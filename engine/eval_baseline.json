@@ -1,0 +1,78 @@
+{
+  "version": "1.0",
+  "timestamp": "2025-09-08T23:00:00Z",
+  "baselines": [
+    {
+      "name": "Starting Position",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "eval": 0,
+      "comments": "Should be close to 0, slightly favoring white"
+    },
+    {
+      "name": "After 1.e4",
+      "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1",
+      "eval": 56,
+      "comments": "White pawn controls center, slight advantage"
+    },
+    {
+      "name": "Queen vs Rook",
+      "fen": "4k3/8/8/8/8/8/8/4KQ1R w - - 0 1",
+      "eval": 1597,
+      "comments": "Queen should be ~400 points better than rook"
+    },
+    {
+      "name": "Knight vs Bishop",
+      "fen": "4k3/8/8/8/8/8/8/4KNB1 w - - 0 1",
+      "eval": 603,
+      "comments": "Knight and bishop roughly equal, slight bishop edge"
+    },
+    {
+      "name": "Central Knight",
+      "fen": "4k3/8/8/3N4/8/8/8/4K3 w - - 0 1",
+      "eval": 20,
+      "comments": "Centralized knight should score well"
+    },
+    {
+      "name": "Edge Knight",
+      "fen": "4k3/8/8/8/8/8/8/N3K3 w - - 0 1",
+      "eval": 17,
+      "comments": "Knight on edge should be penalized"
+    },
+    {
+      "name": "Doubled Pawns",
+      "fen": "4k3/8/8/8/4P3/4P3/8/4K3 w - - 0 1",
+      "eval": 186,
+      "comments": "Doubled pawns should receive penalty"
+    },
+    {
+      "name": "Passed Pawn",
+      "fen": "4k3/8/8/4P3/8/8/8/4K3 w - - 0 1",
+      "eval": 96,
+      "comments": "Advanced passed pawn should be valued highly"
+    },
+    {
+      "name": "King Safety Middle",
+      "fen": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1",
+      "eval": 0,
+      "comments": "Uncastled kings should be penalized"
+    },
+    {
+      "name": "King Safety Castled",
+      "fen": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R4RK1 w kq - 0 1",
+      "eval": 29,
+      "comments": "Castled king should be safer"
+    },
+    {
+      "name": "Endgame King",
+      "fen": "8/8/8/4K3/8/8/8/4k3 w - - 0 1",
+      "eval": 1,
+      "comments": "Centralized king in endgame"
+    },
+    {
+      "name": "Complex Middlegame",
+      "fen": "r1bqk2r/ppp2ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R w KQkq - 4 6",
+      "eval": 50,
+      "comments": "Complex position with multiple factors"
+    }
+  ]
+}

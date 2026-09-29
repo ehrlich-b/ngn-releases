@@ -1,0 +1,8 @@
+Contains information from official-stockfish/master-binpacks, made available under the Open Database License (ODbL) 1.0.
+
+Dataset: https://huggingface.co/datasets/official-stockfish/master-binpacks/tree/1e095a758c630bc58d0b6dac4da44fcd38ac89c2
+License: https://opendatacommons.org/licenses/odbl/1-0/
+
+The NGN-owned net was randomly initialized and trained on mapped T80 search scores and game results. No borrowed trained network or optimizer was imported.
+The separately supplied ngn-0.2.0-rc.1-training-method.tar.gz contains the complete alteration recipe, exact filter keys and score map, plus source provenance and notices. The corresponding engine source contains the transformation algorithms.
+The altered database retains ODbL terms. The engine and model licenses are a separate release decision.

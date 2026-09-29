@@ -1,0 +1,59 @@
+diff --git a/crates/bullet_lib/Cargo.toml b/crates/bullet_lib/Cargo.toml
+index 45f9636..0e71acb 100644
+--- a/crates/bullet_lib/Cargo.toml
++++ b/crates/bullet_lib/Cargo.toml
+@@ -18,5 +18,7 @@ oorandom = "11.1.5"
+ rand = "0.9.0"
+ sfbinpack = "0.6.4"
++serde = { version = "1.0", features = ["derive"] }
++serde_json = "1.0"
+ viriformat = "2.0.1"
+ 
+ [features]
+diff --git a/Cargo.lock b/Cargo.lock
+index a599893..4d8cee9 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -109,6 +109,8 @@ dependencies = [
+  "montyformat",
+  "oorandom",
+  "rand 0.9.4",
++ "serde",
++ "serde_json",
+  "sfbinpack",
+  "viriformat",
+ ]
+diff --git a/crates/bullet_lib/src/value.rs b/crates/bullet_lib/src/value.rs
+index 3e29f95..17a6a66 100644
+--- a/crates/bullet_lib/src/value.rs
++++ b/crates/bullet_lib/src/value.rs
+@@ -166,6 +166,7 @@ where
+             &mut self.optimiser,
+             run::TrainingSchedule { steps, log_rate: 128, lr_schedule: lr_scheduler.boxed() },
+             dataloader,
++            settings.batch_queue_size,
+             |_, step, error| {
+                 loss_sum += error;
+                 ticks_since_last += 1.0;
+diff --git a/crates/trainer/src/run.rs b/crates/trainer/src/run.rs
+index f5141d0..f2e566d 100644
+--- a/crates/trainer/src/run.rs
++++ b/crates/trainer/src/run.rs
+@@ -68,6 +68,7 @@ pub fn train<G: Gpu, O: OptimiserState<G>>(
+     optimiser: &mut Optimiser<G, O>,
+     schedule: TrainingSchedule,
+     dataloader: impl DataLoader,
++    batch_queue_size: usize,
+     mut batch_callback: impl FnMut(&mut Optimiser<G, O>, Step, f32),
+     mut superbatch_callback: impl FnMut(&mut Optimiser<G, O>, Step),
+ ) -> Result<(), TrainingError<G>> {
+@@ -83,7 +84,8 @@ pub fn train<G: Gpu, O: OptimiserState<G>>(
+     );
+ 
+     let steps = schedule.steps;
+-    let (sender, receiver) = mpsc::sync_channel::<PreparedBatchHost>(32);
++    assert!(batch_queue_size > 0, "batch queue must be nonzero");
++    let (sender, receiver) = mpsc::sync_channel::<PreparedBatchHost>(batch_queue_size);
+     let dataloader = thread::spawn(move || {
+         let mut step = Step::from(steps);
+ 

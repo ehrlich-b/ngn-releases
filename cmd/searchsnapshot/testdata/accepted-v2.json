@@ -1,0 +1,106 @@
+{
+  "schema": "ngn-search-snapshot-manifest/v2",
+  "reference_source": {
+    "commit": "53e4d1b9bf4006a39c0327a7016faba7f2b8f82e",
+    "engine_tree": "6232edf09e47b52bb484ee2e2cb0177f6ce9206a",
+    "artifact_path": "output/corrected-pin-20260905/frozen/r0904pin.pgn",
+    "artifact_sha256": "a6b25b2af418f66c7c7cd10b9addaf48b5be4cea53e950d042caa6310848c077"
+  },
+  "hash_mb": 64,
+  "fixtures": [
+    {
+      "name": "startpos",
+      "purpose": "broad cold/warm TT, evaluation-cache, pawn-cache and move-order-history lifetime witness",
+      "start_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "expected_root_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "depth": 4
+    },
+    {
+      "name": "kiwipete-castling",
+      "purpose": "dense qsearch and castling search witness",
+      "start_fen": "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1",
+      "expected_root_fen": "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1",
+      "depth": 3
+    },
+    {
+      "name": "qsearch-hanging-queen",
+      "purpose": "capture qsearch and SEE witness",
+      "start_fen": "4k3/8/8/3q4/4P3/8/8/4K3 w - - 0 1",
+      "expected_root_fen": "4k3/8/8/3q4/4P3/8/8/4K3 w - - 0 1",
+      "depth": 3
+    },
+    {
+      "name": "en-passant-root",
+      "purpose": "legal en-passant root and incremental make/unmake witness",
+      "start_fen": "4k3/8/8/3pP3/8/8/8/4K3 w - d6 0 1",
+      "expected_root_fen": "4k3/8/8/3pP3/8/8/8/4K3 w - d6 0 1",
+      "depth": 4
+    },
+    {
+      "name": "dual-promotion-root",
+      "purpose": "both-color promotion horizon and underpromotion witness",
+      "start_fen": "4k3/P7/8/8/8/8/7p/4K3 w - - 0 1",
+      "expected_root_fen": "4k3/P7/8/8/8/8/7p/4K3 w - - 0 1",
+      "depth": 5
+    },
+    {
+      "name": "threefold-root-history",
+      "purpose": "full played-position repetition map with current root at its third occurrence",
+      "start_fen": "4k3/8/8/8/8/8/8/R3K3 w - - 0 1",
+      "moves": "a1a2 e8e7 a2a1 e7e8 a1a2 e8e7 a2a1 e7e8",
+      "expected_root_fen": "4k3/8/8/8/8/8/8/R3K3 w - - 8 1",
+      "depth": 3
+    },
+    {
+      "name": "game46-full-history",
+      "purpose": "accepted real 190-ply history before the e5e8 repetition-choice witness",
+      "start_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "moves": "c2c3 b7b5 b2b3 e7e5 f2f4 c8a6 f4e5 d7d6 e5e6 f7e6 g1f3 g8f6 e2e3 f8e7 a2a4 b5a4 f1a6 b8a6 b3b4 e8g8 d1a4 a6b8 e1g1 d6d5 f3g5 d8c8 a4c2 h7h6 f1f6 h6g5 f6f8 c8f8 e3e4 f8f7 d2d4 b8d7 c2e2 d7f6 b1d2 f7g6 e4e5 f6h5 d2f1 h5f4 e2g4 g6h5 g4h5 f4h5 g2g3 g8f7 f1e3 f7e8 a1a6 e8d7 e3g4 c7c6 g1g2 g7g6 g2f1 e7d8 f1e2 d8e7 e2f2 a8f8 f2e3 f8a8 e3e2 e7d8 e2f3 d8e7 f3e2 e7d8 e2d3 d8e7 c1e3 e7d8 d3e2 d8e7 e2d3 e7d8 a6a2 a7a6 a2a1 d7e8 g4f2 d8e7 f2h3 g5g4 h3f2 h5g7 f2g4 g7f5 e3d2 e8f7 g4e3 f5e3 d2e3 g6g5 h2h3 f7g6 a1a4 e7d8 a4a1 d8e7 e3d2 g6h5 c3c4 d5c4 d3c4 g5g4 a1h1 a8e8 h3g4 h5g4 h1h6 e7d8 h6g6 g4f3 c4d3 d8b6 g3g4 e8d8 d2c3 a6a5 b4a5 b6d4 c3d4 c6c5 a5a6 d8d4 d3c3 d4a4 g6e6 f3g4 e6b6 g4f5 e5e6 f5f6 c3b3 a4a1 b3c4 a1a5 c4d5 c5c4 d5c4 f6e7 c4b4 a5a1 b4b5 e7f6 b6c6 a1b1 b5a5 b1b8 a6a7 b8e8 a5a6 f6f5 a6b7 f5e5 a7a8q e8a8 b7a8 e5f6 a8b7 f6e7 b7c7 e7f6 c7b7 f6e7 b7c7 e7f6 c7d6 f6f5 e6e7 f5e4 e7e8q e4f4 d6d7 f4f5 c6g6 f5f4 g6f6 f4g5 e8e5 g5g4 e5e8 g4g5 e8e5 g5g4",
+      "expected_root_fen": "8/3K4/5R2/4Q3/6k1/8/8/8 w - - 13 1",
+      "depth": 6,
+      "provenance": {
+        "artifact_sha256": "a6b25b2af418f66c7c7cd10b9addaf48b5be4cea53e950d042caa6310848c077",
+        "game": 46,
+        "prefix_plies": 190,
+        "note": "frozen r0904pin.pgn; next moves e5e8 g4g5 reach the recorded threefold"
+      }
+    },
+    {
+      "name": "game118-full-history",
+      "purpose": "accepted real 187-ply history before the e2f2 repetition-choice witness",
+      "start_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "moves": "f2f4 g7g6 e1f2 g8h6 e2e4 h6g8 b1c3 f8g7 g1f3 c7c5 d2d4 c5d4 f3d4 d7d6 c1e3 b8d7 f1e2 g8f6 h1f1 e8g8 f2g1 f8e8 f4f5 a7a6 d1e1 d7e5 e1h4 b7b5 a1d1 c8b7 d4f3 e5f3 e2f3 b5b4 c3d5 d8a5 e3d4 b7d5 e4d5 a5a2 c2c4 a2c4 d4f6 c4h4 f6h4 g7b2 f3g4 e8b8 h4e7 b2e5 f5g6 h7g6 e7f6 e5f6 f1f6 b4b3 g4d7 b8b4 d1b1 a8d8 d7c6 b3b2 h2h3 g8g7 f6f2 d8b8 g2g3 b4b3 g1g2 a6a5 h3h4 b3b4 f2e2 g7h6 c6e8 g6g5 e8f7 a5a4 e2e6 h6g7 f7h5 a4a3 h4g5 b4b7 b1b2 a3b2 e6g6 g7h8 g6h6 h8g8 h5g6 b7g7 g6b1 g7g5 h6d6 g8f7 g2f3 f7e7 d6e6 e7d7 e6e1 b8f8 f3g2 f8g8 g2f2 g5g3 b1e4 g3a3 e1b1 g8b8 b1h1 b8f8 f2g2 f8g8 g2f2 g8f8 f2g2 f8e8 e4b1 d7d6 g2f2 a3a1 f2f3 e8e5 f3f4 e5d5 f4e3 d6c5 e3e2 c5b5 h1g1 b5b4 g1g4 b4c3 g4g3 c3c4 g3g4 c4c3 g4g3 c3c4 g3g4 c4c5 g4g1 c5b5 e2e3 b5b4 g1f1 b4c4 f1g1 d5h5 g1f1 h5h4 e3f3 c4b4 f3e2 a1a3 b1c2 h4h2 f1f2 h2f2 e2f2 a3c3 c2h7 b4b3 h7e4 c3c2 f2f3 b2b1q e4d5 b3b2 f3e4 b1e1 e4f4 c2f2 d5f3 e1d1 f4e5 f2f3 e5e6 f3f2 e6e5 f2e2 e5f4 e2f2 f4e5 f2e2 e5f4",
+      "expected_root_fen": "8/8/8/8/5K2/8/1k2r3/3q4 b - - 9 1",
+      "depth": 6,
+      "provenance": {
+        "artifact_sha256": "a6b25b2af418f66c7c7cd10b9addaf48b5be4cea53e950d042caa6310848c077",
+        "game": 118,
+        "prefix_plies": 187,
+        "note": "frozen r0904pin.pgn; next moves e2f2 f4e5 reach the recorded threefold"
+      }
+    },
+    {
+      "name": "root-checkmate",
+      "purpose": "terminal root with no callback or legal move",
+      "start_fen": "7k/6Q1/6K1/8/8/8/8/8 b - - 0 1",
+      "expected_root_fen": "7k/6Q1/6K1/8/8/8/8/8 b - - 0 1",
+      "depth": 3
+    },
+    {
+      "name": "global-stop-after-depth",
+      "purpose": "deterministic callback-driven global stop after one completed iteration",
+      "start_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "expected_root_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "depth": 8,
+      "stop_after_depth": 2
+    },
+    {
+      "name": "global-node-limit",
+      "purpose": "legacy global max-node snapshot and interrupted-iteration witness",
+      "start_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "expected_root_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "depth": 10,
+      "max_nodes": 256
+    }
+  ]
+}

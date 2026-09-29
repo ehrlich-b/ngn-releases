@@ -1,0 +1,105 @@
+diff --git a/src/nnue/network.h b/src/nnue/network.h
+index 7170540..a152004 100644
+--- a/src/nnue/network.h
++++ b/src/nnue/network.h
+@@ -86,3 +86,7 @@ class Network {
++#ifdef SF18_BIG_REFERENCE_ORACLE
++   public:
++#else
+    private:
++#endif
+     void load_user_net(const std::string&, const std::string&);
+     void load_internal();
+diff --git a/src/engine.cpp b/src/engine.cpp
+index 788860e..4157568 100644
+--- a/src/engine.cpp
++++ b/src/engine.cpp
+@@ -34,6 +34,9 @@
+ #include "nnue/network.h"
+ #include "nnue/nnue_common.h"
+ #include "nnue/nnue_misc.h"
++#ifdef SF18_BIG_REFERENCE_ORACLE
++#include "nnue/sf18_big_reference_oracle.h"
++#endif
+ #include "numa.h"
+ #include "perft.h"
+ #include "position.h"
+@@ -329,12 +332,23 @@
+-void Engine::trace_eval() const {
+-    StateListPtr trace_states(new std::deque<StateInfo>(1));
+-    Position     p;
+-    p.set(pos.fen(), options["UCI_Chess960"], &trace_states->back());
+-
+-    verify_networks();
+-
+-    sync_cout << "\n" << Eval::trace(p, *networks) << sync_endl;
+-}
+-
+-const OptionsMap& Engine::get_options() const { return options; }
+-OptionsMap&       Engine::get_options() { return options; }
++void Engine::trace_eval() const {
++    StateListPtr trace_states(new std::deque<StateInfo>(1));
++    Position     p;
++    p.set(pos.fen(), options["UCI_Chess960"], &trace_states->back());
++
++    verify_networks();
++
++    sync_cout << "\n" << Eval::trace(p, *networks) << sync_endl;
++}
++
++#ifdef SF18_BIG_REFERENCE_ORACLE
++void Engine::trace_big_reference(const std::string& caseId,
++                                 const std::vector<std::string>& actions) const {
++    networks->big.verify(options["EvalFile"], onVerifyNetworks);
++    const auto rows = Eval::NNUE::SF18BigReferenceOracle::run(
++      pos.fen(), options["UCI_Chess960"], networks->big, tt, caseId, actions);
++    for (const auto& row : rows)
++        sync_cout << "SF18_BIG_REFERENCE_ORACLE_JSON " << row << sync_endl;
++}
++#endif
++
++const OptionsMap& Engine::get_options() const { return options; }
++OptionsMap&       Engine::get_options() { return options; }
+diff --git a/src/engine.h b/src/engine.h
+index 10c92d7..a9e6bf5 100644
+--- a/src/engine.h
++++ b/src/engine.h
+@@ -94,6 +94,10 @@ class Engine {
+-    // utility functions
+-
+-    void trace_eval() const;
+-
+-    const OptionsMap& get_options() const;
+-    OptionsMap&       get_options();
++    // utility functions
++
++    void trace_eval() const;
++#ifdef SF18_BIG_REFERENCE_ORACLE
++    void trace_big_reference(const std::string& caseId,
++                             const std::vector<std::string>& actions) const;
++#endif
++
++    const OptionsMap& get_options() const;
++    OptionsMap&       get_options();
+diff --git a/src/uci.cpp b/src/uci.cpp
+index 9270076..1bd401d 100644
+--- a/src/uci.cpp
++++ b/src/uci.cpp
+@@ -148,6 +148,17 @@ void UCIEngine::loop() {
+             sync_cout << engine.visualize() << sync_endl;
+         else if (token == "eval")
+             engine.trace_eval();
++#ifdef SF18_BIG_REFERENCE_ORACLE
++        else if (token == "sf18bigreference")
++        {
++            std::string caseId, action;
++            std::vector<std::string> actions;
++            is >> caseId;
++            while (is >> action)
++                actions.push_back(action);
++            engine.trace_big_reference(caseId, actions);
++        }
++#endif
+         else if (token == "compiler")
+             sync_cout << compiler_info() << sync_endl;
+         else if (token == "export_net")

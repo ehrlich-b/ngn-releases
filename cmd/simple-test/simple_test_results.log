@@ -1,0 +1,41 @@
+2025/08/31 11:00:30.313316 === TEST 1: Starting Position ===
+2025/08/31 11:00:30.313414 Moves: 
+2025/08/31 11:00:30.317110 --- Testing depth 1 ---
+2025/08/31 11:00:30.317777 SUCCESS: bestmove=a2a4, time=649.9µs, depth=0, nodes=0, score=0
+2025/08/31 11:00:30.317794 --- Testing depth 2 ---
+2025/08/31 11:00:30.333483 SUCCESS: bestmove=b1c3, time=15.678399ms, depth=0, nodes=0, score=0
+2025/08/31 11:00:30.333497 --- Testing depth 3 ---
+2025/08/31 11:00:30.377557 SUCCESS: bestmove=f2f4, time=44.049795ms, depth=0, nodes=0, score=0
+2025/08/31 11:00:30.377573 --- Testing depth 4 ---
+2025/08/31 11:00:31.470502 SUCCESS: bestmove=b1c3, time=1.092920591s, depth=0, nodes=0, score=0
+2025/08/31 11:00:31.470515 --- Testing depth 5 ---
+2025/08/31 11:00:37.194736 SUCCESS: bestmove=e2e3, time=5.724210946s, depth=0, nodes=0, score=0
+2025/08/31 11:00:37.194751 --- Testing depth 6 ---
+2025/08/31 11:00:45.775163 SUCCESS: bestmove=a2a3, time=8.580402881s, depth=0, nodes=0, score=0
+2025/08/31 11:00:45.888296 === TEST 2: After 1.e4 ===
+2025/08/31 11:00:45.888318 Moves: e2e4
+2025/08/31 11:00:45.893738 --- Testing depth 1 ---
+2025/08/31 11:00:45.894493 SUCCESS: bestmove=b8c6, time=738.2µs, depth=0, nodes=0, score=0
+2025/08/31 11:00:45.894505 --- Testing depth 2 ---
+2025/08/31 11:00:45.908458 SUCCESS: bestmove=f7f5, time=13.941699ms, depth=0, nodes=0, score=0
+2025/08/31 11:00:45.908489 --- Testing depth 3 ---
+2025/08/31 11:00:46.002596 SUCCESS: bestmove=g8f6, time=94.095491ms, depth=0, nodes=0, score=0
+2025/08/31 11:00:46.002610 --- Testing depth 4 ---
+2025/08/31 11:00:47.369926 SUCCESS: bestmove=e7e5, time=1.36730627s, depth=0, nodes=0, score=0
+2025/08/31 11:00:47.369940 --- Testing depth 5 ---
+2025/08/31 11:00:52.214843 SUCCESS: bestmove=c7c6, time=4.844891528s, depth=0, nodes=0, score=0
+2025/08/31 11:00:52.214865 --- Testing depth 6 ---
+2025/08/31 11:01:03.062388 SUCCESS: bestmove=a7a6, time=10.847511159s, depth=0, nodes=0, score=0
+2025/08/31 11:01:03.176478 === TEST 3: After 1.e4 e5 ===
+2025/08/31 11:01:03.176500 Moves: e2e4 e7e5
+2025/08/31 11:01:03.180357 --- Testing depth 1 ---
+2025/08/31 11:01:03.181224 SUCCESS: bestmove=a2a4, time=850.9µs, depth=0, nodes=0, score=0
+2025/08/31 11:01:03.181236 --- Testing depth 2 ---
+2025/08/31 11:01:03.201327 SUCCESS: bestmove=b1c3, time=20.081098ms, depth=0, nodes=0, score=0
+2025/08/31 11:01:03.201341 --- Testing depth 3 ---
+2025/08/31 11:01:03.662947 SUCCESS: bestmove=d1f3, time=461.583957ms, depth=0, nodes=0, score=0
+2025/08/31 11:01:03.662962 --- Testing depth 4 ---
+2025/08/31 11:01:05.466375 SUCCESS: bestmove=d1h5, time=1.803402329s, depth=0, nodes=0, score=0
+2025/08/31 11:01:05.466391 --- Testing depth 5 ---
+2025/08/31 11:01:16.886963 SUCCESS: bestmove=c2c3, time=11.420561671s, depth=0, nodes=0, score=0
+2025/08/31 11:01:16.886981 --- Testing depth 6 ---

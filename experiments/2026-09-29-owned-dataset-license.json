@@ -1,0 +1,31 @@
+{
+  "cached_paths": [
+    "/home/ehrli/repos/ngn-next/output/nnue-data-entry-20260905/candidate-manifest.json",
+    "/home/ehrli/repos/ngn-next/output/nnue-data-entry-20260905/README.md",
+    "/home/ehrli/repos/ngn-next/output/nnue-data-entry-20260905/binpack-spec.md",
+    "/home/ehrli/repos/ngn-next/output/nnue-data-entry-20260905/dataset-metadata.json",
+    "/home/ehrli/repos/ngn-next/output/nnue-data-entry-20260905/tree.json"
+  ],
+  "t80-api": {
+    "url": "https://huggingface.co/api/datasets/official-stockfish/master-binpacks/revision/1e095a758c630bc58d0b6dac4da44fcd38ac89c2",
+    "redirect": "https://huggingface.co/api/datasets/official-stockfish/master-binpacks/revision/1e095a758c630bc58d0b6dac4da44fcd38ac89c2",
+    "bytes": 1178,
+    "sha256": "6f36f46ef18413c07804c4affdddf77ba4082a8fe6491c8906415e11829f8f20"
+  },
+  "odbl-text": {
+    "url": "https://opendatacommons.org/licenses/odbl/odbl-10.txt",
+    "redirect": "https://opendatacommons.org/licenses/odbl/odbl-10.txt",
+    "bytes": 25278,
+    "sha256": "607680718977f6f6c9607972afd98f208573f19251315ed1362a8589b51beaf5"
+  },
+  "go-license": {
+    "path": "/usr/local/go/LICENSE",
+    "sha256": "911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad"
+  },
+  "dataset": "official-stockfish/master-binpacks",
+  "revision": "1e095a758c630bc58d0b6dac4da44fcd38ac89c2",
+  "declared_license": "ODbL-1.0",
+  "archive_file": "test80-2022-08-aug-16tb7p.v6-dd.min.binpack",
+  "archive_sha256": "0d22957b8d4f0f8e6f2913be7b744b2dab5178c3563e0f916312d0d94c28b92b",
+  "archive_bytes": 10809713086
+}

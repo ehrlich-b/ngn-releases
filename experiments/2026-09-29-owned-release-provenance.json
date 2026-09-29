@@ -1,0 +1,42 @@
+{
+  "source_commit": "8b440bf959bc527d74bd44dc39f994718453d1b3",
+  "build_source_files_verified_against_git": 436,
+  "build_source_matches": true,
+  "licenses": {
+    "CounterGo": {
+      "url": "https://raw.githubusercontent.com/ChizhovVadim/CounterGo/63c487ca724c620f71c129d62129c6fb9109c872/LICENSE",
+      "redirect": "https://raw.githubusercontent.com/ChizhovVadim/CounterGo/63c487ca724c620f71c129d62129c6fb9109c872/LICENSE",
+      "revision": "63c487ca724c620f71c129d62129c6fb9109c872",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "bytes": 35147
+    },
+    "Rodent-V": {
+      "url": "https://raw.githubusercontent.com/nescitus/Rodent-V/b53ffaf670590932957cb63b7b6d871f6f33b7d8/LICENSE",
+      "redirect": "https://raw.githubusercontent.com/nescitus/Rodent-V/b53ffaf670590932957cb63b7b6d871f6f33b7d8/LICENSE",
+      "revision": "b53ffaf670590932957cb63b7b6d871f6f33b7d8",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "bytes": 35149
+    },
+    "Stockfish": {
+      "url": "https://raw.githubusercontent.com/official-stockfish/Stockfish/sf_18/Copying.txt",
+      "redirect": "https://raw.githubusercontent.com/official-stockfish/Stockfish/sf_18/Copying.txt",
+      "revision": "sf_18",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "bytes": 35149
+    },
+    "Bullet": {
+      "url": "https://raw.githubusercontent.com/jw1912/bullet/629ee50000b2afb7b3337595401c830d3b1e0f42/LICENSE",
+      "redirect": "https://raw.githubusercontent.com/jw1912/bullet/629ee50000b2afb7b3337595401c830d3b1e0f42/LICENSE",
+      "revision": "629ee50000b2afb7b3337595401c830d3b1e0f42",
+      "sha256": "57809ec584029c063fc7052102ebcf4dcc09bab5b3e5358481ac193f7b709ec8",
+      "bytes": 1070
+    }
+  },
+  "storage": {
+    "training/bullet-wdl40": 160651946,
+    "training/bullet-wdl40/target": 159332767,
+    "training/wdl40-e10": 5029220095,
+    "training/e20-resume": 2838313272
+  },
+  "free_gib": 36.987545013427734
+}

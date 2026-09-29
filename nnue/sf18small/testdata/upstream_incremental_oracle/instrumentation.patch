@@ -1,0 +1,435 @@
+diff --git a/src/engine.cpp b/src/engine.cpp
+index 788860e..d9f7793 100644
+--- a/src/engine.cpp
++++ b/src/engine.cpp
+@@ -37,6 +37,9 @@
+ #ifdef SF18_SMALL_ORACLE
+ #include "nnue/sf18_small_oracle.h"
+ #endif
++#ifdef SF18_SMALL_INCREMENTAL_ORACLE
++#include "nnue/sf18_small_incremental_oracle.h"
++#endif
+ #include "numa.h"
+ #include "perft.h"
+ #include "position.h"
+@@ -347,6 +350,17 @@ void Engine::trace_eval() const {
+ #endif
+ }
+ 
++#ifdef SF18_SMALL_INCREMENTAL_ORACLE
++void Engine::trace_small_incremental(const std::string& caseId,
++                                     const std::vector<std::string>& actions) const {
++    networks->small.verify(options["EvalFileSmall"], onVerifyNetworks);
++    const auto rows = Eval::NNUE::SF18SmallIncrementalOracle::run(
++      pos.fen(), options["UCI_Chess960"], networks->small, tt, caseId, actions);
++    for (const auto& row : rows)
++        sync_cout << "SF18_SMALL_INCREMENTAL_ORACLE_JSON " << row << sync_endl;
++}
++#endif
++
+ const OptionsMap& Engine::get_options() const { return options; }
+ OptionsMap&       Engine::get_options() { return options; }
+ 
+diff --git a/src/engine.h b/src/engine.h
+index 10c92d7..b41bd9b 100644
+--- a/src/engine.h
++++ b/src/engine.h
+@@ -94,6 +94,10 @@ class Engine {
+     // utility functions
+ 
+     void trace_eval() const;
++#ifdef SF18_SMALL_INCREMENTAL_ORACLE
++    void trace_small_incremental(const std::string& caseId,
++                                 const std::vector<std::string>& actions) const;
++#endif
+ 
+     const OptionsMap& get_options() const;
+     OptionsMap&       get_options();
+diff --git a/src/nnue/nnue_accumulator.cpp b/src/nnue/nnue_accumulator.cpp
+index 16af8d5..a3d9e0a 100644
+--- a/src/nnue/nnue_accumulator.cpp
++++ b/src/nnue/nnue_accumulator.cpp
+@@ -164,6 +164,21 @@ void AccumulatorStack::evaluate_side(Color                                 persp
+     const auto last_usable_accum =
+       find_last_usable_accumulator<FeatureSet, Dimensions>(perspective);
+ 
++#ifdef SF18_SMALL_INCREMENTAL_ORACLE
++    if constexpr (std::is_same_v<FeatureSet, PSQFeatureSet>
++                  && Dimensions == TransformedFeatureDimensionsSmall)
++    {
++        const bool latestComputed =
++          (latest<FeatureSet>().template acc<Dimensions>()).computed[perspective];
++        if (!latestComputed)
++            smallOracleUpdateKinds[perspective] =
++              (accumulators<FeatureSet>()[last_usable_accum].template acc<Dimensions>())
++                  .computed[perspective]
++                ? SmallOracleUpdateKind::Incremental
++                : SmallOracleUpdateKind::Refresh;
++    }
++#endif
++
+     if ((accumulators<FeatureSet>()[last_usable_accum].template acc<Dimensions>())
+           .computed[perspective])
+         forward_update_incremental<FeatureSet>(perspective, pos, featureTransformer,
+diff --git a/src/nnue/nnue_accumulator.h b/src/nnue/nnue_accumulator.h
+index 438074f..956c5af 100644
+--- a/src/nnue/nnue_accumulator.h
++++ b/src/nnue/nnue_accumulator.h
+@@ -152,6 +152,14 @@ struct AccumulatorState {
+ class AccumulatorStack {
+    public:
+     static constexpr std::size_t MaxSize = MAX_PLY + 1;
++#ifdef SF18_SMALL_INCREMENTAL_ORACLE
++    enum class SmallOracleUpdateKind : std::uint8_t { Reuse, Incremental, Refresh };
++    void begin_small_oracle_probe() noexcept { smallOracleUpdateKinds.fill(SmallOracleUpdateKind::Reuse); }
++    std::array<SmallOracleUpdateKind, COLOR_NB> small_oracle_update_kinds() const noexcept {
++        return smallOracleUpdateKinds;
++    }
++    std::size_t small_oracle_depth() const noexcept { return size - 1; }
++#endif
+ 
+     template<typename T>
+     [[nodiscard]] const AccumulatorState<T>& latest() const noexcept;
+@@ -199,6 +207,9 @@ class AccumulatorStack {
+     std::array<AccumulatorState<PSQFeatureSet>, MaxSize>    psq_accumulators;
+     std::array<AccumulatorState<ThreatFeatureSet>, MaxSize> threat_accumulators;
+     std::size_t                                             size = 1;
++#ifdef SF18_SMALL_INCREMENTAL_ORACLE
++    std::array<SmallOracleUpdateKind, COLOR_NB> smallOracleUpdateKinds{};
++#endif
+ };
+ 
+ }  // namespace Stockfish::Eval::NNUE
+diff --git a/src/nnue/sf18_small_incremental_oracle.h b/src/nnue/sf18_small_incremental_oracle.h
+new file mode 100644
+index 0000000..22bc255
+--- /dev/null
++++ b/src/nnue/sf18_small_incremental_oracle.h
+@@ -0,0 +1,256 @@
++#ifndef SF18_SMALL_INCREMENTAL_ORACLE_H_INCLUDED
++#define SF18_SMALL_INCREMENTAL_ORACLE_H_INCLUDED
++
++#include <array>
++#include <cstdlib>
++#include <deque>
++#include <memory>
++#include <sstream>
++#include <string>
++#include <utility>
++#include <vector>
++
++#include "../position.h"
++#include "../tt.h"
++#include "../uci.h"
++#include "features/half_ka_v2_hm.h"
++#include "network.h"
++#include "nnue_accumulator.h"
++#include "sf18_small_oracle.h"
++
++namespace Stockfish::Eval::NNUE::SF18SmallIncrementalOracle {
++
++using UpdateKind = AccumulatorStack::SmallOracleUpdateKind;
++
++inline const char* update_kind_name(UpdateKind kind) {
++    switch (kind)
++    {
++    case UpdateKind::Reuse: return "reuse";
++    case UpdateKind::Incremental: return "incremental";
++    case UpdateKind::Refresh: return "refresh";
++    }
++    std::abort();
++}
++
++inline std::string json_string(const std::string& value) {
++    std::ostringstream out;
++    out << '"';
++    for (const unsigned char ch : value)
++        switch (ch)
++        {
++        case '"': out << "\\\""; break;
++        case '\\': out << "\\\\"; break;
++        case '\b': out << "\\b"; break;
++        case '\f': out << "\\f"; break;
++        case '\n': out << "\\n"; break;
++        case '\r': out << "\\r"; break;
++        case '\t': out << "\\t"; break;
++        default:
++            if (ch < 0x20)
++                std::abort();
++            out << ch;
++        }
++    out << '"';
++    return out.str();
++}
++
++inline void json_piece(std::ostream& out, Piece piece, Square square) {
++    if (piece == NO_PIECE || square == SQ_NONE)
++        std::abort();
++    out << "{\"Piece\":" << int(type_of(piece)) - 1 << ",\"Color\":"
++        << int(color_of(piece)) << ",\"Square\":" << int(square) << '}';
++}
++
++inline std::string dirty_json(const DirtyPiece& dirty) {
++    std::ostringstream out;
++    out << "{\"mover\":";
++    json_piece(out, dirty.pc, dirty.from);
++    out << ",\"to\":";
++    if (dirty.to == SQ_NONE)
++        out << "null";
++    else
++        out << int(dirty.to);
++    out << ",\"removed\":";
++    if (dirty.remove_sq == SQ_NONE)
++        out << "null";
++    else
++        json_piece(out, dirty.remove_pc, dirty.remove_sq);
++    out << ",\"added\":";
++    if (dirty.add_sq == SQ_NONE)
++        out << "null";
++    else
++        json_piece(out, dirty.add_pc, dirty.add_sq);
++    out << '}';
++    return out.str();
++}
++
++inline const char* move_type_name(Move move) {
++    switch (move.type_of())
++    {
++    case NORMAL: return "normal";
++    case PROMOTION: return "promotion";
++    case EN_PASSANT: return "en-passant";
++    case CASTLING: return "castling";
++    }
++    std::abort();
++}
++
++struct AppliedAction {
++    bool        isNull = false;
++    Move        move;
++    DirtyPiece  dirty{};
++    std::string text;
++};
++
++inline std::string capture_row(const std::string& caseId,
++                               std::size_t sequenceIndex,
++                               const char* operation,
++                               const std::string& action,
++                               const Position& position,
++                               const NetworkSmall& network,
++                               AccumulatorStack& stack,
++                               AccumulatorCaches::Cache<128>& cache,
++                               std::size_t logicalDepth,
++                               const DirtyPiece* dirty,
++                               Move move) {
++    stack.begin_small_oracle_probe();
++    const std::string actual = SF18SmallOracle::sf18_small_oracle_json_from_stack(
++      position, network, stack, cache);
++    const auto updateKinds = stack.small_oracle_update_kinds();
++
++    auto freshCache = std::make_unique<AccumulatorCaches::Cache<128>>();
++    const std::string fresh = sf18_small_oracle_json(position, network, *freshCache);
++    if (actual != fresh)
++        std::abort();
++
++    std::array<bool, COLOR_NB> requiresRefresh{};
++    if (dirty != nullptr)
++        for (Color perspective : {WHITE, BLACK})
++            requiresRefresh[perspective] = PSQFeatureSet::requires_refresh(*dirty, perspective);
++
++    for (Color perspective : {WHITE, BLACK})
++    {
++        UpdateKind expected = UpdateKind::Reuse;
++        if (std::string(operation) == "root")
++            expected = UpdateKind::Refresh;
++        else if (std::string(operation) == "push")
++            expected = requiresRefresh[perspective] ? UpdateKind::Refresh
++                                                    : UpdateKind::Incremental;
++        if (updateKinds[perspective] != expected)
++            std::abort();
++    }
++
++    std::ostringstream out;
++    out << "{\"schema\":\"sf18-small-incremental-oracle/v1\""
++        << ",\"case\":" << json_string(caseId)
++        << ",\"sequence_index\":" << sequenceIndex
++        << ",\"operation\":" << json_string(operation)
++        << ",\"action\":" << json_string(action)
++        << ",\"logical_depth\":" << logicalDepth
++        << ",\"accumulator_depth\":" << stack.small_oracle_depth()
++        << ",\"move_type\":";
++    if (dirty == nullptr)
++        out << "null";
++    else
++        out << json_string(move_type_name(move));
++    out << ",\"dirty\":";
++    if (dirty == nullptr)
++        out << "null";
++    else
++        out << dirty_json(*dirty);
++    out << ",\"requires_refresh\":["
++        << (requiresRefresh[WHITE] ? "true" : "false") << ','
++        << (requiresRefresh[BLACK] ? "true" : "false") << ']';
++    out << ",\"update_kind\":[" << json_string(update_kind_name(updateKinds[WHITE]))
++        << ',' << json_string(update_kind_name(updateKinds[BLACK])) << ']';
++    out << ",\"state\":" << actual << '}';
++    return out.str();
++}
++
++inline std::vector<std::string> run(const std::string& rootFen,
++                                    bool chess960,
++                                    const NetworkSmall& network,
++                                    const TranspositionTable& tt,
++                                    const std::string& caseId,
++                                    const std::vector<std::string>& actions) {
++    if (caseId.empty())
++        std::abort();
++
++    StateListPtr states(new std::deque<StateInfo>(1));
++    Position position;
++    position.set(rootFen, chess960, &states->back());
++    const std::string canonicalRootFen = position.fen();
++
++    auto stack = std::make_unique<AccumulatorStack>();
++    auto cache = std::make_unique<AccumulatorCaches::Cache<128>>();
++    stack->reset();
++    cache->clear(network);
++
++    std::vector<std::string> rows;
++    rows.reserve(1 + 2 * actions.size());
++    std::vector<AppliedAction> applied;
++    applied.reserve(actions.size());
++    std::size_t sequenceIndex = 0;
++    rows.push_back(capture_row(caseId, sequenceIndex++, "root", "", position, network,
++                               *stack, *cache, 0, nullptr, Move::none()));
++
++    for (const std::string& action : actions)
++    {
++        if (action == "null")
++        {
++            if (position.checkers())
++                std::abort();
++            states->emplace_back();
++            position.do_null_move(states->back(), tt);
++            applied.push_back(AppliedAction{true, Move::null(), {}, action});
++            rows.push_back(capture_row(caseId, sequenceIndex++, "push_null", action, position,
++                                       network, *stack, *cache, applied.size(), nullptr,
++                                       Move::null()));
++            continue;
++        }
++
++        const Move move = UCIEngine::to_move(position, action);
++        if (move == Move::none() || !position.legal(move))
++            std::abort();
++        states->emplace_back();
++        auto [dirtyPiece, dirtyThreats] = stack->push();
++        position.do_move(move, states->back(), position.gives_check(move), dirtyPiece,
++                         dirtyThreats, &tt, nullptr);
++        applied.push_back(AppliedAction{false, move, dirtyPiece, action});
++        rows.push_back(capture_row(caseId, sequenceIndex++, "push", action, position, network,
++                                   *stack, *cache, applied.size(), &applied.back().dirty, move));
++    }
++
++    while (!applied.empty())
++    {
++        const AppliedAction appliedAction = applied.back();
++        applied.pop_back();
++        if (appliedAction.isNull)
++        {
++            position.undo_null_move();
++            states->pop_back();
++            rows.push_back(capture_row(caseId, sequenceIndex++, "pop_null", appliedAction.text,
++                                       position, network, *stack, *cache, applied.size(), nullptr,
++                                       Move::null()));
++        }
++        else
++        {
++            position.undo_move(appliedAction.move);
++            stack->pop();
++            states->pop_back();
++            rows.push_back(capture_row(caseId, sequenceIndex++, "pop", appliedAction.text,
++                                       position, network, *stack, *cache, applied.size(),
++                                       &appliedAction.dirty, appliedAction.move));
++        }
++    }
++
++    if (position.fen() != canonicalRootFen || stack->small_oracle_depth() != 0)
++        std::abort();
++    if (rows.size() != 1 + 2 * actions.size())
++        std::abort();
++    return rows;
++}
++
++}  // namespace Stockfish::Eval::NNUE::SF18SmallIncrementalOracle
++
++#endif
+diff --git a/src/nnue/sf18_small_oracle.h b/src/nnue/sf18_small_oracle.h
+index 3cb49d9..b4c845d 100644
+--- a/src/nnue/sf18_small_oracle.h
++++ b/src/nnue/sf18_small_oracle.h
+@@ -157,16 +157,15 @@ inline void json_bounds(std::ostream& out, const char* prefix, const Bounds& bou
+         << '\"' << prefix << "_wide_max\":" << bounds.max;
+ }
+ 
+-inline std::string sf18_small_oracle_json(const Position& position,
+-                                          const NetworkSmall& network,
+-                                          AccumulatorCaches::Cache<128>& cache) {
+-    auto stack = std::make_unique<AccumulatorStack>();
+-    stack->reset();
+-    cache.clear(network);
++inline std::string sf18_small_oracle_json_from_stack(
++  const Position& position,
++  const NetworkSmall& network,
++  AccumulatorStack& stack,
++  AccumulatorCaches::Cache<128>& cache) {
+ 
+     std::array<std::uint8_t, 128> transformed{};
+-    network.featureTransformer.transform(position, *stack, cache, transformed.data(), 0);
+-    const auto& actual = stack->latest<PSQFeatureSet>().acc<128>();
++    network.featureTransformer.transform(position, stack, cache, transformed.data(), 0);
++    const auto& actual = stack.latest<PSQFeatureSet>().acc<128>();
+ 
+     std::array<PSQFeatureSet::IndexList, 2> active;
+     std::array<std::array<std::int16_t, 128>, 2> canonicalAccumulator{};
+@@ -228,7 +227,7 @@ inline std::string sf18_small_oracle_json(const Position& position,
+         psqtRaw[bucket] = wrap32(psqtDifferenceWide[bucket]) / 2;
+         std::array<std::uint8_t, 128> bucketTransformed{};
+         const auto actualPsqt = network.featureTransformer.transform(
+-          position, *stack, cache, bucketTransformed.data(), bucket);
++          position, stack, cache, bucketTransformed.data(), bucket);
+         if (actualPsqt != psqtRaw[bucket] || bucketTransformed != transformed)
+             std::abort();
+         stacks[bucket] = trace_stack(network.network[bucket], transformed);
+@@ -330,7 +329,10 @@ inline std::string sf18_small_oracle_json(const Position& position,
+ inline std::string sf18_small_oracle_json(const Position& position,
+                                           const NetworkSmall& network,
+                                           AccumulatorCaches::Cache<128>& cache) {
+-    return SF18SmallOracle::sf18_small_oracle_json(position, network, cache);
++    auto stack = std::make_unique<AccumulatorStack>();
++    stack->reset();
++    cache.clear(network);
++    return SF18SmallOracle::sf18_small_oracle_json_from_stack(position, network, *stack, cache);
+ }
+ 
+ }  // namespace Stockfish::Eval::NNUE
+diff --git a/src/uci.cpp b/src/uci.cpp
+index 9270076..4a7e16a 100644
+--- a/src/uci.cpp
++++ b/src/uci.cpp
+@@ -148,6 +148,17 @@ void UCIEngine::loop() {
+             sync_cout << engine.visualize() << sync_endl;
+         else if (token == "eval")
+             engine.trace_eval();
++#ifdef SF18_SMALL_INCREMENTAL_ORACLE
++        else if (token == "sf18smallincremental")
++        {
++            std::string caseId, action;
++            std::vector<std::string> actions;
++            is >> caseId;
++            while (is >> action)
++                actions.push_back(action);
++            engine.trace_small_incremental(caseId, actions);
++        }
++#endif
+         else if (token == "compiler")
+             sync_cout << compiler_info() << sync_endl;
+         else if (token == "export_net")

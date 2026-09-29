@@ -1,0 +1,82 @@
+{
+  "asset": "/mnt/c/Users/ehrli/AppData/Local/Temp/ngn-0.2.0-rc.1-training-method.tar.gz",
+  "bytes": 170024651,
+  "sha256": "5488b74959efe7b47dba1b8ff6f20ab17a94ebb6deeaf0a8ac61b7501b9b0941",
+  "recipe": {
+    "schema": "ngn-owned-training-alteration-method-v1",
+    "network_sha256": "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29",
+    "dataset": "official-stockfish/master-binpacks",
+    "revision": "1e095a758c630bc58d0b6dac4da44fcd38ac89c2",
+    "archive": {
+      "path": "/home/ehrli/nnue-public-toolchain-20260906/data/t80-2022-08/test80-2022-08-aug-16tb7p.v6-dd.min.binpack",
+      "bytes": 10809713086,
+      "sha256": "0d22957b8d4f0f8e6f2913be7b744b2dab5178c3563e0f916312d0d94c28b92b"
+    },
+    "source_url": "https://huggingface.co/datasets/official-stockfish/master-binpacks/resolve/1e095a758c630bc58d0b6dac4da44fcd38ac89c2/test80-2022-08-aug-16tb7p.v6-dd.min.binpack",
+    "data_license": "ODbL-1.0",
+    "source_license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+    "modified_by": "NGN",
+    "transformation": {
+      "scatter_algorithm": "training/nnue/k4sample/src/bin/archive.rs, using sampler-v2 rejection_reasons and chain_split from training/nnue/k4sample/src/lib.rs",
+      "split_seed": 26092001,
+      "bucket_seed": 2026092401,
+      "buckets": 256,
+      "workers": 6,
+      "conflicts": "conflicts.bin supplied here; exclude every matching K4 input key",
+      "mapping": "score-map.json supplied here; drop VALUE_NONE score 32002, apply the recorded piecewise-linear mapping and clipping",
+      "gather_algorithm": "ngnk4archive gather --scatter SCATTER --map score-map.json --output train-archive.bf --manifest manifest.json --seed 2026092402",
+      "input_packing": "Bullet ChessBoard 32-byte STM-oriented board, score and result; complete source and pinned Cargo dependencies accompany the engine source archive"
+    },
+    "corpus_sha256": "270f65bdf9f5c948160cae5330030a60f99e94383de2a290b565ae7aad7cde26",
+    "files": {
+      "conflicts.bin": {
+        "bytes": 210844800,
+        "sha256": "bff4bd784b3431559c843ce7762700e49ad02fd1930f772d7f42c015fccdf857"
+      },
+      "score-map.json": {
+        "bytes": 2018,
+        "sha256": "6e45668a237aad3c838257c5744e660d5896f5c9abec4d01f4eea8ea1166544c"
+      },
+      "scatter.json": {
+        "bytes": 6296,
+        "sha256": "a43780d522cab030bcdcde527ec4d559db87098bdb27123abf838935c0339e1f"
+      },
+      "corpus-manifest.json": {
+        "bytes": 3992,
+        "sha256": "5119735957a271252f1521b95999ee6b05ddb04be3e37161f2d6222643b97c50"
+      },
+      "trainer-wdl25.rs": {
+        "bytes": 54771,
+        "sha256": "7bb8ddb483e0de7e82968932cfe94acb0520012a278ed7eb5b2ee680fe4b7110"
+      },
+      "Bullet-MIT.txt": {
+        "bytes": 1070,
+        "sha256": "57809ec584029c063fc7052102ebcf4dcc09bab5b3e5358481ac193f7b709ec8"
+      },
+      "ODbL-1.0.txt": {
+        "bytes": 25278,
+        "sha256": "607680718977f6f6c9607972afd98f208573f19251315ed1362a8589b51beaf5"
+      },
+      "t80-api.json": {
+        "bytes": 1178,
+        "sha256": "6f36f46ef18413c07804c4affdddf77ba4082a8fe6491c8906415e11829f8f20"
+      },
+      "training-attempt.json": {
+        "bytes": 1296,
+        "sha256": "6ddf4f441eaf1d80241c0115aa9157c5a64ffebb581b30cb8faa0a148f39b39a"
+      },
+      "training-completion.json": {
+        "bytes": 611,
+        "sha256": "d3ed630fa42afc9519f78111ff37a985da2735a47fe65138177ab5b5ab4c7961"
+      },
+      "checkpoint-receipt.json": {
+        "bytes": 3273,
+        "sha256": "8717ef056aaa32367fe52b86f823078061b23d15b57fbaad5e68bd3722c628af"
+      }
+    },
+    "claim": "Complete altered-data recipe and its exact non-algorithmic filter/map inputs; this file does not grant a new engine or model license."
+  },
+  "created": 1790675517.8222482,
+  "off_worker_archive_sha256_verified": true,
+  "member_hashes_verified": 11
+}

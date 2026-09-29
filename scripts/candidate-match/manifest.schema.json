@@ -1,0 +1,617 @@
+{
+  "$defs": {
+    "approval": {
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exclusive_match_window": {
+          "type": "boolean"
+        },
+        "reviewed_manifest_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "token": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "authority",
+        "token",
+        "exclusive_match_window",
+        "reviewed_manifest_sha256"
+      ],
+      "type": "object"
+    },
+    "binary": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "provenance": {
+          "additionalProperties": false,
+          "properties": {
+            "build_command": {
+              "items": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "minItems": 1,
+              "type": "array"
+            },
+            "build_receipt": {
+              "$ref": "#/$defs/file"
+            },
+            "source_commit": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "source_tree": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "source_commit",
+            "source_tree",
+            "build_receipt",
+            "build_command"
+          ],
+          "type": "object"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "provenance"
+      ],
+      "type": "object"
+    },
+    "file": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "option": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "value": {}
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "type": "object"
+    },
+    "role": {
+      "additionalProperties": false,
+      "properties": {
+        "backend": {
+          "enum": [
+            "hce",
+            "ngn-v1",
+            "ngn-k4-768-v1",
+            "rodent-v1.1-anand"
+          ]
+        },
+        "binary": {
+          "$ref": "#/$defs/binary"
+        },
+        "capability_profile": {
+          "const": "ngn-pre-m4c-pinned-one-worker-v1"
+        },
+        "display_name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "effective": {
+          "additionalProperties": false,
+          "properties": {
+            "GOMAXPROCS": {
+              "const": 1
+            },
+            "Hash": {
+              "maximum": 1024,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "Move Overhead": {
+              "maximum": 5000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "OwnBook": {
+              "const": false
+            },
+            "Threads": {
+              "const": 1
+            },
+            "threads_basis": {
+              "const": "pinned-source-single-worker-plus-one-cpu-mask"
+            }
+          },
+          "required": [
+            "Threads",
+            "GOMAXPROCS",
+            "OwnBook",
+            "Hash",
+            "Move Overhead",
+            "threads_basis"
+          ],
+          "type": "object"
+        },
+        "environment": {
+          "additionalProperties": false,
+          "properties": {
+            "GOMAXPROCS": {
+              "const": "1"
+            }
+          },
+          "required": [
+            "GOMAXPROCS"
+          ],
+          "type": "object"
+        },
+        "id": {
+          "pattern": "^[A-Za-z0-9_]{1,32}$",
+          "type": "string"
+        },
+        "network": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "format": {
+                  "enum": [
+                    "ngn-v1",
+                    "ngn-k4-768-v1",
+                    "rodent-v1.1-anand"
+                  ]
+                },
+                "path": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "sha256": {
+                  "$ref": "#/$defs/sha256"
+                }
+              },
+              "required": [
+                "path",
+                "sha256",
+                "format"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "requested": {
+          "additionalProperties": false,
+          "properties": {
+            "Hash": {
+              "maximum": 1024,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "Move Overhead": {
+              "maximum": 5000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "OwnBook": {
+              "const": false
+            },
+            "Threads": {
+              "const": 1
+            }
+          },
+          "required": [
+            "Threads",
+            "OwnBook",
+            "Hash",
+            "Move Overhead"
+          ],
+          "type": "object"
+        },
+        "uci_options": {
+          "items": {
+            "$ref": "#/$defs/option"
+          },
+          "maxItems": 6,
+          "minItems": 6,
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "display_name",
+        "binary",
+        "network",
+        "capability_profile",
+        "backend",
+        "uci_options",
+        "requested",
+        "effective",
+        "environment"
+      ],
+      "type": "object"
+    },
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "$id": "https://ngn.invalid/schemas/candidate-match-v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "acceptance": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_games": {
+          "minimum": 2,
+          "type": "integer"
+        },
+        "expected_pairs": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "require_independent_audit": {
+          "const": true
+        },
+        "require_zero_operational_errors": {
+          "const": true
+        },
+        "require_zero_survivors": {
+          "const": true
+        },
+        "strength_claim": {
+          "const": "none"
+        }
+      },
+      "required": [
+        "expected_games",
+        "expected_pairs",
+        "require_independent_audit",
+        "require_zero_operational_errors",
+        "require_zero_survivors",
+        "strength_claim"
+      ],
+      "type": "object"
+    },
+    "approval": {
+      "$ref": "#/$defs/approval"
+    },
+    "classification": {
+      "const": "diagnostic"
+    },
+    "inputs": {
+      "additionalProperties": false,
+      "properties": {
+        "chess_auditor": {
+          "$ref": "#/$defs/file"
+        },
+        "common": {
+          "$ref": "#/$defs/file"
+        },
+        "fastchess": {
+          "$ref": "#/$defs/file"
+        },
+        "manifest_module": {
+          "$ref": "#/$defs/file"
+        },
+        "match_stage": {
+          "$ref": "#/$defs/file"
+        },
+        "opening_pgn": {
+          "$ref": "#/$defs/file"
+        },
+        "opening_prefixes": {
+          "$ref": "#/$defs/file"
+        },
+        "role_exec": {
+          "$ref": "#/$defs/file"
+        },
+        "roles": {
+          "items": {
+            "$ref": "#/$defs/role"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "runner": {
+          "$ref": "#/$defs/file"
+        },
+        "schema": {
+          "$ref": "#/$defs/file"
+        },
+        "stockfish": {
+          "$ref": "#/$defs/file"
+        },
+        "supervisor": {
+          "$ref": "#/$defs/file"
+        },
+        "trace_auditor": {
+          "$ref": "#/$defs/file"
+        },
+        "uci_preflight": {
+          "$ref": "#/$defs/file"
+        }
+      },
+      "required": [
+        "runner",
+        "schema",
+        "common",
+        "manifest_module",
+        "supervisor",
+        "uci_preflight",
+        "match_stage",
+        "trace_auditor",
+        "role_exec",
+        "chess_auditor",
+        "fastchess",
+        "stockfish",
+        "opening_pgn",
+        "opening_prefixes",
+        "roles"
+      ],
+      "type": "object"
+    },
+    "limits": {
+      "additionalProperties": false,
+      "properties": {
+        "chess_audit_seconds": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "match_seconds": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "preflight_seconds": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "sample_interval_seconds": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "term_grace_seconds": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "trace_audit_seconds": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "preflight_seconds",
+        "match_seconds",
+        "trace_audit_seconds",
+        "chess_audit_seconds",
+        "term_grace_seconds",
+        "sample_interval_seconds"
+      ],
+      "type": "object"
+    },
+    "match": {
+      "additionalProperties": false,
+      "oneOf": [
+        {"required": ["time_control"]},
+        {"required": ["node_limit"]}
+      ],
+      "properties": {
+        "affinity_cpus": {
+          "items": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "book": {
+          "const": false
+        },
+        "concurrency": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "draw_adjudication": {
+          "const": false
+        },
+        "games": {
+          "minimum": 2,
+          "type": "integer"
+        },
+        "maxmoves_adjudication": {
+          "const": false
+        },
+        "opening_plies": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "pairs": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "ponder": {
+          "const": false
+        },
+        "recover": {
+          "const": false
+        },
+        "resign_adjudication": {
+          "const": false
+        },
+        "runner_strict": {
+          "const": true
+        },
+        "score_adjudication": {
+          "const": false
+        },
+        "seed": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "tablebase": {
+          "const": false
+        },
+        "time_control": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "node_limit": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "use_affinity": {
+          "const": true
+        }
+      },
+      "required": [
+        "games",
+        "pairs",
+        "concurrency",
+        "seed",
+        "opening_plies",
+        "use_affinity",
+        "affinity_cpus",
+        "runner_strict",
+        "recover",
+        "ponder",
+        "book",
+        "tablebase",
+        "score_adjudication",
+        "resign_adjudication",
+        "draw_adjudication",
+        "maxmoves_adjudication"
+      ],
+      "type": "object"
+    },
+    "operational_profile": {
+      "additionalProperties": false,
+      "properties": {
+        "allow_fastchess_normal_exit": {
+          "const": true
+        },
+        "name": {
+          "const": "ngn-pre-m4c-known-benign-v1"
+        },
+        "ngn_crash_handler": {
+          "const": "required-two-line-init-per-observed-process"
+        }
+      },
+      "required": [
+        "name",
+        "allow_fastchess_normal_exit",
+        "ngn_crash_handler"
+      ],
+      "type": "object"
+    },
+    "purpose": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "resources": {
+      "additionalProperties": false,
+      "properties": {
+        "affinity_mode": {
+          "const": "fastchess-per-game-one-worker"
+        },
+        "memory_limit_kib": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "required_cpus_allowed_list": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "runner_cpus": {
+          "items": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "runner_cpus",
+        "required_cpus_allowed_list",
+        "memory_limit_kib",
+        "affinity_mode"
+      ],
+      "type": "object"
+    },
+    "schema": {
+      "enum": [
+        "ngn-candidate-match-v1",
+        "ngn-candidate-match-borrowed-v1",
+        "ngn-candidate-match-borrowed-fixed-nodes-v1"
+      ]
+    },
+    "status": {
+      "enum": [
+        "HELD",
+        "APPROVED_TO_RUN"
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "status",
+    "purpose",
+    "classification",
+    "approval",
+    "inputs",
+    "match",
+    "resources",
+    "limits",
+    "operational_profile",
+    "acceptance"
+  ],
+  "title": "NGN same-code HCE versus NGN-v1 candidate diagnostic",
+  "type": "object"
+}
