@@ -1,0 +1,85 @@
+NGN source attribution and modification notices
+
+This notice records origins of code and tooling present in NGN 0.2.0-rc.1.
+It remains applicable to historical copies even after components are removed.
+The NGN source and model grant is GPL-3.0-only. That grant does not replace
+upstream copyright, component-license or ODbL database terms.
+
+Rodent V — Naman Thanki and Pawel Koziol
+Source: https://github.com/nescitus/Rodent-V/tree/b53ffaf670590932957cb63b7b6d871f6f33b7d8
+License: GNU GPL version 3; retained text in LICENSES/Rodent-V-GPL.txt.
+NGN adapted the NNUE feature mapping, bucket layout, tensor order and score
+arithmetic into rodenteval (introduced 2026-09-13) and rodentv12eval (2026-09-19).
+The NGN-owned K4 evaluator reused that feature design and internally copied
+NGN's Rodent-backend kernels, explicitly in 3a92418 on 2026-09-27.
+Newly trained weights do not remove this source lineage.
+Rodent V's README separately credits Sungorus 1.4 by Pablo Vazquez as its base.
+This does not assert that NGN's search or board is copied from Rodent/Sungorus,
+or that every NGN assembly routine is a verbatim upstream copy.
+
+Counter Copyright (c) Vadim Chizhov. All rights reserved.
+Source: https://github.com/ChizhovVadim/CounterGo/tree/63c487ca724c620f71c129d62129c6fb9109c872
+License: GNU GPL version 3; retained text in LICENSES/CounterGo-GPL.txt.
+NGN adapted the Counter 5.5 format and evaluation arithmetic into countereval
+starting 2026-09-06, with strict loading, incremental state, engine adapters
+and NGN-specific optimized kernels. The copyright line above is retained from
+the pinned upstream README; it does not override the GPL grant.
+
+Stockfish, a UCI chess playing engine derived from Glaurung 2.1
+Copyright (C) 2004-2026 The Stockfish developers (see upstream AUTHORS file)
+Source: https://github.com/official-stockfish/Stockfish/tree/sf_18
+Authors: https://github.com/official-stockfish/Stockfish/blob/sf_18/AUTHORS
+Stockfish is licensed under GNU GPL version 3 or, at your option, any later
+version. Retained license text: LICENSES/Stockfish-GPL.txt.
+NGN's nnue/sf18small and nnue/sf18big packages and their test instrumentation
+adapt Stockfish formats, feature definitions and evaluation operations starting
+2026-09-06. These Go packages are modified implementations rather than original
+Stockfish source files. No Stockfish trained model was in the owned bundle.
+The published source omitted this upstream copyright notice; it is restored here.
+
+Zahak — Amanj Sherwany
+Copyright (c) 2021 Amanj Sherwany
+Source: https://github.com/amanjpro/zahak
+MIT license: LICENSES/Zahak-MIT.txt and notices in engine/bitboard.go, cache.go,
+hash.go, move.go, piece.go, position.go and square.go. These files were modified
+in NGN. Preserve these notices with historical derived copies; a replacement
+written from an interface contract does not erase the history of these files.
+
+PeSTO/RofChade — Ronald Friederich
+NGN's engine/eval_pesto.go contains derived piece-square tables and material
+values introduced 2026-04-23 and subsequently modified by tuning. That source
+identifies Ronald Friederich and asserts public domain. This audit has not yet
+established the precise original table license; the general Chessprogramming
+Wiki page license is not proof of an author's public-domain dedication.
+Reference: https://www.chessprogramming.org/PeSTO%27s_Evaluation_Function
+
+Bullet — Jamie Whiting
+Copyright (c) 2023 Jamie Whiting
+Source: https://github.com/jw1912/bullet/tree/629ee50000b2afb7b3337595401c830d3b1e0f42
+MIT license: LICENSES/Bullet-MIT.txt. NGN supplied a local queue/dependency patch
+and training harness. Training tooling is separate from the Go engine binary.
+
+sfbinpack — Disservin/binpack-rust
+Source: https://github.com/Disservin/binpack-rust
+Exact dependency: sfbinpack 0.6.4, GPL-3.0, pinned in the sampler Cargo.lock.
+Other pinned sampler dependencies declare MIT/Apache-2.0-family permissions,
+with unicode-ident additionally declaring Unicode-3.0; their registry license
+metadata is retained by the private audit. No compiled sampler binary is part
+of the Go engine packages. Redistributing compiled tools requires their own
+complete notice inventory; an engine grant does not replace those conditions.
+
+Go runtime and standard library
+Copyright 2009 The Go Authors.
+BSD-style source and binary redistribution notice: LICENSES/Go-LICENSE.txt.
+
+Training data — official-stockfish/master-binpacks T80 archive
+Pinned revision: 1e095a758c630bc58d0b6dac4da44fcd38ac89c2
+Contains information made available under the Open Database License 1.0.
+See LICENSES/TRAINING-DATA.txt, LICENSES/ODbL-1.0.txt and the distributed
+training-method archive for the exact source, alterations, map and filter inputs.
+The GPL source/model grant does not replace the database's ODbL terms.
+
+Modification notice dated 2026-10-01: these author/source notices and the
+THIRD_PARTY inventory are corrected privately before the requested removal and
+replacement work. This notice does not claim that published copies have changed
+or that the current audit is a complete legal determination.

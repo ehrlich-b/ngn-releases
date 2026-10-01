@@ -1,3 +1,6 @@
+// Counter Copyright (c) Vadim Chizhov. All rights reserved.
+// Counter 5.5 mechanism adaptation introduced in NGN on 2026-09-06; see NOTICE.
+
 // Package countereval implements the portable full-refresh evaluator used by
 // the Counter 5.5 768x512x1 legacy network format.
 //

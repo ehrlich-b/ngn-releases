@@ -1,3 +1,6 @@
+// Rodent V source attribution: Naman Thanki and Pawel Koziol.
+// NNUE mechanism adaptation introduced in NGN on 2026-09-19; see NOTICE.
+
 // Package rodentv12eval implements the exact portable full-refresh evaluator
 // for Rodent V1.2's default 4x768x768x8 Bullet network.
 //
