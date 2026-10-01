@@ -1,0 +1,11 @@
+{
+  "schema": "ngn-rodent-counter-non-owned-cpu-v1",
+  "threshold_cores": 1.0,
+  "required_consecutive_samples": 12,
+  "sample_seconds": 5,
+  "timing_evidence_rejected": false,
+  "sample_count": 165,
+  "max_non_owned_cores": 1.9270350549069288,
+  "max_consecutive_over_threshold": 1,
+  "max_consecutive_source": "accepted independent terminal review"
+}

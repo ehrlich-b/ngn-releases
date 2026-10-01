@@ -1,0 +1,104 @@
+{
+  "schema": "ngn-rodent-update-speed-gate-archive-v1",
+  "state": "COMPLETE",
+  "decision": "PASS_PERFORMANCE",
+  "scope": "Rodent V1.1 Anand accumulator-update AVX2 speed gate; no Elo or strength claim",
+  "base": {
+    "commit": "762377947c0907d1ce6be74cb71e01521610bd76",
+    "tree": "59587882012a4bd0a64fdac2678a0b0cee01c143"
+  },
+  "candidate": {
+    "combined_patch_sha256": "e1376fae6a6ee848441780487db38a487a7c10ce53bd4af0d08f0a5da923af31",
+    "validation_receipt_sha256": "b1bc9b019f547140de03181a0a44a4bbeac36414628a5185cddd0f223011ad15"
+  },
+  "protocol": {
+    "blocks": 10,
+    "direct_order": "alternating original-first/selected-first",
+    "search_order": "alternating base-first/candidate-first",
+    "direct_benchtime": "250ms",
+    "search_benchtime": "1x",
+    "fixed_nodes": 400000,
+    "fixtures": [
+      "start_white",
+      "start_black",
+      "kiwipete_white",
+      "kiwipete_black",
+      "asymmetric_white",
+      "asymmetric_black"
+    ],
+    "cpu": 4,
+    "supervisor_cpu": 6,
+    "gomaxprocs": 1
+  },
+  "acceptance_rule": {
+    "direct": "every all/AS/ASS/ASAS median selected/original ratio < 1, both order-stratum medians < 1, zero allocations",
+    "search": "equal-weight median candidate/base ratio <= 0.97, every fixture median < 1, both order-stratum medians < 1, exact allocation identity",
+    "identity": "exact cold+warm callback/PV/score/node/context receipt equality before timing",
+    "operational": "all stage receipts clean and no timing interference"
+  },
+  "direct": {
+    "median_ratios": {
+      "all": 0.0230580361557451,
+      "as": 0.025073030046418768,
+      "ass": 0.02244835455722341,
+      "asas": 0.02363242409411648
+    },
+    "order_stratum_median_ratios": {
+      "original_first": 0.02299299788308093,
+      "selected_first": 0.023157038242473556
+    },
+    "bytes_per_op": 0,
+    "allocations_per_op": 0,
+    "pass": true
+  },
+  "search": {
+    "equal_weight_median_ratio": 0.4116223360371921,
+    "fixture_median_ratios": {
+      "start_white": 0.44285883367430384,
+      "start_black": 0.4084804890588416,
+      "kiwipete_white": 0.41476418301554263,
+      "kiwipete_black": 0.4151565306446333,
+      "asymmetric_white": 0.38686686441877227,
+      "asymmetric_black": 0.4042949452117349
+    },
+    "order_stratum_median_ratios": {
+      "base_first": 0.4116583001987424,
+      "candidate_first": 0.4141451533630934
+    },
+    "base_and_candidate_bytes_per_op": 135409224,
+    "base_and_candidate_allocations_per_op": 12,
+    "pass": true
+  },
+  "identity": {
+    "base_path": "/home/ehrli/repos/ngn-rodent-update-gate-20260913/run-001/search-identity-base.json",
+    "candidate_path": "/home/ehrli/repos/ngn-rodent-update-gate-20260913/run-001/search-identity-candidate.json",
+    "shared_sha256": "07574e16014b30afbe99980e445e77f034255447d5504205f07074e6a6a86333",
+    "byte_equal": true,
+    "not_copied_due_to_size": true
+  },
+  "operational": {
+    "stage_receipts_clean": 44,
+    "timing_evidence_rejected": false,
+    "monitor_error": null,
+    "non_owned_cpu_samples": 19,
+    "max_non_owned_cores": 0.5018730249241495,
+    "raw_stage_root": "/home/ehrli/repos/ngn-rodent-update-gate-20260913/run-001/stages",
+    "raw_interference_path": "/home/ehrli/repos/ngn-rodent-update-gate-20260913/run-001/non-owned-cpu.json",
+    "raw_interference_sha256": "ce24b8c1798c1342c5e0622956f650b940c6cc5aa8c73e5f89168e8b2ae3ce4b",
+    "raw_prelaunch_cpu_path": "/home/ehrli/repos/ngn-rodent-update-gate-20260913/run-001/prelaunch-cpu.json",
+    "raw_prelaunch_cpu_sha256": "083d076bbd93ac020d344fb8511abde2b4ccb7db2dd2286b0d4785e6f0d0fab1"
+  },
+  "evidence": {
+    "driver_sha256": "e3f61eaa4b9cc28fbea1126d1a7350273364537f3e9e2fa579c8d4642fa89f1b",
+    "held_manifest_sha256": "1def62b6b92363dcc1e72cd362b46ccec313b66e4841adb03368a657097a07c2",
+    "release_manifest_sha256": "8495cd0f7be31865e8110252edaaff32b3596c2d8a9b60716d9dcaf32060fa64",
+    "frozen_manifest_sha256": "be5d2f2dcbe2f500eb0305d64f89ee5c87209f35e729ba68a671e36995a398af",
+    "decision_sha256": "9bfb8330c5c7764539b8729de08f6b2df6c7e9b8050123e9924072b085acc1b0",
+    "terminal_sha256": "4f5108bd54601e6c01bada44c67ac24f2083629ca2e1357db6946820d2a144fa",
+    "inventory_sha256": "4cc238e68c102b1163d17ad6272b703777847fc29e23e2451a6107806a276b4d",
+    "build_receipt_sha256": "5980a9e7615f8b6de4842491e1c749414a4d5146ef5a3be14c48c34531f7bfd8",
+    "reused_gate_library": "../output-kernel/gate-library.py",
+    "reused_gate_library_sha256": "1f396790b256304e101665304994597f50357f051827e2712d38838165821f35"
+  },
+  "no_extensions_or_repeats_after_observation": true
+}

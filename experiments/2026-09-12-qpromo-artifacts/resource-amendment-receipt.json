@@ -1,0 +1,48 @@
+{
+  "schema": "ngn-qpromo-resource-amendment-v1",
+  "scope": "operational memory ceiling only",
+  "reason": "run-001 A/A exceeded an undersized aggregate process-tree ceiling before completion",
+  "prior_run": {
+    "run_root": "/home/ehrli/repos/ngn-qpromo-gate-20260912/run-001",
+    "phase": "aa",
+    "elapsed_seconds": 77.29678807203891,
+    "completed_games": 7,
+    "candidate_games_started": 0,
+    "termination_reason": "sampled-process-tree-memory-limit",
+    "memory_limit_kib": 4194304,
+    "peak_sampled_process_tree_rss_kib": 4196856,
+    "peak_ngn_processes": 8,
+    "peak_ngn_rss_kib": 4155648,
+    "peak_auxiliary_rss_kib": 41208,
+    "surviving_processes": [],
+    "timing_evidence_rejected": false,
+    "maximum_non_owned_cpu_cores": 0.09994874474499339,
+    "supervisor_receipt_sha256": "fdc3d73fee2eb47ef4dacab26f8c5748d51570ef6eedff4dd4128496a1098bab",
+    "process_samples_sha256": "167f7528e630024c90222b86527dc09e99def5e9d6f99e6eaa4f691201e1a185",
+    "non_owned_cpu_sha256": "e9294886eb9d44494f1c473f6decdfcdf932cf4bf9597359c227f7d0c8bbfd1a"
+  },
+  "comparable_accepted_run": {
+    "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/commands/match/supervisor-receipt.json",
+    "elapsed_seconds": 16542.991788258078,
+    "peak_sampled_process_tree_rss_kib": 2565860,
+    "individual_engine_process_peak_rss_kib": [704540, 751108]
+  },
+  "amendment": {
+    "new_memory_limit_kib": 8388608,
+    "justification": "Eight times the larger accepted per-engine peak is 6008864 KiB; 6 GiB leaves little runner headroom, while 8 GiB is bounded below the observed 13736456 KiB host MemAvailable.",
+    "unchanged": [
+      "engine binaries and hashes",
+      "Counter-5.5 model and options",
+      "time control 10+0.1",
+      "concurrency 4",
+      "physical CPU mask 0,2,4,6",
+      "opening order and paired schedule",
+      "Fastchess seed 20260912",
+      "bootstrap seed 2026091201 and 100000 replicates",
+      "A/A 100 games",
+      "candidate 400 games",
+      "adopt iff candidate-A paired-bootstrap lower95 Elo is positive",
+      "no extension after observing score"
+    ]
+  }
+}

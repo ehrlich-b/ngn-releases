@@ -1,0 +1,292 @@
+{
+  "anchor_provenance": {
+    "ccrl_blitz_snapshot": {
+      "kind": "September 5 CCRL Blitz snapshot recorded by the project",
+      "path": "/home/ehrli/repos/ngn/experiments/2026-09-06-rodent-v1.1-release-confirmation.md",
+      "ratings": {
+        "counter_5_5": {
+          "rating": 3359,
+          "reported_half_interval": 10
+        },
+        "rodent_v1_1": {
+          "rating": 3522,
+          "reported_half_interval": 16
+        }
+      },
+      "sha256": "33cdfdd01f1e2c5ebaf86da34a98411236f0995fe8f7a505c6ccfc917dfaaafe"
+    },
+    "counter_3333_author_readme_orientation": {
+      "kind": "author-README orientation recorded by the project; no local anchor interval",
+      "path": "/home/ehrli/repos/ngn/experiments/2026-09-05-next-stage-roadmap.md",
+      "rating": 3333,
+      "sha256": "7403bd5f1abc9ff9ed0a1f8e03d8dcdca79921628ecc63047fbdf27d1d2eaff3"
+    },
+    "historical_classical": {
+      "interval_95": [
+        2834,
+        2934
+      ],
+      "kind": "separate historical classical five-anchor calibration",
+      "path": "/home/ehrli/repos/ngn/experiments/2026-09-05-2800-result.md",
+      "rating": 2884,
+      "sha256": "ad3d5c54edad30b4f8eff410ec81ae990b4d78411c0787f3c2d7bee6210841bc"
+    }
+  },
+  "anchored_sensitivities": {
+    "counter_t1_on_3333_orientation": {
+      "anchor_rating": 3333,
+      "match_sampling_interval_95": [
+        2931.0804468472925,
+        3069.5834610878355
+      ],
+      "point": 3010.3270644120767
+    },
+    "counter_t1_on_3359_ccrl_blitz": {
+      "anchor_rating": 3359,
+      "anchor_reported_half_interval": 10,
+      "match_sampling_interval_95": [
+        2957.0804468472925,
+        3095.5834610878355
+      ],
+      "outer_sum_with_anchor_reported_interval": [
+        2947.0804468472925,
+        3105.5834610878355
+      ],
+      "point": 3036.3270644120767
+    },
+    "counter_t8_on_3333_orientation": {
+      "anchor_rating": 3333,
+      "match_sampling_interval_95": [
+        3102.8368813773914,
+        3189.9260139026687
+      ],
+      "point": 3146.753563074265
+    },
+    "counter_t8_on_3359_ccrl_blitz": {
+      "anchor_rating": 3359,
+      "anchor_reported_half_interval": 10,
+      "match_sampling_interval_95": [
+        3128.8368813773914,
+        3215.9260139026687
+      ],
+      "outer_sum_with_anchor_reported_interval": [
+        3118.8368813773914,
+        3225.9260139026687
+      ],
+      "point": 3172.753563074265
+    },
+    "rodent_t1_on_3522_ccrl_blitz": {
+      "anchor_rating": 3522,
+      "anchor_reported_half_interval": 16,
+      "match_sampling_interval_95": [
+        3010.4985596188685,
+        3183.9607839942973
+      ],
+      "outer_sum_with_anchor_reported_interval": [
+        2994.4985596188685,
+        3199.9607839942973
+      ],
+      "point": 3109.199132659138
+    }
+  },
+  "candidate": {
+    "binary": {
+      "path": "/home/ehrli/repos/ngn-final-integration-gate/output/final-integration-gate-20260906/attempt-001/build/ngn_linux_amd64_v3",
+      "sha256": "437981db2753e2e9b46fc7185754da63969f284792ed0a6b5182dc192565f910"
+    },
+    "build_receipt": {
+      "path": "/home/ehrli/repos/ngn-final-integration-gate/output/final-integration-gate-20260906/attempt-001/terminal-receipt.json",
+      "sha256": "831349ef0161b1bcea010122aadfcaad36bdfde17fc3e38c5a652294e28d9ea2"
+    },
+    "model": {
+      "path": "/home/ehrli/repos/ngn/build/releases/ngn-a51233b-counter55-v1/n-30-5268.nn",
+      "sha256": "3488baed71f4d432d028e05b65e2ff13f8c9afe7f91974d1a3c34a0691d6670c"
+    },
+    "source_commit": "a51233bdf07729b498f1a0dd5c85502ff7a4d844",
+    "source_tree": "622b3f8da8a1af9abfd7da3ee8942593373a0624"
+  },
+  "cells": {
+    "counter_5_5_t1": {
+      "bindings": {
+        "acceptance": {
+          "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/root-counter-t1-v16-recovery-acceptance-20260908-v1.json",
+          "sha256": "1a8700e89bc134ae64e37e7e9bbc6d05f3ff39cae17912b7dcc54212a0c9b819"
+        },
+        "audit": {
+          "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-counter-t1-v16-offline-audit-20260908/audit-chess-v16.json",
+          "sha256": "fa44168bad1ee10c115981a1fbf8b2ef1234164f596a9a8b0b0be6382c655ecc"
+        },
+        "comparison": {
+          "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-counter-t1-v16-offline-audit-20260908/comparison-v16.json",
+          "sha256": "21b86fdae120fc5dca3e90bd00a1e7414f233425ba6506b011beb0c2355dead4"
+        },
+        "manifest": {
+          "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-fixed-comparisons-20260908-attempt2/counter-5.5-v1.55.0-t1-30p0d3/source/manifest.json",
+          "sha256": "2ac57c2696ab66b9bf3c2a7050f7a9fb4ac7e29202030673548f014e3472dc12"
+        }
+      },
+      "candidate_binary_sha256": "437981db2753e2e9b46fc7185754da63969f284792ed0a6b5182dc192565f910",
+      "full_game_receipt_verified": true,
+      "model_sha256": "3488baed71f4d432d028e05b65e2ff13f8c9afe7f91974d1a3c34a0691d6670c",
+      "per_opening_pair_rows_verified": 50,
+      "recomputed": {
+        "bootstrap": {
+          "elo_interval_95": [
+            -401.91955315270746,
+            -263.41653891216424
+          ],
+          "method": "deterministic-paired-nonparametric-percentile",
+          "pairing_unit": "one opening played with colors reversed",
+          "resamples": 100000,
+          "score_interval_95": [
+            0.09,
+            0.18
+          ],
+          "seed_decimal": 5640563118046458422,
+          "seed_hex": "0x4e474e4558543236"
+        },
+        "elo": -322.6729355879232,
+        "pairs": 50,
+        "penta_0_to_4": [
+          27,
+          19,
+          4,
+          0,
+          0
+        ],
+        "score": 0.135
+      },
+      "width": 1
+    },
+    "counter_5_5_t8": {
+      "bindings": {
+        "acceptance": {
+          "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/root-counter-t8-v17-recovery-acceptance-20260908-v1.json",
+          "sha256": "6b0d2d22e88a96ed799145fc2f82149781034a5e2a7cd78646fceec53b4eac95"
+        },
+        "audit": {
+          "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-counter-t8-v17-offline-audit-20260908/audit-chess-v17.json",
+          "sha256": "3dc61bb6e8f0eb7c72a62fdc2f9d71b62216f6b3a30109eb57a49cf640d9bd46"
+        },
+        "comparison": {
+          "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-counter-t8-v17-offline-audit-20260908/comparison-v17.json",
+          "sha256": "9efe01ae9747721ee211671a6204fb6d7e71669074681c0762359e175d5567ab"
+        },
+        "manifest": {
+          "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-fixed-comparisons-20260908-attempt3/counter-5.5-v1.55.0-t8-30p0d3/source/manifest.json",
+          "sha256": "a2d11e9ccd4f71a85fb144440bb6bdc65ff6ebd5cbc22e2f3bbadf2d6c63a6dc"
+        }
+      },
+      "candidate_binary_sha256": "437981db2753e2e9b46fc7185754da63969f284792ed0a6b5182dc192565f910",
+      "full_game_receipt_verified": true,
+      "model_sha256": "3488baed71f4d432d028e05b65e2ff13f8c9afe7f91974d1a3c34a0691d6670c",
+      "per_opening_pair_rows_verified": 50,
+      "recomputed": {
+        "bootstrap": {
+          "elo_interval_95": [
+            -230.16311862260883,
+            -143.07398609733121
+          ],
+          "method": "deterministic-paired-nonparametric-percentile",
+          "pairing_unit": "one opening played with colors reversed",
+          "resamples": 100000,
+          "score_interval_95": [
+            0.21,
+            0.305
+          ],
+          "seed_decimal": 5640563118046458422,
+          "seed_hex": "0x4e474e4558543236"
+        },
+        "elo": -186.24643692573505,
+        "pairs": 50,
+        "penta_0_to_4": [
+          10,
+          30,
+          9,
+          1,
+          0
+        ],
+        "score": 0.255
+      },
+      "width": 8
+    },
+    "rodent_v1_1_t1": {
+      "bindings": {
+        "audit": {
+          "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-fixed-comparisons-20260908-attempt4/rodent-v1.1-anand-testers-t1-30p0d3/audit.json",
+          "sha256": "ecf9a328c211bf38820699c5be7e5400f0ef2e6dbd3f0e0ad75210e7f0c58436"
+        },
+        "comparison": {
+          "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-fixed-comparisons-20260908-attempt4/rodent-v1.1-anand-testers-t1-30p0d3/comparison.json",
+          "sha256": "67b4379295f465b26e7fdcece412f4f25dd6e9fd6253ff711875ae15f334ae98"
+        },
+        "manifest": {
+          "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-fixed-comparisons-20260908-attempt4/rodent-v1.1-anand-testers-t1-30p0d3/source/manifest.json",
+          "sha256": "25749c38e7e21f44373b4b4a32cf1cd00001ecfa4034c0c0c3c3f039208d8ebb"
+        },
+        "terminal": {
+          "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-fixed-comparisons-20260908-attempt4/rodent-v1.1-anand-testers-t1-30p0d3/terminal.json",
+          "sha256": "fec280cd16a92e6458ca686ebeabb075044d084791c39fb9bcf856c2f84a23d0"
+        }
+      },
+      "candidate_binary_sha256": "437981db2753e2e9b46fc7185754da63969f284792ed0a6b5182dc192565f910",
+      "full_game_receipt_verified": true,
+      "model_sha256": "3488baed71f4d432d028e05b65e2ff13f8c9afe7f91974d1a3c34a0691d6670c",
+      "per_opening_pair_rows_verified": 50,
+      "recomputed": {
+        "bootstrap": {
+          "elo_interval_95": [
+            -511.50144038113154,
+            -338.0392160057027
+          ],
+          "method": "deterministic-paired-nonparametric-percentile",
+          "pairing_unit": "one opening played with colors reversed",
+          "resamples": 100000,
+          "score_interval_95": [
+            0.05,
+            0.125
+          ],
+          "seed_decimal": 5640563118046458422,
+          "seed_hex": "0x4e474e4558543236"
+        },
+        "elo": -412.80086734086217,
+        "pairs": 50,
+        "penta_0_to_4": [
+          35,
+          13,
+          2,
+          0,
+          0
+        ],
+        "score": 0.085
+      },
+      "width": 1
+    }
+  },
+  "conclusions": {
+    "additional_rating_games_now": 0,
+    "eight_thread": "25.5% vs matched Counter8: -186 Elo, paired 95% [-230,-143]; absolute 3147 map is orientation only",
+    "historical_classical": "2884 [2834,2934] is a separate 53e4/native-Windows/five-anchor calibration and is not pooled",
+    "mixed_width_3130": "not defensible: it averages Rodent t1 and Counter t8 mappings",
+    "one_thread": "roughly 3000-3100 as a cross-list orientation, not an official rating",
+    "one_thread_match_interval_union_counter3333_and_rodent3522": [
+      2931.0804468472925,
+      3183.9607839942973
+    ],
+    "reason": "more repeats narrow sampling error but do not resolve cross-list, settings, personality, or thread-count anchor systematics"
+  },
+  "generated_utc": "2026-09-12T21:31:12.777263+00:00",
+  "next_fixed400_rule_review": {
+    "assessment": "valid predeclared fixed-sample evidence of positive mean paired Elo",
+    "required_guardrails": [
+      "finish all 400 games and all 200 color-reversed opening pairs",
+      "no early stopping, extension, or score-conditioned rerun",
+      "zero operational failures and independent legal/terminal audit",
+      "report point estimate and full paired interval; do not claim a positive minimum margin beyond zero"
+    ],
+    "rule": "accept candidate only if the completed 400-game (200-pair) paired 95% interval lower bound is > 0"
+  },
+  "schema": "ngn-rating-reassessment-v2",
+  "scope": "accepted full external cells only; no engines, matches, partial cells, or internal SPRTs",
+  "state": "PASS"
+}

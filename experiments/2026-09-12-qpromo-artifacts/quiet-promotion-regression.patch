@@ -1,0 +1,320 @@
+diff --git a/engine/qpromo_test.go b/engine/qpromo_test.go
+new file mode 100644
+index 0000000..68e0d6b
+--- /dev/null
++++ b/engine/qpromo_test.go
+@@ -0,0 +1,314 @@
++package engine
++
++import (
++	"testing"
++
++	"github.com/ehrlich-b/ngn/countereval"
++)
++
++func directQuietPromotions(pos *Position) map[Move]bool {
++	var got [32]Move
++	n := appendQuietPromotions(pos, got[:])
++	out := make(map[Move]bool, n)
++	for _, move := range got[:n] {
++		out[move] = true
++	}
++	return out
++}
++
++func fullQuietPromotions(pos *Position, legal bool) map[Move]bool {
++	var all [256]Move
++	n := GenerateMovesIntoBuffer(pos, all[:])
++	out := map[Move]bool{}
++	for _, move := range all[:n] {
++		if !move.IsCapture() && !move.IsEnPassant() && move.PromoType() != NoType && (!legal || IsLegalMove(pos, move)) {
++			out[move] = true
++		}
++	}
++	return out
++}
++
++func equalMoveSets(a, b map[Move]bool) bool {
++	if len(a) != len(b) {
++		return false
++	}
++	for move := range a {
++		if !b[move] {
++			return false
++		}
++	}
++	return true
++}
++
++func actualNoisyMoves(pos *Position, legal bool) map[Move]bool {
++	var captures [64]Move
++	n := GenerateCapturesIntoBuffer(pos, captures[:])
++	out := map[Move]bool{}
++	for _, move := range captures[:n] {
++		if !legal || IsLegalMove(pos, move) {
++			out[move] = true
++		}
++	}
++	for move := range directQuietPromotions(pos) {
++		if !legal || IsLegalMove(pos, move) {
++			out[move] = true
++		}
++	}
++	return out
++}
++
++func fullNoisyMoves(pos *Position, legal bool) map[Move]bool {
++	var all [256]Move
++	n := GenerateMovesIntoBuffer(pos, all[:])
++	out := map[Move]bool{}
++	for _, move := range all[:n] {
++		noisy := move.IsCapture() || (!move.IsEnPassant() && move.PromoType() != NoType)
++		if noisy && (!legal || IsLegalMove(pos, move)) {
++			out[move] = true
++		}
++	}
++	return out
++}
++
++func assertQuietPromotionClass(t *testing.T, pos *Position) {
++	t.Helper()
++	before := pos.Copy()
++	direct := directQuietPromotions(pos)
++	if !PositionEqual(before, pos) {
++		t.Fatal("direct generator changed position")
++	}
++	fullPseudo := fullQuietPromotions(pos, false)
++	if !equalMoveSets(direct, fullPseudo) {
++		t.Fatalf("pseudo quiet promotions direct=%v full=%v", direct, fullPseudo)
++	}
++	directLegal := map[Move]bool{}
++	for move := range direct {
++		if IsLegalMove(pos, move) {
++			directLegal[move] = true
++		}
++	}
++	fullLegal := fullQuietPromotions(pos, true)
++	if !equalMoveSets(directLegal, fullLegal) {
++		t.Fatalf("legal quiet promotions direct=%v full=%v", directLegal, fullLegal)
++	}
++	if !equalMoveSets(actualNoisyMoves(pos, false), fullNoisyMoves(pos, false)) {
++		t.Fatalf("pseudo noisy class differs")
++	}
++	if !equalMoveSets(actualNoisyMoves(pos, true), fullNoisyMoves(pos, true)) {
++		t.Fatalf("legal noisy class differs")
++	}
++	if !PositionEqual(before, pos) {
++		t.Fatal("legality checks changed position")
++	}
++}
++
++func TestQuietPromotionGeneratorMatchesFullMoveClass(t *testing.T) {
++	cases := []string{
++		"7k/5P2/6K1/8/8/8/8/8 w - - 0 1",     // white quiet mate promotions
++		"8/8/8/8/8/6k1/5p2/7K b - - 0 1",     // black mirror
++		"r5k1/1P6/8/8/8/8/8/6K1 w - - 0 1",   // b8 quiet and bxa8 capture promotions
++		"6k1/8/8/8/8/8/1p6/R5K1 b - - 0 1",   // black quiet and bxa1 capture promotions
++		"1b5k/2P5/3K4/8/8/8/8/8 w - - 0 1",   // diagonal-pinned white c7 pawn
++		"8/8/8/8/8/3k4/2p5/1B5K b - - 0 1",   // diagonal-pinned black c2 pawn mirror
++		"4r1k1/4P3/8/8/8/8/8/4K3 w - - 0 1",  // blocked white pawn
++		"4k3/8/8/8/8/8/4p3/4R1K1 b - - 0 1",  // blocked black pawn
++		"8/PPPPPPPP/7k/8/8/8/8/K7 w - - 0 1", // maximum eight quiet-promotion pawns
++	}
++	for _, fen := range cases {
++		pos, err := ParseFEN(fen)
++		if err != nil {
++			t.Fatal(err)
++		}
++		assertQuietPromotionClass(t, pos)
++		if fen == "1b5k/2P5/3K4/8/8/8/8/8 w - - 0 1" || fen == "8/8/8/8/8/3k4/2p5/1B5K b - - 0 1" {
++			if got := len(directQuietPromotions(pos)); got != 4 {
++				t.Fatalf("diagonal pin pseudo promotions=%d, want 4", got)
++			}
++			if got := len(fullQuietPromotions(pos, true)); got != 0 {
++				t.Fatalf("diagonal pin legal promotions=%d, want 0", got)
++			}
++		}
++		if fen == "8/PPPPPPPP/7k/8/8/8/8/K7 w - - 0 1" && len(directQuietPromotions(pos)) != 32 {
++			t.Fatalf("maximum quiet promotions=%d, want 32", len(directQuietPromotions(pos)))
++		}
++	}
++}
++
++func TestQuietPromotionGeneratorDeterministicLegalWalk(t *testing.T) {
++	pos, err := ParseFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
++	if err != nil {
++		t.Fatal(err)
++	}
++	for ply := 0; ply < 160; ply++ {
++		assertQuietPromotionClass(t, pos)
++		var all [256]Move
++		n := GenerateMovesIntoBuffer(pos, all[:])
++		legal := make([]Move, 0, n)
++		for _, move := range all[:n] {
++			if IsLegalMove(pos, move) {
++				legal = append(legal, move)
++			}
++		}
++		if len(legal) == 0 {
++			t.Fatalf("walk ended at ply %d", ply)
++		}
++		move := legal[(ply*17+3)%len(legal)]
++		before := pos.Copy()
++		ep, tag, hc, _ := pos.MakeMove(move)
++		pos.UnMakeMove(move, tag, ep, hc)
++		if !PositionEqual(before, pos) {
++			t.Fatalf("make/unmake changed walk state at ply %d", ply)
++		}
++		ep, tag, hc, _ = pos.MakeMove(move)
++		_ = ep
++		_ = tag
++		_ = hc
++	}
++}
++
++func TestQSearchQuietPromotionMates(t *testing.T) {
++	for _, fen := range []string{
++		"7k/5P2/6K1/8/8/8/8/8 w - - 0 1",
++		"8/8/8/8/8/6k1/5p2/7K b - - 0 1",
++	} {
++		pos, err := ParseFEN(fen)
++		if err != nil {
++			t.Fatal(err)
++		}
++		before := pos.Copy()
++		ClearStop()
++		ClearHistoryTable()
++		defaultSearchEngine, _ = NewSearchEngineWithHash(DEFAULT_CACHE_SIZE)
++		info := newQSearchInfo()
++		if got := quiescence(pos, -INFINITY, INFINITY, 0, info); got != MATE_VALUE-1 {
++			t.Fatalf("qsearch(%s)=%d, want exact mate score %d", fen, got, MATE_VALUE-1)
++		}
++		if !PositionEqual(before, pos) || info.FrameDepth != 0 || info.RepStackLen != 0 {
++			t.Fatalf("qsearch did not restore state: pos=%t frames=%d reps=%d", PositionEqual(before, pos), info.FrameDepth, info.RepStackLen)
++		}
++	}
++}
++
++func counterFeatureIndex(piece Piece, square Square) int {
++	return int(piece-WhitePawn)*64 + int(square)
++}
++
++func TestQSearchQuietPromotionCounterPushUnwind(t *testing.T) {
++	model := loadSparseCounterModel(t, map[int]float32{
++		countereval.InputSize * countereval.HiddenSize:                    0.5,
++		counterHiddenWeightIndex(counterFeatureIndex(WhitePawn, F7), 0):   1,
++		counterHiddenWeightIndex(counterFeatureIndex(WhiteKnight, F8), 0): 2,
++		counterHiddenWeightIndex(counterFeatureIndex(WhiteBishop, F8), 0): 3,
++		counterHiddenWeightIndex(counterFeatureIndex(WhiteRook, F8), 0):   4,
++		counterHiddenWeightIndex(counterFeatureIndex(WhiteQueen, F8), 0):  5,
++		counterOutputWeightIndex(0):                                       2,
++	})
++	searcher := NewSearchEngine()
++	if err := searcher.SelectCounter55Evaluator(model); err != nil {
++		t.Fatal(err)
++	}
++	pos, err := ParseFEN("7k/5P2/6K1/8/8/8/8/8 w - - 0 1")
++	if err != nil {
++		t.Fatal(err)
++	}
++	before := pos.Copy()
++
++	searcher.sessionMu.Lock()
++	defer searcher.sessionMu.Unlock()
++	generation := mustAcquireHCEModelUse()
++	defer releaseHCEModelUse()
++	tt := searcher.prepareTTGeneration(generation)
++	evaluator := searcher.mustPreparePrimaryEvaluator(pos, generation)
++	rootRaw := requireCounterRawMatchesFull(t, evaluator, pos)
++	if rootRaw != 3 {
++		t.Fatalf("root raw=%v, want 3", rootRaw)
++	}
++	info := newN3CDirectSearchInfo(searcher, evaluator, tt, 0)
++
++	promotionPushes := 0
++	sawChangedRaw := false
++	evaluator.transitionObserver = func(observedPos *Position, observedEvaluator *workerEvaluator) {
++		raw := requireCounterRawMatchesFull(t, observedEvaluator, observedPos)
++		if observedPos.Board.GetBitboardOf(WhitePawn)&SquareMask[F7] == 0 &&
++			observedPos.Board.PieceAt(F8) != NoPiece && observedPos.Board.PieceAt(F8).Type() != Pawn {
++			promotionPushes++
++			if raw != rootRaw {
++				sawChangedRaw = true
++			}
++		}
++	}
++
++	if got := quiescence(pos, -INFINITY, INFINITY, 0, info); got != MATE_VALUE-1 {
++		t.Fatalf("Counter qsearch=%d, want exact mate score %d", got, MATE_VALUE-1)
++	}
++	if promotionPushes == 0 || !sawChangedRaw {
++		t.Fatalf("Counter qsearch promotion pushes=%d changed-raw=%v", promotionPushes, sawChangedRaw)
++	}
++	if !PositionEqual(before, pos) || info.FrameDepth != 0 || info.RepStackLen != 0 || evaluator.nnueDepth() != 0 {
++		t.Fatalf("Counter qsearch did not restore state: pos=%t frames=%d reps=%d evaluator=%d",
++			PositionEqual(before, pos), info.FrameDepth, info.RepStackLen, evaluator.nnueDepth())
++	}
++	if restoredRaw := requireCounterRawMatchesFull(t, evaluator, pos); restoredRaw != rootRaw {
++		t.Fatalf("restored root raw=%v, want %v", restoredRaw, rootRaw)
++	}
++}
++
++func TestQSearchQuietPromotionCounterPushUnwindBlack(t *testing.T) {
++	model := loadSparseCounterModel(t, map[int]float32{
++		countereval.InputSize * countereval.HiddenSize:                    0.5,
++		counterHiddenWeightIndex(counterFeatureIndex(BlackPawn, F2), 0):   1.5,
++		counterHiddenWeightIndex(counterFeatureIndex(BlackKnight, F1), 0): 2.5,
++		counterHiddenWeightIndex(counterFeatureIndex(BlackBishop, F1), 0): 3.5,
++		counterHiddenWeightIndex(counterFeatureIndex(BlackRook, F1), 0):   4.5,
++		counterHiddenWeightIndex(counterFeatureIndex(BlackQueen, F1), 0):  5.5,
++		counterOutputWeightIndex(0):                                       2,
++	})
++	searcher := NewSearchEngine()
++	if err := searcher.SelectCounter55Evaluator(model); err != nil {
++		t.Fatal(err)
++	}
++	pos, err := ParseFEN("8/8/8/8/8/6k1/5p2/7K b - - 0 1")
++	if err != nil {
++		t.Fatal(err)
++	}
++	before := pos.Copy()
++
++	searcher.sessionMu.Lock()
++	defer searcher.sessionMu.Unlock()
++	generation := mustAcquireHCEModelUse()
++	defer releaseHCEModelUse()
++	tt := searcher.prepareTTGeneration(generation)
++	evaluator := searcher.mustPreparePrimaryEvaluator(pos, generation)
++	rootRaw := requireCounterRawMatchesFull(t, evaluator, pos)
++	if rootRaw != 4 {
++		t.Fatalf("root raw=%v, want 4", rootRaw)
++	}
++	info := newN3CDirectSearchInfo(searcher, evaluator, tt, 0)
++
++	promotionPushes := 0
++	sawChangedRaw := false
++	evaluator.transitionObserver = func(observedPos *Position, observedEvaluator *workerEvaluator) {
++		raw := requireCounterRawMatchesFull(t, observedEvaluator, observedPos)
++		if observedPos.Board.GetBitboardOf(BlackPawn)&SquareMask[F2] == 0 &&
++			observedPos.Board.PieceAt(F1) != NoPiece && observedPos.Board.PieceAt(F1).Type() != Pawn {
++			promotionPushes++
++			if raw != rootRaw {
++				sawChangedRaw = true
++			}
++		}
++	}
++
++	if got := quiescence(pos, -INFINITY, INFINITY, 0, info); got != MATE_VALUE-1 {
++		t.Fatalf("Counter qsearch=%d, want exact mate score %d", got, MATE_VALUE-1)
++	}
++	if promotionPushes == 0 || !sawChangedRaw {
++		t.Fatalf("Counter qsearch promotion pushes=%d changed-raw=%v", promotionPushes, sawChangedRaw)
++	}
++	if !PositionEqual(before, pos) || info.FrameDepth != 0 || info.RepStackLen != 0 || evaluator.nnueDepth() != 0 {
++		t.Fatalf("Counter qsearch did not restore state: pos=%t frames=%d reps=%d evaluator=%d",
++			PositionEqual(before, pos), info.FrameDepth, info.RepStackLen, evaluator.nnueDepth())
++	}
++	if restoredRaw := requireCounterRawMatchesFull(t, evaluator, pos); restoredRaw != rootRaw {
++		t.Fatalf("restored root raw=%v, want %v", restoredRaw, rootRaw)
++	}
++}

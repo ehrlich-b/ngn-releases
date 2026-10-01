@@ -1,0 +1,71 @@
+File: engine-profile-v2.test
+Build ID: 41a0c43ef27f3bd707af8448c89a5fd8dff878e3
+Type: cpu
+Time: 2026-09-13 11:47:53 EDT
+Duration: 20.67s, Total samples = 20.46s (98.97%)
+Active filters:
+   tagignore=scope=search
+Showing nodes accounting for 0.37s, 1.81% of 20.46s total
+      flat  flat%   sum%        cum   cum%
+     0.27s  1.32%  1.32%      0.27s  1.32%  runtime.memclrNoHeapPointers
+     0.02s 0.098%  1.42%      0.02s 0.098%  github.com/ehrlich-b/ngn/engine.prepareWorkerEvaluator
+     0.02s 0.098%  1.52%      0.02s 0.098%  runtime.duffzero
+     0.01s 0.049%  1.56%      0.01s 0.049%  github.com/ehrlich-b/ngn/engine.(*Position).makeMoveHelper
+     0.01s 0.049%  1.61%      0.01s 0.049%  runtime.(*mspan).writeHeapBitsSmall
+     0.01s 0.049%  1.66%      0.01s 0.049%  runtime.(*unwinder).resolveInternal
+     0.01s 0.049%  1.71%      0.01s 0.049%  runtime.madvise
+     0.01s 0.049%  1.76%      0.01s 0.049%  runtime.memmove
+     0.01s 0.049%  1.81%      0.01s 0.049%  runtime.pcvalue
+         0     0%  1.81%      0.15s  0.73%  github.com/ehrlich-b/ngn/engine.(*Cache).Clear (inline)
+         0     0%  1.81%      0.01s 0.049%  github.com/ehrlich-b/ngn/engine.(*Position).MakeMove (inline)
+         0     0%  1.81%      0.30s  1.47%  github.com/ehrlich-b/ngn/engine.(*SearchEngine).NewGame
+         0     0%  1.81%      0.01s 0.049%  github.com/ehrlich-b/ngn/engine.(*SearchEngine).SelectCounter55Evaluator
+         0     0%  1.81%      0.11s  0.54%  github.com/ehrlich-b/ngn/engine.(*SearchEngine).prepareTTGeneration
+         0     0%  1.81%      0.02s 0.098%  github.com/ehrlich-b/ngn/engine.(*workerHistory).ClearHistoryTable
+         0     0%  1.81%      0.37s  1.81%  github.com/ehrlich-b/ngn/engine.BenchmarkCounterProfilePersistent.func1
+         0     0%  1.81%      0.01s 0.049%  github.com/ehrlich-b/ngn/engine.GenerateFEN
+         0     0%  1.81%      0.02s 0.098%  github.com/ehrlich-b/ngn/engine.GenerateLegalMoves (inline)
+         0     0%  1.81%      0.01s 0.049%  github.com/ehrlich-b/ngn/engine.IsLegalMove
+         0     0%  1.81%      0.04s   0.2%  github.com/ehrlich-b/ngn/engine.NewSearchEngineWithHash
+         0     0%  1.81%      0.02s 0.098%  github.com/ehrlich-b/ngn/engine.ParseUCIMove
+         0     0%  1.81%      0.01s 0.049%  github.com/ehrlich-b/ngn/engine.ParseUCIMove.GenerateLegalMoves.func1
+         0     0%  1.81%      0.02s 0.098%  github.com/ehrlich-b/ngn/engine.WrapMoveGeneration
+         0     0%  1.81%      0.01s 0.049%  github.com/ehrlich-b/ngn/engine.evaluatorModel.newWorker (inline)
+         0     0%  1.81%      0.01s 0.049%  github.com/ehrlich-b/ngn/engine.evaluatorModel.newWorkerWithReferenceContext
+         0     0%  1.81%      0.01s 0.049%  github.com/ehrlich-b/ngn/engine.generateLegalMovesUnsafe
+         0     0%  1.81%      0.01s 0.049%  github.com/ehrlich-b/ngn/engine.generatePiecePlacement
+         0     0%  1.81%      0.11s  0.54%  github.com/ehrlich-b/ngn/engine.newCacheWithMode (inline)
+         0     0%  1.81%      0.35s  1.71%  github.com/ehrlich-b/ngn/engine.newCounterProfileGame
+         0     0%  1.81%      0.05s  0.24%  github.com/ehrlich-b/ngn/engine.newCounterTransitionProfileSearch
+         0     0%  1.81%      0.02s 0.098%  github.com/ehrlich-b/ngn/engine.replayCounterProfileMoves
+         0     0%  1.81%      0.01s 0.049%  runtime.(*inlineUnwinder).resolveInternal (inline)
+         0     0%  1.81%      0.01s 0.049%  runtime.(*mcache).allocLarge
+         0     0%  1.81%      0.01s 0.049%  runtime.(*mheap).alloc
+         0     0%  1.81%      0.01s 0.049%  runtime.(*mheap).alloc.func1
+         0     0%  1.81%      0.01s 0.049%  runtime.(*mheap).allocSpan
+         0     0%  1.81%      0.01s 0.049%  runtime.(*pageAlloc).scavenge
+         0     0%  1.81%      0.01s 0.049%  runtime.(*pageAlloc).scavenge.func1
+         0     0%  1.81%      0.01s 0.049%  runtime.(*pageAlloc).scavengeOne
+         0     0%  1.81%      0.01s 0.049%  runtime.(*unwinder).next
+         0     0%  1.81%      0.02s 0.098%  runtime.callers
+         0     0%  1.81%      0.02s 0.098%  runtime.callers.func1
+         0     0%  1.81%      0.01s 0.049%  runtime.heapSetTypeNoHeader (inline)
+         0     0%  1.81%      0.02s 0.098%  runtime.mProf_Malloc
+         0     0%  1.81%      0.11s  0.54%  runtime.makeslice
+         0     0%  1.81%      0.16s  0.78%  runtime.mallocgc
+         0     0%  1.81%      0.15s  0.73%  runtime.mallocgcLarge
+         0     0%  1.81%      0.01s 0.049%  runtime.mallocgcSmallScanNoHeader
+         0     0%  1.81%      0.12s  0.59%  runtime.memclrNoHeapPointersChunked
+         0     0%  1.81%      0.01s 0.049%  runtime.newInlineUnwinder
+         0     0%  1.81%      0.05s  0.24%  runtime.newobject
+         0     0%  1.81%      0.01s 0.049%  runtime.pcdatavalue1
+         0     0%  1.81%      0.02s 0.098%  runtime.profilealloc
+         0     0%  1.81%      0.01s 0.049%  runtime.sysUnused (inline)
+         0     0%  1.81%      0.01s 0.049%  runtime.sysUnusedOS
+         0     0%  1.81%      0.03s  0.15%  runtime.systemstack
+         0     0%  1.81%      0.02s 0.098%  runtime.tracebackPCs
+         0     0%  1.81%      0.01s 0.049%  strings.(*Builder).WriteString (inline)
+         0     0%  1.81%      0.01s 0.049%  strings.Join
+         0     0%  1.81%      0.29s  1.42%  testing.(*B).launch
+         0     0%  1.81%      0.08s  0.39%  testing.(*B).run1.func1
+         0     0%  1.81%      0.37s  1.81%  testing.(*B).runN

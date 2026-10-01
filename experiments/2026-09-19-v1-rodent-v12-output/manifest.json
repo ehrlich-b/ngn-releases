@@ -1,0 +1,55 @@
+{
+  "gates": {
+    "allocation": "exact_identity",
+    "direct_each_order_stratum_below": 1.0,
+    "direct_median_ratio_max": 0.6666666666666666,
+    "identity": "byte_exact_cold_and_warm_trajectory_receipts",
+    "interference_max_non_owned_cores": 1.0,
+    "search_each_fixture_below": 1.0,
+    "search_each_order_stratum_max": 0.97,
+    "search_equal_weight_median_ratio_max": 0.97
+  },
+  "inputs": {
+    "base": {
+      "path": "/home/ehrli/v1-output-gate-inputs-20260919/engine-base.test",
+      "sha256": "19d1793b2aa5613b8d9c2ac573d5485605dadfd75eff92546b5af0398a72da7b"
+    },
+    "candidate": {
+      "path": "/home/ehrli/v1-output-gate-inputs-20260919/engine-candidate.test",
+      "sha256": "35de68a10edebd724e7086effba14707474415950ae5b3a6e275361e6d14786e"
+    },
+    "direct": {
+      "path": "/home/ehrli/v1-output-gate-inputs-20260919/rodentv12-candidate.test",
+      "sha256": "ae443992c1eeb0424905a257bf4004e0191175d4a049d4a529421b8059358584"
+    },
+    "driver": {
+      "path": "/home/ehrli/v1-output-gate-inputs-20260919/run_gate.py",
+      "sha256": "89531310ffab06e7c34923c8abadf7a26df08c704eabaca881bd10bd1f25a1f9"
+    },
+    "model": {
+      "path": "/home/ehrli/rodent-v1.2-public-preflight-20260906/extracted/release/release-1-2/nets/rodent_4kb_768hl_8ob_v2.bin",
+      "sha256": "c35a1abc1b8c1cb1d5f4221454d494c1a6da1ed9088fd51ab27038bfa74b5053"
+    }
+  },
+  "protocol": {
+    "blocks": 10,
+    "child_cpu": 4,
+    "direct_benchtime": "250ms",
+    "driver_cpu": 6,
+    "gomaxprocs": 1,
+    "interference_retry_policy": "discard_pair_and_retry_same_order",
+    "maximum_attempts_per_ten_blocks": 30,
+    "search_benchtime": "1x",
+    "search_fixtures": [
+      "start_white",
+      "start_black",
+      "kiwipete_white",
+      "kiwipete_black",
+      "asymmetric_white",
+      "asymmetric_black"
+    ],
+    "search_nodes": 400000,
+    "timing_interference_sample_seconds": 0.25
+  },
+  "schema": "ngn-rodent-v12-output-gate-v1"
+}

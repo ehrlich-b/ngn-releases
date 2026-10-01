@@ -1,0 +1,379 @@
+diff --git a/engine/search.go b/engine/search.go
+index cb15942..7f92934 100644
+--- a/engine/search.go
++++ b/engine/search.go
+@@ -695,14 +695,20 @@ func searchIterativeDeepeningWorkerUnsafe(pos *Position, maxDepth int, timeManag
+ 			break
+ 		}
+ 
+-		// Mark the start of this iteration so the soft-stop heuristic in
+-		// ShouldStopSearch can measure iteration time.
++		// Close the previous completed iteration, then make one unthrottled
++		// admission decision before starting any work at this depth.
+ 		if info.TimeManager != nil {
+ 			info.TimeManager.NewIteration()
++			// completedDepth is explicit: SearchInfo.Depth is initialized to the
++			// requested maximum and cannot safely express admission state.
++			if !info.TimeManager.ShouldStartIteration(currentDepth - 1) {
++				info.Stopped = true
++				break
++			}
+ 		}
+ 
+-		// Reset seldepth at the top of each iteration so UCI info reports the
+-		// deepest reach for THIS iteration, not the max across all prior ones.
++		// Reset seldepth only after admission so a rejected depth is never
++		// reported as started or completed.
+ 		info.SelDepth = currentDepth
+ 
+ 		// Record this iteration's root depth as the reference for the per-path
+@@ -711,14 +717,6 @@ func searchIterativeDeepeningWorkerUnsafe(pos *Position, maxDepth int, timeManag
+ 		// non-decaying checking line from recursing toward MaximumDepth.
+ 		info.RootDepth = currentDepth
+ 
+-		// Check time before starting each new depth iteration
+-		if info.TimeManager != nil {
+-			if info.TimeManager.shouldStopSearchAt(currentDepth, timeCheckIterationAdmission) {
+-				info.Stopped = true
+-				break
+-			}
+-		}
+-
+ 		// T5: Modern aspiration windows. Shallow depths (<=3) search full width — a
+ 		// stable previousScore isn't established yet and re-searches there are pure
+ 		// waste. From depth 4 up, open a small window scaled by the previous score's
+diff --git a/engine/time.go b/engine/time.go
+index fd741e9..95834f4 100644
+--- a/engine/time.go
++++ b/engine/time.go
+@@ -82,13 +82,6 @@ func (observer *searchTerminationObserver) reset() {
+ 	}
+ }
+ 
+-type timeCheckSite uint8
+-
+-const (
+-	timeCheckActiveSearch timeCheckSite = iota
+-	timeCheckIterationAdmission
+-)
+-
+ // TimeManager handles time allocation and management during search
+ type TimeManager struct {
+ 	timeControl   TimeControl
+@@ -119,12 +112,12 @@ type TimeManager struct {
+ 	shouldStop    bool      // Cached result of last time check
+ 
+ 	// iterationStartTime is set by NewIteration at the top of each iterative
+-	// deepening depth and used by the soft-stop heuristic to estimate the
++	// deepening depth and used by iteration admission to estimate the
+ 	// next iteration's cost. Previously each caller passed time.Now() in this
+-	// slot, which made iterationTime always ~0 and disabled soft-stop.
++	// slot, which made iterationTime always ~0 and disabled the projection.
+ 	iterationStartTime time.Time
+ 	// lastIterationTime is the wall time the most recently COMPLETED iteration
+-	// took; the soft-stop projects the next iteration as a multiple of it.
++	// took; iteration admission projects the next iteration from it.
+ 	lastIterationTime time.Duration
+ 	// stableIters counts consecutive COMPLETED iterations whose best move was
+ 	// unchanged AND whose aspiration window held on the first attempt — the
+@@ -399,12 +392,12 @@ func (tm *TimeManager) ensureSafeTimeAllocation() time.Duration {
+ // ShouldStopSearch determines if search should stop based on time
+ // This method can be called frequently without performance penalty - it uses
+ // internal rate limiting to only do expensive time checks every N calls
+-// NewIteration is called by iterative deepening at the top of each new depth
+-// so the soft-stop heuristic can measure how long the current iteration took
+-// and project the next one. Without this, ShouldStopSearch's nextIterationEstimate
+-// would be zero.
++// NewIteration is called by iterative deepening at the top of each new depth,
++// before ShouldStartIteration. It closes the just-completed iteration and starts
++// timing the proposed one. If admission rejects that depth, no completion is
++// reported for the newly opened timer.
+ func (tm *TimeManager) NewIteration() {
+-	// Record how long the iteration that just finished took, so the soft-stop can
++	// Record how long the iteration that just finished took, so admission can
+ 	// project the next one. NewIteration runs at the top of each ID depth, so when
+ 	// called for depth N the previous (N-1) iteration's elapsed is measured here.
+ 	if !tm.iterationStartTime.IsZero() {
+@@ -413,11 +406,44 @@ func (tm *TimeManager) NewIteration() {
+ 	tm.iterationStartTime = tm.nowTime()
+ }
+ 
++// ShouldStartIteration is the unthrottled root admission gate. Tournament soft
++// policy lives only here: once a depth is admitted, recursive/root/aspiration
++// checks use ShouldStopSearch and enforce hard/emergency bounds only.
++func (tm *TimeManager) ShouldStartIteration(completedDepth int) bool {
++	if tm.shouldStop {
++		return false
++	}
++	now := tm.nowTime()
++	elapsed := now.Sub(tm.startTime)
++	tm.lastTimeCheck = now
++
++	var reason searchTerminationReason
++	switch tm.timeControl {
++	case FixedDepth, Infinite:
++		return true
++	case TimePerMove, FixedTime:
++		if elapsed >= tm.allocatedTime {
++			reason = searchTerminationHardDeadline
++		}
++	case Tournament:
++		reason = tm.tournamentIterationAdmissionReason(completedDepth, elapsed)
++		if reason == searchTerminationSoftAbort {
++			reason = searchTerminationSoftAdmission
++		}
++	}
++	if reason == searchTerminationNone {
++		return true
++	}
++	tm.shouldStop = true
++	tm.observeTermination(reason, completedDepth+1, elapsed)
++	return false
++}
++
+ // ReportCompletedIteration feeds the root's per-iteration signals to the time
+ // manager: the decision-stability flags (T1b) and the best-move node fraction
+ // (T1e). A completed iteration that kept the same best move AND held its aspiration
+ // window on the first try means the choice is settling, so stableIters climbs and
+-// shouldStopTournamentSearch shrinks the soft budget. Any best-move change or window
++// tournament iteration admission shrinks the soft budget. Any best-move change or window
+ // break (a fail-high/fail-low re-search) resets it — that volatility is exactly when
+ // the search must NOT be cut short. bestMoveNodeFraction (the share of the iteration's
+ // nodes spent inside the best move's subtree) is stored unconditionally — it reflects
+@@ -514,10 +540,6 @@ const (
+ )
+ 
+ func (tm *TimeManager) ShouldStopSearch(depth int) bool {
+-	return tm.shouldStopSearchAt(depth, timeCheckActiveSearch)
+-}
+-
+-func (tm *TimeManager) shouldStopSearchAt(depth int, site timeCheckSite) bool {
+ 	// Plain counter: only the search goroutine calls this, and SetTimeControl's
+ 	// reset happens-before the goroutine launch — the old atomic.AddUint64 was a
+ 	// per-node RMW bought for nothing (single-threaded search).
+@@ -541,11 +563,10 @@ func (tm *TimeManager) shouldStopSearchAt(depth int, site timeCheckSite) bool {
+ 				tm.observeTermination(searchTerminationHardDeadline, depth, elapsed)
+ 			}
+ 		case Tournament:
+-			reason := tm.tournamentStopReason(depth, elapsed)
++			// An admitted Tournament iteration is never cancelled by the soft
++			// forecast. Recursive polling retains only hard/emergency safety.
++			reason := tm.tournamentHardStopReason(elapsed)
+ 			tm.shouldStop = reason != searchTerminationNone
+-			if reason == searchTerminationSoftAbort && site == timeCheckIterationAdmission {
+-				reason = searchTerminationSoftAdmission
+-			}
+ 			if tm.shouldStop {
+ 				tm.observeTermination(reason, depth, elapsed)
+ 			}
+@@ -555,16 +576,18 @@ func (tm *TimeManager) shouldStopSearchAt(depth int, site timeCheckSite) bool {
+ 	return tm.shouldStop
+ }
+ 
+-// shouldStopTournamentSearch decides, from the soft/hard budgets set by
+-// computeTournamentLimits, whether to stop searching. The OLD version layered
++// shouldStopTournamentSearch is the pure admission predicate retained for
++// focused factor tests. Production root admission calls ShouldStartIteration;
++// recursive cancellation calls ShouldStopSearch and excludes this soft policy.
++// The OLD version layered
+ // absolute minThinkTime (0.5-8s) and minDepth (4-12) floors that ignored the bank
+ // — the bullet-killers that forced spending a fixed wall-time regardless of how
+ // little time was left. This version is purely bank-relative.
+ func (tm *TimeManager) shouldStopTournamentSearch(depth int, elapsed time.Duration) bool {
+-	return tm.tournamentStopReason(depth, elapsed) != searchTerminationNone
++	return tm.tournamentIterationAdmissionReason(depth, elapsed) != searchTerminationNone
+ }
+ 
+-func (tm *TimeManager) tournamentStopReason(depth int, elapsed time.Duration) searchTerminationReason {
++func (tm *TimeManager) tournamentHardStopReason(elapsed time.Duration) searchTerminationReason {
+ 	// Hard ceiling — never exceeded. computeTournamentLimits caps this at 30% of the
+ 	// usable bank, so a single move can never flag us (the anti-flag guarantee).
+ 	if elapsed >= tm.hardTime {
+@@ -574,10 +597,17 @@ func (tm *TimeManager) tournamentStopReason(depth int, elapsed time.Duration) se
+ 	if tm.baseTime-elapsed <= tm.emergencyTime {
+ 		return searchTerminationEmergencyReserve
+ 	}
++	return searchTerminationNone
++}
++
++func (tm *TimeManager) tournamentIterationAdmissionReason(completedDepth int, elapsed time.Duration) searchTerminationReason {
++	if reason := tm.tournamentHardStopReason(elapsed); reason != searchTerminationNone {
++		return reason
++	}
+ 	// Always finish at least one iteration so the move is real (never a depth-0
+ 	// blunder); the search's clock-interrupt guard keeps the last completed depth
+ 	// if a later iteration is cut off mid-flight.
+-	if depth < 1 {
++	if completedDepth < 1 {
+ 		return searchTerminationNone
+ 	}
+ 	// Soft limit: don't START another iteration we can't finish within the soft budget.
+diff --git a/engine/time_observer_test.go b/engine/time_observer_test.go
+index e7b5880..5a351df 100644
+--- a/engine/time_observer_test.go
++++ b/engine/time_observer_test.go
+@@ -37,8 +37,8 @@ func TestTerminationObserverClassifiesTimeCausesAndLatchesFirst(t *testing.T) {
+ 		var observer searchTerminationObserver
+ 		tm := configuredObserverTournament(clock, &observer)
+ 		tm.startTime = start
+-		if !tm.shouldStopSearchAt(7, timeCheckIterationAdmission) {
+-			t.Fatal("soft admission did not stop")
++		if tm.ShouldStartIteration(6) {
++			t.Fatal("soft admission allowed a new iteration")
+ 		}
+ 		if observer.FirstReason != searchTerminationSoftAdmission || observer.FirstDepth != 7 || observer.FirstElapsed != 801*time.Millisecond {
+ 			t.Fatalf("soft admission observation = %+v", observer)
+@@ -53,13 +53,16 @@ func TestTerminationObserverClassifiesTimeCausesAndLatchesFirst(t *testing.T) {
+ 		}
+ 	})
+ 
+-	t.Run("soft active abort", func(t *testing.T) {
++	t.Run("recursive soft is ignored", func(t *testing.T) {
+ 		clock := &terminationObserverClock{now: start.Add(801 * time.Millisecond)}
+ 		var observer searchTerminationObserver
+ 		tm := configuredObserverTournament(clock, &observer)
+ 		tm.startTime = start
+-		if !tm.ShouldStopSearch(7) || observer.FirstReason != searchTerminationSoftAbort {
+-			t.Fatalf("active soft observation = %+v", observer)
++		if tm.ShouldStopSearch(7) || observer.FirstReason != searchTerminationNone {
++			t.Fatalf("recursive soft check stopped or recorded a cause: %+v", observer)
++		}
++		if tm.ShouldStartIteration(6) || observer.FirstReason != searchTerminationSoftAdmission {
++			t.Fatalf("admission did not own the soft cause: %+v", observer)
+ 		}
+ 	})
+ 
+diff --git a/engine/time_iteration_admission_test.go b/engine/time_iteration_admission_test.go
+new file mode 100644
+index 0000000..76d1f5e
+--- /dev/null
++++ b/engine/time_iteration_admission_test.go
+@@ -0,0 +1,128 @@
++package engine
++
++import (
++	"testing"
++	"time"
++)
++
++func c1BoundaryManager(elapsed time.Duration) (*TimeManager, *terminationObserverClock, *searchTerminationObserver) {
++	start := time.Unix(1000, 0)
++	clock := &terminationObserverClock{now: start.Add(elapsed)}
++	observer := &searchTerminationObserver{}
++	tm := configuredObserverTournament(clock, observer)
++	tm.startTime = start
++	return tm, clock, observer
++}
++
++func TestIterationAdmissionStrictProjectionBoundary(t *testing.T) {
++	for _, test := range []struct {
++		elapsed time.Duration
++		admit   bool
++	}{
++		{799 * time.Millisecond, true},
++		{800 * time.Millisecond, true},
++		{801 * time.Millisecond, false},
++	} {
++		t.Run(test.elapsed.String(), func(t *testing.T) {
++			tm, _, observer := c1BoundaryManager(test.elapsed)
++			tm.checkCounter = 17 // Admission is independent of the 1024-call poll cadence.
++			if got := tm.ShouldStartIteration(1); got != test.admit {
++				t.Fatalf("ShouldStartIteration at %v = %v, want %v", test.elapsed, got, test.admit)
++			}
++			if tm.checkCounter != 17 {
++				t.Fatalf("admission changed recursive poll counter to %d", tm.checkCounter)
++			}
++			if test.admit {
++				if observer.FirstReason != searchTerminationNone {
++					t.Fatalf("admitted boundary recorded %+v", observer)
++				}
++			} else if observer.FirstReason != searchTerminationSoftAdmission || observer.FirstDepth != 2 {
++				t.Fatalf("rejected boundary observation = %+v", observer)
++			}
++		})
++	}
++}
++
++func TestIterationAdmissionFinishesDepthOneAndPreservesZeroHistoryFallback(t *testing.T) {
++	t.Run("depth one ignores soft", func(t *testing.T) {
++		tm, _, observer := c1BoundaryManager(1500 * time.Millisecond)
++		if !tm.ShouldStartIteration(0) {
++			t.Fatalf("depth one rejected below hard bound: %+v", observer)
++		}
++	})
++
++	t.Run("no duration uses elapsed fallback", func(t *testing.T) {
++		tm, _, observer := c1BoundaryManager(time.Second)
++		tm.lastIterationTime = 0
++		if tm.ShouldStartIteration(1) {
++			t.Fatal("elapsed==soft with no previous duration was admitted")
++		}
++		if observer.FirstReason != searchTerminationSoftAdmission {
++			t.Fatalf("fallback observation = %+v", observer)
++		}
++	})
++}
++
++func TestAdmittedIterationIgnoresSoftButHonorsHardAndEmergency(t *testing.T) {
++	t.Run("soft then hard", func(t *testing.T) {
++		tm, clock, observer := c1BoundaryManager(801 * time.Millisecond)
++		if tm.ShouldStopSearch(7) {
++			t.Fatal("recursive check stopped an admitted iteration at the soft boundary")
++		}
++		if observer.FirstReason != searchTerminationNone {
++			t.Fatalf("recursive soft check recorded %+v", observer)
++		}
++
++		clock.now = tm.startTime.Add(3999 * time.Millisecond)
++		tm.checkCounter = 1023
++		if tm.ShouldStopSearch(7) {
++			t.Fatal("recursive check stopped below the hard deadline")
++		}
++		clock.now = tm.startTime.Add(4 * time.Second)
++		tm.checkCounter = 1023
++		if !tm.ShouldStopSearch(7) || observer.FirstReason != searchTerminationHardDeadline {
++			t.Fatalf("hard deadline observation = %+v", observer)
++		}
++	})
++
++	t.Run("emergency", func(t *testing.T) {
++		tm, clock, observer := c1BoundaryManager(0)
++		tm.baseTime = time.Second
++		tm.hardTime = 2 * time.Second
++		clock.now = tm.startTime.Add(901 * time.Millisecond)
++		tm.checkCounter = 1023
++		if !tm.ShouldStopSearch(7) || observer.FirstReason != searchTerminationEmergencyReserve {
++			t.Fatalf("emergency observation = %+v", observer)
++		}
++	})
++}
++
++func TestNewIterationMakesCompletedCostAvailableBeforeAdmission(t *testing.T) {
++	start := time.Unix(2000, 0)
++	clock := &terminationObserverClock{now: start}
++	var observer searchTerminationObserver
++	tm := newTimeManager(clock.Now)
++	tm.timeControl = Tournament
++	tm.startTime = start
++	tm.baseTime = 10 * time.Second
++	tm.softTime = time.Second
++	tm.hardTime = 4 * time.Second
++	tm.emergencyTime = 100 * time.Millisecond
++	tm.stableIters = 3
++	tm.setSearchTerminationObserver(&observer)
++	tm.iterationStartTime = start
++
++	clock.now = start.Add(200 * time.Millisecond)
++	tm.observeCompletedIteration(1, 1)
++	tm.NewIteration()
++	if tm.lastIterationTime != 200*time.Millisecond {
++		t.Fatalf("last iteration=%v, want 200ms", tm.lastIterationTime)
++	}
++	clock.now = start.Add(801 * time.Millisecond)
++	if tm.ShouldStartIteration(1) {
++		t.Fatal("new depth admitted past strict projected boundary")
++	}
++	if observer.IterationCount != 1 || observer.Iterations[0].Depth != 1 {
++		t.Fatalf("unstarted depth was reported completed: %+v", observer)
++	}
++}

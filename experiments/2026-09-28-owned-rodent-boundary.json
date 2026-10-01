@@ -1,0 +1,46 @@
+{
+  "schema": "ngn-native-rodent-boundary-assessment-v1",
+  "decision": "HOLD_NATIVE_GATE",
+  "engine_sha256": "9cfb8195207ee5695c1973a89664ab73b34b5bcbc10ad3bc0f0afe28b9713cbc",
+  "source_tag": "b53ffaf670590932957cb63b7b6d871f6f33b7d8",
+  "source_files": {
+    "moves.go": "def6de59c1b3439e3d9a5d0e8c1bb83fcb4ba14fcc72035aa9a5e0edf62db7d1",
+    "numeric.go": "da25abe23003353e830a878c19e266c1bd3634863ff44ffca55d2c174887ff8b",
+    "options.go": "f02fed02c87703bfb0df7e74b1bfe8d58632e9d408d2beef7fdda2498271caf7",
+    "root.go": "7de21192437efec592e4a675a9c84ce55cce96ddc50177e0b3cb4449d1d19e9f",
+    "search.go": "f67cd2de40f212b7b9db5a7f4d7873097b1759a2917e9086c3e925c5bfdf57a9",
+    "trans.go": "8f9d5b9259af272c2e5a64626963834e6ce12cfd3602e4983cc90534b2e28e3e",
+    "uci.go": "09acd3c34e4bd119e1842d37eaaeaa2a3f9c254ad13a02ddc395999cb2df4b8d"
+  },
+  "stockfish": {
+    "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/tools/stockfish18",
+    "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+  },
+  "historic_plies": 156,
+  "historical_pv": {
+    "legal": false,
+    "first_invalid_index": 9,
+    "move": "g2g1",
+    "legal_same_squares": [
+      "g2g1b",
+      "g2g1n",
+      "g2g1q",
+      "g2g1r"
+    ],
+    "validated_prefix_plies": 9
+  },
+  "hypothetical_queen_suffix_pv": {
+    "legal": false,
+    "first_invalid_index": 10,
+    "move": "b5c5",
+    "legal_same_squares": [],
+    "validated_prefix_plies": 10
+  },
+  "probe_searches": 3,
+  "probe_pvs": 74,
+  "probe_legal_plies": 942,
+  "conclusion": "The historical PV needs a promotion suffix; cold/warm searches at the saved position have legal PVs and do not reproduce it. Tagged source emits suffixes for encoded promotions. A reporting-only mechanism or carried-state cause remains unproved. No compatibility allowance or new scored native match is authorized by this diagnosis.",
+  "probe_report_sha256": "7c879ead64df5cd2e3fd89c20140fcc0fdcf89272796460250785e086ce36615",
+  "fixture_sha256": "29c8b39e176e164b49465202070c35538dc3be06402c44746c7453189d5328d7",
+  "completed": 1790645147.8256044
+}

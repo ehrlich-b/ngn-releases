@@ -1,0 +1,34 @@
+test_safe_environment_is_exact_and_excludes_debug_tuning (test_common.CommonTests.test_safe_environment_is_exact_and_excludes_debug_tuning) ... ok
+test_boolean_numeric_aliases_are_rejected (test_manifest.ManifestTests.test_boolean_numeric_aliases_are_rejected) ... ok
+test_evalfile_must_match_role (test_manifest.ManifestTests.test_evalfile_must_match_role) ... ok
+test_experiment_mutation_invalidates_approval (test_manifest.ManifestTests.test_experiment_mutation_invalidates_approval) ... ok
+test_held_and_bound_approved_manifest (test_manifest.ManifestTests.test_held_and_bound_approved_manifest) ... ok
+test_nonfinite_limits_are_rejected (test_manifest.ManifestTests.test_nonfinite_limits_are_rejected) ... ok
+test_ownbook_must_be_false_and_ordered (test_manifest.ManifestTests.test_ownbook_must_be_false_and_ordered) ... ok
+test_exact_engine_in_wrong_cwd_is_rejected_even_with_correct_instances (test_match_stage.MatchStageTests.test_exact_engine_in_wrong_cwd_is_rejected_even_with_correct_instances) ... ok
+test_records_exact_child_identity_affinity_and_environment (test_match_stage.MatchStageTests.test_records_exact_child_identity_affinity_and_environment) ... ok
+test_wrong_child_gomaxprocs_is_rejected (test_match_stage.MatchStageTests.test_wrong_child_gomaxprocs_is_rejected) ... ok
+test_exact_engine_cwd_hash_and_gomaxprocs (test_role_exec.RoleExecTests.test_exact_engine_cwd_hash_and_gomaxprocs) ... ok
+test_hash_or_cwd_drift_is_rejected (test_role_exec.RoleExecTests.test_hash_or_cwd_drift_is_rejected) ... ok
+test_sigterm_enters_controlled_cleanup_and_reaps_descendant (test_signal_cleanup.SignalCleanupTests.test_sigterm_enters_controlled_cleanup_and_reaps_descendant) ... ok
+test_book_signature_and_illegal_pv_rejected (test_trace_audit.TraceAuditTests.test_book_signature_and_illegal_pv_rejected) ... ok
+test_crash_log_accepts_ordered_startup_records (test_trace_audit.TraceAuditTests.test_crash_log_accepts_ordered_startup_records) ... ok
+test_crash_log_accepts_preserved_counter_interleaving_witness (test_trace_audit.TraceAuditTests.test_crash_log_accepts_preserved_counter_interleaving_witness) ... ok
+test_crash_log_rejects_panic_payload_and_malformed_timestamp (test_trace_audit.TraceAuditTests.test_crash_log_rejects_panic_payload_and_malformed_timestamp) ... ok
+test_crash_log_rejects_wrong_path_missing_or_extra_records (test_trace_audit.TraceAuditTests.test_crash_log_rejects_wrong_path_missing_or_extra_records) ... ok
+test_error_plus_legal_fallback_and_natural_tail_rejected (test_trace_audit.TraceAuditTests.test_error_plus_legal_fallback_and_natural_tail_rejected) ... ok
+test_exact_benign_profile (test_trace_audit.TraceAuditTests.test_exact_benign_profile) ... ok
+test_generic_fatal_log_levels_are_rejected_without_phrase_match (test_trace_audit.TraceAuditTests.test_generic_fatal_log_levels_are_rejected_without_phrase_match) ... ok
+test_option_order_and_refresh_count_rejected (test_trace_audit.TraceAuditTests.test_option_order_and_refresh_count_rejected) ... ok
+test_advertised_domain_and_backend_variants_are_enforced (test_uci_preflight.PreflightTests.test_advertised_domain_and_backend_variants_are_enforced) ... ok
+test_counter_and_rodent_backends_are_proved_not_merely_advertised (test_uci_preflight.PreflightTests.test_counter_and_rodent_backends_are_proved_not_merely_advertised) ... ok
+test_error_after_bestmove_is_drained_and_rejected (test_uci_preflight.PreflightTests.test_error_after_bestmove_is_drained_and_rejected) ... ok
+test_error_plus_legal_fallback_is_rejected (test_uci_preflight.PreflightTests.test_error_plus_legal_fallback_is_rejected) ... ok
+test_good_proves_order_backend_and_persistent_no_book_search (test_uci_preflight.PreflightTests.test_good_proves_order_backend_and_persistent_no_book_search) ... ok
+test_ignored_or_reset_ownbook_is_rejected (test_uci_preflight.PreflightTests.test_ignored_or_reset_ownbook_is_rejected) ... ok
+test_selected_backend_diagnostic_mismatch_is_rejected (test_uci_preflight.PreflightTests.test_selected_backend_diagnostic_mismatch_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 3.304s
+
+OK

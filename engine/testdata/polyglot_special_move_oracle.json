@@ -1,0 +1,2209 @@
+{
+  "schema": "ngn-independent-polyglot-special-move-oracle-v1",
+  "claim": "Pseudo-legal EP book-key contract and legal-move/perft controls; null clocks excluded; no strength measurement",
+  "chess_core_sha256": "1fde6a8e932508d14b31f6a584497b49c2969fc3c7cdc675347f819f0d667a5b",
+  "polyglot_source_sha256": "8dc20733bdc1297a9e8993a76737ba4f328a99185ae94b311ddbb5342fce32fc",
+  "python_chess_version": "1.11.2",
+  "startpos_reference_key": "463b96181691fc9c",
+  "reused_stockfish_oracle_sha256": "897f7ebd0c3adc602839d7782673ddbecdd7c1bc72c58dc73fb424f8884b283e",
+  "histories": [
+    {
+      "name": "pinned_white_capturer",
+      "start_fen": "6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1",
+      "actions": [
+        "d7d5",
+        "a5a4",
+        "h5h6",
+        "a4a5",
+        "h6h5",
+        "a5a4",
+        "h5h6",
+        "a4a5",
+        "h6h5"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "6k1/3p4/8/K3P2r/8/8/8/8 b - -",
+          "polyglot_hex": "e41232c29ea92d85",
+          "legal_moves": [
+            "d7d5",
+            "d7d6",
+            "g8f7",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8",
+            "h5e5",
+            "h5f5",
+            "h5g5",
+            "h5h1",
+            "h5h2",
+            "h5h3",
+            "h5h4",
+            "h5h6",
+            "h5h7",
+            "h5h8"
+          ],
+          "perft2_nodes": 88
+        },
+        {
+          "ply": 1,
+          "action": "d7d5",
+          "fen4": "6k1/8/8/K2pP2r/8/8/8/8 w - d6",
+          "polyglot_hex": "7de1ce053ec5f302",
+          "legal_moves": [
+            "a5a4",
+            "a5a6",
+            "a5b4",
+            "a5b5",
+            "a5b6",
+            "e5e6"
+          ],
+          "perft2_nodes": 95
+        },
+        {
+          "ply": 2,
+          "action": "a5a4",
+          "fen4": "6k1/8/8/3pP2r/K7/8/8/8 b - -",
+          "polyglot_hex": "ba3f79af7c8ea601",
+          "legal_moves": [
+            "d5d4",
+            "g8f7",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8",
+            "h5e5",
+            "h5f5",
+            "h5g5",
+            "h5h1",
+            "h5h2",
+            "h5h3",
+            "h5h4",
+            "h5h6",
+            "h5h7",
+            "h5h8"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 3,
+          "action": "h5h6",
+          "fen4": "6k1/8/7r/3pP3/K7/8/8/8 w - -",
+          "polyglot_hex": "0b6b3776b7271acb",
+          "legal_moves": [
+            "a4a3",
+            "a4a5",
+            "a4b3",
+            "a4b4",
+            "a4b5",
+            "e5e6"
+          ],
+          "perft2_nodes": 115
+        },
+        {
+          "ply": 4,
+          "action": "a4a5",
+          "fen4": "6k1/8/7r/K2pP3/8/8/8/8 b - -",
+          "polyglot_hex": "d02c5e0fc9d4df69",
+          "legal_moves": [
+            "d5d4",
+            "g8f7",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8",
+            "h6a6",
+            "h6b6",
+            "h6c6",
+            "h6d6",
+            "h6e6",
+            "h6f6",
+            "h6g6",
+            "h6h1",
+            "h6h2",
+            "h6h3",
+            "h6h4",
+            "h6h5",
+            "h6h7",
+            "h6h8"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 5,
+          "action": "h6h5",
+          "fen4": "6k1/8/8/K2pP2r/8/8/8/8 w - -",
+          "polyglot_hex": "617810d6027d63a3",
+          "legal_moves": [
+            "a5a4",
+            "a5a6",
+            "a5b4",
+            "a5b5",
+            "a5b6",
+            "e5e6"
+          ],
+          "perft2_nodes": 95
+        },
+        {
+          "ply": 6,
+          "action": "a5a4",
+          "fen4": "6k1/8/8/3pP2r/K7/8/8/8 b - -",
+          "polyglot_hex": "ba3f79af7c8ea601",
+          "legal_moves": [
+            "d5d4",
+            "g8f7",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8",
+            "h5e5",
+            "h5f5",
+            "h5g5",
+            "h5h1",
+            "h5h2",
+            "h5h3",
+            "h5h4",
+            "h5h6",
+            "h5h7",
+            "h5h8"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 7,
+          "action": "h5h6",
+          "fen4": "6k1/8/7r/3pP3/K7/8/8/8 w - -",
+          "polyglot_hex": "0b6b3776b7271acb",
+          "legal_moves": [
+            "a4a3",
+            "a4a5",
+            "a4b3",
+            "a4b4",
+            "a4b5",
+            "e5e6"
+          ],
+          "perft2_nodes": 115
+        },
+        {
+          "ply": 8,
+          "action": "a4a5",
+          "fen4": "6k1/8/7r/K2pP3/8/8/8/8 b - -",
+          "polyglot_hex": "d02c5e0fc9d4df69",
+          "legal_moves": [
+            "d5d4",
+            "g8f7",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8",
+            "h6a6",
+            "h6b6",
+            "h6c6",
+            "h6d6",
+            "h6e6",
+            "h6f6",
+            "h6g6",
+            "h6h1",
+            "h6h2",
+            "h6h3",
+            "h6h4",
+            "h6h5",
+            "h6h7",
+            "h6h8"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 9,
+          "action": "h6h5",
+          "fen4": "6k1/8/8/K2pP2r/8/8/8/8 w - -",
+          "polyglot_hex": "617810d6027d63a3",
+          "legal_moves": [
+            "a5a4",
+            "a5a6",
+            "a5b4",
+            "a5b5",
+            "a5b6",
+            "e5e6"
+          ],
+          "perft2_nodes": 95
+        }
+      ]
+    },
+    {
+      "name": "pinned_white_capturer-null-quiet",
+      "start_fen": "6k1/8/8/K2pP2r/8/8/8/8 w - d6 0 2",
+      "actions": [
+        "0000",
+        "d5d4"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "6k1/8/8/K2pP2r/8/8/8/8 w - d6",
+          "polyglot_hex": "7de1ce053ec5f302",
+          "legal_moves": [
+            "a5a4",
+            "a5a6",
+            "a5b4",
+            "a5b5",
+            "a5b6",
+            "e5e6"
+          ],
+          "perft2_nodes": 95
+        },
+        {
+          "ply": 1,
+          "action": "0000",
+          "fen4": "6k1/8/8/K2pP2r/8/8/8/8 b - -",
+          "polyglot_hex": "99ae367cad5ae6aa",
+          "legal_moves": [
+            "d5d4",
+            "g8f7",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8",
+            "h5e5",
+            "h5f5",
+            "h5g5",
+            "h5h1",
+            "h5h2",
+            "h5h3",
+            "h5h4",
+            "h5h6",
+            "h5h7",
+            "h5h8"
+          ],
+          "perft2_nodes": 90
+        },
+        {
+          "ply": 2,
+          "action": "d5d4",
+          "fen4": "6k1/8/8/K3P2r/3p4/8/8/8 w - -",
+          "polyglot_hex": "7bc35c126165cc4d",
+          "legal_moves": [
+            "a5a4",
+            "a5a6",
+            "a5b4",
+            "a5b5",
+            "a5b6"
+          ],
+          "perft2_nodes": 80
+        }
+      ]
+    },
+    {
+      "name": "pinned_black_capturer",
+      "start_fen": "8/8/8/8/R2p3k/8/4P3/1K6 w - - 0 1",
+      "actions": [
+        "e2e4",
+        "h4h5",
+        "a4a3",
+        "h5h4",
+        "a3a4",
+        "h4h5",
+        "a4a3",
+        "h5h4",
+        "a3a4"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "8/8/8/8/R2p3k/8/4P3/1K6 w - -",
+          "polyglot_hex": "aa28164e64a5d4bd",
+          "legal_moves": [
+            "a4a1",
+            "a4a2",
+            "a4a3",
+            "a4a5",
+            "a4a6",
+            "a4a7",
+            "a4a8",
+            "a4b4",
+            "a4c4",
+            "a4d4",
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "b1c2",
+            "e2e3",
+            "e2e4"
+          ],
+          "perft2_nodes": 88
+        },
+        {
+          "ply": 1,
+          "action": "e2e4",
+          "fen4": "8/8/8/8/R2pP2k/8/8/1K6 b - e3",
+          "polyglot_hex": "a11e5ed885f82b3e",
+          "legal_moves": [
+            "d4d3",
+            "h4g3",
+            "h4g4",
+            "h4g5",
+            "h4h3",
+            "h4h5"
+          ],
+          "perft2_nodes": 95
+        },
+        {
+          "ply": 2,
+          "action": "h4h5",
+          "fen4": "8/8/8/7k/R2pP3/8/8/1K6 w - -",
+          "polyglot_hex": "db55fce7bef2cb78",
+          "legal_moves": [
+            "a4a1",
+            "a4a2",
+            "a4a3",
+            "a4a5",
+            "a4a6",
+            "a4a7",
+            "a4a8",
+            "a4b4",
+            "a4c4",
+            "a4d4",
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "b1c2",
+            "e4e5"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 3,
+          "action": "a4a3",
+          "fen4": "8/8/8/7k/3pP3/R7/8/1K6 b - -",
+          "polyglot_hex": "5aa0b44bd2ce4d68",
+          "legal_moves": [
+            "d4d3",
+            "h5g4",
+            "h5g5",
+            "h5g6",
+            "h5h4",
+            "h5h6"
+          ],
+          "perft2_nodes": 115
+        },
+        {
+          "ply": 4,
+          "action": "h5h4",
+          "fen4": "8/8/8/8/3pP2k/R7/8/1K6 w - -",
+          "polyglot_hex": "efda53aae319efa7",
+          "legal_moves": [
+            "a3a1",
+            "a3a2",
+            "a3a4",
+            "a3a5",
+            "a3a6",
+            "a3a7",
+            "a3a8",
+            "a3b3",
+            "a3c3",
+            "a3d3",
+            "a3e3",
+            "a3f3",
+            "a3g3",
+            "a3h3",
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "b1c2",
+            "e4e5"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 5,
+          "action": "a3a4",
+          "fen4": "8/8/8/8/R2pP2k/8/8/1K6 b - -",
+          "polyglot_hex": "6e2f1b068f2569b7",
+          "legal_moves": [
+            "d4d3",
+            "h4g3",
+            "h4g4",
+            "h4g5",
+            "h4h3",
+            "h4h5"
+          ],
+          "perft2_nodes": 95
+        },
+        {
+          "ply": 6,
+          "action": "h4h5",
+          "fen4": "8/8/8/7k/R2pP3/8/8/1K6 w - -",
+          "polyglot_hex": "db55fce7bef2cb78",
+          "legal_moves": [
+            "a4a1",
+            "a4a2",
+            "a4a3",
+            "a4a5",
+            "a4a6",
+            "a4a7",
+            "a4a8",
+            "a4b4",
+            "a4c4",
+            "a4d4",
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "b1c2",
+            "e4e5"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 7,
+          "action": "a4a3",
+          "fen4": "8/8/8/7k/3pP3/R7/8/1K6 b - -",
+          "polyglot_hex": "5aa0b44bd2ce4d68",
+          "legal_moves": [
+            "d4d3",
+            "h5g4",
+            "h5g5",
+            "h5g6",
+            "h5h4",
+            "h5h6"
+          ],
+          "perft2_nodes": 115
+        },
+        {
+          "ply": 8,
+          "action": "h5h4",
+          "fen4": "8/8/8/8/3pP2k/R7/8/1K6 w - -",
+          "polyglot_hex": "efda53aae319efa7",
+          "legal_moves": [
+            "a3a1",
+            "a3a2",
+            "a3a4",
+            "a3a5",
+            "a3a6",
+            "a3a7",
+            "a3a8",
+            "a3b3",
+            "a3c3",
+            "a3d3",
+            "a3e3",
+            "a3f3",
+            "a3g3",
+            "a3h3",
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "b1c2",
+            "e4e5"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 9,
+          "action": "a3a4",
+          "fen4": "8/8/8/8/R2pP2k/8/8/1K6 b - -",
+          "polyglot_hex": "6e2f1b068f2569b7",
+          "legal_moves": [
+            "d4d3",
+            "h4g3",
+            "h4g4",
+            "h4g5",
+            "h4h3",
+            "h4h5"
+          ],
+          "perft2_nodes": 95
+        }
+      ]
+    },
+    {
+      "name": "pinned_black_capturer-null-quiet",
+      "start_fen": "8/8/8/8/R2pP2k/8/8/1K6 b - e3 0 1",
+      "actions": [
+        "0000",
+        "a4a1"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "8/8/8/8/R2pP2k/8/8/1K6 b - e3",
+          "polyglot_hex": "a11e5ed885f82b3e",
+          "legal_moves": [
+            "d4d3",
+            "h4g3",
+            "h4g4",
+            "h4g5",
+            "h4h3",
+            "h4h5"
+          ],
+          "perft2_nodes": 95
+        },
+        {
+          "ply": 1,
+          "action": "0000",
+          "fen4": "8/8/8/8/R2pP2k/8/8/1K6 w - -",
+          "polyglot_hex": "96f93dac2002ecbe",
+          "legal_moves": [
+            "a4a1",
+            "a4a2",
+            "a4a3",
+            "a4a5",
+            "a4a6",
+            "a4a7",
+            "a4a8",
+            "a4b4",
+            "a4c4",
+            "a4d4",
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "b1c2",
+            "e4e5"
+          ],
+          "perft2_nodes": 90
+        },
+        {
+          "ply": 2,
+          "action": "a4a1",
+          "fen4": "8/8/8/8/3pP2k/8/8/RK6 b - -",
+          "polyglot_hex": "d1535b2ddf9924f9",
+          "legal_moves": [
+            "d4d3",
+            "h4g3",
+            "h4g4",
+            "h4g5",
+            "h4h3",
+            "h4h5"
+          ],
+          "perft2_nodes": 71
+        }
+      ]
+    },
+    {
+      "name": "unrelated_check_white_capturer",
+      "start_fen": "4b1k1/3p4/8/4P3/K7/8/8/8 b - - 0 1",
+      "actions": [
+        "d7d5",
+        "a4a3",
+        "e8f7",
+        "a3a4",
+        "f7e8",
+        "a4a3",
+        "e8f7",
+        "a3a4",
+        "f7e8"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "4b1k1/3p4/8/4P3/K7/8/8/8 b - -",
+          "polyglot_hex": "5aaf50e83cbe49af",
+          "legal_moves": [
+            "d7d5",
+            "d7d6",
+            "e8f7",
+            "e8g6",
+            "e8h5",
+            "g8f7",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8"
+          ],
+          "perft2_nodes": 55
+        },
+        {
+          "ply": 1,
+          "action": "d7d5",
+          "fen4": "4b1k1/8/8/3pP3/K7/8/8/8 w - d6",
+          "polyglot_hex": "c35cac2f9cd29728",
+          "legal_moves": [
+            "a4a3",
+            "a4a5",
+            "a4b3",
+            "a4b4"
+          ],
+          "perft2_nodes": 52
+        },
+        {
+          "ply": 2,
+          "action": "a4a3",
+          "fen4": "4b1k1/8/8/3pP3/8/K7/8/8 b - -",
+          "polyglot_hex": "aa893e9b0024e44c",
+          "legal_moves": [
+            "d5d4",
+            "e8a4",
+            "e8b5",
+            "e8c6",
+            "e8d7",
+            "e8f7",
+            "e8g6",
+            "e8h5",
+            "g8f7",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8"
+          ],
+          "perft2_nodes": 68
+        },
+        {
+          "ply": 3,
+          "action": "e8f7",
+          "fen4": "6k1/5b2/8/3pP3/8/K7/8/8 w - -",
+          "polyglot_hex": "9db4a59a6eac61d5",
+          "legal_moves": [
+            "a3a2",
+            "a3a4",
+            "a3b2",
+            "a3b3",
+            "a3b4",
+            "e5e6"
+          ],
+          "perft2_nodes": 54
+        },
+        {
+          "ply": 4,
+          "action": "a3a4",
+          "fen4": "6k1/5b2/8/3pP3/K7/8/8/8 b - -",
+          "polyglot_hex": "e8f8e9fdcee28210",
+          "legal_moves": [
+            "d5d4",
+            "f7e6",
+            "f7e8",
+            "f7g6",
+            "f7h5",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8"
+          ],
+          "perft2_nodes": 50
+        },
+        {
+          "ply": 5,
+          "action": "f7e8",
+          "fen4": "4b1k1/8/8/3pP3/K7/8/8/8 w - -",
+          "polyglot_hex": "dfc572fca06a0789",
+          "legal_moves": [
+            "a4a3",
+            "a4a5",
+            "a4b3",
+            "a4b4"
+          ],
+          "perft2_nodes": 52
+        },
+        {
+          "ply": 6,
+          "action": "a4a3",
+          "fen4": "4b1k1/8/8/3pP3/8/K7/8/8 b - -",
+          "polyglot_hex": "aa893e9b0024e44c",
+          "legal_moves": [
+            "d5d4",
+            "e8a4",
+            "e8b5",
+            "e8c6",
+            "e8d7",
+            "e8f7",
+            "e8g6",
+            "e8h5",
+            "g8f7",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8"
+          ],
+          "perft2_nodes": 68
+        },
+        {
+          "ply": 7,
+          "action": "e8f7",
+          "fen4": "6k1/5b2/8/3pP3/8/K7/8/8 w - -",
+          "polyglot_hex": "9db4a59a6eac61d5",
+          "legal_moves": [
+            "a3a2",
+            "a3a4",
+            "a3b2",
+            "a3b3",
+            "a3b4",
+            "e5e6"
+          ],
+          "perft2_nodes": 54
+        },
+        {
+          "ply": 8,
+          "action": "a3a4",
+          "fen4": "6k1/5b2/8/3pP3/K7/8/8/8 b - -",
+          "polyglot_hex": "e8f8e9fdcee28210",
+          "legal_moves": [
+            "d5d4",
+            "f7e6",
+            "f7e8",
+            "f7g6",
+            "f7h5",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8"
+          ],
+          "perft2_nodes": 50
+        },
+        {
+          "ply": 9,
+          "action": "f7e8",
+          "fen4": "4b1k1/8/8/3pP3/K7/8/8/8 w - -",
+          "polyglot_hex": "dfc572fca06a0789",
+          "legal_moves": [
+            "a4a3",
+            "a4a5",
+            "a4b3",
+            "a4b4"
+          ],
+          "perft2_nodes": 52
+        }
+      ]
+    },
+    {
+      "name": "unrelated_check_black_capturer",
+      "start_fen": "8/8/8/7k/3p4/8/4P3/1K1B4 w - - 0 1",
+      "actions": [
+        "e2e4",
+        "h5h6",
+        "d1c2",
+        "h6h5",
+        "c2d1",
+        "h5h6",
+        "d1c2",
+        "h6h5",
+        "c2d1"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "8/8/8/7k/3p4/8/4P3/1K1B4 w - -",
+          "polyglot_hex": "50b1ff7828c28866",
+          "legal_moves": [
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "b1c2",
+            "d1a4",
+            "d1b3",
+            "d1c2",
+            "e2e3",
+            "e2e4"
+          ],
+          "perft2_nodes": 55
+        },
+        {
+          "ply": 1,
+          "action": "e2e4",
+          "fen4": "8/8/8/7k/3pP3/8/8/1K1B4 b - e3",
+          "polyglot_hex": "5b87b7eec99f77e5",
+          "legal_moves": [
+            "h5g5",
+            "h5g6",
+            "h5h4",
+            "h5h6"
+          ],
+          "perft2_nodes": 52
+        },
+        {
+          "ply": 2,
+          "action": "h5h6",
+          "fen4": "8/8/7k/8/3pP3/8/8/1K1B4 w - -",
+          "polyglot_hex": "3076f70b390fc6c0",
+          "legal_moves": [
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "b1c2",
+            "d1a4",
+            "d1b3",
+            "d1c2",
+            "d1e2",
+            "d1f3",
+            "d1g4",
+            "d1h5",
+            "e4e5"
+          ],
+          "perft2_nodes": 68
+        },
+        {
+          "ply": 3,
+          "action": "d1c2",
+          "fen4": "8/8/7k/8/3pP3/8/2B5/1K6 b - -",
+          "polyglot_hex": "7752ffc4eaacb844",
+          "legal_moves": [
+            "d4d3",
+            "h6g5",
+            "h6g6",
+            "h6g7",
+            "h6h5",
+            "h6h7"
+          ],
+          "perft2_nodes": 54
+        },
+        {
+          "ply": 4,
+          "action": "h6h5",
+          "fen4": "8/8/8/7k/3pP3/8/2B5/1K6 w - -",
+          "polyglot_hex": "d392faff10e14be8",
+          "legal_moves": [
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "c2a4",
+            "c2b3",
+            "c2d1",
+            "c2d3",
+            "e4e5"
+          ],
+          "perft2_nodes": 50
+        },
+        {
+          "ply": 5,
+          "action": "c2d1",
+          "fen4": "8/8/8/7k/3pP3/8/8/1K1B4 b - -",
+          "polyglot_hex": "94b6f230c342356c",
+          "legal_moves": [
+            "h5g5",
+            "h5g6",
+            "h5h4",
+            "h5h6"
+          ],
+          "perft2_nodes": 52
+        },
+        {
+          "ply": 6,
+          "action": "h5h6",
+          "fen4": "8/8/7k/8/3pP3/8/8/1K1B4 w - -",
+          "polyglot_hex": "3076f70b390fc6c0",
+          "legal_moves": [
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "b1c2",
+            "d1a4",
+            "d1b3",
+            "d1c2",
+            "d1e2",
+            "d1f3",
+            "d1g4",
+            "d1h5",
+            "e4e5"
+          ],
+          "perft2_nodes": 68
+        },
+        {
+          "ply": 7,
+          "action": "d1c2",
+          "fen4": "8/8/7k/8/3pP3/8/2B5/1K6 b - -",
+          "polyglot_hex": "7752ffc4eaacb844",
+          "legal_moves": [
+            "d4d3",
+            "h6g5",
+            "h6g6",
+            "h6g7",
+            "h6h5",
+            "h6h7"
+          ],
+          "perft2_nodes": 54
+        },
+        {
+          "ply": 8,
+          "action": "h6h5",
+          "fen4": "8/8/8/7k/3pP3/8/2B5/1K6 w - -",
+          "polyglot_hex": "d392faff10e14be8",
+          "legal_moves": [
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "c2a4",
+            "c2b3",
+            "c2d1",
+            "c2d3",
+            "e4e5"
+          ],
+          "perft2_nodes": 50
+        },
+        {
+          "ply": 9,
+          "action": "c2d1",
+          "fen4": "8/8/8/7k/3pP3/8/8/1K1B4 b - -",
+          "polyglot_hex": "94b6f230c342356c",
+          "legal_moves": [
+            "h5g5",
+            "h5g6",
+            "h5h4",
+            "h5h6"
+          ],
+          "perft2_nodes": 52
+        }
+      ]
+    },
+    {
+      "name": "legal_white_capturer",
+      "start_fen": "6k1/3p4/7r/K3P3/8/8/8/8 b - - 0 1",
+      "actions": [
+        "d7d5",
+        "e5d6"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "6k1/3p4/7r/K3P3/8/8/8/8 b - -",
+          "polyglot_hex": "ad905ab1fa271446",
+          "legal_moves": [
+            "d7d5",
+            "d7d6",
+            "g8f7",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8",
+            "h6a6",
+            "h6b6",
+            "h6c6",
+            "h6d6",
+            "h6e6",
+            "h6f6",
+            "h6g6",
+            "h6h1",
+            "h6h2",
+            "h6h3",
+            "h6h4",
+            "h6h5",
+            "h6h7",
+            "h6h8"
+          ],
+          "perft2_nodes": 98
+        },
+        {
+          "ply": 1,
+          "action": "d7d5",
+          "fen4": "6k1/8/7r/K2pP3/8/8/8/8 w - d6",
+          "polyglot_hex": "3463a6765a4bcac1",
+          "legal_moves": [
+            "a5a4",
+            "a5b4",
+            "a5b5",
+            "e5d6",
+            "e5e6"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 2,
+          "action": "e5d6",
+          "fen4": "6k1/8/3P3r/K7/8/8/8/8 b - -",
+          "polyglot_hex": "d5f548c2c525d234",
+          "legal_moves": [
+            "g8f7",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8",
+            "h6d6",
+            "h6e6",
+            "h6f6",
+            "h6g6",
+            "h6h1",
+            "h6h2",
+            "h6h3",
+            "h6h4",
+            "h6h5",
+            "h6h7",
+            "h6h8"
+          ],
+          "perft2_nodes": 89
+        }
+      ]
+    },
+    {
+      "name": "legal_white_capturer-null-quiet",
+      "start_fen": "6k1/8/7r/K2pP3/8/8/8/8 w - d6 0 2",
+      "actions": [
+        "0000",
+        "d5d4"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "6k1/8/7r/K2pP3/8/8/8/8 w - d6",
+          "polyglot_hex": "3463a6765a4bcac1",
+          "legal_moves": [
+            "a5a4",
+            "a5b4",
+            "a5b5",
+            "e5d6",
+            "e5e6"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 1,
+          "action": "0000",
+          "fen4": "6k1/8/7r/K2pP3/8/8/8/8 b - -",
+          "polyglot_hex": "d02c5e0fc9d4df69",
+          "legal_moves": [
+            "d5d4",
+            "g8f7",
+            "g8f8",
+            "g8g7",
+            "g8h7",
+            "g8h8",
+            "h6a6",
+            "h6b6",
+            "h6c6",
+            "h6d6",
+            "h6e6",
+            "h6f6",
+            "h6g6",
+            "h6h1",
+            "h6h2",
+            "h6h3",
+            "h6h4",
+            "h6h5",
+            "h6h7",
+            "h6h8"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 2,
+          "action": "d5d4",
+          "fen4": "6k1/8/7r/K3P3/3p4/8/8/8 w - -",
+          "polyglot_hex": "3241346105ebf58e",
+          "legal_moves": [
+            "a5a4",
+            "a5b4",
+            "a5b5",
+            "e5e6"
+          ],
+          "perft2_nodes": 75
+        }
+      ]
+    },
+    {
+      "name": "legal_black_capturer",
+      "start_fen": "8/8/8/8/3p3k/R7/4P3/1K6 w - - 0 1",
+      "actions": [
+        "e2e4",
+        "d4e3"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "8/8/8/8/3p3k/R7/4P3/1K6 w - -",
+          "polyglot_hex": "d30b7848a7bed7a4",
+          "legal_moves": [
+            "a3a1",
+            "a3a2",
+            "a3a4",
+            "a3a5",
+            "a3a6",
+            "a3a7",
+            "a3a8",
+            "a3b3",
+            "a3c3",
+            "a3d3",
+            "a3e3",
+            "a3f3",
+            "a3g3",
+            "a3h3",
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "b1c2",
+            "e2e3",
+            "e2e4"
+          ],
+          "perft2_nodes": 98
+        },
+        {
+          "ply": 1,
+          "action": "e2e4",
+          "fen4": "8/8/8/8/3pP2k/R7/8/1K6 b - e3",
+          "polyglot_hex": "d83d30de46e32827",
+          "legal_moves": [
+            "d4d3",
+            "d4e3",
+            "h4g4",
+            "h4g5",
+            "h4h5"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 2,
+          "action": "d4e3",
+          "fen4": "8/8/8/8/7k/R3p3/8/1K6 w - -",
+          "polyglot_hex": "f351e6a3fc705863",
+          "legal_moves": [
+            "a3a1",
+            "a3a2",
+            "a3a4",
+            "a3a5",
+            "a3a6",
+            "a3a7",
+            "a3a8",
+            "a3b3",
+            "a3c3",
+            "a3d3",
+            "a3e3",
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "b1c2"
+          ],
+          "perft2_nodes": 89
+        }
+      ]
+    },
+    {
+      "name": "legal_black_capturer-null-quiet",
+      "start_fen": "8/8/8/8/3pP2k/R7/8/1K6 b - e3 0 1",
+      "actions": [
+        "0000",
+        "a3a1"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "8/8/8/8/3pP2k/R7/8/1K6 b - e3",
+          "polyglot_hex": "d83d30de46e32827",
+          "legal_moves": [
+            "d4d3",
+            "d4e3",
+            "h4g4",
+            "h4g5",
+            "h4h5"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 1,
+          "action": "0000",
+          "fen4": "8/8/8/8/3pP2k/R7/8/1K6 w - -",
+          "polyglot_hex": "efda53aae319efa7",
+          "legal_moves": [
+            "a3a1",
+            "a3a2",
+            "a3a4",
+            "a3a5",
+            "a3a6",
+            "a3a7",
+            "a3a8",
+            "a3b3",
+            "a3c3",
+            "a3d3",
+            "a3e3",
+            "a3f3",
+            "a3g3",
+            "a3h3",
+            "b1a1",
+            "b1a2",
+            "b1b2",
+            "b1c1",
+            "b1c2",
+            "e4e5"
+          ],
+          "perft2_nodes": 91
+        },
+        {
+          "ply": 2,
+          "action": "a3a1",
+          "fen4": "8/8/8/8/3pP2k/8/8/RK6 b - -",
+          "polyglot_hex": "d1535b2ddf9924f9",
+          "legal_moves": [
+            "d4d3",
+            "h4g3",
+            "h4g4",
+            "h4g5",
+            "h4h3",
+            "h4h5"
+          ],
+          "perft2_nodes": 71
+        }
+      ]
+    },
+    {
+      "name": "both-kingside-castles",
+      "start_fen": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1",
+      "actions": [
+        "e1g1",
+        "e8g8"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq -",
+          "polyglot_hex": "ca5e7916ed3476c1",
+          "legal_moves": [
+            "a1b1",
+            "a1c1",
+            "a1d1",
+            "a2a3",
+            "a2a4",
+            "b2b3",
+            "b2b4",
+            "c2c3",
+            "c2c4",
+            "d2d3",
+            "d2d4",
+            "e1c1",
+            "e1d1",
+            "e1f1",
+            "e1g1",
+            "e2e3",
+            "e2e4",
+            "f2f3",
+            "f2f4",
+            "g2g3",
+            "g2g4",
+            "h1f1",
+            "h1g1",
+            "h2h3",
+            "h2h4"
+          ],
+          "perft2_nodes": 625
+        },
+        {
+          "ply": 1,
+          "action": "e1g1",
+          "fen4": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R4RK1 b kq -",
+          "polyglot_hex": "b42b022291c7add1",
+          "legal_moves": [
+            "a7a5",
+            "a7a6",
+            "a8b8",
+            "a8c8",
+            "a8d8",
+            "b7b5",
+            "b7b6",
+            "c7c5",
+            "c7c6",
+            "d7d5",
+            "d7d6",
+            "e7e5",
+            "e7e6",
+            "e8c8",
+            "e8d8",
+            "e8f8",
+            "e8g8",
+            "f7f5",
+            "f7f6",
+            "g7g5",
+            "g7g6",
+            "h7h5",
+            "h7h6",
+            "h8f8",
+            "h8g8"
+          ],
+          "perft2_nodes": 625
+        },
+        {
+          "ply": 2,
+          "action": "e8g8",
+          "fen4": "r4rk1/pppppppp/8/8/8/8/PPPPPPPP/R4RK1 w - -",
+          "polyglot_hex": "be83ef95449e443a",
+          "legal_moves": [
+            "a1b1",
+            "a1c1",
+            "a1d1",
+            "a1e1",
+            "a2a3",
+            "a2a4",
+            "b2b3",
+            "b2b4",
+            "c2c3",
+            "c2c4",
+            "d2d3",
+            "d2d4",
+            "e2e3",
+            "e2e4",
+            "f1b1",
+            "f1c1",
+            "f1d1",
+            "f1e1",
+            "f2f3",
+            "f2f4",
+            "g1h1",
+            "g2g3",
+            "g2g4",
+            "h2h3",
+            "h2h4"
+          ],
+          "perft2_nodes": 625
+        }
+      ]
+    },
+    {
+      "name": "both-queenside-castles",
+      "start_fen": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1",
+      "actions": [
+        "e1c1",
+        "e8c8"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq -",
+          "polyglot_hex": "ca5e7916ed3476c1",
+          "legal_moves": [
+            "a1b1",
+            "a1c1",
+            "a1d1",
+            "a2a3",
+            "a2a4",
+            "b2b3",
+            "b2b4",
+            "c2c3",
+            "c2c4",
+            "d2d3",
+            "d2d4",
+            "e1c1",
+            "e1d1",
+            "e1f1",
+            "e1g1",
+            "e2e3",
+            "e2e4",
+            "f2f3",
+            "f2f4",
+            "g2g3",
+            "g2g4",
+            "h1f1",
+            "h1g1",
+            "h2h3",
+            "h2h4"
+          ],
+          "perft2_nodes": 625
+        },
+        {
+          "ply": 1,
+          "action": "e1c1",
+          "fen4": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/2KR3R b kq -",
+          "polyglot_hex": "f2733c35be167959",
+          "legal_moves": [
+            "a7a5",
+            "a7a6",
+            "a8b8",
+            "a8c8",
+            "a8d8",
+            "b7b5",
+            "b7b6",
+            "c7c5",
+            "c7c6",
+            "d7d5",
+            "d7d6",
+            "e7e5",
+            "e7e6",
+            "e8c8",
+            "e8d8",
+            "e8f8",
+            "e8g8",
+            "f7f5",
+            "f7f6",
+            "g7g5",
+            "g7g6",
+            "h7h5",
+            "h7h6",
+            "h8f8",
+            "h8g8"
+          ],
+          "perft2_nodes": 575
+        },
+        {
+          "ply": 2,
+          "action": "e8c8",
+          "fen4": "2kr3r/pppppppp/8/8/8/8/PPPPPPPP/2KR3R w - -",
+          "polyglot_hex": "c145a96bf1002d63",
+          "legal_moves": [
+            "a2a3",
+            "a2a4",
+            "b2b3",
+            "b2b4",
+            "c1b1",
+            "c2c3",
+            "c2c4",
+            "d1e1",
+            "d1f1",
+            "d1g1",
+            "d2d3",
+            "d2d4",
+            "e2e3",
+            "e2e4",
+            "f2f3",
+            "f2f4",
+            "g2g3",
+            "g2g4",
+            "h1e1",
+            "h1f1",
+            "h1g1",
+            "h2h3",
+            "h2h4"
+          ],
+          "perft2_nodes": 529
+        }
+      ]
+    },
+    {
+      "name": "rook-rights-capture",
+      "start_fen": "r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1",
+      "actions": [
+        "a1a8",
+        "e8d7"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "r3k2r/8/8/8/8/8/8/R3K2R w KQkq -",
+          "polyglot_hex": "fda239cc692a6053",
+          "legal_moves": [
+            "a1a2",
+            "a1a3",
+            "a1a4",
+            "a1a5",
+            "a1a6",
+            "a1a7",
+            "a1a8",
+            "a1b1",
+            "a1c1",
+            "a1d1",
+            "e1c1",
+            "e1d1",
+            "e1d2",
+            "e1e2",
+            "e1f1",
+            "e1f2",
+            "e1g1",
+            "h1f1",
+            "h1g1",
+            "h1h2",
+            "h1h3",
+            "h1h4",
+            "h1h5",
+            "h1h6",
+            "h1h7",
+            "h1h8"
+          ],
+          "perft2_nodes": 568
+        },
+        {
+          "ply": 1,
+          "action": "a1a8",
+          "fen4": "R3k2r/8/8/8/8/8/8/4K2R b Kk -",
+          "polyglot_hex": "8776f113bf0f60e4",
+          "legal_moves": [
+            "e8d7",
+            "e8e7",
+            "e8f7"
+          ],
+          "perft2_nodes": 87
+        },
+        {
+          "ply": 2,
+          "action": "e8d7",
+          "fen4": "R6r/3k4/8/8/8/8/8/4K2R w K -",
+          "polyglot_hex": "ca02537e061b77ab",
+          "legal_moves": [
+            "a8a1",
+            "a8a2",
+            "a8a3",
+            "a8a4",
+            "a8a5",
+            "a8a6",
+            "a8a7",
+            "a8b8",
+            "a8c8",
+            "a8d8",
+            "a8e8",
+            "a8f8",
+            "a8g8",
+            "a8h8",
+            "e1d1",
+            "e1d2",
+            "e1e2",
+            "e1f1",
+            "e1f2",
+            "e1g1",
+            "h1f1",
+            "h1g1",
+            "h1h2",
+            "h1h3",
+            "h1h4",
+            "h1h5",
+            "h1h6",
+            "h1h7",
+            "h1h8"
+          ],
+          "perft2_nodes": 459
+        }
+      ]
+    },
+    {
+      "name": "white-promotion-q",
+      "start_fen": "7k/P7/8/8/8/8/8/7K w - - 0 1",
+      "actions": [
+        "a7a8q"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "7k/P7/8/8/8/8/8/7K w - -",
+          "polyglot_hex": "9f7e8ceee7e2fc38",
+          "legal_moves": [
+            "a7a8b",
+            "a7a8n",
+            "a7a8q",
+            "a7a8r",
+            "h1g1",
+            "h1g2",
+            "h1h2"
+          ],
+          "perft2_nodes": 19
+        },
+        {
+          "ply": 1,
+          "action": "a7a8q",
+          "fen4": "Q6k/8/8/8/8/8/8/7K b - -",
+          "polyglot_hex": "13512f9bafee5c0a",
+          "legal_moves": [
+            "h8g7",
+            "h8h7"
+          ],
+          "perft2_nodes": 46
+        }
+      ]
+    },
+    {
+      "name": "black-promotion-q",
+      "start_fen": "k7/8/8/8/8/8/7p/K7 b - - 0 1",
+      "actions": [
+        "h2h1q"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "k7/8/8/8/8/8/7p/K7 b - -",
+          "polyglot_hex": "b92c65942a00c1d2",
+          "legal_moves": [
+            "a8a7",
+            "a8b7",
+            "a8b8",
+            "h2h1b",
+            "h2h1n",
+            "h2h1q",
+            "h2h1r"
+          ],
+          "perft2_nodes": 19
+        },
+        {
+          "ply": 1,
+          "action": "h2h1q",
+          "fen4": "k7/8/8/8/8/8/8/K6q w - -",
+          "polyglot_hex": "79bfcc811d340579",
+          "legal_moves": [
+            "a1a2",
+            "a1b2"
+          ],
+          "perft2_nodes": 46
+        }
+      ]
+    },
+    {
+      "name": "white-promotion-capture-q",
+      "start_fen": "r3k3/1P6/8/8/8/8/8/7K w q - 0 1",
+      "actions": [
+        "b7a8q"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "r3k3/1P6/8/8/8/8/8/7K w q -",
+          "polyglot_hex": "f7cdca90f9b86956",
+          "legal_moves": [
+            "b7a8b",
+            "b7a8n",
+            "b7a8q",
+            "b7a8r",
+            "b7b8b",
+            "b7b8n",
+            "b7b8q",
+            "b7b8r",
+            "h1g1",
+            "h1g2",
+            "h1h2"
+          ],
+          "perft2_nodes": 94
+        },
+        {
+          "ply": 1,
+          "action": "b7a8q",
+          "fen4": "Q3k3/8/8/8/8/8/8/7K b - -",
+          "polyglot_hex": "ffa8ca34675f0367",
+          "legal_moves": [
+            "e8d7",
+            "e8e7",
+            "e8f7"
+          ],
+          "perft2_nodes": 69
+        }
+      ]
+    },
+    {
+      "name": "black-promotion-capture-q",
+      "start_fen": "k7/8/8/8/8/8/6p1/4K2R b K - 0 1",
+      "actions": [
+        "g2h1q"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "k7/8/8/8/8/8/6p1/4K2R b K -",
+          "polyglot_hex": "c7163d0f6ebe6337",
+          "legal_moves": [
+            "a8a7",
+            "a8b7",
+            "a8b8",
+            "g2g1b",
+            "g2g1n",
+            "g2g1q",
+            "g2g1r",
+            "g2h1b",
+            "g2h1n",
+            "g2h1q",
+            "g2h1r"
+          ],
+          "perft2_nodes": 85
+        },
+        {
+          "ply": 1,
+          "action": "g2h1q",
+          "fen4": "k7/8/8/8/8/8/8/4K2q w - -",
+          "polyglot_hex": "99f40490d57c6e4f",
+          "legal_moves": [
+            "e1d2",
+            "e1e2",
+            "e1f2"
+          ],
+          "perft2_nodes": 69
+        }
+      ]
+    },
+    {
+      "name": "white-promotion-r",
+      "start_fen": "7k/P7/8/8/8/8/8/7K w - - 0 1",
+      "actions": [
+        "a7a8r"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "7k/P7/8/8/8/8/8/7K w - -",
+          "polyglot_hex": "9f7e8ceee7e2fc38",
+          "legal_moves": [
+            "a7a8b",
+            "a7a8n",
+            "a7a8q",
+            "a7a8r",
+            "h1g1",
+            "h1g2",
+            "h1h2"
+          ],
+          "perft2_nodes": 19
+        },
+        {
+          "ply": 1,
+          "action": "a7a8r",
+          "fen4": "R6k/8/8/8/8/8/8/7K b - -",
+          "polyglot_hex": "35bc364e70b73ab5",
+          "legal_moves": [
+            "h8g7",
+            "h8h7"
+          ],
+          "perft2_nodes": 34
+        }
+      ]
+    },
+    {
+      "name": "black-promotion-r",
+      "start_fen": "k7/8/8/8/8/8/7p/K7 b - - 0 1",
+      "actions": [
+        "h2h1r"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "k7/8/8/8/8/8/7p/K7 b - -",
+          "polyglot_hex": "b92c65942a00c1d2",
+          "legal_moves": [
+            "a8a7",
+            "a8b7",
+            "a8b8",
+            "h2h1b",
+            "h2h1n",
+            "h2h1q",
+            "h2h1r"
+          ],
+          "perft2_nodes": 19
+        },
+        {
+          "ply": 1,
+          "action": "h2h1r",
+          "fen4": "k7/8/8/8/8/8/8/K6r w - -",
+          "polyglot_hex": "72b91f9dc281f985",
+          "legal_moves": [
+            "a1a2",
+            "a1b2"
+          ],
+          "perft2_nodes": 34
+        }
+      ]
+    },
+    {
+      "name": "white-promotion-capture-r",
+      "start_fen": "r3k3/1P6/8/8/8/8/8/7K w q - 0 1",
+      "actions": [
+        "b7a8r"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "r3k3/1P6/8/8/8/8/8/7K w q -",
+          "polyglot_hex": "f7cdca90f9b86956",
+          "legal_moves": [
+            "b7a8b",
+            "b7a8n",
+            "b7a8q",
+            "b7a8r",
+            "b7b8b",
+            "b7b8n",
+            "b7b8q",
+            "b7b8r",
+            "h1g1",
+            "h1g2",
+            "h1h2"
+          ],
+          "perft2_nodes": 94
+        },
+        {
+          "ply": 1,
+          "action": "b7a8r",
+          "fen4": "R3k3/8/8/8/8/8/8/7K b - -",
+          "polyglot_hex": "d945d3e1b80665d8",
+          "legal_moves": [
+            "e8d7",
+            "e8e7",
+            "e8f7"
+          ],
+          "perft2_nodes": 51
+        }
+      ]
+    },
+    {
+      "name": "black-promotion-capture-r",
+      "start_fen": "k7/8/8/8/8/8/6p1/4K2R b K - 0 1",
+      "actions": [
+        "g2h1r"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "k7/8/8/8/8/8/6p1/4K2R b K -",
+          "polyglot_hex": "c7163d0f6ebe6337",
+          "legal_moves": [
+            "a8a7",
+            "a8b7",
+            "a8b8",
+            "g2g1b",
+            "g2g1n",
+            "g2g1q",
+            "g2g1r",
+            "g2h1b",
+            "g2h1n",
+            "g2h1q",
+            "g2h1r"
+          ],
+          "perft2_nodes": 85
+        },
+        {
+          "ply": 1,
+          "action": "g2h1r",
+          "fen4": "k7/8/8/8/8/8/8/4K2r w - -",
+          "polyglot_hex": "92f2d78c0ac992b3",
+          "legal_moves": [
+            "e1d2",
+            "e1e2",
+            "e1f2"
+          ],
+          "perft2_nodes": 51
+        }
+      ]
+    },
+    {
+      "name": "white-promotion-b",
+      "start_fen": "7k/P7/8/8/8/8/8/7K w - - 0 1",
+      "actions": [
+        "a7a8b"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "7k/P7/8/8/8/8/8/7K w - -",
+          "polyglot_hex": "9f7e8ceee7e2fc38",
+          "legal_moves": [
+            "a7a8b",
+            "a7a8n",
+            "a7a8q",
+            "a7a8r",
+            "h1g1",
+            "h1g2",
+            "h1h2"
+          ],
+          "perft2_nodes": 19
+        },
+        {
+          "ply": 1,
+          "action": "a7a8b",
+          "fen4": "B6k/8/8/8/8/8/8/7K b - -",
+          "polyglot_hex": "e302a8c5b2c5b04b",
+          "legal_moves": [
+            "h8g7",
+            "h8g8",
+            "h8h7"
+          ],
+          "perft2_nodes": 27
+        }
+      ]
+    },
+    {
+      "name": "black-promotion-b",
+      "start_fen": "k7/8/8/8/8/8/7p/K7 b - - 0 1",
+      "actions": [
+        "h2h1b"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "k7/8/8/8/8/8/7p/K7 b - -",
+          "polyglot_hex": "b92c65942a00c1d2",
+          "legal_moves": [
+            "a8a7",
+            "a8b7",
+            "a8b8",
+            "h2h1b",
+            "h2h1n",
+            "h2h1q",
+            "h2h1r"
+          ],
+          "perft2_nodes": 19
+        },
+        {
+          "ply": 1,
+          "action": "h2h1b",
+          "fen4": "k7/8/8/8/8/8/8/K6b w - -",
+          "polyglot_hex": "327aadfe49d31010",
+          "legal_moves": [
+            "a1a2",
+            "a1b1",
+            "a1b2"
+          ],
+          "perft2_nodes": 27
+        }
+      ]
+    },
+    {
+      "name": "white-promotion-capture-b",
+      "start_fen": "r3k3/1P6/8/8/8/8/8/7K w q - 0 1",
+      "actions": [
+        "b7a8b"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "r3k3/1P6/8/8/8/8/8/7K w q -",
+          "polyglot_hex": "f7cdca90f9b86956",
+          "legal_moves": [
+            "b7a8b",
+            "b7a8n",
+            "b7a8q",
+            "b7a8r",
+            "b7b8b",
+            "b7b8n",
+            "b7b8q",
+            "b7b8r",
+            "h1g1",
+            "h1g2",
+            "h1h2"
+          ],
+          "perft2_nodes": 94
+        },
+        {
+          "ply": 1,
+          "action": "b7a8b",
+          "fen4": "B3k3/8/8/8/8/8/8/7K b - -",
+          "polyglot_hex": "0ffb4d6a7a74ef26",
+          "legal_moves": [
+            "e8d7",
+            "e8d8",
+            "e8e7",
+            "e8f7",
+            "e8f8"
+          ],
+          "perft2_nodes": 45
+        }
+      ]
+    },
+    {
+      "name": "black-promotion-capture-b",
+      "start_fen": "k7/8/8/8/8/8/6p1/4K2R b K - 0 1",
+      "actions": [
+        "g2h1b"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "k7/8/8/8/8/8/6p1/4K2R b K -",
+          "polyglot_hex": "c7163d0f6ebe6337",
+          "legal_moves": [
+            "a8a7",
+            "a8b7",
+            "a8b8",
+            "g2g1b",
+            "g2g1n",
+            "g2g1q",
+            "g2g1r",
+            "g2h1b",
+            "g2h1n",
+            "g2h1q",
+            "g2h1r"
+          ],
+          "perft2_nodes": 85
+        },
+        {
+          "ply": 1,
+          "action": "g2h1b",
+          "fen4": "k7/8/8/8/8/8/8/4K2b w - -",
+          "polyglot_hex": "d23165ef819b7b26",
+          "legal_moves": [
+            "e1d1",
+            "e1d2",
+            "e1e2",
+            "e1f1",
+            "e1f2"
+          ],
+          "perft2_nodes": 45
+        }
+      ]
+    },
+    {
+      "name": "white-promotion-n",
+      "start_fen": "7k/P7/8/8/8/8/8/7K w - - 0 1",
+      "actions": [
+        "a7a8n"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "7k/P7/8/8/8/8/8/7K w - -",
+          "polyglot_hex": "9f7e8ceee7e2fc38",
+          "legal_moves": [
+            "a7a8b",
+            "a7a8n",
+            "a7a8q",
+            "a7a8r",
+            "h1g1",
+            "h1g2",
+            "h1h2"
+          ],
+          "perft2_nodes": 19
+        },
+        {
+          "ply": 1,
+          "action": "a7a8n",
+          "fen4": "N6k/8/8/8/8/8/8/7K b - -",
+          "polyglot_hex": "282db81a9aedb71c",
+          "legal_moves": [
+            "h8g7",
+            "h8g8",
+            "h8h7"
+          ],
+          "perft2_nodes": 15
+        }
+      ]
+    },
+    {
+      "name": "black-promotion-n",
+      "start_fen": "k7/8/8/8/8/8/7p/K7 b - - 0 1",
+      "actions": [
+        "h2h1n"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "k7/8/8/8/8/8/7p/K7 b - -",
+          "polyglot_hex": "b92c65942a00c1d2",
+          "legal_moves": [
+            "a8a7",
+            "a8b7",
+            "a8b8",
+            "h2h1b",
+            "h2h1n",
+            "h2h1q",
+            "h2h1r"
+          ],
+          "perft2_nodes": 19
+        },
+        {
+          "ply": 1,
+          "action": "h2h1n",
+          "fen4": "k7/8/8/8/8/8/8/K6n w - -",
+          "polyglot_hex": "bf4993dbb11885eb",
+          "legal_moves": [
+            "a1a2",
+            "a1b1",
+            "a1b2"
+          ],
+          "perft2_nodes": 15
+        }
+      ]
+    },
+    {
+      "name": "white-promotion-capture-n",
+      "start_fen": "r3k3/1P6/8/8/8/8/8/7K w q - 0 1",
+      "actions": [
+        "b7a8n"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "r3k3/1P6/8/8/8/8/8/7K w q -",
+          "polyglot_hex": "f7cdca90f9b86956",
+          "legal_moves": [
+            "b7a8b",
+            "b7a8n",
+            "b7a8q",
+            "b7a8r",
+            "b7b8b",
+            "b7b8n",
+            "b7b8q",
+            "b7b8r",
+            "h1g1",
+            "h1g2",
+            "h1h2"
+          ],
+          "perft2_nodes": 94
+        },
+        {
+          "ply": 1,
+          "action": "b7a8n",
+          "fen4": "N3k3/8/8/8/8/8/8/7K b - -",
+          "polyglot_hex": "c4d45db5525ce871",
+          "legal_moves": [
+            "e8d7",
+            "e8d8",
+            "e8e7",
+            "e8f7",
+            "e8f8"
+          ],
+          "perft2_nodes": 25
+        }
+      ]
+    },
+    {
+      "name": "black-promotion-capture-n",
+      "start_fen": "k7/8/8/8/8/8/6p1/4K2R b K - 0 1",
+      "actions": [
+        "g2h1n"
+      ],
+      "stages": [
+        {
+          "ply": 0,
+          "action": "",
+          "fen4": "k7/8/8/8/8/8/6p1/4K2R b K -",
+          "polyglot_hex": "c7163d0f6ebe6337",
+          "legal_moves": [
+            "a8a7",
+            "a8b7",
+            "a8b8",
+            "g2g1b",
+            "g2g1n",
+            "g2g1q",
+            "g2g1r",
+            "g2h1b",
+            "g2h1n",
+            "g2h1q",
+            "g2h1r"
+          ],
+          "perft2_nodes": 85
+        },
+        {
+          "ply": 1,
+          "action": "g2h1n",
+          "fen4": "k7/8/8/8/8/8/8/4K2n w - -",
+          "polyglot_hex": "5f025bca7950eedd",
+          "legal_moves": [
+            "e1d1",
+            "e1d2",
+            "e1e2",
+            "e1f1"
+          ],
+          "perft2_nodes": 20
+        }
+      ]
+    }
+  ],
+  "vectors": 99,
+  "total_oracle_perft2_nodes": 10836,
+  "resource_controls": {
+    "allowed_cpus": [
+      0,
+      2
+    ],
+    "nice": 10,
+    "cpu_max": "50000 100000",
+    "memory_max": "4294967296"
+  }
+}

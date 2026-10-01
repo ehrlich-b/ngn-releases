@@ -1,0 +1,1930 @@
+{
+  "schema": "ngn-k4-probe5m-lr1-selection-v1",
+  "mode": "probe5m-lr1",
+  "contract_version": "sf18-5kn-material-inversion-v2",
+  "command": [
+    "ngnk4bridge",
+    "select",
+    "-mode",
+    "probe5m-lr1",
+    "-candidates",
+    "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates",
+    "-manifest",
+    "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-20260921/finalized-probe5m/manifest.json",
+    "-validation",
+    "/home/ehrli/nnue-owned-k4-20260920/runs/k4-production-pilot-20260921/finalized-pilot/validation.bf",
+    "-out",
+    "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/selection.json"
+  ],
+  "manifest": {
+    "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-20260921/finalized-probe5m/manifest.json",
+    "bytes": 70708,
+    "sha256": "c3bd3b204d1211c95e65e76217dd995e767077a851411a50cf1293f88cf844ab"
+  },
+  "validation": {
+    "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-production-pilot-20260921/finalized-pilot/validation.bf",
+    "bytes": 3200000,
+    "sha256": "4aacc29dc10e4fcf4bb31a06a91442b116cce64e9f24229ff0f0865895c0960c"
+  },
+  "rank": "lowest eligible validation integer MSE through the predeclared early-stop point",
+  "tie_break": "earliest update",
+  "mean_absolute_quantization_gate_cp": 8,
+  "p99_absolute_quantization_gate_cp": 32,
+  "maximum_absolute_quantization_gate_cp": 64,
+  "early_stop": {
+    "minimum_update": 8192,
+    "patience": 8,
+    "minimum_integer_mse_improvement": 0.00001,
+    "triggered": true,
+    "stop_update": 11264
+  },
+  "candidates": [
+    {
+      "update": 0,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-0/receipt.json",
+        "bytes": 2816,
+        "sha256": "e7e7b261fa1e73d5eb495b86d8389b439fb0b0e2ffde97606341fb8be6e443d0"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-0/raw.bin",
+        "bytes": 9489440,
+        "sha256": "cf5cff9b6dd56abc2e6f17f54c446f779c097f843808c156e7acf69b2447fa56"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-0/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "ac4ceb398a97384831ecf2fbff6ec9083be768f00f5ae766de778d6535e214a5"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.026960245795174257,
+      "integer_mean_mse": 0.02695743374931675,
+      "integer_minus_raw_mse": -0.0000028120458575066343,
+      "mean_absolute_quantization_cp": 0.8858537749514359,
+      "p99_absolute_quantization_cp": 3.003403455018997,
+      "maximum_absolute_quantization_cp": 6.324980735778809,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 1024,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-1024/receipt.json",
+        "bytes": 3318,
+        "sha256": "69f3f966764d69f0f1a8b0819aec36739776a9d6d3a96c24baa87bcc2ec26e14"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-1024/raw.bin",
+        "bytes": 9489440,
+        "sha256": "6f8eaf105f2e444ba895602d7f13d2f10e2fda4dc8923eff5f2ad9353e6d1234"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-1024/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "abed1b65b78a86e5484b1629ffd1470ec4d3a46304d3b297c7bd0924bd9d27a6"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009004169536553995,
+      "integer_mean_mse": 0.009031281381400314,
+      "integer_minus_raw_mse": 0.00002711184484631944,
+      "mean_absolute_quantization_cp": 8.477550416723313,
+      "p99_absolute_quantization_cp": 34.59713649749756,
+      "maximum_absolute_quantization_cp": 57.59495559334755,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 2048,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-2048/receipt.json",
+        "bytes": 3334,
+        "sha256": "31e075fb805f49f17c539fdd34d30686a44d90b43a06532c6db2f31a7052a337"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-2048/raw.bin",
+        "bytes": 9489440,
+        "sha256": "5a284b9bc0d1b04e149c5badf330422bcd30263fd1c5f3dfb519c36597ee4f73"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-2048/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "f9ed2f4f5be1531102b54c18e8a7d7783d38aa07684be47e4cae930f213642b3"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.008568221607252579,
+      "integer_mean_mse": 0.008612751120900701,
+      "integer_minus_raw_mse": 0.00004452951364812205,
+      "mean_absolute_quantization_cp": 7.824951658156887,
+      "p99_absolute_quantization_cp": 27.230099320411682,
+      "maximum_absolute_quantization_cp": 45.38323473930359,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 3072,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-3072/receipt.json",
+        "bytes": 3333,
+        "sha256": "fb100fdd0c3f6d43078d9b0f036011606359eb4cc42b659d800d6f1eb890d96d"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-3072/raw.bin",
+        "bytes": 9489440,
+        "sha256": "96cbe3a389b2a435b1256fa1dcb846ebd4c484f70fb47b7397bc57c19e6e7d32"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-3072/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "4e834b172789103e3bc32abb9aa97aba61363297d28f1702aef67f75f5128eb4"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.008452260520399131,
+      "integer_mean_mse": 0.008464454744737289,
+      "integer_minus_raw_mse": 0.00001219422433815752,
+      "mean_absolute_quantization_cp": 6.665953311861456,
+      "p99_absolute_quantization_cp": 25.996540129184723,
+      "maximum_absolute_quantization_cp": 50.868628829717636,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 4096,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-4096/receipt.json",
+        "bytes": 3334,
+        "sha256": "6b575d96ab634c29311aaccb0da5a1a4e0d4e8ee946152ea57033d4502e2b0c2"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-4096/raw.bin",
+        "bytes": 9489440,
+        "sha256": "3bd6e63b97b43be535f762a34ab8a2f0bab117bfd345b4a6c4d7c0c910e496ca"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-4096/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "ee2c1238dc076debe53bf4043e6ad9a85b1c8509036abe32a3ee72e82ab9ca8e"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.008440717353133627,
+      "integer_mean_mse": 0.008466232677190304,
+      "integer_minus_raw_mse": 0.000025515324056677585,
+      "mean_absolute_quantization_cp": 6.7884923096649725,
+      "p99_absolute_quantization_cp": 23.68351697921753,
+      "maximum_absolute_quantization_cp": 39.57898163795471,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 5120,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-5120/receipt.json",
+        "bytes": 3335,
+        "sha256": "89ed248579bfbcffd60ebb5275958b7ec652cf835180f9d25912e2eed1d9fe16"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-5120/raw.bin",
+        "bytes": 9489440,
+        "sha256": "9a1fd7702a27bbafb4f2dd73b751878145753fa18d0fb863c72e10ea2bdc2c36"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-5120/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "ac2694377927956979351a55c3cf00b30f332e960b881f016c24c6cbcde4fee0"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.008471172529772046,
+      "integer_mean_mse": 0.008498860981495375,
+      "integer_minus_raw_mse": 0.000027688451723328553,
+      "mean_absolute_quantization_cp": 7.469422474902794,
+      "p99_absolute_quantization_cp": 29.69472861289978,
+      "maximum_absolute_quantization_cp": 57.153714656829834,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 6144,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-6144/receipt.json",
+        "bytes": 3334,
+        "sha256": "e021ea7add184e55db336c2bd5c3ddc99751483b4293228fcfdfec5c742a9d43"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-6144/raw.bin",
+        "bytes": 9489440,
+        "sha256": "48580ce84cb301c9be4258adb158c240cc87d36e6e65749120b3ac2ca26b7d92"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-6144/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "e4b6aa840a869db3efe21ed060983b909467c9222f375740da27438f89fb6d8d"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.008552557378169992,
+      "integer_mean_mse": 0.008597520062063626,
+      "integer_minus_raw_mse": 0.00004496268389363352,
+      "mean_absolute_quantization_cp": 8.75663256049432,
+      "p99_absolute_quantization_cp": 33.68472099304199,
+      "maximum_absolute_quantization_cp": 59.95563507080078,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 7168,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-7168/receipt.json",
+        "bytes": 3336,
+        "sha256": "205aaa03d6b04a6121a8f2af8acfb171c49acc62235ba9aa6c94e243ebe649a2"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-7168/raw.bin",
+        "bytes": 9489440,
+        "sha256": "a0f760392b4fd808fd2f33fe8d13d4b5b0ad5d2d468e1f155cab6d39a5d56d7d"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-7168/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "75c61799be05d5101a8d96bdd58d941080a5ef2c7a69bf3599f583b14ccbe00b"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.008645906157433181,
+      "integer_mean_mse": 0.008700113218343153,
+      "integer_minus_raw_mse": 0.00005420706090997207,
+      "mean_absolute_quantization_cp": 10.56275006522704,
+      "p99_absolute_quantization_cp": 33.851677656173706,
+      "maximum_absolute_quantization_cp": 53.526516914367676,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 8192,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-8192/receipt.json",
+        "bytes": 3337,
+        "sha256": "38a257ec04344d01bacb0e2c624ed9902102f6f4083985bccd346fc82a5ee529"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-8192/raw.bin",
+        "bytes": 9489440,
+        "sha256": "11dd60bec21297299e3376482803b83065bf60e3e723bdaf2e684ca0a5ef434c"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-8192/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "a26530caa8795ac67acda3b873cc6a505b6a9973e3c4a9cd2a7ebb33b487791a"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.008723882552260535,
+      "integer_mean_mse": 0.00877647840354306,
+      "integer_minus_raw_mse": 0.00005259585128252614,
+      "mean_absolute_quantization_cp": 8.96268584999811,
+      "p99_absolute_quantization_cp": 31.22565221786499,
+      "maximum_absolute_quantization_cp": 53.29416561126709,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 9216,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-9216/receipt.json",
+        "bytes": 3335,
+        "sha256": "49dd432d3263b321d7217362ff9b79fbdc3fea127abea8db3e3cb5a0d0988033"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-9216/raw.bin",
+        "bytes": 9489440,
+        "sha256": "d404535027d45f8d223ffa90891bcc03bd0331350c4dc362e4e98ea465c4c06d"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-9216/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "1d05102164b356a9adf1824e02d03e4cde13fc45e6e28d325ec1193f77773b37"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.0087316372024174,
+      "integer_mean_mse": 0.008765871969102015,
+      "integer_minus_raw_mse": 0.00003423476668461614,
+      "mean_absolute_quantization_cp": 8.316044698671437,
+      "p99_absolute_quantization_cp": 28.372994422912598,
+      "maximum_absolute_quantization_cp": 50.066102504730225,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 10240,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-10240/receipt.json",
+        "bytes": 3343,
+        "sha256": "59fecdde6227837572780799213f0a3edf84d853ea15e4b42ca16fe2da425c44"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-10240/raw.bin",
+        "bytes": 9489440,
+        "sha256": "68f45eb263a67dd368f0c551e440c1d8301cdf4b1520e262728773950597632e"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-10240/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "78347e03581206c4cb0efb873dfbb5b0f28d7d00a7cf195ea472e162e2f6eaef"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.008835867558676474,
+      "integer_mean_mse": 0.008856978260441366,
+      "integer_minus_raw_mse": 0.000021110701764892256,
+      "mean_absolute_quantization_cp": 7.507087061604783,
+      "p99_absolute_quantization_cp": 26.035245895385742,
+      "maximum_absolute_quantization_cp": 51.81462907791138,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 11264,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-11264/receipt.json",
+        "bytes": 3345,
+        "sha256": "2f71153c2b1d45aa108d629e928044d7cbc575ab6576f358fcb70c72d1ed1f87"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-11264/raw.bin",
+        "bytes": 9489440,
+        "sha256": "fe81b68c93aeb9950963eaffb007c83f92559a3a990623095584aa0a9d57f6fa"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-11264/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "2a33e0c0b7b4889026155e24864cf71d1369655ff43d1478f1816223d98cacd7"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.008953180730471072,
+      "integer_mean_mse": 0.008971697500331867,
+      "integer_minus_raw_mse": 0.000018516769860794577,
+      "mean_absolute_quantization_cp": 6.469806668179072,
+      "p99_absolute_quantization_cp": 22.780800104141235,
+      "maximum_absolute_quantization_cp": 45.968820571899414,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 12288,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-12288/receipt.json",
+        "bytes": 3345,
+        "sha256": "2ccd9e66da06d9276fa1603c1c2c4edaf36f6dc9b25ddc2ca4984c43f392c2b6"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-12288/raw.bin",
+        "bytes": 9489440,
+        "sha256": "8f808aaa9be76bd26521a0e313c79383c5cae3cb1d3aa70410361227d5e4560e"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-12288/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "c21aa15c735fdbe9419015eefd7895eee460b828f2fc42ae64b2f8734f658dd1"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009018484323101853,
+      "integer_mean_mse": 0.009035457378616045,
+      "integer_minus_raw_mse": 0.00001697305551419219,
+      "mean_absolute_quantization_cp": 6.59157274258133,
+      "p99_absolute_quantization_cp": 24.006183624267578,
+      "maximum_absolute_quantization_cp": 43.398595333099365,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 13312,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-13312/receipt.json",
+        "bytes": 3345,
+        "sha256": "6fd19901dc6bf7876665167ad9122f332270b436bcb13bc36059f16973a2f780"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-13312/raw.bin",
+        "bytes": 9489440,
+        "sha256": "820d286fd05760fcb01ba9a420939719ab37a4da23c61fe3455b272b5f7ccc25"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-13312/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "ed8e3066c1184b4d912d6787b5c4067c58a03dd2c36d04596c4177df1ac2cb19"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.00908741638724309,
+      "integer_mean_mse": 0.009121228844435964,
+      "integer_minus_raw_mse": 0.000033812457192874956,
+      "mean_absolute_quantization_cp": 8.574698640325916,
+      "p99_absolute_quantization_cp": 28.07583713531494,
+      "maximum_absolute_quantization_cp": 47.914833068847656,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 14336,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-14336/receipt.json",
+        "bytes": 3345,
+        "sha256": "1f0bfe665ee49e80a16f721f6ea0a3d658eb4d3acdec3cecd556be2c6f46eea0"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-14336/raw.bin",
+        "bytes": 9489440,
+        "sha256": "cc4a6feae95f94a6058fd9efeba0c7ec40e436f29033f86f5f04e78b08c4bc0e"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-14336/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "867cdec462a72b898a92c69f17bc6d9d306a8b480e1eba300937bf547c19dca2"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009129128457342981,
+      "integer_mean_mse": 0.00915045068409033,
+      "integer_minus_raw_mse": 0.00002132222674734903,
+      "mean_absolute_quantization_cp": 8.122028087200988,
+      "p99_absolute_quantization_cp": 25.769453048706055,
+      "maximum_absolute_quantization_cp": 46.812255859375,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 15360,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-15360/receipt.json",
+        "bytes": 3345,
+        "sha256": "a060d9a089c73a93f77d3842391b1d1bed903ed77e60e8e9751015ce5633d9e3"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-15360/raw.bin",
+        "bytes": 9489440,
+        "sha256": "d2a06cd88b135cc2653d6b6d34fdb175712878b799c6b273c456e7c6caa4b05a"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-15360/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "ec72c8b05e007a589013e06d93a64326323faf2dfcadcdfc51a98bd92410406a"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009184105866195037,
+      "integer_mean_mse": 0.009230090088822595,
+      "integer_minus_raw_mse": 0.000045984222627557664,
+      "mean_absolute_quantization_cp": 9.499680915382989,
+      "p99_absolute_quantization_cp": 33.4921932220459,
+      "maximum_absolute_quantization_cp": 56.213314056396484,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 16384,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-16384/receipt.json",
+        "bytes": 3345,
+        "sha256": "92de020fbb7c49b62e0f8176129c53c765596465ecb10af887f220f8193dc6b8"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-16384/raw.bin",
+        "bytes": 9489440,
+        "sha256": "46ae17f7065dc9e730733b04628b14aa079e9d54a35419b92bc4f766da75e7c1"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-16384/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "e41f178e228d361b2a8f21fd8072eb98e657d1189be5a0f7e102a64c59bbfe91"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009242122446161728,
+      "integer_mean_mse": 0.00927415386267033,
+      "integer_minus_raw_mse": 0.00003203141650860199,
+      "mean_absolute_quantization_cp": 8.342640524894893,
+      "p99_absolute_quantization_cp": 32.599411368370056,
+      "maximum_absolute_quantization_cp": 57.07965445518494,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 17408,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-17408/receipt.json",
+        "bytes": 3343,
+        "sha256": "99117087c1beca234d222c9c78e04f8338e50f64e331776fcf9d981624b821b0"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-17408/raw.bin",
+        "bytes": 9489440,
+        "sha256": "3e4518183e0b7a926b8d4e4fbcb621fcc0d68f61518ec97929f1fa6c4d5e9b1b"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-17408/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "14625d2177d93c7f6decc5b3d15e64b114b2da4acf7664286c8b02064d4cd21e"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.00928279420514956,
+      "integer_mean_mse": 0.009306537071532634,
+      "integer_minus_raw_mse": 0.000023742866383074865,
+      "mean_absolute_quantization_cp": 9.732231563750208,
+      "p99_absolute_quantization_cp": 31.482800006866455,
+      "maximum_absolute_quantization_cp": 55.81621217727661,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 18432,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-18432/receipt.json",
+        "bytes": 3344,
+        "sha256": "4528c7d0f006f901b563d6ce6ae7229776b36025df25044db1106390a624cad8"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-18432/raw.bin",
+        "bytes": 9489440,
+        "sha256": "730e996327fa71e7a3340e30e2bf10937c6a81e3fb19326deda61cda310757e6"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-18432/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "1c8df66c63d43088698a4943c30daa2dc32c1b2d05889b907f5e4a2a8138c760"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009311963589564041,
+      "integer_mean_mse": 0.00935326531838065,
+      "integer_minus_raw_mse": 0.00004130172881660829,
+      "mean_absolute_quantization_cp": 9.894900516242535,
+      "p99_absolute_quantization_cp": 36.45642852783203,
+      "maximum_absolute_quantization_cp": 68.17400771379471,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 19456,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-19456/receipt.json",
+        "bytes": 3345,
+        "sha256": "a5e9bf81a25703744aecd046b779c2e66ef0c37016456dedde0fca598716a11d"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-19456/raw.bin",
+        "bytes": 9489440,
+        "sha256": "7a697084780c573326b723a91c970272d8d2d85222025c4e55ff9b4f6d728879"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-19456/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "a88697e938b5995df0dbf109f5fa5fea65442a1c12e7108014cd9d30ff332360"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009358888996050195,
+      "integer_mean_mse": 0.009366017176686283,
+      "integer_minus_raw_mse": 0.000007128180636088027,
+      "mean_absolute_quantization_cp": 7.438311652969755,
+      "p99_absolute_quantization_cp": 25.512240886688232,
+      "maximum_absolute_quantization_cp": 46.860753536224365,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 20480,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-20480/receipt.json",
+        "bytes": 3343,
+        "sha256": "953e024976777145fbc750d9bb81a6da16783afdbdf7019f2767c7eabb5e81f1"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-20480/raw.bin",
+        "bytes": 9489440,
+        "sha256": "6ae46a10a963e40c892eb4ea2157fe98c747aa18f9e265539af8d6f57b050f81"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-20480/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "a34e8bffce881b2e9a6f34d44f5b82a3e76a31b7ed3cb3cad26f70c1654ca1d7"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009387278531254633,
+      "integer_mean_mse": 0.009395652016006997,
+      "integer_minus_raw_mse": 0.000008373484752364005,
+      "mean_absolute_quantization_cp": 7.030562582465634,
+      "p99_absolute_quantization_cp": 24.81593132019043,
+      "maximum_absolute_quantization_cp": 55.78958702087402,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 21504,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-21504/receipt.json",
+        "bytes": 3344,
+        "sha256": "d353e2545d7f4c310f8a6f59710ff33a26ca2737994ff2c07c5dec1b76762882"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-21504/raw.bin",
+        "bytes": 9489440,
+        "sha256": "9c11fad334507cc1cf6949be2e24b3dd7b387f6c7fdfef606f068f87cef6a4a2"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-21504/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "4f948e9c8178fab40ca10c3f2df575817dea62188ddeaa5a096070b054502504"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009405947152512573,
+      "integer_mean_mse": 0.009411177711506902,
+      "integer_minus_raw_mse": 0.000005230558994328421,
+      "mean_absolute_quantization_cp": 6.495803059491515,
+      "p99_absolute_quantization_cp": 22.842188835144043,
+      "maximum_absolute_quantization_cp": 37.625285148620605,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 22528,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-22528/receipt.json",
+        "bytes": 3345,
+        "sha256": "fd627944389c97c73e8678174c68a0aa380386ecf9c170bc772d20baf07edc1e"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-22528/raw.bin",
+        "bytes": 9489440,
+        "sha256": "d7f9fad95fde05143ca111592091874a0bdc6132785cb119e48fe56788ec3e04"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-22528/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "649935d3a1cf52af10c8e161f5494e8d4babc05fccc16c76eac1878c864a6820"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009404301987145529,
+      "integer_mean_mse": 0.00941315065239172,
+      "integer_minus_raw_mse": 0.000008848665246192003,
+      "mean_absolute_quantization_cp": 6.613514113944843,
+      "p99_absolute_quantization_cp": 23.497698366642,
+      "maximum_absolute_quantization_cp": 39.659565925598145,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 23552,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-23552/receipt.json",
+        "bytes": 3343,
+        "sha256": "385723cc303752ad059df139943e92eb622fd8e2100b75517ed0dbc26fae692b"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-23552/raw.bin",
+        "bytes": 9489440,
+        "sha256": "3e4f27fcc39043ebea31a8c347590a2db835cf529d5b0796671859dcf809b9d8"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-23552/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "b16a8006faaea6ca19d62e491ffc1f60d388d4624395e8c5e71cb9eb4804b4ae"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009500610609767753,
+      "integer_mean_mse": 0.009530706149220717,
+      "integer_minus_raw_mse": 0.000030095539452964018,
+      "mean_absolute_quantization_cp": 7.8521028764207665,
+      "p99_absolute_quantization_cp": 31.962631225585938,
+      "maximum_absolute_quantization_cp": 57.26156044006348,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 24576,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-24576/receipt.json",
+        "bytes": 3344,
+        "sha256": "6168945e2b690e2386a3271562bdf085d6b505daa6342bff6385330f53bfa94d"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-24576/raw.bin",
+        "bytes": 9489440,
+        "sha256": "4db9d741adf3db0e49e99576185c3b9cd3ee91fbb512cdc9a2064a31c0a1a63d"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-24576/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "b4584c56b159f4e014ac06b9353d0296b82a3e06b3e91be380d572b432ef3412"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009437610585246734,
+      "integer_mean_mse": 0.009466779684697954,
+      "integer_minus_raw_mse": 0.000029169099451220593,
+      "mean_absolute_quantization_cp": 8.279252423274517,
+      "p99_absolute_quantization_cp": 35.92422819137573,
+      "maximum_absolute_quantization_cp": 57.88920593261719,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 25600,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-25600/receipt.json",
+        "bytes": 3345,
+        "sha256": "f4b959824dffba41d82d4ebdc76986444abcab87331339d16f107919b571ba9f"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-25600/raw.bin",
+        "bytes": 9489440,
+        "sha256": "050e9f0ddf6ced9908007d892fca525d9baeec11b367d05d13eb9bdafaea7e59"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-25600/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "704f4fdcb0e2147dbb546204cb95b92630e45391a8c976c104dfc5380456b99f"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009469772954680343,
+      "integer_mean_mse": 0.009509985756194413,
+      "integer_minus_raw_mse": 0.00004021280151406993,
+      "mean_absolute_quantization_cp": 9.079823368249983,
+      "p99_absolute_quantization_cp": 39.94878530502319,
+      "maximum_absolute_quantization_cp": 66.76488900184631,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 26624,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-26624/receipt.json",
+        "bytes": 3345,
+        "sha256": "b290d77d607c5832296fdb0addbf0f0923743478df90c2fb604ec2c73964d117"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-26624/raw.bin",
+        "bytes": 9489440,
+        "sha256": "15b9a8420ca0a860809f001161f6404978f059821536334bc95bcc38c1f779d6"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-26624/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "14dd71b6aa77782e29bdc7ce045fd982f313d893aafda21b81162e46d898c3c9"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009459212555969411,
+      "integer_mean_mse": 0.009511296800080862,
+      "integer_minus_raw_mse": 0.000052084244111450656,
+      "mean_absolute_quantization_cp": 9.339339584869967,
+      "p99_absolute_quantization_cp": 42.991475105285645,
+      "maximum_absolute_quantization_cp": 66.18203842639923,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 27648,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-27648/receipt.json",
+        "bytes": 3345,
+        "sha256": "47aa2f80b1db7180ed248cb53940e980a59df15ab9579d4554123b8e45b42b1f"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-27648/raw.bin",
+        "bytes": 9489440,
+        "sha256": "2735433849fdb3451fa86725bab2a2132152fba257c5b0de811f6faf7570551c"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-27648/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "8db882d36b553b21e66fb6385ca07e7d384fa518f35c44162b49480ef6b01713"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009465431689366423,
+      "integer_mean_mse": 0.00950424412912643,
+      "integer_minus_raw_mse": 0.0000388124397600071,
+      "mean_absolute_quantization_cp": 8.57109872958664,
+      "p99_absolute_quantization_cp": 38.020034074783325,
+      "maximum_absolute_quantization_cp": 62.95333009958267,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 28672,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-28672/receipt.json",
+        "bytes": 3345,
+        "sha256": "8edaf5726efeeedbe27a1b533ced048ee27ef11c47ec65ae5c54be3979403fb7"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-28672/raw.bin",
+        "bytes": 9489440,
+        "sha256": "9461363a3964a75e145969a7df50f5cf4618e473981dc2d2c3a94dbb1de67e92"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-28672/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "60022f8bca7ef1b836ca92fc6ded9d8b8450d0818e8aa9dfe817a82559a8139a"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009482039630581527,
+      "integer_mean_mse": 0.009538854764614874,
+      "integer_minus_raw_mse": 0.00005681513403334691,
+      "mean_absolute_quantization_cp": 9.430041055870168,
+      "p99_absolute_quantization_cp": 46.162800312042236,
+      "maximum_absolute_quantization_cp": 69.44078159332275,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 29696,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-29696/receipt.json",
+        "bytes": 3345,
+        "sha256": "f5fffe74713fc35b5b1d4475ba7fc57940257e6b400a2dd4bdbfeed68b185e68"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-29696/raw.bin",
+        "bytes": 9489440,
+        "sha256": "1a027c2d49b590f208cc1262965bc7389a484e3d66e1419fadc10ef06fa9b9bf"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-29696/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "59988e63498eaaad2c216b8861cdb734e8e8c4b7d66d4e5d84f6331279d78deb"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009475627565242173,
+      "integer_mean_mse": 0.009519474841584453,
+      "integer_minus_raw_mse": 0.00004384727634228029,
+      "mean_absolute_quantization_cp": 8.9361364989255,
+      "p99_absolute_quantization_cp": 42.65990352630615,
+      "maximum_absolute_quantization_cp": 70.50499534606934,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 30720,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-30720/receipt.json",
+        "bytes": 3346,
+        "sha256": "96cd7c486e2ee3a25bedbaa7df1c747c08c27a7b0053ff4b6b5c7b583e2f15b1"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-30720/raw.bin",
+        "bytes": 9489440,
+        "sha256": "663aa38c1cba7dd2483f12b341ba17438d624d84ca0736d5f35ddc6565224d3d"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-30720/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "06d558fa57ad600b9814b0d5a37fb75cfaf349d51077d28a23de40331c32da41"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009470823384341161,
+      "integer_mean_mse": 0.009497913335163963,
+      "integer_minus_raw_mse": 0.000027089950822801676,
+      "mean_absolute_quantization_cp": 8.450151233875937,
+      "p99_absolute_quantization_cp": 36.10036611557007,
+      "maximum_absolute_quantization_cp": 61.50506353378296,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": false
+    },
+    {
+      "update": 31744,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-31744/receipt.json",
+        "bytes": 3342,
+        "sha256": "92725083a22ae0f76bd9382a05b9dce124944561f06dc20dd2a05cfa4be934ce"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-31744/raw.bin",
+        "bytes": 9489440,
+        "sha256": "5e0d8af94f8db5fa2088a3c67356706dba0bc52be0a856e330ed993a2a27c45b"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-31744/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "18035cfdaae48225a8d46838475a589ba3463b18a0572bfc04f962286cefc56b"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009485365210130126,
+      "integer_mean_mse": 0.00951094777986867,
+      "integer_minus_raw_mse": 0.000025582569738544225,
+      "mean_absolute_quantization_cp": 7.868778375757896,
+      "p99_absolute_quantization_cp": 30.74412250518799,
+      "maximum_absolute_quantization_cp": 56.54360389709473,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    },
+    {
+      "update": 32768,
+      "checkpoint": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-32768/receipt.json",
+        "bytes": 3344,
+        "sha256": "241b15c900ac57005d3743e9bdafcfbbac4bf523322e8c3ca2ff0edc9eb2be10"
+      },
+      "raw": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-32768/raw.bin",
+        "bytes": 9489440,
+        "sha256": "729a7730ca97e8814a1deeb612fdf9c7931767f047803b2fe33c793470aef49c"
+      },
+      "quantised": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-32768/quantised.bin",
+        "bytes": 4744768,
+        "sha256": "a252c46df8c8b9086a19cfe06f2a3bc06ee2dd398170710d4847e55a45e74fb3"
+      },
+      "positions": 100000,
+      "raw_mean_mse": 0.009494713894818515,
+      "integer_mean_mse": 0.009507683816448521,
+      "integer_minus_raw_mse": 0.000012969921630006515,
+      "mean_absolute_quantization_cp": 6.887810867442712,
+      "p99_absolute_quantization_cp": 24.797293782234192,
+      "maximum_absolute_quantization_cp": 43.59107518196106,
+      "positions_by_output_bucket": [
+        258,
+        10433,
+        19914,
+        20112,
+        18266,
+        17432,
+        11566,
+        2019
+      ],
+      "saturated_values_by_output_head": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fast_output_safe": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "optimizer_state_finite": true,
+      "eligible": true
+    }
+  ],
+  "selected_update": 3072,
+  "selected_checkpoint": {
+    "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-probe5m-lr1-20260922/training/candidates/candidate-3072/receipt.json",
+    "bytes": 3333,
+    "sha256": "fb100fdd0c3f6d43078d9b0f036011606359eb4cc42b659d800d6f1eb890d96d"
+  }
+}

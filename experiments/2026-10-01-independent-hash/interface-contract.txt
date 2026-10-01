@@ -1,0 +1,91 @@
+Write hash.go from scratch in package engine from this contract. The supplied
+piece/square/move helpers were independently generated for this project; they
+are immutable support files. contract_position.go is a test-only representation
+and adapter, not an old engine implementation. No existing/upstream hashing,
+board, position or search implementation is provided or may be consulted.
+Read only your own module and Go standard library/toolchain. No sibling/parent
+files, network, credentials, external models, delegation or publication.
+
+Implement the specified compatible behavior rather than a new key format or
+heuristic. Produce hash.go, meaningful bounded tests and RESULT.md. Do not change
+support helpers or make explanatory/narrating source comments. The controller
+owns GPL notices and commits. Finish within15 minutes; serial Go only,
+GOMAXPROCS=1 GOFLAGS=-p=1 GOPROXY=off GOTOOLCHAIN=local, CPU0/2 quota50%,
+nice10, memory4GiB. Run standalone tests, race and vet. The controller has hidden
+existing engine/oracle tests, so do not claim end-to-end strength or correctness.
+
+Required globals: piecesZC [12][64]uint64, castleRightsZC [4]uint64,
+enPassantZC [16]uint64 and whiteTurnZC uint64. Initialize them deterministically:
+SHA256 of UTF8 string ehrlich, first8 bytes interpreted little-endian uint64,
+cast that bit pattern to int64 seed for math/rand.NewSource, local rand.Rand.
+Successive Uint64 outputs go to whiteTurnZC first, all piece keys row-major
+(piece index0..11, square0..63), castle keys0..3, then en-passant keys0..15.
+This is a compatibility key-data specification; do not consult an old initializer.
+
+Position tags supplied: uint8 bits0..3 castling WhiteKingSide,WhiteQueenSide,
+BlackKingSide,BlackQueenSide respectively; bit4 InCheck,5 BlackToMove,6 WhiteToMove,
+bit7 enPassantHash. Position.Turn() returns White if WhiteToMove set, Black
+otherwise. Board.PieceAt(Square) returns Piece (NoPiece0; black Pawn..King1..6,
+white Pawn..King7..12). Supplied Move accessors and tag predicates are the ABI.
+Position.hash is a lazily cached ordinary repetition/TT key (not Polyglot).
+
+generateZobristHash(pos *Position)uint64: XOR the side key when turn is White,
+each active castling key in the four-bit order, each occupied board square's
+piecesZC[piece-1][square], and the eligible raw EP key described below. Ignore
+other tag bits, clocks, history and other metadata.
+
+Raw EP key mapping for a position turn: Black and target16..23 maps to keys0..7;
+White and target40..47 maps to keys8..15. Any other target, or NoSquare, adds
+no key. Only add it when enPassantHash is set. That bit means a true legal EP
+capture exists; it is separate from the raw adjacent-pawn book/movegen target.
+
+updateHashForNullMove(pos *Position,newEnPassant Square,oldEnPassant Square):
+If cached hash is0, call pos.Hash() and return without additional toggles.
+Otherwise toggle side key once. When enPassantHash is set, toggle new target's
+EP key mapped by current turn and old target's EP key mapped by opposite turn.
+Write the result back to pos.hash. Both branches use current enPassantHash:
+null moves preserve this reversible bit while temporarily having no raw target.
+Current callers normally pass NoSquare for new and the saved target for old.
+
+updateHash(pos *Position,move Move,captureSquare Square,newEnPassant Square,
+oldEnPassant Square,promoPiece Piece,oldPositionTag PositionTag):
+This receives a position after its board, turn and tag transition, with cached
+hash still describing the previous board. The move describes the forward move
+even during undo; XOR symmetry handles reversal. If cached hash is0, call
+pos.Hash() and return. Otherwise toggle side key once. For a castle move whose
+source is E1, toggle white rook H1/F1 for king side or A1/D1 for queen side;
+source E8 analogously toggles black rook H8/F8 or A8/D8. Other sources do not
+add rook deltas. Independently XOR castle keys for each changed low tag bit
+between oldPositionTag and current pos.Tag.
+New EP contributes iff current enPassantHash is set, mapped by current turn;
+old EP contributes iff oldPositionTag has enPassantHash, mapped by opposite
+current turn. For a nonzero moving piece, toggle its source key and destination
+key (promotion uses promoPiece at destination instead). Toggle the captured
+piece's captureSquare key when CapturedPiece is nonzero. Caller supplies the
+EP victim square for EP and normal destination for ordinary captures. Valid
+move fields/squares are the supported domain. If MovingPiece is NoPiece,
+call pos.Hash() and return without assigning intermediate deltas; preserve
+existing cached-key semantics of that delegated Hash() call. Do not force a
+full refresh or invent validation beyond this specified fallback.
+
+hasLegalEnPassant(pos *Position)bool must be nonmutating and allocation-free:
+NoSquare or an occupied EP target is ineligible. White requires target rank6,
+a black pawn on the same file/rank5, and a candidate white pawn on rank5 one
+file left/right. Black analogously requires target rank3, white victim rank4,
+black candidate rank4. Reject off-board neighboring files. For each candidate,
+copy the board by value, move the own pawn from source to empty EP target,
+remove the victim and call isInCheck on a temporary Position with that board
+and the original side to move. Eligible iff at least one candidate leaves that
+side's king safe. Do not call movegen or hash, mutate source position/history,
+make a heap-backed collection, or ignore the capture's opened attack lines.
+
+Methods refreshEnPassantHash() clears bit7 then sets it iff hasLegalEnPassant
+returns true. ensureEnPassantHash() calls refresh only when raw EnPassant is
+not NoSquare; with no target it deliberately leaves the reversible bit alone.
+
+Tests should pin the deterministic stream without deriving expected results
+using the same implementation, exercise ordinary/promoting/capturing/castling
+and EP deltas, null-move/undo eligibility metadata, cold/delegated hash fallback,
+both adjacent candidates and blocked/unsafe EP probes, no mutation, and race
+checks. The stub is only an adapter; actual engine integration is independently
+verified later. No strength games or timing benchmark.

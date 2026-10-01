@@ -1,0 +1,24 @@
+{
+  "ended_utc": "2026-09-14T00:10:39.772042+00:00",
+  "fastchess_pid": 3290454,
+  "fastchess_returncode": 0,
+  "observation_count": 121272,
+  "observed_instances": {
+    "aa-a": [
+      3290460,
+      3290463,
+      3290474,
+      3290475
+    ],
+    "aa-b": [
+      3290461,
+      3290462,
+      3290472,
+      3290473
+    ]
+  },
+  "schema": "ngn-candidate-child-process-witness-v1",
+  "started_utc": "2026-09-13T23:56:55.820207+00:00",
+  "state": "COMPLETE",
+  "violations": []
+}

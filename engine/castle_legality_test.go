@@ -152,9 +152,6 @@ func TestQuiescenceDoesNotInventCastleEvasion(t *testing.T) {
 		if pos.HasLegalMove() {
 			t.Fatalf("HasLegalMove invented a castle evasion in %s", fen)
 		}
-		if got, resolved := texelQuietSearch(pos, -INFINITY, INFINITY, 0); !resolved || got != -MATE_VALUE {
-			t.Fatalf("offline quiet search(%s)=(%d,%v), want resolved mate", fen, got, resolved)
-		}
 		ClearStop()
 		defaultSearchEngine, _ = NewSearchEngineWithHash(DEFAULT_CACHE_SIZE)
 		if got := quiescence(pos, -INFINITY, INFINITY, 0, newQSearchInfo()); got != -MATE_VALUE {

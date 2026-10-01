@@ -1,0 +1,38 @@
+Rodent V1.1 Anand Slice C final verification, WSL only
+evidence kind: agent-authored summary of terminal/tool responses; no raw output files were retained
+worktree: /home/ehrli/repos/ngn-rodent-engine-slicec-v2-20260913
+go: go version go1.25.5 linux/amd64
+
+[full-short]
+tool response chunk: eb7c22
+command: env GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-engine-slicec-v2-20260913 test -short -p 2 ./... -count=1
+exit: 0
+result: PASS; engine 6.644s, rodenteval 0.011s, all remaining tested packages PASS or [no test files]
+
+[full-short-race]
+tool response chunks: 822972, 2f5ba9
+command: env GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-engine-slicec-v2-20260913 test -short -race -p 2 ./... -count=1
+exit: 0
+result: PASS; engine 41.401s, rodenteval 1.063s, all remaining tested packages PASS or [no test files]
+
+[configured-rodent-integration-race]
+tool response chunk: 7a9bf6
+command: env GOMAXPROCS=2 GOFLAGS=-mod=readonly RODENT_V11_ANAND_MODEL=/home/ehrli/rodent-v1.1-public-preflight-20260906/extracted/release/release-1-1/nets/rodent_anand_512hl.bin /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-engine-slicec-v2-20260913 test -race -p 2 -tags rodentoracle ./engine -run Rodent -count=1 -v
+exit: 0
+result: PASS, engine 3.023s
+tests: TestRodentV11SearchIncrementalMatchesFullRefreshAndUnwinds; TestRodentV11StoppedSearchUnwindsContextAndPosition; TestRodentV11ExplicitMoveNullPopAndClockIdentity; TestRodentV11SMPContextsArePrivateResetAndUnwound; TestRodentV11SelectionAndStateInvalidationAreTransactional; TestUCIRodentV11HeaderlessSelectionAndFailureTransaction; TestRodentSearchScoreReservesMateBandWithoutRule50Input; TestRodentPositionMappingUsesExplicitPlaneOrderAndSide; TestRodentMoveDeltaCoversPackedMoveSemantics; TestRodentMoveDeltaRejectsMalformedStateWithoutMutation
+
+[retained-slice-b-oracle]
+tool response chunk: 88141e
+command: env GOMAXPROCS=2 GOFLAGS=-mod=readonly RODENT_V11_ANAND_MODEL=/home/ehrli/rodent-v1.1-anand-sliceb-gate-20260913/run-002/inputs/network/rodent_anand_512hl.bin RODENT_V11_ANAND_TRANSITION_FIXTURES=/home/ehrli/rodent-v1.1-anand-sliceb-gate-20260913/run-002/inputs/transition_fixtures/transition-fixtures.json RODENT_V11_ANAND_TAGGED_TRANSITION_ORACLE=/home/ehrli/rodent-v1.1-anand-sliceb-gate-20260913/run-002/01-tagged-mechanism/tagged-oracle.json RODENT_V11_ANAND_RELEASE_TRANSITION_ORACLE=/home/ehrli/rodent-v1.1-anand-sliceb-gate-20260913/run-002/02-release-raw/artifacts/oracle.json /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-engine-slicec-v2-20260913 test -p 2 -tags rodentoracle ./rodenteval -run TestV11AnandIncrementalTaggedAndReleaseOracleParity -count=1 -v
+exit: 0
+result: PASS, rodenteval 0.009s; 22 sequences/75 checkpoints including special moves, four king-half crossings, multi-ply null/pop/sibling, and 128-null growth
+
+[format]
+command: /usr/local/go/bin/gofmt -l <all 11 changed .go files>
+exit: 0
+stdout: empty
+
+[preserved-invocation-failure]
+tool response chunk: 5d9620
+attempted command differed only by mistyping the go path as `/usr /local/go/bin/go`; env exited 126 with `env: ‘/usr’: Permission denied` before Go started. The corrected full-short-race command above passed.

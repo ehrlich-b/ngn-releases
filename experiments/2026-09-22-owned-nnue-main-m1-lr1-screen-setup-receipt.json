@@ -1,0 +1,19 @@
+{
+  "schema": "ngn-k4-main20m-screen-setup-v1",
+  "source_sha256": "974e4b5ab871a9e106d0c766bfa39fc83676222337fb7702f61782e2ac5b3222",
+  "old_prefixes_sha256": "1d044000dca4cf29aac0987cc84bfb11e307a6a27826bc9d068f738ce93d1e3a",
+  "new_prefixes_sha256": "5da172ae1d740d788d7e149ea48847e9b9e340accad3ef0c99440ffe3c315e66",
+  "new_pgn_sha256": "45bcb60d261f7c384f271281797655342f5c74e6ae6ac6d8dd91a4f0430d1d5b",
+  "held_manifest_sha256": "4aed850b0b0c8b916513811b7f8fea03a5409d9fd7d267341cff04bce689ec15",
+  "model_sha256": "cebec29cbab676af6a2ade2b67da5c9a01ddb7882ed604238c0e7d67893f72d6",
+  "old_indices": [
+    4001,
+    4020
+  ],
+  "new_indices": [
+    4021,
+    4040
+  ],
+  "prefix_sets_disjoint": true,
+  "review_subject_sha256": "4bed01e100021ab3fb4e6d7d26d31f9dec79e6386ebb386b3518304cdbc67788"
+}

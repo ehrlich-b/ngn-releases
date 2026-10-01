@@ -1,0 +1,138 @@
+package engine
+
+import (
+	"context"
+	"os"
+	"reflect"
+	"runtime"
+	"runtime/pprof"
+	"testing"
+
+	"github.com/ehrlich-b/ngn/rodenteval"
+)
+
+const (
+	rodentProfileModelEnv = "RODENT_V11_ANAND_MODEL"
+	rodentProfileModelSHA = "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb"
+	rodentProfileNodes    = uint64(400_000)
+	rodentProfileHashMB   = 128
+)
+
+var rodentProfileFixtures = []struct {
+	name string
+	fen  string
+}{
+	{"start_white", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+	{"start_black", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1"},
+	{"kiwipete_white", "r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 37 1"},
+	{"kiwipete_black", "r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R b KQkq - 37 1"},
+	{"asymmetric_white", "r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 w kq - 0 15"},
+	{"asymmetric_black", "r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 b kq - 0 15"},
+}
+
+func loadRodentProfileModel(tb testing.TB) *rodenteval.Model {
+	tb.Helper()
+	path := os.Getenv(rodentProfileModelEnv)
+	if path == "" {
+		tb.Fatalf("set %s to the pinned Rodent V1.1 Anand model", rodentProfileModelEnv)
+	}
+	model, err := rodenteval.LoadV11Anand(path)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	metadata, err := model.Metadata()
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if metadata.SHA256 != rodentProfileModelSHA || metadata.Bytes != 789568 {
+		tb.Fatalf("Rodent model identity sha=%s bytes=%d", metadata.SHA256, metadata.Bytes)
+	}
+	return model
+}
+
+func newRodentProfileSearch(tb testing.TB, model *rodenteval.Model, fen string) (*SearchEngine, *Position, pvPositionSnapshot, rodenteval.Position) {
+	tb.Helper()
+	if got := runtime.GOMAXPROCS(0); got != 1 {
+		tb.Fatalf("GOMAXPROCS=%d, want 1", got)
+	}
+	searcher, err := NewSearchEngineWithHash(rodentProfileHashMB)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if err := searcher.SelectRodentV11AnandEvaluator(model); err != nil {
+		tb.Fatal(err)
+	}
+	if err := searcher.ConfigureThreads(1); err != nil {
+		tb.Fatal(err)
+	}
+	searcher.SetMaxNodes(rodentProfileNodes)
+	position, err := ParseFEN(fen)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	root, err := rodentPositionFromPosition(position)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	return searcher, position, snapshotPVPosition(position), root
+}
+
+func requireRodentProfileResult(tb testing.TB, model *rodenteval.Model, searcher *SearchEngine, position *Position, before pvPositionSnapshot, root rodenteval.Position, result *SearchInfo) {
+	tb.Helper()
+	if result == nil || !result.Stopped || result.Nodes < rodentProfileNodes || result.EffectiveThreads != 1 {
+		tb.Fatalf("incomplete fixed-node result: %+v", result)
+	}
+	legal := false
+	for _, move := range GenerateLegalMoves(position) {
+		if move == result.BestMove {
+			legal = true
+			break
+		}
+	}
+	if !legal {
+		tb.Fatalf("best move %v is not legal", result.BestMove)
+	}
+	if !reflect.DeepEqual(snapshotPVPosition(position), before) {
+		tb.Fatal("search changed root position")
+	}
+	worker := searcher.worker.evaluator
+	if worker == nil || worker.rodentContext == nil || worker.rodentContext.Depth() != 0 || worker.rodentContext.Position() != root {
+		tb.Fatal("Rodent worker did not restore its exact root frame")
+	}
+	incremental, err := worker.rodentContext.EvaluateReleaseStatic()
+	if err != nil {
+		tb.Fatal(err)
+	}
+	fresh, err := model.EvaluateReleaseStatic(root)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if incremental != fresh || worker.SearchSTM(position) != rodentSearchScore(fresh) {
+		tb.Fatalf("restored score incremental=%d fresh=%d SearchSTM=%d", incremental, fresh, worker.SearchSTM(position))
+	}
+}
+
+// BenchmarkRodentV11ColdFixedNodes is a diagnostic profile, not a speed gate.
+// Each operation creates a cold engine; only the fixed-node search is timed and
+// labelled. Process CPU and heap profiles still include unlabelled setup.
+func BenchmarkRodentV11ColdFixedNodes(b *testing.B) {
+	model := loadRodentProfileModel(b)
+	for _, fixture := range rodentProfileFixtures {
+		fixture := fixture
+		b.Run(fixture.name, func(b *testing.B) {
+			b.ReportAllocs()
+			for iteration := 0; iteration < b.N; iteration++ {
+				b.StopTimer()
+				searcher, position, before, root := newRodentProfileSearch(b, model, fixture.fen)
+				var result *SearchInfo
+				b.StartTimer()
+				pprof.Do(context.Background(), pprof.Labels("scope", "search", "fixture", fixture.name), func(context.Context) {
+					result = searcher.SearchIterativeDeepening(position, MaximumDepth, nil)
+				})
+				b.StopTimer()
+				requireRodentProfileResult(b, model, searcher, position, before, root, result)
+			}
+			b.ReportMetric(float64(rodentProfileNodes), "minimum_nodes/op")
+		})
+	}
+}

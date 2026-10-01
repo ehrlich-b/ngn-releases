@@ -1,0 +1,23 @@
+{
+  "state": "FAILED_UNSCORED",
+  "games_started": 0,
+  "reason": "Owned release requires sibling ngn.nnue before UCI; the harness staged it as network.",
+  "records": {
+    "matches/STATE.json": {
+      "sha256": "cd12c075f8e9ef9a9f5c9e0a8cb8b8c256e634dfc8d7855f88cae7c4ce9388a8",
+      "text": "{\n  \"completed\": 1790731419.9465733,\n  \"error\": \"external benchmark cell lacks accepted terminal: smoke\",\n  \"state\": \"FAILED\"\n}\n"
+    },
+    "matches/smoke/STATE.json": {
+      "sha256": "38a277b0ce2c63bfd80f98a2fe3bb201f08140793e6533049a75df81e85a6c24",
+      "text": "{\n  \"completed\": 1790731419.8915935,\n  \"error\": \"engine stderr during uciok: ngn: evaluator startup configuration failed: open \\\"/home/ehrli/nnue-owned-maelstrom-20260930/matches/smoke/role0/ngn.nnue\\\": open /home/ehrli/nnue-owned-maelstrom-20260930/matches/smoke/role0/ngn.nnue: no such file or directory\",\n  \"state\": \"FAILED\"\n}\n"
+    },
+    "matches/smoke.stderr": {
+      "sha256": "e017cd82b9b5ff7afa1b925f5411453b751caf2bb3aededc637e765818314ba0",
+      "text": "Traceback (most recent call last):\n  File \"/home/ehrli/nnue-owned-maelstrom-20260930/benchmark-source/scripts/ownedmatch.py\", line 423, in <module>\n    main()\n  File \"/home/ehrli/nnue-owned-maelstrom-20260930/benchmark-source/scripts/ownedmatch.py\", line 415, in main\n    run(args.spec.resolve(), args.out.resolve())\n  File \"/home/ehrli/nnue-owned-maelstrom-20260930/benchmark-source/scripts/ownedmatch.py\", line 334, in run\n    receipt = preflight(launcher, cwd, options, role, out / f'preflight{index}.jsonl', spec['cpus'][0])\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ehrli/nnue-owned-maelstrom-20260930/benchmark-source/scripts/ownedmatch.py\", line 218, in preflight\n    uci_lines = protocol.until(lambda line: line == 'uciok', 30, 'uciok')\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ehrli/nnue-owned-maelstrom-20260930/benchmark-source/scripts/candidate-match/uci_preflight.py\", line 83, in until\n    raise CandidateMatchError(f\"engine stderr during {label}: {line}\")\ncommon.CandidateMatchError: engine stderr during uciok: ngn: evaluator startup configuration failed: open \"/home/ehrli/nnue-owned-maelstrom-20260930/matches/smoke/role0/ngn.nnue\": open /home/ehrli/nnue-owned-maelstrom-20260930/matches/smoke/role0/ngn.nnue: no such file or directory\n"
+    },
+    "matches/smoke/preflight0.jsonl": {
+      "sha256": "b06dc3214b7a7408445f64390029e2ebeab8f65632a756de0c6c2b1d15e1b1b1",
+      "text": "{\"direction\": \"runner-to-engine\", \"line\": \"uci\", \"monotonic\": 100616.545843674}\n{\"direction\": \"engine-stderr\", \"line\": \"ngn: evaluator startup configuration failed: open \\\"/home/ehrli/nnue-owned-maelstrom-20260930/matches/smoke/role0/ngn.nnue\\\": open /home/ehrli/nnue-owned-maelstrom-20260930/matches/smoke/role0/ngn.nnue: no such file or directory\", \"monotonic\": 100616.564985805}\n"
+    }
+  }
+}

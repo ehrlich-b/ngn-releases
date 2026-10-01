@@ -1,52 +1,17 @@
-/*
-https://github.com/amanjpro/zahak/?tab=MIT-1-ov-file#readme
-MIT License
-
-Copyright (c) 2021 Amanj Sherwany
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-
-// NOTE: Modified to remove unnecessary parts
-
 package engine
 
-import (
-	"math/bits"
-	"sync"
-)
+import "sync"
 
+// CHECKMATE_EVAL is the score used for a checkmated position.
 const CHECKMATE_EVAL int16 = 30000
+
+// MAX_NON_CHECKMATE and MIN_NON_CHECKMATE bound ordinary position scores.
 const MAX_NON_CHECKMATE float32 = 25000
 const MIN_NON_CHECKMATE float32 = -MAX_NON_CHECKMATE
-const CASTLING_FLAG = WhiteCanCastleQueenSide | WhiteCanCastleKingSide | BlackCanCastleQueenSide | BlackCanCastleKingSide
 
-type Position struct {
-	Board          Bitboard
-	EnPassant      Square
-	Tag            PositionTag
-	hash           uint64
-	Positions      map[uint64]int
-	positionsMutex sync.RWMutex
-	HalfMoveClock  uint8
-}
-
+// PositionTag stores the state which is not represented by the board itself.
+// The turn bits intentionally occupy two separate flags: callers of the
+// legacy interface use ToggleTurn to flip both of them together.
 type PositionTag uint8
 
 const (
@@ -57,315 +22,16 @@ const (
 	InCheck
 	BlackToMove
 	WhiteToMove
+	enPassantHash
 )
 
-func (p *Position) SetTag(tag PositionTag)      { p.Tag |= tag }
-func (p *Position) ClearTag(tag PositionTag)    { p.Tag &= ^tag }
-func (p *Position) ToggleTag(tag PositionTag)   { p.Tag ^= tag }
-func (p *Position) HasTag(tag PositionTag) bool { return p.Tag&tag != 0 }
+// CASTLING_FLAG is the mask of all four castling-right flags.
+const CASTLING_FLAG PositionTag = WhiteCanCastleKingSide |
+	WhiteCanCastleQueenSide |
+	BlackCanCastleKingSide |
+	BlackCanCastleQueenSide
 
-func (p *Position) HasCastling() bool {
-	return p.HasTag(CASTLING_FLAG)
-}
-
-func (p *Position) Turn() Color {
-	if p.HasTag(WhiteToMove) {
-		return White
-	}
-	return Black
-}
-
-func (p *Position) MakeNullMove() Square {
-	ep := p.EnPassant
-	p.EnPassant = NoSquare
-	p.HalfMoveClock += 1
-	p.ToggleTurn()
-	updateHashForNullMove(p, NoSquare, ep)
-	return ep
-}
-
-func (p *Position) UnMakeNullMove(ep Square) {
-	updateHashForNullMove(p, NoSquare, ep)
-	p.EnPassant = ep
-	p.HalfMoveClock -= 1
-	p.ToggleTurn()
-}
-
-func (p *Position) ToggleTurn() {
-	p.ToggleTag(BlackToMove)
-	p.ToggleTag(WhiteToMove)
-}
-
-// only for movegen
-func (p *Position) partialMakeMove(move Move) {
-	source := move.Source()
-	dest := move.Destination()
-	movingPiece := move.MovingPiece()
-	cp := move.CapturedPiece()
-
-	// EnPassant flag is a form of capture, captures do not result in enpassant allowance
-	if move.IsEnPassant() {
-		ep := findEnPassantCaptureSquare(move)
-		p.Board.Move(source, dest, movingPiece, NoPiece)
-		p.Board.Clear(ep, cp)
-	} else {
-		p.Board.Move(source, dest, movingPiece, cp)
-	}
-
-	// Do promotion
-	promoType := move.PromoType()
-	if promoType != NoType {
-		promoPiece := GetPiece(promoType, p.Turn())
-		p.Board.UpdateSquare(dest, promoPiece, movingPiece)
-	}
-
-	p.ToggleTurn()
-}
-
-// only for movegen
-func (p *Position) partialUnMakeMove(move Move) {
-	p.ToggleTurn()
-	movingPiece := move.MovingPiece()
-	capturedPiece := move.CapturedPiece()
-	source := move.Source()
-	dest := move.Destination()
-
-	// Undo promotion
-	promoType := move.PromoType()
-	if promoType != NoType {
-		promoPiece := GetPiece(promoType, p.Turn())
-		p.Board.UpdateSquare(dest, movingPiece, promoPiece)
-	}
-
-	p.Board.Move(dest, source, movingPiece, NoPiece)
-	// Undo enpassant
-	if move.IsEnPassant() {
-		cp := findEnPassantCaptureSquare(move)
-		p.Board.UpdateSquare(cp, capturedPiece, NoPiece)
-	} else if move.IsCapture() { // Undo capture
-		p.Board.UpdateSquare(dest, capturedPiece, NoPiece)
-	}
-
-	if move.IsQueenSideCastle() {
-		// white
-		if dest == C1 {
-			p.Board.Move(D1, A1, WhiteRook, NoPiece)
-		} else { // black
-			p.Board.Move(D8, A8, BlackRook, NoPiece)
-		}
-	} else if move.IsKingSideCastle() {
-		// white
-		if dest == G1 {
-			p.Board.Move(F1, H1, WhiteRook, NoPiece)
-		} else { // black
-			p.Board.Move(F8, H8, BlackRook, NoPiece)
-		}
-	}
-}
-
-func (p *Position) GameMakeMove(move Move) (Square, PositionTag, uint8, bool) {
-	ep, tag, hc, legal := p.makeMoveHelper(move)
-	if legal {
-		// Update repetition detection for game moves
-		if p.Positions != nil {
-			p.positionsMutex.Lock()
-			p.Positions[p.Hash()]++
-			p.positionsMutex.Unlock()
-		}
-	}
-	return ep, tag, hc, legal
-}
-
-func (p *Position) MakeMove(move Move) (Square, PositionTag, uint8, bool) {
-	// Search version - no repetition map updates for performance
-	return p.makeMoveHelper(move)
-}
-
-func (p *Position) makeMoveHelper(move Move) (Square, PositionTag, uint8, bool) {
-	hc := p.HalfMoveClock
-	ep := p.EnPassant
-	tag := p.Tag
-	movingPiece := move.MovingPiece()
-	capturedPiece := move.CapturedPiece()
-	source := move.Source()
-	dest := move.Destination()
-	captureSquare := NoSquare
-	promoPiece := NoPiece
-
-	p.Board.Move(source, dest, movingPiece, NoPiece)
-
-	// Direct pawn test instead of movingPiece.Type() (a 12-way switch) on this hot
-	// make path: a pawn is exactly WhitePawn or BlackPawn.
-	if movingPiece == WhitePawn || movingPiece == BlackPawn || capturedPiece != NoPiece {
-		p.HalfMoveClock = 0
-	} else {
-		p.HalfMoveClock += 1
-	}
-
-	// EnPassant flag is a form of capture, captures do not result in enpassant allowance
-	if move.IsEnPassant() {
-		p.EnPassant = NoSquare
-		ep := findEnPassantCaptureSquare(move)
-		captureSquare = ep
-		p.Board.Clear(ep, capturedPiece)
-	} else if move.IsCapture() {
-		captureSquare = dest
-		p.Board.Clear(dest, capturedPiece)
-	}
-
-	if movingPiece == WhitePawn &&
-		source.Rank() == Rank2 && dest.Rank() == Rank4 {
-		p.EnPassant = SquareOf(source.File(), Rank3)
-	} else if movingPiece == BlackPawn &&
-		source.Rank() == Rank7 && dest.Rank() == Rank5 {
-		p.EnPassant = SquareOf(source.File(), Rank6)
-	} else {
-		p.EnPassant = NoSquare
-	}
-
-	// Do promotion
-	turn := p.Turn()
-	promoType := move.PromoType()
-	if promoType != NoType {
-		promoPiece = GetPiece(promoType, turn)
-		p.Board.UpdateSquare(dest, promoPiece, movingPiece)
-	}
-
-	if movingPiece == BlackKing {
-		p.ClearTag(BlackCanCastleKingSide)
-		p.ClearTag(BlackCanCastleQueenSide)
-	} else if movingPiece == WhiteKing {
-		p.ClearTag(WhiteCanCastleKingSide)
-		p.ClearTag(WhiteCanCastleQueenSide)
-	} else if movingPiece == BlackRook && source == A8 {
-		p.ClearTag(BlackCanCastleQueenSide)
-	} else if movingPiece == BlackRook && source == H8 {
-		p.ClearTag(BlackCanCastleKingSide)
-	} else if movingPiece == WhiteRook && source == A1 {
-		p.ClearTag(WhiteCanCastleQueenSide)
-	} else if movingPiece == WhiteRook && source == H1 {
-		p.ClearTag(WhiteCanCastleKingSide)
-	}
-
-	// capturing rook nullifies castling right for the opponent on the rooks side
-	if dest == A8 && p.Turn() == White {
-		p.ClearTag(BlackCanCastleQueenSide)
-	} else if dest == H8 && p.Turn() == White {
-		p.ClearTag(BlackCanCastleKingSide)
-	} else if dest == A1 && p.Turn() == Black {
-		p.ClearTag(WhiteCanCastleQueenSide)
-	} else if dest == H1 && p.Turn() == Black {
-		p.ClearTag(WhiteCanCastleKingSide)
-	}
-
-	// movingSide := p.Turn()
-	p.ToggleTurn()
-
-	// Update check status for the new position
-	if isInCheck(p, p.Turn()) {
-		p.SetTag(InCheck)
-	} else {
-		p.ClearTag(InCheck)
-	}
-
-	// En passant only distinguishes a position when an enemy pawn can actually
-	// capture; drop a non-capturable target (p.Turn() is post-ToggleTurn, i.e. the
-	// side that could capture) so phantom EP squares do not split the hash and
-	// repetition signature of otherwise-identical positions. Mirrors PolyglotHash.
-	if p.EnPassant != NoSquare && !canCaptureEnPassant(p) {
-		p.EnPassant = NoSquare
-	}
-
-	updateHash(p, move, captureSquare, p.EnPassant, ep, promoPiece, tag)
-
-	// Update repetition detection - disabled in hot path for performance
-	// Only updated in GameMakeMove for actual game moves
-
-	return ep, tag, hc, true
-}
-
-func (p *Position) GameUnMakeMove(move Move, tag PositionTag, enPassant Square, halfClock uint8) {
-	// Update repetition detection for game moves before undoing
-	if p.Positions != nil {
-		p.positionsMutex.Lock()
-		currentHash := p.Hash()
-		if count, exists := p.Positions[currentHash]; exists {
-			if count > 1 {
-				p.Positions[currentHash]--
-			} else {
-				delete(p.Positions, currentHash)
-			}
-		}
-		p.positionsMutex.Unlock()
-	}
-	p.unMakeMoveHelper(move, tag, enPassant, halfClock)
-}
-
-func (p *Position) UnMakeMove(move Move, tag PositionTag, enPassant Square, halfClock uint8) {
-	// Search version - no repetition map updates for performance
-	p.unMakeMoveHelper(move, tag, enPassant, halfClock)
-}
-
-func (p *Position) unMakeMoveHelper(move Move, tag PositionTag, enPassant Square, halfClock uint8) {
-	// Update repetition detection - disabled in hot path for performance
-	// Only updated in GameUnMakeMove for actual game moves
-
-	movingPiece := move.MovingPiece()
-	capturedPiece := move.CapturedPiece()
-	source := move.Source()
-	dest := move.Destination()
-	promoType := move.PromoType()
-
-	// Reverse the hash update before restoring state.
-	// updateHash is XOR-based, so calling it with the same args as make undoes the change.
-	// At this point p.Tag and p.EnPassant still hold their post-make values, and
-	// p.Turn() returns the side that did NOT move (post-make toggle), so the mover is p.Turn().Other().
-	var promoPiece Piece = NoPiece
-	if promoType != NoType {
-		promoPiece = GetPiece(promoType, p.Turn().Other())
-	}
-	captureSquare := NoSquare
-	if move.IsEnPassant() {
-		captureSquare = findEnPassantCaptureSquare(move)
-	} else if move.IsCapture() {
-		captureSquare = dest
-	}
-	updateHash(p, move, captureSquare, p.EnPassant, enPassant, promoPiece, tag)
-
-	p.Tag = tag
-	p.HalfMoveClock = halfClock
-	p.EnPassant = enPassant
-	// Undo promotion
-	if promoType != NoType {
-		p.Board.UpdateSquare(dest, movingPiece, promoPiece)
-	}
-	p.Board.Move(dest, source, movingPiece, NoPiece)
-
-	// Undo enpassant
-	if move.IsEnPassant() {
-		cp := findEnPassantCaptureSquare(move)
-		p.Board.UpdateSquare(cp, capturedPiece, NoPiece)
-	} else if move.IsCapture() { // Undo capture
-		p.Board.UpdateSquare(dest, capturedPiece, NoPiece)
-	}
-
-	if move.IsQueenSideCastle() {
-		// white
-		if dest == C1 {
-			p.Board.Move(D1, A1, WhiteRook, NoPiece)
-		} else { // black
-			p.Board.Move(D8, A8, BlackRook, NoPiece)
-		}
-	} else if move.IsKingSideCastle() {
-		// white
-		if dest == G1 {
-			p.Board.Move(F1, H1, WhiteRook, NoPiece)
-		} else { // black
-			p.Board.Move(F8, H8, BlackRook, NoPiece)
-		}
-	}
-}
-
+// Status is the coarse result status used by callers of the position layer.
 type Status uint8
 
 const (
@@ -374,119 +40,473 @@ const (
 	Unknown
 )
 
-func (p *Position) IsEndGame() bool {
-	return p.Board.IsEndGame(p.Turn())
+// Position is a board together with the state needed to update and undo it.
+// positionsMutex protects Positions when the game-facing move methods and
+// draw policy inspect or update the repetition table.
+type Position struct {
+	Board          Bitboard
+	EnPassant      Square
+	Tag            PositionTag
+	hash           uint64
+	Positions      map[uint64]int
+	positionsMutex sync.RWMutex
+	HalfMoveClock  uint8
 }
 
-func (p *Position) IsInCheck() bool {
-	return p.HasTag(InCheck)
+// SetTag sets every bit present in tag.
+func (position *Position) SetTag(tag PositionTag) {
+	position.Tag |= tag
 }
 
-func (p *Position) IsDraw() bool {
-	if p.HalfMoveClock > 100 {
-		return true
-	} else {
-		if p.Board.pieces[BlackPawn] != 0 || p.Board.pieces[WhitePawn] != 0 ||
-			p.Board.pieces[BlackRook] != 0 || p.Board.pieces[WhiteRook] != 0 ||
-			p.Board.pieces[BlackQueen] != 0 || p.Board.pieces[WhiteQueen] != 0 {
-			return false
-		} else {
-			wKnights := bitScanForward(p.Board.pieces[WhiteKnight])
-			bKnights := bitScanForward(p.Board.pieces[BlackKnight])
-			wBishops := bitScanForward(p.Board.pieces[WhiteBishop])
-			bBishops := bitScanForward(p.Board.pieces[BlackBishop])
+// ClearTag clears every bit present in tag.
+func (position *Position) ClearTag(tag PositionTag) {
+	position.Tag &^= tag
+}
 
-			wKnightsNum := 0
-			bKnightsNum := 0
-			wBishopsNum := 0
-			bBishopsNum := 0
+// ToggleTag flips every bit present in tag.
+func (position *Position) ToggleTag(tag PositionTag) {
+	position.Tag ^= tag
+}
 
-			if wKnights != 64 {
-				wKnightsNum = 1
-			}
+// HasTag reports whether any bit in tag is set.
+func (position *Position) HasTag(tag PositionTag) bool {
+	return position.Tag&tag != 0
+}
 
-			if bKnights != 64 {
-				bKnightsNum = 1
-			}
+// HasCastling reports whether either side has any castling right remaining.
+func (position *Position) HasCastling() bool {
+	return position.HasTag(CASTLING_FLAG)
+}
 
-			if wBishops != 64 {
-				wBishopsNum = 1
-			}
-
-			if bBishops != 64 {
-				bBishopsNum = 1
-			}
-
-			all := wKnightsNum + bKnightsNum + wBishopsNum + bBishopsNum
-
-			// both sides have a bare king
-			// one side has a king and a minor piece against a bare king
-
-			if all <= 1 {
-				if wKnightsNum != 0 {
-					return bits.OnesCount64(p.Board.pieces[WhiteKnight]) == 1
-				} else if bKnightsNum != 0 {
-					return bits.OnesCount64(p.Board.pieces[BlackKnight]) == 1
-				} else if wBishopsNum != 0 {
-					return bits.OnesCount64(p.Board.pieces[WhiteBishop]) == 1
-				} else if bBishopsNum != 0 {
-					return bits.OnesCount64(p.Board.pieces[BlackBishop]) == 1
-				}
-			}
-			// both sides have a king and a bishop, the bishops being the same color
-			if wKnightsNum == 0 && bKnightsNum == 0 {
-				otherWB := p.Board.pieces[WhiteBishop] ^ (1 << wBishops)
-				otherBB := p.Board.pieces[BlackBishop] ^ (1 << bBishops)
-				if otherWB == 0 && otherBB == 0 &&
-					Square(bBishops).GetColor() == Square(wBishops).GetColor() {
-					return true
-				}
-			}
-		}
+// Turn returns White when the white-turn flag is set and Black otherwise.
+func (position *Position) Turn() Color {
+	if position.HasTag(WhiteToMove) {
+		return White
 	}
-
-	return false
+	return Black
 }
 
-func (p *Position) IsFIDEDrawRule() bool {
-	if p.HalfMoveClock >= 100 {
-		return true
-	}
-	if p.Positions == nil {
-		return false
-	}
-	p.positionsMutex.RLock()
-	value, ok := p.Positions[p.Hash()]
-	p.positionsMutex.RUnlock()
-	return (ok && value >= 3)
+// ToggleTurn flips both legacy turn flags.
+func (position *Position) ToggleTurn() {
+	position.ToggleTag(BlackToMove | WhiteToMove)
 }
 
-func (p *Position) Hash() uint64 {
-	if p.hash == 0 {
-		hash := generateZobristHash(p)
-		p.hash = hash
-	}
-	return p.hash
+// IsEndGame delegates the material question to the board for the side to
+// move.
+func (position *Position) IsEndGame() bool {
+	return position.Board.IsEndGame(position.Turn())
 }
 
+// IsInCheck reports the cached check flag.
+func (position *Position) IsInCheck() bool {
+	return position.HasTag(InCheck)
+}
+
+// Hash returns the cached position key, initializing it lazily.  The helper
+// owns the en-passant eligibility rules and the key stream, so this method
+// deliberately delegates both pieces to it.
+func (position *Position) Hash() uint64 {
+	if position.hash == 0 {
+		position.ensureEnPassantHash()
+		position.hash = generateZobristHash(position)
+	}
+	return position.hash
+}
+
+// findEnPassantCaptureSquare returns the square of the pawn removed by an
+// en-passant move.  The board is rank-major, so the victim is eight squares
+// behind the destination for either mover.
 func findEnPassantCaptureSquare(move Move) Square {
 	return move.Destination() ^ 8
 }
 
-func (p *Position) Copy() *Position {
-	copyMap := make(map[uint64]int, len(p.Positions))
-	for k, v := range p.Positions {
-		copyMap[k] = v
+// applyMoveBoard applies just the board part of a packed move.  The caller is
+// responsible for metadata and the turn.  Board.Move also performs the
+// forward rook movement for a castling king move.
+func (position *Position) applyMoveBoard(move Move) {
+	source := move.Source()
+	destination := move.Destination()
+	moving := move.MovingPiece()
+	captured := move.CapturedPiece()
+
+	destinationPiece := captured
+	if move.IsEnPassant() {
+		destinationPiece = NoPiece
+	}
+	position.Board.Move(source, destination, moving, destinationPiece)
+
+	if move.IsEnPassant() {
+		position.Board.Clear(findEnPassantCaptureSquare(move), captured)
 	}
 
-	newPos := &Position{
-		Board:         p.Board.copy(),
-		EnPassant:     p.EnPassant,
-		Tag:           p.Tag,
-		hash:          p.hash,
-		Positions:     copyMap,
-		HalfMoveClock: p.HalfMoveClock,
-		// Note: Don't copy the mutex - each copy gets its own mutex
+	if promotion := GetPiece(move.PromoType(), moving.Color()); promotion != NoPiece {
+		position.Board.UpdateSquare(destination, promotion, moving)
 	}
-	return newPos
+}
+
+// restoreCastlingRook explicitly returns the rook which Board.Move moved
+// while applying a castle.  Board.Move intentionally only has forward
+// castling behavior.
+func (position *Position) restoreCastlingRook(move Move, mover Color) {
+	if move.IsKingSideCastle() {
+		switch mover {
+		case White:
+			position.Board.Move(F1, H1, WhiteRook, NoPiece)
+		case Black:
+			position.Board.Move(F8, H8, BlackRook, NoPiece)
+		}
+		return
+	}
+	if move.IsQueenSideCastle() {
+		switch mover {
+		case White:
+			position.Board.Move(D1, A1, WhiteRook, NoPiece)
+		case Black:
+			position.Board.Move(D8, A8, BlackRook, NoPiece)
+		}
+	}
+}
+
+// undoMoveBoard undoes just the board part of a packed move.  The mover is
+// supplied by the caller because partial undo first recovers the original
+// side to move.
+func (position *Position) undoMoveBoard(move Move, mover Color) {
+	source := move.Source()
+	destination := move.Destination()
+	moving := move.MovingPiece()
+	captured := move.CapturedPiece()
+
+	if promotion := GetPiece(move.PromoType(), mover); promotion != NoPiece {
+		position.Board.UpdateSquare(destination, moving, promotion)
+	}
+
+	position.Board.Move(destination, source, moving, NoPiece)
+	if move.IsCastle() {
+		position.restoreCastlingRook(move, mover)
+	}
+
+	if move.IsEnPassant() {
+		position.Board.UpdateSquare(findEnPassantCaptureSquare(move), captured, NoPiece)
+	} else if captured != NoPiece {
+		position.Board.UpdateSquare(destination, captured, NoPiece)
+	}
+}
+
+// partialMakeMove changes only the board and the side to move.
+func (position *Position) partialMakeMove(move Move) {
+	position.applyMoveBoard(move)
+	position.ToggleTurn()
+}
+
+// partialUnMakeMove changes only the board and the side to move.  Toggling
+// first recovers the original mover's color for a promotion undo.
+func (position *Position) partialUnMakeMove(move Move) {
+	position.ToggleTurn()
+	position.undoMoveBoard(move, position.Turn())
+}
+
+// clearCastlingRightsForMove applies the four corner/king rules without
+// looking at the captured mailbox value.  A move landing on an opponent's
+// original rook corner therefore also removes that opponent's right when the
+// corner did not contain a rook.
+func (position *Position) clearCastlingRightsForMove(move Move) {
+	moving := move.MovingPiece()
+	mover := moving.Color()
+	source := move.Source()
+	destination := move.Destination()
+
+	switch mover {
+	case White:
+		switch moving.Type() {
+		case King:
+			position.ClearTag(WhiteCanCastleKingSide | WhiteCanCastleQueenSide)
+		case Rook:
+			switch source {
+			case A1:
+				position.ClearTag(WhiteCanCastleQueenSide)
+			case H1:
+				position.ClearTag(WhiteCanCastleKingSide)
+			}
+		}
+		switch destination {
+		case A8:
+			position.ClearTag(BlackCanCastleQueenSide)
+		case H8:
+			position.ClearTag(BlackCanCastleKingSide)
+		}
+	case Black:
+		switch moving.Type() {
+		case King:
+			position.ClearTag(BlackCanCastleKingSide | BlackCanCastleQueenSide)
+		case Rook:
+			switch source {
+			case A8:
+				position.ClearTag(BlackCanCastleQueenSide)
+			case H8:
+				position.ClearTag(BlackCanCastleKingSide)
+			}
+		}
+		switch destination {
+		case A1:
+			position.ClearTag(WhiteCanCastleQueenSide)
+		case H1:
+			position.ClearTag(WhiteCanCastleKingSide)
+		}
+	}
+}
+
+// doublePawnPushTarget returns the raw intervening square for a standard
+// two-square pawn move.
+func doublePawnPushTarget(move Move) Square {
+	moving := move.MovingPiece()
+	if moving.Type() != Pawn {
+		return NoSquare
+	}
+	source := move.Source()
+	destination := move.Destination()
+	if source.File() != destination.File() {
+		return NoSquare
+	}
+
+	switch moving.Color() {
+	case White:
+		if source.Rank() == Rank2 && destination.Rank() == Rank4 {
+			return SquareOf(source.File(), Rank3)
+		}
+	case Black:
+		if source.Rank() == Rank7 && destination.Rank() == Rank5 {
+			return SquareOf(source.File(), Rank6)
+		}
+	}
+	return NoSquare
+}
+
+// updateEnPassantAfterMove installs the raw target only when the independent
+// adjacency predicate accepts it, then refreshes the separate legal-EP hash
+// bit.  The two predicates intentionally remain independent.
+func (position *Position) updateEnPassantAfterMove(move Move) {
+	position.EnPassant = doublePawnPushTarget(move)
+	if position.EnPassant != NoSquare && !canCaptureEnPassant(position) {
+		position.EnPassant = NoSquare
+	}
+	position.refreshEnPassantHash()
+}
+
+// updateCheckForSideToMove refreshes only the cached check flag.
+func (position *Position) updateCheckForSideToMove() {
+	position.ClearTag(InCheck)
+	if isInCheck(position, position.Turn()) {
+		position.SetTag(InCheck)
+	}
+}
+
+// makeMoveHelper applies the complete search move update and returns the
+// metadata needed by its inverse.  Move generation has already established
+// legality; this layer deliberately does not validate the move.
+func (position *Position) makeMoveHelper(move Move) (oldEnPassant Square, oldTag PositionTag, oldClock uint8, legal bool) {
+	// A manually assembled cold root may have a raw EP target but no legal-EP
+	// hash bit yet.  Establish that bit before saving the old metadata.
+	if position.hash == 0 {
+		position.ensureEnPassantHash()
+	}
+
+	oldEnPassant = position.EnPassant
+	oldTag = position.Tag
+	oldClock = position.HalfMoveClock
+
+	moving := move.MovingPiece()
+	captured := move.CapturedPiece()
+	position.applyMoveBoard(move)
+
+	if moving.Type() == Pawn || captured != NoPiece {
+		position.HalfMoveClock = 0
+	} else {
+		position.HalfMoveClock++
+	}
+
+	position.clearCastlingRightsForMove(move)
+	position.ToggleTurn()
+	position.updateEnPassantAfterMove(move)
+	position.updateCheckForSideToMove()
+
+	captureSquare := move.Destination()
+	if move.IsEnPassant() {
+		captureSquare = findEnPassantCaptureSquare(move)
+	}
+	promotion := GetPiece(move.PromoType(), moving.Color())
+	updateHash(position, move, captureSquare, position.EnPassant, oldEnPassant, promotion, oldTag)
+
+	return oldEnPassant, oldTag, oldClock, true
+}
+
+// MakeMove is the search-facing complete move update.
+func (position *Position) MakeMove(move Move) (oldEnPassant Square, oldTag PositionTag, oldClock uint8, legal bool) {
+	return position.makeMoveHelper(move)
+}
+
+// unMakeMoveHelper reverses a complete move.  Hash reversal happens while all
+// post-move metadata is still installed, as required by updateHash.
+func (position *Position) unMakeMoveHelper(move Move, oldTag PositionTag, oldEnPassant Square, oldClock uint8) {
+	captureSquare := move.Destination()
+	if move.IsEnPassant() {
+		captureSquare = findEnPassantCaptureSquare(move)
+	}
+	moving := move.MovingPiece()
+	promotion := GetPiece(move.PromoType(), moving.Color())
+	updateHash(position, move, captureSquare, position.EnPassant, oldEnPassant, promotion, oldTag)
+
+	position.Tag = oldTag
+	position.EnPassant = oldEnPassant
+	position.HalfMoveClock = oldClock
+
+	// The saved tag already contains the original turn.  Use it to recover the
+	// mover's color for promotions and castling-rook restoration; unlike the
+	// partial inverse, the complete inverse must not toggle after restoring the
+	// saved tag.
+	position.undoMoveBoard(move, position.Turn())
+}
+
+// UnMakeMove is the search-facing inverse of MakeMove.
+func (position *Position) UnMakeMove(move Move, oldTag PositionTag, oldEnPassant Square, oldClock uint8) {
+	position.unMakeMoveHelper(move, oldTag, oldEnPassant, oldClock)
+}
+
+// GameMakeMove applies a move and records the resulting position when a
+// repetition table has been supplied.
+func (position *Position) GameMakeMove(move Move) (oldEnPassant Square, oldTag PositionTag, oldClock uint8, legal bool) {
+	oldEnPassant, oldTag, oldClock, legal = position.makeMoveHelper(move)
+	if legal && position.Positions != nil {
+		currentHash := position.Hash()
+		position.positionsMutex.Lock()
+		position.Positions[currentHash]++
+		position.positionsMutex.Unlock()
+	}
+	return oldEnPassant, oldTag, oldClock, legal
+}
+
+// GameUnMakeMove removes the current position from the repetition table and
+// then performs the ordinary search undo.  Missing entries are deliberately
+// left untouched.
+func (position *Position) GameUnMakeMove(move Move, oldTag PositionTag, oldEnPassant Square, oldClock uint8) {
+	if position.Positions != nil {
+		currentHash := position.Hash()
+		position.positionsMutex.Lock()
+		if count, ok := position.Positions[currentHash]; ok {
+			if count <= 1 {
+				delete(position.Positions, currentHash)
+			} else {
+				position.Positions[currentHash] = count - 1
+			}
+		}
+		position.positionsMutex.Unlock()
+	}
+	position.unMakeMoveHelper(move, oldTag, oldEnPassant, oldClock)
+}
+
+// MakeNullMove performs a search null move and returns the raw target which
+// was present before it.  The legal-EP flag is intentionally retained so the
+// inverse can use the supplied hash helper without an extra metadata record.
+func (position *Position) MakeNullMove() Square {
+	position.ensureEnPassantHash()
+	oldEnPassant := position.EnPassant
+	position.EnPassant = NoSquare
+	position.HalfMoveClock++
+	position.ToggleTurn()
+	updateHashForNullMove(position, position.EnPassant, oldEnPassant)
+	return oldEnPassant
+}
+
+// UnMakeNullMove reverses MakeNullMove while retaining the helper's cold/warm
+// hash behavior.
+func (position *Position) UnMakeNullMove(oldEnPassant Square) {
+	updateHashForNullMove(position, position.EnPassant, oldEnPassant)
+	position.EnPassant = oldEnPassant
+	position.HalfMoveClock--
+	position.ToggleTurn()
+}
+
+// Copy returns an independent state copy.  A nil source repetition map is
+// represented by an allocated empty map for compatibility with the legacy
+// callers.
+func (position *Position) Copy() *Position {
+	position.positionsMutex.RLock()
+
+	copyPosition := &Position{
+		Board:         position.Board,
+		EnPassant:     position.EnPassant,
+		Tag:           position.Tag,
+		hash:          position.hash,
+		Positions:     make(map[uint64]int, len(position.Positions)),
+		HalfMoveClock: position.HalfMoveClock,
+	}
+	for key, count := range position.Positions {
+		copyPosition.Positions[key] = count
+	}
+
+	position.positionsMutex.RUnlock()
+	return copyPosition
+}
+
+// IsFIDEDrawRule implements the compatibility FIDE-style clock/repetition
+// policy.  It intentionally does not infer material draws.
+func (position *Position) IsFIDEDrawRule() bool {
+	if position.HalfMoveClock >= 100 {
+		return true
+	}
+	if position.Positions == nil {
+		return false
+	}
+
+	currentHash := position.Hash()
+	position.positionsMutex.RLock()
+	count := position.Positions[currentHash]
+	position.positionsMutex.RUnlock()
+	return count >= 3
+}
+
+// IsDraw is the legacy material helper.  It is intentionally narrower than a
+// complete FIDE adjudicator and does not consult the repetition table.
+func (position *Position) IsDraw() bool {
+	if position.HalfMoveClock > 100 {
+		return true
+	}
+	if position.Board.Pawns() != 0 || position.Board.Rooks() != 0 || position.Board.Queens() != 0 {
+		return false
+	}
+
+	minorMasks := [...]uint64{
+		position.Board.GetBitboardOf(WhiteKnight),
+		position.Board.GetBitboardOf(BlackKnight),
+		position.Board.GetBitboardOf(WhiteBishop),
+		position.Board.GetBitboardOf(BlackBishop),
+	}
+	nonEmptyMasks := 0
+	for _, mask := range minorMasks {
+		if mask != 0 {
+			nonEmptyMasks++
+		}
+	}
+	if nonEmptyMasks == 0 {
+		return true
+	}
+	if nonEmptyMasks == 1 {
+		for _, mask := range minorMasks {
+			if mask != 0 {
+				return PopCount(mask) == 1
+			}
+		}
+	}
+
+	whiteBishops := position.Board.GetBitboardOf(WhiteBishop)
+	blackBishops := position.Board.GetBitboardOf(BlackBishop)
+	if position.Board.Knights() == 0 &&
+		PopCount(whiteBishops) == 1 && PopCount(blackBishops) == 1 {
+		whiteSquare := Square(bitScanForward(whiteBishops))
+		blackSquare := Square(bitScanForward(blackBishops))
+		if whiteSquare.GetColor() == blackSquare.GetColor() {
+			return true
+		}
+	}
+
+	return false
 }

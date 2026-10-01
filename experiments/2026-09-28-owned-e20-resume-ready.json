@@ -1,0 +1,12 @@
+{
+  "checkpoint_sha256": "c5e81e8add24f426e43fd1dbd502cd18e22d4d4f3c7f958f222bed7949e4506e",
+  "completed": 1790643547.9346192,
+  "completion_sha256": "59a87f427394ec67fc75262f5c5f0808a5db4acae496d8ef214569eba3d597d9",
+  "name": "e20-resume",
+  "network": {
+    "path": "/home/ehrli/nnue-owned-continuation-20260928/training/e20-resume.nnue",
+    "sha256": "e8b1bde89dc87363b521da4681983acb5dec4973569ad8faa9a302131ef93374"
+  },
+  "parity_sha256": "5e4084aab5a06fe4392158e4ea186ca5b839f68ea3da7f07800f8f9501d6fc61",
+  "state": "COMPLETE"
+}

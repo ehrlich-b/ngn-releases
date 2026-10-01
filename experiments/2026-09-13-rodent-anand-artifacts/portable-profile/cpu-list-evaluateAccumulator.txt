@@ -1,0 +1,16 @@
+Total: 44.29s
+ROUTINE ======================== github.com/ehrlich-b/ngn/rodenteval.(*Model).evaluateAccumulator in repos/ngn-rodent-profile-20260913/rodenteval/evaluate.go
+     8.99s     20.42s (flat, cum) 46.11% of Total
+         .          .     83:func (model *Model) evaluateAccumulator(accumulator *accumulator, sideToMove Color) int {
+         .          .     84:	var sum int32
+     350ms      360ms     85:	for hidden := 0; hidden < HiddenSize; hidden++ {
+     3.78s      9.37s     86:		sum += clippedSquaredWeighted(accumulator[sideToMove][hidden], model.outputWeights[0][hidden])
+     4.79s     10.62s     87:		sum += clippedSquaredWeighted(accumulator[sideToMove^1][hidden], model.outputWeights[1][hidden])
+         .          .     88:	}
+      40ms       40ms     89:	sum = sum/inputScale + int32(model.outputBias)
+      30ms       30ms     90:	return int(sum * outputScale / (inputScale * layerScale))
+         .          .     91:}
+         .          .     92:
+         .          .     93:// EvaluateRaw returns the exact Anand full-refresh score before Rodent's
+         .          .     94:// release-specific material factor.
+         .          .     95:func (model *Model) EvaluateRaw(position Position) (int, error) {

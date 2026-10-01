@@ -1,0 +1,63 @@
+diff --git a/engine/search.go b/engine/search.go
+index bddc73a..28856fe 100644
+--- a/engine/search.go
++++ b/engine/search.go
+@@ -2320,6 +2320,31 @@ func quiescence(pos *Position, alpha int, beta int, ply int, info *SearchInfo) i
+ 	return quiescenceWithDepth(pos, alpha, beta, ply, info, 0)
+ }
+ 
++// appendQuietPromotions appends the four non-capturing promotion variants for
++// each pawn with an empty promotion square. It is deliberately pseudo-legal:
++// qsearch's existing MakeMove/isInCheck gate remains the sole legality policy.
++// This avoids full move generation at every qnode while retaining all promotions.
++func appendQuietPromotions(pos *Position, moves []Move) int {
++	occupied := pos.Board.GetWhitePieces() | pos.Board.GetBlackPieces()
++	pawns, step, piece := pos.Board.GetBitboardOf(WhitePawn)&RankMasks[Rank7], 8, WhitePawn
++	if pos.Turn() == Black {
++		pawns, step, piece = pos.Board.GetBitboardOf(BlackPawn)&RankMasks[Rank2], -8, BlackPawn
++	}
++	n := 0
++	for pawns != 0 {
++		from := Square(bits.TrailingZeros64(pawns))
++		to := Square(int(from) + step)
++		if occupied&SquareMask[int(to)] == 0 {
++			for _, promo := range [...]PieceType{Queen, Rook, Bishop, Knight} {
++				moves[n] = NewMove(from, to, piece, NoPiece, promo, 0)
++				n++
++			}
++		}
++		pawns &^= SquareMask[int(from)]
++	}
++	return n
++}
++
+ func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *SearchInfo, qDepth int) int {
+ 	if ply > info.SelDepth {
+ 		info.SelDepth = ply
+@@ -2516,17 +2541,21 @@ func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *Sear
+ 		alpha = standPat
+ 	}
+ 
+-	// Captures only. Quiet checks are dropped because moveGivesCheck misses
+-	// discovered, en-passant, and promotion checks; an incomplete quiet-check
+-	// path is worse than captures-only at the horizon.
++	// Search captures plus all quiet promotions. Quiet checks remain dropped because
++	// moveGivesCheck misses discovered and en-passant checks; an incomplete
++	// quiet-check path is worse than this bounded noisy class at the horizon.
++	// Keep specialized capture generation and its ordering unchanged. Quiet
++	// promotions are the only added noisy class; 64 existing captures plus at
++	// most 32 promotion moves fit the local arrays without changing SearchInfo.
+ 	captureCount := GenerateCapturesIntoBuffer(pos, info.CaptureBuffer[:])
+-	var captures [64]Move
++	var captures [96]Move
+ 	copy(captures[:], (*info.CaptureBuffer)[:captureCount])
++	captureCount += appendQuietPromotions(pos, captures[captureCount:])
+ 
+ 	// MVV/LVA scores for an INCREMENTAL selection-sort (select-max per iter, stop at
+ 	// cutoff — avoids the upfront full-sort cost the void "-129" comment cited).
+ 	// Encoding-only (victim/attacker seeWeight, no board access); ttMove forced top.
+-	var capScore [64]int
++	var capScore [96]int
+ 	for i := 0; i < captureCount; i++ {
+ 		capScore[i] = 8*int(captures[i].CapturedPiece().seeWeight()) - int(captures[i].MovingPiece().seeWeight())
+ 		if captures[i] == ttMove {

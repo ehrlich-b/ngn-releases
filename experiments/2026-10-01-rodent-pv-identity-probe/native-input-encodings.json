@@ -1,0 +1,12 @@
+{
+  "experiments/2026-10-01-rodent-pv-identity-probe/source_mechanism_model.go": {
+    "sha256": "b728692fe8180827bc81c67f10a0ab07afea4a8a74b447d67be99db139dbec18",
+    "archive": "experiments/2026-10-01-rodent-pv-identity-probe/native-source_mechanism_model.go.gz",
+    "gzip_sha256": "789e6c81ef47106bdd6d15de08507522f4944d142b56df08a380e0b4ffcce9e4"
+  },
+  "experiments/2026-10-01-rodent-pv-identity-probe.md": {
+    "sha256": "ec22a9b9e54c2fd51ca7097289d92ec603e6a9893d7d0514f48abe3507e0cad8",
+    "archive": "experiments/2026-10-01-rodent-pv-identity-probe/native-2026-10-01-rodent-pv-identity-probe.md.gz",
+    "gzip_sha256": "3e4317c61ae962f43110c95361409cabe6e650d3bb3b2f8e52e2cc1ca5d4c659"
+  }
+}

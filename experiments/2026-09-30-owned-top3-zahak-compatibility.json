@@ -1,0 +1,303 @@
+{
+  "claim": "This is an instrument correction for one exact unmodified native opponent. All historical/PV moves are independently legal, the first draw boundary and warning move match, and the diagnostic binds to a witnessed info line and root. Played moves, clocks, crash/stderr/process rules and all other warning classes remain audited. No engine or network behavior changed; no new scored strength verdict is yet admitted.",
+  "controls": {
+    "counter_default_positive_control_passed": true,
+    "dependency": {
+      "core_sha256": "1fde6a8e932508d14b31f6a584497b49c2969fc3c7cdc675347f819f0d667a5b",
+      "version": "1.11.2"
+    },
+    "independently_validated_warning_count": 1,
+    "instrument": {
+      "common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+      "counter_draw_compat.py": "ada29da47b4f8855fd5565ce60d68b53812571ded7845843c9452ebeff236c87",
+      "ownedmatch.py": "76c9f2e972de789bdc203971f33eea53bbea7dbb403bbffa469ca80568638690",
+      "ownedmatch_zahakdraw.py": "f399cdf1384333a70d1b31fd4c3ecc8aa514763dc0be3b2c5149bfde50cc1716",
+      "ownedstorage.py": "a3a892cede5d2b0a65291bbc38829bf566f288ca7b23b419df754678c60f23f2",
+      "process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+      "python_chess_core_1.11.2": "1fde6a8e932508d14b31f6a584497b49c2969fc3c7cdc675347f819f0d667a5b",
+      "quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3",
+      "role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+      "run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+      "trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+      "uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+    },
+    "negative_fixture_execution": "All thirteen mutations in the fingerprinted test_foreign_unbound_illegal_and_false_draws_are_rejected passed, with ValueError required for every rejection.",
+    "negative_fixtures": [
+      {
+        "name": "artifact",
+        "rejected": true
+      },
+      {
+        "name": "actor",
+        "rejected": true
+      },
+      {
+        "name": "info-binding",
+        "rejected": true
+      },
+      {
+        "name": "root-binding",
+        "rejected": true
+      },
+      {
+        "name": "prefix",
+        "rejected": true
+      },
+      {
+        "name": "tail",
+        "rejected": true
+      },
+      {
+        "name": "boundary",
+        "rejected": true
+      },
+      {
+        "name": "draw-kind",
+        "rejected": true
+      },
+      {
+        "name": "grammar",
+        "rejected": true
+      },
+      {
+        "name": "severity",
+        "rejected": true
+      },
+      {
+        "name": "position",
+        "rejected": true
+      },
+      {
+        "name": "missing-block",
+        "rejected": true
+      },
+      {
+        "name": "terminal-root",
+        "rejected": true
+      }
+    ],
+    "original_run_decision": "UNSCORED. Saved stopped smoke is a mechanism fixture only; no retrospective game verdict or pooling.",
+    "other_warning_classes_preserved": true,
+    "pass": true,
+    "positive_fixtures": [
+      {
+        "boundary_fen": "6k1/6p1/5p2/3q4/6Q1/6KP/5B2/8 w - - 100 100",
+        "every_move_legal": true,
+        "first_post_draw_index": 40,
+        "first_post_draw_move": "h3h4",
+        "history_plies": 158,
+        "info": "info depth 30 seldepth 47 hashfull 1000 tbhits 0 nodes 2303982 nps 2930438 score cp 203 time 786 pv g2g3 c8b8 f3f4 b8b3 f4e3 b3b8 g3g2 b8b7 e3f3 b7d7 f3h5 h8g8 h5g4 d7b5 g2g3 b5b8 g4f4 b8b5 f2e3 b5b7 f4c4 g8h7 c4d3 h7g8 d3d8 g8f7 d8d4 b7b3 d4d7 f7f8 g3f2 f8g8 d7d4 g8h8 d4g4 b3d5 f2g3 h8h7 e3f2 h7g8 h3h4",
+        "kind": "fifty-move rule",
+        "line": 37715,
+        "pv_plies": 41,
+        "role": "Zahak-10.0"
+      }
+    ],
+    "raw_trace_sha256": "5f973435b06200a33c60971dae7f10a24b8e02d50f184905ff8ecdecf0d2b949",
+    "schema": "ngn-zahak-draw-controls-v1",
+    "test_source": {
+      "path": "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1-v3/benchmark-source/scripts/ownedmulti_tests/test_zahak_draw.py",
+      "sha256": "4cf6f38ea2c3b31854240a03a00ace2061f6eb5ce5481704e4bcb552c0ceb19f"
+    },
+    "test_stderr": {
+      "path": "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1-v3/validation/owned-controls.stderr",
+      "sha256": "2a841a845cc6aff69d564e7ac6a044a8e655b2be9a773ce91c944b07d7a59a47"
+    },
+    "trace_compressed": {
+      "path": "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1/matches/smoke/fastchess.log.gz",
+      "sha256": "2a936302ff68cb6caee41fa0f701b634ce68272b9023f46e534a16f2c688d1f1"
+    },
+    "validation": {
+      "path": "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1-v3/validation/report.json",
+      "sha256": "d1e3fe6bfe8b6c009d93083e47688dc6a78004943524c2fbd10b49edd9d1f36d"
+    }
+  },
+  "launch": {
+    "command": [
+      "systemd-run",
+      "--user",
+      "--unit=ngn-owned-top3-zahak-120p1-v3-20260930",
+      "--property=WorkingDirectory=/home/ehrli/nnue-owned-top3-20260930/zahak-120p1-v3",
+      "--property=KillMode=control-group",
+      "--property=TimeoutStopSec=30",
+      "--property=RuntimeMaxSec=73096",
+      "--property=MemoryMax=8G",
+      "--property=CPUAffinity=4 6 8 10 12 14",
+      "/usr/bin/python3",
+      "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1-v3/benchmark-source/scripts/ownedbenchmark.py",
+      "--root",
+      "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1-v3",
+      "--plan",
+      "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1-v3/plan.json"
+    ],
+    "initial_status": "MainPID=44881\nActiveState=active\nSubState=running\n",
+    "memory_available_gib": 13.130332946777344,
+    "plan": {
+      "path": "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1-v3/plan.json",
+      "sha256": "f257c8c281fe450deea517735d38f80acf3df099660c45ae866602b8b560d4ac"
+    },
+    "scope": "Smoke, fresh matching A/A, then one fixed 400-game scored anchor. Both hopper workers retain CPUs0,2; no simultaneous engine build/training on the six match CPUs.",
+    "started_at_unix": 1790782903.9386811,
+    "unit": "ngn-owned-top3-zahak-120p1-v3-20260930",
+    "windows_free_gib": 125.38185501098633
+  },
+  "opening_selection": {
+    "excluded_prior_entries": 1274,
+    "games_started": 0,
+    "pairs": 270,
+    "state": "FRESH_OPENINGS_PREDECLARED"
+  },
+  "preparatory_validation_v2": {
+    "reason": "The first source snapshot retained the older Counter helper API, which lacked the explicit artifact/checker arguments already introduced for Maelstrom. A new source snapshot uses the previously validated generic helper and passes all controls and the full WSL short race suite.",
+    "receipt": {
+      "bytes": 11265,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/top3-zahak-validation-v2-report.json",
+      "sha256": "61bf8f962a19cef9be7a0303adf523e2e543949b6811aa73f4a6d81ee1cc411a"
+    },
+    "state": "FAILED_BEFORE_NEW_GAMES"
+  },
+  "schema": "ngn-owned-top3-zahak-compatibility-v1",
+  "source_receipt": {
+    "scripts/candidate-match/common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+    "scripts/candidate-match/manifest.py": "a7ce8f4a6141e963688eefac273a9b9822f87d57674ce7191f288701af492b3b",
+    "scripts/candidate-match/process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+    "scripts/candidate-match/role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+    "scripts/candidate-match/run_candidate_match.py": "9ba8aa75a917923b01a456d30e513f7793ebc585a75522765275f6db2ef89a6a",
+    "scripts/candidate-match/run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+    "scripts/candidate-match/smp_match_stage.py": "22ea985b6b242d2cf7ad3a61d08e5f4b4ac4a89d860b769c08d718358f9dfe15",
+    "scripts/candidate-match/smp_role_exec.py": "a003aa7fc1272a573b544475e595c0bf653622313b8450063f587e2a6b0dc0c4",
+    "scripts/candidate-match/tests/fixture_match_parent.py": "114f449ec835185b27ba3a1df89067ffe8c74fd57bb9f3b127c8f2de96a73fb2",
+    "scripts/candidate-match/tests/fixture_signal_runner.py": "c226c3b5be3b3ac9a1b5dd647170a5f20bfbbcdbec0cbaa7f384f610576914b1",
+    "scripts/candidate-match/tests/fixture_signal_stage.py": "8dbad2a4721e6a7e61c72f7287f9ea8e5fc36e95e2a855d20523110681773e3a",
+    "scripts/candidate-match/tests/fixture_uci_engine.py": "55cc95bf31e1ab98c11efecb63efec8da2fde507c3239f08fd1216d1ef2994ab",
+    "scripts/candidate-match/tests/test_common.py": "b8efa50e816ee853032be09f3bb3788600acfa5669604f7f18c6e8c28430f8f4",
+    "scripts/candidate-match/tests/test_manifest.py": "6484db80c7acc9464cccbc55f51798a790a3b65ac14b0347db786a75c3a69bb9",
+    "scripts/candidate-match/tests/test_match_stage.py": "fb7ff803362cd2d8215b51203fd40ee3d323b018290794fb63f89095e678a567",
+    "scripts/candidate-match/tests/test_role_exec.py": "6e80c4cfed90752a5e0fe8f6d9c10b1dbf67c74573e9e094ef0b421736e414fd",
+    "scripts/candidate-match/tests/test_signal_cleanup.py": "e7f462a18eb9c417f49bed60345f2fa3176384df22369f9fe87d880b5029a6da",
+    "scripts/candidate-match/tests/test_trace_audit.py": "ddf9856a3d5bf02670a6a45eb41df7b2436554c637e5cfba619d3f428305e742",
+    "scripts/candidate-match/tests/test_uci_preflight.py": "7c3128f9b7a84c342bc5a7cbc2d3f75bc36f16fc6817348556210ebd92db65b5",
+    "scripts/candidate-match/trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+    "scripts/candidate-match/uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171",
+    "scripts/counter_draw_compat.py": "ada29da47b4f8855fd5565ce60d68b53812571ded7845843c9452ebeff236c87",
+    "scripts/ownedbenchmark.py": "096f2ed00aeaa330ea95454ca028481b4c9da3e528f92e97f42584d936662b8b",
+    "scripts/ownedmatch.py": "76c9f2e972de789bdc203971f33eea53bbea7dbb403bbffa469ca80568638690",
+    "scripts/ownedmatch_counterdraw.py": "ba881c5dd3823b9d8bd1ee356f7607b842fd7ddea42827fc6233909d6560e5ea",
+    "scripts/ownedmatch_zahakdraw.py": "f399cdf1384333a70d1b31fd4c3ecc8aa514763dc0be3b2c5149bfde50cc1716",
+    "scripts/ownedmulti_tests/fixture_parent.py": "2d9f6969bdcee81862dfd92ad466dc1bf354d88113c97e90bc7799765ea032b1",
+    "scripts/ownedmulti_tests/test_ownedmatch_native.py": "ed67c493852477388e70eeb3beb56e6bad0be01dbb73e1c41e147aa2dd3cc078",
+    "scripts/ownedmulti_tests/test_ownedmultimatch.py": "cd574022ef4eb3afa11650a1e7742a37d86baa25fca0092fb7033bd9fef17c61",
+    "scripts/ownedmulti_tests/test_ownedstorage.py": "3343c7474b363ac3934e347c55214b66ce13929cc0125f113d95c1bf50dfcd62",
+    "scripts/ownedmulti_tests/test_zahak_draw.py": "4cf6f38ea2c3b31854240a03a00ace2061f6eb5ce5481704e4bcb552c0ceb19f",
+    "scripts/ownedmultimatch.py": "1efc31373ce4d8937186122bc7ed84bef2f9b373da948837f36f52970f1c39ff",
+    "scripts/ownedsmp.py": "4ed87fa26cad8d3857a1a0a8a27670a726e6b16a96a0f8e99d0eb1e11be371fe",
+    "scripts/ownedstorage.py": "a3a892cede5d2b0a65291bbc38829bf566f288ca7b23b419df754678c60f23f2",
+    "scripts/quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3"
+  },
+  "stopped_first_trial": {
+    "diagnostic": {
+      "bytes": 7614,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/top3-zahak-smoke-diagnostic.json",
+      "sha256": "5370c1208679839256e8a2e05b73350658d2d46e01c39cb608444fc3141660a1"
+    },
+    "failure": {
+      "bytes": 1738,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/top3-zahak-smoke-failure.json",
+      "sha256": "27066ba7daf844ee694181c24c8d07ed191177dd1bb0c51faebd70e957a64b59"
+    },
+    "reason": "The strict smoke stopped on the exact official Zahak 10 artifact PV-after-fifty-move diagnostic. Original games remain unscored and are not pooled.",
+    "state": "FAILED_UNSCORED"
+  },
+  "validation": {
+    "completed": 1790782527.7843266,
+    "instrument": {
+      "common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+      "counter_draw_compat.py": "ada29da47b4f8855fd5565ce60d68b53812571ded7845843c9452ebeff236c87",
+      "ownedmatch.py": "76c9f2e972de789bdc203971f33eea53bbea7dbb403bbffa469ca80568638690",
+      "ownedmatch_zahakdraw.py": "f399cdf1384333a70d1b31fd4c3ecc8aa514763dc0be3b2c5149bfde50cc1716",
+      "ownedstorage.py": "a3a892cede5d2b0a65291bbc38829bf566f288ca7b23b419df754678c60f23f2",
+      "process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+      "python_chess_core_1.11.2": "1fde6a8e932508d14b31f6a584497b49c2969fc3c7cdc675347f819f0d667a5b",
+      "quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3",
+      "role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+      "run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+      "trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+      "uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+    },
+    "multicore_instrument": {
+      "common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+      "counter_draw_compat.py": "ada29da47b4f8855fd5565ce60d68b53812571ded7845843c9452ebeff236c87",
+      "ownedmatch.py": "76c9f2e972de789bdc203971f33eea53bbea7dbb403bbffa469ca80568638690",
+      "ownedmatch_zahakdraw.py": "f399cdf1384333a70d1b31fd4c3ecc8aa514763dc0be3b2c5149bfde50cc1716",
+      "ownedmultimatch.py": "1efc31373ce4d8937186122bc7ed84bef2f9b373da948837f36f52970f1c39ff",
+      "ownedstorage.py": "a3a892cede5d2b0a65291bbc38829bf566f288ca7b23b419df754678c60f23f2",
+      "process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+      "python_chess_core_1.11.2": "1fde6a8e932508d14b31f6a584497b49c2969fc3c7cdc675347f819f0d667a5b",
+      "quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3",
+      "role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+      "run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+      "smp_match_stage.py": "22ea985b6b242d2cf7ad3a61d08e5f4b4ac4a89d860b769c08d718358f9dfe15",
+      "smp_role_exec.py": "a003aa7fc1272a573b544475e595c0bf653622313b8450063f587e2a6b0dc0c4",
+      "trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+      "uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+    },
+    "pass": true,
+    "phase": "go-short-race-all",
+    "state": "COMPLETE",
+    "steps": [
+      {
+        "command": [
+          "/usr/bin/python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1-v3/benchmark-source/scripts/ownedmulti_tests",
+          "-v"
+        ],
+        "cwd": "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1-v3/benchmark-source",
+        "elapsed_seconds": 2.6178689002990723,
+        "name": "owned-controls",
+        "pass": true,
+        "returncode": 0,
+        "stderr_sha256": "2a841a845cc6aff69d564e7ac6a044a8e655b2be9a773ce91c944b07d7a59a47",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1-v3/benchmark-source/scripts/candidate-match/tests",
+          "-v"
+        ],
+        "cwd": "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1-v3/benchmark-source",
+        "elapsed_seconds": 3.41879940032959,
+        "name": "candidate-controls",
+        "pass": true,
+        "returncode": 0,
+        "stderr_sha256": "bd05f6181bae75d5a248c5292e2716db12321c0d6c843623506d57eb764c76aa",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "/usr/local/go/bin/go",
+          "test",
+          "-short",
+          "-race",
+          "./...",
+          "-count=1"
+        ],
+        "cwd": "/home/ehrli/nnue-owned-continuation-20260928/source",
+        "elapsed_seconds": 47.182478189468384,
+        "name": "go-short-race-all",
+        "pass": true,
+        "returncode": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "d89bfee9f5393334fc8cdb12e1741e05c9a3bbc1db616e600692537a8ccc9f9b"
+      }
+    ]
+  }
+}

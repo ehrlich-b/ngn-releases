@@ -2,14 +2,11 @@ package engine
 
 import "testing"
 
-// TestEnPassantHashCapturabilityGate guards the en-passant hashing fix: the EP
-// square must enter the zobrist hash ONLY when an enemy pawn can actually capture
-// en passant. A phantom EP target (set after every double push regardless of
-// capturability) split the hash — and therefore the repetition signature — of
-// otherwise-identical positions, and fragmented the transposition table. The gate
-// lives at the two EP set-sites (makeMoveHelper's double push and ParseFEN), so
-// the full hash (generateZobristHash) and the incremental hash (updateHash) stay
-// in agreement.
+// TestEnPassantHashCapturabilityGate guards both EP contracts. The raw target is
+// retained only with an adjacent pawn, as required by the existing Polyglot book
+// key. The ordinary Zobrist/repetition key is stricter and includes that target
+// only when at least one EP capture is legal. FEN and incremental paths must
+// agree under both rules.
 func TestEnPassantHashCapturabilityGate(t *testing.T) {
 	// Play one UCI move from fen via the search make path (incremental hash).
 	play := func(fen, uci string) (uint64, Square) {
@@ -57,9 +54,11 @@ func TestEnPassantHashCapturabilityGate(t *testing.T) {
 	}
 
 	// Pinned: an adjacent capturer exists but the EP capture is pin-illegal
-	// (a5 king and h5 rook share the rank with the e5/d5 pawns). Adjacency gating
-	// retains the EP square (consistent with Stockfish/Polyglot); the property
-	// under test is that full and incremental hash still agree.
+	// (a5 king and h5 rook share the rank with the e5/d5 pawns). The raw target
+	// remains for Polyglot's separate adjacency/book-key contract. Stockfish 18's
+	// real-move repetition key instead applies legal-EP normalization (its FEN
+	// loader retains the pseudo target); NGN's full and incremental ordinary keys
+	// must agree on that legal identity.
 	hPin, _ := play("6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1", "d7d5")
 	if hPin != full("6k1/8/8/K2pP2r/8/8/8/8 w - d6 0 1") {
 		t.Errorf("pinned EP: incremental hash != full hash from FEN")

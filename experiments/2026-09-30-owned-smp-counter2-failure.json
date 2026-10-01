@@ -1,0 +1,210 @@
+{
+  "checked_at_unix": 1790730433.8460925,
+  "queue": {
+    "completed": 1790729657.8950946,
+    "error": "external cell did not produce accepted terminal: aa",
+    "state": "FAILED"
+  },
+  "aa_state": {
+    "completed": 1790729657.8587155,
+    "error": "supervised-match exited 124",
+    "state": "FAILED"
+  },
+  "aa_supervisor": {
+    "command": [
+      "/usr/bin/python3",
+      "/home/ehrli/nnue-owned-smp-20260929/external-source-v2/scripts/candidate-match/smp_match_stage.py",
+      "--config",
+      "/home/ehrli/nnue-owned-smp-20260929/external-width2/aa/match-stage.json"
+    ],
+    "command_returncode": 143,
+    "cpu_list": "12,14",
+    "elapsed_seconds": 14401.039398132998,
+    "ended_unix_time": 1790729657.8492405,
+    "final_survivor_check_scope": "procfs PGID plus every previously observed descendant PID",
+    "full_command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/home/ehrli/nnue-owned-smp-20260929/external-width2/aa/supervised-match/time.txt",
+      "taskset",
+      "-c",
+      "12,14",
+      "/usr/bin/python3",
+      "/home/ehrli/nnue-owned-smp-20260929/external-source-v2/scripts/candidate-match/smp_match_stage.py",
+      "--config",
+      "/home/ehrli/nnue-owned-smp-20260929/external-width2/aa/match-stage.json"
+    ],
+    "interrupted_signal": null,
+    "limit_seconds": 14400.0,
+    "memory_limit_exceeded": false,
+    "memory_limit_kib": 10485760,
+    "monitor_error": null,
+    "orphan_detected": false,
+    "peak_sampled_process_count": 5,
+    "peak_sampled_process_tree_rss_kib": 1281572,
+    "process_group_id": 679711,
+    "sample_interval_seconds": 1.0,
+    "sampling_scope": "leader process group plus observed descendants, including observed reparented descendants",
+    "sigkill_sent": false,
+    "stage": "supervised-match",
+    "started_unix_time": 1790715458.548519,
+    "state": "FAILED",
+    "supervised_root_pid": 679711,
+    "supervisor_returncode": 124,
+    "surviving_processes": [],
+    "term_grace_seconds": 3.0,
+    "term_sent": true,
+    "termination_reason": "stage-timeout",
+    "timed_out": true,
+    "valid_samples": 14293
+  },
+  "anchor_exists": false,
+  "unit": "MainPID=0\nControlGroup=\nActiveState=inactive\nSubState=dead\n",
+  "archive": {
+    "bytes": 9517247,
+    "sha256": "68795188abac5030358d2d0d86a30be4d2489f73fb65f5913e2386e27b567a65",
+    "files": [
+      {
+        "path": "STATE.json",
+        "bytes": 125,
+        "sha256": "dfd2716b4bac3c00e8c67b1d2f9e92391cde6741f164c1a8c034b354b6224893"
+      },
+      {
+        "path": "aa/STATE.json",
+        "bytes": 101,
+        "sha256": "70a7e5d0af014ccd3aa4bc0edd16a06f7f36ab531a50e0947f8588d3e926e7ed"
+      },
+      {
+        "path": "aa/child-processes.json",
+        "bytes": 133,
+        "sha256": "d0ff93a04bb564e60cb061bb728019f2a4c8bea04340318f8f8deb0697840808"
+      },
+      {
+        "path": "aa/command.json",
+        "bytes": 1829,
+        "sha256": "f2b506cc9346a0ee92035b532920a9e0b909c1268c033b9b83d6f5399b61d121"
+      },
+      {
+        "path": "aa/config.json",
+        "bytes": 5371,
+        "sha256": "18eae6d67f1de38f3259d703e8743f8cb55d41d46ce5f8f334647bdc3da9f689"
+      },
+      {
+        "path": "aa/fastchess.log",
+        "bytes": 75126602,
+        "sha256": "4188d607d6745446e82fd696bd705562bf90e343c31bde620be0c70bdba30ee9"
+      },
+      {
+        "path": "aa/games.pgn",
+        "bytes": 2020757,
+        "sha256": "4ce8f191571ea9c6fe44cc118968e35c54fd5cc5a24eec275fef83fb10bc4cd3"
+      },
+      {
+        "path": "aa/match-stage.json",
+        "bytes": 3429,
+        "sha256": "0438337446ca9fcbb8cd5648594a06c503d480bf509ad13a9a554bafa5639576"
+      },
+      {
+        "path": "aa/match.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "aa/match.stdout",
+        "bytes": 9929,
+        "sha256": "bce5f566f7c11ce75c8335d86da79b0145d262c9791c1d9144c58f16bda72b99"
+      },
+      {
+        "path": "aa/spec.json",
+        "bytes": 3216,
+        "sha256": "0983cbe48130bbaf6eeb9efa734eb561670097808900768eb274d054b84e0190"
+      },
+      {
+        "path": "aa/supervised-match/command.json",
+        "bytes": 219,
+        "sha256": "31364a20b22f908496babc71da0388fbdbf32b0a1ad63e583346f1b73dc3cadb"
+      },
+      {
+        "path": "aa/supervised-match/supervisor-receipt.json",
+        "bytes": 1676,
+        "sha256": "08511bfcd0bce2ef775e5b4584944a755148b44c2e021ee68d0989c1312570a1"
+      },
+      {
+        "path": "smoke/STATE.json",
+        "bytes": 92,
+        "sha256": "7b09a7ae1082046a7ff611c544af5621daca7af23694b52c5b7871955c97a748"
+      },
+      {
+        "path": "smoke/child-processes.json",
+        "bytes": 4125009,
+        "sha256": "987f8c89280928aa5929825ae614a0456a691d4ccbe3a1a9f1da91e7a9ab38dc"
+      },
+      {
+        "path": "smoke/command.json",
+        "bytes": 1683,
+        "sha256": "aae912bb3aeaeae72728c27bd578066c974a5e30e61b988f84727ab1628d1697"
+      },
+      {
+        "path": "smoke/config.json",
+        "bytes": 4940,
+        "sha256": "0621f43ac3169b8e2f317074216ffb9a7119a015977f05763d6d9c3b303d6913"
+      },
+      {
+        "path": "smoke/fastchess.log",
+        "bytes": 5599363,
+        "sha256": "35b7b59a2592b4d0a0a7408b87dee36d146986a51d0776eb1a30e4ff733f6850"
+      },
+      {
+        "path": "smoke/games.pgn",
+        "bytes": 240376,
+        "sha256": "8f76199040c6e6447d5630883a9cc66f1dd94f9c75186e6558f91e827370f6e9"
+      },
+      {
+        "path": "smoke/match-stage.json",
+        "bytes": 3305,
+        "sha256": "599f78e7bec0efb7efeeb6687db48c53084b3d5eb247840b5227a91f6080b0f6"
+      },
+      {
+        "path": "smoke/match.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "smoke/match.stdout",
+        "bytes": 1324,
+        "sha256": "129803458e4e8a35bbba9cd033a5e1c37fbac1a6fb06e3672526a86d25887458"
+      },
+      {
+        "path": "smoke/spec.json",
+        "bytes": 2815,
+        "sha256": "022d8cfa7cd29410cdac8b8a435de36b9f555917d28fbeddd866ddf14c027af6"
+      },
+      {
+        "path": "smoke/supervised-audit/command.json",
+        "bytes": 1051,
+        "sha256": "cfbb8b24bc2447b47fb722b191c333dd39ce45aca5c43368b135364e76ee8ce6"
+      },
+      {
+        "path": "smoke/supervised-audit/supervisor-receipt.json",
+        "bytes": 3421,
+        "sha256": "f095df0b29174d349a831656ab9e1d98d8fd7417398b802cd6640997fc7533d7"
+      },
+      {
+        "path": "smoke/supervised-match/command.json",
+        "bytes": 222,
+        "sha256": "63ef40bdee07490a2f24013a77198d5b7b371d60b03d50e900e03c7a5df12040"
+      },
+      {
+        "path": "smoke/supervised-match/supervisor-receipt.json",
+        "bytes": 1672,
+        "sha256": "ccbc29d409174ac756124451b1c9a11cc541d0840cb1d393cecd34b73f16af21"
+      }
+    ],
+    "local_path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/outputs/ccrl-counter2-failed-aa-records.tar.gz",
+    "off_worker_hash_check": "PASS"
+  },
+  "scored": false,
+  "decision": "Preserve the timed-out A/A unscored. The Counter anchor was never launched. Do not restart or pool this cell.",
+  "checked_at_utc": "2026-09-30T01:07:13.846092+00:00"
+}

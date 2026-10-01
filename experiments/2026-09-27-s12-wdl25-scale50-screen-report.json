@@ -1,0 +1,39 @@
+{
+  "schema": "ngn-quickmatch-report-v1",
+  "candidate": "NGN-Owned-K4-WDL25-E10-Scale50",
+  "games": 200,
+  "pairs": 100,
+  "legal_plies": 29652,
+  "results": {
+    "1/2-1/2": 118,
+    "0-1": 40,
+    "1-0": 42
+  },
+  "reasons": {
+    "Draw by 3-fold repetition": 92,
+    "Draw by insufficient mating material": 20,
+    "Black mates": 40,
+    "White mates": 42,
+    "Draw by fifty moves rule": 6
+  },
+  "penta_0_to_4": [
+    3,
+    21,
+    54,
+    21,
+    1
+  ],
+  "score": 0.49,
+  "score_interval_95": [
+    0.4525,
+    0.5275
+  ],
+  "elo": -6.94963842776909,
+  "elo_interval_95": [
+    -33.10621598837355,
+    19.128260449779404
+  ],
+  "audit_sha256": "f1f2c20064fd21d6cc3a4c77dce96e77c2c9be273f163ccdc59a55908477c674",
+  "pgn_sha256": "6f51d29819d81caf3ff707fd381b7822b38158d9f7ac0f458bb735dc76c64edf",
+  "bootstrap": "percentile over pair scores, 20000 resamples, seed 2026092701"
+}

@@ -1,0 +1,116 @@
+{
+  "schema": "ngn-sf18-big-feasibility-v6",
+  "status": "n1f-complete-positive-bounded-strength-screen",
+  "base_commit": "497dfa5",
+  "scope": {
+    "included": [
+      "dedicated startup-only sf18big-research UCI process",
+      "hidden and locked evaluator mutation options",
+      "ucinewgame backend persistence",
+      "same-tree HCE control build",
+      "HCE/HCE operational smoke",
+      "40-game paired equal-time BIG-vs-HCE screen"
+    ],
+    "excluded": [
+      "SF18 BIG in the normal NGN UCI option list",
+      "default evaluator change",
+      "promotion-grade SPRT or absolute rating claim",
+      "score adjudication",
+      "dirty-threat transition optimization"
+    ]
+  },
+  "artifacts": {
+    "model": {
+      "file": "nn-c288c895ea92.nnue",
+      "bytes": 108919594,
+      "sha256": "c288c895ea924429ea9092e3f36b2b3c1f00f2a3a4c759ff7e57e79e3b43e4a7"
+    },
+    "candidate": {
+      "path": "output/n1b/ngn-sf18-big-research",
+      "sha256": "556f571e8bb5125c66d5adce89cbe25d25698dc23af35db2c3e63a549e806da1"
+    },
+    "control": {
+      "path": "output/n1b/ngn-hce-control",
+      "sha256": "81e15336d7b4a834ebb7fc3fdd8aeaca6d8b85c9afb6d281db6c644b194408b4"
+    },
+    "harness": {
+      "path": "output/n1b/sprt-screen",
+      "sha256": "02cb1276b21fda4071fff15d247829567beda8a870c34f8885ce39e45b2b920a"
+    }
+  },
+  "screen_contract": {
+    "host": "AMD Ryzen 7 9800X3D 8-Core Processor",
+    "os_arch": "linux/amd64",
+    "go": "go1.25.5",
+    "goamd64": "v3",
+    "movetime_ms": 20,
+    "concurrency": 1,
+    "max_plies": 160,
+    "score_adjudication": false,
+    "paired_reversed_colors": true,
+    "built_in_openings_available": 24,
+    "opening_pairs_played": 20,
+    "game_cap": 40,
+    "minimum_games_before_sprt_stop": 41
+  },
+  "aa_smoke": {
+    "games": 8,
+    "wdl": [2, 4, 2],
+    "score_percent": 50.0,
+    "pentanomial": [0, 1, 2, 1, 0],
+    "penta_elo": 0.0,
+    "penta_elo_95ci": [-126, 126],
+    "operational_failures": 0,
+    "elapsed_seconds": 18
+  },
+  "big_vs_hce_screen": {
+    "games": 40,
+    "wdl": [22, 16, 2],
+    "score_percent": 75.0,
+    "pentanomial": [0, 0, 5, 10, 5],
+    "penta_elo": 190.8,
+    "penta_elo_95ci": [125, 272],
+    "penta_llr": 1.38,
+    "trinomial_elo": 190.8,
+    "trinomial_elo_95ci": [69, 313],
+    "terminations": {
+      "checkmate": 24,
+      "max_moves": 15,
+      "draw_rule": 1
+    },
+    "operational_failures": {
+      "startup": 0,
+      "protocol": 0,
+      "crash": 0,
+      "illegal_move": 0,
+      "no_move": 0
+    },
+    "elapsed_seconds": 98,
+    "harness_verdict": "inconclusive at the deliberately capped 40 games under the narrow [-3,+3] SPRT",
+    "screen_decision": "positive: quality signal more than compensates for the measured node-cost penalty in this bounded regime"
+  },
+  "validation": {
+    "official_model_lock_and_newgame_test": "PASS",
+    "focused_sf18_engine_tests": "PASS",
+    "focused_sf18_engine_race": "PASS",
+    "adapter_vet": "PASS",
+    "repository_short_suite": "PASS",
+    "hce_hce_operational_smoke": "PASS",
+    "unscoped_nonshort_engine_suite": "NO_RESULT: exceeded two minutes silently; established short suite and focused gates used instead",
+    "git_diff_check": "PASS"
+  },
+  "source_sha256": {
+    "engine/uci.go": "2c437f1f9ecb8c2d7b2bc46000ea4011affa5fec6f2820b3007cf0db7ed0446c",
+    "engine/uci_sf18_big_research.go": "254018f72285d0b27776b36185be3f34bb3f4a96a4dd0296392d1b615fc03902",
+    "engine/uci_sf18_big_research_test.go": "c1893333e5e62eac7a1ee113c9d383afe7daf838cf465e3ebd0f0b4c5757f388",
+    "cmd/sf18big-research/main.go": "9af9df678129640b40f9b76b56bd2d4b1c81a64474a7f67a43a06197e0b9192d"
+  },
+  "decision": {
+    "n1f_screen_gate": "pass",
+    "quality_signal_positive": true,
+    "normal_uci_exposure_authorized": false,
+    "default_change_authorized": false,
+    "promotion_authorized": false,
+    "next_gate": "N1g exact dirty-threat transition updates, repeated cost gate, then larger pre-registered equal-time match"
+  }
+}

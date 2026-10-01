@@ -1,0 +1,42 @@
+{
+  "schema": "ngn-counter-output-base-build-receipt-v1",
+  "created_utc": "2026-09-13",
+  "worktree": "/home/ehrli/repos/ngn-counter-output-base-20260913",
+  "source": {
+    "commit": "a12e1976981fbf89b148a5b229689bf06916a8ba",
+    "tree": "3590e3f33c6ee25d5fa84abe813ec307c5b9e8d3",
+    "tracked_diff_empty": true,
+    "only_untracked_path": "engine/counter_transition_profile_test.go"
+  },
+  "profile_test": {
+    "source_path": "/home/ehrli/repos/ngn-counter-transition-fastpath-v1/engine/counter_transition_profile_test.go",
+    "copied_path": "/home/ehrli/repos/ngn-counter-output-base-20260913/engine/counter_transition_profile_test.go",
+    "sha256": "8623a3f8d486f9fcd3231b835469890ece52e79a9cabcf5bb6d5562d664dea4c"
+  },
+  "toolchain": "go version go1.25.5 linux/amd64",
+  "build": {
+    "environment": {
+      "CGO_ENABLED": "0",
+      "GOAMD64": "v3",
+      "GOMAXPROCS": "2"
+    },
+    "command": [
+      "/usr/local/go/bin/go",
+      "-C",
+      "/home/ehrli/repos/ngn-counter-output-base-20260913",
+      "test",
+      "-p",
+      "2",
+      "-c",
+      "-o",
+      "/home/ehrli/repos/ngn-counter-output-base-20260913/output/base-engine.test",
+      "./engine"
+    ],
+    "exit_code": 0
+  },
+  "binary": {
+    "path": "/home/ehrli/repos/ngn-counter-output-base-20260913/output/base-engine.test",
+    "bytes": 20002971,
+    "sha256": "6df6e3cda0977d0624073848280a6d3dfada4f8b8ee074805add67767525c944"
+  }
+}

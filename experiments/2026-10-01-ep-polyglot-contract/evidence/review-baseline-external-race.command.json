@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "/usr/local/go/bin/go",
+    "test",
+    "-short",
+    "-race",
+    "./engine",
+    "-run",
+    "^TestExternalPolyglotSpecialMoveContract$",
+    "-count=1",
+    "-v"
+  ],
+  "cwd": "/home/ehrli/ngn-personal-correctness-20261001/polyglot-baseline-proof8b",
+  "environment": {
+    "GOMAXPROCS": "1",
+    "GOFLAGS": "-p=1",
+    "GOTOOLCHAIN": "local",
+    "GOCACHE": "/home/ehrli/ngn-personal-correctness-20261001/.gocache-ep-repair",
+    "NGN_POLYGLOT_EXTERNAL_CONTRACT": "1"
+  },
+  "source_sha256": "d162217a2e44f5190a31df1b0812cf080e791ca41987a423b209efcb0714b679",
+  "fixture_sha256": "3e7acd53328562ab5fb6943441d586f8bb3723e269c1904c4f128ecee63d05fc",
+  "elapsed_wall_seconds": 8.006635125995672
+}

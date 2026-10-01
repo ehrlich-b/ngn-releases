@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "count": 100,
+  "source_corpus": {
+    "path": "/home/ehrli/repos/ngn/output/remote-pin-20260905/results-r0905acceptedpin/inputs/sprt_openings.txt",
+    "sha256": "974e4b5ab871a9e106d0c766bfa39fc83676222337fb7702f61782e2ac5b3222"
+  },
+  "converter_source_sha256": "0020241ae526b74d1a7cb4944a4fa92e704bd3a1fc165525cf0aae00768fee73",
+  "pinned_chess_header": {
+    "path": "output/nnue-smp-b0-20260905/fastchess/src/app/third_party/chess.hpp",
+    "sha256": "bca26e0e6e69300c7f3878cf19ea0002ce03b589e84c0ef489703af7a9d5616d",
+    "fastchess_commit": "f618e34540f94f4719ad3817950618dabe441318"
+  },
+  "converter_binary_sha256": "3c99382a07760ac72e7cf0461f5d04a3ff9614338a9058dbcd6f3dcf49cdbcb5",
+  "output_pgn_sha256": "6f0e61c02567f2fcaadbf2f20b10ad6a6a3eab689982181575b784e12036d4a4",
+  "selected_prefixes": {
+    "path": "/home/ehrli/repos/ngn-next/experiments/2026-09-05-nnue-smp-b0-opening-prefixes-100.txt",
+    "count": 100,
+    "sha256": "1c3bad721bde116e6cd3fcdc2c04fb1ef96acdd410e7c441a84b4b444f5a3a9a"
+  }
+}

@@ -1,0 +1,11 @@
+goos: linux
+goarch: amd64
+pkg: github.com/ehrlich-b/ngn/engine
+cpu: AMD Ryzen 7 9800X3D 8-Core Processor           
+BenchmarkRodentV11ColdFixedNodes/start_white         	       5	 635217791 ns/op	    400000 minimum_nodes/op	135426849 B/op	      14 allocs/op
+BenchmarkRodentV11ColdFixedNodes/start_black         	       5	 639900301 ns/op	    400000 minimum_nodes/op	135427662 B/op	      14 allocs/op
+BenchmarkRodentV11ColdFixedNodes/kiwipete_white      	       5	 749377660 ns/op	    400000 minimum_nodes/op	135436273 B/op	      15 allocs/op
+BenchmarkRodentV11ColdFixedNodes/kiwipete_black      	       5	 719635749 ns/op	    400000 minimum_nodes/op	135428884 B/op	      14 allocs/op
+BenchmarkRodentV11ColdFixedNodes/asymmetric_white    	       5	 646795003 ns/op	    400000 minimum_nodes/op	135440385 B/op	      15 allocs/op
+BenchmarkRodentV11ColdFixedNodes/asymmetric_black    	       5	 632465064 ns/op	    400000 minimum_nodes/op	135425608 B/op	      14 allocs/op
+PASS

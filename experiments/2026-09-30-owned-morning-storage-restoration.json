@@ -1,0 +1,150 @@
+{
+  "artifacts": {
+    "compact-wsl-20260930-morning.ps1": {
+      "bytes": 6175,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/compact-wsl-20260930-morning.ps1",
+      "sha256": "d6e44f9ff3de6498066cfb7e60af0d2c40cd50f832880ed2cf0c71615ae543ee"
+    },
+    "compact-wsl-20260930-morning.py": {
+      "bytes": 6280,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/compact-wsl-20260930-morning.py",
+      "sha256": "55dc43869f90f1fbf71526300a635d5553a2a763e95e8d87c96eea798e2f6ae4"
+    },
+    "maintenance-20260930-morning.stderr": {
+      "bytes": 1015,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/maintenance-20260930-morning.stderr",
+      "sha256": "d688dc8e4175aeb986b265ac677732fc5fde704cec0436b0ff41936740097973"
+    },
+    "maintenance-20260930-morning.stdout": {
+      "bytes": 32399,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/maintenance-20260930-morning.stdout",
+      "sha256": "973fabf154568f545af9ecf7141e609707e8d85ea01e2e09eff60e0df8a7cb2d"
+    },
+    "maintenance-after-20260930-morning.json": {
+      "bytes": 2735,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/maintenance-after-20260930-morning.json",
+      "sha256": "05405f06b77d6f771cfa394a8fce0e8f862ca649c0ea65b7137bcf5537a8a62f"
+    },
+    "maintenance-before-20260930-morning.json": {
+      "bytes": 2719,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/maintenance-before-20260930-morning.json",
+      "sha256": "9a362ce432174e3b14f31ab5fbe6b01aa1b55fd28ddf127d97938f43a1d148be"
+    }
+  },
+  "authorization": {
+    "scope": "Repeat the same approved read-only VHDX compaction and restoration after both chess jobs stopped.",
+    "source_chat_id": "01a0e9e2-b6ab-7a12-b58c-18435b4545e5",
+    "source_chat_title": "Assess overall engine progress",
+    "user_approval": "Yes\u2014compact now and restore the services"
+  },
+  "capacity_admission_pass": false,
+  "claim": "Compaction and service restoration succeeded. Both hopper workers, Docker, the relay and keepalive are restored. Physical Windows free space remains below the unchanged 25 GiB floor, so no new chess or training job is admitted. Linux allocation or VHDX length reduction is not counted as equivalent Windows physical recovery.",
+  "procedure_pass": true,
+  "restoration": {
+    "checked_at_unix": 1790767396.669871,
+    "containers": [
+      {
+        "id": "c6ac4c84b70c26fed55d7abd231a1d845d278c27cd972d88eb332e3bf8138a9f",
+        "names": [
+          "/arli-slot0-task-lean-evidence-month2-w10-cp-import-budget-contract-split"
+        ],
+        "restart": {
+          "MaximumRetryCount": 0,
+          "Name": "no"
+        },
+        "status": "Up About a minute"
+      },
+      {
+        "id": "09589d4909aca131e6ac535d70f73383b8d3f2c4d6883897c94f95c3ed4d6ee8",
+        "names": [
+          "/arli-slot1-task-lean-evidence-month2-w10-cp-import-budget-failure-modes"
+        ],
+        "restart": {
+          "MaximumRetryCount": 0,
+          "Name": "no"
+        },
+        "status": "Up About a minute"
+      },
+      {
+        "id": "e0ad11fe4f146ff7ec35a7280362269b6f45bc8c4db1cee881e0799f907c185b",
+        "names": [
+          "/arli-relay"
+        ],
+        "restart": {
+          "MaximumRetryCount": 0,
+          "Name": "unless-stopped"
+        },
+        "status": "Up About a minute"
+      }
+    ],
+    "failed_gate_supervisor": {
+      "command": [
+        "/usr/bin/python3",
+        "/home/ehrli/nnue-owned-morning-20260930/benchmark-source-v2/scripts/candidate-match/smp_match_stage.py",
+        "--config",
+        "/home/ehrli/nnue-owned-morning-20260930/smp/matches/width4-gate/match-stage.json"
+      ],
+      "command_returncode": 143,
+      "cpu_list": "4,6,8,10",
+      "elapsed_seconds": 14371.771585825998,
+      "ended_unix_time": 1790757068.0553203,
+      "final_survivor_check_scope": "procfs PGID plus every previously observed descendant PID",
+      "full_command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/home/ehrli/nnue-owned-morning-20260930/smp/matches/width4-gate/supervised-match/time.txt",
+        "taskset",
+        "-c",
+        "4,6,8,10",
+        "/usr/bin/python3",
+        "/home/ehrli/nnue-owned-morning-20260930/benchmark-source-v2/scripts/candidate-match/smp_match_stage.py",
+        "--config",
+        "/home/ehrli/nnue-owned-morning-20260930/smp/matches/width4-gate/match-stage.json"
+      ],
+      "interrupted_signal": 15,
+      "limit_seconds": 28508.0,
+      "memory_limit_exceeded": false,
+      "memory_limit_kib": 10485760,
+      "monitor_error": null,
+      "orphan_detected": false,
+      "peak_sampled_process_count": 5,
+      "peak_sampled_process_tree_rss_kib": 3063908,
+      "process_group_id": 61586,
+      "sample_interval_seconds": 1.0,
+      "sampling_scope": "leader process group plus observed descendants, including observed reparented descendants",
+      "sigkill_sent": false,
+      "stage": "supervised-match",
+      "started_unix_time": 1790742891.7607706,
+      "state": "FAILED",
+      "supervised_root_pid": 61586,
+      "supervisor_returncode": 143,
+      "surviving_processes": [],
+      "term_grace_seconds": 3.0,
+      "term_sent": true,
+      "termination_reason": "supervisor-signal-15",
+      "timed_out": false,
+      "valid_samples": 14281
+    },
+    "hopper_enabled": "enabled",
+    "schema": "ngn-wsl-maintenance-before-v1",
+    "services": {
+      "arli-hopper.service": "active",
+      "docker.service": "active"
+    },
+    "units": {
+      "ngn-owned-morning-native-v4-20260930": "MainPID=0\nActiveState=inactive\nSubState=dead",
+      "ngn-owned-morning-smp-20260930": "MainPID=0\nActiveState=inactive\nSubState=dead"
+    },
+    "windows_free_gib": 24.448001861572266
+  },
+  "result": {
+    "AfterFreeGiB": 24.494,
+    "AfterVhdGiB": 406.974,
+    "BeforeFreeGiB": 23.965,
+    "BeforeVhdGiB": 409.687,
+    "ExitCode": 0,
+    "KeepaliveState": "Running"
+  },
+  "state": "COMPLETE"
+}

@@ -1,0 +1,1 @@
+NGN_EP_OWNED_NNUE=/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue GOCACHE=/home/ehrli/ngn-personal-correctness-20261001/.gocache-ep-repair GOMAXPROCS=1 GOFLAGS=-p=1 /usr/local/go/bin/go test -short ./engine -run ^TestOwnedK4EnPassantRepetitionReadiness -count=1 -v

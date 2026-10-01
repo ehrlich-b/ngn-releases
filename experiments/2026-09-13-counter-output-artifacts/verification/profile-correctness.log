@@ -1,0 +1,43 @@
+=== RUN   TestCounterTransitionFixedNodeSnapshot
+--- PASS: TestCounterTransitionFixedNodeSnapshot (4.15s)
+=== RUN   TestCounterTransitionAdapterSpecialMovesAndDirectBoards
+=== RUN   TestCounterTransitionAdapterSpecialMovesAndDirectBoards/white_normal
+=== RUN   TestCounterTransitionAdapterSpecialMovesAndDirectBoards/black_normal
+=== RUN   TestCounterTransitionAdapterSpecialMovesAndDirectBoards/white_capture
+=== RUN   TestCounterTransitionAdapterSpecialMovesAndDirectBoards/black_en_passant
+=== RUN   TestCounterTransitionAdapterSpecialMovesAndDirectBoards/white_castle
+=== RUN   TestCounterTransitionAdapterSpecialMovesAndDirectBoards/black_castle
+=== RUN   TestCounterTransitionAdapterSpecialMovesAndDirectBoards/white_promotion
+=== RUN   TestCounterTransitionAdapterSpecialMovesAndDirectBoards/black_promotion_capture
+--- PASS: TestCounterTransitionAdapterSpecialMovesAndDirectBoards (0.03s)
+    --- PASS: TestCounterTransitionAdapterSpecialMovesAndDirectBoards/white_normal (0.00s)
+    --- PASS: TestCounterTransitionAdapterSpecialMovesAndDirectBoards/black_normal (0.00s)
+    --- PASS: TestCounterTransitionAdapterSpecialMovesAndDirectBoards/white_capture (0.00s)
+    --- PASS: TestCounterTransitionAdapterSpecialMovesAndDirectBoards/black_en_passant (0.00s)
+    --- PASS: TestCounterTransitionAdapterSpecialMovesAndDirectBoards/white_castle (0.00s)
+    --- PASS: TestCounterTransitionAdapterSpecialMovesAndDirectBoards/black_castle (0.00s)
+    --- PASS: TestCounterTransitionAdapterSpecialMovesAndDirectBoards/white_promotion (0.00s)
+    --- PASS: TestCounterTransitionAdapterSpecialMovesAndDirectBoards/black_promotion_capture (0.00s)
+=== RUN   TestCounterTransitionAdapterRejectsInvalidState
+--- PASS: TestCounterTransitionAdapterRejectsInvalidState (0.00s)
+=== RUN   TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves
+=== RUN   TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/pseudo-legal_self-check
+=== RUN   TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/empty
+=== RUN   TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/wrong_mover_colour
+=== RUN   TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/missing_source
+=== RUN   TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/quiet_occupied_destination
+=== RUN   TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/capture_victim_mismatch
+=== RUN   TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/invalid_promotion_type
+=== RUN   TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/invalid_castle_squares
+=== RUN   TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/missing_en-passant_victim
+--- PASS: TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves (0.00s)
+    --- PASS: TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/pseudo-legal_self-check (0.00s)
+    --- PASS: TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/empty (0.00s)
+    --- PASS: TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/wrong_mover_colour (0.00s)
+    --- PASS: TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/missing_source (0.00s)
+    --- PASS: TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/quiet_occupied_destination (0.00s)
+    --- PASS: TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/capture_victim_mismatch (0.00s)
+    --- PASS: TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/invalid_promotion_type (0.00s)
+    --- PASS: TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/invalid_castle_squares (0.00s)
+    --- PASS: TestCounterMoveDeltaDirectMatchesSemanticReferenceForIllegalAndMalformedMoves/missing_en-passant_victim (0.00s)
+PASS

@@ -1,0 +1,4868 @@
+{
+  "crash_logs": [
+    {
+      "attribution": "record counts only; process witness is authoritative for process identity and lifecycle",
+      "expected_processes": 1,
+      "initialization_lines": 1,
+      "pairs": 1,
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/artifacts/preflight/k4/ngn_crashes.log",
+      "path_lines": 1,
+      "phase": "preflight",
+      "role_id": "k4",
+      "sha256": "43118eb1d22d8940b63c7eefab3a5ea8117e59d608d5f1a9b81ef6bf0bb7f20d"
+    },
+    {
+      "attribution": "record counts only; process witness is authoritative for process identity and lifecycle",
+      "expected_processes": 1,
+      "initialization_lines": 1,
+      "pairs": 1,
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/artifacts/preflight/rodent/ngn_crashes.log",
+      "path_lines": 1,
+      "phase": "preflight",
+      "role_id": "rodent",
+      "sha256": "c37a6ed458bd8f41e7e157ca94d39fba19381a8ef9594107744edd7206cfb891"
+    },
+    {
+      "attribution": "record counts only; process witness is authoritative for process identity and lifecycle",
+      "expected_processes": 2,
+      "initialization_lines": 2,
+      "pairs": 2,
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/ngn_crashes.log",
+      "path_lines": 2,
+      "phase": "match",
+      "role_id": "k4",
+      "sha256": "160fd415e7ea5ea61c98f4d10481a7b02cf068b08a5c15ec3d7f9ba65c2be8a7"
+    },
+    {
+      "attribution": "record counts only; process witness is authoritative for process identity and lifecycle",
+      "expected_processes": 2,
+      "initialization_lines": 2,
+      "pairs": 2,
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/ngn_crashes.log",
+      "path_lines": 2,
+      "phase": "match",
+      "role_id": "rodent",
+      "sha256": "9ee283ac6fee2eb1bf15dc8d39d5a348afdd0e0d795d4dcf8d02483cc7577580"
+    }
+  ],
+  "ended_utc": "2026-09-23T09:36:35.513830+00:00",
+  "pass": true,
+  "schema": "ngn-candidate-trace-audit-v1",
+  "started_utc": "2026-09-23T09:36:33.630804+00:00",
+  "state": "COMPLETE",
+  "trace": {
+    "canonical_errors": [],
+    "completed_option_sequences": [
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642949854912"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/rodent/network.ngn",
+          "EvalBackend rodent-v1.1-anand",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Borrowed-Rodent-V1.1-Anand",
+        "thread": "124642941462208"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-20M-LR1-20480",
+        "thread": "124642941462208"
+      }
+    ],
+    "engine_lines": 483531,
+    "normal_exits": {
+      "NGN-Borrowed-Rodent-V1.1-Anand": 2,
+      "NGN-Owned-K4-20M-LR1-20480": 2
+    },
+    "pass": true,
+    "probable_embedded_book_signature_plies": 0,
+    "trace_lines": 920951,
+    "warning_lines": 0
+  },
+  "trace_sha256": "05a7ec925ccbb156e72db1136ce5ed2b1a067b7ae699b5a8213e28c9ca97f3b6"
+}

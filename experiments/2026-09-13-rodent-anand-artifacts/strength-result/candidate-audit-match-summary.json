@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "games": 400,
+  "pairs": 200,
+  "count_mode": "exact",
+  "legal_plies": 60198,
+  "results": {
+    "1-0": 153,
+    "1/2-1/2": 134,
+    "0-1": 113
+  },
+  "results_semantics": "PGN result totals by White/Draw/Black, not engine-role WDL",
+  "reasons": {
+    "White mates": 153,
+    "Draw by 3-fold repetition": 93,
+    "Draw by fifty moves rule": 18,
+    "Black mates": 113,
+    "Draw by insufficient mating material": 22,
+    "Draw by stalemate": 1
+  },
+  "probable_embedded_book_signature_plies": 0,
+  "engine_a_points": 254.0,
+  "engine_a_score_rate": 0.635,
+  "engine_a_points_by_color": {
+    "white": 137.0,
+    "black": 117.0
+  },
+  "penta_0_to_4": [
+    5,
+    24,
+    70,
+    60,
+    41
+  ],
+  "ep_normalization_control": {
+    "dead_ep_identity_equal": true,
+    "legal_ep_identity_distinct": true,
+    "legal_ep_move": "b4a3",
+    "pinned_ep_move_illegal": true,
+    "pinned_ep_identity_equal": true,
+    "stockfish_key_observed": {
+      "dead_ep_equal": true,
+      "legal_ep_distinct": true,
+      "pinned_ep_equal": false
+    }
+  },
+  "pgn_sha256": "1c32dd373c86fb372b5a833d24cc55b95454601606b0fca6a3e3a07b9e00c95a",
+  "opening_prefixes_sha256": "2257ecfb9af03f1ee0bff68f71ec97dbe363cdb9f535fab1a0ebc5af1abaaf33",
+  "opening_pgn_sha256": "1ae6a65a0224d7a4ff893a3c999542cd3d05e9a7f0e989fe2deee1cff7b8bf5a",
+  "final_epd_sha256": "6da0bc0ce5d33fa69b2e2c112aff568a27053f7bc7dba45cabbb38abff718777",
+  "stockfish_sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+}

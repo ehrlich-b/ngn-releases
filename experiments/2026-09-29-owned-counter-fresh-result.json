@@ -1,0 +1,121 @@
+{
+  "STATE": {
+    "completed": 1790691369.3551657,
+    "started": 1790677715.8593235,
+    "state": "COMPLETE"
+  },
+  "report": {
+    "schema": "ngn-quickmatch-report-v1",
+    "candidate": "Owned-WDL25",
+    "games": 400,
+    "pairs": 200,
+    "legal_plies": 69062,
+    "results": {
+      "0-1": 107,
+      "1-0": 142,
+      "1/2-1/2": 151
+    },
+    "reasons": {
+      "Black mates": 107,
+      "White mates": 142,
+      "Draw by fifty moves rule": 25,
+      "Draw by insufficient mating material": 21,
+      "Draw by 3-fold repetition": 103,
+      "Draw by stalemate": 2
+    },
+    "penta_0_to_4": [
+      0,
+      8,
+      50,
+      97,
+      45
+    ],
+    "score": 0.72375,
+    "score_interval_95": [
+      0.69625,
+      0.75125
+    ],
+    "elo": 167.3145160169302,
+    "elo_interval_95": [
+      144.0995686301667,
+      192.00855823721307
+    ],
+    "audit_sha256": "d296f1e6baf75702912692d7ce57b18730ffc4ccaca9b72c65fa44ef1b590cd4",
+    "pgn_sha256": "e6015a2eea628ca1cf8ad4f493ec84199935cce6ff0ee7a1fc91916edaf4fba0",
+    "bootstrap": "percentile over pair scores, 20000 resamples, seed 2026092701"
+  },
+  "control": {
+    "audit_sha256": "d296f1e6baf75702912692d7ce57b18730ffc4ccaca9b72c65fa44ef1b590cd4",
+    "configuration": {
+      "concurrency": 6,
+      "cpus": [
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "nodes": null,
+      "strict": false,
+      "tc": "60+0.6"
+    },
+    "instrument": {
+      "common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+      "counter_draw_compat.py": "0a64df56ff32feb7a3f5e93c1aecfe2bac98fded766e448d448c57ed657ae587",
+      "ownedmatch.py": "581fe4ddb5a8033b109769dd9a988bed6e4368a1ea41415a9b11a370c5d7b1f8",
+      "ownedmatch_counterdraw.py": "ba881c5dd3823b9d8bd1ee356f7607b842fd7ddea42827fc6233909d6560e5ea",
+      "process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+      "python_chess_core_1.11.2": "1fde6a8e932508d14b31f6a584497b49c2969fc3c7cdc675347f819f0d667a5b",
+      "quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3",
+      "role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+      "run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+      "trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+      "uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+    },
+    "operational_sha256": "c644c4b8763a14ded1a44a9785b0a203cd54ab68ff9b535334f2a18eb7072c18",
+    "pass": true,
+    "purpose": "anchor",
+    "report_sha256": "aafb40970412da1ec31a7a28fc50531f58927ecfb80f5747f07bf82535f1d621",
+    "role_identity": {
+      "engine": {
+        "path": "/home/ehrli/nnue-owned-continuation-20260928/build/ngn",
+        "sha256": "c2516bb9b1f9fbffbe7f5f863d4b2cb45588d9a347089523400d359ee051b3b2"
+      },
+      "network": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue",
+        "sha256": "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29"
+      },
+      "options": [
+        [
+          "Threads",
+          1
+        ],
+        [
+          "OwnBook",
+          false
+        ],
+        [
+          "EvalFile",
+          "$NETWORK"
+        ],
+        [
+          "EvalBackend",
+          "ngn-k4-768-v1"
+        ],
+        [
+          "Hash",
+          128
+        ],
+        [
+          "Move Overhead",
+          100
+        ],
+        [
+          "K4EvalScale",
+          60
+        ]
+      ]
+    }
+  }
+}

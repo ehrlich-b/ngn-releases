@@ -1,0 +1,18 @@
+{
+  "schema": "ngn-k4-main20m-confirm400-setup-v1",
+  "source_sha256": "974e4b5ab871a9e106d0c766bfa39fc83676222337fb7702f61782e2ac5b3222",
+  "old_a_sha256": "1d044000dca4cf29aac0987cc84bfb11e307a6a27826bc9d068f738ce93d1e3a",
+  "old_b_sha256": "5da172ae1d740d788d7e149ea48847e9b9e340accad3ef0c99440ffe3c315e66",
+  "new_prefixes_sha256": "645894923fa6541a687eac7b65c5d3f09c094c3b503f94ccd26f18c5c695148e",
+  "new_pgn_sha256": "ed36907ffd9711ee917f8c547b6d351a3d52b7ddbb7ec7518bd3b4e54f5fc497",
+  "held_manifest_sha256": "8054dac3d04f0d71f621bc18792a2167d9d1d6830159372f915e262c565b4536",
+  "model_sha256": "cebec29cbab676af6a2ade2b67da5c9a01ddb7882ed604238c0e7d67893f72d6",
+  "new_indices": [
+    4041,
+    4240
+  ],
+  "prefix_sets_disjoint": true,
+  "review_subject_sha256": "59e35609c7b3d1ef57d49c8fcdb6d9bc42069ef44c476f005745ba617fc4df7f",
+  "bootstrap_seed": 2026092201,
+  "bootstrap_replicates": 100000
+}

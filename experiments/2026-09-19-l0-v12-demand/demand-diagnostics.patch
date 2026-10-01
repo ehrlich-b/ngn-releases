@@ -1,0 +1,301 @@
+diff --git a/rodentv12eval/context.go b/rodentv12eval/context.go
+index bab7a16..ece464c 100644
+--- a/rodentv12eval/context.go
++++ b/rodentv12eval/context.go
+@@ -40,13 +40,74 @@ type featureUpdate struct {
+ 	add    bool
+ }
+ 
++const (
++	demandFrameRoot uint8 = iota
++	demandFrameMove
++	demandFrameNull
++)
++
++const demandBothPerspectives uint8 = 1<<uint8(White) | 1<<uint8(Black)
++
++type demandFrame struct {
++	kind        uint8
++	updateCount uint8
++	refresh     Color
++	needMask    uint8
++	direct      bool
++}
++
++// DemandDiagnostics is a disposable L0 observer for measuring accumulator
++// work whose result is never consumed. Counts are per logical frame except
++// fields ending in Perspectives, which count the two accumulator halves
++// separately so a later king refresh can cut only its own dependency chain.
++// This observer is applied only in an isolated diagnostic worktree.
++type DemandDiagnostics struct {
++	EvaluationCalls  uint64 `json:"evaluation_calls"`
++	MovePushes       uint64 `json:"move_pushes"`
++	NullPushes       uint64 `json:"null_pushes"`
++	MaxDepth         uint64 `json:"max_depth"`
++	UnbalancedResets uint64 `json:"unbalanced_resets"`
++
++	MoveFramesRequired       uint64 `json:"move_frames_required"`
++	MoveFramesDirect         uint64 `json:"move_frames_direct"`
++	MoveFramesDescendantOnly uint64 `json:"move_frames_descendant_only"`
++	MoveFramesAbandoned      uint64 `json:"move_frames_abandoned"`
++	NullFramesRequired       uint64 `json:"null_frames_required"`
++	NullFramesDirect         uint64 `json:"null_frames_direct"`
++	NullFramesDescendantOnly uint64 `json:"null_frames_descendant_only"`
++	NullFramesAbandoned      uint64 `json:"null_frames_abandoned"`
++
++	MoveCopyPerspectivesTotal     uint64 `json:"move_copy_perspectives_total"`
++	MoveCopyPerspectivesRequired  uint64 `json:"move_copy_perspectives_required"`
++	MoveCopyPerspectivesAbandoned uint64 `json:"move_copy_perspectives_abandoned"`
++	NullCopyPerspectivesTotal     uint64 `json:"null_copy_perspectives_total"`
++	NullCopyPerspectivesRequired  uint64 `json:"null_copy_perspectives_required"`
++	NullCopyPerspectivesAbandoned uint64 `json:"null_copy_perspectives_abandoned"`
++
++	Update2PerspectivesTotal     uint64 `json:"update2_perspectives_total"`
++	Update2PerspectivesRequired  uint64 `json:"update2_perspectives_required"`
++	Update2PerspectivesAbandoned uint64 `json:"update2_perspectives_abandoned"`
++	Update3PerspectivesTotal     uint64 `json:"update3_perspectives_total"`
++	Update3PerspectivesRequired  uint64 `json:"update3_perspectives_required"`
++	Update3PerspectivesAbandoned uint64 `json:"update3_perspectives_abandoned"`
++	Update4PerspectivesTotal     uint64 `json:"update4_perspectives_total"`
++	Update4PerspectivesRequired  uint64 `json:"update4_perspectives_required"`
++	Update4PerspectivesAbandoned uint64 `json:"update4_perspectives_abandoned"`
++	RefreshPerspectivesTotal     uint64 `json:"refresh_perspectives_total"`
++	RefreshPerspectivesRequired  uint64 `json:"refresh_perspectives_required"`
++	RefreshPerspectivesAbandoned uint64 `json:"refresh_perspectives_abandoned"`
++}
++
+ // SearchContext is one worker's dynamically growing V1.2 accumulator stack.
+ // Frames own both evaluator input state and the two-perspective accumulator.
+ type SearchContext struct {
+-	model        *Model
+-	accumulators []accumulator
+-	positions    []Position
+-	depth        int
++	model             *Model
++	accumulators      []accumulator
++	positions         []Position
++	depth             int
++	demandEnabled     bool
++	demandFrames      []demandFrame
++	demandDiagnostics DemandDiagnostics
+ }
+ 
+ // NewSearchContext validates and fully refreshes the root before publishing a
+@@ -77,6 +138,12 @@ func (context *SearchContext) Reset(root Position) error {
+ 	refreshed := context.model.fullRefresh(root.Board)
+ 	context.accumulators[0] = refreshed
+ 	context.positions[0] = root
++	if context.demandEnabled {
++		if context.depth != 0 {
++			context.demandDiagnostics.UnbalancedResets++
++		}
++		context.demandFrames[0] = demandFrame{kind: demandFrameRoot, refresh: Color(2)}
++	}
+ 	context.depth = 0
+ 	return nil
+ }
+@@ -108,6 +175,12 @@ func (context *SearchContext) EvaluateRaw() (int, error) {
+ 	if err := context.validate(); err != nil {
+ 		return 0, err
+ 	}
++	if context.demandEnabled {
++		context.demandDiagnostics.EvaluationCalls++
++		frame := &context.demandFrames[context.depth]
++		frame.needMask |= demandBothPerspectives
++		frame.direct = true
++	}
+ 	position := context.positions[context.depth]
+ 	return context.model.evaluateAccumulator(
+ 		&context.accumulators[context.depth],
+@@ -116,6 +189,47 @@ func (context *SearchContext) EvaluateRaw() (int, error) {
+ 	), nil
+ }
+ 
++// EnableDemandDiagnostics starts the disposable L0 observer. It may only be
++// enabled on a balanced context so every subsequent pushed frame is classified.
++func (context *SearchContext) EnableDemandDiagnostics() error {
++	if err := context.validate(); err != nil {
++		return err
++	}
++	if context.depth != 0 {
++		return fmt.Errorf("rodent v1.2 demand diagnostics: enable at depth %d, want 0", context.depth)
++	}
++	context.demandEnabled = true
++	context.demandFrames = make([]demandFrame, len(context.accumulators))
++	context.demandFrames[0] = demandFrame{kind: demandFrameRoot, refresh: Color(2)}
++	context.demandDiagnostics = DemandDiagnostics{}
++	return nil
++}
++
++// DiagnosticDemandCounts returns the current disposable L0 counters.
++func (context *SearchContext) DiagnosticDemandCounts() DemandDiagnostics {
++	if context == nil || !context.demandEnabled {
++		return DemandDiagnostics{}
++	}
++	return context.demandDiagnostics
++}
++
++// ResetDiagnosticDemandCounts clears counters between frozen fixtures without
++// disabling the observer or reallocating its frame metadata.
++func (context *SearchContext) ResetDiagnosticDemandCounts() error {
++	if err := context.validate(); err != nil {
++		return err
++	}
++	if !context.demandEnabled {
++		return fmt.Errorf("rodent v1.2 demand diagnostics: observer is disabled")
++	}
++	if context.depth != 0 {
++		return fmt.Errorf("rodent v1.2 demand diagnostics: reset at depth %d, want 0", context.depth)
++	}
++	context.demandDiagnostics = DemandDiagnostics{}
++	context.demandFrames[0] = demandFrame{kind: demandFrameRoot, refresh: Color(2)}
++	return nil
++}
++
+ // EvaluateReleaseStatic returns the current exact V1.2 release static score.
+ func (context *SearchContext) EvaluateReleaseStatic() (int, error) {
+ 	raw, err := context.EvaluateRaw()
+@@ -154,6 +268,9 @@ func (context *SearchContext) PushMove(delta MoveDelta, expectedPost Position) e
+ 	context.model.applyUpdates(child, nextPosition.Board, &updates, updateCount, refreshPerspective)
+ 	context.positions[next] = nextPosition
+ 	context.depth = next
++	if context.demandEnabled {
++		context.recordDemandPush(next, demandFrameMove, updateCount, refreshPerspective)
++	}
+ 	return nil
+ }
+ 
+@@ -171,6 +288,9 @@ func (context *SearchContext) PushNull() error {
+ 	context.positions[next] = context.positions[context.depth]
+ 	context.positions[next].SideToMove ^= 1
+ 	context.depth = next
++	if context.demandEnabled {
++		context.recordDemandPush(next, demandFrameNull, 0, Color(2))
++	}
+ 	return nil
+ }
+ 
+@@ -182,10 +302,111 @@ func (context *SearchContext) Pop() error {
+ 	if context.depth == 0 {
+ 		return fmt.Errorf("rodent v1.2 default search context: cannot pop root frame")
+ 	}
++	if context.demandEnabled {
++		context.classifyDemandPop()
++	}
+ 	context.depth--
+ 	return nil
+ }
+ 
++func (context *SearchContext) recordDemandPush(depth int, kind uint8, updateCount int, refresh Color) {
++	frame := demandFrame{kind: kind, updateCount: uint8(updateCount), refresh: refresh}
++	context.demandFrames[depth] = frame
++	if uint64(depth) > context.demandDiagnostics.MaxDepth {
++		context.demandDiagnostics.MaxDepth = uint64(depth)
++	}
++	if kind == demandFrameNull {
++		context.demandDiagnostics.NullPushes++
++		context.demandDiagnostics.NullCopyPerspectivesTotal += 2
++		return
++	}
++	context.demandDiagnostics.MovePushes++
++	context.demandDiagnostics.MoveCopyPerspectivesTotal += 2
++	updatePerspectives := uint64(2)
++	if refresh == White || refresh == Black {
++		updatePerspectives--
++		context.demandDiagnostics.RefreshPerspectivesTotal++
++	}
++	switch updateCount {
++	case 2:
++		context.demandDiagnostics.Update2PerspectivesTotal += updatePerspectives
++	case 3:
++		context.demandDiagnostics.Update3PerspectivesTotal += updatePerspectives
++	case 4:
++		context.demandDiagnostics.Update4PerspectivesTotal += updatePerspectives
++	}
++}
++
++func demandPerspectiveCount(mask uint8) uint64 {
++	return uint64(bits.OnesCount8(mask & demandBothPerspectives))
++}
++
++func (context *SearchContext) classifyDemandPop() {
++	frame := context.demandFrames[context.depth]
++	parent := &context.demandFrames[context.depth-1]
++	needed := frame.needMask & demandBothPerspectives
++	if frame.kind == demandFrameNull {
++		if needed == 0 {
++			context.demandDiagnostics.NullFramesAbandoned++
++		} else {
++			context.demandDiagnostics.NullFramesRequired++
++			if frame.direct {
++				context.demandDiagnostics.NullFramesDirect++
++			} else {
++				context.demandDiagnostics.NullFramesDescendantOnly++
++			}
++		}
++		required := demandPerspectiveCount(needed)
++		context.demandDiagnostics.NullCopyPerspectivesRequired += required
++		context.demandDiagnostics.NullCopyPerspectivesAbandoned += 2 - required
++		parent.needMask |= needed
++		return
++	}
++
++	if needed == 0 {
++		context.demandDiagnostics.MoveFramesAbandoned++
++	} else {
++		context.demandDiagnostics.MoveFramesRequired++
++		if frame.direct {
++			context.demandDiagnostics.MoveFramesDirect++
++		} else {
++			context.demandDiagnostics.MoveFramesDescendantOnly++
++		}
++	}
++	copyNeeded := needed
++	if frame.refresh == White || frame.refresh == Black {
++		refreshBit := uint8(1) << uint8(frame.refresh)
++		copyNeeded &^= refreshBit
++		if needed&refreshBit != 0 {
++			context.demandDiagnostics.RefreshPerspectivesRequired++
++		} else {
++			context.demandDiagnostics.RefreshPerspectivesAbandoned++
++		}
++	}
++	copyRequired := demandPerspectiveCount(copyNeeded)
++	context.demandDiagnostics.MoveCopyPerspectivesRequired += copyRequired
++	context.demandDiagnostics.MoveCopyPerspectivesAbandoned += 2 - copyRequired
++
++	updateRequired := copyRequired
++	updateTotal := uint64(2)
++	if frame.refresh == White || frame.refresh == Black {
++		updateTotal--
++	}
++	updateAbandoned := updateTotal - updateRequired
++	switch frame.updateCount {
++	case 2:
++		context.demandDiagnostics.Update2PerspectivesRequired += updateRequired
++		context.demandDiagnostics.Update2PerspectivesAbandoned += updateAbandoned
++	case 3:
++		context.demandDiagnostics.Update3PerspectivesRequired += updateRequired
++		context.demandDiagnostics.Update3PerspectivesAbandoned += updateAbandoned
++	case 4:
++		context.demandDiagnostics.Update4PerspectivesRequired += updateRequired
++		context.demandDiagnostics.Update4PerspectivesAbandoned += updateAbandoned
++	}
++	parent.needMask |= copyNeeded
++}
++
+ func (context *SearchContext) validate() error {
+ 	if context == nil || context.model == nil {
+ 		return fmt.Errorf("rodent v1.2 default search context: nil context or model")
+@@ -216,6 +437,11 @@ func (context *SearchContext) ensurePushCapacity() error {
+ 	copy(grownPositions, context.positions)
+ 	context.accumulators = grownAccumulators
+ 	context.positions = grownPositions
++	if context.demandEnabled {
++		grownDemandFrames := make([]demandFrame, newFrames)
++		copy(grownDemandFrames, context.demandFrames)
++		context.demandFrames = grownDemandFrames
++	}
+ 	return nil
+ }
+ 

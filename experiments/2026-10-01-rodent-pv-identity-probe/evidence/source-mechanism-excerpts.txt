@@ -1,0 +1,310 @@
+
+=== tables.go:81-90 ===
+    81	// Move types (stored in bits 15..12 of the move integer)
+    82	const (
+    83		NORMAL = 0 // standard move or capture
+    84		CASTLE = 1 // king castles kingside or queenside
+    85		EP_CAP = 2 // en passant capture
+    86		EP_SET = 3 // double pawn push (sets en passant square)
+    87		N_PROM = 4 // promotion to knight
+    88		B_PROM = 5 // promotion to bishop
+    89		R_PROM = 6 // promotion to rook
+    90		Q_PROM = 7 // promotion to queen
+
+=== tables.go:291-307 ===
+   291	//   A move is a single int with three packed fields:
+   292	//
+   293	//       [ moveType (4) | toSq (6) | fromSq (6) ]
+   294	//        bits 15..12     bits 11..6   bits 5..0
+   295	//
+   296	//   moveFrom / moveTo extract the square fields.
+   297	//   moveType extracts bits 15..12.
+   298	//   isProm is true for any of the four promotion types.
+   299	//   promType maps the move-type back to the promoted piece type
+   300	//   (N_PROM=4 -> N=1, B_PROM=5 -> B=2, R_PROM=6 -> R=3, Q_PROM=7 -> Q=4).
+   301	//
+   302
+   303	func moveFrom(m int) int { return m & 63 }
+   304	func moveTo(m int) int   { return (m >> 6) & 63 }
+   305	func moveType(m int) int { return m >> 12 }
+   306	func isProm(m int) bool  { return m&0x4000 != 0 }
+   307	func promType(m int) int { return (m >> 12) - 3 }
+
+=== gen.go:59-104 ===
+    59		// ---- Pawn captures and promotions ----
+    60		if side == White {
+    61			// Promotion-captures to the left (toward file A).
+    62			// Source: White pawns on rank 7, not on file A, shifted +7.
+    63			bb := ((p.pieceBB(White, P) & ^fileABB & rank7BB) << 7) & p.colorBB[Black]
+    64			for bb != 0 {
+    65				to := lsb(bb)
+    66				list[n] = (Q_PROM << 12) | (to << 6) | (to - 7)
+    67				n++
+    68				list[n] = (R_PROM << 12) | (to << 6) | (to - 7)
+    69				n++
+    70				list[n] = (B_PROM << 12) | (to << 6) | (to - 7)
+    71				n++
+    72				list[n] = (N_PROM << 12) | (to << 6) | (to - 7)
+    73				n++
+    74				bb &= bb - 1
+    75			}
+    76			// Promotion-captures to the right (toward file H).
+    77			bb = ((p.pieceBB(White, P) & ^fileHBB & rank7BB) << 9) & p.colorBB[Black]
+    78			for bb != 0 {
+    79				to := lsb(bb)
+    80				list[n] = (Q_PROM << 12) | (to << 6) | (to - 9)
+    81				n++
+    82				list[n] = (R_PROM << 12) | (to << 6) | (to - 9)
+    83				n++
+    84				list[n] = (B_PROM << 12) | (to << 6) | (to - 9)
+    85				n++
+    86				list[n] = (N_PROM << 12) | (to << 6) | (to - 9)
+    87				n++
+    88				bb &= bb - 1
+    89			}
+    90			// Quiet promotions (pawn on rank 7 pushes straight to rank 8).
+    91			bb = ((p.pieceBB(White, P) & rank7BB) << 8) & p.empty()
+    92			for bb != 0 {
+    93				to := lsb(bb)
+    94				list[n] = (Q_PROM << 12) | (to << 6) | (to - 8)
+    95				n++
+    96				list[n] = (R_PROM << 12) | (to << 6) | (to - 8)
+    97				n++
+    98				list[n] = (B_PROM << 12) | (to << 6) | (to - 8)
+    99				n++
+   100				list[n] = (N_PROM << 12) | (to << 6) | (to - 8)
+   101				n++
+   102				bb &= bb - 1
+   103			}
+   104			// Normal captures left (no rank-7 pawns, no file-A pawns).
+
+=== gen.go:132-175 ===
+   132			// Black pawns advance in the decreasing-index direction (>>).
+   133			// Promotion-captures left (from Black's perspective: toward file A, shift >>9).
+   134			bb := ((p.pieceBB(Black, P) & ^fileABB & rank2BB) >> 9) & p.colorBB[White]
+   135			for bb != 0 {
+   136				to := lsb(bb)
+   137				list[n] = (Q_PROM << 12) | (to << 6) | (to + 9)
+   138				n++
+   139				list[n] = (R_PROM << 12) | (to << 6) | (to + 9)
+   140				n++
+   141				list[n] = (B_PROM << 12) | (to << 6) | (to + 9)
+   142				n++
+   143				list[n] = (N_PROM << 12) | (to << 6) | (to + 9)
+   144				n++
+   145				bb &= bb - 1
+   146			}
+   147			// Promotion-captures right (>>7).
+   148			bb = ((p.pieceBB(Black, P) & ^fileHBB & rank2BB) >> 7) & p.colorBB[White]
+   149			for bb != 0 {
+   150				to := lsb(bb)
+   151				list[n] = (Q_PROM << 12) | (to << 6) | (to + 7)
+   152				n++
+   153				list[n] = (R_PROM << 12) | (to << 6) | (to + 7)
+   154				n++
+   155				list[n] = (B_PROM << 12) | (to << 6) | (to + 7)
+   156				n++
+   157				list[n] = (N_PROM << 12) | (to << 6) | (to + 7)
+   158				n++
+   159				bb &= bb - 1
+   160			}
+   161			// Quiet promotions.
+   162			bb = ((p.pieceBB(Black, P) & rank2BB) >> 8) & p.empty()
+   163			for bb != 0 {
+   164				to := lsb(bb)
+   165				list[n] = (Q_PROM << 12) | (to << 6) | (to + 8)
+   166				n++
+   167				list[n] = (R_PROM << 12) | (to << 6) | (to + 8)
+   168				n++
+   169				list[n] = (B_PROM << 12) | (to << 6) | (to + 8)
+   170				n++
+   171				list[n] = (N_PROM << 12) | (to << 6) | (to + 8)
+   172				n++
+   173				bb &= bb - 1
+   174			}
+   175			// Normal captures left.
+
+=== legal.go:125-160 ===
+   125		// --- Pawn-specific checks for NORMAL and promotion moves ---
+   126		if fromType == P {
+   127			if side == White {
+   128				// A White pawn on rank 7 must promote; a non-promotion here is illegal.
+   129				if rankOf(from) == 7 && !isProm(move) {
+   130					return false
+   131				}
+   132				// Straight push: must land on an empty square.
+   133				if to-from == 8 {
+   134					return toType == NO_TP
+   135				}
+   136				// Diagonal capture: must land on an enemy piece.
+   137				if (to-from == 7 && fileOf(from) != 0) || (to-from == 9 && fileOf(from) != 7) {
+   138					return toType != NO_TP
+   139				}
+   140			} else {
+   141				if rankOf(from) == 0 && !isProm(move) {
+   142					return false
+   143				}
+   144				if from-to == 8 {
+   145					return toType == NO_TP
+   146				}
+   147				if (from-to == 7 && fileOf(from) != 7) || (from-to == 9 && fileOf(from) != 0) {
+   148					return toType != NO_TP
+   149				}
+   150			}
+   151			return false
+   152		}
+   153
+   154		// Non-pawn pieces must not carry a promotion flag.
+   155		if isProm(move) {
+   156			return false
+   157		}
+   158
+   159		// The piece must be able to reach the target square.
+   160		return attacksFrom(p, from)&squareBit(to) != 0
+
+=== movepick.go:82-134 ===
+    82	// to the next.
+    83	func (m *MovePicker) nextMove() (int, MoveGenStage) {
+    84	startPhase:
+    85		switch m.phase {
+    86		case StageTTMove:
+    87			move := m.ttMove
+    88			m.phase = StageGenCaptures
+    89			if move != 0 && isLegal(m.p, move) {
+    90				return move, StageTTMove
+    91			}
+    92			goto startPhase
+    93
+    94		case StageGenCaptures:
+    95			m.end = genCaptures(m.p, m.move[:])
+    96			m.cur = 0
+    97			m.badCount = 0
+    98			scoreCaptures(m)
+    99			m.phase = StageGoodCaptures
+   100			goto startPhase
+   101
+   102		case StageGoodCaptures:
+   103			for m.cur < m.end {
+   104				move := m.pickBest()
+   105				if move == m.ttMove {
+   106					continue
+   107				}
+   108				if isBadCapture(m.p, move) {
+   109					m.badCaps[m.badCount] = move
+   110					m.badCount++
+   111					continue
+   112				}
+   113				return move, StageGoodCaptures
+   114			}
+   115			m.phase = StageKiller1
+   116			goto startPhase
+   117
+   118		case StageKiller1:
+   119			move := m.killer1
+   120			m.phase = StageKiller2
+   121			if move != 0 && move != m.ttMove &&
+   122				m.p.board[moveTo(move)] == NO_PC && isLegal(m.p, move) {
+   123				return move, StageKiller1
+   124			}
+   125			goto startPhase
+   126
+   127		case StageKiller2:
+   128			move := m.killer2
+   129			m.phase = StageGenQuiet
+   130			if move != 0 && move != m.ttMove &&
+   131				m.p.board[moveTo(move)] == NO_PC && isLegal(m.p, move) {
+   132				return move, StageKiller2
+   133			}
+   134			goto startPhase
+
+=== trans.go:94-109 ===
+    94	func packTTData(key uint64, move, score, depth, bound, date int) uint64 {
+    95		return uint64(uint16(int16(move))) |
+    96			uint64(uint16(int16(score)))<<16 |
+    97			uint64(uint8(depth))<<32 |
+    98			uint64(uint8(bound))<<40 |
+    99			uint64(uint8(date&63))<<42 |
+   100			(key & 0xFFFF000000000000)
+   101	}
+   102
+   103	func unpackTTData(d uint64) (move, score, depth, bound, date int) {
+   104		move = int(int16(d))
+   105		score = int(int16(d >> 16))
+   106		depth = int(uint8(d >> 32))
+   107		bound = int((d >> 40) & 3)
+   108		date = int((d >> 42) & 63)
+   109		return
+
+=== trans.go:226-245 ===
+   226	// probe looks up a position in the transposition table.
+   227	//
+   228	// If a matching entry is found, *move is set to the stored best move
+   229	// and *score is set to the stored score.  Returns true only when the
+   230	// score can be used directly as a cutoff (depth sufficient + bound
+   231	// matches window).  The move hint is always returned on a key match
+   232	// so the search can try it first regardless of depth.
+   233	func (t *TTable) probe(key uint64, move *int, score *int, flag *int, ttDepth *int, alpha, beta, depth, ply int) bool {
+   234		base := int(key) & t.mask
+   235		bucket := t.entries[base : base+4]
+   236		for i := range bucket {
+   237			e := &bucket[i]
+   238			data := atomic.LoadUint64(&e.data)
+   239			if (data ^ key) & 0xFFFF000000000000 != 0 {
+   240				continue
+   241			}
+   242			mv, sc, dp, bd, _ := unpackTTData(data)
+   243
+   244			*move = mv
+   245			*flag = bd
+
+=== uci.go:714-747 ===
+   714	func writeMove(buf *bytes.Buffer, move int, useChess960 bool) {
+   715		from := moveFrom(move)
+   716		to := moveTo(move)
+   717
+   718		toFile := fileOf(to)
+   719		toRank := rankOf(to)
+   720
+   721		if moveType(move) == CASTLE && !useChess960 {
+   722			if to > from {
+   723				toFile = 6 // 'g'
+   724			} else {
+   725				toFile = 2 // 'c'
+   726			}
+   727		}
+   728
+   729		buf.WriteByte(byte('a' + fileOf(from)))
+   730		buf.WriteByte(byte('1' + rankOf(from)))
+   731		buf.WriteByte(byte('a' + toFile))
+   732		buf.WriteByte(byte('1' + toRank))
+   733		if isProm(move) {
+   734			const promChars = "nbrq"
+   735			buf.WriteByte(promChars[(move>>12)&3])
+   736		}
+   737	}
+   738
+   739	func writePV(buf *bytes.Buffer, pv []int) {
+   740		for i, move := range pv {
+   741			if move == 0 {
+   742				break
+   743			}
+   744			if i > 0 {
+   745				buf.WriteByte(' ')
+   746			}
+   747			writeMove(buf, move, useChess960)
+
+=== uci.go:767-780 ===
+   767	// buildPV prepends move to src and writes the result into dst,
+   768	// keeping the principal variation buffer current after each alpha improvement.
+   769	func buildPV(dst, src []int, move int) {
+   770		dst[0] = move
+   771		i := 1
+   772		for i < len(dst) {
+   773			if src[i-1] == 0 {
+   774				break
+   775			}
+   776			dst[i] = src[i-1]
+   777			i++
+   778		}
+   779		if i < len(dst) {
+   780			dst[i] = 0

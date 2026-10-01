@@ -1,0 +1,352 @@
+diff --git a/countereval/feature_updates_amd64_v3.go b/countereval/feature_updates_amd64_v3.go
+index 7d02e3b..8af96be 100644
+--- a/countereval/feature_updates_amd64_v3.go
++++ b/countereval/feature_updates_amd64_v3.go
+@@ -3,6 +3,7 @@
+ package countereval
+ 
+ const featureUpdateRowsUseAVX2 = true
++const fusedFeatureUpdatesUseAVX2 = true
+ 
+ // These pairs fail compilation if the fixed Counter hidden width changes
+ // without a corresponding kernel review.
+@@ -24,3 +25,37 @@ func addFeatureRowAVX2(accumulator, weights *[HiddenSize]float32)
+ 
+ //go:noescape
+ func subFeatureRowAVX2(accumulator, weights *[HiddenSize]float32)
++
++// copyAndApplyFeatureUpdates handles only deriveTransition's three reachable
++// semantic sequences. Its child and parent arguments refer to distinct search
++// frames and are acquired only after any stack growth.
++func copyAndApplyFeatureUpdates(
++	child, parent *[HiddenSize]float32,
++	model *Model,
++	updates *[4]featureUpdate,
++	updateCount int,
++) {
++	row := func(index int) *[HiddenSize]float32 {
++		base := updates[index].feature * HiddenSize
++		return (*[HiddenSize]float32)(model.hiddenWeights[base : base+HiddenSize])
++	}
++	switch updateCount {
++	case 2: // moving piece remove, destination add
++		copyAndUpdate2AVX2(child, parent, row(0), row(1))
++	case 3: // moving piece remove, capture remove, destination add
++		copyAndUpdate3AVX2(child, parent, row(0), row(1), row(2))
++	case 4: // king remove/add, rook remove/add
++		copyAndUpdate4AVX2(child, parent, row(0), row(1), row(2), row(3))
++	default:
++		panic("counter evaluator: unreachable fused feature-update count")
++	}
++}
++
++//go:noescape
++func copyAndUpdate2AVX2(child, parent, remove, add *[HiddenSize]float32)
++
++//go:noescape
++func copyAndUpdate3AVX2(child, parent, remove0, remove1, add *[HiddenSize]float32)
++
++//go:noescape
++func copyAndUpdate4AVX2(child, parent, remove0, add0, remove1, add1 *[HiddenSize]float32)
+diff --git a/countereval/feature_updates_amd64_v3.s b/countereval/feature_updates_amd64_v3.s
+index 1e3fb30..4cf6fdb 100644
+--- a/countereval/feature_updates_amd64_v3.s
++++ b/countereval/feature_updates_amd64_v3.s
+@@ -34,3 +34,75 @@ sub_loop:
+ 	JNZ sub_loop
+ 	VZEROUPPER
+ 	RET
++
++// Copy a parent frame and apply the ordinary move sequence: subtract, add.
++TEXT ·copyAndUpdate2AVX2(SB), NOSPLIT, $0-32
++	MOVQ child+0(FP), AX
++	MOVQ parent+8(FP), BX
++	MOVQ remove+16(FP), CX
++	MOVQ add+24(FP), DX
++	MOVL $64, SI
++copy_update2_loop:
++	VMOVUPS (BX), Y0
++	VSUBPS (CX), Y0, Y0
++	VADDPS (DX), Y0, Y0
++	VMOVUPS Y0, (AX)
++	ADDQ $32, AX
++	ADDQ $32, BX
++	ADDQ $32, CX
++	ADDQ $32, DX
++	DECL SI
++	JNZ copy_update2_loop
++	VZEROUPPER
++	RET
++
++// Copy a parent frame and apply a capture sequence: subtract, subtract, add.
++TEXT ·copyAndUpdate3AVX2(SB), NOSPLIT, $0-40
++	MOVQ child+0(FP), AX
++	MOVQ parent+8(FP), BX
++	MOVQ remove0+16(FP), CX
++	MOVQ remove1+24(FP), DX
++	MOVQ add+32(FP), SI
++	MOVL $64, DI
++copy_update3_loop:
++	VMOVUPS (BX), Y0
++	VSUBPS (CX), Y0, Y0
++	VSUBPS (DX), Y0, Y0
++	VADDPS (SI), Y0, Y0
++	VMOVUPS Y0, (AX)
++	ADDQ $32, AX
++	ADDQ $32, BX
++	ADDQ $32, CX
++	ADDQ $32, DX
++	ADDQ $32, SI
++	DECL DI
++	JNZ copy_update3_loop
++	VZEROUPPER
++	RET
++
++// Copy a parent frame and apply castling: subtract, add, subtract, add.
++TEXT ·copyAndUpdate4AVX2(SB), NOSPLIT, $0-48
++	MOVQ child+0(FP), AX
++	MOVQ parent+8(FP), BX
++	MOVQ remove0+16(FP), CX
++	MOVQ add0+24(FP), DX
++	MOVQ remove1+32(FP), SI
++	MOVQ add1+40(FP), DI
++	MOVL $64, R8
++copy_update4_loop:
++	VMOVUPS (BX), Y0
++	VSUBPS (CX), Y0, Y0
++	VADDPS (DX), Y0, Y0
++	VSUBPS (SI), Y0, Y0
++	VADDPS (DI), Y0, Y0
++	VMOVUPS Y0, (AX)
++	ADDQ $32, AX
++	ADDQ $32, BX
++	ADDQ $32, CX
++	ADDQ $32, DX
++	ADDQ $32, SI
++	ADDQ $32, DI
++	DECL R8
++	JNZ copy_update4_loop
++	VZEROUPPER
++	RET
+diff --git a/countereval/feature_updates_amd64_v3_test.go b/countereval/feature_updates_amd64_v3_test.go
+index 5221b0b..cce1a43 100644
+--- a/countereval/feature_updates_amd64_v3_test.go
++++ b/countereval/feature_updates_amd64_v3_test.go
+@@ -5,7 +5,7 @@ package countereval
+ import "testing"
+ 
+ func TestFeatureUpdateRowsSelectAVX2(t *testing.T) {
+-	if !featureUpdateRowsUseAVX2 {
+-		t.Fatal("GOAMD64 v3 did not select Counter AVX2 feature-row kernels")
++	if !featureUpdateRowsUseAVX2 || !fusedFeatureUpdatesUseAVX2 {
++		t.Fatal("GOAMD64 v3 did not select all Counter AVX2 feature-update kernels")
+ 	}
+ }
+diff --git a/countereval/feature_updates_fallback.go b/countereval/feature_updates_fallback.go
+index 10b60ce..91e9d99 100644
+--- a/countereval/feature_updates_fallback.go
++++ b/countereval/feature_updates_fallback.go
+@@ -3,6 +3,7 @@
+ package countereval
+ 
+ const featureUpdateRowsUseAVX2 = false
++const fusedFeatureUpdatesUseAVX2 = false
+ 
+ func addFeatureRow(accumulator, weights *[HiddenSize]float32) {
+ 	addFeatureRowPortable(accumulator, weights)
+@@ -11,3 +12,16 @@ func addFeatureRow(accumulator, weights *[HiddenSize]float32) {
+ func subFeatureRow(accumulator, weights *[HiddenSize]float32) {
+ 	subFeatureRowPortable(accumulator, weights)
+ }
++
++// Preserve the established portable copy followed by ordered complete-row
++// updates. Only amd64.v3 replaces this sequence with fused lane-independent
++// arithmetic.
++func copyAndApplyFeatureUpdates(
++	child, parent *[HiddenSize]float32,
++	model *Model,
++	updates *[4]featureUpdate,
++	updateCount int,
++) {
++	*child = *parent
++	applyFeatureUpdates(child, model, updates, updateCount)
++}
+diff --git a/countereval/feature_updates_fallback_test.go b/countereval/feature_updates_fallback_test.go
+index 93ea793..5d33846 100644
+--- a/countereval/feature_updates_fallback_test.go
++++ b/countereval/feature_updates_fallback_test.go
+@@ -5,7 +5,7 @@ package countereval
+ import "testing"
+ 
+ func TestFeatureUpdateRowsSelectPortableFallback(t *testing.T) {
+-	if featureUpdateRowsUseAVX2 {
+-		t.Fatal("non-v3 build selected Counter AVX2 feature-row kernels")
++	if featureUpdateRowsUseAVX2 || fusedFeatureUpdatesUseAVX2 {
++		t.Fatal("non-v3 build selected a Counter AVX2 feature-update kernel")
+ 	}
+ }
+diff --git a/countereval/feature_updates_test.go b/countereval/feature_updates_test.go
+index f876127..598c86f 100644
+--- a/countereval/feature_updates_test.go
++++ b/countereval/feature_updates_test.go
+@@ -145,3 +145,77 @@ func requireFeatureRowBits(t *testing.T, got, want [HiddenSize]float32, seed int
+ 		}
+ 	}
+ }
++
++func TestCopyAndApplyFeatureUpdatesMatchesOrderedPortableBits(t *testing.T) {
++	cases := []struct {
++		name    string
++		updates [4]featureUpdate
++		count   int
++	}{
++		{"ordinary", [4]featureUpdate{{feature: 17}, {feature: 205, add: true}}, 2},
++		{"capture", [4]featureUpdate{{feature: 17}, {feature: 205}, {feature: 390, add: true}}, 3},
++		{"castle", [4]featureUpdate{{feature: 17}, {feature: 205, add: true}, {feature: 390}, {feature: 767, add: true}}, 4},
++	}
++	for _, test := range cases {
++		t.Run(test.name, func(t *testing.T) {
++			model := &Model{}
++			var parent, child [HiddenSize]float32
++			for lane := range parent {
++				parent[lane] = float32((lane%29)-14) * 0.125
++				child[lane] = math.Float32frombits(0x7fc00000 | uint32(lane+1))
++				for row := 0; row < test.count; row++ {
++					feature := test.updates[row].feature
++					model.hiddenWeights[feature*HiddenSize+lane] = float32(((lane+row*11)%31)-15) * 0.0625
++				}
++			}
++
++			// Dedicated lanes exercise cancellation/order, signed zero,
++			// subnormal boundaries, and halfway rounding across multiple rows.
++			parent[0] = 1e20
++			parent[1] = math.Float32frombits(0x80000000)
++			parent[2] = math.Float32frombits(0x00800000)
++			parent[3] = 1
++			for row := 0; row < test.count; row++ {
++				base := test.updates[row].feature * HiddenSize
++				switch row {
++				case 0:
++					model.hiddenWeights[base] = 1e20
++					model.hiddenWeights[base+1] = 0
++					model.hiddenWeights[base+2] = math.SmallestNonzeroFloat32
++					model.hiddenWeights[base+3] = math.Float32frombits(0x33800000)
++				case 1:
++					model.hiddenWeights[base] = 1
++					model.hiddenWeights[base+1] = math.Float32frombits(0x80000000)
++					model.hiddenWeights[base+2] = math.SmallestNonzeroFloat32
++					model.hiddenWeights[base+3] = math.Float32frombits(0x33800000)
++				default:
++					model.hiddenWeights[base] = 1
++					model.hiddenWeights[base+1] = 0
++					model.hiddenWeights[base+2] = -math.SmallestNonzeroFloat32
++					model.hiddenWeights[base+3] = math.Float32frombits(0x34000000)
++				}
++			}
++
++			parentBefore := parent
++			var weightsBefore [4][HiddenSize]float32
++			for row := 0; row < test.count; row++ {
++				base := test.updates[row].feature * HiddenSize
++				copy(weightsBefore[row][:], model.hiddenWeights[base:base+HiddenSize])
++			}
++			want := parent
++			applyTestUpdates(model, &want, test.updates[:test.count])
++			copyAndApplyFeatureUpdates(&child, &parent, model, &test.updates, test.count)
++
++			requireAccumulatorBits(t, child, want)
++			requireAccumulatorBits(t, parent, parentBefore)
++			for row := 0; row < test.count; row++ {
++				base := test.updates[row].feature * HiddenSize
++				for lane := 0; lane < HiddenSize; lane++ {
++					if got, want := math.Float32bits(model.hiddenWeights[base+lane]), math.Float32bits(weightsBefore[row][lane]); got != want {
++						t.Fatalf("row=%d lane=%d weight bits=%08x want=%08x", row, lane, got, want)
++					}
++				}
++			}
++		})
++	}
++}
+diff --git a/countereval/search_context.go b/countereval/search_context.go
+index d9f6447..8d3aa31 100644
+--- a/countereval/search_context.go
++++ b/countereval/search_context.go
+@@ -104,8 +104,9 @@ func (context *SearchContext) PushMove(delta MoveDelta, expectedPost Board) erro
+ 	}
+ 
+ 	next := context.depth + 1
+-	context.accumulators[next] = context.accumulators[context.depth]
+-	applyFeatureUpdates(&context.accumulators[next], context.model, &updates, updateCount)
++	parent := &context.accumulators[context.depth]
++	child := &context.accumulators[next]
++	copyAndApplyFeatureUpdates(child, parent, context.model, &updates, updateCount)
+ 	context.boards[next] = nextBoard
+ 	context.depth = next
+ 	return nil
+diff --git a/countereval/search_context_test.go b/countereval/search_context_test.go
+index 2ed5229..9242e4c 100644
+--- a/countereval/search_context_test.go
++++ b/countereval/search_context_test.go
+@@ -104,6 +104,62 @@ func TestSearchContextRejectsBeforeCapacityGrowth(t *testing.T) {
+ 	requireAccumulatorBits(t, context.accumulators[context.depth], beforeAccumulator)
+ }
+ 
++func TestSearchContextMoveGrowsThenPreservesParentAndPop(t *testing.T) {
++	const from = 8
++	const to = 16
++	fromFeature := from
++	toFeature := to
++	model := loadedSearchModel(t, map[int]float32{
++		hiddenWeightsStart + fromFeature*HiddenSize: 1e20,
++		hiddenWeightsStart + toFeature*HiddenSize:   1,
++		outputWeightsStart:                          1,
++	})
++	root := boardWith(pieceAt(0, from), pieceAt(5, 4), pieceAt(11, 60))
++	post := boardWith(pieceAt(0, to), pieceAt(5, 4), pieceAt(11, 60))
++	context, err := model.NewSearchContext(root)
++	if err != nil {
++		t.Fatal(err)
++	}
++	for context.Depth() < CompatibilityFrameCount-1 {
++		if err := context.PushNull(); err != nil {
++			t.Fatal(err)
++		}
++	}
++	parentDepth := context.Depth()
++	parent := context.accumulators[parentDepth]
++	parentRaw := context.EvaluateRaw()
++	fromWeights := model.hiddenWeights[fromFeature*HiddenSize : (fromFeature+1)*HiddenSize]
++	toWeights := model.hiddenWeights[toFeature*HiddenSize : (toFeature+1)*HiddenSize]
++	fromBefore := append([]float32(nil), fromWeights...)
++	toBefore := append([]float32(nil), toWeights...)
++
++	delta := MoveDelta{MovingPlane: 0, From: from, To: to}
++	updates := []featureUpdate{{feature: fromFeature}, {feature: toFeature, add: true}}
++	want := parent
++	applyTestUpdates(model, &want, updates)
++	if err := context.PushMove(delta, post); err != nil {
++		t.Fatal(err)
++	}
++	if context.Depth() != CompatibilityFrameCount || context.FrameCapacity() != 2*CompatibilityFrameCount || context.Board() != post {
++		t.Fatalf("depth=%d capacity=%d board=%v", context.Depth(), context.FrameCapacity(), context.Board())
++	}
++	requireAccumulatorBits(t, context.accumulators[parentDepth], parent)
++	requireAccumulatorBits(t, context.accumulators[context.depth], want)
++	for lane := 0; lane < HiddenSize; lane++ {
++		if math.Float32bits(fromWeights[lane]) != math.Float32bits(fromBefore[lane]) ||
++			math.Float32bits(toWeights[lane]) != math.Float32bits(toBefore[lane]) {
++			t.Fatalf("model weight mutated at lane %d", lane)
++		}
++	}
++	if err := context.Pop(); err != nil {
++		t.Fatal(err)
++	}
++	if context.Depth() != parentDepth || context.Board() != root || math.Float32bits(context.EvaluateRaw()) != math.Float32bits(parentRaw) {
++		t.Fatal("pop after grown move did not restore parent state")
++	}
++	requireAccumulatorBits(t, context.accumulators[context.depth], parent)
++}
++
+ func TestSearchContextUnsafeGrowthIsTransactional(t *testing.T) {
+ 	const updateWeight = float32(1e35)
+ 	model := loadedSearchModel(t, map[int]float32{hiddenWeightsStart: updateWeight})

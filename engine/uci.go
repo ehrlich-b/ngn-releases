@@ -156,7 +156,6 @@ type UCIEngine struct {
 	copyPosition            func(*Position) *Position
 	evaluatorConfig         uciEvaluatorConfig
 	startupDefaults         uciEvaluatorDefaults
-	startupK4EvalScale      int
 	startupOwnBook          bool
 	researchEvaluatorLocked bool
 	ownBook                 bool
@@ -211,25 +210,25 @@ func NewUCIEngine() *UCIEngine {
 	}
 
 	return &UCIEngine{
-		position:           newUCIStartingPosition(),
-		searcher:           NewSearchEngine(),
-		debugMode:          false,
-		engineName:         "ngn",
-		engineAuthor:       "ngn team",
-		version:            "0.1.0",
-		timeManager:        newUCITimeManager(),
-		movesPlayed:        0,
-		lastScore:          0,
-		debugLogger:        logger,
-		rawUCILogger:       rawUCILogger,
-		allowResignation:   false, // Default to no resignation
-		now:                time.Now,
-		copyPosition:       func(pos *Position) *Position { return pos.Copy() },
-		evaluatorConfig:    newUCIEvaluatorConfig(),
-		startupDefaults:    uciEvaluatorDefaults{backend: uciEvaluatorHCE},
-		ownBook:            true,
-		startupOwnBook:     true,
-		startupK4EvalScale: 100,
+		position:                newUCIStartingPosition(),
+		searcher:                NewSearchEngine(),
+		debugMode:               false,
+		engineName:              "ngn",
+		engineAuthor:            "ngn team",
+		version:                 "0.1.0",
+		timeManager:             newUCITimeManager(),
+		movesPlayed:             0,
+		lastScore:               0,
+		debugLogger:             logger,
+		rawUCILogger:            rawUCILogger,
+		allowResignation:        false, // Default to no resignation
+		now:                     time.Now,
+		copyPosition:            func(pos *Position) *Position { return pos.Copy() },
+		evaluatorConfig:         newUCIEvaluatorConfig(),
+		startupDefaults:         uciEvaluatorDefaults{backend: uciEvaluatorHCE},
+		researchEvaluatorLocked: true,
+		ownBook:                 true,
+		startupOwnBook:          true,
 	}
 }
 
@@ -272,19 +271,6 @@ func (uci *UCIEngine) ConfigureStartupThreadScheduler(update func(int)) {
 	if update != nil {
 		update(uci.searcher.ThreadCount())
 	}
-}
-
-// ConfigureStartupK4EvalScale records an explicit startup scale and advertises
-// it as the UCI default. Runtime options do not rewrite that startup default.
-func (uci *UCIEngine) ConfigureStartupK4EvalScale(percent int) error {
-	uci.joinSearch(true)
-	if err := uci.searcher.SetK4EvalScale(percent); err != nil {
-		return err
-	}
-	uci.lifecycleMu.Lock()
-	uci.startupK4EvalScale = percent
-	uci.lifecycleMu.Unlock()
-	return nil
 }
 
 // ConfigureStartupOwnBook lets an explicit launcher retain the audited
@@ -433,7 +419,6 @@ func (uci *UCIEngine) handleUCI(output io.Writer) {
 	name, version, author := uci.engineName, uci.version, uci.engineAuthor
 	evalBackendDefault := uci.startupDefaults.backend
 	evalFileDefault := uci.startupDefaults.file
-	k4ScaleDefault := uci.startupK4EvalScale
 	ownBookDefault := uci.startupOwnBook
 	researchEvaluatorLocked := uci.researchEvaluatorLocked
 	uci.lifecycleMu.Unlock()
@@ -451,10 +436,9 @@ func (uci *UCIEngine) handleUCI(output io.Writer) {
 	uci.sendUCIMessage(output, "option name Threads type spin default 1 min 1 max 64")
 	uci.sendUCIMessage(output, "option name Move Overhead type spin default 100 min 0 max 5000")
 	uci.sendUCIMessage(output, fmt.Sprintf("option name OwnBook type check default %t", ownBookDefault))
-	uci.sendUCIMessage(output, fmt.Sprintf("option name K4EvalScale type spin default %d min %d max %d", k4ScaleDefault, minK4EvalScalePercent, maxK4EvalScalePercent))
 	uci.sendUCIMessage(output, "option name SyzygyPath type string default <empty>")
 	if !researchEvaluatorLocked {
-		uci.sendUCIMessage(output, fmt.Sprintf("option name EvalBackend type combo default %s var hce var ngn-v1 var ngn-k4-768-v1 var sf18-big var counter-5.5 var rodent-v1.1-anand var rodent-v1.2-default", evalBackendDefault))
+		uci.sendUCIMessage(output, fmt.Sprintf("option name EvalBackend type combo default %s var hce var ngn-v1 var sf18-big var counter-5.5", evalBackendDefault))
 		uci.sendUCIMessage(output, fmt.Sprintf("option name EvalFile type string default %s", evalFileDefault))
 	}
 
@@ -523,15 +507,6 @@ func (uci *UCIEngine) handleSetOption(args []string, output io.Writer) {
 					fmt.Fprintf(output, "info string syzygy loaded: %s (%d pieces)\n", optionValue, TBLargestPieceCount())
 				}
 			}
-		}
-	case "k4evalscale":
-		percent, err := strconv.Atoi(optionValue)
-		if err != nil || percent < minK4EvalScalePercent || percent > maxK4EvalScalePercent {
-			break
-		}
-		uci.joinSearch(true)
-		if err := uci.searcher.SetK4EvalScale(percent); err != nil {
-			uci.sendEvalOptionError(output, "%v", err)
 		}
 	case "move overhead":
 		milliseconds, err := strconv.Atoi(optionValue)

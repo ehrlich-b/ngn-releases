@@ -1,0 +1,71 @@
+{
+  "schema": "ngn-counter-fused-receipt-v1",
+  "created_utc": "2026-09-13",
+  "scope": "fused SearchContext parent accumulator copy plus exact ordered 2/3/4-row feature updates",
+  "base_commit": "9ef265664499bc79fa129bf75adb7aaa52b7e5c6",
+  "worktree": "/home/ehrli/repos/ngn-counter-fused-20260913",
+  "go_version": "go version go1.25.5 linux/amd64",
+  "source_state": "uncommitted candidate; no production integration or performance run",
+  "candidate_binary": {
+    "path": "/home/ehrli/repos/ngn-counter-fused-20260913/output/counter-fused-20260913/binaries/engine-fusion-candidate.test",
+    "sha256": "dc552d9d83e7855e364b085b45cd57a0788d8ae47b3c7e420b194af9f274050e",
+    "command": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 /usr/local/go/bin/go -C /home/ehrli/repos/ngn-counter-fused-20260913 test -p 2 -c -o /home/ehrli/repos/ngn-counter-fused-20260913/output/counter-fused-20260913/binaries/engine-fusion-candidate.test ./engine",
+    "exit": 0
+  },
+  "accepted_base_binary": {
+    "path": "/home/ehrli/repos/ngn-counter-profile-20260913/output/gate-base/engine-counter-fusion-base-9ef2656.test",
+    "sha256": "26d0e1fa69ee62e7e1ce809cf144f3265767efb3ee0ffd5909f29474f139f8a7",
+    "size_bytes": 20050226,
+    "command": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 /usr/local/go/bin/go -C /home/ehrli/repos/ngn-counter-profile-20260913 test -p 2 -c -o /home/ehrli/repos/ngn-counter-profile-20260913/output/gate-base/engine-counter-fusion-base-9ef2656.test ./engine",
+    "exit": 0
+  },
+  "patches": {
+    "production": {"path": "receipts/production.patch", "sha256": "8af4bb14087cb931296b29ea2e3fbcc800888ee59e2170bd95f00f91f38ff5c1"},
+    "tests": {"path": "receipts/tests.patch", "sha256": "d1505ba3d64f4f44c141783a5246a4a347c9c795084bfcd27187207256a8833c"},
+    "complete": {"path": "receipts/candidate.patch", "sha256": "8451ce391a2baa86bbb5d2060ca7c3517093b39554743992bfc95bdcc579a3d8"}
+  },
+  "inventories": {
+    "source_files": "receipts/source-files.sha256",
+    "test_logs": "receipts/test-logs.sha256",
+    "frozen_artifacts": "receipts/frozen-artifacts.sha256"
+  },
+  "frozen_inputs": {
+    "cold_probe": {"path": "receipts/probe-inputs/counter_transition_profile_test.go.txt", "sha256": "8623a3f8d486f9fcd3231b835469890ece52e79a9cabcf5bb6d5562d664dea4c"},
+    "persistent_probe": {"path": "receipts/probe-inputs/counter_post_output_profile_test.go.txt", "sha256": "7883232be0870b80531d5a2f7532e5355ab207e61af42a05f3f7c042002fb308"},
+    "prefixes": {"path": "receipts/probe-inputs/counter_profile_prefixes.json", "sha256": "067e3cc3bb62b5d544d0bf0ce9d18c2de7c94e46bf721e443b53f9a64b47303e"}
+  },
+  "verification": [
+    {"name": "focused-v3", "log": "logs/focused-v3.log", "exit_file": "logs/focused-v3.exit", "exit": 0},
+    {"name": "focused-v1", "log": "logs/focused-v1.log", "exit_file": "logs/focused-v1.exit", "exit": 0},
+    {"name": "shortengine", "log": "logs/shortengine.log", "exit_file": "logs/shortengine.exit", "exit": 0},
+    {"name": "raceengine", "log": "logs/raceengine.log", "exit_file": "logs/raceengine.exit", "exit": 0},
+    {"name": "fullshort", "log": "logs/fullshort.log", "exit_file": "logs/fullshort.exit", "exit": 0},
+    {"name": "counteroracle-v1", "log": "logs/counteroracle-v1.log", "exit_file": "logs/counteroracle-v1.exit", "exit": 0},
+    {"name": "counteroracle-v3", "log": "logs/counteroracle-v3.log", "exit_file": "logs/counteroracle-v3.exit", "exit": 0},
+    {"name": "frozen-snapshots", "log": "logs/frozen-snapshots.log", "exit_file": "logs/frozen-snapshots.exit", "exit": 0}
+  ],
+  "preserved_failure": {
+    "name": "fullshort-evidence-layout-failure",
+    "log": "logs/fullshort-evidence-layout-failure.log",
+    "exit_file": "logs/fullshort-evidence-layout-failure.exit",
+    "exit": 1,
+    "classification": "evidence-layout failure, not source/test failure",
+    "cause": "archived probe copies retained .go names under output and were discovered by go test ./... as an incomplete package",
+    "correction": "archive copies renamed to inert .go.txt without changing bytes; live engine probes remained unchanged; required fullshort rerun exited 0"
+  },
+  "snapshots": {
+    "cold": {"path": "receipts/candidate-cold-snapshot.json", "sha256": "2ffbc729295f3794883502e2c74779614623ef132844c795dc72c8d2e1dd1656"},
+    "persistent": {"path": "receipts/candidate-persistent-snapshot.json", "sha256": "8eb00369a0f89d8a9e60bd0116beb70115905aec3adeb89510eec80651c71591"}
+  },
+  "disassembly": {
+    "path": "logs/fused-kernels-disassembly.log",
+    "sha256": "bc8ae93ba2893e9964f2b818db0602655c6bb658c3c0c036325d002955538fdc",
+    "finding": "All three kernels execute 64 eight-float blocks with parent load, exact SA/SSA/SASA VSUBPS/VADDPS order, one child store, VZEROUPPER, and no FMA."
+  },
+  "commands": {
+    "initial_and_correctness": "receipts/run_verification.sh",
+    "corrected_remaining": "receipts/run_remaining.sh",
+    "notes": "Exact commands and environment variables are preserved in these scripts; all compute used GOMAXPROCS<=2 and go test -p 2 except frozen snapshot execution at GOMAXPROCS=1."
+  },
+  "performance_executed": false
+}

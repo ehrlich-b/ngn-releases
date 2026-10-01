@@ -1,0 +1,31 @@
+info string reading book file "books/empty.bin": failure: open books/empty.bin: no such file or directory
+info string reading book file "books/empty.bin": failure: open books/empty.bin: no such file or directory
+
+   ___          __         __   _   __
+  / _ \___  ___/ /__ ___  / /_ | | / /
+ / , _/ _ \/ _  / -_) _ \/ __/ | |/ /
+/_/|_|\___/\_,_/\__/_//_/\__/  |___/
+
+         Rodent V 1.2
+      Type 'uci' or 'help'
+id name Rodent V 1.2 AVX2
+id author Naman Thanki, Pawel Koziol, based on Sungorus by Pablo Vazquez
+option name Hash type spin default 16 min 1 max 4096
+option name Clear Hash type button
+option name UCI_Chess960 type check default false
+option name UCI_LimitStrength type check default false
+option name UCI_Elo type spin default 3000 min 800 max 3000
+option name Threads type spin default 1 min 1 max 256
+info string Loaded NNUE network: nets/rodent_4kb_768hl_8ob_v2.bin
+uciok
+readyok
+readyok
+readyok
+readyok
+readyok
+readyok
+info depth 1 seldepth 1 multipv 1 time 1 nodes 2 nps 2000 hashfull 0 score cp -6 pv a2a4
+info depth 1 seldepth 1 multipv 1 time 1 nodes 5 nps 5000 hashfull 0 score cp 9 pv c2c4
+info depth 1 seldepth 1 multipv 1 time 1 nodes 7 nps 7000 hashfull 0 score cp 37 pv d2d4
+info depth 2 seldepth 3 multipv 1 time 1 nodes 47 nps 47000 hashfull 0 score cp 19 pv d2d4 d7d5
+bestmove d2d4 ponder d7d5

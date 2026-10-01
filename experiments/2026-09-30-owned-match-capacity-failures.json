@@ -1,0 +1,1327 @@
+{
+  "checked_at_unix": 1790734815.805954,
+  "jobs": {
+    "smp": {
+      "queue": {
+        "completed": 1790734079.5240295,
+        "error": "cell did not produce an accepted terminal: width4-gate",
+        "state": "FAILED"
+      },
+      "cell": {
+        "completed": 1790734079.4817264,
+        "error": "host capacity guard failed",
+        "state": "FAILED"
+      },
+      "supervisor": {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ehrli/nnue-owned-smp-20260929/source-v2/scripts/candidate-match/smp_match_stage.py",
+          "--config",
+          "/home/ehrli/nnue-owned-smp-20260929/matches/width4-gate/match-stage.json"
+        ],
+        "command_returncode": 143,
+        "cpu_list": "4,6,8,10",
+        "elapsed_seconds": 19232.36862830499,
+        "ended_unix_time": 1790734079.4513662,
+        "final_survivor_check_scope": "procfs PGID plus every previously observed descendant PID",
+        "full_command": [
+          "/usr/bin/time",
+          "-v",
+          "-o",
+          "/home/ehrli/nnue-owned-smp-20260929/matches/width4-gate/supervised-match/time.txt",
+          "taskset",
+          "-c",
+          "4,6,8,10",
+          "/usr/bin/python3",
+          "/home/ehrli/nnue-owned-smp-20260929/source-v2/scripts/candidate-match/smp_match_stage.py",
+          "--config",
+          "/home/ehrli/nnue-owned-smp-20260929/matches/width4-gate/match-stage.json"
+        ],
+        "interrupted_signal": 15,
+        "limit_seconds": 28800.0,
+        "memory_limit_exceeded": false,
+        "memory_limit_kib": 10485760,
+        "monitor_error": null,
+        "orphan_detected": false,
+        "peak_sampled_process_count": 5,
+        "peak_sampled_process_tree_rss_kib": 3029848,
+        "process_group_id": 676051,
+        "sample_interval_seconds": 1.0,
+        "sampling_scope": "leader process group plus observed descendants, including observed reparented descendants",
+        "sigkill_sent": false,
+        "stage": "supervised-match",
+        "started_unix_time": 1790715158.3318033,
+        "state": "FAILED",
+        "supervised_root_pid": 676051,
+        "supervisor_returncode": 143,
+        "surviving_processes": [],
+        "term_grace_seconds": 3.0,
+        "term_sent": true,
+        "termination_reason": "supervisor-signal-15",
+        "timed_out": false,
+        "valid_samples": 19108
+      },
+      "last_capacity": {
+        "unix_time": 1790734077.853461,
+        "windows_free_gib": 24.932533264160156,
+        "memory_available_kib": 11300044,
+        "loadavg": "5.04 5.44 5.32 8/564 859404",
+        "cpu_stat": "cpu  52880294 65133 1161782 110576724 149041 0 522822 0 0 0",
+        "cgroup_memory": {
+          "memory.current": "3796488192",
+          "memory.peak": "9474056192",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+        }
+      },
+      "scored": false
+    },
+    "maelstrom": {
+      "queue": {
+        "completed": 1790734094.9014773,
+        "error": "external benchmark cell lacks accepted terminal: anchor",
+        "state": "FAILED"
+      },
+      "cell": {
+        "completed": 1790734094.8326902,
+        "error": "host capacity guard failed",
+        "state": "FAILED"
+      },
+      "supervisor": {
+        "command": [
+          "/usr/bin/python3",
+          "/home/ehrli/nnue-owned-maelstrom-20260930-v2/benchmark-source/scripts/candidate-match/run_match_stage.py",
+          "--config",
+          "/home/ehrli/nnue-owned-maelstrom-20260930-v2/matches/anchor/match-stage.json"
+        ],
+        "command_returncode": 143,
+        "cpu_list": "12,14",
+        "elapsed_seconds": 31.192001292991336,
+        "ended_unix_time": 1790734094.8058422,
+        "final_survivor_check_scope": "procfs PGID plus every previously observed descendant PID",
+        "full_command": [
+          "/usr/bin/time",
+          "-v",
+          "-o",
+          "/home/ehrli/nnue-owned-maelstrom-20260930-v2/matches/anchor/supervised-match/time.txt",
+          "taskset",
+          "-c",
+          "12,14",
+          "/usr/bin/python3",
+          "/home/ehrli/nnue-owned-maelstrom-20260930-v2/benchmark-source/scripts/candidate-match/run_match_stage.py",
+          "--config",
+          "/home/ehrli/nnue-owned-maelstrom-20260930-v2/matches/anchor/match-stage.json"
+        ],
+        "interrupted_signal": 15,
+        "limit_seconds": 21600.0,
+        "memory_limit_exceeded": false,
+        "memory_limit_kib": 10485760,
+        "monitor_error": null,
+        "orphan_detected": false,
+        "peak_sampled_process_count": 7,
+        "peak_sampled_process_tree_rss_kib": 1502888,
+        "process_group_id": 859122,
+        "sample_interval_seconds": 1.0,
+        "sampling_scope": "leader process group plus observed descendants, including observed reparented descendants",
+        "sigkill_sent": false,
+        "stage": "supervised-match",
+        "started_unix_time": 1790734064.450709,
+        "state": "FAILED",
+        "supervised_root_pid": 859122,
+        "supervisor_returncode": 143,
+        "surviving_processes": [],
+        "term_grace_seconds": 3.0,
+        "term_sent": true,
+        "termination_reason": "supervisor-signal-15",
+        "timed_out": false,
+        "valid_samples": 31
+      },
+      "last_capacity": {
+        "unix_time": 1790734093.5966861,
+        "windows_free_gib": 24.932533264160156,
+        "memory_available_kib": 12525696,
+        "loadavg": "4.51 5.30 5.28 3/544 859869",
+        "cpu_stat": "cpu  52884159 65177 1162046 110597645 149050 0 522980 0 0 0",
+        "cgroup_memory": {
+          "memory.current": "1982922752",
+          "memory.peak": "3271766016",
+          "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+        }
+      },
+      "scored": false
+    }
+  },
+  "no_chess_processes": true,
+  "archive": {
+    "bytes": 78411127,
+    "sha256": "8aae283d3b518d40164841a7675b19e10819d0a4733d6819bfc839e1994e509b",
+    "files": [
+      {
+        "path": "maelstrom/matches/STATE.json",
+        "bytes": 129,
+        "sha256": "fd144692640d6c0720abcd32e8d3c5ceaa21d03378eb0e7bd3506540a49ae81a"
+      },
+      {
+        "path": "maelstrom/matches/aa.json",
+        "bytes": 3097,
+        "sha256": "a391073eb504f7d7b44c720083f4695d459a9ceb543b3ab14fd1ba1b3063f09e"
+      },
+      {
+        "path": "maelstrom/matches/aa.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/aa.stdout",
+        "bytes": 903,
+        "sha256": "896ab4e7717fb5401aa626a7e887b120dda58039eac0e69b5658d87d6335cc5b"
+      },
+      {
+        "path": "maelstrom/matches/aa/STATE.json",
+        "bytes": 93,
+        "sha256": "a6f129226be65455a54db7e73e80faf8b2d7e2e2ee2618c6b2fb68ef927e13d3"
+      },
+      {
+        "path": "maelstrom/matches/aa/audit-operational.json",
+        "bytes": 98420,
+        "sha256": "7b1a3b00a7d824b75a555187b8973c8422e82cae01193266f24789d5a506d854"
+      },
+      {
+        "path": "maelstrom/matches/aa/audit.json",
+        "bytes": 54953,
+        "sha256": "e4187447d20f60ace5400ec308f0c379fe03670736a76d13f18621b5b16ab09c"
+      },
+      {
+        "path": "maelstrom/matches/aa/child-processes.json",
+        "bytes": 4810797,
+        "sha256": "9cd666e7a6962a98e58c0fd2d2aba384de275f80115746de2746ed246a56c9c0"
+      },
+      {
+        "path": "maelstrom/matches/aa/command.json",
+        "bytes": 1848,
+        "sha256": "f7517198d7348f7cf95d0fc95068f568dac2161d73f90d969ae4e29e8ff02e2a"
+      },
+      {
+        "path": "maelstrom/matches/aa/config.json",
+        "bytes": 5377,
+        "sha256": "c3fa239f5af61b5a5b9926a18f7eb84a44568ff46b600f8c4e2329fb5679bf33"
+      },
+      {
+        "path": "maelstrom/matches/aa/control.json",
+        "bytes": 2000,
+        "sha256": "ec8d50173f9f3a21dd1b1bb5f9bc5c6c7715b69445e92d0fd62420cf8242f20a"
+      },
+      {
+        "path": "maelstrom/matches/aa/fastchess.log",
+        "bytes": 98905078,
+        "sha256": "2cf61b704a956edee4c52f7a9641fb77c8a4a4da375f8e985d52eafdcc782931"
+      },
+      {
+        "path": "maelstrom/matches/aa/final.epd",
+        "bytes": 6970,
+        "sha256": "178d8841df6b402cb3ff84b190c7dabef5125ac5024afcad9cd1dced7e9bf5fb"
+      },
+      {
+        "path": "maelstrom/matches/aa/games.pgn",
+        "bytes": 3397001,
+        "sha256": "f9b73a4224abb5c23c8ce3439bd579fe166f7c6b2a36b51adf7a9789fdaa90b4"
+      },
+      {
+        "path": "maelstrom/matches/aa/match-stage.json",
+        "bytes": 3480,
+        "sha256": "ae9798b7c132887b0f7e0ea548189cde20a9e7eed50f9f2cfec3b52a237c9caf"
+      },
+      {
+        "path": "maelstrom/matches/aa/match.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/aa/match.stdout",
+        "bytes": 18541,
+        "sha256": "7fd56a5596d6fbfc879e3aa94b956250dafabb1b0618a7ff9036099b799554a3"
+      },
+      {
+        "path": "maelstrom/matches/aa/opening_prefixes.txt",
+        "bytes": 1920,
+        "sha256": "56e227f07c0e4a72a3bd2d0ce075289c8133e97de8d6c7f6e44bc198262644e9"
+      },
+      {
+        "path": "maelstrom/matches/aa/openings_pgn.pgn",
+        "bytes": 6624,
+        "sha256": "b352f13522f4440c1f12d1e15f84ddd8247749aaa6ff15031703dc4a973799d6"
+      },
+      {
+        "path": "maelstrom/matches/aa/preflight0-crashes.log",
+        "bytes": 247,
+        "sha256": "fe0c4017bfaf6ee2c7629d68d8294f9100976afde7021b6ec261473a06806b93"
+      },
+      {
+        "path": "maelstrom/matches/aa/preflight0.json",
+        "bytes": 8160,
+        "sha256": "3ec0fbc3d441cce94fe0400877f9cbf3b375da5be096ea9cba068d3dec792265"
+      },
+      {
+        "path": "maelstrom/matches/aa/preflight0.jsonl",
+        "bytes": 12946,
+        "sha256": "296d5821cf77584e2def4882cfc9324db23b75850541d69b5cb8694c8b3f882c"
+      },
+      {
+        "path": "maelstrom/matches/aa/preflight1-crashes.log",
+        "bytes": 247,
+        "sha256": "b71155d44b5b80fe4d55b552cfa54ba648939871856eb4d60c03f41da7f5fb70"
+      },
+      {
+        "path": "maelstrom/matches/aa/preflight1.json",
+        "bytes": 8160,
+        "sha256": "bb91f02f9b2471d3304f38f86be997638188a19a6ff1f70c0f4b0a5e6ecbcd59"
+      },
+      {
+        "path": "maelstrom/matches/aa/preflight1.jsonl",
+        "bytes": 12948,
+        "sha256": "c98407a1bd265283f0432d1e89a52f771f65c0d64867b77ce89212b6bd9bc7e1"
+      },
+      {
+        "path": "maelstrom/matches/aa/report.json",
+        "bytes": 903,
+        "sha256": "896ab4e7717fb5401aa626a7e887b120dda58039eac0e69b5658d87d6335cc5b"
+      },
+      {
+        "path": "maelstrom/matches/aa/role0/ngn_crashes.log",
+        "bytes": 494,
+        "sha256": "e8eb3f9dc12c74454b6140a163bac36273716694ec4e011e27e38611ef403e31"
+      },
+      {
+        "path": "maelstrom/matches/aa/role0/role-config.json",
+        "bytes": 320,
+        "sha256": "20095634f3319f5e0dde53d9e4578346cd9ff81337fb131b144cd9be87dcec5d"
+      },
+      {
+        "path": "maelstrom/matches/aa/role0/role_exec.py",
+        "bytes": 1886,
+        "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+      },
+      {
+        "path": "maelstrom/matches/aa/role1/ngn_crashes.log",
+        "bytes": 494,
+        "sha256": "997a0737e1dc5cbca8f7033edfd111df6c8739b3ae8c07b88b55dfa3b589f8a1"
+      },
+      {
+        "path": "maelstrom/matches/aa/role1/role-config.json",
+        "bytes": 320,
+        "sha256": "565523b43abeae9a60fb8a4497af9b0f351d2cbb4603f76f36f4754b7cea823c"
+      },
+      {
+        "path": "maelstrom/matches/aa/role1/role_exec.py",
+        "bytes": 1886,
+        "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+      },
+      {
+        "path": "maelstrom/matches/aa/spec.json",
+        "bytes": 3097,
+        "sha256": "a391073eb504f7d7b44c720083f4695d459a9ceb543b3ab14fd1ba1b3063f09e"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-audit/command.json",
+        "bytes": 1040,
+        "sha256": "0b5f1a44e29edd0490f46d38a40a2c73b580a12c0e87383b9edf9d114cd2f6c3"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-audit/host-capacity.jsonl",
+        "bytes": 381,
+        "sha256": "ccf6b63521f9a85142b1eceba35d6c25bafe6682b78acff3690d00993b02ccb7"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-audit/process-tree.jsonl",
+        "bytes": 1975,
+        "sha256": "28d11aedadb9ffe0564d6a4ea154b95444d0c309ea07d32d1003ec601f3f19d2"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-audit/stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-audit/stdout",
+        "bytes": 1406,
+        "sha256": "70e2caa2fa1dcf1c7f8b23c70d71f1203dc1ecd5e396b61ccbd26b2b64efaa4d"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-audit/supervisor-receipt.json",
+        "bytes": 3397,
+        "sha256": "ea69567b1e9cb53b2f2c8b1a2aed6aa2ab6e9a96d52715cc99a82660dddb6b23"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-audit/time.txt",
+        "bytes": 1641,
+        "sha256": "9cfdab1e6eb2d84a9fe17f7a774ccd64da88f864bd599d2e11143f69b7c46a0b"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-match/command.json",
+        "bytes": 227,
+        "sha256": "27cf706deecc36f421bbb864f0a4359aa8bdb9f142664ee2104df5cba02ff728"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-match/host-capacity.jsonl",
+        "bytes": 26706,
+        "sha256": "c2ddddd8d9cdad6d952515cf595ce55c615458a6ee299d3c1d31d27707112489"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-match/process-tree.jsonl",
+        "bytes": 1453568,
+        "sha256": "710cb3bf26dbb37484696a652e30a4f33c50f32f8cf3b50c1125800cd768705d"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-match/stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-match/stdout",
+        "bytes": 114,
+        "sha256": "6d8743c28d21a13053a8c82479b548a32c6ed4f21281601181db7ba6c5eab894"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-match/supervisor-receipt.json",
+        "bytes": 1681,
+        "sha256": "08162e0d5e850e381fcaf15a063b81821868ac3c6ab046b13695271cb046154c"
+      },
+      {
+        "path": "maelstrom/matches/aa/supervised-match/time.txt",
+        "bytes": 962,
+        "sha256": "f306f5105ae561aaa5da3244f28c45835cb2d970ce5868602f5f0baed14c0441"
+      },
+      {
+        "path": "maelstrom/matches/anchor.json",
+        "bytes": 2810,
+        "sha256": "3630c37db9f7af79e69a63a21da1cf775fa4e9a668e89f62bf0c70d922e7882e"
+      },
+      {
+        "path": "maelstrom/matches/anchor.stderr",
+        "bytes": 812,
+        "sha256": "9affe0b958db2c22cc6cc5a733022ba224d2c24c8531c711d2799512595dada7"
+      },
+      {
+        "path": "maelstrom/matches/anchor.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/anchor/STATE.json",
+        "bytes": 100,
+        "sha256": "c937d991887a4b6cb97667f3df77825037e9009d1659f9adec352f1dadd55419"
+      },
+      {
+        "path": "maelstrom/matches/anchor/child-processes.json",
+        "bytes": 133,
+        "sha256": "4ad50927af2e586e57067c2be64dfbd39dc7b400589b2b1cc0dcafeec8998929"
+      },
+      {
+        "path": "maelstrom/matches/anchor/command.json",
+        "bytes": 1690,
+        "sha256": "bc8ecc48b2e1b1e201109394c39dd269d1ee4cdfe4a318a2d15eae7c2c497412"
+      },
+      {
+        "path": "maelstrom/matches/anchor/fastchess.log",
+        "bytes": 1043813,
+        "sha256": "98648fa6a50719cf1ef2c783a72adfe09939214fb6471efe1088f56cf5da0b18"
+      },
+      {
+        "path": "maelstrom/matches/anchor/final.epd",
+        "bytes": 111,
+        "sha256": "78a9d30f943329f2b6a21fb00fd00adda9a5b966f9c417028b9ff849093c5dc9"
+      },
+      {
+        "path": "maelstrom/matches/anchor/games.pgn",
+        "bytes": 33077,
+        "sha256": "35b97b04985003936e904534995f7c3918c6395829176ab8c82b350803f41f9c"
+      },
+      {
+        "path": "maelstrom/matches/anchor/match-stage.json",
+        "bytes": 3352,
+        "sha256": "6f6e3a33499e4cffb80ebbc9c9e99eedda0219d6ad89d7b94664b2f34fc75e9c"
+      },
+      {
+        "path": "maelstrom/matches/anchor/match.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/anchor/match.stdout",
+        "bytes": 392,
+        "sha256": "d7682f72e55eebc69a82b96a52e8c3115974271887b66e4c2c428a4cd22b8832"
+      },
+      {
+        "path": "maelstrom/matches/anchor/opening_prefixes.txt",
+        "bytes": 6000,
+        "sha256": "c74ab943d3433cd169d05be1051a2292b2bd1830e2e383de94e9d65a02a1da83"
+      },
+      {
+        "path": "maelstrom/matches/anchor/openings_pgn.pgn",
+        "bytes": 20830,
+        "sha256": "bba72c67c8463846710b0681f28cd5394f446c41c7b8e773af058fc57a49bad8"
+      },
+      {
+        "path": "maelstrom/matches/anchor/preflight0-crashes.log",
+        "bytes": 251,
+        "sha256": "e014d38f35ba442bd5e281bb843c4d51bb5446c54fe75d34b1bc836793a374f4"
+      },
+      {
+        "path": "maelstrom/matches/anchor/preflight0.json",
+        "bytes": 8176,
+        "sha256": "4c55a94aa20016f6cba49debea57d418178feda6aac81ab8d3f2957752427937"
+      },
+      {
+        "path": "maelstrom/matches/anchor/preflight0.jsonl",
+        "bytes": 12962,
+        "sha256": "25cd8e76408205ed2d9b767494cda15ffc3b379044ca481e8a5d0141d5f3847f"
+      },
+      {
+        "path": "maelstrom/matches/anchor/preflight1.json",
+        "bytes": 913,
+        "sha256": "f43e570d591db4648306d36c0017594a39246642e0d16b7e07e9514cc9554bed"
+      },
+      {
+        "path": "maelstrom/matches/anchor/preflight1.jsonl",
+        "bytes": 2319,
+        "sha256": "50a3811585e863648701c306031ee3e4f17b2e16020743a042b7b2b7a134b2c7"
+      },
+      {
+        "path": "maelstrom/matches/anchor/role0/ngn_crashes.log",
+        "bytes": 502,
+        "sha256": "7acf705f320dc6000dbcb1a49d7fae35a4072f6982caebc075ba83ed8c071ed1"
+      },
+      {
+        "path": "maelstrom/matches/anchor/role0/role-config.json",
+        "bytes": 328,
+        "sha256": "212a5f9dd4064d4fcaaf2a72e0e3bcf40b871ce92dd8a7146bbfbf510a01fa1a"
+      },
+      {
+        "path": "maelstrom/matches/anchor/role0/role_exec.py",
+        "bytes": 1886,
+        "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+      },
+      {
+        "path": "maelstrom/matches/anchor/role1/role-config.json",
+        "bytes": 328,
+        "sha256": "e77d1a52e1839974644eabf1353913bcc2322389b3fabf36ceed3efe6452ce0f"
+      },
+      {
+        "path": "maelstrom/matches/anchor/role1/role_exec.py",
+        "bytes": 1886,
+        "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+      },
+      {
+        "path": "maelstrom/matches/anchor/spec.json",
+        "bytes": 2810,
+        "sha256": "3630c37db9f7af79e69a63a21da1cf775fa4e9a668e89f62bf0c70d922e7882e"
+      },
+      {
+        "path": "maelstrom/matches/anchor/supervised-match/command.json",
+        "bytes": 231,
+        "sha256": "1b7593f209d96e5123dc50484d86c15bd771aadd864770b1481837a0ce10790e"
+      },
+      {
+        "path": "maelstrom/matches/anchor/supervised-match/host-capacity.jsonl",
+        "bytes": 765,
+        "sha256": "c16996e9cbed22b33c12b371b26a6d4cd33508e68df33e23050ad145e33f4a6f"
+      },
+      {
+        "path": "maelstrom/matches/anchor/supervised-match/process-tree.jsonl",
+        "bytes": 21240,
+        "sha256": "cc07aec101855224a56f0350f653fd29a2128867c97ed310d1c767bcca3f8dfe"
+      },
+      {
+        "path": "maelstrom/matches/anchor/supervised-match/stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/anchor/supervised-match/stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/anchor/supervised-match/supervisor-receipt.json",
+        "bytes": 1708,
+        "sha256": "140b365f0dcc6d970526a1f78e713a5b38c425c6f97bf3add3bc895a2349add0"
+      },
+      {
+        "path": "maelstrom/matches/anchor/supervised-match/time.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/smoke.json",
+        "bytes": 2612,
+        "sha256": "ad8a3d974390cff6e3194b8478946cb9eacbf49771cab119303f269bca892c37"
+      },
+      {
+        "path": "maelstrom/matches/smoke.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/smoke.stdout",
+        "bytes": 288,
+        "sha256": "bd1cb7c9acb11cad3832e6859bd69e5db4674fdabb98cc8ff22a7f766e68d298"
+      },
+      {
+        "path": "maelstrom/matches/smoke/STATE.json",
+        "bytes": 93,
+        "sha256": "bf9dbc28ec0203f6f8f0a42327a6fec889b143c20cab8f8ce1c8efe42be780d3"
+      },
+      {
+        "path": "maelstrom/matches/smoke/audit-operational.json",
+        "bytes": 5770,
+        "sha256": "9af480281851de13be1f4d0397b22071eefabfa07255bac278e9d153b90990c1"
+      },
+      {
+        "path": "maelstrom/matches/smoke/audit.json",
+        "bytes": 4697,
+        "sha256": "ef701976bdc021acafccbf3e434149438107ac68758ee195b43358e54de2dbe5"
+      },
+      {
+        "path": "maelstrom/matches/smoke/child-processes.json",
+        "bytes": 275097,
+        "sha256": "58f6203dd1a64a3e1f58df069cac5c403485cfea6f740e7ef47ea5e5a7bb1477"
+      },
+      {
+        "path": "maelstrom/matches/smoke/command.json",
+        "bytes": 1678,
+        "sha256": "7261e548a69f21cc5d42bed73c6e4529a907e80924de416e704925cfe6b407b4"
+      },
+      {
+        "path": "maelstrom/matches/smoke/config.json",
+        "bytes": 4859,
+        "sha256": "23fa8eff50bf221f8dfe6d85a6f4ecaf499bce5886b3356ab566a0ffb44f0a97"
+      },
+      {
+        "path": "maelstrom/matches/smoke/control.json",
+        "bytes": 2003,
+        "sha256": "0bf1a189ca3c21296ad3b645da2599f89c1a810f1410f166f049b75f87ab6387"
+      },
+      {
+        "path": "maelstrom/matches/smoke/fastchess.log",
+        "bytes": 4736759,
+        "sha256": "5e828cc23e3d1ea9c097a68a8fdfe1123fb3b4ce2d38e3c5c6f5a00d94ca61d4"
+      },
+      {
+        "path": "maelstrom/matches/smoke/final.epd",
+        "bytes": 458,
+        "sha256": "00e4eb21c817410618909728091da46bb22ff4174be25d5563bce1577498b877"
+      },
+      {
+        "path": "maelstrom/matches/smoke/games.pgn",
+        "bytes": 166381,
+        "sha256": "219072dc56fb8b56366d75edfa67d7ed6f52afa70fe1181b00dd9a93cfa28b6c"
+      },
+      {
+        "path": "maelstrom/matches/smoke/match-stage.json",
+        "bytes": 3330,
+        "sha256": "573457cc56fe00fdc50c454cf85c182f32a1a1b3c4999b2c4ad6826f6629e5f4"
+      },
+      {
+        "path": "maelstrom/matches/smoke/match.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/smoke/match.stdout",
+        "bytes": 1542,
+        "sha256": "deba02eca8635ae9b60b7b3e95fc62389a59d44c7a34ae4eef6536ce4d1f40fc"
+      },
+      {
+        "path": "maelstrom/matches/smoke/opening_prefixes.txt",
+        "bytes": 120,
+        "sha256": "971b244ce95c1f65eba86f580966bfb555054e7e6520978af9e5abcebac39472"
+      },
+      {
+        "path": "maelstrom/matches/smoke/openings_pgn.pgn",
+        "bytes": 409,
+        "sha256": "de955aaf6bb0056843143fac684ead9a0a55a0819a98e90812c33f68f8eaf4dc"
+      },
+      {
+        "path": "maelstrom/matches/smoke/preflight0-crashes.log",
+        "bytes": 250,
+        "sha256": "a169f3162c8e5b8619dcfdabf203df9342e3e28a0e8bbc24218d6ae5874cad79"
+      },
+      {
+        "path": "maelstrom/matches/smoke/preflight0.json",
+        "bytes": 8172,
+        "sha256": "f1f57e932e49e4e788ab273680473e89ec5b6e64e2b3ec4be9583998c74e5548"
+      },
+      {
+        "path": "maelstrom/matches/smoke/preflight0.jsonl",
+        "bytes": 12957,
+        "sha256": "ce165536157d07e0ec91cbd9ec318f2e75e2a14297e30f4b64d83276b5192d20"
+      },
+      {
+        "path": "maelstrom/matches/smoke/preflight1.json",
+        "bytes": 913,
+        "sha256": "f43e570d591db4648306d36c0017594a39246642e0d16b7e07e9514cc9554bed"
+      },
+      {
+        "path": "maelstrom/matches/smoke/preflight1.jsonl",
+        "bytes": 2319,
+        "sha256": "4d1a5200b134126c7c318bab345bf34f373f4c2a223ce83d3efeb798b9faec11"
+      },
+      {
+        "path": "maelstrom/matches/smoke/report.json",
+        "bytes": 306,
+        "sha256": "d8ea5d859dc6dbc27c1c0a26552b3658d2cc9519c3c8c4c35919f203e24dba9b"
+      },
+      {
+        "path": "maelstrom/matches/smoke/role0/ngn_crashes.log",
+        "bytes": 500,
+        "sha256": "e0b1d48c33f71b983cab7232117f76a20e32179b853389d96d0552fd45b847f3"
+      },
+      {
+        "path": "maelstrom/matches/smoke/role0/role-config.json",
+        "bytes": 326,
+        "sha256": "5117c419b2a82c53e6d467575125520c385e0d9167da3551b372b22c80acb154"
+      },
+      {
+        "path": "maelstrom/matches/smoke/role0/role_exec.py",
+        "bytes": 1886,
+        "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+      },
+      {
+        "path": "maelstrom/matches/smoke/role1/role-config.json",
+        "bytes": 326,
+        "sha256": "33e77f62c530b8858834c4a7f3ea65df45e5b63125c661310a83020225270906"
+      },
+      {
+        "path": "maelstrom/matches/smoke/role1/role_exec.py",
+        "bytes": 1886,
+        "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+      },
+      {
+        "path": "maelstrom/matches/smoke/spec.json",
+        "bytes": 2612,
+        "sha256": "ad8a3d974390cff6e3194b8478946cb9eacbf49771cab119303f269bca892c37"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-audit/command.json",
+        "bytes": 1069,
+        "sha256": "77be9a56449714330e0aab35d927be296bc927f1cca6d6c22bd741e2fe09b897"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-audit/host-capacity.jsonl",
+        "bytes": 381,
+        "sha256": "4e05a088afa048efa2b68fa2d45897abeebacb08d4a3fc44f2f6a9786c8ff726"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-audit/process-tree.jsonl",
+        "bytes": 253,
+        "sha256": "81c8b5bb9133a75298c36e4f1d69c0b28ab7f82b781610ba73c2476d69d29b8f"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-audit/stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-audit/stdout",
+        "bytes": 1272,
+        "sha256": "ee26fb75d8a22feb7e118371f50dfc5010f4bd0b3f973c552440b101a10bc4db"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-audit/supervisor-receipt.json",
+        "bytes": 3458,
+        "sha256": "fe727a3993e73e1999a41ed21926653445aeec4676a790fcfd1ff6d3517ce04b"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-audit/time.txt",
+        "bytes": 1664,
+        "sha256": "7e0cab1d1a5002c26fe7b3cbdea6959e306676e667d1d6d51c080b0848c0508d"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-match/command.json",
+        "bytes": 230,
+        "sha256": "efad8967984d73d7f20905d2d4269917efd922daa57a2af079146418c1ae139e"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-match/host-capacity.jsonl",
+        "bytes": 1526,
+        "sha256": "a81f3e018c79dd223cb8f680a07034f68bc0fb6b189455d8d11700b314b648a7"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-match/process-tree.jsonl",
+        "bytes": 82063,
+        "sha256": "d4fd054af249bd6667b1fb21df63bf68c68fb4c4e7005848f3684ad7738391b5"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-match/stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-match/stdout",
+        "bytes": 113,
+        "sha256": "7374b3d88174ce504172eecb5a005f4fcda0e1ff9501f5372bea2fd481df1d35"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-match/supervisor-receipt.json",
+        "bytes": 1688,
+        "sha256": "a539b26df97986eff6a2c4a23615b1cd4bc13eb9a81bfe349a0afb448dc4cf1e"
+      },
+      {
+        "path": "maelstrom/matches/smoke/supervised-match/time.txt",
+        "bytes": 958,
+        "sha256": "157596a1e856b78e5d212a9b6430839087df8632ff4d57eff315cc415dfa0b4f"
+      },
+      {
+        "path": "maelstrom/plan.json",
+        "bytes": 6038,
+        "sha256": "549b303d13008cc51abb25f1c2d52735a8241cf0cff43a3b576afad9f68d6a56"
+      },
+      {
+        "path": "maelstrom/unit.json",
+        "bytes": 851,
+        "sha256": "48b67a510271f2be086f9ecaf0a9fe2fc8634afc116e687624fc2a7ba5a77f60"
+      },
+      {
+        "path": "smp/matches/STATE.json",
+        "bytes": 128,
+        "sha256": "2f2b727db0e3b3505e2706da6a9c4ce6e350f0843585f57593e27e82ea2e2d55"
+      },
+      {
+        "path": "smp/matches/width2-aa/STATE.json",
+        "bytes": 94,
+        "sha256": "8052ed6cc8600584b517bffee78431bf843c894d95440f95e421d73f5e7aa031"
+      },
+      {
+        "path": "smp/matches/width2-gate/STATE.json",
+        "bytes": 93,
+        "sha256": "c14eb66b999cc607b2f463689d241676e65ee03a55f55b07c862eaa4cc5fa739"
+      },
+      {
+        "path": "smp/matches/width4-aa.json",
+        "bytes": 3243,
+        "sha256": "8c41f9ab8dd0cd443971b274309cfcb2f4b6b284b81c67fa65a02b3ac33888d3"
+      },
+      {
+        "path": "smp/matches/width4-aa.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "smp/matches/width4-aa.stdout",
+        "bytes": 903,
+        "sha256": "f1f5d1c0b54dd060184ef7bf3cde35705baeaf8fd3f0533f8cd41bdb55861ef6"
+      },
+      {
+        "path": "smp/matches/width4-aa/STATE.json",
+        "bytes": 94,
+        "sha256": "e092494df32e4726e67016e1ec14b1989f0963307883fe7becbe2b27606b1b36"
+      },
+      {
+        "path": "smp/matches/width4-aa/audit-operational.json",
+        "bytes": 98563,
+        "sha256": "365cbd0cdda3e5248027b3baed122d55b8258f92e7ddd3f5a98916ecdb871bdc"
+      },
+      {
+        "path": "smp/matches/width4-aa/audit.json",
+        "bytes": 55183,
+        "sha256": "744a650df5609da2d243d89404dd762e4bbcac27062bf93a87118b6ff9b2ceb0"
+      },
+      {
+        "path": "smp/matches/width4-aa/child-processes.json",
+        "bytes": 14648511,
+        "sha256": "df10427f5d77d7ef39bf562effbe568d87a9bbf7121cc9bf322776cf643eacda"
+      },
+      {
+        "path": "smp/matches/width4-aa/command.json",
+        "bytes": 1830,
+        "sha256": "840c24dbbed19d54afa21052b218346e70849c6795981b36553e68f64505a609"
+      },
+      {
+        "path": "smp/matches/width4-aa/config.json",
+        "bytes": 5365,
+        "sha256": "c745fad5c50f561f0560000a8cd993f04b7e905ee27085438377336a3a2be5de"
+      },
+      {
+        "path": "smp/matches/width4-aa/control.json",
+        "bytes": 2447,
+        "sha256": "17ce03f99c9de6dce3a10b718f3f3559dfa97dd15c165b35bf3b5d6821aff2c3"
+      },
+      {
+        "path": "smp/matches/width4-aa/fastchess.log",
+        "bytes": 99721760,
+        "sha256": "8de67273e0fd0dc2199904560f51e8cfc9b766432245219e84f0e0511d63ef30"
+      },
+      {
+        "path": "smp/matches/width4-aa/final.epd",
+        "bytes": 7285,
+        "sha256": "175d80f3f120dce5555602bdabfadb7ac6704b159bb7ddc17c0f337b92b7307d"
+      },
+      {
+        "path": "smp/matches/width4-aa/games.pgn",
+        "bytes": 2899645,
+        "sha256": "f464573b9146995dfa01a6808e54d8758e5f9c897d211f9b2528ec38865c453d"
+      },
+      {
+        "path": "smp/matches/width4-aa/match-stage.json",
+        "bytes": 3428,
+        "sha256": "611bdac49f31ff95337b8dbc782538a63837e6e8c4f24525cc295719a41db87d"
+      },
+      {
+        "path": "smp/matches/width4-aa/match.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "smp/matches/width4-aa/match.stdout",
+        "bytes": 18437,
+        "sha256": "04e2c2f375b578632179b4f65cc6d78ca776724b6d7716e0fde5ba9ec4cb6508"
+      },
+      {
+        "path": "smp/matches/width4-aa/opening_prefixes.txt",
+        "bytes": 1920,
+        "sha256": "e331d70bf33bb54db482e124db1acd4f74f8fcd0bb831f88b78a73f8e63a8a34"
+      },
+      {
+        "path": "smp/matches/width4-aa/openings_pgn.pgn",
+        "bytes": 6648,
+        "sha256": "bc338d562a12ef738e9eadc9c10035917f199b933aba0b35dca9a0728346aaaf"
+      },
+      {
+        "path": "smp/matches/width4-aa/preflight0-crashes.log",
+        "bytes": 245,
+        "sha256": "9d5e87037df71b8f55d647b23c6b18e1f647fd9a1a993bc982f85ef323a2ac7d"
+      },
+      {
+        "path": "smp/matches/width4-aa/preflight0.json",
+        "bytes": 8136,
+        "sha256": "5403d82ff1c4fc0dbb6abe2e0572bd52e0e84cc44dca6ffe9fb484d4ffd162b6"
+      },
+      {
+        "path": "smp/matches/width4-aa/preflight0.jsonl",
+        "bytes": 12962,
+        "sha256": "1d5ebc233dc20b84a176d9997d93e3cfa97bc24f41659fd87819c6cc22ec36ad"
+      },
+      {
+        "path": "smp/matches/width4-aa/preflight1-crashes.log",
+        "bytes": 245,
+        "sha256": "330d757f968f7b26f1aad7623d8996aa367235acbfa493ccccdfb5cec5584a01"
+      },
+      {
+        "path": "smp/matches/width4-aa/preflight1.json",
+        "bytes": 8131,
+        "sha256": "7a40f4056023b04c8d5f272e2c9e345a54050d01a4659617feae836f0a2f49a0"
+      },
+      {
+        "path": "smp/matches/width4-aa/preflight1.jsonl",
+        "bytes": 12963,
+        "sha256": "c9352c24a3803a2affbed4a21f48a77626679af3df5588f048b8ab28b6ddd69b"
+      },
+      {
+        "path": "smp/matches/width4-aa/report.json",
+        "bytes": 903,
+        "sha256": "f1f5d1c0b54dd060184ef7bf3cde35705baeaf8fd3f0533f8cd41bdb55861ef6"
+      },
+      {
+        "path": "smp/matches/width4-aa/role0/ngn_crashes.log",
+        "bytes": 245,
+        "sha256": "1a1c1c0f233cc43ced9c58d06d0c12f1ef9a09c187cc6e92166b83411b94b4c4"
+      },
+      {
+        "path": "smp/matches/width4-aa/role0/role-config.json",
+        "bytes": 380,
+        "sha256": "b31293d7957bb68fe891b2314c70463664d55f131626b14d9c5c7dc8be170413"
+      },
+      {
+        "path": "smp/matches/width4-aa/role0/smp_role_exec.py",
+        "bytes": 2090,
+        "sha256": "a003aa7fc1272a573b544475e595c0bf653622313b8450063f587e2a6b0dc0c4"
+      },
+      {
+        "path": "smp/matches/width4-aa/role1/ngn_crashes.log",
+        "bytes": 245,
+        "sha256": "700e98814626669f9aee85c1445b946dea27430383d4df9dfa44f10a015d50c6"
+      },
+      {
+        "path": "smp/matches/width4-aa/role1/role-config.json",
+        "bytes": 380,
+        "sha256": "eb3a84fa4a3f861fa29b543b949d19fef74e3f13ba014ff90e7509c9b15344c3"
+      },
+      {
+        "path": "smp/matches/width4-aa/role1/smp_role_exec.py",
+        "bytes": 2090,
+        "sha256": "a003aa7fc1272a573b544475e595c0bf653622313b8450063f587e2a6b0dc0c4"
+      },
+      {
+        "path": "smp/matches/width4-aa/spec.json",
+        "bytes": 3243,
+        "sha256": "8c41f9ab8dd0cd443971b274309cfcb2f4b6b284b81c67fa65a02b3ac33888d3"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-audit/command.json",
+        "bytes": 1026,
+        "sha256": "90df580f748b8fdf3b38fcab576bf64e041a14bb35f9c8c1b13630a945d958a0"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-audit/host-capacity.jsonl",
+        "bytes": 381,
+        "sha256": "00fdc80f0ff12acd81e260adda7c23a19e866c213c25c3c22b26879d709acb96"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-audit/process-tree.jsonl",
+        "bytes": 1629,
+        "sha256": "26a679bfbc913e5dfbcf254982c46dc3b074c96888fa3bac42da488e9279dafe"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-audit/stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-audit/stdout",
+        "bytes": 1405,
+        "sha256": "4d1cc53dbcb910b626d75decacf7f6072adf0ca730d438b77828cd6c1fff68a9"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-audit/supervisor-receipt.json",
+        "bytes": 3374,
+        "sha256": "d9c3e81b870e65c0d6a39b64ad5ebedca583dcc81b769db051e68dc9a00f4c47"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-audit/time.txt",
+        "bytes": 1628,
+        "sha256": "6b8554ec27e20694eb330455eaca7df4d6a9146586f2fc5d74e8b3da3f6d0aa0"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-match/command.json",
+        "bytes": 209,
+        "sha256": "7ecec0d55d5a758ddf76f146e35561a68f2ccff98396b25c0a916f9360cc676f"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-match/host-capacity.jsonl",
+        "bytes": 51751,
+        "sha256": "5de81c2a4b2b313a7b67d907036008a7cdc74a3a3ca8dcd77466240d39fdf874"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-match/process-tree.jsonl",
+        "bytes": 2110366,
+        "sha256": "5b2375c1effa917d3093e52124285f7f6f816b4744dda0cc6493529a0db6e1eb"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-match/stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-match/stdout",
+        "bytes": 98,
+        "sha256": "1e49ffcc17dcf1ece8fbd4253e22882f29042c6d19fb572d823bb987cf296b5b"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-match/supervisor-receipt.json",
+        "bytes": 1649,
+        "sha256": "5c52bd159f05a26230048501b8cf394d61718c103bdc2a5f0d1c2f33222b9522"
+      },
+      {
+        "path": "smp/matches/width4-aa/supervised-match/time.txt",
+        "bytes": 949,
+        "sha256": "6d05f1aea58bd88b5662868d5f51030fee56987fa068fd306b292bd5a2134bfd"
+      },
+      {
+        "path": "smp/matches/width4-gate.json",
+        "bytes": 3436,
+        "sha256": "ee7ea7972b359eec336b216d7389cf7951e97d78106ad3e2fe938cc0ff21fb8d"
+      },
+      {
+        "path": "smp/matches/width4-gate.stderr",
+        "bytes": 659,
+        "sha256": "72bc97d2ea472304bb55f600dbba1cfae140648f2e3bd34a68fcdff60810f865"
+      },
+      {
+        "path": "smp/matches/width4-gate.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "smp/matches/width4-gate/STATE.json",
+        "bytes": 100,
+        "sha256": "8bc11613423ae66e07adff80309a82ac4b32880f1f8bd81577bec10dc51dcc70"
+      },
+      {
+        "path": "smp/matches/width4-gate/child-processes.json",
+        "bytes": 133,
+        "sha256": "d6e71db78f43a14349909b3fb8fe4de032a9027b1c8a79f6b642a30b0b0e8b55"
+      },
+      {
+        "path": "smp/matches/width4-gate/command.json",
+        "bytes": 1849,
+        "sha256": "9d326bedc6f685d023fd958ed517103b061fd5849ac9cf1bb4f74004afe3e147"
+      },
+      {
+        "path": "smp/matches/width4-gate/config.json",
+        "bytes": 5384,
+        "sha256": "19bd0dcdd98f27d72feff2d25c49d268dcba770de3574bb7256b4000ab6ccd39"
+      },
+      {
+        "path": "smp/matches/width4-gate/fastchess.log",
+        "bytes": 473809221,
+        "sha256": "4700e548fa3048abb64d9fd381ed96267dc09c417da0c7c539f03e9274c87e1f"
+      },
+      {
+        "path": "smp/matches/width4-gate/final.epd",
+        "bytes": 32403,
+        "sha256": "8fff509acf8eff8626131b11d4ee04c549702a363eac9832856dddcffee79cb3"
+      },
+      {
+        "path": "smp/matches/width4-gate/games.pgn",
+        "bytes": 14425193,
+        "sha256": "2c9ac47becf270bedfee91544a54a9a1820cc20026325f92fe9f828a33cc6321"
+      },
+      {
+        "path": "smp/matches/width4-gate/match-stage.json",
+        "bytes": 3467,
+        "sha256": "b4659f838f27afc8cb45825379df7d3dcf70859762adef5c07b64eac5c6277e5"
+      },
+      {
+        "path": "smp/matches/width4-gate/match.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "smp/matches/width4-gate/match.stdout",
+        "bytes": 79303,
+        "sha256": "24ef78f0a076549db2d6ec9f1b024a413dc2a062496d0101f5e3d46832787459"
+      },
+      {
+        "path": "smp/matches/width4-gate/opening_prefixes.txt",
+        "bytes": 12000,
+        "sha256": "3af656ea0edad537b0e99191bea348cea94f896607f948a8f80273a1119de405"
+      },
+      {
+        "path": "smp/matches/width4-gate/openings_pgn.pgn",
+        "bytes": 41802,
+        "sha256": "7e5b597c11e3b8e97d25d724c5e38cc01344faffc838356d93812ab1dd02ae57"
+      },
+      {
+        "path": "smp/matches/width4-gate/preflight0-crashes.log",
+        "bytes": 247,
+        "sha256": "aee4e030e40a43fe604191bcd21a901c6df88d9507e6234ac25a09dccab46052"
+      },
+      {
+        "path": "smp/matches/width4-gate/preflight0.json",
+        "bytes": 8140,
+        "sha256": "3176977b28804a751a1ef7d8824a2c478de670a7a9e2ab51b899ee06e533ea6e"
+      },
+      {
+        "path": "smp/matches/width4-gate/preflight0.jsonl",
+        "bytes": 12966,
+        "sha256": "d256a1fdb17b519d62a48de80c7f610faf35e1c62ad81b0b2befbb923312647e"
+      },
+      {
+        "path": "smp/matches/width4-gate/preflight1-crashes.log",
+        "bytes": 247,
+        "sha256": "b3b2d70ce5f2b3e5575536a5bc95d1c67a8c4c7ce3e867d2ca259876e1cf4b30"
+      },
+      {
+        "path": "smp/matches/width4-gate/preflight1.json",
+        "bytes": 8133,
+        "sha256": "25915dfdb7343fd5b77392ee021aa74ff899df1ee25d65032f79982d755ca883"
+      },
+      {
+        "path": "smp/matches/width4-gate/preflight1.jsonl",
+        "bytes": 12953,
+        "sha256": "5fdf49c881c8af8f306d40196a7516631a97df6cb9285c6758f186a1a55ec579"
+      },
+      {
+        "path": "smp/matches/width4-gate/role0/ngn_crashes.log",
+        "bytes": 247,
+        "sha256": "5fa17e8631bfa77db6416e1237e5888241c5b584570707413f563a23ff8e4c3e"
+      },
+      {
+        "path": "smp/matches/width4-gate/role0/role-config.json",
+        "bytes": 384,
+        "sha256": "035f4f0cb763218989e112dd687a52320e8e0df9d9cdb6085fe263b1039f34c7"
+      },
+      {
+        "path": "smp/matches/width4-gate/role0/smp_role_exec.py",
+        "bytes": 2090,
+        "sha256": "a003aa7fc1272a573b544475e595c0bf653622313b8450063f587e2a6b0dc0c4"
+      },
+      {
+        "path": "smp/matches/width4-gate/role1/ngn_crashes.log",
+        "bytes": 247,
+        "sha256": "53067f57d232039aea6675278ae599cb6e116f4e2c567413a70b09c5aa71ec0a"
+      },
+      {
+        "path": "smp/matches/width4-gate/role1/role-config.json",
+        "bytes": 384,
+        "sha256": "7887ff2172b73b930be7ab53ba71b206096c97fabb8574755071ed703c83e3d9"
+      },
+      {
+        "path": "smp/matches/width4-gate/role1/smp_role_exec.py",
+        "bytes": 2090,
+        "sha256": "a003aa7fc1272a573b544475e595c0bf653622313b8450063f587e2a6b0dc0c4"
+      },
+      {
+        "path": "smp/matches/width4-gate/spec.json",
+        "bytes": 3436,
+        "sha256": "ee7ea7972b359eec336b216d7389cf7951e97d78106ad3e2fe938cc0ff21fb8d"
+      },
+      {
+        "path": "smp/matches/width4-gate/supervised-match/command.json",
+        "bytes": 211,
+        "sha256": "ceceef42ee524f84de1ae922cb030c4906215986b2755dd35f3b4b3b0d31356b"
+      },
+      {
+        "path": "smp/matches/width4-gate/supervised-match/host-capacity.jsonl",
+        "bytes": 245101,
+        "sha256": "ee1be9ce772491d4285507121fa5c332db97319cc817dfef5bb3125e9b3aad2a"
+      },
+      {
+        "path": "smp/matches/width4-gate/supervised-match/process-tree.jsonl",
+        "bytes": 9995074,
+        "sha256": "80827fea60e3ed3c430d4351492077b498a8c6cec4a3d923640c686dfe3fa42b"
+      },
+      {
+        "path": "smp/matches/width4-gate/supervised-match/stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "smp/matches/width4-gate/supervised-match/stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "smp/matches/width4-gate/supervised-match/supervisor-receipt.json",
+        "bytes": 1673,
+        "sha256": "0a333f76d87a8b4a284f6aeeef1d358deae041b3a1cebbef4030452bc8fa444d"
+      },
+      {
+        "path": "smp/matches/width4-gate/supervised-match/time.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "smp/plan.json",
+        "bytes": 23747,
+        "sha256": "a728f7bec9ead09b6c144be1c10b77f446d63125aa0c3ad5cc833fc226215dc0"
+      },
+      {
+        "path": "smp/unit.json",
+        "bytes": 864,
+        "sha256": "2d7994c82a4f70ac2ba2a941e554f789bab940b52cdc8b589ad9567065516505"
+      }
+    ],
+    "local_path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/outputs/20260930-capacity-failed-match-records.tar.gz",
+    "off_worker_hash_check": "PASS"
+  },
+  "completed_controls": {
+    "maelstrom/matches/aa/report.json": {
+      "schema": "ngn-quickmatch-report-v1",
+      "candidate": "Owned-1-A",
+      "games": 128,
+      "pairs": 64,
+      "legal_plies": 19408,
+      "results": {
+        "1/2-1/2": 89,
+        "0-1": 19,
+        "1-0": 20
+      },
+      "reasons": {
+        "Draw by 3-fold repetition": 68,
+        "Black mates": 19,
+        "White mates": 20,
+        "Draw by insufficient mating material": 17,
+        "Draw by fifty moves rule": 3,
+        "Draw by stalemate": 1
+      },
+      "penta_0_to_4": [
+        0,
+        16,
+        36,
+        11,
+        1
+      ],
+      "score": 0.48828125,
+      "score_interval_95": [
+        0.4453125,
+        0.53125
+      ],
+      "elo": -8.144513059083144,
+      "elo_interval_95": [
+        -38.153397218633536,
+        21.74306492903708
+      ],
+      "audit_sha256": "e4187447d20f60ace5400ec308f0c379fe03670736a76d13f18621b5b16ab09c",
+      "pgn_sha256": "f9b73a4224abb5c23c8ce3439bd579fe166f7c6b2a36b51adf7a9789fdaa90b4",
+      "bootstrap": "percentile over pair scores, 20000 resamples, seed 2026092701"
+    },
+    "maelstrom/matches/aa/control.json": {
+      "audit_sha256": "e4187447d20f60ace5400ec308f0c379fe03670736a76d13f18621b5b16ab09c",
+      "configuration": {
+        "concurrency": 2,
+        "cpus": [
+          12,
+          14
+        ],
+        "nodes": null,
+        "strict": true,
+        "tc": "10+0.1"
+      },
+      "instrument": {
+        "common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+        "ownedmatch.py": "38ba920e60d6ae412ee100308f124f72e2d255009c24106e2a257c7e1664e216",
+        "process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+        "quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3",
+        "role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+        "run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+        "trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+        "uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+      },
+      "operational_sha256": "7b1a3b00a7d824b75a555187b8973c8422e82cae01193266f24789d5a506d854",
+      "pass": true,
+      "purpose": "aa",
+      "report_sha256": "896ab4e7717fb5401aa626a7e887b120dda58039eac0e69b5658d87d6335cc5b",
+      "role_identity": {
+        "engine": {
+          "path": "/home/ehrli/nnue-owned-continuation-20260928/release-build-0.2.0-rc.1/ngn",
+          "sha256": "de86da92c75ada0f5449ae47d66d55879e221054731190e0c7c885d02123937f"
+        },
+        "network": {
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue",
+          "sha256": "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29"
+        },
+        "options": [
+          [
+            "Threads",
+            1
+          ],
+          [
+            "OwnBook",
+            false
+          ],
+          [
+            "EvalFile",
+            "$NETWORK"
+          ],
+          [
+            "EvalBackend",
+            "ngn-k4-768-v1"
+          ],
+          [
+            "Hash",
+            128
+          ],
+          [
+            "Move Overhead",
+            100
+          ],
+          [
+            "K4EvalScale",
+            60
+          ]
+        ]
+      }
+    }
+  },
+  "decision": "Preserve both incomplete strength comparisons unscored. Retain the previously accepted two-core setting."
+}

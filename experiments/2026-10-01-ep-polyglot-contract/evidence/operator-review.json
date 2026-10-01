@@ -1,0 +1,36 @@
+{
+  "completed_at_utc": "2026-10-01T04:45:23.310120+00:00",
+  "results": [
+    {
+      "name": "review-candidate-external-race",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "checks": 302,
+      "external_mismatches": 302,
+      "sequence_sha256": "3f89792dd707913f365e2f0554b862c816469466d20cf6df47452097c52b14f7",
+      "race_reported": false
+    },
+    {
+      "name": "review-baseline-external-race",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "checks": 302,
+      "external_mismatches": 302,
+      "sequence_sha256": "3f89792dd707913f365e2f0554b862c816469466d20cf6df47452097c52b14f7",
+      "race_reported": false
+    }
+  ],
+  "source_sha256": "d162217a2e44f5190a31df1b0812cf080e791ca41987a423b209efcb0714b679",
+  "fixture_sha256": "3e7acd53328562ab5fb6943441d586f8bb3723e269c1904c4f128ecee63d05fc",
+  "baseline_and_candidate_keys_identical": true,
+  "external_polyglot_contract": "FAIL_PREEXISTING",
+  "restoration_legal_perft_and_copy_assertions_completed": true,
+  "production_changes": false,
+  "allowed_cpus": [
+    0,
+    2
+  ],
+  "cpu_max": "50000 100000",
+  "memory_max": "4294967296",
+  "nice": 10
+}

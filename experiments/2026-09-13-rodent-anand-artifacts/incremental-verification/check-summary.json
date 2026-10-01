@@ -1,0 +1,68 @@
+{
+  "schema": "ngn-rodenteval-slice-b-check-summary-v1",
+  "state": "COMPLETE",
+  "required_tests_no_skips": true,
+  "checks": [
+    {
+      "name": "unit",
+      "argv": [
+        "/usr/local/go/bin/go",
+        "test",
+        "-v",
+        "-count=1",
+        "-run",
+        "^(TestSearchContextMoveFamiliesMatchFullRefreshAllLanes|TestSearchContextAllPromotionsMatchFullRefreshAllLanes|TestSearchContextKingMirrorBoundaryBothDirectionsAndColors|TestSearchContextMultiPlyUnwindAndSiblingReuse|TestApplyUpdatesRefreshesOnlyCrossingKingPerspective|TestSearchContextIncrementalArithmeticWrapsInt16|TestSearchContextRejectsTransitionsTransactionally|TestSearchContextNullPopResetAndCapacityGrowth|TestSearchContextsOwnIndependentFrames|TestSearchContextRejectsUnvalidatedModelAndPosition)$",
+        "./rodenteval"
+      ],
+      "returncode": 0,
+      "log": "/home/ehrli/rodent-v1.1-anand-sliceb-gate-20260913/run-002/03-ngn-checks/checks/unit.log",
+      "bytes": 7777
+    },
+    {
+      "name": "oracle",
+      "argv": [
+        "/usr/local/go/bin/go",
+        "test",
+        "-v",
+        "-count=1",
+        "-tags",
+        "rodentoracle",
+        "-run",
+        "^TestV11AnandIncrementalTaggedAndReleaseOracleParity$",
+        "./rodenteval"
+      ],
+      "returncode": 0,
+      "log": "/home/ehrli/rodent-v1.1-anand-sliceb-gate-20260913/run-002/03-ngn-checks/checks/oracle.log",
+      "bytes": 3989
+    },
+    {
+      "name": "race",
+      "argv": [
+        "/usr/local/go/bin/go",
+        "test",
+        "-short",
+        "-race",
+        "-count=1",
+        "-p=2",
+        "./rodenteval"
+      ],
+      "returncode": 0,
+      "log": "/home/ehrli/rodent-v1.1-anand-sliceb-gate-20260913/run-002/03-ngn-checks/checks/race.log",
+      "bytes": 48
+    },
+    {
+      "name": "fullshort",
+      "argv": [
+        "/usr/local/go/bin/go",
+        "test",
+        "-short",
+        "-count=1",
+        "-p=2",
+        "./..."
+      ],
+      "returncode": 0,
+      "log": "/home/ehrli/rodent-v1.1-anand-sliceb-gate-20260913/run-002/03-ngn-checks/checks/fullshort.log",
+      "bytes": 2335
+    }
+  ]
+}

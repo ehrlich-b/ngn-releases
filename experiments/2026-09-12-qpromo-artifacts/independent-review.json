@@ -1,0 +1,134 @@
+{
+  "aa": {
+    "bootstrap": {
+      "elo": -13.904842503684801,
+      "lower95_elo": -59.64310774803512,
+      "method": "paired nonparametric percentile bootstrap",
+      "pairs": 50,
+      "replicates": 100000,
+      "seed": 2026091201,
+      "upper95_elo": 31.354042247812043
+    },
+    "engine_a": "BASE-A-A",
+    "engine_a_wdl": [
+      22,
+      52,
+      26
+    ],
+    "engine_b": "BASE-B-B",
+    "games": 100,
+    "interference": {
+      "maximum_consecutive_over_one_core": 0,
+      "samples": 168
+    },
+    "legal_plies": 15196,
+    "pairs": 50,
+    "penta_0_to_4": [
+      1,
+      18,
+      18,
+      10,
+      3
+    ],
+    "receipt_sha256": {
+      "audit-match.json": "bf27de630136758e321fcc6199db739462c001a0d8a589bbbc4402f4782478ca",
+      "audit-operational.json": "a0e3b3e945abfbfc38a80dec30fe9c73cfb406c349e44907b88975b659ac1394",
+      "final.epd": "f33d04ebfe50599fa2bba35acdc0939194021a8029ae18ac18b30377390eebad",
+      "games.pgn": "29f3f263faf0a4da06ece71fad7f74f793d29d0dd2b7ad109347c8477cf9df1c",
+      "match-witness.json": "834753f0d2a097f75847a128be1a16c7080e8a03822f7e22f05147bdb027306d",
+      "non-owned-cpu.json": "00cd557ca965a463faa934c5476b36c39e3d8815358dfd5bdbb249a7bf5f4ebc",
+      "supervisor.json": "d8baba21f1ef586e976e6f76c1ed57d114a389d14c6acc284c4e2e478d94b5f4"
+    }
+  },
+  "bindings": {
+    "decision": {
+      "path": "/home/ehrli/repos/ngn-qpromo-gate-20260912/run-002/decision.json",
+      "sha256": "c81ec9b28a0ed25d1cf87f6aa295373eb597c8fba8080d50391b74a3b4b0e66c"
+    },
+    "inventory": {
+      "files": 92,
+      "path": "/home/ehrli/repos/ngn-qpromo-gate-20260912/run-002/inventory.sha256.json",
+      "sha256": "e8d4159bedc519321611d7077f3f3b6a43dae0eb80da6d16c1b047542efa1c04"
+    }
+  },
+  "candidate": {
+    "bootstrap": {
+      "elo": 12.16521457965757,
+      "lower95_elo": -11.295634654995819,
+      "method": "paired nonparametric percentile bootstrap",
+      "pairs": 200,
+      "replicates": 100000,
+      "seed": 2026091201,
+      "upper95_elo": 34.86007028756008
+    },
+    "engine_a": "CANDIDATE-A",
+    "engine_a_wdl": [
+      118,
+      178,
+      104
+    ],
+    "engine_b": "BASE-B",
+    "games": 400,
+    "interference": {
+      "maximum_consecutive_over_one_core": 0,
+      "samples": 671
+    },
+    "legal_plies": 62848,
+    "pairs": 200,
+    "penta_0_to_4": [
+      9,
+      46,
+      80,
+      52,
+      13
+    ],
+    "receipt_sha256": {
+      "audit-match.json": "4dc4a6187f268bc726bb1c3ad3107ceb4068fc2f9b5efb94e691b53f34b2f9d0",
+      "audit-operational.json": "44657fb31d916d58bf0ee22b9017204e8ea0b3f83dc559ab372db5da12fd4416",
+      "final.epd": "358ce7d759236987548813fa269154adbe95bff0ae5207e72929b054e41f9e26",
+      "games.pgn": "40240b36605329f1f51d610682ae1653a1a2699d9b5c342a4b067bd610a8c5b6",
+      "match-witness.json": "e3a2253bf97150aafe7329cc1c485ca818dee70ec37e933ec5fb1dd4e2afac29",
+      "non-owned-cpu.json": "60d0c5b663d3d45eb09c6d88d3a25bcd110f09aa14ca443d49452f24ce3740c1",
+      "supervisor.json": "f93a17b8580c92866bdd9344106c6e3d9cefd2ba9d15efa8b410eef0407487aa"
+    }
+  },
+  "frozen_inputs": {
+    "build_receipt_reconciled": true,
+    "count": 20,
+    "sha256": {
+      "external:/home/ehrli/repos/ngn-qpromo-gate-20260912/qpromo_gate_resource_amendment_v2.json": "a672be9ff284171c5dcd79ee69f770fab438d26635bfde029220d3ba20e404c8",
+      "external:/home/ehrli/repos/ngn-qpromo-gate-20260912/run-001/aa/supervisor.json": "fdc3d73fee2eb47ef4dacab26f8c5748d51570ef6eedff4dd4128496a1098bab",
+      "inputs/base-ngn": "86ef7473fa5f53e4fdd800f550f4fe3f182db09056afacbad98cf174d88554bc",
+      "inputs/candidate-ngn": "3a0300324e3f1727f62d6d64b88e382075a7b6f33381ec76f4bb42468aca55a2",
+      "inputs/n-30-5268.nn": "3488baed71f4d432d028e05b65e2ff13f8c9afe7f91974d1a3c34a0691d6670c",
+      "inputs/opening-prefixes-first200.txt": "2257ecfb9af03f1ee0bff68f71ec97dbe363cdb9f535fab1a0ebc5af1abaaf33",
+      "inputs/openings-first200.pgn": "1ae6a65a0224d7a4ff893a3c999542cd3d05e9a7f0e989fe2deee1cff7b8bf5a",
+      "inputs/qpromo-build-test-receipt-20260912.json": "aa709d5e9e6e63a1e27bcc7a3fae66e8143ec25f114010cab36f9cdca5141d5a",
+      "inputs/quiet-promotion-production.patch": "171cfea254797ec0f756ed3503ea295ec4a5175bf88bd486a0cbb2009870bbb7",
+      "inputs/quiet-promotion-regression.patch": "34aaf0f0de0d979013a57fd2ecc438eb35bafb44b284ebb4c1128eebf11a9326",
+      "qpromo_gate_driver.py": "9c35fe89ef99a854deba2919e230af4decf6d7f93e55cb10c96444e8c51b2455",
+      "source/audit_fastchess_match.py": "2665c86e9cefd089757a44d30bc7e26a4481eb456bd4ed248849a71660e91bc1",
+      "source/common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+      "source/process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+      "source/role_exec.py": "d859a8f6610124bfcbf0e92af3286733c45184cff1377346b5be854b25c2337a",
+      "source/run_match_stage.py": "5ce5e6fed89cb9124d169feb65c0e0fcc1cb3c739ec234993d706cf07efbbe34",
+      "source/trace_audit.py": "423872b4cd7ad3e335e72df58bf14df3366e94819ca2f517d4dd0fc17263b380",
+      "source/uci_preflight.py": "d627b51033d2bebf4451262c8f3cadf676c6a59acaa539e2d8afc6a230ffd6b1",
+      "tools/fastchess": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00",
+      "tools/stockfish": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+    }
+  },
+  "independently_reproduced_decision": "SHELVE",
+  "live_run_processes": [],
+  "prelaunch_non_owned_cores": 0.03699029826959561,
+  "run_root": "/home/ehrli/repos/ngn-qpromo-gate-20260912/run-002",
+  "schema": "ngn-qpromo-run002-independent-terminal-review-v4",
+  "state": "PASS",
+  "terminal": {
+    "decision": "SHELVE",
+    "path": "/home/ehrli/repos/ngn-qpromo-gate-20260912/run-002/terminal.json",
+    "sha256": "8f4781b0fb57dbd05ac846338bb9b0522b8e90c5bf9fc8cb6d49a331987e46b0"
+  },
+  "verified_utc": "2026-09-12T23:09:54.614291+00:00",
+  "verifier_sha256": "05ebd5a82e6aac7a1df4ea6bbbb47b954b0a637c5de8de197da3f96b275dba70"
+}

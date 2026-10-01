@@ -1,0 +1,1028 @@
+{
+  "crash_logs": [
+    {
+      "attribution": "record counts only; process witness is authoritative for process identity and lifecycle",
+      "expected_processes": 1,
+      "initialization_lines": 1,
+      "pairs": 1,
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/artifacts/preflight/hce/ngn_crashes.log",
+      "path_lines": 1,
+      "phase": "preflight",
+      "role_id": "hce",
+      "sha256": "ca8b9eb12fec1ac89c6acb02767d0bece554bc3df5103f9619c26e136f5762ff"
+    },
+    {
+      "attribution": "record counts only; process witness is authoritative for process identity and lifecycle",
+      "expected_processes": 1,
+      "initialization_lines": 1,
+      "pairs": 1,
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/artifacts/preflight/k4/ngn_crashes.log",
+      "path_lines": 1,
+      "phase": "preflight",
+      "role_id": "k4",
+      "sha256": "790b93980da35536697886500ddeca52d2491e3e676a6ad536703694565768ff"
+    },
+    {
+      "attribution": "record counts only; process witness is authoritative for process identity and lifecycle",
+      "expected_processes": 1,
+      "initialization_lines": 1,
+      "pairs": 1,
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/hce/ngn_crashes.log",
+      "path_lines": 1,
+      "phase": "match",
+      "role_id": "hce",
+      "sha256": "2e0baf076cb22414371999b94e484593a763e8211388ec9180bb19b7525f329d"
+    },
+    {
+      "attribution": "record counts only; process witness is authoritative for process identity and lifecycle",
+      "expected_processes": 1,
+      "initialization_lines": 1,
+      "pairs": 1,
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/ngn_crashes.log",
+      "path_lines": 1,
+      "phase": "match",
+      "role_id": "k4",
+      "sha256": "3ab260d68e0790706fd35353bf614631b33602dadd30e6e828b1d97aaedd6cd9"
+    }
+  ],
+  "ended_utc": "2026-09-22T06:34:53.063543+00:00",
+  "pass": true,
+  "schema": "ngn-candidate-trace-audit-v1",
+  "started_utc": "2026-09-22T06:34:52.631345+00:00",
+  "state": "COMPLETE",
+  "trace": {
+    "canonical_errors": [],
+    "completed_option_sequences": [
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile /home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-probe5m-lr1-screen-40-v1/run-001/inputs/roles/k4/network.ngn",
+          "EvalBackend ngn-k4-768-v1",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-Owned-K4-5M-LR1-3072",
+        "thread": "134158456190656"
+      },
+      {
+        "options": [
+          "Threads 1",
+          "OwnBook false",
+          "EvalFile <empty>",
+          "EvalBackend hce",
+          "Hash 128",
+          "Move Overhead 100"
+        ],
+        "role": "NGN-7f6b1f4-HCE",
+        "thread": "134158456190656"
+      }
+    ],
+    "engine_lines": 116615,
+    "normal_exits": {
+      "NGN-7f6b1f4-HCE": 1,
+      "NGN-Owned-K4-5M-LR1-3072": 1
+    },
+    "pass": true,
+    "probable_embedded_book_signature_plies": 0,
+    "trace_lines": 215771,
+    "warning_lines": 0
+  },
+  "trace_sha256": "2a5f4b48308eca378bcae6e035cb382d5be86fe162dcf5f67a800142935d24e0"
+}

@@ -1,0 +1,154 @@
+diff --git a/engine/moveorder.go b/engine/moveorder.go
+index b872bc6..c3d80b7 100644
+--- a/engine/moveorder.go
++++ b/engine/moveorder.go
+@@ -43,19 +43,29 @@ func (h *workerHistory) correctionValue(stm Color, idx int) int {
+ 	return h.pawnCorrectionHistory[stm][idx] * 6245 / 131072
+ }
+ 
+-// correctedStandPat is the raw eval plus the side-to-move's pawn-structure, non-pawn AND
+-// minor-piece corrections — the same backed-up static value interior nodes use (search.go ~1353). T4:
++// correctedStaticEval applies the correction policy selected by the immutable
++// evaluator backend. Pawn and non-pawn correction remain active for every backend;
++// Counter 5.5 alone excludes the minor term.
++func (h *workerHistory) correctedStaticEval(pos *Position, evaluator *workerEvaluator) int {
++	stm := pos.Turn()
++	value := evaluator.SearchSTM(pos) +
++		h.correctionValue(stm, pawnCorrectionIndex(pos.Board.pieces[WhitePawn], pos.Board.pieces[BlackPawn])) +
++		h.nonPawnCorrectionValue(stm, nonPawnCorrectionIndex(pos.Board.GetWhitePieces()&^pos.Board.pieces[WhitePawn], pos.Board.GetBlackPieces()&^pos.Board.pieces[BlackPawn]))
++	if evaluator.usesMinorCorrectionHistory() {
++		value += h.minorCorrectionValue(stm, minorCorrectionIndex(pos.Board.pieces[WhiteKnight]|pos.Board.pieces[WhiteBishop], pos.Board.pieces[BlackKnight]|pos.Board.pieces[BlackBishop]))
++	}
++	return value
++}
++
++// correctedStandPat is the raw eval plus the side-to-move's backend-selected
++// corrections — the same backed-up static value interior nodes use. T4:
+ // qsearch applies it at the !inCheck stand-pat and the qDepth cap-return so the whole search
+ // backs up corrected statics (was: qsearch returned the raw eval, discarding the correction).
+ // The ply>=MaximumDepth emergency cap stays RAW — it fires before inCheck is known, and an
+ // in-check static must never be corrected. The eval cache is unaffected — the correction is
+ // added outside it.
+ func (h *workerHistory) correctedStandPat(pos *Position, evaluator *workerEvaluator) int {
+-	stm := pos.Turn()
+-	return evaluator.SearchSTM(pos) +
+-		h.correctionValue(stm, pawnCorrectionIndex(pos.Board.pieces[WhitePawn], pos.Board.pieces[BlackPawn])) +
+-		h.nonPawnCorrectionValue(stm, nonPawnCorrectionIndex(pos.Board.GetWhitePieces()&^pos.Board.pieces[WhitePawn], pos.Board.GetBlackPieces()&^pos.Board.pieces[BlackPawn])) +
+-		h.minorCorrectionValue(stm, minorCorrectionIndex(pos.Board.pieces[WhiteKnight]|pos.Board.pieces[WhiteBishop], pos.Board.pieces[BlackKnight]|pos.Board.pieces[BlackBishop]))
++	return h.correctedStaticEval(pos, evaluator)
+ }
+ 
+ // updatePawnCorrection nudges a slot toward the observed (searchScore - staticEval) gap
+@@ -189,6 +199,13 @@ func (h *workerHistory) maybeUpdateMinorCorrection(stm Color, idx, staticEval, b
+ 	h.updateMinorCorrection(stm, idx, bestScore-staticEval, depth)
+ }
+ 
++func (h *workerHistory) maybeUpdateMinorCorrectionForEvaluator(evaluator *workerEvaluator, stm Color, idx, staticEval, bestScore, beta, depth int, bestMove Move, inCheck bool) {
++	if !evaluator.usesMinorCorrectionHistory() {
++		return
++	}
++	h.maybeUpdateMinorCorrection(stm, idx, staticEval, bestScore, beta, depth, bestMove, inCheck)
++}
++
+ // Killer moves table for move ordering heuristic.
+ // killerMoves[ply][slot] stores killer moves keyed by PLY (distance from root), 2 per ply.
+ // Keying by ply (not remaining depth) is what lets a quiet refutation found at one node be
+diff --git a/engine/search.go b/engine/search.go
+index bddc73a..325c3d5 100644
+--- a/engine/search.go
++++ b/engine/search.go
+@@ -1283,18 +1283,25 @@ func improvingVsPrevTurn(info *SearchInfo, ply int, staticEval int) bool {
+ // T17: nothing else ever writes slot 0 — alphaBetaPV is only entered at ply >= 1
+ // — so without this a node at ply 2 compared its eval against a zeroed slot and
+ // computed "is my eval positive" rather than "is my eval trending up". The value
+-// mirrors the non-check branch of alphaBetaPV (raw eval plus all three
+-// correction tables); a root in check has no static eval and seeds the sentinel.
++// mirrors the non-check branch of alphaBetaPV (raw eval plus the corrections
++// selected for the evaluator backend); a root in check has no static eval and
++// seeds the sentinel.
+ func seedRootStaticEval(pos *Position, info *SearchInfo) {
+ 	if isInCheck(pos, pos.Turn()) {
+ 		info.StaticEvalStack[0] = unknownStaticEval
+ 		return
+ 	}
+-	stm := pos.Turn()
+-	corrIdx := pawnCorrectionIndex(pos.Board.pieces[WhitePawn], pos.Board.pieces[BlackPawn])
+-	nonPawnCorrIdx := nonPawnCorrectionIndex(pos.Board.GetWhitePieces()&^pos.Board.pieces[WhitePawn], pos.Board.GetBlackPieces()&^pos.Board.pieces[BlackPawn])
+-	minorCorrIdx := minorCorrectionIndex(pos.Board.pieces[WhiteKnight]|pos.Board.pieces[WhiteBishop], pos.Board.pieces[BlackKnight]|pos.Board.pieces[BlackBishop])
+-	info.StaticEvalStack[0] = info.evaluator.SearchSTM(pos) + info.history.correctionValue(stm, corrIdx) + info.history.nonPawnCorrectionValue(stm, nonPawnCorrIdx) + info.history.minorCorrectionValue(stm, minorCorrIdx)
++	info.StaticEvalStack[0] = info.history.correctedStaticEval(pos, info.evaluator)
++}
++
++func refineStaticEvalFromTT(staticEval int, ttHit, inSingular bool, ttEval int, ttNodeType NodeType) int {
++	if ttHit && !inSingular && abs(ttEval) < MATE_IN_MAX &&
++		(ttNodeType == Exact ||
++			(ttNodeType == LowerBound && ttEval > staticEval) ||
++			(ttNodeType == UpperBound && ttEval < staticEval)) {
++		return ttEval
++	}
++	return staticEval
+ }
+ 
+ // searchDrawScore applies the same terminal rules in the main and quiescence
+@@ -1524,19 +1531,16 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
+ 		corrIdx = pawnCorrectionIndex(pos.Board.pieces[WhitePawn], pos.Board.pieces[BlackPawn])
+ 		nonPawnCorrIdx = nonPawnCorrectionIndex(pos.Board.GetWhitePieces()&^pos.Board.pieces[WhitePawn], pos.Board.GetBlackPieces()&^pos.Board.pieces[BlackPawn])
+ 		minorCorrIdx = minorCorrectionIndex(pos.Board.pieces[WhiteKnight]|pos.Board.pieces[WhiteBishop], pos.Board.pieces[BlackKnight]|pos.Board.pieces[BlackBishop])
+-		staticEval = info.evaluator.SearchSTM(pos) + info.history.correctionValue(stm, corrIdx) + info.history.nonPawnCorrectionValue(stm, nonPawnCorrIdx) + info.history.minorCorrectionValue(stm, minorCorrIdx)
+-		corrStaticEval = staticEval // T4: capture the corrected static (raw + pawn + non-pawn + minor) BEFORE S7 overwrites it (all tables' learn target)
++		staticEval = info.evaluator.SearchSTM(pos) + info.history.correctionValue(stm, corrIdx) + info.history.nonPawnCorrectionValue(stm, nonPawnCorrIdx)
++		if info.evaluator.usesMinorCorrectionHistory() {
++			staticEval += info.history.minorCorrectionValue(stm, minorCorrIdx)
++		}
++		corrStaticEval = staticEval // T4: capture the backend-selected corrected static BEFORE S7 overwrites it (all active tables' learn target)
+ 		// S7: a search-refined TT score is a sharper static estimate than a fresh
+ 		// eval for the margin heuristics below (RFP/futility/NMP/improving). Use it
+ 		// when the stored bound brackets it. Skip mate scores (would distort margins)
+ 		// and the singular-verification root (keep its pruning behaviour unchanged).
+-		if ttHit && !inSingular && abs(ttEval) < MATE_IN_MAX {
+-			if ttNodeType == Exact ||
+-				(ttNodeType == LowerBound && ttEval > staticEval) ||
+-				(ttNodeType == UpperBound && ttEval < staticEval) {
+-				staticEval = ttEval
+-			}
+-		}
++		staticEval = refineStaticEvalFromTT(staticEval, ttHit, inSingular, ttEval, ttNodeType)
+ 	}
+ 	info.StaticEvalStack[ply] = staticEval
+ 
+@@ -2246,7 +2250,7 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
+ 			// Learn the pawn-structure + non-pawn + minor corrections from this fail-high before returning.
+ 			info.history.maybeUpdatePawnCorrection(stm, corrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
+ 			info.history.maybeUpdateNonPawnCorrection(stm, nonPawnCorrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
+-			info.history.maybeUpdateMinorCorrection(stm, minorCorrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
++			info.history.maybeUpdateMinorCorrectionForEvaluator(info.evaluator, stm, minorCorrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
+ 
+ 			// Store in transposition table as Lower Bound (Cut-Node). Skip at the
+ 			// singular verification root: its result is a move-excluded search and
+@@ -2279,7 +2283,7 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
+ 	// Learn the pawn-structure + non-pawn + minor corrections from the completed search of this node.
+ 	info.history.maybeUpdatePawnCorrection(stm, corrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
+ 	info.history.maybeUpdateNonPawnCorrection(stm, nonPawnCorrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
+-	info.history.maybeUpdateMinorCorrection(stm, minorCorrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
++	info.history.maybeUpdateMinorCorrectionForEvaluator(info.evaluator, stm, minorCorrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
+ 
+ 	// Store in transposition table
+ 	var nodeType NodeType
+diff --git a/engine/worker_evaluator.go b/engine/worker_evaluator.go
+index 9b22006..f942f56 100644
+--- a/engine/worker_evaluator.go
++++ b/engine/worker_evaluator.go
+@@ -159,6 +159,13 @@ func (e *workerEvaluator) Identity() evaluatorModelIdentity {
+ 	return e.model.identity
+ }
+ 
++// usesMinorCorrectionHistory binds this experiment's potential-redundancy test
++// to the immutable evaluator selection. Counter 5.5 does not apply or learn the
++// separate minor correction table; the HCE and NGN-v1 policies remain unchanged.
++func (e *workerEvaluator) usesMinorCorrectionHistory() bool {
++	return e != nil && e.model.identity.backend != evaluatorBackendCounter55
++}
++
+ // Reset binds this worker's mutable context to the admitted search root. HCE's
+ // root PST refresh remains owned by search admission and is intentionally not
+ // duplicated here.

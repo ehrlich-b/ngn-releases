@@ -1,0 +1,36 @@
+=== RUN   TestRodentV11SearchIncrementalMatchesFullRefreshAndUnwinds
+--- PASS: TestRodentV11SearchIncrementalMatchesFullRefreshAndUnwinds (0.06s)
+=== RUN   TestRodentV11StoppedSearchUnwindsContextAndPosition
+--- PASS: TestRodentV11StoppedSearchUnwindsContextAndPosition (0.00s)
+=== RUN   TestRodentV11ExplicitMoveNullPopAndClockIdentity
+--- PASS: TestRodentV11ExplicitMoveNullPopAndClockIdentity (0.00s)
+=== RUN   TestRodentV11SMPContextsArePrivateResetAndUnwound
+--- PASS: TestRodentV11SMPContextsArePrivateResetAndUnwound (0.03s)
+=== RUN   TestRodentV11SelectionAndStateInvalidationAreTransactional
+--- PASS: TestRodentV11SelectionAndStateInvalidationAreTransactional (0.03s)
+=== RUN   TestUCIRodentV11HeaderlessSelectionAndFailureTransaction
+--- PASS: TestUCIRodentV11HeaderlessSelectionAndFailureTransaction (0.09s)
+=== RUN   TestRodentSearchScoreReservesMateBandWithoutRule50Input
+--- PASS: TestRodentSearchScoreReservesMateBandWithoutRule50Input (0.00s)
+=== RUN   TestRodentPositionMappingUsesExplicitPlaneOrderAndSide
+--- PASS: TestRodentPositionMappingUsesExplicitPlaneOrderAndSide (0.00s)
+=== RUN   TestRodentMoveDeltaCoversPackedMoveSemantics
+=== RUN   TestRodentMoveDeltaCoversPackedMoveSemantics/white_quiet
+=== RUN   TestRodentMoveDeltaCoversPackedMoveSemantics/black_quiet
+=== RUN   TestRodentMoveDeltaCoversPackedMoveSemantics/capture
+=== RUN   TestRodentMoveDeltaCoversPackedMoveSemantics/en_passant
+=== RUN   TestRodentMoveDeltaCoversPackedMoveSemantics/castle
+=== RUN   TestRodentMoveDeltaCoversPackedMoveSemantics/white_promotion_capture
+=== RUN   TestRodentMoveDeltaCoversPackedMoveSemantics/black_promotion
+--- PASS: TestRodentMoveDeltaCoversPackedMoveSemantics (0.00s)
+    --- PASS: TestRodentMoveDeltaCoversPackedMoveSemantics/white_quiet (0.00s)
+    --- PASS: TestRodentMoveDeltaCoversPackedMoveSemantics/black_quiet (0.00s)
+    --- PASS: TestRodentMoveDeltaCoversPackedMoveSemantics/capture (0.00s)
+    --- PASS: TestRodentMoveDeltaCoversPackedMoveSemantics/en_passant (0.00s)
+    --- PASS: TestRodentMoveDeltaCoversPackedMoveSemantics/castle (0.00s)
+    --- PASS: TestRodentMoveDeltaCoversPackedMoveSemantics/white_promotion_capture (0.00s)
+    --- PASS: TestRodentMoveDeltaCoversPackedMoveSemantics/black_promotion (0.00s)
+=== RUN   TestRodentMoveDeltaRejectsMalformedStateWithoutMutation
+--- PASS: TestRodentMoveDeltaRejectsMalformedStateWithoutMutation (0.00s)
+PASS
+ok  	github.com/ehrlich-b/ngn/engine	0.229s

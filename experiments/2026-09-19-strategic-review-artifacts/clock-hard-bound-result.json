@@ -1,0 +1,102 @@
+{
+  "elapsed_sec": 2.942,
+  "input": "/home/ehrli/repos/ngn-external-counter-checkpoint-gate-20260913/run-003/candidate/fastchess.log",
+  "source_time_go_blob": "3cb408b6fae48d4d7098c0f9216a0df8c418714d",
+  "anomalies": {
+    "stop_without_active": 4
+  },
+  "excluded_go": {},
+  "pending": 0,
+  "move_overhead_commands": {
+    "100": 400
+  },
+  "minimum_increment_counts": {
+    "100": 32347
+  },
+  "go_examples": [
+    "go wtime 10100 btime 10100 winc 100 binc 100",
+    "go wtime 10100 btime 10100 winc 100 binc 100",
+    "go wtime 9937 btime 10100 winc 100 binc 100"
+  ],
+  "all": {
+    "n": 32347,
+    "duration_ms": 6786594.298,
+    "tail_ms": 1732566.763,
+    "last_score_mate": 1541,
+    "last_depth_ge100": 34,
+    "last_nodes_le1": 0,
+    "explicit_stop": 0,
+    "deadline_exclusions": {
+      "0ms_margin": {
+        "n": 27470,
+        "search_pct": 84.922868,
+        "tail_ms": 1579754.362,
+        "tail_pct": 91.179999,
+        "last_score_mate": 1368,
+        "last_depth_ge100": 32
+      },
+      "5ms_margin": {
+        "n": 26922,
+        "search_pct": 83.228738,
+        "tail_ms": 1566442.088,
+        "tail_pct": 90.411644,
+        "last_score_mate": 1352,
+        "last_depth_ge100": 31
+      }
+    }
+  },
+  "substantial_tail_ge5ms": {
+    "n": 21192,
+    "duration_ms": 4747084.094,
+    "tail_ms": 1727740.354,
+    "last_score_mate": 163,
+    "last_depth_ge100": 0,
+    "last_nodes_le1": 0,
+    "explicit_stop": 0,
+    "deadline_exclusions": {
+      "0ms_margin": {
+        "n": 17730,
+        "search_pct": 83.663647,
+        "tail_ms": 1575811.582,
+        "tail_pct": 91.206504,
+        "last_score_mate": 70,
+        "last_depth_ge100": 0
+      },
+      "5ms_margin": {
+        "n": 17388,
+        "search_pct": 82.04983,
+        "tail_ms": 1562675.0,
+        "tail_pct": 90.446171,
+        "last_score_mate": 62,
+        "last_depth_ge100": 0
+      }
+    }
+  },
+  "substantial_nonmate_below_depth100_no_stop": {
+    "n": 21029,
+    "duration_ms": 4728957.145,
+    "tail_ms": 1723047.357,
+    "last_score_mate": 0,
+    "last_depth_ge100": 0,
+    "last_nodes_le1": 0,
+    "explicit_stop": 0,
+    "deadline_exclusions": {
+      "0ms_margin": {
+        "n": 17660,
+        "search_pct": 83.979267,
+        "tail_ms": 1574283.446,
+        "tail_pct": 91.366232,
+        "last_score_mate": 0,
+        "last_depth_ge100": 0
+      },
+      "5ms_margin": {
+        "n": 17326,
+        "search_pct": 82.390984,
+        "tail_ms": 1561241.132,
+        "tail_pct": 90.609299,
+        "last_score_mate": 0,
+        "last_depth_ge100": 0
+      }
+    }
+  }
+}

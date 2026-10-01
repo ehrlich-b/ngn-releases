@@ -1,0 +1,48 @@
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_quiet
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_quiet
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_double
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_double
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_capture
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_capture
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_en_passant
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_en_passant
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_kingside_castle
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_queenside_castle
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_kingside_castle
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_queenside_castle
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_promotions
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_promotions
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_promotion_capture
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_promotion_capture
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_king_d_to_e
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_king_e_to_d
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_king_d_to_e
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_king_e_to_d
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/multi_ply_null_pop_sibling
+=== RUN   TestV11AnandIncrementalTaggedAndReleaseOracleParity/null_growth_128_to_256
+--- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity (0.01s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_quiet (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_quiet (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_double (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_double (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_capture (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_capture (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_en_passant (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_en_passant (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_kingside_castle (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_queenside_castle (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_kingside_castle (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_queenside_castle (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_promotions (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_promotions (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_promotion_capture (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_promotion_capture (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_king_d_to_e (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/white_king_e_to_d (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_king_d_to_e (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/black_king_e_to_d (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/multi_ply_null_pop_sibling (0.00s)
+    --- PASS: TestV11AnandIncrementalTaggedAndReleaseOracleParity/null_growth_128_to_256 (0.00s)
+PASS
+ok  	github.com/ehrlich-b/ngn/rodenteval	0.011s

@@ -1,0 +1,11 @@
+{
+  "ended_utc": "2026-09-22T03:04:21.179522+00:00",
+  "games": 40,
+  "independent_chess_audit_pass": true,
+  "operational_pass": true,
+  "pairs": 20,
+  "review_subject_sha256": "26cbee7a64c1548861b209815a74050500e85563c0b552603910d9b8e4c1b9ce",
+  "schema": "ngn-candidate-match-terminal-v1",
+  "started_manifest_sha256": "a46e70e2d7e7af00861ec60f9bb7ceb08a8d7b6be87b5c29930dcfa3bb586eba",
+  "state": "COMPLETE"
+}

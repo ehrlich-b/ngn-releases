@@ -1,0 +1,66 @@
+{
+  "schema": "ngn-candidate-trace-audit-v1",
+  "state": "COMPLETE",
+  "pass": true,
+  "started_utc": "2026-09-14T00:10:45.258388+00:00",
+  "ended_utc": "2026-09-14T00:10:46.209054+00:00",
+  "trace_sha256": "08668cec00952b69fa9e2a287f232f16c44f3da55faa669b6d6a8c166e10a048",
+  "crash_logs": [
+    {
+      "attribution": "record counts only; process witness is authoritative for process identity and lifecycle",
+      "expected_processes": 1,
+      "initialization_lines": 1,
+      "pairs": 1,
+      "path": "/home/ehrli/repos/ngn-rodent-counter-strength-gate-20260913/run-001/aa/preflight-aa-a.crash_handler.log",
+      "path_lines": 1,
+      "phase": "preflight",
+      "role_id": "aa-a",
+      "sha256": "123580dcf1c4dd4c7bb0ca9b4399cf94d2af59e7d70f00681f8dfb2292098a9a"
+    },
+    {
+      "attribution": "record counts only; process witness is authoritative for process identity and lifecycle",
+      "expected_processes": 4,
+      "initialization_lines": 4,
+      "pairs": 4,
+      "path": "/home/ehrli/repos/ngn-rodent-counter-strength-gate-20260913/run-001/aa/role-a/ngn_crashes.log",
+      "path_lines": 4,
+      "phase": "match",
+      "role_id": "aa-a",
+      "sha256": "be5e9261575d73744adced83a4b041d406cd67c4bb1d021ff9e8df050042d66b"
+    },
+    {
+      "attribution": "record counts only; process witness is authoritative for process identity and lifecycle",
+      "expected_processes": 1,
+      "initialization_lines": 1,
+      "pairs": 1,
+      "path": "/home/ehrli/repos/ngn-rodent-counter-strength-gate-20260913/run-001/aa/preflight-aa-b.crash_handler.log",
+      "path_lines": 1,
+      "phase": "preflight",
+      "role_id": "aa-b",
+      "sha256": "43af31ad147c4d722d2bda1278af844d414654decdbe8a649f4ae50863d07fd0"
+    },
+    {
+      "attribution": "record counts only; process witness is authoritative for process identity and lifecycle",
+      "expected_processes": 4,
+      "initialization_lines": 4,
+      "pairs": 4,
+      "path": "/home/ehrli/repos/ngn-rodent-counter-strength-gate-20260913/run-001/aa/role-b/ngn_crashes.log",
+      "path_lines": 4,
+      "phase": "match",
+      "role_id": "aa-b",
+      "sha256": "8085a3d99869042af77e81d6dc012dc0bb6972b70f25726ed327f237411123fc"
+    }
+  ],
+  "trace": {
+    "pass": true,
+    "trace_lines": 498860,
+    "engine_lines": 261168,
+    "normal_exits": {
+      "COUNTER-A": 4,
+      "COUNTER-B": 4
+    },
+    "warning_lines": 0,
+    "canonical_errors": [],
+    "probable_embedded_book_signature_plies": 0
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "ngn-rodent-update-avx2-candidate-receipt-v1",
+  "status": "VALIDATION_PASS_PERFORMANCE_HELD",
+  "base": {
+    "commit": "762377947c0907d1ce6be74cb71e01521610bd76",
+    "tree": "59587882012a4bd0a64fdac2678a0b0cee01c143"
+  },
+  "worktree": "/home/ehrli/repos/ngn-rodent-update-avx2-20260913",
+  "toolchain": "go version go1.25.5 linux/amd64",
+  "patches": {
+    "production": {
+      "path": "/home/ehrli/repos/ngn-rodent-update-avx2-20260913/output/rodent-update-avx2-20260913/production.patch",
+      "sha256": "120ebb3831dbef82963ca9af153e50d74e850edb341ed093d7c8ab6fc1f6487f"
+    },
+    "tests": {
+      "path": "/home/ehrli/repos/ngn-rodent-update-avx2-20260913/output/rodent-update-avx2-20260913/tests.patch",
+      "sha256": "f7c96508f8d2789a3ab86baf0bdd8edc7e7f903ccb85c24afdefbb78c56c18bd"
+    },
+    "combined": {
+      "path": "/home/ehrli/repos/ngn-rodent-update-avx2-20260913/output/rodent-update-avx2-20260913/candidate.patch",
+      "sha256": "e1376fae6a6ee848441780487db38a487a7c10ce53bd4af0d08f0a5da923af31"
+    }
+  },
+  "source_sha256": {
+    "rodenteval/context.go": "f66e7e2a7f18a4621b4cd8f5b4892ccb4788711f19450a38823dc018e77fdca9",
+    "rodenteval/apply_updates.go": "ce12ddf3bba245fb2d0bddd596769349932c4a7fb61239a369d71418b31390e7",
+    "rodenteval/apply_updates_amd64_v3.go": "298370c014e693e7c57b3b19dd406cb15f52a08650811d9a99b4071064a99d1e",
+    "rodenteval/apply_updates_amd64_v3.s": "703c181a67b9ed89d6cc0bc33db0552d535caddee183faba43a91e99b3dbdaf8",
+    "rodenteval/apply_updates_fallback.go": "af5744e36d7a1b236ecf2456038fc02441b6213a0439ab0a7c76c77cdbacda58",
+    "rodenteval/apply_updates_test.go": "743abcc1660c112ba79edc88ec5c6ca083fc1fd640905adbc6b034224af827c9",
+    "rodenteval/apply_updates_amd64_v3_test.go": "9040eba36d422a5c53726085db585d920174c89af1a7b2cb20fe0bb7475ba5e2",
+    "rodenteval/apply_updates_fallback_test.go": "15b9037df5737f2ac4e41d2c972bdf69149878477d70ff26cad4c37ae2c7bcab"
+  },
+  "inputs_sha256": {
+    "model.bin": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb",
+    "release-oracle.json": "2685ecfae535fedd55fdce00d8c816b60955cf4f93873bda836366e409f97cb8",
+    "transition-fixtures.json": "f9e26de0ed7a9663011f1fe8844ee0d8beb7a1bea4a2e4da50805fdbbf9579d4",
+    "tagged-transition-oracle.json": "415c956859d923153fe3dabd4e7591991561710f7eb4f02a9183fb42bb389d25",
+    "release-transition-oracle.json": "5f110afab9f9e8c9df8381c64d229b7b1797511366174200720afbc8f2f48853"
+  },
+  "validation": {
+    "script": {
+      "path": "/home/ehrli/repos/ngn-rodent-update-avx2-20260913/output/rodent-update-avx2-20260913/run-validation-v1.sh",
+      "sha256": "fe4d6eafa49ece06841aee6715c8270aa0f1c0d410e2cd8b636ec457adfe0ac5"
+    },
+    "raw_directory": "/home/ehrli/repos/ngn-rodent-update-avx2-20260913/output/rodent-update-avx2-20260913/validation",
+    "raw_inventory": {
+      "path": "/home/ehrli/repos/ngn-rodent-update-avx2-20260913/output/rodent-update-avx2-20260913/validation-SHA256SUMS",
+      "sha256": "bc289a72a0b49a24e67034394744b5141800a00e33cd5ad664534fa85558995c"
+    },
+    "stages": [
+      {
+        "name": "focused-v1",
+        "exit": 0,
+        "command": "env CGO_ENABLED=0 GOAMD64=v1 GOMAXPROCS=2 GOFLAGS=-mod=readonly go -C <worktree> test -p 2 ./rodenteval -run '^TestRodentApplyUpdates' -count=1 -v"
+      },
+      {
+        "name": "focused-v3",
+        "exit": 0,
+        "command": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly go -C <worktree> test -p 2 ./rodenteval -run '^TestRodentApplyUpdates' -count=1 -v"
+      },
+      {
+        "name": "oracle-v1",
+        "exit": 0,
+        "command": "env CGO_ENABLED=0 GOAMD64=v1 GOMAXPROCS=2 GOFLAGS=-mod=readonly <five pinned Rodent env inputs> go -C <worktree> test -p 2 -tags rodentoracle ./rodenteval -count=1 -v"
+      },
+      {
+        "name": "oracle-v3",
+        "exit": 0,
+        "command": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly <five pinned Rodent env inputs> go -C <worktree> test -p 2 -tags rodentoracle ./rodenteval -count=1 -v"
+      },
+      {
+        "name": "engine-rodent-v3",
+        "exit": 0,
+        "command": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly RODENT_V11_ANAND_MODEL=<pinned> go -C <worktree> test -p 2 -tags rodentoracle ./engine -run Rodent -count=1 -v"
+      },
+      {
+        "name": "full-short-v3",
+        "exit": 0,
+        "command": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly go -C <worktree> test -short -p 2 ./... -count=1"
+      },
+      {
+        "name": "full-short-race-v3",
+        "exit": 0,
+        "command": "env GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly go -C <worktree> test -short -race -p 2 ./... -count=1"
+      }
+    ],
+    "required_oracles_executed": {
+      "v1_exact_release_72": true,
+      "v1_incremental_transition_75": true,
+      "v3_exact_release_72": true,
+      "v3_incremental_transition_75": true,
+      "configured_engine_rodent_tests": true
+    }
+  },
+  "build_evidence": {
+    "candidate_rodenteval_test": {
+      "path": "/home/ehrli/repos/ngn-rodent-update-avx2-20260913/output/rodent-update-avx2-20260913/rodenteval-update-candidate.test",
+      "sha256": "a9525a81dc5120639a989b83eac2f8d11c629e53dd9c4666b2edbe37e032be22",
+      "goamd64": "v3"
+    },
+    "disassembly": {
+      "path": "/home/ehrli/repos/ngn-rodent-update-avx2-20260913/output/rodent-update-avx2-20260913/disassembly-gnu.txt",
+      "sha256": "5cfe2cf26e1f55ea93cdb227d4955806f621a1ef51e86794620ae9ad5b4286a7"
+    }
+  },
+  "held_speed_gate_proposal": {
+    "performance_launched": false,
+    "mechanism": "Reuse the accepted Rodent output-kernel paired driver, six fixed fixtures, exact cold/warm identity snapshots, v3/v3 matched binaries, alternating execution order, and clean CPU-affinity supervision.",
+    "direct_check": "Add one private test-only benchmark for portable versus selected 2/3/4-row kernels over preloaded captured update rows; require every row class and the aggregate to improve with 0 B/op and 0 allocs/op.",
+    "acceptance": "Across the same repeated paired blocks, require candidate/base median search time <= 0.97 (at least 3% less time), every fixture median < 1, both execution-order strata < 1, exact callback/PV/score/node/context identity, and identical allocation counts.",
+    "failure": "Reject on any correctness/identity/dispatch failure, any fixture regression, or a non-repeatable/sub-3% search gain."
+  },
+  "commit_created": false
+}

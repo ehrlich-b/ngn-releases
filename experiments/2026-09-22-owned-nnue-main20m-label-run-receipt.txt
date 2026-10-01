@@ -1,0 +1,15 @@
+started_utc=2026-09-22T06:42:17Z
+sampler_sha256=53d240d4948a165a46fa42875f825edef79eb0f36a33e580a27cb562c56d4138
+source_5m_run_receipt_sha256=995f643947688cd7a8b25ecab06944f3df05ac8cc74bb508568c1233b1d55edb
+queue_sha256=f7222c1972d0e7010756acb75100e1381c574bd0835d682d034daec51a2aa78c
+initial_expansion_accepted=4327066
+target_expansion_accepted=19000000
+resume1_started_utc=2026-09-22T07:02:13Z
+resume1_initial_expansion_accepted=4414183
+ended_utc=2026-09-22T19:07:58Z
+new_shards_packed=171
+expansion_accepted_available=19123414
+label_receipts=221
+pack_receipts=221
+linux_free_after_bytes=868507430912
+windows_c_free_after_bytes=255253475328

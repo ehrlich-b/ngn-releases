@@ -1,0 +1,28 @@
+{
+  "source_commit": "1d01609d7c0d03e15a3522b50829a4ac91447baf",
+  "bundle": "/home/ehrli/nnue-owned-continuation-20260928/bundle-wdl25",
+  "windows_smoke_copy": "/mnt/c/Users/ehrli/AppData/Local/Temp/ngn-owned-candidate-20260928",
+  "reports": [
+    {
+      "platform": "linux",
+      "command": [
+        "/home/ehrli/nnue-owned-continuation-20260928/bundle-wdl25/ngn-owned"
+      ],
+      "pass": true,
+      "depth8": "info depth 8 seldepth 19 score cp 51 nodes 13230 time 19 nps 694130 hashfull 1 pv e2e4 c7c5 g1f3 e7e6 d2d4 c5d4 f3d4 g8f6",
+      "bestmove": "bestmove e2e4"
+    },
+    {
+      "platform": "windows",
+      "command": [
+        "/mnt/c/Windows/System32/cmd.exe",
+        "/d",
+        "/c",
+        "C:\\Users\\ehrli\\AppData\\Local\\Temp\\ngn-owned-candidate-20260928\\ngn-owned.cmd"
+      ],
+      "pass": true,
+      "depth8": "info depth 8 seldepth 19 score cp 51 nodes 13230 time 12 nps 1017809 hashfull 1 pv e2e4 c7c5 g1f3 e7e6 d2d4 c5d4 f3d4 g8f6",
+      "bestmove": "bestmove e2e4"
+    }
+  ]
+}

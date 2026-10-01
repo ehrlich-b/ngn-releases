@@ -1,0 +1,100 @@
+{
+  "purpose": "M5 external anchor: owned K4 A1-e10 (S1-era binary ccfb56a-equivalent, K4EvalScale=60 per the E1 rule) vs the exact Counter 5.5 release artifact (6c48fb52..., Threads=1, Hash=128, ExperimentSettings=false, no overhead option), reusing the accepted 2026-09-18 run-003 openings (first200), seed 20260912, 10+0.1, 400 games, non-strict fastchess for the external role. Paired by round with run-003 (NGN Rodent V1.1 vs the same Counter). Diagnostic; relative Elo against one external engine on the shared host, not an absolute rating.",
+  "fastchess": {
+    "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/tools/fastchess",
+    "sha256": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00"
+  },
+  "auditor": {
+    "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/audit_fastchess_match.py",
+    "sha256": "4c4d7374c16fe7fa9104429aecbb22ea582e1525d70712c6769d6ae28d16d224"
+  },
+  "stockfish": {
+    "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/tools/stockfish18",
+    "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+  },
+  "openings_pgn": {
+    "path": "/home/ehrli/repos/ngn-external-counter-checkpoint-gate-20260913/run-003/inputs/openings-first200.pgn",
+    "sha256": "1ae6a65a0224d7a4ff893a3c999542cd3d05e9a7f0e989fe2deee1cff7b8bf5a"
+  },
+  "opening_prefixes": {
+    "path": "/home/ehrli/repos/ngn-external-counter-checkpoint-gate-20260913/run-003/inputs/opening-prefixes-first200.txt",
+    "sha256": "2257ecfb9af03f1ee0bff68f71ec97dbe363cdb9f535fab1a0ebc5af1abaaf33"
+  },
+  "opening_plies": 6,
+  "pairs": 200,
+  "concurrency": 4,
+  "cpus": [
+    8,
+    10,
+    12,
+    14
+  ],
+  "seed": 20260912,
+  "tc": "10+0.1",
+  "strict": false,
+  "roles": [
+    {
+      "name": "NGN-Owned-K4-A1-E10-Scale60",
+      "engine": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/ngn-cand3",
+        "sha256": "75b0afdb8cf56ebb16daabb41f19979a9881b3d0211e1faf0773d80f14846279"
+      },
+      "network": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/archive-a1/runs/archive-a1-e10.nnue",
+        "sha256": "7e7fe59ba477b12041f010d7a1c2851d728ef84c8a761961a5e2e4b77776cfaf"
+      },
+      "options": [
+        [
+          "Threads",
+          1
+        ],
+        [
+          "OwnBook",
+          false
+        ],
+        [
+          "EvalFile",
+          "$NETWORK"
+        ],
+        [
+          "EvalBackend",
+          "ngn-k4-768-v1"
+        ],
+        [
+          "Hash",
+          128
+        ],
+        [
+          "Move Overhead",
+          100
+        ],
+        [
+          "K4EvalScale",
+          60
+        ]
+      ]
+    },
+    {
+      "name": "Counter-5.5",
+      "engine": {
+        "path": "/home/ehrli/repos/ngn-external-counter-checkpoint-gate-20260913/run-003/inputs/counter-5.5",
+        "sha256": "6c48fb52934d49d3774633e32f0b4fb4796b1e2c63925f24167ef0f0c0d761c8"
+      },
+      "network": null,
+      "options": [
+        [
+          "Threads",
+          1
+        ],
+        [
+          "Hash",
+          128
+        ],
+        [
+          "ExperimentSettings",
+          false
+        ]
+      ]
+    }
+  ]
+}

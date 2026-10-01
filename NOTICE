@@ -83,3 +83,96 @@ Modification notice dated 2026-10-01: these author/source notices and the
 THIRD_PARTY inventory are corrected privately before the requested removal and
 replacement work. This notice does not claim that published copies have changed
 or that the current audit is a complete legal determination.
+
+Private modification dated 2026-10-01: Rodent V1.1/V1.2 and derived K4
+runtime adapters and generation tooling were removed after the attribution
+correction. The source history, old releases and original provenance remain.
+The piece/square/move primitives were replaced by fresh-context implementations
+from behavior contracts and independently verified against the historical ABI.
+The normal candidate build uses locked HCE; HCE still contains derived PeSTO
+tables, and board/position/hash/cache still retain their Zahak origin and MIT
+notices. This stage does not claim a wholly independent engine or a new rating.
+
+Private modification dated 2026-10-01, subsequent cache stage: the cache
+implementation was replaced by a fresh-context implementation from its behavior
+contract. Hidden replay, synchronized coherence, HCE node/perft identity and
+required regression/race checks passed. Historical Zahak notices remain for
+derived copies. The board, position and hash implementations remain derived
+and credited; PeSTO-derived classical values remain.
+
+Canonical Polyglot constants — Disservin/chess-library
+Copyright (c) 2023 disservin
+Source: https://github.com/Disservin/chess-library/tree/53e6a841dcda7059a2af363d85f785ef1817304a
+MIT permission/copyright: LICENSES/chess-library-MIT.txt, with a source header
+in engine/polyglot_random.go. The candidate's 781 constants and retained license
+text were checked against Git-verified pinned source blobs. These values are
+fixed external protocol data required for interoperable Polyglot book keys.
+
+Private modification dated 2026-10-01, subsequent hash stage: the position
+hashing implementation was independently regenerated from its behavior/key-data
+contract and verified against stream, move/null restoration, legal EP, Polyglot
+and HCE node/perft controls, including zero-allocation real-engine EP probes.
+Historical Zahak notices remain for derived copies. Two credited core
+implementations remain: board and position; PeSTO-derived values remain.
+
+Private modification dated 2026-10-01, subsequent board stage: the board
+container was regenerated from its behavior contract and verified against
+occupancy/mailbox/accumulator/castling/capture replay, hash restoration, HCE
+node/perft and all required regression/race checks. Position is the remaining
+credited Zahak core implementation; historical notices remain. PeSTO-derived
+values remain, and their precise original permission is unresolved.
+
+Classical tuning-data mirror — KierenP/ChessTrainingSets
+Copyright (c) 2020 Kieren Pearson
+README contributor: Alexandru Moșoi (quiet-labeled.epd)
+Source: https://github.com/KierenP/ChessTrainingSets/tree/ef85c314b9f0c0ff814a0d870f6b0b7c7c7f4b87
+Mirror's declared MIT text: LICENSES/ChessTrainingSets-MIT.txt. The May 28 NGN
+tuning record identifies this mirror and EPD conversion/PST tuning. Exact local
+training-file identity and original contributor permission chain remain open;
+this mirror notice does not establish separate PeSTO table permission.
+
+Private modification dated 2026-10-01, subsequent position stage: the position
+layer was regenerated from a typed behavior contract and verified against
+move/undo/null/castling/promotion/EP/repetition/copy/draw replay, prior board and
+hash controls, HCE node/perft and all required short/race checks. All seven
+identified Zahak-derived core components have now been replaced in this
+candidate. Historical origins and MIT notices remain; PeSTO-derived values and
+the other documented source/data permission questions remain unresolved. This
+generation process is not a legal clean-room certification or a claim that
+every remaining source expression is original.
+
+Private current-candidate modification dated 2026-10-01: the old HCE,
+PeSTO/legacy square arrays, explicitly ported Counter draw-factor routine,
+inherited magic constants and generic/Counter/Stockfish NNUE implementations
+and adapters are removed. The new HCE and coordinate sliding attacks were
+generated independently from typed contracts without prior source or data.
+Old tuning/model APIs and tools are retired. All seven identified Zahak core
+components were independently replaced in preceding stages. Historical notices
+remain. Current canonical Polyglot format data retains the precisely pinned
+Disservin MIT source and full permission text. Published chess techniques and
+Go's standard library remain in use; this is not an assertion that every
+algorithm/constant was invented by NGN or a blanket legal certification.
+
+Subsequent current-tree cleanup dated 2026-10-01: the retired K4/Bullet neural
+training scaffold is removed as well. It is not used by the independent HCE.
+Bullet copyright/permission notices and the complete earlier history remain.
+
+Search-technique acknowledgements for NGN 0.2.0
+NGN's search, move ordering and time management use published alpha-beta,
+pruning, correction-history and budget formulas researched in these projects:
+CounterGo by Vadim Chizhov: https://github.com/ChizhovVadim/CounterGo
+Stockfish by the Stockfish developers: https://github.com/official-stockfish/Stockfish
+Ethereal by Andrew Grant: https://github.com/AndyGrant/Ethereal
+Weiss by Terje Kirstihagen: https://github.com/TerjeKir/weiss
+Stash by Morgan Houppin: https://github.com/mhouppin/stash-bot
+These acknowledge algorithm/formula inspiration; they do not claim that the
+current evaluator is one of those implementations. No external neural model
+or evaluation backend is bundled or selected. GPLv3 text is retained in LICENSE.
+
+Historical Rodent mechanism probe
+experiments/2026-10-01-rodent-pv-identity-probe retains a source-derived move/TT/
+pawn-validation model and archived source evidence from Rodent V, by Naman
+Thanki and Pawel Koziol, under GPLv3. Its SOURCE-LICENSE-GPL-3.0, origin receipts
+and added directory NOTICE apply. It is an independent diagnostic executable,
+not imported by NGN's main dependency closure or used in the evaluation hot path.
+Its source/evidence is preserved with attribution rather than hidden.

@@ -1,0 +1,245 @@
+{
+  "schema": 1,
+  "cases": [
+    {
+      "name": "final_ply_mate_beats_maxmoves",
+      "fen": "7k/5P2/6K1/8/8/8/8/r7 b - - 0 1",
+      "white_moves": [
+        "f7f8q"
+      ],
+      "black_moves": [
+        "a1a2"
+      ],
+      "applied_moves": [
+        "a1a2",
+        "f7f8q"
+      ],
+      "extra_args": [
+        "-maxmoves",
+        "1"
+      ],
+      "tc": "2+0.02",
+      "result": "1-0",
+      "termination": "normal",
+      "reason": "White mates",
+      "classification": "checkmate"
+    },
+    {
+      "name": "final_ply_stalemate_beats_maxmoves",
+      "fen": "k1r5/4Q3/3K4/8/8/8/8/8 b - - 0 1",
+      "white_moves": [
+        "e7c7"
+      ],
+      "black_moves": [
+        "c8c7"
+      ],
+      "applied_moves": [
+        "c8c7",
+        "e7c7"
+      ],
+      "extra_args": [
+        "-maxmoves",
+        "1"
+      ],
+      "tc": "2+0.02",
+      "result": "1/2-1/2",
+      "termination": "normal",
+      "reason": "Draw by stalemate",
+      "classification": "stalemate"
+    },
+    {
+      "name": "final_ply_fifty_move_beats_maxmoves",
+      "fen": "4r2k/8/8/8/8/8/6K1/R7 b - - 98 1",
+      "white_moves": [
+        "a1a2"
+      ],
+      "black_moves": [
+        "e8e7"
+      ],
+      "applied_moves": [
+        "e8e7",
+        "a1a2"
+      ],
+      "extra_args": [
+        "-maxmoves",
+        "1"
+      ],
+      "tc": "2+0.02",
+      "result": "1/2-1/2",
+      "termination": "normal",
+      "reason": "Draw by fifty moves rule",
+      "classification": "fifty_move"
+    },
+    {
+      "name": "final_ply_repetition_beats_maxmoves",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "white_moves": [
+        "g1f3",
+        "f3g1",
+        "g1f3",
+        "f3g1"
+      ],
+      "black_moves": [
+        "g8f6",
+        "f6g8",
+        "g8f6",
+        "f6g8"
+      ],
+      "applied_moves": [
+        "g1f3",
+        "g8f6",
+        "f3g1",
+        "f6g8",
+        "g1f3",
+        "g8f6",
+        "f3g1",
+        "f6g8"
+      ],
+      "extra_args": [
+        "-maxmoves",
+        "4"
+      ],
+      "tc": "2+0.02",
+      "result": "1/2-1/2",
+      "termination": "normal",
+      "reason": "Draw by 3-fold repetition",
+      "classification": "repetition"
+    },
+    {
+      "name": "ordinary_maxmoves_control",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "white_moves": [
+        "e2e4"
+      ],
+      "black_moves": [
+        "e7e5"
+      ],
+      "applied_moves": [
+        "e2e4",
+        "e7e5"
+      ],
+      "extra_args": [
+        "-maxmoves",
+        "1"
+      ],
+      "tc": "2+0.02",
+      "result": "1/2-1/2",
+      "termination": "adjudication",
+      "reason": "Draw by adjudication",
+      "classification": "ordinary_cap"
+    },
+    {
+      "name": "mate_beats_score_draw",
+      "fen": "7k/5P2/6K1/8/8/8/8/8 w - - 0 1",
+      "white_moves": [
+        "f7f8q"
+      ],
+      "black_moves": [],
+      "applied_moves": [
+        "f7f8q"
+      ],
+      "extra_args": [
+        "-draw",
+        "movenumber=0",
+        "movecount=1",
+        "score=1"
+      ],
+      "tc": "2+0.02",
+      "result": "1-0",
+      "termination": "normal",
+      "reason": "White mates",
+      "classification": "checkmate"
+    },
+    {
+      "name": "stalemate_beats_score_draw",
+      "fen": "k7/8/2QK4/8/8/8/8/8 w - - 0 1",
+      "white_moves": [
+        "c6c7"
+      ],
+      "black_moves": [],
+      "applied_moves": [
+        "c6c7"
+      ],
+      "extra_args": [
+        "-draw",
+        "movenumber=0",
+        "movecount=1",
+        "score=1"
+      ],
+      "tc": "2+0.02",
+      "result": "1/2-1/2",
+      "termination": "normal",
+      "reason": "Draw by stalemate",
+      "classification": "stalemate"
+    },
+    {
+      "name": "late_mate_loses_on_time",
+      "fen": "7k/5P2/6K1/8/8/8/8/8 w - - 0 1",
+      "white_moves": [
+        "f7f8q"
+      ],
+      "black_moves": [],
+      "applied_moves": [],
+      "white_delay_ms": 250,
+      "extra_args": [],
+      "tc": "0.05+0",
+      "result": "0-1",
+      "termination": "time forfeit",
+      "reason": "White loses on time",
+      "classification": "timeout"
+    },
+    {
+      "name": "final_ply_black_mate_beats_maxmoves",
+      "fen": "R7/8/8/8/8/6k1/5p2/7K w - - 0 1",
+      "white_moves": [
+        "a8a7"
+      ],
+      "black_moves": [
+        "f2f1q"
+      ],
+      "applied_moves": [
+        "a8a7",
+        "f2f1q"
+      ],
+      "extra_args": [
+        "-maxmoves",
+        "1"
+      ],
+      "tc": "2+0.02",
+      "result": "0-1",
+      "termination": "normal",
+      "reason": "Black mates",
+      "classification": "checkmate"
+    },
+    {
+      "name": "increment_credit_both_colors",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "white_moves": [
+        "e2e4",
+        "g1f3"
+      ],
+      "black_moves": [
+        "e7e5",
+        "g8f6"
+      ],
+      "applied_moves": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "g8f6"
+      ],
+      "white_delay_ms": 150,
+      "black_delay_ms": 150,
+      "require_increment_ms": 300,
+      "extra_args": [
+        "-maxmoves",
+        "2"
+      ],
+      "tc": "0.25+0.3",
+      "result": "1/2-1/2",
+      "termination": "adjudication",
+      "reason": "Draw by adjudication",
+      "classification": "increment_control"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "pass": true,
+  "method": "Independent standard-library PGN tag/move/count/color-pair recount. Legal replay remains the separately hash-verified WSL Stockfish audit.",
+  "matches": {
+    "wdl15-aa": {
+      "pass": true,
+      "candidate": "WDL15-A",
+      "games": 128,
+      "pairs": 64,
+      "candidate_WDL": {
+        "wins": 24,
+        "draws": 78,
+        "losses": 26
+      },
+      "plies": 20483,
+      "penta_0_to_4": [
+        2,
+        15,
+        30,
+        17,
+        0
+      ],
+      "score": 0.4921875,
+      "elo": -5.429122875709548,
+      "paired_95_elo_interval_from_report": [
+        -38.153397218633536,
+        27.198831638044446
+      ],
+      "pgn_sha256": "fe0aa808351d0a42d84c15521b2c8c2861199674bd076ff01f4ad4608ea93e8b"
+    },
+    "wdl15-gate": {
+      "pass": true,
+      "candidate": "Owned-WDL15",
+      "games": 800,
+      "pairs": 400,
+      "candidate_WDL": {
+        "wins": 170,
+        "draws": 480,
+        "losses": 150
+      },
+      "plies": 119280,
+      "penta_0_to_4": [
+        10,
+        67,
+        220,
+        99,
+        4
+      ],
+      "score": 0.5125,
+      "elo": 8.687699877294486,
+      "paired_95_elo_interval_from_report": [
+        -3.9088152458382632,
+        21.307101295913743
+      ],
+      "pgn_sha256": "25fd1cdcc7796cd5a31dd4e3bcd8f6b2b534d883e0f8040a173e134599f6b4c3"
+    }
+  },
+  "verdict": {
+    "baseline": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue",
+      "sha256": "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29"
+    },
+    "candidate": {
+      "path": "/home/ehrli/nnue-owned-continuation-20260928/wdl15/wdl15-e10.nnue",
+      "sha256": "8b5d4396feb5f8d844d90993d0918736f06ac2c596844b480a7cff7440da3292"
+    },
+    "decision": "RETAIN_SELECTED",
+    "report": {
+      "path": "/home/ehrli/nnue-owned-continuation-20260928/wdl15-gate/wdl15-gate/report.json",
+      "sha256": "cade79d87804a684e4f3039830cf359491ac9e2f2818640263dedc675d8fba26"
+    },
+    "rule": "Promote only if all audits pass and paired 95% Elo lower bound exceeds zero at exactly 800 games. No extension, checkpoint substitution or pooling.",
+    "state": "COMPLETE"
+  },
+  "off_worker_collection": {
+    "archive": "/Users/ehrlich/repos/ngn/output/owned-continuation-artifacts-20260928/completed-20260929-155619.tar.gz",
+    "archive_bytes": 91505634,
+    "archive_sha256": "4fe4d9000d26e214ebe39ec1f7f1704af9ecab27bea840e533304f8a8d02b1e8",
+    "requested": [
+      "wdl15-aa",
+      "wdl15-gate"
+    ],
+    "collected": [
+      "lifecycle",
+      "wdl15-aa",
+      "wdl15-gate"
+    ]
+  },
+  "claim": "WDL15 fails its predeclared positive lower-bound promotion rule. Retain WDL25; a small benefit remains unresolved. No extension or pooling."
+}

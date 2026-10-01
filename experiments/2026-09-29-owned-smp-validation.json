@@ -1,0 +1,93 @@
+{
+  "pass": true,
+  "validation": {
+    "pass": true,
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/home/ehrli/nnue-owned-smp-20260929/source-v2/scripts/ownedmulti_tests",
+      "-v"
+    ],
+    "returncode": 0,
+    "source_receipt_sha256": "07c4787ee734d2cdbf0eff603d501c2f8d3035efc6cae7556fe405de2168d7e3",
+    "unchanged_base_and_race_receipt_sha256": "35a31caa7628fd6348e36858045858e951a4d5780b1a6f68c14db753280ef894",
+    "release_source_files_verified": 436,
+    "controls_stderr_sha256": "8c64f1fa39126af3c773569d6286acca9137c975f136223146ffa095fc011950",
+    "completed": 1790700033.0516462,
+    "change": "Distinguish exactly acknowledged Threads options from per-go worker receipts. Prior failed smoke remains unscored."
+  },
+  "smokes": {
+    "smoke-width2": {
+      "pass": true,
+      "games": 6,
+      "legal_plies": 756,
+      "effective_widths": {
+        "minimum_full_width_fraction": 0.5,
+        "pass": true,
+        "roles": {
+          "Owned-A": {
+            "configuration_acknowledgements": 6,
+            "configured": 2,
+            "effective_width_counts": {
+              "2": 361
+            },
+            "full_width_fraction": 1.0,
+            "searches": 361
+          },
+          "Owned-B": {
+            "configuration_acknowledgements": 6,
+            "configured": 1,
+            "effective_width_counts": {
+              "1": 359
+            },
+            "full_width_fraction": 1.0,
+            "searches": 359
+          }
+        }
+      },
+      "pgn_sha256": "66bbb78b4136d0803c8e35f908a254ab25254e6a89a299a41de433e7eb5beaf2",
+      "process_witness_sha256": "de084d6a2d622c899bc2548dff09bfc092d45e2be5624b32b50405281ba4c2ea"
+    },
+    "smoke-width4": {
+      "pass": true,
+      "games": 6,
+      "legal_plies": 625,
+      "effective_widths": {
+        "minimum_full_width_fraction": 0.5,
+        "pass": true,
+        "roles": {
+          "Owned-A": {
+            "configuration_acknowledgements": 6,
+            "configured": 4,
+            "effective_width_counts": {
+              "4": 295
+            },
+            "full_width_fraction": 1.0,
+            "searches": 295
+          },
+          "Owned-B": {
+            "configuration_acknowledgements": 6,
+            "configured": 4,
+            "effective_width_counts": {
+              "4": 294
+            },
+            "full_width_fraction": 1.0,
+            "searches": 294
+          }
+        }
+      },
+      "pgn_sha256": "6653cf0f55c3fa949b546fe52589308f69c54a292f389616714ebb5495014a85",
+      "process_witness_sha256": "82e19401f46dcebecfb881b65bb5ff0a1c1db7ba427f844e549ae0fef2b30e7b"
+    }
+  },
+  "off_worker_archive": {
+    "path": "/Users/ehrlich/repos/ngn/output/owned-smp-artifacts-20260929/preflight-20260929-164743.tar.gz",
+    "bytes": 1360881,
+    "sha256": "ca5e875a60c7dd5e25919341cf709e8ce41eb896b1fd1280d66326d6fe4c98ba"
+  },
+  "prior_failed_smoke": "Preserved unscored in pilots/smoke-width2; corrected instrument reran both procedure smokes from the start.",
+  "claim": "Procedure and actual worker-width evidence only. No Elo gain or absolute rating follows from the smokes."
+}

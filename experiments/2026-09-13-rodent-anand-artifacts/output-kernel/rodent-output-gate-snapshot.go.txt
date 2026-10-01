@@ -1,0 +1,183 @@
+package engine
+
+import (
+	"encoding/json"
+	"os"
+	"reflect"
+	"testing"
+
+	"github.com/ehrlich-b/ngn/rodenteval"
+)
+
+const rodentOutputGateReceiptEnv = "NGN_RODENT_OUTPUT_GATE_RECEIPT"
+
+type rodentOutputGateInfo struct {
+	Scalars map[string]any `json:"scalars"`
+	PV      []string       `json:"pv"`
+}
+
+type rodentOutputGateTrajectory struct {
+	Callbacks         []rodentOutputGateInfo `json:"callbacks"`
+	Final             rodentOutputGateInfo   `json:"final"`
+	RootReleaseStatic int                    `json:"root_release_static"`
+	RootRestored      bool                   `json:"root_restored"`
+	ContextDepth      int                    `json:"context_depth"`
+	ContextAtRoot     bool                   `json:"context_at_root"`
+}
+
+type rodentOutputGateFixture struct {
+	Name string                     `json:"name"`
+	FEN  string                     `json:"fen"`
+	Cold rodentOutputGateTrajectory `json:"cold"`
+	Warm rodentOutputGateTrajectory `json:"warm"`
+}
+
+type rodentOutputGateReceipt struct {
+	Schema      int                       `json:"schema"`
+	ModelSHA256 string                    `json:"model_sha256"`
+	ModelBytes  int                       `json:"model_bytes"`
+	HashMB      int                       `json:"hash_mb"`
+	Threads     int                       `json:"threads"`
+	NodeLimit   uint64                    `json:"node_limit"`
+	Fixtures    []rodentOutputGateFixture `json:"fixtures"`
+}
+
+func rodentOutputGateSnapshot(info *SearchInfo) rodentOutputGateInfo {
+	scalars := make(map[string]any)
+	value := reflect.ValueOf(info).Elem()
+	typeInfo := value.Type()
+	for index := 0; index < value.NumField(); index++ {
+		fieldType := typeInfo.Field(index)
+		if fieldType.PkgPath != "" {
+			continue
+		}
+		field := value.Field(index)
+		switch field.Kind() {
+		case reflect.Bool, reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64,
+			reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+			scalars[fieldType.Name] = field.Interface()
+		case reflect.Array:
+			switch fieldType.Name {
+			case "CutIdxHist", "BcutBand", "FmcBand", "CutMissByClass":
+				scalars[fieldType.Name] = field.Interface()
+			}
+		}
+	}
+	pv := make([]string, info.PVLength)
+	for index := range pv {
+		pv[index] = MoveToAlgebraic(info.PV[index])
+	}
+	return rodentOutputGateInfo{Scalars: scalars, PV: pv}
+}
+
+func requireRodentOutputGatePV(tb testing.TB, root *Position, info *SearchInfo) {
+	tb.Helper()
+	if info.PVLength <= 0 || info.PVLength > MaximumDepth || info.BestMove == EmptyMove || info.PV[0] != info.BestMove {
+		tb.Fatalf("invalid reported PV length=%d best=%v", info.PVLength, info.BestMove)
+	}
+	position := root.Copy()
+	for ply := 0; ply < info.PVLength; ply++ {
+		move := info.PV[ply]
+		found := false
+		for _, candidate := range GenerateLegalMoves(position) {
+			if candidate == move {
+				found = true
+				break
+			}
+		}
+		if !found {
+			tb.Fatalf("illegal PV move at ply %d: %s", ply, MoveToAlgebraic(move))
+		}
+		_, _, _, made := position.MakeMove(move)
+		if !made {
+			tb.Fatalf("PV move failed at ply %d: %s", ply, MoveToAlgebraic(move))
+		}
+	}
+}
+
+func runRodentOutputGateTrajectory(tb testing.TB, model *rodenteval.Model, searcher *SearchEngine, position *Position, before pvPositionSnapshot, root rodenteval.Position) rodentOutputGateTrajectory {
+	tb.Helper()
+	callbacks := make([]rodentOutputGateInfo, 0, MaximumDepth)
+	result := searcher.SearchIterativeDeepeningWithCallback(position, MaximumDepth, nil, func(info *SearchInfo) {
+		requireRodentOutputGatePV(tb, position, info)
+		callbacks = append(callbacks, rodentOutputGateSnapshot(info))
+	})
+	if result == nil || !result.Stopped || result.Nodes < rodentProfileNodes || result.EffectiveThreads != 1 {
+		tb.Fatalf("incomplete fixed-node result: %+v", result)
+	}
+	requireRodentOutputGatePV(tb, position, result)
+	if len(callbacks) == 0 {
+		tb.Fatal("no completed-depth callbacks")
+	}
+	restored := reflect.DeepEqual(snapshotPVPosition(position), before)
+	if !restored {
+		tb.Fatal("search changed root position")
+	}
+	worker := searcher.worker.evaluator
+	if worker == nil || worker.rodentContext == nil {
+		tb.Fatal("search has no Rodent context")
+	}
+	depth := worker.rodentContext.Depth()
+	contextAtRoot := worker.rodentContext.Position() == root
+	if depth != 0 || !contextAtRoot {
+		tb.Fatalf("Rodent context depth=%d at_root=%v", depth, contextAtRoot)
+	}
+	incremental, err := worker.rodentContext.EvaluateReleaseStatic()
+	if err != nil {
+		tb.Fatal(err)
+	}
+	fresh, err := model.EvaluateReleaseStatic(root)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if incremental != fresh || worker.SearchSTM(position) != rodentSearchScore(fresh) {
+		tb.Fatalf("root release static incremental=%d fresh=%d SearchSTM=%d", incremental, fresh, worker.SearchSTM(position))
+	}
+	return rodentOutputGateTrajectory{
+		Callbacks: callbacks, Final: rodentOutputGateSnapshot(result),
+		RootReleaseStatic: fresh, RootRestored: restored,
+		ContextDepth: depth, ContextAtRoot: contextAtRoot,
+	}
+}
+
+// TestRodentOutputFixedNodeSnapshot must produce byte-identical JSON from the
+// portable base and selected candidate before either contributes timing data.
+func TestRodentOutputFixedNodeSnapshot(t *testing.T) {
+	model := loadRodentProfileModel(t)
+	metadata, err := model.Metadata()
+	if err != nil {
+		t.Fatal(err)
+	}
+	output := os.Getenv(rodentOutputGateReceiptEnv)
+	if output == "" {
+		t.Fatalf("set %s to a new explicit receipt path", rodentOutputGateReceiptEnv)
+	}
+	receipt := rodentOutputGateReceipt{
+		Schema: 1, ModelSHA256: metadata.SHA256, ModelBytes: metadata.Bytes,
+		HashMB: rodentProfileHashMB, Threads: 1, NodeLimit: rodentProfileNodes,
+	}
+	for _, fixture := range rodentProfileFixtures {
+		searcher, position, before, root := newRodentProfileSearch(t, model, fixture.fen)
+		cold := runRodentOutputGateTrajectory(t, model, searcher, position, before, root)
+		warm := runRodentOutputGateTrajectory(t, model, searcher, position, before, root)
+		receipt.Fixtures = append(receipt.Fixtures, rodentOutputGateFixture{
+			Name: fixture.name, FEN: fixture.fen, Cold: cold, Warm: warm,
+		})
+	}
+	data, err := json.MarshalIndent(receipt, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	data = append(data, '\n')
+	file, err := os.OpenFile(output, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0o644)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := file.Write(data); err != nil {
+		_ = file.Close()
+		t.Fatal(err)
+	}
+	if err := file.Close(); err != nil {
+		t.Fatal(err)
+	}
+}

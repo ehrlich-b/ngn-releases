@@ -1,0 +1,182 @@
+{
+  "schema": "ngn-rodent-v12-demand-trace-result-v1",
+  "decision": "SHELVE_L1_LAZY_ACCUMULATORS",
+  "reason": "measured optimistic whole-search ceiling is materially below the frozen 3 percent threshold",
+  "source_code_commit": "9c8ecc7ba97fa8d5eb8bd6143bb08f35c907301b",
+  "held_package_commit": "ae739e210563c603df2134832df30685b38ff536",
+  "run_root": "/home/ehrli/l0-v12-demand-20260919/run-001",
+  "worktree": "/home/ehrli/repos/ngn-l0-demand-20260919",
+  "platform": {
+    "os": "WSL Linux",
+    "cpu": "AMD Ryzen 7 9800X3D 8-Core Processor",
+    "go": "go1.25.5",
+    "goamd64": "v3",
+    "gomaxprocs": 1,
+    "engine_threads": 1,
+    "hash_mb": 128
+  },
+  "validation": {
+    "diagnostic_unit_test": "PASS: go test ./rodentv12eval -run TestDemandDiagnostics -count=1",
+    "probe_compile_and_prefix_shape": "PASS: go test ./engine -run TestRodentV12DemandTracePrefixShape -count=1",
+    "trace_test": "PASS: go test ./engine -run ^TestRodentV12DemandTrace$ -count=1 -v",
+    "trace_go_reported_seconds": 5.322,
+    "trace_wall_seconds": 5.67,
+    "trace_max_rss_kbytes": 317184,
+    "fixed_node_searches": 12,
+    "trajectory_identity": true,
+    "identity_fields": ["nodes", "depth", "seldepth", "best_move", "best_score", "pv"],
+    "unbalanced_resets": 0,
+    "accounting_partitions": "PASS",
+    "evaluator_depth_after_each_search": 0,
+    "hopper_alive_after_run": {
+      "pid": 3099092,
+      "command": "/usr/bin/python3 /home/ehrli/hopper/hopper.py run"
+    },
+    "surviving_probe_or_fastchess_processes": 0
+  },
+  "cold": {
+    "searches": 6,
+    "nodes_per_search": 400000,
+    "evaluation_calls": 1949839,
+    "move_pushes": 1915563,
+    "null_pushes": 173464,
+    "max_depth": 33,
+    "move_frames": {
+      "required": 1810136,
+      "direct": 1767734,
+      "descendant_only": 42402,
+      "abandoned": 105427,
+      "abandoned_fraction": 0.05503708309254251
+    },
+    "null_frames": {
+      "required": 161180,
+      "direct": 161180,
+      "descendant_only": 0,
+      "abandoned": 12284
+    },
+    "move_copy_perspectives": {
+      "total": 3831126,
+      "required": 3483544,
+      "abandoned": 347582,
+      "abandoned_fraction": 0.09072580750411237
+    },
+    "null_copy_perspectives": {
+      "total": 346928,
+      "required": 322360,
+      "abandoned": 24568,
+      "abandoned_fraction": 0.07081584651570355
+    },
+    "update2_perspectives": {
+      "total": 2319760,
+      "required": 2213716,
+      "abandoned": 106044,
+      "abandoned_fraction": 0.04571334965686105
+    },
+    "update3_perspectives": {
+      "total": 1319489,
+      "required": 1218221,
+      "abandoned": 101268,
+      "abandoned_fraction": 0.0767478925553756
+    },
+    "update4_perspectives": {
+      "total": 55566,
+      "required": 51607,
+      "abandoned": 3959,
+      "abandoned_fraction": 0.0712486052622107
+    },
+    "refresh_perspectives": {
+      "total": 136311,
+      "required": 130329,
+      "abandoned": 5982,
+      "abandoned_fraction": 0.04388493958668046
+    },
+    "whole_search_opportunity_percent": {
+      "directly_attributed": 0.5586470650972224,
+      "frozen_optimistic_ceiling": 0.8441492254032197,
+      "null_copy_sensitivity": 0.009914218512198498,
+      "sensitivity_inclusive_ceiling": 0.8540634439154182,
+      "shortfall_to_3_percent": 2.145936556084582
+    }
+  },
+  "warm": {
+    "searches": 6,
+    "nodes_per_search": 200000,
+    "evaluation_calls": 942954,
+    "move_pushes": 934592,
+    "null_pushes": 91572,
+    "max_depth": 25,
+    "move_frames": {
+      "required": 876006,
+      "direct": 848719,
+      "descendant_only": 27287,
+      "abandoned": 58586,
+      "abandoned_fraction": 0.06268617749777443
+    },
+    "null_frames": {
+      "required": 82432,
+      "direct": 82432,
+      "descendant_only": 0,
+      "abandoned": 9140
+    },
+    "move_copy_perspectives": {
+      "total": 1869184,
+      "required": 1658134,
+      "abandoned": 211050,
+      "abandoned_fraction": 0.11291023248647539
+    },
+    "null_copy_perspectives": {
+      "total": 183144,
+      "required": 164864,
+      "abandoned": 18280,
+      "abandoned_fraction": 0.09981216965884768
+    },
+    "update2_perspectives": {
+      "total": 1276150,
+      "required": 1193595,
+      "abandoned": 82555,
+      "abandoned_fraction": 0.06469067115934647
+    },
+    "update3_perspectives": {
+      "total": 491948,
+      "required": 459499,
+      "abandoned": 32449,
+      "abandoned_fraction": 0.06596022343824957
+    },
+    "update4_perspectives": {
+      "total": 5964,
+      "required": 5040,
+      "abandoned": 924,
+      "abandoned_fraction": 0.15492957746478872
+    },
+    "refresh_perspectives": {
+      "total": 95122,
+      "required": 89120,
+      "abandoned": 6002,
+      "abandoned_fraction": 0.06309791636004289
+    },
+    "whole_search_opportunity_percent": {
+      "directly_attributed_with_cold_profile_weights": 0.6633554130475993,
+      "frozen_optimistic_ceiling_with_cold_profile_weights": 1.2396934412166134,
+      "null_copy_sensitivity_with_cold_profile_weight": 0.013973703752238676,
+      "sensitivity_inclusive_ceiling": 1.2536671449688521,
+      "shortfall_to_3_percent": 1.7463328550311479
+    }
+  },
+  "cost_sensitivity": {
+    "post_v3_profile_total_cpu_seconds": 6.98,
+    "push_null_flat_seconds": 0.01,
+    "push_null_flat_whole_search_percent": 0.14,
+    "push_null_accumulator_copy_source_line": 170,
+    "cold_null_copy_share_required_to_reach_threshold_percent": 30.44305590724975,
+    "interpretation": "the exact observed PushNull total is 0.14 percent, over 217 times smaller than the null-copy share that would be required to rescue the cold ceiling"
+  },
+  "artifacts": {
+    "probe_sha256": "237305da9836873d0a075e1b9cb6a508e6da5886063d2f5fec71c0c7011db35d",
+    "stdout_sha256": "e19d6ef38a4b1476fc387c09c66d568fa37835789daa2f269a1ace61f78bffe6",
+    "time_sha256": "9e1132be82e70e7d1ae7995a33f2a2696a89621cbcda7e1f8b5e28229e6b5233",
+    "null_copy_pprof_listing_sha256": "457edb9fd77024aeec9457ab9dcbce4674b465adec9099bb52221bab6c607b8b",
+    "post_v3_cpu_pprof_sha256": "3d5719788b4e64daaca4912092963b1aaa4403f19f736f4a08a7255e8969e8b8"
+  },
+  "reopen_condition": "reconsider lazy accumulators only after a materially different evaluator or search changes the measured perspective-aware demand profile, or a fresh profile attributes at least 3 percent whole-search time to actually avoidable work",
+  "next": "advance to H0 passive search-history and selection-signal measurement; do not implement L1"
+}

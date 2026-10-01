@@ -1,0 +1,18 @@
+uci
+setoption name Threads value 1
+isready
+setoption name Hash value 128
+isready
+setoption name UCI_Chess960 value false
+isready
+setoption name UCI_LimitStrength value false
+isready
+setoption name UCI_Elo value 3000
+isready
+ucinewgame
+isready
+position fen 8/7R/4K3/8/1p6/1P4p1/5k2/8 w - - 4 79
+go depth 18
+position fen 8/7R/4K3/8/1p6/1P4p1/5k2/8 w - - 4 79
+go depth 17
+quit

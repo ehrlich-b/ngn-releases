@@ -1,0 +1,75 @@
+{
+  "schema": "ngn-rodenteval-slice-b-formatting-receipt-v1",
+  "status": "FORMATTED_SOURCE_HELD_FOR_RUNTIME_VERIFICATION",
+  "worktree": "/home/ehrli/repos/ngn-rodenteval-context-20260913",
+  "base_commit": "11ca24e848f55e8eeb63a382a8bba37c40e5ed9e",
+  "base_tree": "96c2053cbffeddeea7d2fa8e28504488c3970e39",
+  "preformat_v3": {
+    "context_go_sha256": "f10c6ef9d7413878398ab080aa2895b966095e708120061d6f4d8b5169174ce3",
+    "context_test_go_sha256": "d46db3ab881e599836f74bd1574a6a33c840fcf26be7db13931b22a40a70af6e",
+    "context_oracle_test_go_sha256": "a2c3389306f7ce55e7388cd3cb6e9ca837395488e0004a8ea3245d105ef63220",
+    "combined_source_patch": {
+      "path": "/home/ehrli/repos/ngn-rodenteval-context-20260913/output/rodenteval-slice-b-source-20260913/slice-b-source-with-consumer-v3.patch",
+      "sha256": "b30957db211b4fe627cc66da694aac46fd24b71a9d3e783c51c7f66ce9ec000f"
+    },
+    "source_only_receipt": {
+      "path": "/home/ehrli/repos/ngn-rodenteval-context-20260913/output/rodenteval-slice-b-source-20260913/source-only-receipt-v3.json",
+      "sha256": "097fec9b206b83fcb0d7dc9763865069ebc55701ef26840a8f45b798edb65bf9"
+    }
+  },
+  "format_command": {
+    "command": "/usr/local/go/bin/gofmt -w rodenteval/context.go rodenteval/context_test.go rodenteval/context_oracle_test.go",
+    "exit_code": 0
+  },
+  "formatted_sources": {
+    "context_go": {
+      "path": "/home/ehrli/repos/ngn-rodenteval-context-20260913/output/rodenteval-slice-b-source-20260913/context-final.go.txt",
+      "sha256": "f10c6ef9d7413878398ab080aa2895b966095e708120061d6f4d8b5169174ce3"
+    },
+    "context_test_go": {
+      "path": "/home/ehrli/repos/ngn-rodenteval-context-20260913/output/rodenteval-slice-b-source-20260913/context_test-final.go.txt",
+      "sha256": "d46db3ab881e599836f74bd1574a6a33c840fcf26be7db13931b22a40a70af6e"
+    },
+    "context_oracle_test_go": {
+      "path": "/home/ehrli/repos/ngn-rodenteval-context-20260913/output/rodenteval-slice-b-source-20260913/context_oracle_test-final.go.txt",
+      "sha256": "3235b2643d0aa9c4d2da0b136c78602d0528106366c94aaaf09efc7acbc7a9da"
+    }
+  },
+  "format_evidence": {
+    "gofmt_l_exit_code": 0,
+    "gofmt_l_stdout": "",
+    "ignore_all_space_comparisons_exit_code": {
+      "context_go": 0,
+      "context_test_go": 0,
+      "context_oracle_test_go": 0
+    },
+    "byte_delta": "context.go and context_test.go unchanged; context_oracle_test.go changed only whitespace (48 insertions, 48 deletions).",
+    "whitespace_patch": {
+      "path": "/home/ehrli/repos/ngn-rodenteval-context-20260913/output/rodenteval-slice-b-source-20260913/gofmt-whitespace-v3.patch",
+      "sha256": "aa2cb59df1c890de8e12535fa52148d4cbc993953aec2a21b0eb15cd52434dbc"
+    },
+    "git_diff_check_exit_code": 0
+  },
+  "final_code_tests_patch": {
+    "path": "/home/ehrli/repos/ngn-rodenteval-context-20260913/output/rodenteval-slice-b-source-20260913/slice-b-code-tests-final.patch",
+    "sha256": "116593a42cd094aeb6d88cffafa5151ce1a6fae3ffacbbd818a487e10334422f",
+    "scope": [
+      "rodenteval/context.go",
+      "rodenteval/context_test.go",
+      "rodenteval/context_oracle_test.go"
+    ],
+    "experiment_report_excluded": true
+  },
+  "execution": {
+    "go_build_performed": false,
+    "go_test_performed": false,
+    "engine_or_oracle_execution_performed": false,
+    "performance_execution_performed": false
+  },
+  "publication": {
+    "committed": false,
+    "pushed": false,
+    "engine_or_uci_wiring": false,
+    "playing_backend_changed": false
+  }
+}

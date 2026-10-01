@@ -1,0 +1,668 @@
+{
+  "checked_at_unix": 1790731899.7699852,
+  "records": {
+    "source-receipt.json": {
+      "sha256": "75e234184a4357eedb80902364807360b63adcd95f998c3e56fa8258c317a38e",
+      "value": {
+        "repository": "https://github.com/saisree27/Maelstrom",
+        "release_tag": "v3.3.0",
+        "commit": "b71b738509b431b8d1e7fb60f448f796b09d743b",
+        "archive_url": "https://codeload.github.com/saisree27/Maelstrom/tar.gz/b71b738509b431b8d1e7fb60f448f796b09d743b",
+        "archive_sha256": "e64df204a6d24d3586219578d7af7b9f3db47b55d986d2fb2087c2ce2982ad49",
+        "archive_bytes": 789893,
+        "source_files": [
+          {
+            "path": ".github/workflows/go.yml",
+            "bytes": 379,
+            "sha256": "5e2715ed82ad3bd25d5ef2ab17aac92ca8df60956e64eec6d24adab07b751128"
+          },
+          {
+            "path": ".gitignore",
+            "bytes": 71,
+            "sha256": "1500e99f2a4f9cb5e263b0d11d25811a526bfef6eaa4fc0941a3dcf29a2ac521"
+          },
+          {
+            "path": "LICENSE.md",
+            "bytes": 1072,
+            "sha256": "15a40c88e5cd2740205e5715e445d4b6355ee72d010672547aa9f6271bcbf729"
+          },
+          {
+            "path": "README.md",
+            "bytes": 4891,
+            "sha256": "6a68680f189e7984cff268c32a0c3af18293a30405db7d69ce51e3ce69b22562"
+          },
+          {
+            "path": "engine/bitboard.go",
+            "bytes": 3228,
+            "sha256": "65424b3b95469d0616b387cff472902728c10e047f6d53576d35d03f760ba0f7"
+          },
+          {
+            "path": "engine/board.go",
+            "bytes": 21170,
+            "sha256": "d0a4d3aa1b2618add42d7ea1f6da09336e994e1f6ddeab685e6b75b96b2d5716"
+          },
+          {
+            "path": "engine/constants.go",
+            "bytes": 14876,
+            "sha256": "969c2a5832318d2f2ccabd671e4caa1f797fa7cd9bab7e74ea5f205e96a40b3f"
+          },
+          {
+            "path": "engine/evaluation.go",
+            "bytes": 1375,
+            "sha256": "e9f721f5e7fba4aab2097ba065ed566e83a27d1e14b312e2056f4fd7059c0793"
+          },
+          {
+            "path": "engine/evaluation_test.go",
+            "bytes": 2552,
+            "sha256": "81c0aaf57ab3418e0008f31704914d166bb3a23d3887ccc0f16b0857e2872ef0"
+          },
+          {
+            "path": "engine/move.go",
+            "bytes": 2998,
+            "sha256": "8e31872bc955a745defb92318045afd54bb9920741836b4e63a5bab70581f15a"
+          },
+          {
+            "path": "engine/movegen.go",
+            "bytes": 22110,
+            "sha256": "059fae333e14bdebce9358a48860991b9904ce13aa0c7ece264fc783e209ca92"
+          },
+          {
+            "path": "engine/movegen_test.go",
+            "bytes": 15020,
+            "sha256": "9a763cb4ad270d308f14aaf8578931589f1d51fd3b1905c4dfa53148268a37f1"
+          },
+          {
+            "path": "engine/moveorder.go",
+            "bytes": 5329,
+            "sha256": "2c895fc63ee7930ad9750df3469b111ff1f42d6ff0a08a63513ea8a1ab48a2db"
+          },
+          {
+            "path": "engine/nn_weights/512.bin",
+            "bytes": 789568,
+            "sha256": "83b63c9df6974e380be60b16ee859187c27c83a9fccc608a49810a5e87d5663c"
+          },
+          {
+            "path": "engine/nnue.go",
+            "bytes": 12209,
+            "sha256": "42eac6029ff90536992dd14962d0ae1e1801fa1b36ac28eeb41c05567fbae829"
+          },
+          {
+            "path": "engine/nnue_test.go",
+            "bytes": 8121,
+            "sha256": "7f613dab787de237b3f3729b0cd25de6e0b9582860f7ee0d0f3c4c84650a641c"
+          },
+          {
+            "path": "engine/perft.go",
+            "bytes": 4426,
+            "sha256": "5388ea4a4caf9db8ea728aaf4bc2806ab886cac282333b5e07a79f4edd7f0558"
+          },
+          {
+            "path": "engine/perft_test.go",
+            "bytes": 318,
+            "sha256": "c759b28af842c46984effa3f1356dbaf16aa153f5cc0c788be3d89b98600ea8f"
+          },
+          {
+            "path": "engine/profiling.go",
+            "bytes": 1068,
+            "sha256": "05b99925b3df63465eead0690d3873d9ca844a1584f596b6e4b2686d61e71cf8"
+          },
+          {
+            "path": "engine/profiling_test.go",
+            "bytes": 543,
+            "sha256": "b58f0638576ba300ac743b3b9a9ded957513b4bf5c67266bc935864f774666cc"
+          },
+          {
+            "path": "engine/run.go",
+            "bytes": 1275,
+            "sha256": "dd1695d5c92a1e355c8267a4ef7c85a5c5560d13e7cca894b13c92128678ef6f"
+          },
+          {
+            "path": "engine/screlu/screlu.go",
+            "bytes": 943,
+            "sha256": "0eacacc206f0149cae5db7e73c622d477c64fb8f5705588ead47463ed7874a93"
+          },
+          {
+            "path": "engine/screlu/screlu_simd.c",
+            "bytes": 1433,
+            "sha256": "7b50d46068997f1863bef9d1d28ad852268ad517b7e438316ff083c3851714f3"
+          },
+          {
+            "path": "engine/screlu/screlu_simd.h",
+            "bytes": 225,
+            "sha256": "fa36d736394b77147b4990aaf49cb11e6d957d9875998100fecdb50fa5316497"
+          },
+          {
+            "path": "engine/search.go",
+            "bytes": 20748,
+            "sha256": "1955fb0a53024132835c4e79bc752f65fabd04f34bb0861cab10d2ff5198d4de"
+          },
+          {
+            "path": "engine/see.go",
+            "bytes": 3097,
+            "sha256": "6ffc5a1d38b52a8dac4c8810c526eb491a43db126c4878d9d3c5058bffd2b27f"
+          },
+          {
+            "path": "engine/see_test.go",
+            "bytes": 1075,
+            "sha256": "6f6e6c73077b7644e3b850e1640d88942ab511a2782179a1d547bdd0c15f00fc"
+          },
+          {
+            "path": "engine/test_data/see_test.txt",
+            "bytes": 5144,
+            "sha256": "35e4a2a81a5f95de00fa9b3e954719bd6d7876724d6b5ce619f85e4fb94966ec"
+          },
+          {
+            "path": "engine/time.go",
+            "bytes": 6508,
+            "sha256": "24ffd7fcae86d77b6a4ecb9014c5ccf059960ddf00690bfe209beb2a08122444"
+          },
+          {
+            "path": "engine/ttable.go",
+            "bytes": 2257,
+            "sha256": "426d45339d7ee8085426238496184962858b76cb5677ce7f4715b7cfaba49c57"
+          },
+          {
+            "path": "engine/tunable.go",
+            "bytes": 2049,
+            "sha256": "03e7e8a0b5fb62bb94a6f90e316a0cc73113066eb1cc63621624f2a6c5e8e199"
+          },
+          {
+            "path": "engine/uci.go",
+            "bytes": 7168,
+            "sha256": "70399c3f5dfcdc986f5e5e1bf730289335f6c79e28a2a0d881b7db98d1036d13"
+          },
+          {
+            "path": "go.mod",
+            "bytes": 26,
+            "sha256": "e9b3368681d2df9173d687f74a65e2164d39ac0516744836a0d4109c3a279bff"
+          },
+          {
+            "path": "maelstrom/main.go",
+            "bytes": 123,
+            "sha256": "a0185ebcb80d052241c0e1ab75464cdfe974da49635497ba16027dddd5bc026b"
+          },
+          {
+            "path": "maelstrom-logo.png",
+            "bytes": 294076,
+            "sha256": "3d78b01f8177f2714d4893cba96f574e2a16f1e9d2ab083ad9cadd99dc97164f"
+          }
+        ]
+      }
+    },
+    "build-receipt.json": {
+      "sha256": "1b357b8e868feda2a95f1af4998e341454648f5501e1a0823ae2299b06abbb3a",
+      "value": {
+        "state": "COMPLETE",
+        "started": 1790730785.4601326,
+        "completed": 1790730787.1856062,
+        "command": [
+          "taskset",
+          "-c",
+          "12,14",
+          "/usr/local/go/bin/go",
+          "build",
+          "-trimpath",
+          "-buildvcs=false",
+          "-o",
+          "/home/ehrli/nnue-owned-maelstrom-20260930/maelstrom-3.3.0",
+          "./maelstrom"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "go_version": "go version go1.25.5 linux/amd64",
+        "environment": {
+          "PATH": "/usr/local/go/bin:/usr/bin:/bin",
+          "GOMAXPROCS": "2",
+          "GOOS": "linux",
+          "GOARCH": "amd64",
+          "GOAMD64": "v3",
+          "CGO_ENABLED": "1"
+        },
+        "source_receipt": {
+          "path": "/home/ehrli/nnue-owned-maelstrom-20260930/source-receipt.json",
+          "sha256": "75e234184a4357eedb80902364807360b63adcd95f998c3e56fa8258c317a38e"
+        },
+        "embedded_network": {
+          "path": "engine/nn_weights/512.bin",
+          "sha256": "83b63c9df6974e380be60b16ee859187c27c83a9fccc608a49810a5e87d5663c"
+        },
+        "engine": {
+          "path": "/home/ehrli/nnue-owned-maelstrom-20260930/maelstrom-3.3.0",
+          "sha256": "66ea969530d63f5904114079f518ba618b0deb4e269eb0c95d7496960379ea53"
+        },
+        "build_info": "/home/ehrli/nnue-owned-maelstrom-20260930/maelstrom-3.3.0: go1.25.5\n\tpath\tmaelstrom/maelstrom\n\tmod\tmaelstrom\t(devel)\t\n\tbuild\t-buildmode=exe\n\tbuild\t-compiler=gc\n\tbuild\t-trimpath=true\n\tbuild\tDefaultGODEBUG=containermaxprocs=0,decoratemappings=0,gotestjsonbuildtext=1,httpcookiemaxnum=0,multipathtcp=0,randseednop=0,rsa1024min=0,tlsmlkem=0,tlssha1=1,updatemaxprocs=0,x509rsacrt=0,x509sha256skid=0,x509usepolicies=0\n\tbuild\tCGO_ENABLED=1\n\tbuild\tGOARCH=amd64\n\tbuild\tGOOS=linux\n\tbuild\tGOAMD64=v3\n"
+      }
+    },
+    "benchmark-source-receipt.json": {
+      "sha256": "aa255d6b90267f5acf108a6847acf3c10811c63e1fdce5fc94d4f66bc734bc13",
+      "value": {
+        "scripts/candidate-match/common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+        "scripts/candidate-match/manifest.py": "a7ce8f4a6141e963688eefac273a9b9822f87d57674ce7191f288701af492b3b",
+        "scripts/candidate-match/process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+        "scripts/candidate-match/role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+        "scripts/candidate-match/run_candidate_match.py": "9ba8aa75a917923b01a456d30e513f7793ebc585a75522765275f6db2ef89a6a",
+        "scripts/candidate-match/run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+        "scripts/candidate-match/smp_match_stage.py": "22ea985b6b242d2cf7ad3a61d08e5f4b4ac4a89d860b769c08d718358f9dfe15",
+        "scripts/candidate-match/smp_role_exec.py": "a003aa7fc1272a573b544475e595c0bf653622313b8450063f587e2a6b0dc0c4",
+        "scripts/candidate-match/tests/fixture_match_parent.py": "114f449ec835185b27ba3a1df89067ffe8c74fd57bb9f3b127c8f2de96a73fb2",
+        "scripts/candidate-match/tests/fixture_signal_runner.py": "c226c3b5be3b3ac9a1b5dd647170a5f20bfbbcdbec0cbaa7f384f610576914b1",
+        "scripts/candidate-match/tests/fixture_signal_stage.py": "8dbad2a4721e6a7e61c72f7287f9ea8e5fc36e95e2a855d20523110681773e3a",
+        "scripts/candidate-match/tests/fixture_uci_engine.py": "55cc95bf31e1ab98c11efecb63efec8da2fde507c3239f08fd1216d1ef2994ab",
+        "scripts/candidate-match/tests/test_common.py": "b8efa50e816ee853032be09f3bb3788600acfa5669604f7f18c6e8c28430f8f4",
+        "scripts/candidate-match/tests/test_manifest.py": "6484db80c7acc9464cccbc55f51798a790a3b65ac14b0347db786a75c3a69bb9",
+        "scripts/candidate-match/tests/test_match_stage.py": "fb7ff803362cd2d8215b51203fd40ee3d323b018290794fb63f89095e678a567",
+        "scripts/candidate-match/tests/test_role_exec.py": "6e80c4cfed90752a5e0fe8f6d9c10b1dbf67c74573e9e094ef0b421736e414fd",
+        "scripts/candidate-match/tests/test_signal_cleanup.py": "e7f462a18eb9c417f49bed60345f2fa3176384df22369f9fe87d880b5029a6da",
+        "scripts/candidate-match/tests/test_trace_audit.py": "ddf9856a3d5bf02670a6a45eb41df7b2436554c637e5cfba619d3f428305e742",
+        "scripts/candidate-match/tests/test_uci_preflight.py": "7c3128f9b7a84c342bc5a7cbc2d3f75bc36f16fc6817348556210ebd92db65b5",
+        "scripts/candidate-match/trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+        "scripts/candidate-match/uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171",
+        "scripts/counter_draw_compat.py": "0a64df56ff32feb7a3f5e93c1aecfe2bac98fded766e448d448c57ed657ae587",
+        "scripts/ownedbenchmark.py": "56595613f95366d46deed92587980bc18adb71155e4905aae38a89fd77217fd8",
+        "scripts/ownedmatch.py": "38ba920e60d6ae412ee100308f124f72e2d255009c24106e2a257c7e1664e216",
+        "scripts/ownedmatch_counterdraw.py": "ba881c5dd3823b9d8bd1ee356f7607b842fd7ddea42827fc6233909d6560e5ea",
+        "scripts/ownedmulti_tests/fixture_parent.py": "2d9f6969bdcee81862dfd92ad466dc1bf354d88113c97e90bc7799765ea032b1",
+        "scripts/ownedmulti_tests/test_ownedmatch_native.py": "ed67c493852477388e70eeb3beb56e6bad0be01dbb73e1c41e147aa2dd3cc078",
+        "scripts/ownedmulti_tests/test_ownedmultimatch.py": "cd574022ef4eb3afa11650a1e7742a37d86baa25fca0092fb7033bd9fef17c61",
+        "scripts/ownedmultimatch.py": "af15862096e08fb26632d4ed43bc69993dedb80c87a9a9fff152c5c021cd658c",
+        "scripts/ownedsmp.py": "f1f58db83cb37c135803005d9ccd117c0ac158a94822004c77b1256f759c46c0",
+        "scripts/quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3"
+      }
+    },
+    "validation/report.json": {
+      "sha256": "d30219188e335a4c366b76bdddb3cb9ff768e04684b90dfc76ed4618824bfc1c",
+      "value": {
+        "completed": 1790731801.3720148,
+        "instrument": {
+          "common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+          "ownedmatch.py": "38ba920e60d6ae412ee100308f124f72e2d255009c24106e2a257c7e1664e216",
+          "process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+          "quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3",
+          "role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+          "run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+          "trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+          "uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+        },
+        "pass": true,
+        "phase": "go-short-race-all",
+        "state": "COMPLETE",
+        "steps": [
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "/home/ehrli/nnue-owned-maelstrom-20260930-v2/benchmark-source/scripts/ownedmulti_tests",
+              "-v"
+            ],
+            "cwd": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/benchmark-source",
+            "elapsed_seconds": 2.480685234069824,
+            "name": "owned-controls",
+            "pass": true,
+            "returncode": 0,
+            "stderr_sha256": "8ac0834e30caaab511869c767803f7b730071bd2be35677567cc41750dbde8d9",
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "command": [
+              "/usr/bin/python3",
+              "-m",
+              "unittest",
+              "discover",
+              "-s",
+              "/home/ehrli/nnue-owned-maelstrom-20260930-v2/benchmark-source/scripts/candidate-match/tests",
+              "-v"
+            ],
+            "cwd": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/benchmark-source",
+            "elapsed_seconds": 3.486231565475464,
+            "name": "candidate-controls",
+            "pass": true,
+            "returncode": 0,
+            "stderr_sha256": "cf9ff0535d91f2386b35f50f4e0d9fc2ae30b24816e4d96b3ca52a5e3816779b",
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "command": [
+              "/usr/local/go/bin/go",
+              "test",
+              "-short",
+              "-race",
+              "./...",
+              "-count=1"
+            ],
+            "cwd": "/home/ehrli/nnue-owned-continuation-20260928/source",
+            "elapsed_seconds": 48.5068998336792,
+            "name": "go-short-race-all",
+            "pass": true,
+            "returncode": 0,
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "683e8346f1f91ded16d0508999ea41b6952540fee7f976244bc471469d103034"
+          }
+        ]
+      }
+    },
+    "validation-unit.json": {
+      "sha256": "14abaaf75240178774d6fb04ccfb0cc57bcc59ed7234d0914e88ef2f16a6662e",
+      "value": {
+        "unit": "ngn-owned-maelstrom-validation-v2-20260930",
+        "command": [
+          "systemd-run",
+          "--user",
+          "--unit=ngn-owned-maelstrom-validation-v2-20260930",
+          "--property=WorkingDirectory=/home/ehrli/nnue-owned-maelstrom-20260930-v2",
+          "--property=KillMode=control-group",
+          "--property=TimeoutStopSec=30",
+          "--property=RuntimeMaxSec=2400",
+          "--property=MemoryMax=4G",
+          "/usr/bin/python3",
+          "/home/ehrli/nnue-owned-maelstrom-20260930-v2/validation-run.py"
+        ],
+        "initial_status": "MainPID=834946\nActiveState=active\nSubState=running\n"
+      }
+    },
+    "openings/receipt.json": {
+      "sha256": "ff1b4780e07291c919a23a643ac3ed8f77e69ab1d163b3adde283d13721a689a",
+      "value": {
+        "aa": {
+          "lines": [
+            4677,
+            4740
+          ],
+          "pgn": {
+            "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/openings/aa.pgn",
+            "sha256": "b352f13522f4440c1f12d1e15f84ddd8247749aaa6ff15031703dc4a973799d6"
+          },
+          "prefixes": {
+            "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/openings/aa.txt",
+            "sha256": "56e227f07c0e4a72a3bd2d0ce075289c8133e97de8d6c7f6e44bc198262644e9"
+          }
+        },
+        "anchor": {
+          "lines": [
+            4741,
+            4940
+          ],
+          "pgn": {
+            "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/openings/anchor.pgn",
+            "sha256": "bba72c67c8463846710b0681f28cd5394f446c41c7b8e773af058fc57a49bad8"
+          },
+          "prefixes": {
+            "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/openings/anchor.txt",
+            "sha256": "c74ab943d3433cd169d05be1051a2292b2bd1830e2e383de94e9d65a02a1da83"
+          }
+        },
+        "smoke": {
+          "lines": [
+            4673,
+            4676
+          ],
+          "pgn": {
+            "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/openings/smoke.pgn",
+            "sha256": "de955aaf6bb0056843143fac684ead9a0a55a0819a98e90812c33f68f8eaf4dc"
+          },
+          "prefixes": {
+            "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/openings/smoke.txt",
+            "sha256": "971b244ce95c1f65eba86f580966bfb555054e7e6520978af9e5abcebac39472"
+          }
+        }
+      }
+    },
+    "plan.json": {
+      "sha256": "549b303d13008cc51abb25f1c2d52735a8241cf0cff43a3b576afad9f68d6a56",
+      "value": {
+        "cells": [
+          {
+            "limit_seconds": 1800,
+            "minimum_remaining_seconds": 37000,
+            "name": "smoke",
+            "pairs": 4,
+            "purpose": "smoke"
+          },
+          {
+            "limit_seconds": 7200,
+            "minimum_remaining_seconds": 33000,
+            "name": "aa",
+            "pairs": 64,
+            "purpose": "aa"
+          },
+          {
+            "limit_seconds": 21600,
+            "minimum_remaining_seconds": 23600,
+            "name": "anchor",
+            "pairs": 200,
+            "purpose": "anchor"
+          }
+        ],
+        "claim_boundary": "Released NGN versus an unmodified, pinned-source Linux build of Maelstrom v3.3.0 at 10+0.1 and Hash128, one physical CPU per game. This is a direct relative result against a second leading Go opponent; it is not an official CCRL rating or a transfer of CCRL40/15 Elo.",
+        "common": {
+          "auditor": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/audit_fastchess_match.py",
+            "sha256": "4c4d7374c16fe7fa9104429aecbb22ea582e1525d70712c6769d6ae28d16d224"
+          },
+          "concurrency": 2,
+          "cpus": [
+            12,
+            14
+          ],
+          "fastchess": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/tools/fastchess",
+            "sha256": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00"
+          },
+          "minimum_windows_free_gib": 25,
+          "opening_plies": 6,
+          "seed": 2026093001,
+          "stockfish": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/tools/stockfish18",
+            "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+          },
+          "strict": true,
+          "tc": "10+0.1"
+        },
+        "controller": {
+          "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/benchmark-controller.py",
+          "sha256": "56595613f95366d46deed92587980bc18adb71155e4905aae38a89fd77217fd8"
+        },
+        "deadline_utc": "2026-09-30T13:00:00Z",
+        "decision_rule": "Require fresh 8-game procedure smoke and 128-game A/A with paired 95% score interval containing 50%, then report only the final fixed 400-game fully audited relative result. A win requires the paired 95% lower score bound above 50%. Never extend, pool or substitute on observed score.",
+        "initial_remaining_seconds": 37000,
+        "instrument": {
+          "common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+          "ownedmatch.py": "38ba920e60d6ae412ee100308f124f72e2d255009c24106e2a257c7e1664e216",
+          "process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+          "quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3",
+          "role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+          "run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+          "trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+          "uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+        },
+        "minimum_windows_free_gib": 25,
+        "opening_master_sha256": "974e4b5ab871a9e106d0c766bfa39fc83676222337fb7702f61782e2ac5b3222",
+        "opening_ranges": {
+          "aa": [
+            4677,
+            4740
+          ],
+          "anchor": [
+            4741,
+            4940
+          ],
+          "smoke": [
+            4673,
+            4676
+          ]
+        },
+        "opening_receipt": {
+          "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/openings/receipt.json",
+          "sha256": "ff1b4780e07291c919a23a643ac3ed8f77e69ab1d163b3adde283d13721a689a"
+        },
+        "opponent_build_receipt": {
+          "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/build-receipt.json",
+          "sha256": "1b357b8e868feda2a95f1af4998e341454648f5501e1a0823ae2299b06abbb3a"
+        },
+        "opponent_source_receipt": {
+          "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/source-receipt.json",
+          "sha256": "75e234184a4357eedb80902364807360b63adcd95f998c3e56fa8258c317a38e"
+        },
+        "resource_rule": "Two simultaneous games, each pinned to one physical CPU (12 or 14), with GOMAXPROCS=1 for both roles. The existing SMP gate uses physical CPUs 4,6,8,10. Keep hopper, Docker and relay running.",
+        "roles": [
+          {
+            "engine": {
+              "path": "/home/ehrli/nnue-owned-continuation-20260928/release-build-0.2.0-rc.1/ngn",
+              "sha256": "de86da92c75ada0f5449ae47d66d55879e221054731190e0c7c885d02123937f"
+            },
+            "name": "NGN-0.2.0-rc.1",
+            "network": {
+              "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue",
+              "sha256": "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29"
+            },
+            "options": [
+              [
+                "Threads",
+                1
+              ],
+              [
+                "OwnBook",
+                false
+              ],
+              [
+                "EvalFile",
+                "$NETWORK"
+              ],
+              [
+                "EvalBackend",
+                "ngn-k4-768-v1"
+              ],
+              [
+                "Hash",
+                128
+              ],
+              [
+                "Move Overhead",
+                100
+              ],
+              [
+                "K4EvalScale",
+                60
+              ]
+            ]
+          },
+          {
+            "engine": {
+              "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/maelstrom-3.3.0",
+              "sha256": "66ea969530d63f5904114079f518ba618b0deb4e269eb0c95d7496960379ea53"
+            },
+            "name": "Maelstrom-3.3.0",
+            "network": null,
+            "options": [
+              [
+                "Hash",
+                128
+              ],
+              [
+                "Ponder",
+                false
+              ]
+            ]
+          }
+        ],
+        "schema": "ngn-owned-external-benchmark-plan-v1",
+        "source_receipt": {
+          "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/benchmark-source-receipt.json",
+          "sha256": "aa255d6b90267f5acf108a6847acf3c10811c63e1fdce5fc94d4f66bc734bc13"
+        },
+        "stop_rules": "Any failed control or legal/operational/process audit, deadline or capacity guard preserves the incomplete cell unscored. No restart, extension, partial verdict or pooling. No warning allowlist is added for Maelstrom.",
+        "validation": {
+          "path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/validation/report.json",
+          "sha256": "d30219188e335a4c366b76bdddb3cb9ff768e04684b90dfc76ed4618824bfc1c"
+        }
+      }
+    },
+    "unit.json": {
+      "sha256": "48b67a510271f2be086f9ecaf0a9fe2fc8634afc116e687624fc2a7ba5a77f60",
+      "value": {
+        "unit": "ngn-owned-maelstrom-v2-20260930",
+        "command": [
+          "systemd-run",
+          "--user",
+          "--unit=ngn-owned-maelstrom-v2-20260930",
+          "--property=WorkingDirectory=/home/ehrli/nnue-owned-maelstrom-20260930-v2",
+          "--property=KillMode=control-group",
+          "--property=TimeoutStopSec=30",
+          "--property=RuntimeMaxSec=41301",
+          "--property=MemoryMax=4G",
+          "/usr/bin/python3",
+          "/home/ehrli/nnue-owned-maelstrom-20260930-v2/benchmark-controller.py",
+          "--root",
+          "/home/ehrli/nnue-owned-maelstrom-20260930-v2",
+          "--plan",
+          "/home/ehrli/nnue-owned-maelstrom-20260930-v2/plan.json"
+        ],
+        "initial_status": "MainPID=836341\nActiveState=active\nSubState=running\n",
+        "started": 1790731899.0077357,
+        "windows_free_gib": 25.52747344970703,
+        "plan_sha256": "549b303d13008cc51abb25f1c2d52735a8241cf0cff43a3b576afad9f68d6a56"
+      }
+    },
+    "matches/STATE.json": {
+      "sha256": "b836a270e0203080e2be269231a293e4a25335c236a3de0e24796b0a433adeb9",
+      "value": {
+        "completed_cells": [],
+        "name": "smoke",
+        "started": 1790731899.0386968,
+        "state": "RUNNING"
+      }
+    },
+    "matches/smoke/STATE.json": {
+      "sha256": "e66567a27e6a20ec56db1ffb5e7928fe6597d6ed6ca90102db61f73bc19c2d32",
+      "value": {
+        "started": 1790731899.063796,
+        "state": "MATCH_RUNNING"
+      }
+    }
+  },
+  "validation_output": {
+    "candidate-controls.stderr": {
+      "sha256": "cf9ff0535d91f2386b35f50f4e0d9fc2ae30b24816e4d96b3ca52a5e3816779b",
+      "text": "test_safe_environment_is_exact_and_excludes_debug_tuning (test_common.CommonTests.test_safe_environment_is_exact_and_excludes_debug_tuning) ... ok\ntest_boolean_numeric_aliases_are_rejected (test_manifest.ManifestTests.test_boolean_numeric_aliases_are_rejected) ... ok\ntest_borrowed_comparison_requires_exact_k4_rodent_pair (test_manifest.ManifestTests.test_borrowed_comparison_requires_exact_k4_rodent_pair) ... ok\ntest_clock_budget_preserved (test_manifest.ManifestTests.test_clock_budget_preserved) ... ok\ntest_evalfile_must_match_role (test_manifest.ManifestTests.test_evalfile_must_match_role) ... ok\ntest_experiment_mutation_invalidates_approval (test_manifest.ManifestTests.test_experiment_mutation_invalidates_approval) ... ok\ntest_fixed_node_borrowed_contract_forbids_clock_and_mixed_budget (test_manifest.ManifestTests.test_fixed_node_borrowed_contract_forbids_clock_and_mixed_budget) ... ok\ntest_held_and_bound_approved_manifest (test_manifest.ManifestTests.test_held_and_bound_approved_manifest) ... ok\ntest_k4_exact_network_role_is_supported (test_manifest.ManifestTests.test_k4_exact_network_role_is_supported) ... ok\ntest_network_format_must_match_backend (test_manifest.ManifestTests.test_network_format_must_match_backend) ... ok\ntest_nonfinite_limits_are_rejected (test_manifest.ManifestTests.test_nonfinite_limits_are_rejected) ... ok\ntest_ownbook_must_be_false_and_ordered (test_manifest.ManifestTests.test_ownbook_must_be_false_and_ordered) ... ok\ntest_exact_engine_in_wrong_cwd_is_rejected_even_with_correct_instances (test_match_stage.MatchStageTests.test_exact_engine_in_wrong_cwd_is_rejected_even_with_correct_instances) ... ok\ntest_records_exact_child_identity_affinity_and_environment (test_match_stage.MatchStageTests.test_records_exact_child_identity_affinity_and_environment) ... ok\ntest_wrong_child_gomaxprocs_is_rejected (test_match_stage.MatchStageTests.test_wrong_child_gomaxprocs_is_rejected) ... ok\ntest_exact_engine_cwd_hash_and_gomaxprocs (test_role_exec.RoleExecTests.test_exact_engine_cwd_hash_and_gomaxprocs) ... ok\ntest_hash_or_cwd_drift_is_rejected (test_role_exec.RoleExecTests.test_hash_or_cwd_drift_is_rejected) ... ok\ntest_sigterm_enters_controlled_cleanup_and_reaps_descendant (test_signal_cleanup.SignalCleanupTests.test_sigterm_enters_controlled_cleanup_and_reaps_descendant) ... ok\ntest_book_signature_and_illegal_pv_rejected (test_trace_audit.TraceAuditTests.test_book_signature_and_illegal_pv_rejected) ... ok\ntest_crash_log_accepts_ordered_startup_records (test_trace_audit.TraceAuditTests.test_crash_log_accepts_ordered_startup_records) ... ok\ntest_crash_log_accepts_preserved_counter_interleaving_witness (test_trace_audit.TraceAuditTests.test_crash_log_accepts_preserved_counter_interleaving_witness) ... ok\ntest_crash_log_rejects_panic_payload_and_malformed_timestamp (test_trace_audit.TraceAuditTests.test_crash_log_rejects_panic_payload_and_malformed_timestamp) ... ok\ntest_crash_log_rejects_wrong_path_missing_or_extra_records (test_trace_audit.TraceAuditTests.test_crash_log_rejects_wrong_path_missing_or_extra_records) ... ok\ntest_error_plus_legal_fallback_and_natural_tail_rejected (test_trace_audit.TraceAuditTests.test_error_plus_legal_fallback_and_natural_tail_rejected) ... ok\ntest_exact_benign_profile (test_trace_audit.TraceAuditTests.test_exact_benign_profile) ... ok\ntest_generic_fatal_log_levels_are_rejected_without_phrase_match (test_trace_audit.TraceAuditTests.test_generic_fatal_log_levels_are_rejected_without_phrase_match) ... ok\ntest_option_order_and_refresh_count_rejected (test_trace_audit.TraceAuditTests.test_option_order_and_refresh_count_rejected) ... ok\ntest_advertised_domain_and_backend_variants_are_enforced (test_uci_preflight.PreflightTests.test_advertised_domain_and_backend_variants_are_enforced) ... ok\ntest_error_after_bestmove_is_drained_and_rejected (test_uci_preflight.PreflightTests.test_error_after_bestmove_is_drained_and_rejected) ... ok\ntest_error_plus_legal_fallback_is_rejected (test_uci_preflight.PreflightTests.test_error_plus_legal_fallback_is_rejected) ... ok\ntest_extended_backends_are_proved_not_merely_advertised (test_uci_preflight.PreflightTests.test_extended_backends_are_proved_not_merely_advertised) ... ok\ntest_good_proves_order_backend_and_persistent_no_book_search (test_uci_preflight.PreflightTests.test_good_proves_order_backend_and_persistent_no_book_search) ... ok\ntest_ignored_or_reset_ownbook_is_rejected (test_uci_preflight.PreflightTests.test_ignored_or_reset_ownbook_is_rejected) ... ok\ntest_selected_backend_diagnostic_mismatch_is_rejected (test_uci_preflight.PreflightTests.test_selected_backend_diagnostic_mismatch_is_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 34 tests in 3.406s\n\nOK\n"
+    },
+    "candidate-controls.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text": ""
+    },
+    "go-short-race-all.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text": ""
+    },
+    "go-short-race-all.stdout": {
+      "sha256": "683e8346f1f91ded16d0508999ea41b6952540fee7f976244bc471469d103034",
+      "text": "ok  \tgithub.com/ehrlich-b/ngn\t1.768s\n?   \tgithub.com/ehrlich-b/ngn/cmd/analyze_position\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/benchmark\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/blunder-finder\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/combined-report\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/elo-assess\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/eval_breakdown\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/evaltune\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/gametest\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/gauntlet\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/lossxray\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/moves_to_fen\t[no test files]\nok  \tgithub.com/ehrlich-b/ngn/cmd/ngnk4bridge\t2.942s\n?   \tgithub.com/ehrlich-b/ngn/cmd/ngnk4finalize\t[no test files]\nok  \tgithub.com/ehrlich-b/ngn/cmd/ngnk4label\t1.025s\nok  \tgithub.com/ehrlich-b/ngn/cmd/ngnk4pack\t1.033s\nok  \tgithub.com/ehrlich-b/ngn/cmd/ngnk4staticdump\t1.034s\nok  \tgithub.com/ehrlich-b/ngn/cmd/ngnk4teachercheck\t1.033s\nok  \tgithub.com/ehrlich-b/ngn/cmd/nnuebridge\t1.689s\n?   \tgithub.com/ehrlich-b/ngn/cmd/oracle\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/pgn-test\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/pgn_to_fens\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/pgnify\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/pruning-analysis\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/pruning-comparison\t[no test files]\nok  \tgithub.com/ehrlich-b/ngn/cmd/searchsnapshot\t1.088s\n?   \tgithub.com/ehrlich-b/ngn/cmd/sf18big-research\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/sfpv\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/simple-test\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/smoke\t[no test files]\nok  \tgithub.com/ehrlich-b/ngn/cmd/sprt\t1.032s\n?   \tgithub.com/ehrlich-b/ngn/cmd/spsa\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/tactical-test\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/test-harness\t[no test files]\nok  \tgithub.com/ehrlich-b/ngn/cmd/texel\t1.063s\nok  \tgithub.com/ehrlich-b/ngn/cmd/texelcorpus\t1.392s\n?   \tgithub.com/ehrlich-b/ngn/cmd/trace_move\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/cmd/zzbias\t[no test files]\nok  \tgithub.com/ehrlich-b/ngn/countereval\t2.696s\nok  \tgithub.com/ehrlich-b/ngn/engine\t39.922s\n?   \tgithub.com/ehrlich-b/ngn/internal/history\t[no test files]\n?   \tgithub.com/ehrlich-b/ngn/internal/rating\t[no test files]\nok  \tgithub.com/ehrlich-b/ngn/internal/texeldata\t1.244s\nok  \tgithub.com/ehrlich-b/ngn/internal/uci\t1.044s\nok  \tgithub.com/ehrlich-b/ngn/nnue\t1.516s\nok  \tgithub.com/ehrlich-b/ngn/nnue/ngnk4\t3.230s\nok  \tgithub.com/ehrlich-b/ngn/nnue/sf18big\t1.045s\nok  \tgithub.com/ehrlich-b/ngn/nnue/sf18small\t16.488s\nok  \tgithub.com/ehrlich-b/ngn/rodenteval\t1.095s\nok  \tgithub.com/ehrlich-b/ngn/rodentv12eval\t1.403s\nok  \tgithub.com/ehrlich-b/ngn/training/nnue/k4finalize\t1.065s\nok  \tgithub.com/ehrlich-b/ngn/training/nnue/k4label\t5.288s\nok  \tgithub.com/ehrlich-b/ngn/training/nnue/k4pack\t1.051s\n"
+    },
+    "owned-controls.stderr": {
+      "sha256": "8ac0834e30caaab511869c767803f7b730071bd2be35677567cc41750dbde8d9",
+      "text": "test_new_anchor_cannot_reuse_a_different_aa_instrument_or_clock (test_ownedmatch_native.NativeAdmissionTests.test_new_anchor_cannot_reuse_a_different_aa_instrument_or_clock) ... ok\ntest_other_artifacts_still_require_an_explicit_one_worker_option (test_ownedmatch_native.NativeAdmissionTests.test_other_artifacts_still_require_an_explicit_one_worker_option) ... ok\ntest_protocol_identity_and_absent_threads_are_verified (test_ownedmatch_native.NativeAdmissionTests.test_protocol_identity_and_absent_threads_are_verified) ... ok\ntest_single_worker_release_is_admitted_without_sending_threads (test_ownedmatch_native.NativeAdmissionTests.test_single_worker_release_is_admitted_without_sending_threads) ... ok\ntest_staged_owned_release_starts_before_evalfile_can_be_set (test_ownedmatch_native.ReleaseStartupTests.test_staged_owned_release_starts_before_evalfile_can_be_set) ... /home/ehrli/nnue-owned-maelstrom-20260930-v2/benchmark-source/scripts/ownedmulti_tests/test_ownedmatch_native.py:100: ResourceWarning: unclosed file <_io.BufferedWriter name=5>\n  receipt = match.preflight(launcher, cwd, options, role, cwd / 'positive.jsonl', cpu)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/home/ehrli/nnue-owned-maelstrom-20260930-v2/benchmark-source/scripts/ownedmulti_tests/test_ownedmatch_native.py:100: ResourceWarning: unclosed file <_io.BufferedReader name=6>\n  receipt = match.preflight(launcher, cwd, options, role, cwd / 'positive.jsonl', cpu)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/home/ehrli/nnue-owned-maelstrom-20260930-v2/benchmark-source/scripts/ownedmulti_tests/test_ownedmatch_native.py:100: ResourceWarning: unclosed file <_io.BufferedReader name=8>\n  receipt = match.preflight(launcher, cwd, options, role, cwd / 'positive.jsonl', cpu)\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/usr/lib/python3.12/traceback.py:241: ResourceWarning: unclosed file <_io.BufferedWriter name=5>\n  tb.tb_frame.clear()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/usr/lib/python3.12/traceback.py:241: ResourceWarning: unclosed file <_io.BufferedReader name=6>\n  tb.tb_frame.clear()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/usr/lib/python3.12/traceback.py:241: ResourceWarning: unclosed file <_io.BufferedReader name=8>\n  tb.tb_frame.clear()\nResourceWarning: Enable tracemalloc to get the object allocation traceback\nok\ntest_aa_binds_cpu_teams_instrument_and_participating_width (test_ownedmultimatch.LayoutTests.test_aa_binds_cpu_teams_instrument_and_participating_width) ... ok\ntest_effective_width_receipts_reject_missing_duplicate_foreign_and_false_width (test_ownedmultimatch.LayoutTests.test_effective_width_receipts_reject_missing_duplicate_foreign_and_false_width) ... ok\ntest_exact_counter_external_mode_and_mixed_receipts (test_ownedmultimatch.LayoutTests.test_exact_counter_external_mode_and_mixed_receipts) ... ok\ntest_hidden_thread_mask_drift_is_rejected (test_ownedmultimatch.LayoutTests.test_hidden_thread_mask_drift_is_rejected) ... ok\ntest_layout_rejects_overlap_width_overcommit_and_uncontrolled_options (test_ownedmultimatch.LayoutTests.test_layout_rejects_overlap_width_overcommit_and_uncontrolled_options) ... ok\ntest_launcher_expands_anchor_and_rejects_unknown_anchor_or_hash (test_ownedmultimatch.ProcessTests.test_launcher_expands_anchor_and_rejects_unknown_anchor_or_hash) ... ok\ntest_live_multicore_child_witness (test_ownedmultimatch.ProcessTests.test_live_multicore_child_witness) ... ok\ntest_wrong_live_width_or_affinity_is_rejected (test_ownedmultimatch.ProcessTests.test_wrong_live_width_or_affinity_is_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 2.393s\n\nOK\n"
+    },
+    "owned-controls.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text": ""
+    }
+  },
+  "host": {
+    "uname": [
+      "Linux",
+      "NewPC",
+      "6.6.87.2-microsoft-standard-WSL2",
+      "#1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025",
+      "x86_64"
+    ],
+    "cpu_model": "AMD Ryzen 7 9800X3D 8-Core Processor",
+    "c_compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+  },
+  "current_unit": "MainPID=836341\nResult=success\nActiveState=active\nSubState=running\n",
+  "local_source_hash_check": {
+    "pass": true,
+    "files": 31
+  }
+}

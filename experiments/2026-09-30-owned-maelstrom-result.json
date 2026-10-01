@@ -1,0 +1,1239 @@
+{
+  "archive_bytes": 69630012,
+  "archive_sha256": "c1a78167ca9ddbd812f0d6f19c633a121d0f12ef3f27dd685a3cb3fb494dd041",
+  "claim": "Released NGN/WDL25 versus unmodified pinned-source Maelstrom v3.3.0 on WSL, one physical CPU per game, 10+0.1 and Hash128. Fresh smoke/A/A and all 400 final games pass independent legal, operational and process audits. WSL recount and every off-worker file hash match. This proves a relative win; it is not an official CCRL rating or a world rank. No earlier stopped or rejected game was pooled.",
+  "manifest": {
+    "benchmark-source-v3/scripts/candidate-match/common.py": {
+      "bytes": 9154,
+      "sha256": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807"
+    },
+    "benchmark-source-v3/scripts/candidate-match/manifest.py": {
+      "bytes": 16742,
+      "sha256": "a7ce8f4a6141e963688eefac273a9b9822f87d57674ce7191f288701af492b3b"
+    },
+    "benchmark-source-v3/scripts/candidate-match/process_supervisor.py": {
+      "bytes": 11349,
+      "sha256": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f"
+    },
+    "benchmark-source-v3/scripts/candidate-match/role_exec.py": {
+      "bytes": 1886,
+      "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+    },
+    "benchmark-source-v3/scripts/candidate-match/run_candidate_match.py": {
+      "bytes": 24410,
+      "sha256": "9ba8aa75a917923b01a456d30e513f7793ebc585a75522765275f6db2ef89a6a"
+    },
+    "benchmark-source-v3/scripts/candidate-match/run_match_stage.py": {
+      "bytes": 10973,
+      "sha256": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40"
+    },
+    "benchmark-source-v3/scripts/candidate-match/smp_match_stage.py": {
+      "bytes": 4286,
+      "sha256": "22ea985b6b242d2cf7ad3a61d08e5f4b4ac4a89d860b769c08d718358f9dfe15"
+    },
+    "benchmark-source-v3/scripts/candidate-match/smp_role_exec.py": {
+      "bytes": 2090,
+      "sha256": "a003aa7fc1272a573b544475e595c0bf653622313b8450063f587e2a6b0dc0c4"
+    },
+    "benchmark-source-v3/scripts/candidate-match/tests/fixture_match_parent.py": {
+      "bytes": 971,
+      "sha256": "114f449ec835185b27ba3a1df89067ffe8c74fd57bb9f3b127c8f2de96a73fb2"
+    },
+    "benchmark-source-v3/scripts/candidate-match/tests/fixture_signal_runner.py": {
+      "bytes": 1221,
+      "sha256": "c226c3b5be3b3ac9a1b5dd647170a5f20bfbbcdbec0cbaa7f384f610576914b1"
+    },
+    "benchmark-source-v3/scripts/candidate-match/tests/fixture_signal_stage.py": {
+      "bytes": 368,
+      "sha256": "8dbad2a4721e6a7e61c72f7287f9ea8e5fc36e95e2a855d20523110681773e3a"
+    },
+    "benchmark-source-v3/scripts/candidate-match/tests/fixture_uci_engine.py": {
+      "bytes": 2527,
+      "sha256": "55cc95bf31e1ab98c11efecb63efec8da2fde507c3239f08fd1216d1ef2994ab"
+    },
+    "benchmark-source-v3/scripts/candidate-match/tests/test_common.py": {
+      "bytes": 603,
+      "sha256": "b8efa50e816ee853032be09f3bb3788600acfa5669604f7f18c6e8c28430f8f4"
+    },
+    "benchmark-source-v3/scripts/candidate-match/tests/test_manifest.py": {
+      "bytes": 9021,
+      "sha256": "6484db80c7acc9464cccbc55f51798a790a3b65ac14b0347db786a75c3a69bb9"
+    },
+    "benchmark-source-v3/scripts/candidate-match/tests/test_match_stage.py": {
+      "bytes": 4404,
+      "sha256": "fb7ff803362cd2d8215b51203fd40ee3d323b018290794fb63f89095e678a567"
+    },
+    "benchmark-source-v3/scripts/candidate-match/tests/test_role_exec.py": {
+      "bytes": 3130,
+      "sha256": "6e80c4cfed90752a5e0fe8f6d9c10b1dbf67c74573e9e094ef0b421736e414fd"
+    },
+    "benchmark-source-v3/scripts/candidate-match/tests/test_signal_cleanup.py": {
+      "bytes": 1898,
+      "sha256": "e7f462a18eb9c417f49bed60345f2fa3176384df22369f9fe87d880b5029a6da"
+    },
+    "benchmark-source-v3/scripts/candidate-match/tests/test_trace_audit.py": {
+      "bytes": 8129,
+      "sha256": "ddf9856a3d5bf02670a6a45eb41df7b2436554c637e5cfba619d3f428305e742"
+    },
+    "benchmark-source-v3/scripts/candidate-match/tests/test_uci_preflight.py": {
+      "bytes": 6968,
+      "sha256": "7c3128f9b7a84c342bc5a7cbc2d3f75bc36f16fc6817348556210ebd92db65b5"
+    },
+    "benchmark-source-v3/scripts/candidate-match/trace_audit.py": {
+      "bytes": 12549,
+      "sha256": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b"
+    },
+    "benchmark-source-v3/scripts/candidate-match/uci_preflight.py": {
+      "bytes": 15308,
+      "sha256": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+    },
+    "benchmark-source-v3/scripts/counter_draw_compat.py": {
+      "bytes": 5174,
+      "sha256": "ada29da47b4f8855fd5565ce60d68b53812571ded7845843c9452ebeff236c87"
+    },
+    "benchmark-source-v3/scripts/ownedbenchmark.py": {
+      "bytes": 6474,
+      "sha256": "4e44243d7678b423d0b58a34d2605845116b9d790bf9e93313e6d56d1d693035"
+    },
+    "benchmark-source-v3/scripts/ownedmatch.py": {
+      "bytes": 24855,
+      "sha256": "76c9f2e972de789bdc203971f33eea53bbea7dbb403bbffa469ca80568638690"
+    },
+    "benchmark-source-v3/scripts/ownedmatch_counterdraw.py": {
+      "bytes": 1417,
+      "sha256": "ba881c5dd3823b9d8bd1ee356f7607b842fd7ddea42827fc6233909d6560e5ea"
+    },
+    "benchmark-source-v3/scripts/ownedmatch_maelstromdraw.py": {
+      "bytes": 2219,
+      "sha256": "1bea9b5068dd29538dcd7ab2a2174a72979536ace37523a24a7383eb29a7d016"
+    },
+    "benchmark-source-v3/scripts/ownedmulti_tests/fixture_parent.py": {
+      "bytes": 721,
+      "sha256": "2d9f6969bdcee81862dfd92ad466dc1bf354d88113c97e90bc7799765ea032b1"
+    },
+    "benchmark-source-v3/scripts/ownedmulti_tests/test_maelstrom_draw.py": {
+      "bytes": 4937,
+      "sha256": "ba4a0a71d34bf9f41c77810a0c18fec687cc1cfde80a0e36c2b7a49eac8ab30b"
+    },
+    "benchmark-source-v3/scripts/ownedmulti_tests/test_ownedmatch_native.py": {
+      "bytes": 6371,
+      "sha256": "ed67c493852477388e70eeb3beb56e6bad0be01dbb73e1c41e147aa2dd3cc078"
+    },
+    "benchmark-source-v3/scripts/ownedmulti_tests/test_ownedmultimatch.py": {
+      "bytes": 11635,
+      "sha256": "cd574022ef4eb3afa11650a1e7742a37d86baa25fca0092fb7033bd9fef17c61"
+    },
+    "benchmark-source-v3/scripts/ownedmulti_tests/test_ownedstorage.py": {
+      "bytes": 8390,
+      "sha256": "3343c7474b363ac3934e347c55214b66ce13929cc0125f113d95c1bf50dfcd62"
+    },
+    "benchmark-source-v3/scripts/ownedmultimatch.py": {
+      "bytes": 19186,
+      "sha256": "1efc31373ce4d8937186122bc7ed84bef2f9b373da948837f36f52970f1c39ff"
+    },
+    "benchmark-source-v3/scripts/ownedsmp.py": {
+      "bytes": 8025,
+      "sha256": "4ed87fa26cad8d3857a1a0a8a27670a726e6b16a96a0f8e99d0eb1e11be371fe"
+    },
+    "benchmark-source-v3/scripts/ownedstorage.py": {
+      "bytes": 5434,
+      "sha256": "a3a892cede5d2b0a65291bbc38829bf566f288ca7b23b419df754678c60f23f2"
+    },
+    "benchmark-source-v3/scripts/quickmatch.py": {
+      "bytes": 10196,
+      "sha256": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3"
+    },
+    "native-v4/compatibility-controls.json": {
+      "bytes": 16089,
+      "sha256": "8140d5a5f9e643442b05259fa2f5e04f30c49c89f202997b441ae6e083ecce9c"
+    },
+    "native-v4/final-receipt.json": {
+      "bytes": 18055,
+      "sha256": "035ef33650a6463d83a78d8db0861214418b606f426c4439c3a89aa1095481ba"
+    },
+    "native-v4/matches/STATE.json": {
+      "bytes": 125,
+      "sha256": "288e14c4f6eb9feffa2248b2d13fc238ce2b80ad4a9bea331a40e41d69faadc1"
+    },
+    "native-v4/matches/aa.json": {
+      "bytes": 3762,
+      "sha256": "23d862ebc43f81e39acf1e573ae07cf8d66287ef24616da923f9537aaec3fadf"
+    },
+    "native-v4/matches/aa.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v4/matches/aa.stdout": {
+      "bytes": 855,
+      "sha256": "6b2827816aded0abe8bf1ffb42c4941da4c9c886206834e9429a27f99d7d1ea1"
+    },
+    "native-v4/matches/aa/STATE.json": {
+      "bytes": 93,
+      "sha256": "c12750561d363a1c0e91071618e527450847d4a4dde501b936eec80fd0bc6557"
+    },
+    "native-v4/matches/aa/audit-operational.json": {
+      "bytes": 99787,
+      "sha256": "2b39ba00875ea423270fb4f25d4950393b4d1995fab6bcc0b4b7a448fd628b29"
+    },
+    "native-v4/matches/aa/audit.json": {
+      "bytes": 54722,
+      "sha256": "52fb2c1c769f064affaa1abd8b2e7f4c4619c9fa88a85c21f0ca6d8f04e682e5"
+    },
+    "native-v4/matches/aa/child-processes.json": {
+      "bytes": 4886920,
+      "sha256": "5c275a931e0464f96201f7b2db755160c0f8fe3ef3919314bfe0d5b04a66a680"
+    },
+    "native-v4/matches/aa/command.json": {
+      "bytes": 1863,
+      "sha256": "7dc75684c42c5aa37e47303068788df378d70d3abd4c1df45089296171a2d348"
+    },
+    "native-v4/matches/aa/config.json": {
+      "bytes": 5399,
+      "sha256": "983e23e2fd5fc8ac204abf92bca22de240a4b143ddbcee98c40c2ebbb0af0efd"
+    },
+    "native-v4/matches/aa/control.json": {
+      "bytes": 3079,
+      "sha256": "58eb4cd3fca2cb7f6765b17ce4bd437fd2deb723dd950a9e0855ca4afcfccc21"
+    },
+    "native-v4/matches/aa/fastchess.log.gz": {
+      "bytes": 15686650,
+      "sha256": "ce2f3a0cefa9d854524f4ce883d57f73e9650cb9c17a6c245864a9e64ebb3e33"
+    },
+    "native-v4/matches/aa/final.epd": {
+      "bytes": 6917,
+      "sha256": "f2a397dfa9ea010287892c523a81d8ab7633eab5c49dc67e59b14347db2b56cc"
+    },
+    "native-v4/matches/aa/games.pgn": {
+      "bytes": 3397816,
+      "sha256": "f2121e0a0b91a140e86e820c7c1085795e9381d43a969d7dd0c8b71f060bfb96"
+    },
+    "native-v4/matches/aa/match-stage.json": {
+      "bytes": 3543,
+      "sha256": "f3ded08dc1a7fb2d56dcbd6b7a390eff79843e4f05de6fc7cc60d06399d70817"
+    },
+    "native-v4/matches/aa/match.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v4/matches/aa/match.stdout": {
+      "bytes": 18381,
+      "sha256": "8dfe4a6f15b644bb5c11ad0a4bbede2568f50b4113466277af78e704782ed4b4"
+    },
+    "native-v4/matches/aa/opening_prefixes.txt": {
+      "bytes": 1920,
+      "sha256": "969869e8265869930b7a4e2c8e9839a199e32068583999da0d2da3d935e7acd4"
+    },
+    "native-v4/matches/aa/openings_pgn.pgn": {
+      "bytes": 6641,
+      "sha256": "c5db7a1d39fa8e0b07c8412c88b90aff463926e183dd67cea8245625a9ede173"
+    },
+    "native-v4/matches/aa/preflight0-crashes.log": {
+      "bytes": 252,
+      "sha256": "c9dc58f1bdad9b4e3f945e23b3bea9d8e56e4db475e065a3665fc64269ca14a9"
+    },
+    "native-v4/matches/aa/preflight0.json": {
+      "bytes": 8180,
+      "sha256": "108bedbaf76c93272ddaedd40620d2532b157b815c15b291a2e9ac7d581da40a"
+    },
+    "native-v4/matches/aa/preflight0.jsonl": {
+      "bytes": 12739,
+      "sha256": "ed97e3e1db465976fc072b31042099109cd9a1db13927f8c803654b4426b3043"
+    },
+    "native-v4/matches/aa/preflight1-crashes.log": {
+      "bytes": 252,
+      "sha256": "a9be003f7a27e43235365db1823ecf4c830a09bdb109ea10b08439f5881a26eb"
+    },
+    "native-v4/matches/aa/preflight1.json": {
+      "bytes": 8180,
+      "sha256": "6e27630a4fc2995a53d089805a8859fa92235133832d80cfb745ac291d6ac854"
+    },
+    "native-v4/matches/aa/preflight1.jsonl": {
+      "bytes": 12747,
+      "sha256": "a0c911365c6ac97695dd1fdc4cb325fe41b46731076ca23a1805e1c8185751c7"
+    },
+    "native-v4/matches/aa/report.json": {
+      "bytes": 855,
+      "sha256": "6b2827816aded0abe8bf1ffb42c4941da4c9c886206834e9429a27f99d7d1ea1"
+    },
+    "native-v4/matches/aa/role0/ngn_crashes.log": {
+      "bytes": 504,
+      "sha256": "82a0f0ab73b5da36cf3d5c6e871f14426c7c1dec986cdac08d675566483de689"
+    },
+    "native-v4/matches/aa/role0/role-config.json": {
+      "bytes": 330,
+      "sha256": "604540ff303b6a8917aae1e9be2534141d139dc1cf910e727e50191c97b6dbad"
+    },
+    "native-v4/matches/aa/role0/role_exec.py": {
+      "bytes": 1886,
+      "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+    },
+    "native-v4/matches/aa/role1/ngn_crashes.log": {
+      "bytes": 504,
+      "sha256": "35cd54f08478c3c586f54d1920956e103a8f3d3468c61bcf6b7b2b2362c4843b"
+    },
+    "native-v4/matches/aa/role1/role-config.json": {
+      "bytes": 330,
+      "sha256": "a614688d261d21cba051e82e0404ae5e7640b39bf493c29507c7a91e1621d05d"
+    },
+    "native-v4/matches/aa/role1/role_exec.py": {
+      "bytes": 1886,
+      "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+    },
+    "native-v4/matches/aa/spec.json": {
+      "bytes": 3762,
+      "sha256": "23d862ebc43f81e39acf1e573ae07cf8d66287ef24616da923f9537aaec3fadf"
+    },
+    "native-v4/matches/aa/supervised-audit/command.json": {
+      "bytes": 1075,
+      "sha256": "bd9b2af57c72470e4811380f5f41f08d8c44c00d584e271cdaf895a6f91b49a5"
+    },
+    "native-v4/matches/aa/supervised-audit/host-capacity.jsonl": {
+      "bytes": 367,
+      "sha256": "5365089832970651b44d370e61cb282fb4fd82a2c47c2ed9350ff9d7eecd3bdb"
+    },
+    "native-v4/matches/aa/supervised-audit/process-tree.jsonl": {
+      "bytes": 1589,
+      "sha256": "2255a5a9940141648635a6aa56cd419aabef144dff358e9d927031e0b02caa8b"
+    },
+    "native-v4/matches/aa/supervised-audit/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v4/matches/aa/supervised-audit/stdout": {
+      "bytes": 1377,
+      "sha256": "a42b2c39a8485b5f57dc0be63e7bbbc5885b4e29a4b0d2b4e6506c9ab4a7716f"
+    },
+    "native-v4/matches/aa/supervised-audit/supervisor-receipt.json": {
+      "bytes": 3471,
+      "sha256": "71e3419e0fc8056386fd506a9f266f0382fb7b705aa49215c439783dc63cc0a6"
+    },
+    "native-v4/matches/aa/supervised-audit/time.txt": {
+      "bytes": 1675,
+      "sha256": "69bfb4c8ae600b5dfcdf321f757f2cd5e81e6f4f3b2aa0829fe61b6529d92272"
+    },
+    "native-v4/matches/aa/supervised-match/command.json": {
+      "bytes": 230,
+      "sha256": "ce3a6ede1056eb803aa78a3271e7e0943fd24ac3869acf6ff90ee60c3cf7d34a"
+    },
+    "native-v4/matches/aa/supervised-match/host-capacity.jsonl": {
+      "bytes": 25919,
+      "sha256": "9ca7c9875b22d8dfb1574d5ceddb3cad987c2c0adb4451c96a77b1a380e375f5"
+    },
+    "native-v4/matches/aa/supervised-match/process-tree.jsonl": {
+      "bytes": 1404578,
+      "sha256": "cd78a58435b86fbf8052dc324cc1bc60a6343590b0d955fab6cda16c43bfdcea"
+    },
+    "native-v4/matches/aa/supervised-match/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v4/matches/aa/supervised-match/stdout": {
+      "bytes": 110,
+      "sha256": "350e45ec1d7b7b1974b398153802ce7a3a2aea6019850183ebae15776b1c767d"
+    },
+    "native-v4/matches/aa/supervised-match/supervisor-receipt.json": {
+      "bytes": 1690,
+      "sha256": "c53ec0cabe2bca2a2a53d46bfc8577c59071adbb5385eabf45a75a85057ea3b8"
+    },
+    "native-v4/matches/aa/supervised-match/time.txt": {
+      "bytes": 964,
+      "sha256": "74fddc135dd9865b774b0e74fedd68bf54fe9a06fa3a95c9fc7228775f7e58f0"
+    },
+    "native-v4/matches/aa/trace-storage.json": {
+      "bytes": 370,
+      "sha256": "1c63e3ffb9a79f57d2698a494de27fc29b7a3d5e0ca341fc35c40e5fd78aa604"
+    },
+    "native-v4/matches/anchor.json": {
+      "bytes": 3480,
+      "sha256": "5b75e351b7b3c6f1b1795b4df71db504c34ec92c117cccb3e2b88f5b8ac47394"
+    },
+    "native-v4/matches/anchor.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v4/matches/anchor.stdout": {
+      "bytes": 909,
+      "sha256": "1089268ba491b28a161bb3c411e252e7f42dbb084cbe6a1b2e1f10f976c61d1a"
+    },
+    "native-v4/matches/anchor/STATE.json": {
+      "bytes": 93,
+      "sha256": "71f1a7b2acdc0431f1abab066d286ebb01acec93df91d4d601500fd3b49e9e7e"
+    },
+    "native-v4/matches/anchor/audit-operational.json": {
+      "bytes": 468671,
+      "sha256": "288e5cb8a0b8018a2ef979051bcc788fff0fc76f11c47aec33b24397b7d767a9"
+    },
+    "native-v4/matches/anchor/audit.json": {
+      "bytes": 169361,
+      "sha256": "5e78785594e088355b107467aad8f361855a0d41a0afad63e197f232759b9d92"
+    },
+    "native-v4/matches/anchor/child-processes.json": {
+      "bytes": 14776728,
+      "sha256": "0c1cd3b8ca733497d714a6ec147035536fcfd6bb2f684578a7b81e0319cdb64b"
+    },
+    "native-v4/matches/anchor/command.json": {
+      "bytes": 1696,
+      "sha256": "d50e97aad6a99bf6d6490ddf076a257637bb58d0115e6d26374758cc10f5bd96"
+    },
+    "native-v4/matches/anchor/config.json": {
+      "bytes": 4893,
+      "sha256": "2cf5d611f91d3b3ef78171f45640893d32d641d1b9bc3a0dd8a7f2a44d0f9680"
+    },
+    "native-v4/matches/anchor/control.json": {
+      "bytes": 3083,
+      "sha256": "6bc169daac68875204963ced95f9a9b94a2c6d978fc739328f227bc7c785bf59"
+    },
+    "native-v4/matches/anchor/fastchess.log.gz": {
+      "bytes": 46991236,
+      "sha256": "d505a35a4c0772b312e906e2e41bcd67f20fdd1fe214363959c22a853267771a"
+    },
+    "native-v4/matches/anchor/final.epd": {
+      "bytes": 21161,
+      "sha256": "4307aa3c8c630e954eda7e0c6843c07aa652f85fb43517160b707e1b520f16fb"
+    },
+    "native-v4/matches/anchor/games.pgn": {
+      "bytes": 10233964,
+      "sha256": "9874ea2f5357b149f7bbeb85723b72374fff2372cf74a5e0adab9a6bcc348abd"
+    },
+    "native-v4/matches/anchor/match-stage.json": {
+      "bytes": 3406,
+      "sha256": "e262e5127cf6b5bf56fafc37aaf3c30a7ae70275d0d1eba6be3c060f527dac39"
+    },
+    "native-v4/matches/anchor/match.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v4/matches/anchor/match.stdout": {
+      "bytes": 698620,
+      "sha256": "63edec566d56bea435d668240664edecdc7e889dea37eddfb03a25b18f8b6704"
+    },
+    "native-v4/matches/anchor/opening_prefixes.txt": {
+      "bytes": 6000,
+      "sha256": "1e03f519e152dcc2b7d118322af598fd06cc8c9c9b8cdbecbfd210fce9d750e6"
+    },
+    "native-v4/matches/anchor/openings_pgn.pgn": {
+      "bytes": 20848,
+      "sha256": "870ce3ad5a0c3af7d10143ef7431746f84cb99415ec1108e18e390ed79244224"
+    },
+    "native-v4/matches/anchor/preflight0-crashes.log": {
+      "bytes": 256,
+      "sha256": "c4e36ab3df403339fd863de15a322954a44bb166db3cfea1060b49065a636b07"
+    },
+    "native-v4/matches/anchor/preflight0.json": {
+      "bytes": 8196,
+      "sha256": "d60307e34ebe51c4d6875bf6ad7efa48e97cc48d3f574ac72216574aac70a664"
+    },
+    "native-v4/matches/anchor/preflight0.jsonl": {
+      "bytes": 12753,
+      "sha256": "e4aeb9e7650a99b592d6a75c0bb9db62bffc36009aff70f20f26a3e579a548cb"
+    },
+    "native-v4/matches/anchor/preflight1.json": {
+      "bytes": 913,
+      "sha256": "f43e570d591db4648306d36c0017594a39246642e0d16b7e07e9514cc9554bed"
+    },
+    "native-v4/matches/anchor/preflight1.jsonl": {
+      "bytes": 2274,
+      "sha256": "e2616a2c52d8255caef1b65f3b5af51f6f8b4d0df5bef67fa81d4a274ba12db2"
+    },
+    "native-v4/matches/anchor/report.json": {
+      "bytes": 909,
+      "sha256": "1089268ba491b28a161bb3c411e252e7f42dbb084cbe6a1b2e1f10f976c61d1a"
+    },
+    "native-v4/matches/anchor/role0/ngn_crashes.log": {
+      "bytes": 512,
+      "sha256": "1834dc23f3a70835e750ce7508d011e232aa89647e32d6efd0b21d56a6f447e8"
+    },
+    "native-v4/matches/anchor/role0/role-config.json": {
+      "bytes": 338,
+      "sha256": "4e709d770df19f7270e8e0cad39c3b763d7029f4bdb9341649833c03dd4b01cd"
+    },
+    "native-v4/matches/anchor/role0/role_exec.py": {
+      "bytes": 1886,
+      "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+    },
+    "native-v4/matches/anchor/role1/role-config.json": {
+      "bytes": 338,
+      "sha256": "f311b75a70433f7a561b0d293d36734c39c2ef54e2af3d6947ba1a6f0f7b1062"
+    },
+    "native-v4/matches/anchor/role1/role_exec.py": {
+      "bytes": 1886,
+      "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+    },
+    "native-v4/matches/anchor/spec.json": {
+      "bytes": 3480,
+      "sha256": "5b75e351b7b3c6f1b1795b4df71db504c34ec92c117cccb3e2b88f5b8ac47394"
+    },
+    "native-v4/matches/anchor/supervised-audit/command.json": {
+      "bytes": 1115,
+      "sha256": "46738e6a8551a8e59cf8234f54f677cbce7a1065316e3149568057a0eabe9c73"
+    },
+    "native-v4/matches/anchor/supervised-audit/host-capacity.jsonl": {
+      "bytes": 374,
+      "sha256": "66d5aa745601a5a78508128bb4490e224c4d568e3c265e36081191d8f158e12f"
+    },
+    "native-v4/matches/anchor/supervised-audit/process-tree.jsonl": {
+      "bytes": 4729,
+      "sha256": "882daed20aa18dde0c7293932564d261a6f6e7032e5f6628c9da0cca145767ef"
+    },
+    "native-v4/matches/anchor/supervised-audit/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v4/matches/anchor/supervised-audit/stdout": {
+      "bytes": 1413,
+      "sha256": "94af780cc570dd1bf94bd0d1c3326c6f4e0f1a31a48b673cdb339e11d033253d"
+    },
+    "native-v4/matches/anchor/supervised-audit/supervisor-receipt.json": {
+      "bytes": 3557,
+      "sha256": "8ded9564e5e413f85cb8ffe1093a0026fb84ef7b698f96bd1fb4cba8d4f7a98d"
+    },
+    "native-v4/matches/anchor/supervised-audit/time.txt": {
+      "bytes": 1718,
+      "sha256": "d49c83dd21aabd06412fb48e087fa31baa21442a902efe0361207b7138cafb41"
+    },
+    "native-v4/matches/anchor/supervised-match/command.json": {
+      "bytes": 234,
+      "sha256": "4d8c6a46815bfacb0f4920e16273f06eddf289cd33b2f0f694892d2a2f263cc8"
+    },
+    "native-v4/matches/anchor/supervised-match/host-capacity.jsonl": {
+      "bytes": 76616,
+      "sha256": "fbd47f6ca7f0919931139eabba169911e0691af4ddbc783c194a7a7d241b9881"
+    },
+    "native-v4/matches/anchor/supervised-match/process-tree.jsonl": {
+      "bytes": 4156325,
+      "sha256": "6b96afef2195f5449efe2f84bbc39e4f76f251b8d12c9dac440db363050dad81"
+    },
+    "native-v4/matches/anchor/supervised-match/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v4/matches/anchor/supervised-match/stdout": {
+      "bytes": 111,
+      "sha256": "3ab3ee4c8446fd6e3bd17bb6764b04dfb6edf0c322849fbd944b718f788f5f32"
+    },
+    "native-v4/matches/anchor/supervised-match/supervisor-receipt.json": {
+      "bytes": 1698,
+      "sha256": "1ae45d7cb2fc784276c332d8bee7de1417fb38e4915fd34f11ce4c5eae1ac161"
+    },
+    "native-v4/matches/anchor/supervised-match/time.txt": {
+      "bytes": 970,
+      "sha256": "adf05a4f0cb6102e2613d4ee88a774c384dc14e05f5898380c354537a0649c07"
+    },
+    "native-v4/matches/anchor/trace-storage.json": {
+      "bytes": 371,
+      "sha256": "292122f7b59323cb9c29d4400fa30c74145aae62f211e98052232abb87158147"
+    },
+    "native-v4/matches/smoke.json": {
+      "bytes": 3277,
+      "sha256": "f129bf700deefe597d470069f9958e3654c6912c823d9e7675950d9c366a261d"
+    },
+    "native-v4/matches/smoke.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v4/matches/smoke.stdout": {
+      "bytes": 289,
+      "sha256": "e1caa42efb82f41ce25e865a44fbd60c9265e6500739b4562d060cace6bee676"
+    },
+    "native-v4/matches/smoke/STATE.json": {
+      "bytes": 93,
+      "sha256": "6c4db60269f9fa7a714d7e0c2f6a88e48264fdacde9fd7132e6c769e974b7dcc"
+    },
+    "native-v4/matches/smoke/audit-operational.json": {
+      "bytes": 5887,
+      "sha256": "94df23cbc876d3c021847b47d4eae5d4968d72f23c4e9ff6bb8498a437b2b8ce"
+    },
+    "native-v4/matches/smoke/audit.json": {
+      "bytes": 4632,
+      "sha256": "ea8315aba1638cbfb097a119028a00c4a3b988f30ca6fdf937a622c8c88acb06"
+    },
+    "native-v4/matches/smoke/child-processes.json": {
+      "bytes": 282163,
+      "sha256": "fbee8649cbe2e2f57d50a77cece0b15e8705f63b19d7da8b68f06f1be2005c56"
+    },
+    "native-v4/matches/smoke/command.json": {
+      "bytes": 1685,
+      "sha256": "a79f5ec4cb08bfdb4503b0f7c74df952cdd133b5f8ab74eb15568900c33fb1ef"
+    },
+    "native-v4/matches/smoke/config.json": {
+      "bytes": 4874,
+      "sha256": "3ceafe49e382771ee9fa7bff4f659c1eef9e9cd7ea6d9dae2b6f327c589801ec"
+    },
+    "native-v4/matches/smoke/control.json": {
+      "bytes": 3082,
+      "sha256": "a237691452ff952b5c1b045b98a510c48dbe3cb5db97b0e8db1e9a6cb0623f95"
+    },
+    "native-v4/matches/smoke/fastchess.log.gz": {
+      "bytes": 800523,
+      "sha256": "279f32e55a2c5d9af9ec12b8cf1bf7b8706c3688529502e3957ebf0586a4e1bc"
+    },
+    "native-v4/matches/smoke/final.epd": {
+      "bytes": 424,
+      "sha256": "2e824cd294c47a883e890ae0d1a0b3f70c8082374e7fed47c088b8b3fe41208e"
+    },
+    "native-v4/matches/smoke/games.pgn": {
+      "bytes": 181191,
+      "sha256": "35e05c5340a4f0cd8369b0dde234fea259e53e294ff6a0567427dfbfa5c324ac"
+    },
+    "native-v4/matches/smoke/match-stage.json": {
+      "bytes": 3385,
+      "sha256": "3823acaff7a6d752f60d47e7bbaf4e5ffb1c82b82a76182ddf392ffc5196de8b"
+    },
+    "native-v4/matches/smoke/match.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v4/matches/smoke/match.stdout": {
+      "bytes": 1503,
+      "sha256": "88be5e885618aab1a573dc37e1c01fbfeb26dd02fdee922049134c759b524907"
+    },
+    "native-v4/matches/smoke/opening_prefixes.txt": {
+      "bytes": 120,
+      "sha256": "84a3341ed22536acbd974fdd00c8c0400431d2651bc9b6e6118c51dfd0138215"
+    },
+    "native-v4/matches/smoke/openings_pgn.pgn": {
+      "bytes": 412,
+      "sha256": "efa52df82a9d331f0919978474533af6615e3b4bdba5bff1a13f621a2f124b7e"
+    },
+    "native-v4/matches/smoke/preflight0-crashes.log": {
+      "bytes": 255,
+      "sha256": "cd32bff6451f4fc98ed1c647251df5bde55685d19eec04ea68cd3f7fa0279b9f"
+    },
+    "native-v4/matches/smoke/preflight0.json": {
+      "bytes": 8192,
+      "sha256": "3394ea36a866b9b2a28b99de9ac9f03ae00a3a8b2405d9033e042786030f8bce"
+    },
+    "native-v4/matches/smoke/preflight0.jsonl": {
+      "bytes": 12741,
+      "sha256": "88d9ee0aec5511164dcf6bc4a5ca836bf4569759b455a4cce791925128032896"
+    },
+    "native-v4/matches/smoke/preflight1.json": {
+      "bytes": 913,
+      "sha256": "f43e570d591db4648306d36c0017594a39246642e0d16b7e07e9514cc9554bed"
+    },
+    "native-v4/matches/smoke/preflight1.jsonl": {
+      "bytes": 2269,
+      "sha256": "792e5850e475abd6d952635d46ffa6d814c00b5b1ca269601c37fee3c88b9705"
+    },
+    "native-v4/matches/smoke/report.json": {
+      "bytes": 307,
+      "sha256": "7f5ec4a30e6affe061cb1fea3f82c1624c2d169a76f93d38fb7d58e89b004f4a"
+    },
+    "native-v4/matches/smoke/role0/ngn_crashes.log": {
+      "bytes": 510,
+      "sha256": "3e21ca1e4a26957bb9878dfe9b2a1ad925327a58971a0342780e3728e09e174c"
+    },
+    "native-v4/matches/smoke/role0/role-config.json": {
+      "bytes": 336,
+      "sha256": "4cb7f66933f42f7d750b131c54c9d5ff8d6d0c168e5cdf03e578f0d04a5db6a2"
+    },
+    "native-v4/matches/smoke/role0/role_exec.py": {
+      "bytes": 1886,
+      "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+    },
+    "native-v4/matches/smoke/role1/role-config.json": {
+      "bytes": 336,
+      "sha256": "902b3c0862e2b2d0ed60f396797275bd38e611f6a85c5f7ce5ce4789fafdcd82"
+    },
+    "native-v4/matches/smoke/role1/role_exec.py": {
+      "bytes": 1886,
+      "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+    },
+    "native-v4/matches/smoke/spec.json": {
+      "bytes": 3277,
+      "sha256": "f129bf700deefe597d470069f9958e3654c6912c823d9e7675950d9c366a261d"
+    },
+    "native-v4/matches/smoke/supervised-audit/command.json": {
+      "bytes": 1104,
+      "sha256": "5f5459103535fdb700658791034e096378453231452df79a7706bf905dabf25d"
+    },
+    "native-v4/matches/smoke/supervised-audit/host-capacity.jsonl": {
+      "bytes": 369,
+      "sha256": "51d70a953e27f3ae68dcbefa2f887a80065459184ec50816b06f44067f00ed23"
+    },
+    "native-v4/matches/smoke/supervised-audit/process-tree.jsonl": {
+      "bytes": 247,
+      "sha256": "6b8c48ac6c90ca2472d2e988b042c7058085964259017a6e836c45d8340634c1"
+    },
+    "native-v4/matches/smoke/supervised-audit/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v4/matches/smoke/supervised-audit/stdout": {
+      "bytes": 1286,
+      "sha256": "54f97900b31d70c8329c9f1fd54ee7a2049f3f8e2da71965bf669ff83a625003"
+    },
+    "native-v4/matches/smoke/supervised-audit/supervisor-receipt.json": {
+      "bytes": 3531,
+      "sha256": "38e5fb636aab9742018818d085b6d448ca6c03d8c09d88ec506336a9e4e19204"
+    },
+    "native-v4/matches/smoke/supervised-audit/time.txt": {
+      "bytes": 1700,
+      "sha256": "98ffafcca4c8d1e2a7d5a64dd43ca0c12979114db4dd79820b3d7b498cda9ea6"
+    },
+    "native-v4/matches/smoke/supervised-match/command.json": {
+      "bytes": 233,
+      "sha256": "8d246534c59866b888fee5cbc27da19bd544f36a502e6dc4b49b4248309ccc2d"
+    },
+    "native-v4/matches/smoke/supervised-match/host-capacity.jsonl": {
+      "bytes": 1478,
+      "sha256": "853632d73de07c89b499785a1011fbf3bedfac016fb5b9982ecc28e7053faf0d"
+    },
+    "native-v4/matches/smoke/supervised-match/process-tree.jsonl": {
+      "bytes": 80278,
+      "sha256": "63141a8f61d9618a98d201f1c8cab3e79cb5412e7763af5ee82cf17622890e83"
+    },
+    "native-v4/matches/smoke/supervised-match/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-v4/matches/smoke/supervised-match/stdout": {
+      "bytes": 109,
+      "sha256": "0f864003d8a4def2c27bf877dc665e9904af713b98907f12b5818ae6be69077e"
+    },
+    "native-v4/matches/smoke/supervised-match/supervisor-receipt.json": {
+      "bytes": 1697,
+      "sha256": "6130c0ef3d51440570323079cb8f6e7988ee7d5efa59a8ed8a22fac4cef56026"
+    },
+    "native-v4/matches/smoke/supervised-match/time.txt": {
+      "bytes": 961,
+      "sha256": "a3d3a8a8db63b3ff174858a7d2a8649929aeb1ce48ff5bcb8b82a4641aefa252"
+    },
+    "native-v4/matches/smoke/trace-storage.json": {
+      "bytes": 367,
+      "sha256": "49a6742884f85c9b0735520dcfe805339abf04243da5767cdc80a1a92b7af7ce"
+    },
+    "native-v4/matches/verdict.json": {
+      "bytes": 702,
+      "sha256": "bcdf37d0a1c1aa02b21f68765167ea3808637298989168d042144e81caad4870"
+    },
+    "native-v4/openings/receipt.json": {
+      "bytes": 4476,
+      "sha256": "8cb97b6536cf2e4a931151154a1e8206c80539429ed8c67a11501becbcf3b21d"
+    },
+    "native-v4/openings/selection.json": {
+      "bytes": 604,
+      "sha256": "d758c03682235a729355b91e5f3973d6c42eaefbc6189778faf0a7bb375e4299"
+    },
+    "native-v4/plan.json": {
+      "bytes": 8009,
+      "sha256": "93f17ea48df1f0814aa3085f3c449e5fc88882a071885e05f2beaeba4949d101"
+    },
+    "native-v4/unit.json": {
+      "bytes": 1016,
+      "sha256": "043759e856e95ff3b580faef245a178a6c2abd87c78d18ca7ed27dc6fc1d22f5"
+    },
+    "source-v3-receipt.json": {
+      "bytes": 4004,
+      "sha256": "60d5cc13aad3687abd0d35fb35aa8a433140c89d916569d8eb766fffbfabd6d6"
+    },
+    "validation-v3/report.json": {
+      "bytes": 4475,
+      "sha256": "9354e6fc1ce1b6ce65bbca3fd2b8688f67ef161ddc9463e346b8c1c3a7341f12"
+    }
+  },
+  "off_worker": {
+    "pass": true,
+    "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/outputs/20260930-maelstrom-final-records.tar.gz",
+    "verified_files": 182
+  },
+  "receipt": {
+    "cells": {
+      "aa": {
+        "control": {
+          "audit_sha256": "52fb2c1c769f064affaa1abd8b2e7f4c4619c9fa88a85c21f0ca6d8f04e682e5",
+          "configuration": {
+            "concurrency": 2,
+            "cpus": [
+              12,
+              14
+            ],
+            "input_pool": {
+              "auditor": {
+                "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/audit_fastchess_match.py",
+                "sha256": "4c4d7374c16fe7fa9104429aecbb22ea582e1525d70712c6769d6ae28d16d224"
+              },
+              "fastchess": {
+                "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/fastchess",
+                "sha256": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00"
+              },
+              "stockfish": {
+                "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/stockfish18",
+                "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+              }
+            },
+            "maximum_trace_bytes": 1073741824,
+            "nodes": null,
+            "strict": false,
+            "tc": "10+0.1",
+            "trace_storage": "ram-gzip"
+          },
+          "instrument": {
+            "common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+            "counter_draw_compat.py": "ada29da47b4f8855fd5565ce60d68b53812571ded7845843c9452ebeff236c87",
+            "ownedmatch.py": "76c9f2e972de789bdc203971f33eea53bbea7dbb403bbffa469ca80568638690",
+            "ownedmatch_maelstromdraw.py": "1bea9b5068dd29538dcd7ab2a2174a72979536ace37523a24a7383eb29a7d016",
+            "ownedstorage.py": "a3a892cede5d2b0a65291bbc38829bf566f288ca7b23b419df754678c60f23f2",
+            "process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+            "python_chess_core_1.11.2": "1fde6a8e932508d14b31f6a584497b49c2969fc3c7cdc675347f819f0d667a5b",
+            "quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3",
+            "role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+            "run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+            "trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+            "uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+          },
+          "operational_sha256": "2b39ba00875ea423270fb4f25d4950393b4d1995fab6bcc0b4b7a448fd628b29",
+          "pass": true,
+          "purpose": "aa",
+          "report_sha256": "6b2827816aded0abe8bf1ffb42c4941da4c9c886206834e9429a27f99d7d1ea1",
+          "role_identity": {
+            "engine": {
+              "path": "/home/ehrli/nnue-owned-continuation-20260928/release-build-0.2.0-rc.1/ngn",
+              "sha256": "de86da92c75ada0f5449ae47d66d55879e221054731190e0c7c885d02123937f"
+            },
+            "network": {
+              "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue",
+              "sha256": "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29"
+            },
+            "options": [
+              [
+                "Threads",
+                1
+              ],
+              [
+                "OwnBook",
+                false
+              ],
+              [
+                "EvalFile",
+                "$NETWORK"
+              ],
+              [
+                "EvalBackend",
+                "ngn-k4-768-v1"
+              ],
+              [
+                "Hash",
+                128
+              ],
+              [
+                "Move Overhead",
+                100
+              ],
+              [
+                "K4EvalScale",
+                60
+              ]
+            ]
+          }
+        },
+        "independently_verified_post_draw_pv_count": 0,
+        "process_witness_pass": true,
+        "report": {
+          "audit_sha256": "52fb2c1c769f064affaa1abd8b2e7f4c4619c9fa88a85c21f0ca6d8f04e682e5",
+          "bootstrap": "percentile over pair scores, 20000 resamples, seed 2026092701",
+          "candidate": "Owned-1-A",
+          "elo": 29.931575403173355,
+          "elo_interval_95": [
+            -0.0,
+            60.31415751636436
+          ],
+          "games": 128,
+          "legal_plies": 19403,
+          "pairs": 64,
+          "penta_0_to_4": [
+            0,
+            9,
+            36,
+            18,
+            1
+          ],
+          "pgn_sha256": "f2121e0a0b91a140e86e820c7c1085795e9381d43a969d7dd0c8b71f060bfb96",
+          "reasons": {
+            "Black mates": 13,
+            "Draw by 3-fold repetition": 61,
+            "Draw by fifty moves rule": 4,
+            "Draw by insufficient mating material": 16,
+            "White mates": 34
+          },
+          "results": {
+            "0-1": 13,
+            "1-0": 34,
+            "1/2-1/2": 81
+          },
+          "schema": "ngn-quickmatch-report-v1",
+          "score": 0.54296875,
+          "score_interval_95": [
+            0.5,
+            0.5859375
+          ]
+        },
+        "state": {
+          "completed": 1790742053.3712409,
+          "started": 1790739992.089584,
+          "state": "COMPLETE"
+        },
+        "trace_storage": {
+          "compressed_bytes": 15686650,
+          "compressed_sha256": "ce2f3a0cefa9d854524f4ce883d57f73e9650cb9c17a6c245864a9e64ebb3e33",
+          "mode": "ram-gzip",
+          "raw_bytes": 98119820,
+          "raw_path": "/dev/shm/ngn-owned-trace-ft5z77ek/fastchess.log",
+          "raw_sha256": "e78c6235ce7a8e1ffb99f50f402021af400dcdef8972009f624a53aad673ad11",
+          "stage_failed": false,
+          "state": "ARCHIVED"
+        }
+      },
+      "anchor": {
+        "control": {
+          "audit_sha256": "5e78785594e088355b107467aad8f361855a0d41a0afad63e197f232759b9d92",
+          "configuration": {
+            "concurrency": 2,
+            "cpus": [
+              12,
+              14
+            ],
+            "input_pool": {
+              "auditor": {
+                "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/audit_fastchess_match.py",
+                "sha256": "4c4d7374c16fe7fa9104429aecbb22ea582e1525d70712c6769d6ae28d16d224"
+              },
+              "fastchess": {
+                "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/fastchess",
+                "sha256": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00"
+              },
+              "stockfish": {
+                "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/stockfish18",
+                "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+              }
+            },
+            "maximum_trace_bytes": 1073741824,
+            "nodes": null,
+            "strict": false,
+            "tc": "10+0.1",
+            "trace_storage": "ram-gzip"
+          },
+          "instrument": {
+            "common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+            "counter_draw_compat.py": "ada29da47b4f8855fd5565ce60d68b53812571ded7845843c9452ebeff236c87",
+            "ownedmatch.py": "76c9f2e972de789bdc203971f33eea53bbea7dbb403bbffa469ca80568638690",
+            "ownedmatch_maelstromdraw.py": "1bea9b5068dd29538dcd7ab2a2174a72979536ace37523a24a7383eb29a7d016",
+            "ownedstorage.py": "a3a892cede5d2b0a65291bbc38829bf566f288ca7b23b419df754678c60f23f2",
+            "process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+            "python_chess_core_1.11.2": "1fde6a8e932508d14b31f6a584497b49c2969fc3c7cdc675347f819f0d667a5b",
+            "quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3",
+            "role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+            "run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+            "trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+            "uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+          },
+          "operational_sha256": "288e5cb8a0b8018a2ef979051bcc788fff0fc76f11c47aec33b24397b7d767a9",
+          "pass": true,
+          "purpose": "anchor",
+          "report_sha256": "1089268ba491b28a161bb3c411e252e7f42dbb084cbe6a1b2e1f10f976c61d1a",
+          "role_identity": {
+            "engine": {
+              "path": "/home/ehrli/nnue-owned-continuation-20260928/release-build-0.2.0-rc.1/ngn",
+              "sha256": "de86da92c75ada0f5449ae47d66d55879e221054731190e0c7c885d02123937f"
+            },
+            "network": {
+              "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue",
+              "sha256": "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29"
+            },
+            "options": [
+              [
+                "Threads",
+                1
+              ],
+              [
+                "OwnBook",
+                false
+              ],
+              [
+                "EvalFile",
+                "$NETWORK"
+              ],
+              [
+                "EvalBackend",
+                "ngn-k4-768-v1"
+              ],
+              [
+                "Hash",
+                128
+              ],
+              [
+                "Move Overhead",
+                100
+              ],
+              [
+                "K4EvalScale",
+                60
+              ]
+            ]
+          }
+        },
+        "independently_verified_post_draw_pv_count": 552,
+        "process_witness_pass": true,
+        "report": {
+          "audit_sha256": "5e78785594e088355b107467aad8f361855a0d41a0afad63e197f232759b9d92",
+          "bootstrap": "percentile over pair scores, 20000 resamples, seed 2026092701",
+          "candidate": "NGN-0.2.0-rc.1",
+          "elo": 250.48513994044063,
+          "elo_interval_95": [
+            223.68857508076837,
+            280.1096771797852
+          ],
+          "games": 400,
+          "legal_plies": 58590,
+          "pairs": 200,
+          "penta_0_to_4": [
+            0,
+            1,
+            32,
+            86,
+            81
+          ],
+          "pgn_sha256": "9874ea2f5357b149f7bbeb85723b72374fff2372cf74a5e0adab9a6bcc348abd",
+          "reasons": {
+            "Black mates": 121,
+            "Draw by 3-fold repetition": 91,
+            "Draw by fifty moves rule": 17,
+            "Draw by insufficient mating material": 16,
+            "Draw by stalemate": 1,
+            "White mates": 154
+          },
+          "results": {
+            "0-1": 121,
+            "1-0": 154,
+            "1/2-1/2": 125
+          },
+          "schema": "ngn-quickmatch-report-v1",
+          "score": 0.80875,
+          "score_interval_95": [
+            0.78375,
+            0.83375
+          ]
+        },
+        "state": {
+          "completed": 1790748165.0085387,
+          "started": 1790742053.471974,
+          "state": "COMPLETE"
+        },
+        "trace_storage": {
+          "compressed_bytes": 46991236,
+          "compressed_sha256": "d505a35a4c0772b312e906e2e41bcd67f20fdd1fe214363959c22a853267771a",
+          "mode": "ram-gzip",
+          "raw_bytes": 302899623,
+          "raw_path": "/dev/shm/ngn-owned-trace-i8vf0tzq/fastchess.log",
+          "raw_sha256": "dc0cbeb2ebef09b743aa07c62e31796322af8e46fe912658f8b8efc061e2f01f",
+          "stage_failed": false,
+          "state": "ARCHIVED"
+        }
+      },
+      "smoke": {
+        "control": {
+          "audit_sha256": "ea8315aba1638cbfb097a119028a00c4a3b988f30ca6fdf937a622c8c88acb06",
+          "configuration": {
+            "concurrency": 2,
+            "cpus": [
+              12,
+              14
+            ],
+            "input_pool": {
+              "auditor": {
+                "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/audit_fastchess_match.py",
+                "sha256": "4c4d7374c16fe7fa9104429aecbb22ea582e1525d70712c6769d6ae28d16d224"
+              },
+              "fastchess": {
+                "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/fastchess",
+                "sha256": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00"
+              },
+              "stockfish": {
+                "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/stockfish18",
+                "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+              }
+            },
+            "maximum_trace_bytes": 1073741824,
+            "nodes": null,
+            "strict": false,
+            "tc": "10+0.1",
+            "trace_storage": "ram-gzip"
+          },
+          "instrument": {
+            "common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+            "counter_draw_compat.py": "ada29da47b4f8855fd5565ce60d68b53812571ded7845843c9452ebeff236c87",
+            "ownedmatch.py": "76c9f2e972de789bdc203971f33eea53bbea7dbb403bbffa469ca80568638690",
+            "ownedmatch_maelstromdraw.py": "1bea9b5068dd29538dcd7ab2a2174a72979536ace37523a24a7383eb29a7d016",
+            "ownedstorage.py": "a3a892cede5d2b0a65291bbc38829bf566f288ca7b23b419df754678c60f23f2",
+            "process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+            "python_chess_core_1.11.2": "1fde6a8e932508d14b31f6a584497b49c2969fc3c7cdc675347f819f0d667a5b",
+            "quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3",
+            "role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+            "run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+            "trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+            "uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+          },
+          "operational_sha256": "94df23cbc876d3c021847b47d4eae5d4968d72f23c4e9ff6bb8498a437b2b8ce",
+          "pass": true,
+          "purpose": "smoke",
+          "report_sha256": "7f5ec4a30e6affe061cb1fea3f82c1624c2d169a76f93d38fb7d58e89b004f4a",
+          "role_identity": {
+            "engine": {
+              "path": "/home/ehrli/nnue-owned-continuation-20260928/release-build-0.2.0-rc.1/ngn",
+              "sha256": "de86da92c75ada0f5449ae47d66d55879e221054731190e0c7c885d02123937f"
+            },
+            "network": {
+              "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue",
+              "sha256": "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29"
+            },
+            "options": [
+              [
+                "Threads",
+                1
+              ],
+              [
+                "OwnBook",
+                false
+              ],
+              [
+                "EvalFile",
+                "$NETWORK"
+              ],
+              [
+                "EvalBackend",
+                "ngn-k4-768-v1"
+              ],
+              [
+                "Hash",
+                128
+              ],
+              [
+                "Move Overhead",
+                100
+              ],
+              [
+                "K4EvalScale",
+                60
+              ]
+            ]
+          }
+        },
+        "independently_verified_post_draw_pv_count": 0,
+        "process_witness_pass": true,
+        "report": {
+          "audit_sha256": "ea8315aba1638cbfb097a119028a00c4a3b988f30ca6fdf937a622c8c88acb06",
+          "games": 8,
+          "legal_plies": 1045,
+          "pairs": 4,
+          "pass": true,
+          "pgn_sha256": "35e05c5340a4f0cd8369b0dde234fea259e53e294ff6a0567427dfbfa5c324ac",
+          "purpose": "smoke",
+          "schema": "ngn-owned-instrument-smoke-v1"
+        },
+        "state": {
+          "completed": 1790739992.0222013,
+          "started": 1790739872.839598,
+          "state": "COMPLETE"
+        },
+        "trace_storage": {
+          "compressed_bytes": 800523,
+          "compressed_sha256": "279f32e55a2c5d9af9ec12b8cf1bf7b8706c3688529502e3957ebf0586a4e1bc",
+          "mode": "ram-gzip",
+          "raw_bytes": 5082657,
+          "raw_path": "/dev/shm/ngn-owned-trace-1v84od_z/fastchess.log",
+          "raw_sha256": "f60a5f1641381cbbbe9d212bbd9560a86ddeb5106eeea24948a967d039eb1076",
+          "stage_failed": false,
+          "state": "ARCHIVED"
+        }
+      }
+    },
+    "checked_at_unix": 1790748973.012651,
+    "independent_recounts": {
+      "aa": {
+        "candidate": "Owned-1-A",
+        "candidate_WDL": {
+          "draws": 81,
+          "losses": 18,
+          "wins": 29
+        },
+        "games": 128,
+        "legal_plies": 19403,
+        "pairs": 64,
+        "pass": true,
+        "penta_0_to_4": [
+          0,
+          9,
+          36,
+          18,
+          1
+        ],
+        "pgn_sha256": "f2121e0a0b91a140e86e820c7c1085795e9381d43a969d7dd0c8b71f060bfb96",
+        "score": 0.54296875
+      },
+      "anchor": {
+        "candidate": "NGN-0.2.0-rc.1",
+        "candidate_WDL": {
+          "draws": 125,
+          "losses": 14,
+          "wins": 261
+        },
+        "games": 400,
+        "legal_plies": 58590,
+        "pairs": 200,
+        "pass": true,
+        "penta_0_to_4": [
+          0,
+          1,
+          32,
+          86,
+          81
+        ],
+        "pgn_sha256": "9874ea2f5357b149f7bbeb85723b72374fff2372cf74a5e0adab9a6bcc348abd",
+        "score": 0.80875
+      },
+      "smoke": {
+        "candidate": "NGN-0.2.0-rc.1",
+        "candidate_WDL": {
+          "draws": 1,
+          "losses": 0,
+          "wins": 7
+        },
+        "games": 8,
+        "legal_plies": 1045,
+        "pairs": 4,
+        "pass": true,
+        "penta_0_to_4": [
+          0,
+          0,
+          0,
+          1,
+          3
+        ],
+        "pgn_sha256": "35e05c5340a4f0cd8369b0dde234fea259e53e294ff6a0567427dfbfa5c324ac",
+        "score": 0.9375
+      }
+    },
+    "pass": true,
+    "recount_method": "Independent standard-library PGN tag, move, color-pair, result, penta and point recount on WSL. Every normal TC game and repeated opening pair matches the separately verified legal audit and paired report. No old game is pooled.",
+    "unit_status": "MainPID=0\nActiveState=inactive\nSubState=dead\n",
+    "verdict": {
+      "claim": "Released NGN versus an unmodified, pinned-source Linux build of Maelstrom v3.3.0 at 10+0.1 and Hash128, one physical CPU per game. This is a direct relative result against a second leading Go opponent; it is not an official CCRL rating or a transfer of CCRL40/15 Elo.",
+      "decision": "WIN_PROVED",
+      "elo": 250.48513994044063,
+      "elo_interval_95": [
+        223.68857508076837,
+        280.1096771797852
+      ],
+      "games": 400,
+      "report": {
+        "path": "/home/ehrli/nnue-owned-morning-20260930/native-v4/matches/anchor/report.json",
+        "sha256": "1089268ba491b28a161bb3c411e252e7f42dbb084cbe6a1b2e1f10f976c61d1a"
+      },
+      "score_interval_95": [
+        0.78375,
+        0.83375
+      ],
+      "state": "COMPLETE"
+    }
+  }
+}

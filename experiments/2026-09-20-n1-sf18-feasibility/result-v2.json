@@ -1,0 +1,215 @@
+{
+  "schema": "ngn.sf18_big_n1b_feasibility.v1",
+  "status": "PASS_TO_N1C_DEMAND_DRIVEN_CONTEXT",
+  "base_commit": "2a31592181b57825ddeef3d729c9b25c2b450219",
+  "source_commit": "cb3d4ee9b47d0c5aae855b12379378ea1439675c",
+  "network": {
+    "file": "nn-c288c895ea92.nnue",
+    "bytes": 108919594,
+    "sha256": "c288c895ea924429ea9092e3f36b2b3c1f00f2a3a4c759ff7e57e79e3b43e4a7"
+  },
+  "scope": {
+    "implemented": [
+      "exact scalar BIG full refresh with separate HalfKAv2 and FullThreats accumulator state",
+      "allocation-free active FullThreats enumeration",
+      "simple sorted-set FullThreats transition diff",
+      "exact scalar base and threat 1024-lane row updates",
+      "exact BIG transform and material-selected head"
+    ],
+    "excluded": [
+      "search or UCI evaluator wiring",
+      "default changes",
+      "engine games",
+      "worker context or accumulator stack",
+      "Stockfish fused or double-update machinery",
+      "SIMD kernels"
+    ]
+  },
+  "source_sha256": {
+    "nnue/sf18big/evaluate.go": "6637896c8105f3f21f6563ff8916d17ea61573c165c0730bd2c861a4327c8665",
+    "nnue/sf18big/threats.go": "9dfdf084153e056278563658bbef20936ee961cce3bd5ad92da82e321e84f12e",
+    "nnue/sf18big/reference_oracle_test.go": "9713e52d560aa8be1834d369091cb04764610a7ca5f647aea8050662ebd08cd6",
+    "nnue/sf18big/reference_benchmark_test.go": "b762a4b99bc3acfe3be23c6dcae8425808d395f2b356c5f781c3091c3144ccc6",
+    "nnue/sf18big/threats_test.go": "f087072b93edc37630afa412098cfd2a7cce3cda698b29a1fbbbbd5f11b49788",
+    "instrumentation.patch": "1613d1aef8c249ab9f55b151fc53225408dd63d2855e6126c820e39262a51ed5",
+    "sf18_big_reference_oracle.h": "97b6fac3406da13ab7822f10a0811acb3a8d8107f83c0f22fec7c0c6eb1bda91",
+    "generate_reference_oracle.py": "a87bf50f96c4dc2191f82ea9a0df7ec5fd583fbae9b985ce011945e1ebf516d7",
+    "freeze_representative_sequences.py": "197c66e319648bb31f4cff2e779c3edffe214b254e8a28c79d9d0ab999a3b470",
+    "representative_sequences.json": "1f375f586e8da6c7e2528195fdf537af284abba7979165abc9c00c864e5cd23d"
+  },
+  "oracle": {
+    "instrumented_binary_sha256": "f555e3e00d60e89355afb61a8bd347e977b96653b54de42a511a01e5a120b88e",
+    "frozen_small_sequence_sha256": "fe843291d9dde5b52bedc6b81debeeb99017d552009d811a854603c661906246",
+    "suites": {
+      "core": {
+        "rows": 290,
+        "jsonl_sha256": "8bba456867d8e2f3acce20b59f830625bbecd74ca839ad60d018cb84efa0cb03"
+      },
+      "growth": {
+        "rows": 133,
+        "jsonl_sha256": "dba955766db11b756cbbb5dc1e61e7566911aacf8666029e18aa00d47c78dddc"
+      },
+      "representative": {
+        "rows": 780,
+        "jsonl_sha256": "d0f55e6e20c30d0b05fba852f514a6aad16ccf1bf078472ad93d09ba851ded4d"
+      }
+    },
+    "total_rows": 1203,
+    "forward_transitions": 1048,
+    "parity": [
+      "active threats",
+      "sorted added and removed threat sets",
+      "FullThreats refresh decisions",
+      "base accumulator",
+      "threat accumulator",
+      "base PSQT",
+      "threat PSQT",
+      "transformed input",
+      "selected PSQT raw",
+      "selected positional raw",
+      "selected output components"
+    ],
+    "result": "PASS"
+  },
+  "representative_distribution": {
+    "rows": 780,
+    "moves": 768,
+    "perspective_transitions": 1536,
+    "active_threats_per_perspective": {
+      "min": 6,
+      "median": 36,
+      "p95": 48,
+      "max": 54,
+      "mean": 33.18205128205128
+    },
+    "changed_threat_rows_per_perspective": {
+      "min": 0,
+      "median": 7,
+      "p95": 13,
+      "max": 82,
+      "mean": 7.2421875
+    },
+    "changed_threat_rows_per_nonrefresh_move": {
+      "min": 0,
+      "median": 14,
+      "p95": 26,
+      "max": 36,
+      "mean": 14.10236220472441,
+      "moves": 762
+    },
+    "threat_refresh": {
+      "perspectives": 6,
+      "perspective_rate": 0.00390625
+    },
+    "base_rows_per_perspective": {
+      "min": 2,
+      "median": 2,
+      "p95": 3,
+      "max": 4,
+      "mean": 2.265625
+    },
+    "base_row_updates_per_move_after_refresh": {
+      "min": 2,
+      "median": 4,
+      "p95": 6,
+      "max": 6,
+      "mean": 4.359375
+    },
+    "base_refresh": {
+      "perspectives": 47,
+      "perspective_rate": 0.030598958333333332
+    }
+  },
+  "benchmark": {
+    "host": "AMD Ryzen 7 9800X3D 8-Core Processor",
+    "os_arch": "linux/amd64",
+    "go": "go1.25.5",
+    "goamd64": "v3",
+    "gomaxprocs": 1,
+    "taskset_core": 2,
+    "blocks": 10,
+    "seconds_per_block": 1,
+    "ns_per_op": {
+      "threat_enumeration_one_perspective": {
+        "samples": [2780, 2803, 2780, 2787, 2783, 2830, 2765, 2786, 2816, 2832],
+        "median": 2786.5,
+        "allocs": 0
+      },
+      "sorted_threat_diff_one_perspective": {
+        "samples": [126.5, 130.4, 128.2, 126.1, 125.1, 125.8, 125.5, 126.0, 127.1, 126.8],
+        "median": 126.3,
+        "allocs": 0
+      },
+      "threat_row_update_1024": {
+        "samples": [525.1, 541.5, 531.4, 546.1, 540.2, 537.1, 538.1, 531.4, 536.8, 536.7],
+        "median": 536.95,
+        "allocs": 0
+      },
+      "base_row_update_1024": {
+        "samples": [451.7, 450.9, 445.9, 456.4, 466.3, 455.0, 450.6, 453.3, 451.3, 452.0],
+        "median": 451.85,
+        "allocs": 0
+      },
+      "transform_1024": {
+        "samples": [5530, 5562, 5600, 5598, 5541, 5439, 5488, 5468, 5509, 5487],
+        "median": 5519.5,
+        "allocs": 0
+      },
+      "selected_head_1024": {
+        "samples": [6018, 6035, 6113, 6156, 6160, 6073, 6091, 6074, 6067, 6066],
+        "median": 6073.5,
+        "allocs": 0
+      },
+      "full_refresh": {
+        "samples": [59040, 57476, 58113, 57813, 56939, 57769, 58200, 58481, 57760, 57280],
+        "median": 57791,
+        "allocs": 0
+      },
+      "selected_full_refresh": {
+        "samples": [69789, 69253, 69512, 70181, 70528, 71722, 69561, 69624, 69764, 69235],
+        "median": 69694,
+        "allocs": 0
+      }
+    }
+  },
+  "scalar_kernel_ceiling": {
+    "assumptions": [
+      "retain prior sorted threat sets",
+      "enumerate and diff both perspectives once per demanded transition",
+      "apply observed base and threat changed rows",
+      "conservatively replace any own-king move with a complete two-perspective full refresh",
+      "add one transform and selected-head propagation per demanded evaluation"
+    ],
+    "maintenance_ns": {
+      "min": 7633,
+      "median": 15150.3,
+      "p95": 57791,
+      "max": 57791,
+      "mean": 17932.780078125
+    },
+    "maintenance_plus_output_ns": {
+      "median": 26743.3,
+      "p95": 69384,
+      "mean": 29525.780078125
+    },
+    "nonrefresh_maintenance_ns": {
+      "median": 15150.3,
+      "p95": 21593.7,
+      "max": 27866.9,
+      "mean": 15334.53273231623,
+      "moves": 721
+    },
+    "boundary": "Measured scalar kernels only; N1c must add demand-driven frame bookkeeping and prove that search does not eagerly pay this cost on every edge."
+  },
+  "validation": {
+    "official_oracle_go_test": "PASS",
+    "sf18big_race_with_official_model_spots_and_all_oracles": "PASS",
+    "repository_short_suite": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "decision": {
+    "route": "KEEP_OPEN",
+    "reason": "Exact parity is complete, active and changed threat sets are bounded, refresh incidence is low, and the scalar reference costs are finite and decomposed. The measured scalar ceiling is too expensive to wire eagerly, so only a demand-driven worker context is authorized next.",
+    "next": "N1c: implement a non-search-integrated demand-driven BIG context with lazy donor updates, no full-frame copying, exact oracle parity, and explicit evaluated-node cost. No UCI/search/default/game work is authorized yet."
+  }
+}

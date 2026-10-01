@@ -1,0 +1,56 @@
+{
+  "schema": "ngn-h1-history-policy-recovery-static-review-v1",
+  "state": "PASS",
+  "reviewed_utc": "2026-09-20T01:31:16Z",
+  "held_manifest": {
+    "path": "experiments/2026-09-19-h1-history-policy/recovery-manifest-held-v1.json",
+    "sha256": "0567110ed610ebcbabc81b6ee327554d7ed5ebdeea6605d1625fea0da5c8484c",
+    "release_state": "HELD_PENDING_STATIC_REVIEW"
+  },
+  "driver": {
+    "sha256": "ec162b7f970e7a3548e1ac611fd10bc055f0f1e4d50cd7b48ea265fce30381b4",
+    "test_sha256": "5815c0f91ab3270097b9247b5ebd574c8467c7161fafde4af6a81476b8291cfd",
+    "wsl_tests": {
+      "tests": 2,
+      "status": "PASS"
+    }
+  },
+  "incident": {
+    "failed_component": "original controller telemetry loop",
+    "exception": "ProcessLookupError while reading a transient /proc entry",
+    "chess_process_disposition": "independently supervised match continued to completion",
+    "direct_supervisor_state": "COMPLETE",
+    "direct_fastchess_returncode": 0,
+    "direct_process_violations": [],
+    "direct_surviving_processes": [],
+    "direct_score_inspected_before_recovery_release": false
+  },
+  "held_check": {
+    "state": "HELD_RECOVERY_CHECK_COMPLETE",
+    "original_manifest_hash_checked": true,
+    "original_driver_hash_checked": true,
+    "original_helper_hash_checked": true,
+    "preserved_direct_artifacts_hash_checked": 6,
+    "completed_prior_phases_validated": 3,
+    "recovery_root": "absent"
+  },
+  "reviewed_invariants": [
+    "The already-completed direct pilot is retained exactly and is never replayed or extended.",
+    "Recovery requires its supervisor and child-process witness to prove zero exits, no violations, and no surviving processes before the games can be audited.",
+    "The direct pilot PGN, final EPD, trace log, supervisor receipt, witness, and controller traceback are byte-frozen before score inspection.",
+    "The missing direct-phase non-owned-CPU sample is explicitly recorded as a telemetry-only deviation; background CPU was predeclared non-gating, so the gap cannot select or reject the result.",
+    "The A/A rule, all bootstrap seeds and replicate counts, factorial interaction, early-shelve boundary, independent confirmation corpus, and strict-positive confirmation boundary are unchanged.",
+    "Confirmation is created only when the preserved direct pilot upper 95% Elo bound is not below zero, and it still runs exactly 200 pairs of policy 11 versus 00 on lines 201-400.",
+    "The procfs repair changes only telemetry collection by treating a vanished process entry like the already-handled FileNotFoundError; it does not alter engines, games, scores, openings, clocks, affinity, or audits.",
+    "The final receipt discloses partial shared-host telemetry and distinguishes recovery from an uninterrupted original run."
+  ],
+  "limitations": [
+    "Continuous non-owned CPU telemetry is unavailable for the preserved direct pilot from the controller crash onward.",
+    "The direct match remains valid only as relative engine evidence under the original shared-host limitation; this recovery does not upgrade the claim boundary."
+  ],
+  "authorization": {
+    "release_state": "RELEASED_AFTER_STATIC_REVIEW",
+    "authorized": true,
+    "scope": "audit the frozen existing direct pilot without replay, apply the unchanged rule, and run at most the already-predeclared independent confirmation"
+  }
+}

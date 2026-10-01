@@ -1,0 +1,47 @@
+{
+  "schema": "ngn-ep-independent-receipt-comparison-v1",
+  "source_head": "701328646490f1bc8ed214002f578a58c9b0723e",
+  "input_sha256": {
+    "ngn-baseline-probe.stdout": "6f2bd6235f84f2f1c8fe06135016abe99695e3906294b885acfe16ca8d3a5ac4",
+    "stockfish-probe.json": "897f7ebd0c3adc602839d7782673ddbecdd7c1bc72c58dc73fb424f8884b283e"
+  },
+  "all_six_fixtures_agree_with_independent_oracle": true,
+  "fixtures": [
+    {
+      "name": "pinned_white_capturer",
+      "legal_sets_and_depth_2_perft_agree": true,
+      "played_repetition_verified": true,
+      "legal_ep_control_verified": false
+    },
+    {
+      "name": "pinned_black_capturer",
+      "legal_sets_and_depth_2_perft_agree": true,
+      "played_repetition_verified": true,
+      "legal_ep_control_verified": false
+    },
+    {
+      "name": "unrelated_check_white_capturer",
+      "legal_sets_and_depth_2_perft_agree": true,
+      "played_repetition_verified": true,
+      "legal_ep_control_verified": false
+    },
+    {
+      "name": "unrelated_check_black_capturer",
+      "legal_sets_and_depth_2_perft_agree": true,
+      "played_repetition_verified": true,
+      "legal_ep_control_verified": false
+    },
+    {
+      "name": "legal_white_capturer",
+      "legal_sets_and_depth_2_perft_agree": true,
+      "played_repetition_verified": false,
+      "legal_ep_control_verified": true
+    },
+    {
+      "name": "legal_black_capturer",
+      "legal_sets_and_depth_2_perft_agree": true,
+      "played_repetition_verified": false,
+      "legal_ep_control_verified": true
+    }
+  ]
+}

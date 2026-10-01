@@ -1,0 +1,240 @@
+{
+  "acceptance": {
+    "fixed_games_no_early_stop": true,
+    "interpretation": "matched-local-external-comparison-not-world-best-claim",
+    "require_complete_pairs": true,
+    "require_external_admission": true,
+    "require_independent_chess_audit": true,
+    "require_trace_audit": true,
+    "require_zero_operational_errors": true,
+    "require_zero_survivors": true
+  },
+  "approval": {
+    "authority": "root",
+    "exclusive_match_window": true,
+    "reviewed_manifest_sha256": "4afa296bbcf0052eaf9cfab46a84895af73757770b8f7e83ace00a369e6f66b6",
+    "token": "root-sf18-big-counter55-4afa296bbcf0052eaf9c"
+  },
+  "candidate": {
+    "binary": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/output/n1i-match/ngn-sf18-big-v3",
+      "sha256": "f386ab74b9592763e276e155f010a3e9d887175fb72f285c957f272d9d7f4524"
+    },
+    "build_receipt": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-build-receipt.json",
+      "sha256": "87de436e096171930e5d9fa1118a802aa8e5de6e2df834c0f6c9790f853033b5"
+    },
+    "display_name": "NGN-SF18-BIG-629df0e",
+    "id": "ngn_sf18_big",
+    "model": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-feasibility-20260920/output/n1b/nn-c288c895ea92.nnue",
+      "sha256": "c288c895ea924429ea9092e3f36b2b3c1f00f2a3a4c759ff7e57e79e3b43e4a7"
+    },
+    "options": [
+      {
+        "name": "Threads",
+        "value": 1
+      },
+      {
+        "name": "OwnBook",
+        "value": false
+      },
+      {
+        "name": "EvalFile",
+        "value": "$FROZEN_NETWORK"
+      },
+      {
+        "name": "EvalBackend",
+        "value": "sf18-big"
+      },
+      {
+        "name": "Hash",
+        "value": 128
+      },
+      {
+        "name": "Move Overhead",
+        "value": 100
+      }
+    ]
+  },
+  "cell": {
+    "adjudication": false,
+    "book": false,
+    "concurrency": 1,
+    "games": 100,
+    "hash_mib_per_engine": 128,
+    "id": "sf18-big-vs-counter-5.5-t1-30p0d3",
+    "move_overhead_ms": 100,
+    "opening_plies": 16,
+    "pairs": 50,
+    "ponder": false,
+    "recover": false,
+    "strict": false,
+    "tablebase": false,
+    "time_control": "30+0.3",
+    "warning_policy": {
+      "allowed_fastchess_warnings": [
+        {
+          "actor": "fastchess",
+          "display_name": "Counter 5.5",
+          "kind": "pv-continues-after-fifty-move-rule",
+          "level": "WARN",
+          "move_format": "uci-coordinate-lowercase-v1",
+          "profile_id": "counter-5.5-v1.55.0",
+          "role": "opponent"
+        }
+      ],
+      "fastchess_strict": false,
+      "id": "counter55-pv-after-fifty-v1"
+    },
+    "width": 1
+  },
+  "inputs": {
+    "chess_auditor": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/audit_fastchess_match.py",
+      "sha256": "2665c86e9cefd089757a44d30bc7e26a4481eb456bd4ed248849a71660e91bc1"
+    },
+    "common": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/common.py",
+      "sha256": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807"
+    },
+    "external_admission": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/external_uci_admission.py",
+      "sha256": "9c3a70acebb90a710e7024549fcf4923e8ebd69693abcd5bbfff4e45ace8fdcb"
+    },
+    "external_profiles": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/external_profiles.py",
+      "sha256": "fef76d555824c7585c5cc6ce086a90057cc38f29edfd3ccced8d84f182015d05"
+    },
+    "external_report": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/external_report.py",
+      "sha256": "d847c8bbb2e0c26f3e4d0f1f8c73e1da4475b085507508d4e25813c2412053cc"
+    },
+    "fastchess": {
+      "path": "/home/ehrli/repos/ngn-next/output/nnue-smp-b0-pv-corrected-20260905/aa-200-tc30/inputs/fastchess",
+      "sha256": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00"
+    },
+    "legacy_manifest": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/manifest.py",
+      "sha256": "acaee374e7f6c68b3391300eb6af1f2df3e93ccd2d333e7ce97525a51257966d"
+    },
+    "manifest_module": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/external_match_manifest.py",
+      "sha256": "7b178c2dacc8a5d1cf691bdd64158812a18fb8e58cfe361732a157416d695bfd"
+    },
+    "match_stage": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/run_match_stage.py",
+      "sha256": "5ce5e6fed89cb9124d169feb65c0e0fcc1cb3c739ec234993d706cf07efbbe34"
+    },
+    "opening_history_audit": {
+      "path": "/home/ehrli/repos/ngn-nnue8-hce8-runner/output/nnue8-hce8-combined-validation-20260906-attempt3/receipts/history-audit.json",
+      "sha256": "37964e69a227a6bc05c40d3c4671dff45a5fdf0df6aa11ac54b9f6d6961a672f"
+    },
+    "opening_pgn": {
+      "path": "/home/ehrli/repos/ngn-nnue8-hce8-runner/output/nnue8-hce8-combined-validation-20260906-attempt3/selection/selected-200.pgn",
+      "sha256": "b1d5d8503c2ee9d9c82c6df73138041f0a093109c44926dcaf10f58545c1b377"
+    },
+    "opening_root_review": {
+      "path": "/home/ehrli/repos/ngn-nnue8-hce8-runner/output/root-combined-opening-validation-review-v1.json",
+      "sha256": "9f6dddebb61d92f497d8ab99feecd362ddf5ee791d72fa4a88380153132f6335"
+    },
+    "opening_selection_receipt": {
+      "path": "/home/ehrli/repos/ngn-nnue8-hce8-runner/output/nnue8-hce8-combined-validation-20260906-attempt3/selection/selection-receipt.json",
+      "sha256": "b289ac730134a2da90f0e71655ed1ccc2c85f22b3673efa7d8df39d46f2301a8"
+    },
+    "opening_stockfish_admission": {
+      "path": "/home/ehrli/repos/ngn-nnue8-hce8-runner/output/nnue8-hce8-combined-validation-20260906-attempt3/receipts/stockfish-opening-admission.json",
+      "sha256": "31260807a9f1d9a56051f199a5a4f7bfdbb2344b710fedf7c6394d48f2e9f70c"
+    },
+    "opening_uci": {
+      "path": "/home/ehrli/repos/ngn-nnue8-hce8-runner/output/nnue8-hce8-combined-validation-20260906-attempt3/selection/selected-200.uci",
+      "sha256": "05da45f7653ae0682133af7e813ab08f9f50a7677b0a28b921931ead4b28c9f4"
+    },
+    "role_exec": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/role_exec.py",
+      "sha256": "d859a8f6610124bfcbf0e92af3286733c45184cff1377346b5be854b25c2337a"
+    },
+    "runner": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/run_external_fixed_match.py",
+      "sha256": "a26a66f82e8b78bb39060265e0b976421f9f96bc4f06fa129d473686000f9090"
+    },
+    "runner_helpers": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/run_candidate_match.py",
+      "sha256": "61a26e01df0b913f32f1ade2ea09f3203e8e0b47e396bbe062a2ce581111ff98"
+    },
+    "stockfish": {
+      "path": "/home/ehrli/repos/ngn-nnue8-hce8-runner/output/nnue8-hce8-combined-validation-20260906-attempt3/inputs/stockfish18",
+      "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+    },
+    "supervisor": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/process_supervisor.py",
+      "sha256": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f"
+    },
+    "trace_auditor": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/external_trace_audit.py",
+      "sha256": "bd193c5ddccd8f9b7f57792b86ff6f76e8fdf5f88d67e1d881115e3f059f6d87"
+    },
+    "trace_helpers": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/trace_audit.py",
+      "sha256": "3451b4c77760f00e54f0f6ba358678ddbd053bf100fdc0460c5c245486788c5f"
+    },
+    "uci_preflight": {
+      "path": "/home/ehrli/repos/ngn-n1-sf18-n1i-match/experiments/2026-09-20-n1-sf18-feasibility/n1i-counter55-runner/uci_preflight.py",
+      "sha256": "51dc46f7fc15789c5a62a1b82b978ac3ab14fa90e7399a8e1a6e078366d120fc"
+    }
+  },
+  "limits": {
+    "audit_seconds": 7200,
+    "match_seconds": 14400,
+    "preflight_seconds": 120,
+    "sample_interval_seconds": 0.05,
+    "term_grace_seconds": 3
+  },
+  "opponent": {
+    "admission_receipt": {
+      "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-validation-v11-20260907-attempt1/artifacts/admissions/counter-5.5-v1.55.0-t1/artifacts/admission/receipt.json",
+      "sha256": "14fdd01242c17fd2e9bba3d80e07b73f65d4d9c246706e3ba56b94b6559a7937"
+    },
+    "admission_transcript": {
+      "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-validation-v11-20260907-attempt1/artifacts/admissions/counter-5.5-v1.55.0-t1/artifacts/admission/transcript.jsonl",
+      "sha256": "5e4fb25fa81510cbd16e2e71a45394d19fb6dc82acde542a2b1d80107d640a7e"
+    },
+    "binary": {
+      "path": "/home/ehrli/repos/ngn-next/output/go-opponent-preflight-20260906/counter-5.5-linux-amd64",
+      "sha256": "6c48fb52934d49d3774633e32f0b4fb4796b1e2c63925f24167ef0f0c0d761c8"
+    },
+    "display_name": "Counter 5.5",
+    "id": "external",
+    "identity_receipt": {
+      "path": "/home/ehrli/repos/ngn-next/output/go-opponent-preflight-20260906/handshake.json",
+      "sha256": "3d48a88f2dd0eac637c7a546af9eb37f38d4d017df0bc3e22bcc3a0ef7ceeef9"
+    },
+    "options": [
+      {
+        "name": "Threads",
+        "value": 1
+      },
+      {
+        "name": "Hash",
+        "value": 128
+      },
+      {
+        "name": "ExperimentSettings",
+        "value": false
+      }
+    ],
+    "profile_id": "counter-5.5-v1.55.0"
+  },
+  "purpose": "direct one-thread 30+0.3 SF18 BIG comparison against the exact pinned Counter 5.5 anchor; no transitive Elo addition",
+  "resources": {
+    "cpus": [
+      12
+    ],
+    "cpus_allowed_list": "12",
+    "fastchess_use_affinity": false,
+    "gomaxprocs": 1,
+    "memory_limit_kib": 12582912
+  },
+  "schema": "ngn-external-fixed-match-v1",
+  "status": "APPROVED_TO_RUN"
+}

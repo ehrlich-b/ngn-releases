@@ -1,0 +1,14 @@
+Sep 30 23:05:23 NewPC systemd[241]: Started ngn-personal-night-nnue-review-20261001.service - /usr/bin/python3 /home/ehrli/ngn-personal-correctness-20261001/review-night-nnue.py.
+Sep 30 23:05:24 NewPC python3[641795]: Traceback (most recent call last):
+Sep 30 23:05:24 NewPC python3[641795]:   File "/home/ehrli/ngn-personal-correctness-20261001/review-night-nnue.py", line 17, in <module>
+Sep 30 23:05:24 NewPC python3[641795]:     'controls': {name: (group / name).read_text().strip()
+Sep 30 23:05:24 NewPC python3[641795]:                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+Sep 30 23:05:24 NewPC python3[641795]:   File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+Sep 30 23:05:24 NewPC python3[641795]:     with self.open(mode='r', encoding=encoding, errors=errors) as f:
+Sep 30 23:05:24 NewPC python3[641795]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Sep 30 23:05:24 NewPC python3[641795]:   File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+Sep 30 23:05:24 NewPC python3[641795]:     return io.open(self, mode, buffering, encoding, errors, newline)
+Sep 30 23:05:24 NewPC python3[641795]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Sep 30 23:05:24 NewPC python3[641795]: FileNotFoundError: [Errno 2] No such file or directory: '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/ngn-personal-night-nnue-review-20261001.service/cpuset.cpus.effective'
+Sep 30 23:05:24 NewPC systemd[241]: ngn-personal-night-nnue-review-20261001.service: Main process exited, code=exited, status=1/FAILURE
+Sep 30 23:05:24 NewPC systemd[241]: ngn-personal-night-nnue-review-20261001.service: Failed with result 'exit-code'.

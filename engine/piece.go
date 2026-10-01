@@ -1,30 +1,6 @@
-/*
-https://github.com/amanjpro/zahak/?tab=MIT-1-ov-file#readme
-MIT License
-
-Copyright (c) 2021 Amanj Sherwany
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-
 package engine
 
+// Piece identifies a chess piece value.
 type Piece int8
 
 const (
@@ -43,6 +19,7 @@ const (
 	BlackKing
 )
 
+// Pieces contains the nonempty piece values in numeric order.
 var Pieces = []Piece{
 	WhitePawn,
 	WhiteKnight,
@@ -58,6 +35,7 @@ var Pieces = []Piece{
 	BlackKing,
 }
 
+// PieceType identifies a piece kind without its color.
 type PieceType int8
 
 const (
@@ -70,23 +48,31 @@ const (
 	King
 )
 
+// Color identifies a side.
 type Color int8
 
 const (
-	NoColor Color = iota - 1
-	Black
-	White
+	NoColor Color = -1
+	Black   Color = 0
+	White   Color = 1
 )
 
+// MAX_INT is the maximum signed int16 value used as the king weight.
+const MAX_INT int16 = 32767
+
+// Other returns the opposite supported color.
 func (c Color) Other() Color {
-	if c == White {
-		return Black
-	} else if c == Black {
+	switch c {
+	case Black:
 		return White
+	case White:
+		return Black
+	default:
+		return NoColor
 	}
-	return NoColor
 }
 
+// Name returns the uppercase name of a piece type.
 func (t PieceType) Name() string {
 	switch t {
 	case Pawn:
@@ -101,43 +87,70 @@ func (t PieceType) Name() string {
 		return "Q"
 	case King:
 		return "K"
+	default:
+		return " "
 	}
-	return " "
 }
 
-// Hot-path lookup tables replacing the Type/seeWeight/Weight/Color switch chains —
-// these are the innermost ops of SEE, MVV/LVA ordering, delta pruning and the
-// make-legality test. Indexed by int(p)&15 so any out-of-range Piece value maps to
-// the same defaults the old switches returned (NoType / 0 / Black) instead of
-// panicking. Layout: NoPiece=0, White Pawn..King = 1..6, Black Pawn..King = 7..12.
-var pieceTypeTable = [16]PieceType{
-	NoType, Pawn, Knight, Bishop, Rook, Queen, King, Pawn, Knight, Bishop, Rook, Queen, King, NoType, NoType, NoType,
-}
-var pieceSeeWeightTable = [16]int16{
-	0, 100, 320, 330, 525, 1000, MAX_INT, 100, 320, 330, 525, 1000, MAX_INT, 0, 0, 0,
-}
-var pieceWeightTable = [16]int16{
-	0, 100, 320, 330, 525, 1000, MAX_INT, 100, 320, 330, 525, 1000, MAX_INT, 0, 0, 0,
-}
-var pieceColorTable = [16]Color{
-	NoColor, White, White, White, White, White, White, Black, Black, Black, Black, Black, Black, Black, Black, Black,
+func (p Piece) lowNibble() uint8 {
+	return uint8(p) & 0x0f
 }
 
+// Type returns the type encoded by the low nibble of p.
 func (p Piece) Type() PieceType {
-	return pieceTypeTable[int(p)&15]
+	n := p.lowNibble()
+	switch {
+	case n >= 1 && n <= 6:
+		return PieceType(n)
+	case n >= 7 && n <= 12:
+		return PieceType(n - 6)
+	default:
+		return NoType
+	}
 }
 
-const MAX_INT = int16(32767)
-
-// seeWeight uses the same values as Weight() for consistency between SEE and evaluation.
-func (p Piece) seeWeight() int16 {
-	return pieceSeeWeightTable[int(p)&15]
+// Color returns the color encoded by the low nibble of p.
+func (p Piece) Color() Color {
+	n := p.lowNibble()
+	switch {
+	case n == 0:
+		return NoColor
+	case n <= 6:
+		return White
+	default:
+		return Black
+	}
 }
 
+func (p Piece) weight() int16 {
+	switch p.Type() {
+	case Pawn:
+		return 100
+	case Knight:
+		return 320
+	case Bishop:
+		return 330
+	case Rook:
+		return 525
+	case Queen:
+		return 1000
+	case King:
+		return MAX_INT
+	default:
+		return 0
+	}
+}
+
+// Weight returns the material weight encoded by p.
 func (p Piece) Weight() int16 {
-	return pieceWeightTable[int(p)&15]
+	return p.weight()
 }
 
+func (p Piece) seeWeight() int16 {
+	return p.weight()
+}
+
+// Name returns the colored character for an exact piece value.
 func (p Piece) Name() string {
 	switch p {
 	case WhitePawn:
@@ -164,12 +177,13 @@ func (p Piece) Name() string {
 		return "q"
 	case BlackKing:
 		return "k"
+	default:
+		return " "
 	}
-	return " "
 }
 
-func pieceFromName(name rune) Piece {
-	switch name {
+func pieceFromName(r rune) Piece {
+	switch r {
 	case 'P':
 		return WhitePawn
 	case 'N':
@@ -194,27 +208,22 @@ func pieceFromName(name rune) Piece {
 		return BlackQueen
 	case 'k':
 		return BlackKing
+	default:
+		return NoPiece
 	}
-	return NoPiece
 }
 
-func (p Piece) Color() Color {
-	return pieceColorTable[int(p)&15]
-}
-
+// GetPiece combines a type and color into a piece value.
 func GetPiece(pieceType PieceType, color Color) Piece {
-	// Pieces are laid out White (Pawn..King = 1..6) then Black (Pawn..King = 7..12),
-	// mirroring PieceType (Pawn..King = 1..6): a white piece is Piece(pieceType) and a
-	// black piece is that plus the 6 white pieces. Replaces a 12-case double switch
-	// (hot in attack/check detection). NoType or NoColor map to NoPiece as before.
 	if pieceType == NoType {
 		return NoPiece
 	}
-	if color == White {
+	switch color {
+	case White:
 		return Piece(pieceType)
+	case Black:
+		return Piece(pieceType + 6)
+	default:
+		return NoPiece
 	}
-	if color == Black {
-		return Piece(pieceType) + 6
-	}
-	return NoPiece
 }

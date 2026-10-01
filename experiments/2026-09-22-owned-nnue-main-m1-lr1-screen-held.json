@@ -1,0 +1,279 @@
+{
+  "acceptance": {
+    "expected_games": 40,
+    "expected_pairs": 20,
+    "require_independent_audit": true,
+    "require_zero_operational_errors": true,
+    "require_zero_survivors": true,
+    "strength_claim": "none"
+  },
+  "approval": {
+    "authority": null,
+    "token": null,
+    "exclusive_match_window": false,
+    "reviewed_manifest_sha256": null
+  },
+  "classification": "diagnostic",
+  "inputs": {
+    "chess_auditor": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/audit_fastchess_match.py",
+      "sha256": "4c4d7374c16fe7fa9104429aecbb22ea582e1525d70712c6769d6ae28d16d224"
+    },
+    "common": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/candidate-match/common.py",
+      "sha256": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807"
+    },
+    "fastchess": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/tools/fastchess",
+      "sha256": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00"
+    },
+    "manifest_module": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/candidate-match/manifest.py",
+      "sha256": "738a369305b1a857335097367154bdca4a006997e665057467fce2742434014e"
+    },
+    "match_stage": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/candidate-match/run_match_stage.py",
+      "sha256": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40"
+    },
+    "opening_pgn": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-lr1-screen-40-v1/inputs/openings/openings-4021-4040.pgn",
+      "sha256": "45bcb60d261f7c384f271281797655342f5c74e6ae6ac6d8dd91a4f0430d1d5b"
+    },
+    "opening_prefixes": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-lr1-screen-40-v1/inputs/openings/opening-prefixes-4021-4040.txt",
+      "sha256": "5da172ae1d740d788d7e149ea48847e9b9e340accad3ef0c99440ffe3c315e66"
+    },
+    "role_exec": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/candidate-match/role_exec.py",
+      "sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4"
+    },
+    "roles": [
+      {
+        "backend": "hce",
+        "binary": {
+          "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-lr1-screen-40-v1/inputs/engine/ngn-k4-lr1-screen-v1",
+          "sha256": "1f2502844f0eab41832cd0818f57c81d59ec66a774e1a09756e0cc72c0c6d1be",
+          "provenance": {
+            "source_commit": "7f6b1f447d4307920437a46747f89434dcb9d23f",
+            "source_tree": "20547216adfc5ab021b647ae0ee49016f410280e clean committed tree",
+            "build_receipt": {
+              "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-lr1-screen-40-v1/inputs/engine/ngn-k4-lr1-screen-v1.build.json",
+              "sha256": "211e41d75503fdc5cff2ad0c6ae3eb0d889650fcaa96957e238f2606f92165e6"
+            },
+            "build_command": [
+              "env",
+              "CGO_ENABLED=0",
+              "GOOS=linux",
+              "GOARCH=amd64",
+              "GOAMD64=v3",
+              "go",
+              "build",
+              "-trimpath",
+              "-ldflags=-buildid=",
+              "-o",
+              "/private/tmp/ngn-k4-lr1-screen-v1",
+              "."
+            ]
+          }
+        },
+        "capability_profile": "ngn-pre-m4c-pinned-one-worker-v1",
+        "display_name": "NGN-7f6b1f4-HCE",
+        "effective": {
+          "GOMAXPROCS": 1,
+          "Hash": 128,
+          "Move Overhead": 100,
+          "OwnBook": false,
+          "Threads": 1,
+          "threads_basis": "pinned-source-single-worker-plus-one-cpu-mask"
+        },
+        "environment": {
+          "GOMAXPROCS": "1"
+        },
+        "id": "hce",
+        "network": null,
+        "requested": {
+          "Hash": 128,
+          "Move Overhead": 100,
+          "OwnBook": false,
+          "Threads": 1
+        },
+        "uci_options": [
+          {
+            "name": "Threads",
+            "value": 1
+          },
+          {
+            "name": "OwnBook",
+            "value": false
+          },
+          {
+            "name": "EvalFile",
+            "value": "<empty>"
+          },
+          {
+            "name": "EvalBackend",
+            "value": "hce"
+          },
+          {
+            "name": "Hash",
+            "value": 128
+          },
+          {
+            "name": "Move Overhead",
+            "value": 100
+          }
+        ]
+      },
+      {
+        "backend": "ngn-k4-768-v1",
+        "binary": {
+          "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-lr1-screen-40-v1/inputs/engine/ngn-k4-lr1-screen-v1",
+          "sha256": "1f2502844f0eab41832cd0818f57c81d59ec66a774e1a09756e0cc72c0c6d1be",
+          "provenance": {
+            "source_commit": "7f6b1f447d4307920437a46747f89434dcb9d23f",
+            "source_tree": "20547216adfc5ab021b647ae0ee49016f410280e clean committed tree",
+            "build_receipt": {
+              "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-lr1-screen-40-v1/inputs/engine/ngn-k4-lr1-screen-v1.build.json",
+              "sha256": "211e41d75503fdc5cff2ad0c6ae3eb0d889650fcaa96957e238f2606f92165e6"
+            },
+            "build_command": [
+              "env",
+              "CGO_ENABLED=0",
+              "GOOS=linux",
+              "GOARCH=amd64",
+              "GOAMD64=v3",
+              "go",
+              "build",
+              "-trimpath",
+              "-ldflags=-buildid=",
+              "-o",
+              "/private/tmp/ngn-k4-lr1-screen-v1",
+              "."
+            ]
+          }
+        },
+        "capability_profile": "ngn-pre-m4c-pinned-one-worker-v1",
+        "display_name": "NGN-Owned-K4-20M-LR1-20480",
+        "effective": {
+          "GOMAXPROCS": 1,
+          "Hash": 128,
+          "Move Overhead": 100,
+          "OwnBook": false,
+          "Threads": 1,
+          "threads_basis": "pinned-source-single-worker-plus-one-cpu-mask"
+        },
+        "environment": {
+          "GOMAXPROCS": "1"
+        },
+        "id": "k4",
+        "network": {
+          "format": "ngn-k4-768-v1",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-main-m1-lr1-20260922/model-selected.nnue",
+          "sha256": "cebec29cbab676af6a2ade2b67da5c9a01ddb7882ed604238c0e7d67893f72d6"
+        },
+        "requested": {
+          "Hash": 128,
+          "Move Overhead": 100,
+          "OwnBook": false,
+          "Threads": 1
+        },
+        "uci_options": [
+          {
+            "name": "Threads",
+            "value": 1
+          },
+          {
+            "name": "OwnBook",
+            "value": false
+          },
+          {
+            "name": "EvalFile",
+            "value": "$FROZEN_NETWORK"
+          },
+          {
+            "name": "EvalBackend",
+            "value": "ngn-k4-768-v1"
+          },
+          {
+            "name": "Hash",
+            "value": 128
+          },
+          {
+            "name": "Move Overhead",
+            "value": 100
+          }
+        ]
+      }
+    ],
+    "runner": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/candidate-match/run_candidate_match.py",
+      "sha256": "724ad50feb535a49bb6a8a26969fe576434ff55fbb407cc5e137934aa92a195e"
+    },
+    "schema": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/candidate-match/manifest.schema.json",
+      "sha256": "b826605831bd32a75e349b08217e4f4a7a63688924b252bb744cd29993d471f3"
+    },
+    "stockfish": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/tools/stockfish18",
+      "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+    },
+    "supervisor": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/candidate-match/process_supervisor.py",
+      "sha256": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f"
+    },
+    "trace_auditor": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/candidate-match/trace_audit.py",
+      "sha256": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b"
+    },
+    "uci_preflight": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/candidate-match/uci_preflight.py",
+      "sha256": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+    }
+  },
+  "limits": {
+    "chess_audit_seconds": 600,
+    "match_seconds": 3600,
+    "preflight_seconds": 60,
+    "sample_interval_seconds": 0.1,
+    "term_grace_seconds": 10,
+    "trace_audit_seconds": 180
+  },
+  "match": {
+    "affinity_cpus": [
+      12
+    ],
+    "book": false,
+    "concurrency": 1,
+    "draw_adjudication": false,
+    "games": 40,
+    "maxmoves_adjudication": false,
+    "opening_plies": 6,
+    "pairs": 20,
+    "ponder": false,
+    "recover": false,
+    "resign_adjudication": false,
+    "runner_strict": true,
+    "score_adjudication": false,
+    "seed": 20260923,
+    "tablebase": false,
+    "time_control": "10+0.1",
+    "use_affinity": true
+  },
+  "operational_profile": {
+    "allow_fastchess_normal_exit": true,
+    "name": "ngn-pre-m4c-known-benign-v1",
+    "ngn_crash_handler": "required-two-line-init-per-observed-process"
+  },
+  "purpose": "Forty-game paired-opening 10+0.1 same-code HCE versus owned K4 20M lower-rate update-20480 screen on the optimized AVX2 engine; opening pairs 4021-4040 are disjoint from all prior K4 screens; diagnostic cutoff 50%, no Elo or promotion claim.",
+  "resources": {
+    "affinity_mode": "fastchess-per-game-one-worker",
+    "memory_limit_kib": 12582912,
+    "required_cpus_allowed_list": "12,14",
+    "runner_cpus": [
+      12,
+      14
+    ]
+  },
+  "schema": "ngn-candidate-match-v1",
+  "status": "HELD"
+}

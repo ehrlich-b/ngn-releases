@@ -1,0 +1,95 @@
+{
+  "schema": "ngn-counter-policy-fixed-gate-v1",
+  "driver_sha256": "8aec98ffcd90001d1fd67c5a048dd4ef3e7b0aa68fcfd6d4ffcc46705f2688f2",
+  "release_state": "HELD_AFTER_INDEPENDENT_REVIEW",
+  "run_root": "/home/ehrli/repos/ngn-counter-policy-gate-20260913/run-001",
+  "protocol": {
+    "aa_games": 100,
+    "candidate_games": 400,
+    "tc": "10+0.1",
+    "concurrency": 4,
+    "physical_cpu_mask": ["0", "2", "4", "6"],
+    "seed": 20260912,
+    "bootstrap_seed": 2026091201,
+    "bootstrap_replicates": 100000
+  },
+  "decision_rule": "A/A 100-game paired-bootstrap 95% interval must include zero; then ADOPT candidate iff fixed 400-game paired-bootstrap lower95 relative Elo is greater than zero; otherwise SHELVE; never extend or rerun after observing score",
+  "claim_boundary": "candidate-versus-immediate-base relative Elo at Threads=1 only; not an absolute rating, 3300 proof, or wider-thread claim",
+  "engines": {
+    "base": {
+      "path": "/home/ehrli/repos/ngn-counter-minor-off-20260913/output/counter-minor-off-20260913/binaries/ngn-counter-minor-base-270c735",
+      "sha256": "695c7aed5d15c4303d3d32f8cdc58c207b3705768e9e9d462970aa3ed1abc2df",
+      "source_commit": "270c73563139996d03f3c34b2840015b8e130df9",
+      "source_tree": "2356d5e024e8593d096332257a9647f05b15f9bf"
+    },
+    "candidate": {
+      "path": "/home/ehrli/repos/ngn-counter-minor-off-20260913/output/counter-minor-off-20260913/binaries/ngn-counter-minor-off-270c735",
+      "sha256": "a3e7a53ac5a9960348781c48d4c8469180fff88fe426b08adcc97f33be2742a7",
+      "base_commit": "270c73563139996d03f3c34b2840015b8e130df9",
+      "production_patch_sha256": "3318c4b94306f1640d3beb803833bf2661b1edc6ebb8875e0127bbaf474b4af5",
+      "regression_test_patch_sha256": "4dd199ed546edc63301cf4d0f28eb7ca2b5529a91e8815dd47c3f2c443ded220"
+    }
+  },
+  "frozen_sources": {
+    "role_exec.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/role_exec.py",
+      "sha256": "d859a8f6610124bfcbf0e92af3286733c45184cff1377346b5be854b25c2337a"
+    },
+    "run_match_stage.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/run_match_stage.py",
+      "sha256": "5ce5e6fed89cb9124d169feb65c0e0fcc1cb3c739ec234993d706cf07efbbe34"
+    },
+    "process_supervisor.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/process_supervisor.py",
+      "sha256": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f"
+    },
+    "trace_audit.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/trace_audit.py",
+      "sha256": "423872b4cd7ad3e335e72df58bf14df3366e94819ca2f517d4dd0fc17263b380"
+    },
+    "audit_fastchess_match.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/audit_fastchess_match.py",
+      "sha256": "2665c86e9cefd089757a44d30bc7e26a4481eb456bd4ed248849a71660e91bc1"
+    },
+    "uci_preflight.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/uci_preflight.py",
+      "sha256": "d627b51033d2bebf4451262c8f3cadf676c6a59acaa539e2d8afc6a230ffd6b1"
+    },
+    "common.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/common.py",
+      "sha256": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807"
+    },
+    "fastchess": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/inputs/tools/fastchess",
+      "sha256": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00"
+    },
+    "stockfish": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/inputs/tools/stockfish",
+      "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+    },
+    "openings": {
+      "path": "/home/ehrli/repos/ngn-m4c-sprt-runner/output/sprt-inputs-v1/openings-first200.pgn",
+      "sha256": "1ae6a65a0224d7a4ff893a3c999542cd3d05e9a7f0e989fe2deee1cff7b8bf5a"
+    },
+    "prefixes": {
+      "path": "/home/ehrli/repos/ngn-m4c-sprt-runner/output/sprt-inputs-v1/opening-prefixes-first200.txt",
+      "sha256": "2257ecfb9af03f1ee0bff68f71ec97dbe363cdb9f535fab1a0ebc5af1abaaf33"
+    },
+    "model": {
+      "path": "/home/ehrli/repos/ngn/build/releases/ngn-a51233b-counter55-v1/n-30-5268.nn",
+      "sha256": "3488baed71f4d432d028e05b65e2ff13f8c9afe7f91974d1a3c34a0691d6670c"
+    },
+    "candidate_production_patch": {
+      "path": "/home/ehrli/repos/ngn-counter-minor-off-20260913/output/counter-minor-off-20260913/receipts/production.patch",
+      "sha256": "3318c4b94306f1640d3beb803833bf2661b1edc6ebb8875e0127bbaf474b4af5"
+    },
+    "candidate_regression_patch": {
+      "path": "/home/ehrli/repos/ngn-counter-minor-off-20260913/output/counter-minor-off-20260913/receipts/test.patch",
+      "sha256": "4dd199ed546edc63301cf4d0f28eb7ca2b5529a91e8815dd47c3f2c443ded220"
+    },
+    "build_test_receipt": {
+      "path": "/home/ehrli/repos/ngn-counter-minor-off-20260913/output/counter-minor-off-20260913/receipts/build-test-receipt.json",
+      "sha256": "cbc3acbdbf414a73e116b88fa0e29e130be793708cb302d32d69e3c4b6c9fc47"
+    }
+  }
+}

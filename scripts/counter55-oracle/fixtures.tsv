@@ -1,0 +1,13 @@
+# id<TAB>FEN; every literal must be accepted unchanged in identity fields by both pinned parsers before oracle acceptance.
+start_white	rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+start_black	rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1
+kiwipete_white	r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 37 1
+kiwipete_black	r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R b KQkq - 37 1
+ep_white	7k/8/8/3pP3/8/8/8/K7 w - d6 0 1
+ep_black	7k/8/8/8/3Pp3/8/8/K7 b - d3 0 1
+promoted_white	7k/Q7/1Q6/8/8/8/6q1/K7 w - - 99 1
+promoted_black	7k/Q7/1Q6/8/8/8/6q1/K7 b - - 99 1
+bounds_white	7k/8/8/8/8/8/8/K7 w - - 100 1
+bounds_black	7k/8/8/8/8/8/8/K7 b - - 100 1
+asymmetric_white	r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 w kq - 0 15
+asymmetric_black	r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 b kq - 0 15

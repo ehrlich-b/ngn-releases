@@ -1,0 +1,18 @@
+{
+  "action": "Read-only verification of the earlier approved submission. No new external message or reply was sent.",
+  "ai_disclosure": "I use AI tools to help develop the engine, including implementation, testing, and NNUE training tooling.",
+  "approved_draft_sha256": "67800430c9a868cf429a069b10827d854dfceb82bf2485b81e19fce7d7c2248c",
+  "checked_at_utc": "2026-09-30T03:49:46Z",
+  "guest_view_confirmed": true,
+  "post_count": 1,
+  "post_id": 155487,
+  "post_url": "https://kirill-kryukov.com/chess/discussion-board/viewtopic.php?p=155487#p155487",
+  "replies": 0,
+  "snapshot": {
+    "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/outputs/ccrl-public-topic-snapshot.txt",
+    "sha256": "4cc6ad1bb1097bb790919ed45560c4a9f2a082c8c9c434ab9b2839b8f809c468"
+  },
+  "state": "PUBLIC",
+  "topic_id": 19325,
+  "topic_url": "https://kirill-kryukov.com/chess/discussion-board/viewtopic.php?t=19325"
+}

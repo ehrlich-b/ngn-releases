@@ -1,0 +1,75 @@
+{
+  "schema": "ngn-e0-v12-anand-static-review-v1",
+  "date": "2026-09-19",
+  "state": "PASS",
+  "review_kind": "root static review; not independent agent review",
+  "held_package_commit": "c748470",
+  "driver_sha256": "ca574a5c88337441e61d98bbd86263913c81bd35a52c561e7f6a1fbbb63dedd1",
+  "test_driver_sha256": "39349edf79bb1f5c40efc1192e63967ec87b1976de8edfd906a2961a001b8c75",
+  "held_manifest_sha256": "11d62e77bb8b10cbb0089ad287250182dbb25f16cec01faa8c53298204b85fed",
+  "release_manifest_sha256": "496f30a8096b98a037461af9d0aaf8d66107739b858306f9d6740690313811ff",
+  "held_to_release_diff": {
+    "changed_fields": [
+      "release_state"
+    ],
+    "before": "HELD_PENDING_STATIC_REVIEW",
+    "after": "RELEASED_AFTER_STATIC_REVIEW"
+  },
+  "wsl_validation": {
+    "worktree_commit": "c748470",
+    "focused_driver_tests": {
+      "tests": 4,
+      "elapsed_seconds": 0.015,
+      "result": "OK"
+    },
+    "candidate_match_suite": {
+      "tests": 29,
+      "elapsed_seconds": 3.352,
+      "result": "OK"
+    },
+    "py_compile": "PASS",
+    "held_static_check": {
+      "state": "HELD_STATIC_CHECK_COMPLETE",
+      "frozen_sources": 13,
+      "shared_engine": "hash-checked",
+      "run_root": "absent"
+    }
+  },
+  "build": {
+    "source_commit": "117be117e70dd9ed2748dfbfd1a2ffb7afbf834e",
+    "source_tree": "d6ab33f1f151744696b566b43c33bd942f619b2a",
+    "binary_sha256": "dcde045792bba6b6d4f3fc83c9153763b94ff1ba1cba1d9df564a1ad69eb15aa",
+    "format": "ELF 64-bit LSB x86-64, statically linked",
+    "go_version": "go1.25.5 linux/amd64",
+    "goamd64": "v3",
+    "cgo_enabled": "0",
+    "build_flags": [
+      "-trimpath"
+    ],
+    "worktree_clean_after_build": true
+  },
+  "topology": {
+    "logical_cpus": 16,
+    "physical_cores": 8,
+    "selected_logical_cpus": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "selected_physical_cores": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "scope": {
+    "games_started_during_review": false,
+    "generic_candidate_manifest_changed": false,
+    "hopper_may_be_paused": false,
+    "background_cpu_is_rejection_condition": false,
+    "score_based_extension_allowed": false
+  },
+  "verdict": "RELEASE_RUN_001"
+}

@@ -1,0 +1,56 @@
+package engine
+
+import (
+	"encoding/json"
+	"math"
+	"math/rand"
+	"os"
+	"sort"
+	"testing"
+)
+
+// Diagnostic only: quantify the float surrogate's approximation separately from
+// exact integer trace/live parity. These fresh random walks are not fit holdouts.
+func TestReviewTuningRounding(t *testing.T) {
+	path := os.Getenv("NGN_REVIEW_MODEL")
+	if path == "" { t.Fatal("NGN_REVIEW_MODEL is required") }
+	blob, err := os.ReadFile(path)
+	if err != nil { t.Fatal(err) }
+	var fitted TexelModelExport
+	if err := json.Unmarshal(blob, &fitted); err != nil { t.Fatal(err) }
+	original := ExportTexelModel()
+	savedCache := pawnCacheDisabled
+	pawnCacheDisabled = true
+	defer func() { pawnCacheDisabled = savedCache; if err := ApplyTexelModel(original); err != nil { t.Fatal(err) } }()
+	positions := make([]Position, 0, 1600)
+	rng := rand.New(rand.NewSource(20260905))
+	for game := 0; game < 16; game++ {
+		pos, err := ParseFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+		if err != nil { t.Fatal(err) }
+		for ply := 0; ply < 100; ply++ {
+			positions = append(positions, *pos.Copy())
+			moves := GenerateLegalMoves(pos)
+			if len(moves) == 0 { break }
+			pos.GameMakeMove(moves[rng.Intn(len(moves))])
+		}
+	}
+	for _, run := range []struct{name string; model TexelModelExport}{{"base", original}, {"fitted", fitted}} {
+		if err := ApplyTexelModel(run.model); err != nil { t.Fatal(err) }
+		w := make([]float64, len(TexelFullParams()))
+		for i, p := range TexelFullParams() { w[i] = float64(*p) }
+		residuals := make([]float64, 0, len(positions))
+		maxResidual, sum, above8, worst := -1.0, 0.0, 0, ""
+		for _, pos := range positions {
+			pos.Board.recomputeAccumulator()
+			tr := buildEvalTrace(&pos.Board)
+			integer, live := reconstructEvalInt(&tr), evaluateUnsafe(&pos.Board)
+			if integer != live { t.Fatalf("%s integer/live mismatch %d != %d at %s", run.name, integer, live, GenerateFEN(&pos)) }
+			r := math.Abs(evalTraceFloat(&tr, w)-float64(live))
+			residuals = append(residuals, r); sum += r
+			if r > 8 { above8++ }
+			if r > maxResidual { maxResidual, worst = r, GenerateFEN(&pos) }
+		}
+		sort.Float64s(residuals)
+		t.Logf("%s n=%d integer_live_mismatches=0 mean_abs_cp=%.6f p95_abs_cp=%.6f max_abs_cp=%.6f above_8cp=%d worst_fen=%s", run.name, len(positions), sum/float64(len(positions)), residuals[int(.95*float64(len(residuals)))], maxResidual, above8, worst)
+	}
+}

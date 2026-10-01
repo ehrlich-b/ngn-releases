@@ -1,0 +1,116 @@
+{
+  "schema": "ngn-owned-verification-v1",
+  "started": 1790632740.1676402,
+  "go_version": "go version go1.25.5 linux/amd64",
+  "goamd64": "v3",
+  "gomaxprocs": 3,
+  "steps": [
+    {
+      "name": "focused",
+      "command": [
+        "/usr/local/go/bin/go",
+        "test",
+        "-short",
+        "./engine",
+        "-run",
+        "^(TestUCIK4Scale|TestK4Scale|TestPendingK4Scale)",
+        "-count=1",
+        "-timeout=120s"
+      ],
+      "race": false,
+      "returncode": 0,
+      "seconds": 5.555490255355835
+    },
+    {
+      "name": "engine-short",
+      "command": [
+        "/usr/local/go/bin/go",
+        "test",
+        "-short",
+        "./engine",
+        "-count=1",
+        "-timeout=15m"
+      ],
+      "race": false,
+      "returncode": 0,
+      "seconds": 7.979956865310669
+    },
+    {
+      "name": "engine-race",
+      "command": [
+        "/usr/local/go/bin/go",
+        "test",
+        "-short",
+        "-race",
+        "./engine",
+        "-count=1",
+        "-timeout=20m"
+      ],
+      "race": true,
+      "returncode": 0,
+      "seconds": 47.62882423400879
+    },
+    {
+      "name": "all-short",
+      "command": [
+        "/usr/local/go/bin/go",
+        "test",
+        "-short",
+        "./...",
+        "-count=1",
+        "-timeout=15m"
+      ],
+      "race": false,
+      "returncode": 0,
+      "seconds": 10.47063159942627
+    },
+    {
+      "name": "all-race",
+      "command": [
+        "/usr/local/go/bin/go",
+        "test",
+        "-short",
+        "-race",
+        "./...",
+        "-count=1",
+        "-timeout=20m"
+      ],
+      "race": true,
+      "returncode": 0,
+      "seconds": 48.24660611152649
+    },
+    {
+      "name": "linux-v3",
+      "command": [
+        "/usr/local/go/bin/go",
+        "build",
+        "-trimpath",
+        "-o",
+        "/home/ehrli/nnue-owned-continuation-20260928/build/ngn",
+        "."
+      ],
+      "race": false,
+      "returncode": 0,
+      "seconds": 3.6319825649261475
+    },
+    {
+      "name": "windows-v3",
+      "command": [
+        "/usr/local/go/bin/go",
+        "build",
+        "-trimpath",
+        "-o",
+        "/home/ehrli/nnue-owned-continuation-20260928/build/ngn.exe",
+        "."
+      ],
+      "race": false,
+      "returncode": 0,
+      "seconds": 3.5811235904693604
+    }
+  ],
+  "completed": 1790632867.2841763,
+  "builds": {
+    "ngn": "c2516bb9b1f9fbffbe7f5f863d4b2cb45588d9a347089523400d359ee051b3b2",
+    "ngn.exe": "4734e4c59f6342344365714f3a55d71f7b5ee9ee35d637b23e9f2c9db6d2ed28"
+  }
+}

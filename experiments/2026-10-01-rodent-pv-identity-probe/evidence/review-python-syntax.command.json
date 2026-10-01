@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-c",
+    "import ast,pathlib; [ast.parse(pathlib.Path(p).read_text()) for p in ['/home/ehrli/ngn-personal-correctness-20261001/repo/experiments/2026-10-01-rodent-pv-identity-probe/rodent_pv_probe.py', '/home/ehrli/ngn-personal-correctness-20261001/repo/experiments/2026-10-01-rodent-pv-identity-probe/classifier_regression.py']]"
+  ],
+  "env": {
+    "GOMAXPROCS": "1",
+    "GOFLAGS": "-mod=readonly -p=1",
+    "GOTOOLCHAIN": "local",
+    "GOCACHE": "/home/ehrli/ngn-personal-correctness-20261001/.gocache-rodent-review",
+    "PYTHONPATH": "/home/ehrli/nnue-owned-continuation-20260928/counterdraw-deps/chess-1.11.2"
+  },
+  "elapsed_wall_seconds": 0.028738689004967455
+}

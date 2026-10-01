@@ -1,0 +1,145 @@
+[
+  {
+    "label": "engine-compile",
+    "command": [
+      "/usr/local/go/bin/go",
+      "test",
+      "-short",
+      "./engine",
+      "-run",
+      "^TestNoSuchReleaseCompileProbe$",
+      "-count=1"
+    ],
+    "exit_code": 0,
+    "seconds": 0.646
+  },
+  {
+    "label": "all-compile",
+    "command": [
+      "/usr/local/go/bin/go",
+      "test",
+      "-short",
+      "./...",
+      "-run",
+      "^TestNoSuchReleaseCompileProbe$",
+      "-count=1"
+    ],
+    "exit_code": 0,
+    "seconds": 1.597
+  },
+  {
+    "label": "baseline",
+    "command": [
+      "/usr/local/go/bin/go",
+      "test",
+      "-short",
+      "./engine",
+      "-run",
+      "^Test(PrivatePositionCompatibilityDump|PrivateHashCompatibilityDump|PrivateSliderReplayDump|IndependentHashLegalEPNoHeap|IndependentPositionMutationNoHeap)$",
+      "-count=1",
+      "-timeout=20m"
+    ],
+    "exit_code": 0,
+    "seconds": 0.8
+  },
+  {
+    "label": "candidate",
+    "command": [
+      "/usr/local/go/bin/go",
+      "test",
+      "-short",
+      "./engine",
+      "-run",
+      "^Test(PrivatePositionCompatibilityDump|PrivateHashCompatibilityDump|PrivateSliderReplayDump|IndependentHashLegalEPNoHeap|IndependentPositionMutationNoHeap)$",
+      "-count=1",
+      "-timeout=20m"
+    ],
+    "exit_code": 0,
+    "seconds": 0.7
+  },
+  {
+    "label": "engine",
+    "command": [
+      "/usr/local/go/bin/go",
+      "test",
+      "-short",
+      "./engine",
+      "-count=1",
+      "-timeout=30m"
+    ],
+    "exit_code": 0,
+    "seconds": 12.896
+  },
+  {
+    "label": "engine-race",
+    "command": [
+      "/usr/local/go/bin/go",
+      "test",
+      "-short",
+      "-race",
+      "./engine",
+      "-count=1",
+      "-timeout=30m"
+    ],
+    "exit_code": 0,
+    "seconds": 68.461
+  },
+  {
+    "label": "all",
+    "command": [
+      "/usr/local/go/bin/go",
+      "test",
+      "-short",
+      "./...",
+      "-count=1",
+      "-timeout=30m"
+    ],
+    "exit_code": 0,
+    "seconds": 13.237
+  },
+  {
+    "label": "all-race",
+    "command": [
+      "/usr/local/go/bin/go",
+      "test",
+      "-short",
+      "-race",
+      "./...",
+      "-count=1",
+      "-timeout=30m"
+    ],
+    "exit_code": 0,
+    "seconds": 78.216
+  },
+  {
+    "label": "vet",
+    "command": [
+      "/usr/local/go/bin/go",
+      "vet",
+      "./..."
+    ],
+    "exit_code": 0,
+    "seconds": 3.186
+  },
+  {
+    "label": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.016
+  },
+  {
+    "label": "release-dependencies",
+    "command": [
+      "/usr/local/go/bin/go",
+      "list",
+      "-deps",
+      "."
+    ],
+    "exit_code": 0,
+    "seconds": 0.294
+  }
+]

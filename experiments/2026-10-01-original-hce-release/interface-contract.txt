@@ -1,0 +1,25 @@
+Implement an original, small classical chess evaluation core and sliding attacks from scratch in Go. This is a personal experimental chess engine. Correctness and independence take priority over playing strength. Do not research or reproduce any other engine's evaluator, tables, coefficients, code, weights or trained data. Use only the supplied independently generated types/board, your own files, and Go's standard library/toolchain. No network or parent/sibling files. No delegation or commits; the controller commits after independent review.
+
+Package engine, Go 1.25. Supplied piece.go, square.go, move.go and bitboard.go are read-only. Choose your own simple numerical coefficients and document how you chose them. Generate tables analytically from board coordinates, do not paste remembered tables. No training data is available or wanted. The board uses A1=0..H8=63; White/Black and packed piece definitions are in supplied interfaces. All score APIs return White-positive integer centipawns without tempo; the host separately supplies side-to-move conversion, cache and terminal rules.
+
+Implement evaluation_core.go with:
+var mgPST [13][64]int
+var egPST [13][64]int
+var piecePhaseInc [13]int
+const totalPhase int (choose positive maximum consistent with initial standard material)
+func RebuildPST() // deterministic complete rebuild of these arrays from original analytic formulas, initialized before any board mutation; no external model or data loading
+func evaluateRaw(board *Bitboard) int // bounded strictly inside +/-25000, allocation-free, nonmutating, deterministic, White-relative. Use original material/positional/pawn/king terms of your choice, keep it small and coherent. Bare kings, K+B vs K and K+N vs K should be zero. Flipping all colors and vertically mirroring pieces must negate the score. Symmetric start position should be zero. Reading incremental board accumulators is allowed but ensure the score agrees with a from-mailbox rebuild. Do not mutate the input to repair it.
+func gamePhase(board *Bitboard) int // clamp phase to [0,totalPhase]
+func isEndgame(board *Bitboard) bool // simple material criterion, no inherited coefficients
+func hasNonPawnMaterial(board *Bitboard, color Color) bool // any N/B/R/Q for that color, no pawn/king
+
+Implement slider_attacks.go from board-coordinate rules:
+func GetRookAttacks(sq int, occupied uint64) uint64
+func GetBishopAttacks(sq int, occupied uint64) uint64
+func GetQueenAttacks(sq int, occupied uint64) uint64
+func getRookAttacksBB(sq int, occupied uint64) uint64
+func getBishopAttacksBB(sq int, occupied uint64) uint64
+func trailingZeros(bb uint64) int // zero =>64
+Valid origin 0..63. Attacks include the first blocking square in each ray, exclude origin, never wrap files/ranks, ignore origin occupancy, invalid origins return zero. No borrowed magic constants, tables, unsafe, assembly or generated external assets. A direct coordinate ray walk is fine; no performance target.
+
+Add meaningful tests: exhaustive all origins and individual blocker squares against a separately structured simple oracle; deterministic random occupancies; no allocation, no mutation; evaluation mirror/sign, boundedness, material advantage, dead-material controls, rebuild equivalence, and legal-shape board mutations with accumulator restoration. Do not alter supplied helpers. Run serial go test ./..., go test -race ./..., go vet ./..., and gofmt. GOMAXPROCS=1 GOFLAGS=-p=1; only one native model under the controller's CPU0/2 50% Nice10 quota. Finish within 15 minutes. RESULT.md should record design, original coefficient rationale, actual commands/results and limitations. No strength/rating claim.

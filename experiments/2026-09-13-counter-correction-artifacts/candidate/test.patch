@@ -1,0 +1,171 @@
+diff --git a/engine/counter_minor_correction_test.go b/engine/counter_minor_correction_test.go
+new file mode 100644
+index 0000000..8608750
+--- /dev/null
++++ b/engine/counter_minor_correction_test.go
+@@ -0,0 +1,165 @@
++package engine
++
++import "testing"
++
++const counterMinorPolicyFEN = "4k3/pp6/8/3n4/3N4/8/6PP/4K3 w - - 0 1"
++
++func correctionSlots(pos *Position) (Color, int, int, int) {
++	stm := pos.Turn()
++	return stm,
++		pawnCorrectionIndex(pos.Board.pieces[WhitePawn], pos.Board.pieces[BlackPawn]),
++		nonPawnCorrectionIndex(pos.Board.GetWhitePieces()&^pos.Board.pieces[WhitePawn], pos.Board.GetBlackPieces()&^pos.Board.pieces[BlackPawn]),
++		minorCorrectionIndex(pos.Board.pieces[WhiteKnight]|pos.Board.pieces[WhiteBishop], pos.Board.pieces[BlackKnight]|pos.Board.pieces[BlackBishop])
++}
++
++func poisonCorrectionPolicy(h *workerHistory, pos *Position) (int, int, int) {
++	stm, pawnIdx, nonPawnIdx, minorIdx := correctionSlots(pos)
++	h.pawnCorrectionHistory[stm][pawnIdx] = 3 * corrHistLimit / 4
++	h.nonPawnCorrectionHistory[stm][nonPawnIdx] = -corrHistLimit / 4
++	h.minorCorrectionHistory[stm][minorIdx] = corrHistLimit
++	return h.correctionValue(stm, pawnIdx), h.nonPawnCorrectionValue(stm, nonPawnIdx), h.minorCorrectionValue(stm, minorIdx)
++}
++
++func TestCounterMinorCorrectionExcludedAtRootInteriorAndQStandPat(t *testing.T) {
++	pos, err := ParseFEN(counterMinorPolicyFEN)
++	if err != nil {
++		t.Fatal(err)
++	}
++	searcher := NewSearchEngine()
++	if err := searcher.SelectCounter55Evaluator(loadVaryingCounterModel(t)); err != nil {
++		t.Fatal(err)
++	}
++	if err := searcher.worker.evaluator.Reset(pos); err != nil {
++		t.Fatal(err)
++	}
++	pawn, nonPawn, minor := poisonCorrectionPolicy(&searcher.worker.history, pos)
++	if pawn == 0 || nonPawn == 0 || minor == 0 {
++		t.Fatalf("poisoned terms pawn=%d nonpawn=%d minor=%d", pawn, nonPawn, minor)
++	}
++	raw := searcher.worker.evaluator.SearchSTM(pos)
++	want := raw + pawn + nonPawn
++
++	if got := searcher.worker.history.correctedStaticEval(pos, searcher.worker.evaluator); got != want {
++		t.Fatalf("Counter shared corrected static=%d want raw+pawn+nonpawn=%d", got, want)
++	}
++	if got := searcher.worker.history.correctedStandPat(pos, searcher.worker.evaluator); got != want {
++		t.Fatalf("Counter qstand=%d want raw+pawn+nonpawn=%d", got, want)
++	}
++	ClearStop()
++	qinfo := newQSearchInfo()
++	qinfo.control = &searcher.worker.control
++	qinfo.history = &searcher.worker.history
++	qinfo.evaluator = searcher.worker.evaluator
++	if got := quiescence(pos, -INFINITY, INFINITY, 0, qinfo); got != want {
++		t.Fatalf("Counter qsearch result=%d want corrected stand-pat=%d", got, want)
++	}
++	info := &SearchInfo{history: &searcher.worker.history, evaluator: searcher.worker.evaluator}
++	seedRootStaticEval(pos, info)
++	if got := info.StaticEvalStack[0]; got != want {
++		t.Fatalf("Counter root static=%d want raw+pawn+nonpawn=%d", got, want)
++	}
++	interior := newN3CDirectSearchInfo(searcher, searcher.worker.evaluator, defaultTTForDirectTest(), 1)
++	if score := alphaBetaPV(pos, 1, 1, -INFINITY, INFINITY, true, true, false, interior); score == stoppedSearchScore || interior.Stopped {
++		t.Fatalf("controlled interior search stopped: score=%d stopped=%v", score, interior.Stopped)
++	}
++	if got := interior.StaticEvalStack[1]; got != want {
++		t.Fatalf("Counter interior StaticEvalStack=%d want raw+pawn+nonpawn=%d", got, want)
++	}
++}
++
++func TestMinorCorrectionPolicyPreservesHCEAndNGNV1(t *testing.T) {
++	pos, err := ParseFEN(counterMinorPolicyFEN)
++	if err != nil {
++		t.Fatal(err)
++	}
++
++	hceWorker := testHCEWorkerEvaluator(nil)
++	var hceHistory workerHistory
++	hcePawn, hceNonPawn, hceMinor := poisonCorrectionPolicy(&hceHistory, pos)
++	hceRaw := hceWorker.SearchSTM(pos)
++	if got, want := hceHistory.correctedStaticEval(pos, hceWorker), hceRaw+hcePawn+hceNonPawn+hceMinor; got != want {
++		t.Fatalf("HCE corrected static=%d want all terms=%d", got, want)
++	}
++
++	model, _ := adapterContextModel(t)
++	ngnModel, err := ngnV1EvaluatorModel(model, 1)
++	if err != nil {
++		t.Fatal(err)
++	}
++	ngnWorker, err := ngnModel.newWorker(nil)
++	if err != nil {
++		t.Fatal(err)
++	}
++	if err := ngnWorker.Reset(pos); err != nil {
++		t.Fatal(err)
++	}
++	var ngnHistory workerHistory
++	ngnPawn, ngnNonPawn, ngnMinor := poisonCorrectionPolicy(&ngnHistory, pos)
++	if got, want := ngnHistory.correctedStaticEval(pos, ngnWorker), ngnWorker.SearchSTM(pos)+ngnPawn+ngnNonPawn+ngnMinor; got != want {
++		t.Fatalf("NGN-v1 corrected static=%d want all terms=%d", got, want)
++	}
++}
++
++func TestCounterMinorCorrectionLearningExcludedAndOtherTermsUnchanged(t *testing.T) {
++	pos, err := ParseFEN(counterMinorPolicyFEN)
++	if err != nil {
++		t.Fatal(err)
++	}
++	searcher := NewSearchEngine()
++	if err := searcher.SelectCounter55Evaluator(loadVaryingCounterModel(t)); err != nil {
++		t.Fatal(err)
++	}
++	stm, pawnIdx, nonPawnIdx, minorIdx := correctionSlots(pos)
++	quiet := NewMove(D4, F5, WhiteKnight, NoPiece, NoType, 0)
++	h := &searcher.worker.history
++	h.maybeUpdatePawnCorrection(stm, pawnIdx, 0, 200, 50, 8, quiet, false)
++	h.maybeUpdateNonPawnCorrection(stm, nonPawnIdx, 0, 200, 50, 8, quiet, false)
++	h.maybeUpdateMinorCorrectionForEvaluator(searcher.worker.evaluator, stm, minorIdx, 0, 200, 50, 8, quiet, false)
++	if h.pawnCorrectionHistory[stm][pawnIdx] == 0 || h.nonPawnCorrectionHistory[stm][nonPawnIdx] == 0 {
++		t.Fatal("Counter policy changed pawn or non-pawn learning")
++	}
++	if h.minorCorrectionHistory[stm][minorIdx] != 0 {
++		t.Fatal("Counter policy learned a minor correction")
++	}
++
++	for name, backend := range map[string]evaluatorBackend{"hce": evaluatorBackendHCE, "ngnv1": evaluatorBackendNGNV1} {
++		t.Run(name, func(t *testing.T) {
++			var history workerHistory
++			evaluator := &workerEvaluator{model: evaluatorModel{identity: evaluatorModelIdentity{backend: backend}}}
++			history.maybeUpdateMinorCorrectionForEvaluator(evaluator, stm, minorIdx, 0, 200, 50, 8, quiet, false)
++			if history.minorCorrectionHistory[stm][minorIdx] == 0 {
++				t.Fatal("minor learning disabled for control backend")
++			}
++		})
++	}
++}
++
++func TestStaticEvalTTRefinementBoundariesUnchanged(t *testing.T) {
++	const staticEval = 100
++	tests := []struct {
++		name       string
++		hit        bool
++		singular   bool
++		ttEval     int
++		ttNodeType NodeType
++		want       int
++	}{
++		{"exact", true, false, 90, Exact, 90},
++		{"lower-better", true, false, 101, LowerBound, 101},
++		{"lower-equal", true, false, 100, LowerBound, staticEval},
++		{"lower-worse", true, false, 99, LowerBound, staticEval},
++		{"upper-better", true, false, 99, UpperBound, 99},
++		{"upper-equal", true, false, 100, UpperBound, staticEval},
++		{"upper-worse", true, false, 101, UpperBound, staticEval},
++		{"mate-boundary", true, false, MATE_IN_MAX, Exact, staticEval},
++		{"singular", true, true, 90, Exact, staticEval},
++		{"miss", false, false, 90, Exact, staticEval},
++	}
++	for _, test := range tests {
++		t.Run(test.name, func(t *testing.T) {
++			if got := refineStaticEvalFromTT(staticEval, test.hit, test.singular, test.ttEval, test.ttNodeType); got != test.want {
++				t.Fatalf("refined static=%d want=%d", got, test.want)
++			}
++		})
++	}
++}

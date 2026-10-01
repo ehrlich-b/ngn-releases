@@ -1,0 +1,231 @@
+{
+  "schema": 1,
+  "status": "APPROVED_TO_RUN",
+  "purpose": "Fixed 200-game paired A/A runner and clock control; pipeline evidence, not an engine-strength claim.",
+  "approval": {
+    "authority": "root",
+    "token": "root-23573d954cd7497ca3a43a628b9c99b3",
+    "exclusive_match_window": true,
+    "reviewed_utc": "2026-09-06T01:03:33.026187+00:00",
+    "held_manifest_sha256": "63472e49bf72243c071678d0fa8d426d1dc179b01cae03aff3d7f9a723f31a3f"
+  },
+  "inputs": {
+    "engine": {
+      "path": "/home/ehrli/repos/ngn-next/output/nnue-smp-b0-20260905/baseline/ngn_fb00814_linux_amd64_v3",
+      "sha256": "5d834a0b3246ac73dacb892ef36e136cf5376dc1e44f659d6b60546e9b7f6a70",
+      "source_commit": "fb008142cab267fdb4d91796580c64691da646eb",
+      "build": "Go 1.25.5; CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3; -trimpath -buildvcs=true"
+    },
+    "fastchess": {
+      "path": "/home/ehrli/repos/ngn-next/output/nnue-smp-b0-20260905/fastchess/src/fastchess",
+      "sha256": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00",
+      "tag": "v1.8.2-alpha",
+      "commit": "f618e34540f94f4719ad3817950618dabe441318",
+      "tree": "7af51c972096164b267d617ea4c32a856a17b586"
+    },
+    "raw_opening_corpus": {
+      "path": "/home/ehrli/repos/ngn/output/remote-pin-20260905/results-r0905acceptedpin/inputs/sprt_openings.txt",
+      "sha256": "974e4b5ab871a9e106d0c766bfa39fc83676222337fb7702f61782e2ac5b3222",
+      "lines": 5000
+    },
+    "stockfish": {
+      "path": "/home/ehrli/repos/ngn/output/remote-pin-20260905/stockfish18",
+      "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+    },
+    "auditor": {
+      "path": "/home/ehrli/repos/ngn-next/scripts/fastchess-match/audit_fastchess_match.py",
+      "sha256": "4c4d7374c16fe7fa9104429aecbb22ea582e1525d70712c6769d6ae28d16d224"
+    },
+    "converter": {
+      "path": "/home/ehrli/repos/ngn-next/scripts/fastchess-match/convert_uci_openings.cpp",
+      "sha256": "0020241ae526b74d1a7cb4944a4fa92e704bd3a1fc165525cf0aae00768fee73"
+    },
+    "launcher": {
+      "path": "/home/ehrli/repos/ngn-next/scripts/fastchess-match/run_b0_aa.py",
+      "sha256": "9b0ab0294000aab2f7917086118c5b7a0d5430445eeb4a2716fb00f250e4cefe"
+    },
+    "evidence": [
+      {
+        "path": "/home/ehrli/repos/ngn-next/experiments/2026-09-05-nnue-smp-b0-openings-100.json",
+        "sha256": "1196937972350460098807897bef58492b9c445fb59ff6f3890a696f687ad6c6"
+      },
+      {
+        "path": "/home/ehrli/repos/ngn-next/output/nnue-smp-b0-20260905/opening-pgn-smoke/manifest.json",
+        "sha256": "9f5f6f39c14f18a7c1eab26b55acf5b6ec4b9eb1e55a7d7b4f41897be9a59534"
+      },
+      {
+        "path": "/home/ehrli/repos/ngn-next/output/nnue-smp-b0-20260905/baseline-uci/uci-options.txt",
+        "sha256": "56cd1551be052d32dd33b83ae1f3c3c73f8bbb327c91a98bbc5168c04d323951"
+      },
+      {
+        "path": "/home/ehrli/repos/ngn-next/output/nnue-smp-b0-20260905/fixtures-attempt5/manifest.json",
+        "sha256": "4d833982d9da330002c8d50a1ba8522677796f6c1b4436ebe2a68c8b0b3c8169"
+      },
+      {
+        "path": "/home/ehrli/repos/ngn-next/output/nnue-smp-b0-20260905/affinity-smoke-attempt2/manifest.json",
+        "sha256": "7f5a8c01b657eeacb75d67bd5d223fcc8f898c7318c0f4df2971da1292120f2d"
+      },
+      {
+        "path": "/home/ehrli/repos/ngn-next/output/nnue-smp-b0-20260905/compliance/stdout.txt",
+        "sha256": "4c801921eb6a1c7262f1c85f1ec9d383904daa6cd1e2803c51ab40f5a74c9a12"
+      },
+      {
+        "path": "/home/ehrli/repos/ngn-next/output/nnue-smp-b0-20260905/match-auditor-smoke/manifest.json",
+        "sha256": "c95a6dc6c864768ab101608494d241db40204276096a579d2f157e5df7828cc8"
+      },
+      {
+        "path": "/home/ehrli/repos/ngn-next/output/nnue-smp-b0-20260905/embedded-book-probe/manifest.json",
+        "sha256": "e06f9671f04fce65e2e2ad6944f00b9fdd71fd9d9486614f3b57f4be232318cb"
+      }
+    ],
+    "opening_prefixes": {
+      "path": "/home/ehrli/repos/ngn-next/experiments/2026-09-05-nnue-smp-b0-opening-prefixes-100.txt",
+      "sha256": "1c3bad721bde116e6cd3fcdc2c04fb1ef96acdd410e7c441a84b4b444f5a3a9a",
+      "lines": 100,
+      "plies_per_line": 6
+    },
+    "openings_pgn": {
+      "path": "/home/ehrli/repos/ngn-next/experiments/2026-09-05-nnue-smp-b0-openings-100.pgn",
+      "sha256": "6f0e61c02567f2fcaadbf2f20b10ad6a6a3eab689982181575b784e12036d4a4",
+      "games": 100,
+      "plies_per_game": 6,
+      "format": "SAN PGN"
+    }
+  },
+  "match": {
+    "engine_a": "B0_A",
+    "engine_b": "B0_B",
+    "games": 200,
+    "pairs": 100,
+    "rounds": 100,
+    "games_per_round": 2,
+    "repeat_colors": true,
+    "time_control": "30+0.3",
+    "timemargin_ms": 0,
+    "concurrency": 8,
+    "seed": 20260905,
+    "opening_order": "sequential",
+    "opening_start": 1,
+    "runner_strict": true,
+    "recover": false,
+    "score_adjudication": false,
+    "resign_adjudication": false,
+    "maxmoves_adjudication": false,
+    "tablebase_adjudication": false,
+    "opening_format": "pgn",
+    "opening_plies": 6
+  },
+  "uci_options": {
+    "sent_to_both": {
+      "Threads": 1,
+      "Hash": 64,
+      "Move Overhead": 100
+    },
+    "OwnBook": {
+      "status": "absent_from_pinned_uci_receipt",
+      "sent": false,
+      "embedded_book_fallback": "active_and_frozen_in_B0_binary"
+    },
+    "Ponder": {
+      "status": "absent_from_pinned_uci_receipt",
+      "sent": false
+    },
+    "SyzygyPath": {
+      "status": "default_empty",
+      "sent": false
+    }
+  },
+  "resources": {
+    "observed_logical_cpus": 16,
+    "observed_physical_cores": 8,
+    "observed_smt_threads_per_core": 2,
+    "required_cpus_allowed_list": "0-15",
+    "selected_logical_cpus": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14
+    ],
+    "assignment": "one distinct physical-core sibling per concurrent game thread; both alternating one-thread engines share that thread CPU",
+    "fallback": "If cpuset/topology/affinity preflight changes, do not launch. Prepare and review a replacement c1 manifest using one selected CPU."
+  },
+  "outputs": {
+    "run_directory": "/home/ehrli/repos/ngn-next/output/nnue-smp-b0-20260905/aa-200-tc30",
+    "pgn": "games.pgn",
+    "final_epd": "final.epd",
+    "engine_log": "fastchess.log",
+    "stdout": "match.stdout",
+    "stderr": "match.stderr",
+    "audit": "audit.json",
+    "terminal_process_receipt": "terminal-processes.txt",
+    "done": "DONE",
+    "environment_sanitization": "environment-sanitization.json",
+    "external_book_paths": "external-book-paths.json",
+    "engine_work_directories": [
+      "engine-cwd/a",
+      "engine-cwd/b"
+    ]
+  },
+  "audit_contract": [
+    "exactly 200 one-game UCI-notation PGNs and 100 pinned six-ply startpos prefixes, each played once per engine color",
+    "every output game starts with the exact selected UCI source prefix, all six prefix plies are marked book, and Stockfish replays the complete history from startpos",
+    "every actual PGN move belongs to the preceding pinned-Stockfish perft-1 legal move set",
+    "searched plies matching B0 embedded-book fixed-response telemetry are retained and counted distinctly as probable embedded-book signature plies; all remain subject to legal replay",
+    "every searched move has time-left, latency, nodes, seldepth, NPS, hashfull, and PV telemetry",
+    "all final boards are independently classified; any timeout, illegal move, disconnect, stall, adjudication, or unterminated game fails",
+    "threefold requires the actual final legally-normalized repetition identity at least three times; pinned illegal-EP witness is tested",
+    "the 200 final EPD positions reconcile exactly with all independently replayed PGN final boards",
+    "runner/auditor/manifest/binaries/openings are copied and hashed in the run; no chess process may remain at completion",
+    "both engine cwd directories start without any B0 default external-book path, all inherited NGN_* variables are cleared, and post-run default-book paths remain absent"
+  ],
+  "acceptance": {
+    "pipeline": [
+      "fastchess exit 0 and empty stderr",
+      "independent audit exit 0 and empty stderr",
+      "exactly 200 games/100 pairs",
+      "terminal process receipt empty",
+      "DONE_EXIT_0"
+    ],
+    "aa_score_rate": {
+      "engine": "B0_A",
+      "min": 0.4,
+      "max": 0.6,
+      "meaning": "prospective runner-sanity cap only; no strength inference"
+    },
+    "strength_claim": "none"
+  },
+  "launch_after_approval": {
+    "cwd": "/home/ehrli/repos/ngn-next",
+    "argv": [
+      "nohup",
+      "python3",
+      "scripts/fastchess-match/run_b0_aa.py",
+      "--manifest",
+      "experiments/2026-09-05-nnue-smp-b0-aa-manifest.json",
+      "--output",
+      "output/nnue-smp-b0-20260905/aa-200-tc30",
+      "--approval-token",
+      "<TOKEN_FROM_APPROVED_MANIFEST>"
+    ],
+    "stdout": "output/nnue-smp-b0-20260905/aa-200-tc30.supervisor.stdout",
+    "stderr": "output/nnue-smp-b0-20260905/aa-200-tc30.supervisor.stderr",
+    "background": true
+  },
+  "book_and_environment_policy": {
+    "embedded_book": "B0 TryLoadDefaultBook has a compiled embedded fallback; it remains active as part of the frozen baseline.",
+    "internal_book_accounting": "Auditor records probable embedded-book signature plies (cp 50, depth 1, nodes 1, time/NPS 0, matching PV) distinctly; they remain legal-move audited.",
+    "engine_work_directories": "two separate newly-created empty directories inside the immutable run directory",
+    "external_default_paths_required_absent_pre_and_post": [
+      "book.bin",
+      "opening.bin",
+      "openings.bin",
+      "book/book.bin",
+      "book/opening.bin"
+    ],
+    "environment": "launcher removes every inherited NGN_* variable before starting fastchess, including NGN_DEBUG_LOG and NGN_EVAL_W when present"
+  }
+}

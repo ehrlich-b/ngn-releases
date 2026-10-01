@@ -1,0 +1,56 @@
+{
+  "baseline": {
+    "exit": 1,
+    "legacy_numeric_assertion_failures": 12,
+    "nonnumeric_ep_controls_exit": 0
+  },
+  "focused": {
+    "exit": 0,
+    "external_book_key_observations": 302,
+    "external_book_move_cases": 23,
+    "external_book_move_perft2_nodes": 7651,
+    "owned_nnue_leaf_cases_non_skipped": 16
+  },
+  "inputs": {
+    "owned_model_sha256": "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29",
+    "transition_oracle_sha256": "172796acc6b60cc450fe5614734d03c5068d3b5fa4be208e51dc4a44d284623d"
+  },
+  "resources": {
+    "GOFLAGS": "-p=1",
+    "GOMAXPROCS": "1",
+    "affinity": [
+      0,
+      2
+    ],
+    "cpu_max": "50000 100000",
+    "memory_max": "4294967296",
+    "nice": 10,
+    "proc_cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/ngn-personal-integration-review-20261001.service"
+  },
+  "source": {
+    "active_ep_fixture_sha256": "a5a0a6716c04a6d4a3a207f05a91d2ac28f401b40c3c8ad6e331fec99848bf76",
+    "base": "28d66322debef23d01645a1bc73d7e942ada9813",
+    "base_production_hashes": {
+      "engine/hash.go": "a0f41a097f46295708b703fbcd8deba69389aba97dbbd9d3429db92a82576419",
+      "engine/position.go": "123da9954e7192103883155ad4943e99742fe115156be31f13639014b77b4d65"
+    },
+    "book_component": "780c89dfb3177c115e682a8c1524ee8101ccaaec",
+    "component_hashes": {
+      "LICENSES/chess-library-MIT.txt": "5860e7607afbf4c7e91bad5549b71d16fc4eceb90f0c671cd77a343ae7461a2a",
+      "engine/book_test.go": "421cb328309f232d1ade68ff407c51b506df783bd6a7216ad90311230eb70290",
+      "engine/polyglot.go": "0d4f8b258ad0b214921d8fde1f555ebd429aaeffe2a19ac7bc13d1774c762037",
+      "engine/polyglot_book_move_contract_test.go": "0147e6db9c4a7cbde7d0872bc08468ad09164049b72ccda0244e9247715dfb98",
+      "engine/polyglot_external_contract_test.go": "b3d9a088e1bd81af8986271094b0e923d5ca6817aa6ecdfd7e3f6726ba6c8cd0",
+      "engine/polyglot_random.go": "9faa80dc15ff730cddf3580b87054703d7ce587d92d15a4277362826b1366477",
+      "engine/testdata/polyglot_book_move_oracle.json": "8289efed4fd50a58a6bff4a816c9b0ecdc7cea7d7d7acc7dcf0a17d26de993ba",
+      "engine/testdata/polyglot_book_move_oracle.provenance.md": "fc89c17321586d95e0dd4c050895091502bd8768c3f33e56013e66ad78d24b6a"
+    }
+  },
+  "state": "EP_POLYGLOT_COMBINED_REVIEW_PASS",
+  "suite_exits": {
+    "short-all-actual-net": 0,
+    "short-engine-actual-net": 0,
+    "short-race-all-actual-net": 0,
+    "short-race-engine-actual-net": 0
+  }
+}

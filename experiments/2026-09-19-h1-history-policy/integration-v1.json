@@ -1,0 +1,47 @@
+{
+  "schema": "ngn-h1-history-policy-integration-v1",
+  "state": "PASS",
+  "production_policy": "11",
+  "production_commit": "30e490558769b9adf46cf2b9ecdd1fb02dc9552d",
+  "production_tree": "b4d0c00cfd806d4ff61022150290da49ba7fcc8d",
+  "final_test_commit": "4d45be82744d58f42e9ba758e0b9c1ad0f561359",
+  "final_test_tree": "402a9f285396f8e0aaddb9281c499fcd0f304695",
+  "build": {
+    "go_version": "go1.25.5 linux/amd64",
+    "goamd64": "v3",
+    "cgo_enabled": "0",
+    "flags": [
+      "-p=1",
+      "-trimpath"
+    ],
+    "binary_sha256": "19ddf423ff6addffadd4b830834ca2d3483b47c64b7530689141337b8a39a518"
+  },
+  "validation": {
+    "wsl_repository_short_suite": "PASS",
+    "wsl_engine_race_suite": "PASS",
+    "h1_python_tests": {
+      "tests": 6,
+      "status": "PASS"
+    },
+    "searchsnapshot": {
+      "baseline": "2cde3b31f6e09f8c03eab4ee723b823322645aa7 with h1producer,h1consumer",
+      "candidate": "30e490558769b9adf46cf2b9ecdd1fb02dc9552d without build tags",
+      "behavior_equal": true,
+      "behavior_differences": [],
+      "metadata_differences": [
+        "expected removal of h1producer,h1consumer build tags",
+        "source identity"
+      ]
+    },
+    "final_worktree_clean": true,
+    "post_validation_delta": "Only test_driver.py changed from the Go-validated production commit to the final test commit."
+  },
+  "strength_authority": {
+    "result": "experiments/2026-09-19-h1-history-policy/result-v1.json",
+    "decision": "ACCEPT",
+    "confirmation_elo": 56.96325834124352,
+    "confirmation_lower95_elo": 38.3731888566979,
+    "confirmation_upper95_elo": 75.88264847563141,
+    "confirmation_games": 400
+  }
+}

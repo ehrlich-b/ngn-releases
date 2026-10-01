@@ -1,0 +1,240 @@
+diff --git a/rodenteval/apply_updates.go b/rodenteval/apply_updates.go
+new file mode 100644
+index 0000000..daac59c
+--- /dev/null
++++ b/rodenteval/apply_updates.go
+@@ -0,0 +1,40 @@
++package rodenteval
++
++// These portable kernels are the arithmetic oracle for incremental feature
++// updates. Every operation intentionally wraps in int16 and stays in the
++// semantic order emitted by deriveTransition.
++func rodentApplyUpdates2Portable(
++	destination, add0, subtract1 *[HiddenSize]int16,
++) {
++	for hidden := 0; hidden < HiddenSize; hidden++ {
++		value := destination[hidden]
++		value += add0[hidden]
++		value -= subtract1[hidden]
++		destination[hidden] = value
++	}
++}
++
++func rodentApplyUpdates3Portable(
++	destination, add0, subtract1, subtract2 *[HiddenSize]int16,
++) {
++	for hidden := 0; hidden < HiddenSize; hidden++ {
++		value := destination[hidden]
++		value += add0[hidden]
++		value -= subtract1[hidden]
++		value -= subtract2[hidden]
++		destination[hidden] = value
++	}
++}
++
++func rodentApplyUpdates4Portable(
++	destination, add0, subtract1, add2, subtract3 *[HiddenSize]int16,
++) {
++	for hidden := 0; hidden < HiddenSize; hidden++ {
++		value := destination[hidden]
++		value += add0[hidden]
++		value -= subtract1[hidden]
++		value += add2[hidden]
++		value -= subtract3[hidden]
++		destination[hidden] = value
++	}
++}
+diff --git a/rodenteval/apply_updates_amd64_v3.go b/rodenteval/apply_updates_amd64_v3.go
+new file mode 100644
+index 0000000..8486860
+--- /dev/null
++++ b/rodenteval/apply_updates_amd64_v3.go
+@@ -0,0 +1,45 @@
++//go:build amd64 && amd64.v3
++
++package rodenteval
++
++const rodentApplyUpdatesUsesAVX2 = true
++
++// These pairs fail compilation if the fixed Anand hidden width changes
++// without a corresponding kernel review.
++var (
++	_ [HiddenSize - 512]byte
++	_ [512 - HiddenSize]byte
++)
++
++func rodentApplyUpdates2(
++	destination, add0, subtract1 *[HiddenSize]int16,
++) {
++	rodentApplyUpdates2AVX2(destination, add0, subtract1)
++}
++
++func rodentApplyUpdates3(
++	destination, add0, subtract1, subtract2 *[HiddenSize]int16,
++) {
++	rodentApplyUpdates3AVX2(destination, add0, subtract1, subtract2)
++}
++
++func rodentApplyUpdates4(
++	destination, add0, subtract1, add2, subtract3 *[HiddenSize]int16,
++) {
++	rodentApplyUpdates4AVX2(destination, add0, subtract1, add2, subtract3)
++}
++
++//go:noescape
++func rodentApplyUpdates2AVX2(
++	destination, add0, subtract1 *[HiddenSize]int16,
++)
++
++//go:noescape
++func rodentApplyUpdates3AVX2(
++	destination, add0, subtract1, subtract2 *[HiddenSize]int16,
++)
++
++//go:noescape
++func rodentApplyUpdates4AVX2(
++	destination, add0, subtract1, add2, subtract3 *[HiddenSize]int16,
++)
+diff --git a/rodenteval/apply_updates_amd64_v3.s b/rodenteval/apply_updates_amd64_v3.s
+new file mode 100644
+index 0000000..93de80d
+--- /dev/null
++++ b/rodenteval/apply_updates_amd64_v3.s
+@@ -0,0 +1,68 @@
++//go:build amd64 && amd64.v3
++
++#include "textflag.h"
++
++// The Anand update rows are exact modular int16 arithmetic. VPADDW and VPSUBW
++// therefore match the Go int16 oracle lane-for-lane, including overflow.
++TEXT ·rodentApplyUpdates2AVX2(SB), NOSPLIT, $0-24
++	MOVQ destination+0(FP), AX
++	MOVQ add0+8(FP), BX
++	MOVQ subtract1+16(FP), CX
++	MOVL $32, R8
++apply_updates_2_block:
++	VMOVDQU (AX), Y0
++	VPADDW (BX), Y0, Y0
++	VPSUBW (CX), Y0, Y0
++	VMOVDQU Y0, (AX)
++	ADDQ $32, AX
++	ADDQ $32, BX
++	ADDQ $32, CX
++	DECL R8
++	JNZ apply_updates_2_block
++	VZEROUPPER
++	RET
++
++TEXT ·rodentApplyUpdates3AVX2(SB), NOSPLIT, $0-32
++	MOVQ destination+0(FP), AX
++	MOVQ add0+8(FP), BX
++	MOVQ subtract1+16(FP), CX
++	MOVQ subtract2+24(FP), DX
++	MOVL $32, R8
++apply_updates_3_block:
++	VMOVDQU (AX), Y0
++	VPADDW (BX), Y0, Y0
++	VPSUBW (CX), Y0, Y0
++	VPSUBW (DX), Y0, Y0
++	VMOVDQU Y0, (AX)
++	ADDQ $32, AX
++	ADDQ $32, BX
++	ADDQ $32, CX
++	ADDQ $32, DX
++	DECL R8
++	JNZ apply_updates_3_block
++	VZEROUPPER
++	RET
++
++TEXT ·rodentApplyUpdates4AVX2(SB), NOSPLIT, $0-40
++	MOVQ destination+0(FP), AX
++	MOVQ add0+8(FP), BX
++	MOVQ subtract1+16(FP), CX
++	MOVQ add2+24(FP), DX
++	MOVQ subtract3+32(FP), R8
++	MOVL $32, R9
++apply_updates_4_block:
++	VMOVDQU (AX), Y0
++	VPADDW (BX), Y0, Y0
++	VPSUBW (CX), Y0, Y0
++	VPADDW (DX), Y0, Y0
++	VPSUBW (R8), Y0, Y0
++	VMOVDQU Y0, (AX)
++	ADDQ $32, AX
++	ADDQ $32, BX
++	ADDQ $32, CX
++	ADDQ $32, DX
++	ADDQ $32, R8
++	DECL R9
++	JNZ apply_updates_4_block
++	VZEROUPPER
++	RET
+diff --git a/rodenteval/apply_updates_fallback.go b/rodenteval/apply_updates_fallback.go
+new file mode 100644
+index 0000000..b1fb396
+--- /dev/null
++++ b/rodenteval/apply_updates_fallback.go
+@@ -0,0 +1,23 @@
++//go:build !amd64 || !amd64.v3
++
++package rodenteval
++
++const rodentApplyUpdatesUsesAVX2 = false
++
++func rodentApplyUpdates2(
++	destination, add0, subtract1 *[HiddenSize]int16,
++) {
++	rodentApplyUpdates2Portable(destination, add0, subtract1)
++}
++
++func rodentApplyUpdates3(
++	destination, add0, subtract1, subtract2 *[HiddenSize]int16,
++) {
++	rodentApplyUpdates3Portable(destination, add0, subtract1, subtract2)
++}
++
++func rodentApplyUpdates4(
++	destination, add0, subtract1, add2, subtract3 *[HiddenSize]int16,
++) {
++	rodentApplyUpdates4Portable(destination, add0, subtract1, add2, subtract3)
++}
+diff --git a/rodenteval/context.go b/rodenteval/context.go
+index 13617d5..c0175e9 100644
+--- a/rodenteval/context.go
++++ b/rodenteval/context.go
+@@ -346,16 +346,27 @@ func (model *Model) applyUpdates(
+ 			feature := featureIndex(color, pieceType, update.square, kingSquares[perspective], perspective)
+ 			rows[index] = &model.inputWeights[feature]
+ 		}
+-		for hidden := 0; hidden < HiddenSize; hidden++ {
+-			value := destination[perspective][hidden]
+-			for index, update := range updates[:updateCount] {
+-				if update.add {
+-					value += rows[index][hidden]
+-				} else {
+-					value -= rows[index][hidden]
++		switch {
++		case updateCount == 2 && updates[0].add && !updates[1].add:
++			rodentApplyUpdates2(&destination[perspective], rows[0], rows[1])
++		case updateCount == 3 && updates[0].add && !updates[1].add && !updates[2].add:
++			rodentApplyUpdates3(&destination[perspective], rows[0], rows[1], rows[2])
++		case updateCount == 4 && updates[0].add && !updates[1].add && updates[2].add && !updates[3].add:
++			rodentApplyUpdates4(&destination[perspective], rows[0], rows[1], rows[2], rows[3])
++		default:
++			// Preserve the private helper's general semantics if a future
++			// transition introduces a different ordered update pattern.
++			for hidden := 0; hidden < HiddenSize; hidden++ {
++				value := destination[perspective][hidden]
++				for index, update := range updates[:updateCount] {
++					if update.add {
++						value += rows[index][hidden]
++					} else {
++						value -= rows[index][hidden]
++					}
+ 				}
++				destination[perspective][hidden] = value
+ 			}
+-			destination[perspective][hidden] = value
+ 		}
+ 	}
+ }

@@ -1,0 +1,16 @@
+[
+  {
+    "label": "engine-compile",
+    "command": [
+      "/usr/local/go/bin/go",
+      "test",
+      "-short",
+      "./engine",
+      "-run",
+      "^TestNoSuchReleaseCompileProbe$",
+      "-count=1"
+    ],
+    "exit_code": 1,
+    "seconds": 0.248
+  }
+]

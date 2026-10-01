@@ -1,0 +1,149 @@
+{
+  "schema": "ngn-k4-search-panel-v1",
+  "selection": "first 32 by frozen teacher-quality identity-hash sample order; independent of evaluator predictions and search results",
+  "source_audit_sha256": "452f84bc8be81e5ab681c736241d7f9d1d7b54a3830622b0897c7d9ffb4b93b8",
+  "source_sample_sha256": "c752df471d55ff0fd9ccc729ef759c56e25aa62d6a2f7cdddcd0b5053c811bbe",
+  "engine_sha256": "3c3257bf14b43883ef7c88608fdb06eefe2379928119154ea6d38571c05e61b8",
+  "k4_model_sha256": "034559653a83a7e64d4407badff334f66e3eae6a3a1f33147e3516b3c88c3e69",
+  "rodent_model_sha256": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb",
+  "teacher_sha256": "174270346ae9ed600713d165fa745dfa87fc084e44907c8084767f2b905e86d3",
+  "search": {
+    "teacher_nodes": 200000,
+    "equal_nodes": 100000,
+    "equal_movetime_ms": 250,
+    "threads": 1,
+    "hash_mib": 128,
+    "move_overhead_ms": 100,
+    "concurrency": 1
+  },
+  "positions": [
+    {
+      "id": "07652d817bf3e9dbbceec00f3d757e26c262eb135db45ff79deefbc76058774e",
+      "fen": "4b3/p3k1p1/P3pp1p/3n4/1r1P3P/2r2N2/3R1PP1/R4BK1 b - - 0 1"
+    },
+    {
+      "id": "55d6c88e0bc4620edd19f5a57348a9e165916ec99bbc5f58598311b304134475",
+      "fen": "5rk1/2p3pp/2r1pnn1/8/8/P1N2q2/1P3PQP/2BR1RK1 b - - 0 1"
+    },
+    {
+      "id": "605956ee465753d82af80c2d269c7435f1e3bb7cb121e20b1f11d8f2ac661da6",
+      "fen": "r2r2k1/pq3pb1/1pp1bnpp/4p3/2P1P3/1PN4P/P1QBBPP1/3R1RK1 w - - 0 1"
+    },
+    {
+      "id": "a2ffaced2dc542357ef7ac47b48b4363a4a8af52baf5cc4a40103e24c8e6491b",
+      "fen": "8/p1r1nppk/7p/R2p4/3Pn3/P3P1P1/1P3P1P/4RK2 w - - 0 1"
+    },
+    {
+      "id": "d2eba3032a3092a8ca963272c1a369593596bd6c768e0ef73b1d9685b4a7f376",
+      "fen": "2rq2k1/1p3pp1/5nbp/1pQP4/8/P1N3NP/5PP1/R5K1 w - - 0 1"
+    },
+    {
+      "id": "6a2a017c3055df6cdb8192e4abd3c245b743b3fdbb98d1d5ef89d1bbcdbe742b",
+      "fen": "8/3N1p1k/1R5p/5p1P/1P2p3/2b1B3/2r5/5K2 b - - 0 1"
+    },
+    {
+      "id": "c816a392fc98ac274cd6a1259b232b0db9498d0b15e9f37ef458bfcc27b5fab2",
+      "fen": "4r1k1/1br2pb1/pR2p1p1/6Bp/PP2P2P/2q2BP1/4QP2/2R3K1 b - - 0 1"
+    },
+    {
+      "id": "c8148d5e157c8242285d6d853293dee0c6953faa0d2c7c696a0149ef57a03709",
+      "fen": "6k1/7p/5p2/8/1p1N1p2/1Pn1P3/3r1PP1/4R1K1 w - - 0 1"
+    },
+    {
+      "id": "ddceb0eb1048dd48b31338a7290f02cc0c66f7f76257c78da25cfd3ba12dcc28",
+      "fen": "8/4p1kp/1p1ppnp1/1P4N1/7P/6P1/4qP2/Q5K1 b - - 0 1"
+    },
+    {
+      "id": "5d6686132234a6be8b7ff4e19b20abcbbc78c44274025181ab2d37234c77624b",
+      "fen": "r4rk1/2p2pbp/np1p2p1/p2P1bq1/NPP1p3/P3P2P/4BPPK/R2QBR2 w - - 0 1"
+    },
+    {
+      "id": "e80313e6cf662e822d620ae8bf598fecfd3509b0f41196942008dd163e1444bf",
+      "fen": "6k1/4b1pp/6r1/4pp2/pp5P/3R1PPK/PPr5/1R3B2 w - - 0 1"
+    },
+    {
+      "id": "f33ec6a5fc02bb536461dcaafa49784c6098e8e494ce1e77f35d6f71528713ec",
+      "fen": "1rr5/1p2nk1p/5pp1/PPP1p3/2Rp4/1N5P/5PP1/R5K1 w - - 0 1"
+    },
+    {
+      "id": "b2948fefedb47f992494f2bf8c5e5584c1882c4bc071ef38c0a24ae63849ff5a",
+      "fen": "r4r1k/1bq1b1pp/pp3n2/2n5/2B5/1PN1P3/PB2QPPP/3R1RK1 b - - 0 1"
+    },
+    {
+      "id": "05ff7d1b5e2d933cacb45d8a19d5f7045d2cceaec74142e50180824f1942241d",
+      "fen": "3r3r/p1k2p2/Ppp2n2/2Pp1p2/3P3P/2B1P1P1/6K1/RR6 b - - 0 1"
+    },
+    {
+      "id": "1ea0516e48cd1bb957c068d850c8f825b966bca1df429090444a7985b1454c25",
+      "fen": "8/4k1p1/2bb1p1p/1p6/2p1PPPP/4B3/1P2K3/rBR5 w - - 0 1"
+    },
+    {
+      "id": "e414ea40718ba1d8d976f6203ba0778a16e00cbd2acd3d2d96215d977be651fe",
+      "fen": "6r1/2Q3bk/p5p1/3qPp2/3p1PpP/6P1/3B1R1K/8 w - - 0 1"
+    },
+    {
+      "id": "3f07ac6b5edc3abea1212ee402194ec8e8dec8ea8f381a5d4f9c37982d8626c6",
+      "fen": "8/5kpp/3q4/1p6/5P1P/pP3BP1/P3R2K/8 w - - 0 1"
+    },
+    {
+      "id": "256479a58831ec197ae57c45f8587a48649fea76657139deaf0c86a1dd75c442",
+      "fen": "1kbr1b2/pp6/2p5/3BP3/2P1NP2/1P1n4/P7/R1B3K1 w - - 0 1"
+    },
+    {
+      "id": "dcd555bf031601b66d5756afc490df000abc6c3482ce758ad46df30eb1ab1c36",
+      "fen": "8/3k1p2/1pn1p3/1b1pPpPp/3P1N2/1PR5/2N2K1P/1r6 b - - 0 1"
+    },
+    {
+      "id": "2f4d1100ad0796ce26eef1c7b7e9ef33811b9a0c0f03f0e5bd24b8f58185aa3c",
+      "fen": "r7/2R5/8/p5nk/3N1Kp1/4P3/8/8 w - - 0 1"
+    },
+    {
+      "id": "023fddbf793372b962d254aa57c7281a6ef752daca279b1b982cf7f260c3b8d9",
+      "fen": "6k1/8/6K1/3rPn2/5P2/7R/8/8 b - - 0 1"
+    },
+    {
+      "id": "e108707058bbe3e20c9a566306cabfbd8c544356e03e7ea29210e72e0854694c",
+      "fen": "8/8/8/7n/5n2/4kP1p/1p5K/1B6 b - - 0 1"
+    },
+    {
+      "id": "99fe8d69444f1079630281d1000f0ffd46b71d6abaed639f4ba04855f15bb84c",
+      "fen": "r2qr1k1/pRb2pp1/2p4p/3p1n2/P1nP4/2N2BPP/1PP2P2/2BQ1RK1 b - - 0 1"
+    },
+    {
+      "id": "94af3ffdc22bd4568e13bd99f300fd7c97bd186e615d4717164151017a764f78",
+      "fen": "6k1/5ppp/2pq4/8/4Q3/5P1P/2P3P1/6K1 b - - 0 1"
+    },
+    {
+      "id": "b6a3897b4d72fd180d9cbd0af43d282943a2d4d2977155f47dab322c132190dc",
+      "fen": "2k5/1pp3p1/p4p2/P3p3/r3N3/5P1r/1KP4P/4B2R w - - 0 1"
+    },
+    {
+      "id": "1ed2ab7407423a4accbf393b0159d7464c963ac324ca2a74cbbf786eb1ce1d30",
+      "fen": "1r4k1/r6p/6n1/4PR2/p2P1p2/B4P1P/R4K2/8 b - - 0 1"
+    },
+    {
+      "id": "cdd2f026f80f642e55fd916f73c842bca9cbfa8afdc29b544a3b0704b93ca65d",
+      "fen": "6k1/5p2/1p4p1/1Npn4/P4PPp/R1p2K1P/2r2P2/8 w - - 0 1"
+    },
+    {
+      "id": "4a3386215db03644255f2f5b9b6d234119fc59f6aa145a1a9ef45d519a4fd372",
+      "fen": "2r3k1/3R3p/p5p1/1p2p1Q1/4n2P/5BP1/P1q2PK1/8 w - - 0 1"
+    },
+    {
+      "id": "debaaf710eb1bafadc9c8500f173b163c86669fb1c3a954cfbaef2ad3034824b",
+      "fen": "1r1b2k1/3b3r/5p2/3P1Np1/p1R1P1P1/B7/6K1/2R5 b - - 0 1"
+    },
+    {
+      "id": "c6fa474828aa419b2f856b68478016a06fd1185954b928d232933f11f3e48d93",
+      "fen": "6k1/5p2/p5p1/6P1/2R4P/1P4K1/r1r5/3R4 b - - 0 1"
+    },
+    {
+      "id": "320b0ce45131266d4828c2cec23303e5101d384fccaa14bd807c298a6257a82e",
+      "fen": "4Q3/4r3/prp1k3/2R5/1P1qp1P1/4P2P/2p2P2/6K1 w - - 0 1"
+    },
+    {
+      "id": "b0d179e1849f25c6dcc5a8d1e117b7c0cf4ebeb3214e93287798e00f37c70e25",
+      "fen": "5nk1/5p2/5bp1/3R4/B3p2P/4B1P1/1r3PK1/8 w - - 0 1"
+    }
+  ]
+}

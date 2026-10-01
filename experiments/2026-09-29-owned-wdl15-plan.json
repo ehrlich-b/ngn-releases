@@ -1,0 +1,77 @@
+{
+  "schema": "ngn-owned-wdl15-plan-v1",
+  "training_deadline_utc": "2026-09-29T14:00:00Z",
+  "gate_deadline_utc": "2026-09-29T17:00:00Z",
+  "gate_minimum_remaining_seconds": 6000,
+  "admission_windows_free_gib": 35,
+  "minimum_windows_free_gib": 25,
+  "write_budget_gib": 6,
+  "harness_sha256": "0f6e428cf47be736111cf9481d9ecbbd378fe51d904dd977e37719f05e1a7141",
+  "parent_harness_sha256": "7bb8ddb483e0de7e82968932cfe94acb0520012a278ed7eb5b2ee680fe4b7110",
+  "bullet_commit": "629ee50000b2afb7b3337595401c830d3b1e0f42",
+  "bullet_patch_sha256": "f7f5e0dd02695fe57ec58a630b63006da96cb1ec6b8fd4769a4e6308a8121e54",
+  "bridge_sha256": "86f14a514e00ebcf27e7e6f4e8bdf513c042032f2c5e395044abf747fe41ddfe",
+  "corpus_manifest_sha256": "5119735957a271252f1521b95999ee6b05ddb04be3e37161f2d6222643b97c50",
+  "corpus_sha256": "270f65bdf9f5c948160cae5330030a60f99e94383de2a290b565ae7aad7cde26",
+  "opening_master_sha256": "974e4b5ab871a9e106d0c766bfa39fc83676222337fb7702f61782e2ac5b3222",
+  "engine_sha256": "c2516bb9b1f9fbffbe7f5f863d4b2cb45588d9a347089523400d359ee051b3b2",
+  "allowed_baseline_networks": [
+    "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29",
+    "e8b1bde89dc87363b521da4681983acb5dec4973569ad8faa9a302131ef93374"
+  ],
+  "result_weight_start": 0,
+  "result_weight_end": 0.15,
+  "updates": 1638400,
+  "checkpoint_updates": 16384,
+  "batch_size": 16384,
+  "model_seed": 26092001,
+  "learning_rate": [
+    0.001,
+    1e-05
+  ],
+  "configuration": {
+    "tc": "10+0.1",
+    "concurrency": 6,
+    "cpus": [
+      4,
+      6,
+      8,
+      10,
+      12,
+      14
+    ],
+    "strict": true,
+    "opening_plies": 6,
+    "threads": 1,
+    "gomaxprocs": 1,
+    "scale_percent": 60,
+    "hash_mb": 128,
+    "own_book": false,
+    "move_overhead_ms": 100
+  },
+  "training_selection": "Final checkpoint candidate-1638400 only, declared before training. Require real GPU smoke/resume, mutually exclusive flag rejection, mismatched result-weight resume rejection, and float/integer/incremental export parity.",
+  "baseline_selection": "The immutable net selected by the existing e20 gate and used by the full fresh Counter anchor. If e20 promotes, this is a candidate comparison with different update count as well as weight; it is not an isolated weight claim.",
+  "matches": [
+    {
+      "name": "wdl15-aa",
+      "games": 128,
+      "opening_lines": [
+        4501,
+        4564
+      ],
+      "decision": "Require all audits and paired 95% score interval containing parity."
+    },
+    {
+      "name": "wdl15-gate",
+      "games": 800,
+      "opening_lines": [
+        4565,
+        4964
+      ],
+      "decision": "Promote only if all audits pass and paired 95% Elo lower bound exceeds zero at exactly 800 games. No extension, checkpoint substitution or pooling."
+    }
+  ],
+  "serialization": "Train on CPU 0,2 with bounded writes. Wait for the full fresh Counter anchor to finish and its unit to be inactive before any new games on 4,6,8,10,12,14.",
+  "interpretation": "An additional result-weight candidate after WDL40 failed its fixed gate. Its production release remains separate until the full playing gate accepts it. The selected prior net continues to be packaged.",
+  "stop_rules": "C: below 25 GiB, deadline, failed prerequisite or any operational/legal audit leaves incomplete work unscored. Do not shorten fixed caps. Preserve existing checkpoints and live harnesses."
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "ngn-g0b-v12-harness-result-v1",
+  "date": "2026-09-19",
+  "state": "COMPLETE",
+  "verdict": "ADMIT_E0_HARNESS_PREPARATION",
+  "source_base": "5964175",
+  "scope": {
+    "generic_manifest_changed": false,
+    "strength_games_started": false,
+    "files": {
+      "scripts/candidate-match/uci_preflight.py": "8740114c3a374f6663312b84344aaa6ffca32d71eeb27a51a9076515bb92882a",
+      "scripts/candidate-match/tests/test_uci_preflight.py": "abe1188dedfc732ce442f2854027f88fdf2ee23ac3ddfd4e006f1753da849cf4",
+      "scripts/candidate-match/tests/test_match_stage.py": "fb7ff803362cd2d8215b51203fd40ee3d323b018290794fb63f89095e678a567"
+    }
+  },
+  "validation": {
+    "platform": "WSL Ubuntu",
+    "worktree": "/home/ehrli/repos/ngn-sol-g0b-20260919",
+    "command": "/usr/bin/python3 -m unittest discover -s tests -v",
+    "tests_run": 29,
+    "elapsed_seconds": 3.351,
+    "result": "OK",
+    "py_compile": "PASS"
+  },
+  "configured_preflight": {
+    "artifact_root": "/home/ehrli/e0-v12-v11-preflight-20260919-001",
+    "shared_engine_sha256": "dcde045792bba6b6d4f3fc83c9153763b94ff1ba1cba1d9df564a1ad69eb15aa",
+    "role_launcher_sha256": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+    "roles": {
+      "rodent-v1.1-anand": {
+        "model_sha256": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb",
+        "config_sha256": "091bda4382a0e2145c0d8fd3afd155ab87b44b431ec1fb2216ef611651c4d699",
+        "role_config_sha256": "5c1ed6479ef4c236d1a37b82c2bc39e26c17a20ec9a369851fd0fc3ae34e7451",
+        "receipt_sha256": "8364f9774ea6545776b0b1246caf4262e00b0375b6449c4f5ce41991c3ab1f4e",
+        "transcript_sha256": "5882591c5b6a83f0a321d1cb126be7bcc54f411b40dd563e3b221f2bf09a1d43",
+        "state": "COMPLETE",
+        "diagnostic_backend": "rodent-v1.1-anand",
+        "ownbook_false_nodes": 154,
+        "bestmove": "e2e3"
+      },
+      "rodent-v1.2-default": {
+        "model_sha256": "c35a1abc1b8c1cb1d5f4221454d494c1a6da1ed9088fd51ab27038bfa74b5053",
+        "config_sha256": "59a93e636be01cc31f4f157f49f48fd89b2d2d3eeea153fabebd4751a910334a",
+        "role_config_sha256": "948809a70ea5078b50bbe34fcc9560e818fc1c1d5acb0058ad2b53bbd65ff32c",
+        "receipt_sha256": "0dfc8579be9d68058b63b8fa28a173ad524e59c06695389349fc00a280216d34",
+        "transcript_sha256": "e0241860f008814691191b0f81bc33b76b41040b79703a13b4574fa306d5c181",
+        "state": "COMPLETE",
+        "diagnostic_backend": "rodent-v1.2-default",
+        "ownbook_false_nodes": 162,
+        "bestmove": "d2d4"
+      }
+    }
+  },
+  "next": "Freeze and review the separate Rodent-specific E0 driver and manifest before starting A/A100."
+}

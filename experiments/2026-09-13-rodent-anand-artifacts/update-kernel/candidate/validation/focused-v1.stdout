@@ -1,0 +1,12 @@
+=== RUN   TestRodentApplyUpdatesSelectsPortableFallback
+--- PASS: TestRodentApplyUpdatesSelectsPortableFallback (0.00s)
+=== RUN   TestRodentApplyUpdatesMatchesPortableForAdversarialLanes
+--- PASS: TestRodentApplyUpdatesMatchesPortableForAdversarialLanes (0.00s)
+=== RUN   TestRodentApplyUpdatesMatchesPortableForRandomWraparound
+--- PASS: TestRodentApplyUpdatesMatchesPortableForRandomWraparound (0.00s)
+=== RUN   TestRodentApplyUpdatesTouchesEveryLaneAndPreservesRows
+--- PASS: TestRodentApplyUpdatesTouchesEveryLaneAndPreservesRows (0.00s)
+=== RUN   TestRodentApplyUpdatesDoNotAllocate
+--- PASS: TestRodentApplyUpdatesDoNotAllocate (0.00s)
+PASS
+ok  	github.com/ehrlich-b/ngn/rodenteval	0.002s

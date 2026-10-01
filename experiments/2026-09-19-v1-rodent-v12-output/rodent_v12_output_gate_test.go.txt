@@ -1,0 +1,304 @@
+package engine
+
+import (
+	"context"
+	"encoding/json"
+	"os"
+	"reflect"
+	"runtime"
+	"runtime/pprof"
+	"testing"
+
+	"github.com/ehrlich-b/ngn/rodentv12eval"
+)
+
+const (
+	rodentV12OutputGateModelEnv   = "RODENT_V12_DEFAULT_MODEL"
+	rodentV12OutputGateReceiptEnv = "NGN_RODENT_V12_OUTPUT_GATE_RECEIPT"
+	rodentV12OutputGateModelSHA   = "c35a1abc1b8c1cb1d5f4221454d494c1a6da1ed9088fd51ab27038bfa74b5053"
+	rodentV12OutputGateNodes      = uint64(400_000)
+	rodentV12OutputGateHashMB     = 128
+)
+
+var rodentV12OutputGateFixtures = []struct {
+	name string
+	fen  string
+}{
+	{"start_white", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+	{"start_black", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1"},
+	{"kiwipete_white", "r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 37 1"},
+	{"kiwipete_black", "r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R b KQkq - 37 1"},
+	{"asymmetric_white", "r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 w kq - 0 15"},
+	{"asymmetric_black", "r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 b kq - 0 15"},
+}
+
+type rodentV12OutputGateInfo struct {
+	Scalars map[string]any `json:"scalars"`
+	PV      []string       `json:"pv"`
+}
+
+type rodentV12OutputGateTrajectory struct {
+	Callbacks         []rodentV12OutputGateInfo `json:"callbacks"`
+	Final             rodentV12OutputGateInfo   `json:"final"`
+	RootReleaseStatic int                       `json:"root_release_static"`
+	RootRestored      bool                      `json:"root_restored"`
+	ContextDepth      int                       `json:"context_depth"`
+	ContextAtRoot     bool                      `json:"context_at_root"`
+}
+
+type rodentV12OutputGateFixture struct {
+	Name string                        `json:"name"`
+	FEN  string                        `json:"fen"`
+	Cold rodentV12OutputGateTrajectory `json:"cold"`
+	Warm rodentV12OutputGateTrajectory `json:"warm"`
+}
+
+type rodentV12OutputGateReceipt struct {
+	Schema      int                          `json:"schema"`
+	ModelSHA256 string                       `json:"model_sha256"`
+	ModelBytes  int                          `json:"model_bytes"`
+	HashMB      int                          `json:"hash_mb"`
+	Threads     int                          `json:"threads"`
+	NodeLimit   uint64                       `json:"node_limit"`
+	Fixtures    []rodentV12OutputGateFixture `json:"fixtures"`
+}
+
+func loadRodentV12OutputGateModel(tb testing.TB) *rodentv12eval.Model {
+	tb.Helper()
+	path := os.Getenv(rodentV12OutputGateModelEnv)
+	if path == "" {
+		tb.Fatalf("set %s", rodentV12OutputGateModelEnv)
+	}
+	model, err := rodentv12eval.LoadV12Default(path)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	metadata, err := model.Metadata()
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if metadata.SHA256 != rodentV12OutputGateModelSHA || metadata.Bytes != 4_744_768 {
+		tb.Fatalf("model identity sha=%s bytes=%d", metadata.SHA256, metadata.Bytes)
+	}
+	return model
+}
+
+func newRodentV12OutputGateSearch(tb testing.TB, model *rodentv12eval.Model, fen string) (*SearchEngine, *Position, pvPositionSnapshot, rodentv12eval.Position) {
+	tb.Helper()
+	if runtime.GOMAXPROCS(0) != 1 {
+		tb.Fatalf("GOMAXPROCS=%d, want 1", runtime.GOMAXPROCS(0))
+	}
+	searcher, err := NewSearchEngineWithHash(rodentV12OutputGateHashMB)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if err := searcher.SelectRodentV12DefaultEvaluator(model); err != nil {
+		tb.Fatal(err)
+	}
+	if err := searcher.ConfigureThreads(1); err != nil {
+		tb.Fatal(err)
+	}
+	searcher.SetMaxNodes(rodentV12OutputGateNodes)
+	position, err := ParseFEN(fen)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	root, err := rodentV12PositionFromPosition(position)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	return searcher, position, snapshotPVPosition(position), root
+}
+
+func rodentV12OutputGateSnapshot(info *SearchInfo) rodentV12OutputGateInfo {
+	scalars := make(map[string]any)
+	value := reflect.ValueOf(info).Elem()
+	typeInfo := value.Type()
+	for index := 0; index < value.NumField(); index++ {
+		fieldType := typeInfo.Field(index)
+		if fieldType.PkgPath != "" {
+			continue
+		}
+		field := value.Field(index)
+		switch field.Kind() {
+		case reflect.Bool, reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64,
+			reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
+			scalars[fieldType.Name] = field.Interface()
+		case reflect.Array:
+			switch fieldType.Name {
+			case "CutIdxHist", "BcutBand", "FmcBand", "CutMissByClass":
+				scalars[fieldType.Name] = field.Interface()
+			}
+		}
+	}
+	pv := make([]string, info.PVLength)
+	for index := range pv {
+		pv[index] = MoveToAlgebraic(info.PV[index])
+	}
+	return rodentV12OutputGateInfo{Scalars: scalars, PV: pv}
+}
+
+func requireRodentV12OutputGatePV(tb testing.TB, root *Position, info *SearchInfo) {
+	tb.Helper()
+	if info.PVLength <= 0 || info.PVLength > MaximumDepth || info.BestMove == EmptyMove || info.PV[0] != info.BestMove {
+		tb.Fatalf("invalid PV length=%d best=%v", info.PVLength, info.BestMove)
+	}
+	position := root.Copy()
+	for ply := 0; ply < info.PVLength; ply++ {
+		move := info.PV[ply]
+		legal := false
+		for _, candidate := range GenerateLegalMoves(position) {
+			if candidate == move {
+				legal = true
+				break
+			}
+		}
+		if !legal {
+			tb.Fatalf("illegal PV move at ply %d: %s", ply, MoveToAlgebraic(move))
+		}
+		_, _, _, made := position.MakeMove(move)
+		if !made {
+			tb.Fatalf("PV move failed at ply %d: %s", ply, MoveToAlgebraic(move))
+		}
+	}
+}
+
+func runRodentV12OutputGateTrajectory(tb testing.TB, model *rodentv12eval.Model, searcher *SearchEngine, position *Position, before pvPositionSnapshot, root rodentv12eval.Position) rodentV12OutputGateTrajectory {
+	tb.Helper()
+	callbacks := make([]rodentV12OutputGateInfo, 0, MaximumDepth)
+	result := searcher.SearchIterativeDeepeningWithCallback(position, MaximumDepth, nil, func(info *SearchInfo) {
+		requireRodentV12OutputGatePV(tb, position, info)
+		callbacks = append(callbacks, rodentV12OutputGateSnapshot(info))
+	})
+	if result == nil || !result.Stopped || result.Nodes < rodentV12OutputGateNodes || result.EffectiveThreads != 1 {
+		tb.Fatalf("incomplete fixed-node result: %+v", result)
+	}
+	requireRodentV12OutputGatePV(tb, position, result)
+	if len(callbacks) == 0 {
+		tb.Fatal("no completed-depth callbacks")
+	}
+	restored := reflect.DeepEqual(snapshotPVPosition(position), before)
+	if !restored {
+		tb.Fatal("search changed root position")
+	}
+	worker := searcher.worker.evaluator
+	if worker == nil || worker.rodentV12Context == nil {
+		tb.Fatal("search has no Rodent V1.2 context")
+	}
+	depth := worker.rodentV12Context.Depth()
+	contextAtRoot := worker.rodentV12Context.Position() == root
+	if depth != 0 || !contextAtRoot {
+		tb.Fatalf("context depth=%d at_root=%v", depth, contextAtRoot)
+	}
+	incremental, err := worker.rodentV12Context.EvaluateReleaseStatic()
+	if err != nil {
+		tb.Fatal(err)
+	}
+	fresh, err := model.EvaluateReleaseStatic(root)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if incremental != fresh || worker.SearchSTM(position) != rodentSearchScore(fresh) {
+		tb.Fatalf("root score incremental=%d fresh=%d SearchSTM=%d", incremental, fresh, worker.SearchSTM(position))
+	}
+	return rodentV12OutputGateTrajectory{
+		Callbacks: callbacks, Final: rodentV12OutputGateSnapshot(result),
+		RootReleaseStatic: fresh, RootRestored: restored,
+		ContextDepth: depth, ContextAtRoot: contextAtRoot,
+	}
+}
+
+func TestRodentV12OutputGateSnapshot(t *testing.T) {
+	model := loadRodentV12OutputGateModel(t)
+	metadata, err := model.Metadata()
+	if err != nil {
+		t.Fatal(err)
+	}
+	output := os.Getenv(rodentV12OutputGateReceiptEnv)
+	if output == "" {
+		t.Fatalf("set %s", rodentV12OutputGateReceiptEnv)
+	}
+	receipt := rodentV12OutputGateReceipt{
+		Schema: 1, ModelSHA256: metadata.SHA256, ModelBytes: metadata.Bytes,
+		HashMB: rodentV12OutputGateHashMB, Threads: 1, NodeLimit: rodentV12OutputGateNodes,
+	}
+	for _, fixture := range rodentV12OutputGateFixtures {
+		searcher, position, before, root := newRodentV12OutputGateSearch(t, model, fixture.fen)
+		cold := runRodentV12OutputGateTrajectory(t, model, searcher, position, before, root)
+		warm := runRodentV12OutputGateTrajectory(t, model, searcher, position, before, root)
+		receipt.Fixtures = append(receipt.Fixtures, rodentV12OutputGateFixture{
+			Name: fixture.name, FEN: fixture.fen, Cold: cold, Warm: warm,
+		})
+	}
+	data, err := json.MarshalIndent(receipt, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	data = append(data, '\n')
+	file, err := os.OpenFile(output, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0o644)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := file.Write(data); err != nil {
+		_ = file.Close()
+		t.Fatal(err)
+	}
+	if err := file.Close(); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func BenchmarkRodentV12OutputGateColdFixedNodes(b *testing.B) {
+	model := loadRodentV12OutputGateModel(b)
+	for _, fixture := range rodentV12OutputGateFixtures {
+		fixture := fixture
+		b.Run(fixture.name, func(b *testing.B) {
+			b.ReportAllocs()
+			for iteration := 0; iteration < b.N; iteration++ {
+				b.StopTimer()
+				searcher, position, before, root := newRodentV12OutputGateSearch(b, model, fixture.fen)
+				var result *SearchInfo
+				b.StartTimer()
+				pprof.Do(context.Background(), pprof.Labels("scope", "search", "fixture", fixture.name), func(context.Context) {
+					result = searcher.SearchIterativeDeepening(position, MaximumDepth, nil)
+				})
+				b.StopTimer()
+				_ = runRodentV12OutputGateResultChecks(b, model, searcher, position, before, root, result)
+			}
+			b.ReportMetric(float64(rodentV12OutputGateNodes), "minimum_nodes/op")
+		})
+	}
+}
+
+func runRodentV12OutputGateResultChecks(tb testing.TB, model *rodentv12eval.Model, searcher *SearchEngine, position *Position, before pvPositionSnapshot, root rodentv12eval.Position, result *SearchInfo) bool {
+	tb.Helper()
+	if result == nil || !result.Stopped || result.Nodes < rodentV12OutputGateNodes || result.EffectiveThreads != 1 {
+		tb.Fatalf("incomplete fixed-node result: %+v", result)
+	}
+	legal := false
+	for _, move := range GenerateLegalMoves(position) {
+		if move == result.BestMove {
+			legal = true
+			break
+		}
+	}
+	if !legal {
+		tb.Fatalf("best move %v is not legal", result.BestMove)
+	}
+	if !reflect.DeepEqual(snapshotPVPosition(position), before) {
+		tb.Fatal("search changed root position")
+	}
+	worker := searcher.worker.evaluator
+	if worker == nil || worker.rodentV12Context == nil || worker.rodentV12Context.Depth() != 0 || worker.rodentV12Context.Position() != root {
+		tb.Fatal("worker did not restore exact root frame")
+	}
+	incremental, err := worker.rodentV12Context.EvaluateReleaseStatic()
+	if err != nil {
+		tb.Fatal(err)
+	}
+	fresh, err := model.EvaluateReleaseStatic(root)
+	if err != nil || incremental != fresh || worker.SearchSTM(position) != rodentSearchScore(fresh) {
+		tb.Fatalf("restored root mismatch incremental=%d fresh=%d err=%v", incremental, fresh, err)
+	}
+	return true
+}

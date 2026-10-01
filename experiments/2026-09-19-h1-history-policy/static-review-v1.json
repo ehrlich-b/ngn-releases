@@ -1,0 +1,68 @@
+{
+  "schema": "ngn-h1-history-policy-static-review-v1",
+  "state": "PASS",
+  "reviewed_utc": "2026-09-20T00:14:51Z",
+  "held_manifest": {
+    "path": "experiments/2026-09-19-h1-history-policy/manifest-held-v1.json",
+    "sha256": "8bd5e7c2508cda82342cc5ce5f245277e293735d4f5bc8c24f293239dde2e35f",
+    "release_state": "HELD_PENDING_STATIC_REVIEW"
+  },
+  "driver": {
+    "sha256": "9688dcfd959c2d51f8ef30ae82e3f67136485eb300ffa6c9bfdf85acc15a112a",
+    "test_sha256": "30fc3a23ccf29c3127180612bcd961ffd54fbbcf6fcb4e7d5879fb49b963d213",
+    "wsl_regression_tests": {
+      "tests": 4,
+      "status": "PASS"
+    }
+  },
+  "engine_source": {
+    "commit": "2cde3b31f6e09f8c03eab4ee723b823322645aa7",
+    "tree": "f3fbeb453dee83a355c9160c3f3b4e9a323141c2",
+    "worktree_clean": true
+  },
+  "held_check": {
+    "state": "HELD_STATIC_CHECK_COMPLETE",
+    "engines_hash_checked": 4,
+    "distinct_engine_hashes": 4,
+    "frozen_sources_hash_checked": 15,
+    "run_root": "absent"
+  },
+  "validation": {
+    "policy_short_suites": {
+      "00": "PASS",
+      "01": "PASS",
+      "10": "PASS",
+      "11": "PASS"
+    },
+    "race_suites": {
+      "00": "PASS",
+      "11": "PASS"
+    },
+    "default_policy_identity": {
+      "comparator": "cmd/searchsnapshot",
+      "unrestricted_fixtures": "EXACT",
+      "only_difference": "global-node-limit now stops at the exact 256-node cap instead of 257",
+      "disposition": "EXPECTED_CORRECTNESS_REPAIR"
+    }
+  },
+  "reviewed_invariants": [
+    "The A/A gate runs policy 00 against itself for 50 color-reversed pairs and requires a paired-bootstrap interval containing zero.",
+    "The three 64-pair pilot cells use the identical sequential pilot opening set and preserve policy 11 as the only confirmation candidate.",
+    "The interaction resamples matching opening indices jointly and cannot select a policy or tune a constant.",
+    "The 200-pair confirmation uses the independent lines 201-400 corpus and accepts only when the paired-bootstrap lower 95% Elo bound is positive.",
+    "Every phase uses Rodent V1.2 default, Threads=1, GOMAXPROCS=1, Hash=128, OwnBook=false, Move Overhead=100, 10+0.1, and physical CPU masks 0,2,4,6.",
+    "Each role is preflighted before games; the supervisor, process witness, legal audit, terminal audit, and retained evidence hashes are mandatory.",
+    "The Lean hopper remains running and non-owned CPU use is retained as telemetry without silently invalidating or selecting samples.",
+    "No observed result can extend the sample, select another factorial cell, alter a constant, or reuse pilot openings for confirmation."
+  ],
+  "finding_resolved_before_release": {
+    "issue": "The generic identity checker rejected engine records after their required build_tags field had already passed manifest validation.",
+    "fix": "A strict checked_engine projection now preserves the required tag record while hashing path and bytes; a regression test covers valid and extra-key cases.",
+    "verification": "Four WSL unit tests and the complete held-manifest check pass with the corrected driver."
+  },
+  "authorization": {
+    "release_state": "RELEASED_AFTER_STATIC_REVIEW",
+    "authorized": true,
+    "scope": "one immutable run at /home/ehrli/h1-history-policy-gate-20260919/run-001 under the reviewed decision rule"
+  }
+}

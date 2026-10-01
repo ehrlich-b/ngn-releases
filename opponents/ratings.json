@@ -1,0 +1,9 @@
+[
+  {"version":"v5.0.0","path":"opponents/blunder_500","ccrl":2080,"source":"CCRL Blitz (Blunder README rating table); fallback lower bracket"},
+  {"version":"v6.1.0","path":"opponents/blunder_610","ccrl":2155,"source":"CCRL Blitz (Blunder README rating table)"},
+  {"version":"v7.2.0","path":"opponents/blunder_720","ccrl":2425,"source":"CCRL Blitz (Blunder README rating table)"},
+  {"version":"v7.4.0","path":"opponents/blunder_740","ccrl":2532,"source":"CCRL Blitz (Blunder README rating table); the anchor that exposed SF UCI_Elo inflation"},
+  {"version":"v8.0.0","path":"opponents/blunder_800","ccrl":2674,"source":"CCRL Blitz (Blunder README rating table); fallback upper bracket"},
+  {"version":"fruit-2.1","path":"opponents/fruit_21","ccrl":2685,"source":"CCRL Blitz 40/2 = 2685 (48.3% over 604 games); Fabien Letouzey 2005; built from src (Warpten/Fruit-2.1 mirror) with clang -std=gnu++98; independent non-Blunder anchor with no movetime-overshoot bug"},
+  {"version":"counter-3.8","path":"opponents/counter_38","ccrl":2994,"source":"CCRL Blitz ~2994; CounterGo 3.8 (Vadim Chizhov), commit b172b99 (release commit, not a git tag), pre-NNUE pure-Go HCE; cross-family TOP anchor to un-saturate the ladder"}
+]

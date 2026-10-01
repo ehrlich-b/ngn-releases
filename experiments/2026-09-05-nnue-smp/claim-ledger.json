@@ -1,0 +1,195 @@
+{
+  "date": "2026-09-05",
+  "accepted_source": "53e4d1b9bf4006a39c0327a7016faba7f2b8f82e",
+  "claims": [
+    {
+      "claim": "Stockfish18 release introduces SFNNv10 threat inputs and documents an automated training workflow.",
+      "url": "https://github.com/official-stockfish/Stockfish/releases/tag/sf_18",
+      "date": "2026-01-31",
+      "evidence": "release lines171-184",
+      "status": "verified official release"
+    },
+    {
+      "claim": "SF18 has 1024/128 big/small transformers with15/32 downstream sizes,8PSQT and8layerstacks; Sept5master addsPP_3Wide and1024/32/32.",
+      "urls": [
+        "https://github.com/official-stockfish/Stockfish/blob/cb3d4ee9b47d0c5aae855b12379378ea1439675c/src/nnue/nnue_architecture.h",
+        "https://github.com/official-stockfish/Stockfish/blob/edb0d9db6731067ec50ce619ff372b463bc4dd5d/src/nnue/nnue_architecture.h"
+      ],
+      "evidence": "root retrieved raw source onWSL; constants/types independently inspected",
+      "status": "verified source"
+    },
+    {
+      "claim": "SF18 raw network evaluation differs from engine evaluation: smallnetselection,PSQT/positionalmix,complexity/optimism/material adjustments andrule50damping live in evaluate.cpp.",
+      "url": "https://github.com/official-stockfish/Stockfish/blob/cb3d4ee9b47d0c5aae855b12379378ea1439675c/src/evaluate.cpp",
+      "evidence": "lines49-84 independently inspected",
+      "status": "verified source"
+    },
+    {
+      "claim": "SF18 loader validates version and network/component hashes; .nnue extension is insufficient to identify compatible semantics.",
+      "url": "https://github.com/official-stockfish/Stockfish/blob/cb3d4ee9b47d0c5aae855b12379378ea1439675c/src/nnue/network.cpp",
+      "evidence": "lines345-386 and91-97 independently inspected",
+      "status": "verified source plus inference"
+    },
+    {
+      "claim": "Go shared mutable state requires synchronization; independently atomic words are not a multiword transaction.",
+      "url": "https://go.dev/ref/mem",
+      "evidence": "official memory model June6,2022",
+      "status": "verified; TT protocol still design choice"
+    },
+    {
+      "claim": "Race detector only detects executed races; realistic lifecycle/parallel workloads are required.",
+      "url": "https://go.dev/doc/articles/race_detector",
+      "evidence": "How To Use section",
+      "status": "verified official docs"
+    },
+    {
+      "claim": "Go1.27 extends experimental SIMD: portable package plus updated archsimd, still experimental; installedbaseline1.25.5.",
+      "urls": [
+        "https://go.dev/doc/go1.27",
+        "https://go.dev/doc/go1.26"
+      ],
+      "evidence": "Go1.27 lines205-218; installed go versionremote",
+      "status": "verified; no upgradeinstalled"
+    },
+    {
+      "claim": "Fastchess offers full PGN/PV/time metadata, pentanomial reporting, strict warnings, optionalcrash recovery; latest releaseAPIreturnedv1.8.2-alpha July26.",
+      "urls": [
+        "https://github.com/Disservin/fastchess/blob/master/man.md",
+        "https://github.com/Disservin/fastchess/releases/tag/v1.8.2-alpha"
+      ],
+      "evidence": "root inspected officialmanual andWSLGitHubAPI",
+      "status": "verified capability; pinnedtagtests still required"
+    },
+    {
+      "claim": "Paired openings should be analyzed with thepentanomial model and prospective sequential/fixedrules.",
+      "url": "https://official-stockfish.github.io/docs/fishtest-wiki/Fishtest-Mathematics.html",
+      "evidence": "officialFishtest statisticalmethods",
+      "status": "verified method; nofinalsample sizingyet"
+    },
+    {
+      "claim": "NGN has global16MiBevalcache, cachedHCE50movedamping/tempo and multiple uncachedfallback evalsites.",
+      "paths": [
+        "engine/eval.go:2790",
+        "engine/eval.go:2806",
+        "engine/search.go:1322",
+        "engine/search.go:1327",
+        "engine/search.go:1337"
+      ],
+      "revision": "53e4d1b",
+      "status": "root-source-verified"
+    },
+    {
+      "claim": "NGN's shared-TT entry is currently plainkey/data singlethread and50Mnodeceiling exists.",
+      "paths": [
+        "engine/cache.go:33",
+        "engine/search.go:1294"
+      ],
+      "revision": "53e4d1b",
+      "status": "root-source-verified"
+    },
+    {
+      "claim": "Minimal pipeline uses pinned Bullet shared Chess768/128 dual perspective SCReLU, QA255/QB64/scale400.",
+      "urls": [
+        "https://raw.githubusercontent.com/jw1912/bullet/629ee50000b2afb7b3337595401c830d3b1e0f42/examples/simple.rs",
+        "https://raw.githubusercontent.com/jw1912/bullet/629ee50000b2afb7b3337595401c830d3b1e0f42/crates/bullet_lib/src/game/inputs/chess768.rs"
+      ],
+      "status": "root independently read exact source; index normalization fixture remains implementation gate"
+    },
+    {
+      "claim": "Bullet saves chosen tensor order in LE/column-major with optional round and whole-stream 64-byte padding; missing quantized output can coexist with completed training.",
+      "url": "https://github.com/jw1912/bullet/blob/629ee50000b2afb7b3337595401c830d3b1e0f42/docs/4-saved-networks.md",
+      "status": "root independently verified"
+    },
+    {
+      "claim": "Unconstrained i16 output tensors can overflow i32 dot or scaled result; v0 oracle uses i64 and narrowing requires proven bounds.",
+      "status": "root arithmetic review; confirmed by both Sol lanes; design requirement"
+    },
+    {
+      "claim": "CounterGo owns engine TT/workers, uses primary result with helper TT contributions, per-entry CAS protection.",
+      "urls": [
+        "https://github.com/ChizhovVadim/CounterGo/blob/de02aef5a6887b82383ae9a7d6ce0614b730155f/pkg/engine/engine.go",
+        "https://github.com/ChizhovVadim/CounterGo/blob/de02aef5a6887b82383ae9a7d6ce0614b730155f/pkg/engine/lazysmp.go",
+        "https://github.com/ChizhovVadim/CounterGo/blob/de02aef5a6887b82383ae9a7d6ce0614b730155f/pkg/engine/transtable.go"
+      ],
+      "status": "root independently verified source"
+    },
+    {
+      "claim": "Zahak pinned TT has plain shared key/data reads/writes; cannot be adopted as safe Go concurrency.",
+      "url": "https://github.com/amanjpro/zahak/blob/72ff8066e2d8348d8d3847fab62c4a6b8344240d/engine/cache.go",
+      "status": "root verified fields/access; agent verified goroutine fanout"
+    },
+    {
+      "claim": "NGN histories, caches, stop/nodes/config/resource globals require ownership; SearchInfo and Position.Copy are existing private-state seeds.",
+      "paths": [
+        "engine/search.go:514",
+        "engine/position.go:476",
+        "engine/moveorder.go:10",
+        "engine/eval.go:2866",
+        "engine/uci.go:477"
+      ],
+      "revision": "53e4d1b",
+      "status": "Sol file/line inventory; root confirmed key global/eval/control sites"
+    },
+    {
+      "claim": "Stockfish archive says all included networks CC0; SF18 small present.",
+      "url": "https://github.com/official-stockfish/networks/blob/dd5c7f74c073a7d0bcbb52648d26c537a3d04cf4/README.md",
+      "status": "root read exact statement; both Sol lanes verified tree includes SF18 small"
+    },
+    {
+      "claim": "Current network canonical SHA 1a298aa575a085434d29027978dc36867fe9c5bcea9376654b7a8eba1e52dfc2; archive size98511183. HTTP HEAD result78944870 retracted as canonical.",
+      "url": "https://raw.githubusercontent.com/official-stockfish/networks/dd5c7f74c073a7d0bcbb52648d26c537a3d04cf4/nn-1a298aa575a0.nnue",
+      "status": "Root independently verified full WSL file size and SHA256; canonical conflict resolved, HTTP transport discrepancy not diagnosed."
+    },
+    {
+      "claim": "PlentyChess and Reckless use different king buckets/layers/feature families/custom files despite common quantization concepts.",
+      "urls": [
+        "https://github.com/Yoshie2000/PlentyChess/blob/04e07a98ee6ac104c30e7374450c94b96d94ef4d/src/nnue.h",
+        "https://github.com/codedeliveryservice/Reckless/blob/91b56c29861f0a5713204bdeffd6c45e9eb9f649/src/nnue.rs"
+      ],
+      "status": "root independently verified constants; Sol inspected full feature/state/serializer code"
+    },
+    {
+      "claim": "RTX5080 CC12.0 requires Blackwell-compatible CUDA; baseline GPU visible but runtime not installed/proved.",
+      "urls": [
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://docs.nvidia.com/cuda/blackwell-compatibility-guide/",
+        "https://docs.nvidia.com/cuda/archive/12.8.0/cuda-toolkit-release-notes/"
+      ],
+      "status": "Sol official-doc research; root remote inventory. GPU batch explicitly unproved"
+    },
+    {
+      "claim": "Pinned Bullet training dependencies support chosen isolated Rust/CUDA route; later nnue-pytorch route heavier.",
+      "urls": [
+        "https://github.com/jw1912/bullet/blob/629ee50000b2afb7b3337595401c830d3b1e0f42/docs/2-getting-started.md",
+        "https://github.com/official-stockfish/nnue-pytorch/tree/9f72946529c4187d3679014036cd22c3be419716"
+      ],
+      "status": "Sol source verified; no installation"
+    },
+    {
+      "claim": "Official master binpacks are candidate corpus, not prevalidated NGN training data; file provenance and game-preserving split are entry gates.",
+      "url": "https://huggingface.co/datasets/official-stockfish/master-binpacks",
+      "status": "Sol dataset metadata research; exact file/decoder pending"
+    },
+    {
+      "claim": "Strict global node budget requires CAS or another bounded reservation protocol; timed searches can keep private counters.",
+      "status": "root/Sol design; current one-thread node-count semantics separately preserved"
+    },
+    {
+      "claim": "Chosen NNUE/SMP SPRT defaults, CPU budget and longer clock are prospective design decisions, not measured performance.",
+      "status": "root plan, must freeze concrete run manifest before candidate games"
+    },
+    {
+      "claim": "Sol review tightened validation/test isolation, independent float-to-export oracle, GPU reproducibility wording, padding admission and toolchain isolation; root incorporated corrections.",
+      "status": "design review complete for pipeline; no code run"
+    },
+    {
+      "claim": "Root incorporated architecture and concurrency review: explicit score adapter/header/delta timing, SF small scope/optimism, session-exclusive direct TT, cancellable setup, output reasons, full model-state invalidation, private time counters and worker-0-only node-limited initial milestone.",
+      "status": "all three Sol design reviews reconciled; implementation gates remain unrun"
+    },
+    {
+      "claim": "Pinned Bullet writer takes f32 tensors, promotes to f64, multiplies scale in f64 and uses f64 round/trunc before checked integer casting. Float32 multiplication would produce different bytes at boundaries.",
+      "url": "https://github.com/jw1912/bullet/blob/629ee50000b2afb7b3337595401c830d3b1e0f42/crates/trainer/src/model/weights.rs#L287",
+      "status": "Root independently verified lines287-313 after Sol implementation review corrected earlier rounding-width inference; exact source governs exporter."
+    }
+  ]
+}

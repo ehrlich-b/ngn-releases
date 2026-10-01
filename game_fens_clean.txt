@@ -1,0 +1,359 @@
+Extracting FENs from the_game.pgn...
+Move 0 (Initial): rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+Move 1: e4 -> rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1
+Move 2: e5 -> rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 1
+Move 3: Nf3 -> rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 1
+Move 4: d6 -> rnbqkbnr/ppp2ppp/3p4/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 1
+Move 5: d4 -> rnbqkbnr/ppp2ppp/3p4/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R b KQkq d3 0 1
+Move 6: exd4 -> rnbqkbnr/ppp2ppp/3p4/8/3pP3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 1
+Move 7: Nxd4 -> rnbqkbnr/ppp2ppp/3p4/8/3NP3/8/PPP2PPP/RNBQKB1R b KQkq - 0 1
+Move 8: Nf6 -> rnbqkb1r/ppp2ppp/3p1n2/8/3NP3/8/PPP2PPP/RNBQKB1R w KQkq - 1 1
+Move 9: Nc3 -> rnbqkb1r/ppp2ppp/3p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R b KQkq - 2 1
+Move 10: Be7 -> rnbqk2r/ppp1bppp/3p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq - 3 1
+Move 11: Be3 -> rnbqk2r/ppp1bppp/3p1n2/8/3NP3/2N1B3/PPP2PPP/R2QKB1R b KQkq - 4 1
+Error parsing move 14}: no legal move matches 14}
+Move 12: O-O -> rnbq1rk1/ppp1bppp/3p1n2/8/3NP3/2N1B3/PPP2PPP/R2QKB1R w KQ - 5 1
+Error parsing move e4-e5: no legal move matches e4-e5
+Error parsing move d6xe5: no legal move matches d6xe5
+Error parsing move f4xe5: no legal move matches f4xe5
+Error parsing move Nc6xe5: no legal move matches Nc6xe5
+Error parsing move Nb3xc5): no legal move matches Nb3xc5)
+Error parsing move 8}: no legal move matches 8}
+Move 13: Be2 -> rnbq1rk1/ppp1bppp/3p1n2/8/3NP3/2N1B3/PPP1BPPP/R2QK2R b KQ - 6 1
+Move 14: c5 -> rnbq1rk1/pp2bppp/3p1n2/2p5/3NP3/2N1B3/PPP1BPPP/R2QK2R w KQ c6 0 1
+Move 15: Nb3 -> rnbq1rk1/pp2bppp/3p1n2/2p5/4P3/1NN1B3/PPP1BPPP/R2QK2R b KQ - 1 1
+Error parsing move 24}: no legal move matches 24}
+Move 16: Nc6 -> r1bq1rk1/pp2bppp/2np1n2/2p5/4P3/1NN1B3/PPP1BPPP/R2QK2R w KQ - 2 1
+Error parsing move f4-f5: no legal move matches f4-f5
+Error parsing move Be6-d7: no legal move matches Be6-d7
+Error parsing move Nc3-b5: no legal move matches Nc3-b5
+Error parsing move Qc7-b6: no legal move matches Qc7-b6
+Error parsing move Be2-c4): no legal move matches Be2-c4)
+Error parsing move 10}: no legal move matches 10}
+Move 17: O-O -> r1bq1rk1/pp2bppp/2np1n2/2p5/4P3/1NN1B3/PPP1BPPP/R2Q1RK1 b - - 3 1
+Move 18: Re8 -> r1bqr1k1/pp2bppp/2np1n2/2p5/4P3/1NN1B3/PPP1BPPP/R2Q1RK1 w - - 4 1
+Error parsing move Ne5-g4: no legal move matches Ne5-g4
+Error parsing move Rf1-d1: no legal move matches Rf1-d1
+Error parsing move Bd7-e6: no legal move matches Bd7-e6
+Error parsing move Qd2-d3: no legal move matches Qd2-d3
+Error parsing move Ng4xe3: no legal move matches Ng4xe3
+Error parsing move Qd3xe3): no legal move matches Qd3xe3)
+Error parsing move 17}: no legal move matches 17}
+Move 19: Bb5 -> r1bqr1k1/pp2bppp/2np1n2/1Bp5/4P3/1NN1B3/PPP2PPP/R2Q1RK1 b - - 5 1
+Error parsing move 30}: no legal move matches 30}
+Move 20: Be6 -> r2qr1k1/pp2bppp/2npbn2/1Bp5/4P3/1NN1B3/PPP2PPP/R2Q1RK1 w - - 6 1
+Error parsing move Be6xb3: no legal move matches Be6xb3
+Error parsing move c2xb3: no legal move matches c2xb3
+Move 21: Nc6xa5 -> r2qr1k1/pp2bppp/2npbn2/NBp5/4P3/2N1B3/PPP2PPP/R2Q1RK1 b - - 7 1
+Error parsing move Nc3-d5: no legal move matches Nc3-d5
+Move 22: Nf6xd5 -> r2qr1k1/pp2bppp/2npb3/NBpn4/4P3/2N1B3/PPP2PPP/R2Q1RK1 w - - 8 1
+Error parsing move Qd2xd5): no legal move matches Qd2xd5)
+Error parsing move 13}: no legal move matches 13}
+Move 23: Bxc6 -> r2qr1k1/pp2bppp/2Bpb3/N1pn4/4P3/2N1B3/PPP2PPP/R2Q1RK1 b - - 0 1
+Error parsing move 29}: no legal move matches 29}
+Move 24: bxc6 -> r2qr1k1/p3bppp/2ppb3/N1pn4/4P3/2N1B3/PPP2PPP/R2Q1RK1 w - - 0 1
+Error parsing move a4xb3: no legal move matches a4xb3
+Error parsing move a2xb3: no legal move matches a2xb3
+Error parsing move Nf6-d7: no legal move matches Nf6-d7
+Error parsing move Nd2-c4: no legal move matches Nd2-c4
+Error parsing move Nd7-b6: no legal move matches Nd7-b6
+Error parsing move Ra1xa8: no legal move matches Ra1xa8
+Error parsing move Re8xa8): no legal move matches Re8xa8)
+Error parsing move 24}: no legal move matches 24}
+Move 25: Rb1 -> r2qr1k1/p3bppp/2ppb3/N1pn4/4P3/2N1B3/PPP2PPP/1R1Q1RK1 b - - 1 1
+Error parsing move a5: no legal move matches a5
+Error parsing move Bg5-f4: no legal move matches Bg5-f4
+Error parsing move g7-g5: no legal move matches g7-g5
+Error parsing move Bf4-e3: no legal move matches Bf4-e3
+Error parsing move d6-d5: no legal move matches d6-d5
+Error parsing move e4xd5: no legal move matches e4xd5
+Error parsing move Nf6xd5: no legal move matches Nf6xd5
+Error parsing move Qd1-e2: no legal move matches Qd1-e2
+Move 26: Nd5xc3 -> r2qr1k1/p3bppp/2ppb3/N1p5/4P3/2n1B3/PPP2PPP/1R1Q1RK1 w - - 0 1
+Error parsing move b2xc3): no legal move matches b2xc3)
+Error parsing move 13}: no legal move matches 13}
+Error parsing move Nd2: no legal move matches Nd2
+Error parsing move d5: no legal move matches d5
+Error parsing move Be6-f5: no legal move matches Be6-f5
+Error parsing move Nc5-d3: no legal move matches Nc5-d3
+Error parsing move d5-d4: no legal move matches d5-d4
+Error parsing move Nc3-a4: no legal move matches Nc3-a4
+Error parsing move Qd8-f6: no legal move matches Qd8-f6
+Error parsing move Qd1-f3: no legal move matches Qd1-f3
+Error parsing move Ra8-b8: no legal move matches Ra8-b8
+Error parsing move Na4-c5: no legal move matches Na4-c5
+Error parsing move Bg5-d2: no legal move matches Bg5-d2
+Error parsing move Qf3-h5): no legal move matches Qf3-h5)
+Error parsing move 13}: no legal move matches 13}
+Error parsing move exd5: no legal move matches exd5
+Error parsing move cxd5: no legal move matches cxd5
+Error parsing move Nc3-b5: no legal move matches Nc3-b5
+Error parsing move Be6xa2: no legal move matches Be6xa2
+Error parsing move Rb1-a1: no legal move matches Rb1-a1
+Error parsing move Nf6-d5: no legal move matches Nf6-d5
+Error parsing move Bf4-e5: no legal move matches Bf4-e5
+Error parsing move Be7-g5: no legal move matches Be7-g5
+Move 27: Be5xd4 -> r2qr1k1/p3bppp/2ppb3/N1p5/3BP3/2n5/PPP2PPP/1R1Q1RK1 b - - 1 1
+Error parsing move c5xd4: no legal move matches c5xd4
+Error parsing move Ra1xa2: no legal move matches Ra1xa2
+Error parsing move Nd5-b4: no legal move matches Nd5-b4
+Error parsing move Ra2-a1: no legal move matches Ra2-a1
+Error parsing move Qd8-d7: no legal move matches Qd8-d7
+Error parsing move Nb5-a3): no legal move matches Nb5-a3)
+Error parsing move 18}: no legal move matches 18}
+Error parsing move Nb3: no legal move matches Nb3
+Move 28: d4 -> r2qr1k1/p3bppp/2ppb3/N7/3pP3/2n5/PPP2PPP/1R1Q1RK1 w - - 0 1
+Error parsing move Nb3xd4: no legal move matches Nb3xd4
+Error parsing move c5xd4: no legal move matches c5xd4
+Error parsing move Be3xd4: no legal move matches Be3xd4
+Error parsing move Nf6-d5: no legal move matches Nf6-d5
+Error parsing move Nc3-b5: no legal move matches Nc3-b5
+Error parsing move Nd5-f4: no legal move matches Nd5-f4
+Error parsing move Qd1-f3: no legal move matches Qd1-f3
+Error parsing move Ra8-b8: no legal move matches Ra8-b8
+Error parsing move Qf3xf4: no legal move matches Qf3xf4
+Error parsing move Rb8xb5: no legal move matches Rb8xb5
+Error parsing move Rb1-e1: no legal move matches Rb1-e1
+Error parsing move Be6xa2: no legal move matches Be6xa2
+Error parsing move b2-b3: no legal move matches b2-b3
+Error parsing move Be7-g5: no legal move matches Be7-g5
+Error parsing move Qf4-g4): no legal move matches Qf4-g4)
+Error parsing move 17}: no legal move matches 17}
+Error parsing move Bxd4: no legal move matches Bxd4
+Error parsing move cxd4: no legal move matches cxd4
+Error parsing move Bg4-f5: no legal move matches Bg4-f5
+Error parsing move Rb1-e1: no legal move matches Rb1-e1
+Error parsing move Nf6-e4: no legal move matches Nf6-e4
+Error parsing move Re1-e3: no legal move matches Re1-e3
+Error parsing move a5-a4: no legal move matches a5-a4
+Error parsing move Nc3xe4: no legal move matches Nc3xe4
+Error parsing move Re8xe4: no legal move matches Re8xe4
+Error parsing move a2-a3: no legal move matches a2-a3
+Error parsing move Re4xe3: no legal move matches Re4xe3
+Error parsing move f2xe3): no legal move matches f2xe3)
+Error parsing move 16}: no legal move matches 16}
+Error parsing move Nxd4: no legal move matches Nxd4
+Error parsing move Bg4: no legal move matches Bg4
+Error parsing move Nc3-b5: no legal move matches Nc3-b5
+Error parsing move Re8-e4: no legal move matches Re8-e4
+Error parsing move h2-h3: no legal move matches h2-h3
+Error parsing move Bc5xd4: no legal move matches Bc5xd4
+Error parsing move h3xg4: no legal move matches h3xg4
+Error parsing move Re4xg4: no legal move matches Re4xg4
+Error parsing move Rb1-d1: no legal move matches Rb1-d1
+Error parsing move Qd8-d5: no legal move matches Qd8-d5
+Error parsing move g2-g3: no legal move matches g2-g3
+Error parsing move Ra8-d8: no legal move matches Ra8-d8
+Error parsing move Nb5xd4: no legal move matches Nb5xd4
+Error parsing move Rg4xd4: no legal move matches Rg4xd4
+Move 29: Qd3xd4 -> r2qr1k1/p3bppp/2ppb3/N7/3QP3/2n5/PPP2PPP/1R3RK1 b - - 0 1
+Error parsing move Qd5xd4: no legal move matches Qd5xd4
+Error parsing move Rd1xd4: no legal move matches Rd1xd4
+Error parsing move Rd8xd4): no legal move matches Rd8xd4)
+Error parsing move 17}: no legal move matches 17}
+Error parsing move Qd2: no legal move matches Qd2
+Error parsing move 18}: no legal move matches 18}
+Error parsing move Bc5: no legal move matches Bc5
+Error parsing move Re1xe8+: no legal move matches Re1xe8+
+Error parsing move Rc8xe8: no legal move matches Rc8xe8
+Error parsing move Nb3-d2: no legal move matches Nb3-d2
+Error parsing move Bd7-f5: no legal move matches Bd7-f5
+Error parsing move Nd2-c4: no legal move matches Nd2-c4
+Error parsing move Bb6-c5: no legal move matches Bb6-c5
+Error parsing move Nc4-e3: no legal move matches Nc4-e3
+Error parsing move Bf5-d7): no legal move matches Bf5-d7)
+Error parsing move 13}: no legal move matches 13}
+Error parsing move Nf3: no legal move matches Nf3
+Error parsing move Qxd2: no legal move matches Qxd2
+Error parsing move Bg4-e6: no legal move matches Bg4-e6
+Error parsing move Rf1-e1: no legal move matches Rf1-e1
+Error parsing move Nf6-d5: no legal move matches Nf6-d5
+Error parsing move c3-c4: no legal move matches c3-c4
+Error parsing move Nd5-c3: no legal move matches Nd5-c3
+Error parsing move Rb1-a1: no legal move matches Rb1-a1
+Move 30: Be6xc4 -> r2qr1k1/p3bppp/2pp4/N7/2bQP3/2n5/PPP2PPP/1R3RK1 w - - 1 1
+Error parsing move Re1xe8+: no legal move matches Re1xe8+
+Error parsing move Ra8xe8: no legal move matches Ra8xe8
+Error parsing move Nb3xa5: no legal move matches Nb3xa5
+Error parsing move Bc4xa2): no legal move matches Bc4xa2)
+Error parsing move 16}: no legal move matches 16}
+Error parsing move Nxd2: no legal move matches Nxd2
+Error parsing move Bb4: no legal move matches Bb4
+Error parsing move Bb4xc3: no legal move matches Bb4xc3
+Error parsing move b2xc3: no legal move matches b2xc3
+Error parsing move Ra8-c8: no legal move matches Ra8-c8
+Error parsing move f2-f3: no legal move matches f2-f3
+Error parsing move Bg4-f5: no legal move matches Bg4-f5
+Error parsing move c3-c4: no legal move matches c3-c4
+Error parsing move Re8-d8: no legal move matches Re8-d8
+Error parsing move Rf1-f2: no legal move matches Rf1-f2
+Error parsing move Bf5xc2: no legal move matches Bf5xc2
+Error parsing move Rb1-b5: no legal move matches Rb1-b5
+Error parsing move Bc2-d3: no legal move matches Bc2-d3
+Error parsing move Rb5xa5: no legal move matches Rb5xa5
+Error parsing move Bd3xc4: no legal move matches Bd3xc4
+Move 31: Nd2xc4 -> r2qr1k1/p3bppp/2pp4/8/2NQP3/2n5/PPP2PPP/1R3RK1 b - - 0 1
+Error parsing move Rc8xc4): no legal move matches Rc8xc4)
+Error parsing move 9}: no legal move matches 9}
+Error parsing move Rfe1: no legal move matches Rfe1
+Error parsing move Bf5: no legal move matches Bf5
+Error parsing move Ng4-e5: no legal move matches Ng4-e5
+Error parsing move Rb1-d1: no legal move matches Rb1-d1
+Error parsing move Ne5-c4: no legal move matches Ne5-c4
+Error parsing move Nc3-a4: no legal move matches Nc3-a4
+Error parsing move Bb6-c7: no legal move matches Bb6-c7
+Error parsing move Rf1-e1: no legal move matches Rf1-e1
+Error parsing move Bc7-f4): no legal move matches Bc7-f4)
+Error parsing move 10}: no legal move matches 10}
+Error parsing move Rxe8+: no legal move matches Rxe8+
+Error parsing move Rxe8: no legal move matches Rxe8
+Error parsing move Bc2-f5: no legal move matches Bc2-f5
+Error parsing move Nd2-b3: no legal move matches Nd2-b3
+Error parsing move Bc5-b6: no legal move matches Bc5-b6
+Error parsing move Nc3-a4: no legal move matches Nc3-a4
+Error parsing move Bb6-d8: no legal move matches Bb6-d8
+Error parsing move Nb3-d4: no legal move matches Nb3-d4
+Error parsing move Bf5-g6: no legal move matches Bf5-g6
+Error parsing move b2-b4: no legal move matches b2-b4
+Error parsing move Nf6-d5: no legal move matches Nf6-d5
+Error parsing move b4-b5: no legal move matches b4-b5
+Error parsing move Bd8-g5: no legal move matches Bd8-g5
+Error parsing move Rc1-d1): no legal move matches Rc1-d1)
+Error parsing move 11}: no legal move matches 11}
+Error parsing move Rc1: no legal move matches Rc1
+Move 32: Nd5 -> r2qr1k1/p3bppp/2pp4/3n4/2NQP3/8/PPP2PPP/1R3RK1 w - - 1 1
+Error parsing move Bb4xd2: no legal move matches Bb4xd2
+Error parsing move Rc1-f1: no legal move matches Rc1-f1
+Error parsing move Bf5xc2: no legal move matches Bf5xc2
+Error parsing move Nd5-e3: no legal move matches Nd5-e3
+Error parsing move Bd2xe3: no legal move matches Bd2xe3
+Error parsing move f2xe3: no legal move matches f2xe3
+Error parsing move Re8xe3: no legal move matches Re8xe3
+Error parsing move Kg1-f2: no legal move matches Kg1-f2
+Error parsing move Re3-d3: no legal move matches Re3-d3
+Error parsing move Rf1-e1: no legal move matches Rf1-e1
+Error parsing move Kg8-f8: no legal move matches Kg8-f8
+Error parsing move Re1-e2: no legal move matches Re1-e2
+Error parsing move Bc2-d1: no legal move matches Bc2-d1
+Error parsing move Re2-e5: no legal move matches Re2-e5
+Error parsing move a5-a4: no legal move matches a5-a4
+Error parsing move Kf2-g1): no legal move matches Kf2-g1)
+Error parsing move 8}: no legal move matches 8}
+Error parsing move Ndb1: no legal move matches Ndb1
+Error parsing move 6}: no legal move matches 6}
+Error parsing move Nxc3: no legal move matches Nxc3
+Error parsing move Rd1-c1: no legal move matches Rd1-c1
+Error parsing move Bc5-f8: no legal move matches Bc5-f8
+Error parsing move Rc1-d1: no legal move matches Rc1-d1
+Error parsing move Bf8-e7: no legal move matches Bf8-e7
+Error parsing move Rd1-e1: no legal move matches Rd1-e1
+Error parsing move Kg8-f8: no legal move matches Kg8-f8
+Error parsing move Nb5-c3: no legal move matches Nb5-c3
+Error parsing move Rd8-d4: no legal move matches Rd8-d4
+Error parsing move Re1-e5): no legal move matches Re1-e5)
+Error parsing move 13}: no legal move matches 13}
+Error parsing move bxc3: no legal move matches bxc3
+Error parsing move Bd6: no legal move matches Bd6
+Error parsing move Rc1-f1: no legal move matches Rc1-f1
+Error parsing move Bf5xc2: no legal move matches Bf5xc2
+Error parsing move g2-g3: no legal move matches g2-g3
+Error parsing move Bf4-d6: no legal move matches Bf4-d6
+Error parsing move Rf1-c1: no legal move matches Rf1-c1
+Error parsing move Bc2-f5: no legal move matches Bc2-f5
+Error parsing move h3-h4: no legal move matches h3-h4
+Error parsing move Re8-e2: no legal move matches Re8-e2
+Error parsing move Nb1-c3: no legal move matches Nb1-c3
+Error parsing move Re2-b2: no legal move matches Re2-b2
+Error parsing move Rc1-e1): no legal move matches Rc1-e1)
+Error parsing move 14}: no legal move matches 14}
+Move 33: g3 -> r2qr1k1/p3bppp/2pp4/3n4/2NQP3/6P1/PPP2P1P/1R3RK1 b - - 0 1
+Error parsing move Re2: no legal move matches Re2
+Error parsing move Bg4xf3: no legal move matches Bg4xf3
+Error parsing move Rc1-d1: no legal move matches Rc1-d1
+Error parsing move Re2-f2+: no legal move matches Re2-f2+
+Error parsing move Kf1xf2: no legal move matches Kf1xf2
+Error parsing move Bf3xd1: no legal move matches Bf3xd1
+Error parsing move Nb1-d2: no legal move matches Nb1-d2
+Error parsing move Bd1xc2: no legal move matches Bd1xc2
+Error parsing move Kf2-e3: no legal move matches Kf2-e3
+Error parsing move f7-f6: no legal move matches f7-f6
+Error parsing move c3-c4: no legal move matches c3-c4
+Error parsing move Bd6-c5+: no legal move matches Bd6-c5+
+Error parsing move Ke3-f4: no legal move matches Ke3-f4
+Error parsing move g7-g5+: no legal move matches g7-g5+
+Error parsing move Kf4-g4: no legal move matches Kf4-g4
+Error parsing move a5-a4: no legal move matches a5-a4
+Error parsing move h2-h4: no legal move matches h2-h4
+Error parsing move f6-f5+: no legal move matches f6-f5+
+Error parsing move Kg4-h3: no legal move matches Kg4-h3
+Error parsing move h7-h6): no legal move matches h7-h6)
+Error parsing move 9}: no legal move matches 9}
+Error parsing move Kf1: no legal move matches Kf1
+Error parsing move Bg4: no legal move matches Bg4
+Error parsing move Kf1xf2: no legal move matches Kf1xf2
+Error parsing move Bf3xd1: no legal move matches Bf3xd1
+Error parsing move Kf2-e3: no legal move matches Kf2-e3
+Error parsing move Bd1xc2: no legal move matches Bd1xc2
+Error parsing move Nb1-d2): no legal move matches Nb1-d2)
+Error parsing move 19}: no legal move matches 19}
+Error parsing move Kg1: no legal move matches Kg1
+Error parsing move 5}: no legal move matches 5}
+Error parsing move Bh3: no legal move matches Bh3
+Error parsing move Rd1-g1: no legal move matches Rd1-g1
+Error parsing move Be3xg1: no legal move matches Be3xg1
+Error parsing move Kh1xg1: no legal move matches Kh1xg1
+Error parsing move Re2-g2+: no legal move matches Re2-g2+
+Error parsing move Kg1-f1: no legal move matches Kg1-f1
+Error parsing move Rg2xh2+: no legal move matches Rg2xh2+
+Error parsing move Kf1-e1: no legal move matches Kf1-e1
+Error parsing move Rh2xc2: no legal move matches Rh2xc2
+Error parsing move Nf3-d4: no legal move matches Nf3-d4
+Error parsing move Rc2xa2: no legal move matches Rc2xa2
+Error parsing move Ke1-d1: no legal move matches Ke1-d1
+Error parsing move Bh3-g4+: no legal move matches Bh3-g4+
+Error parsing move Kd1-c1): no legal move matches Kd1-c1)
+Error parsing move 9}: no legal move matches 9}
+Error parsing move Rd1: no legal move matches Rd1
+Move 34: f6 -> r2qr1k1/p3b1pp/2pp1p2/3n4/2NQP3/6P1/PPP2P1P/1R3RK1 w - - 0 1
+Error parsing move Re2-g2+: no legal move matches Re2-g2+
+Error parsing move Kg1-f1: no legal move matches Kg1-f1
+Error parsing move Rg2xh2+: no legal move matches Rg2xh2+
+Error parsing move Kf1-e1: no legal move matches Kf1-e1
+Error parsing move Rh2xc2: no legal move matches Rh2xc2
+Error parsing move c3-c4: no legal move matches c3-c4
+Error parsing move Rc2xc4: no legal move matches Rc2xc4
+Error parsing move a2-a3: no legal move matches a2-a3
+Error parsing move Rc4-c3: no legal move matches Rc4-c3
+Error parsing move Ke1-f2: no legal move matches Ke1-f2
+Error parsing move Rc3xa3: no legal move matches Rc3xa3
+Error parsing move Nf3-d4: no legal move matches Nf3-d4
+Error parsing move Kg8-f7): no legal move matches Kg8-f7)
+Error parsing move 18}: no legal move matches 18}
+Move 35: a4 -> r2qr1k1/p3b1pp/2pp1p2/3n4/P1NQP3/6P1/1PP2P1P/1R3RK1 b - a3 0 1
+Error parsing move Bc5: no legal move matches Bc5
+Error parsing move Kg1-h1: no legal move matches Kg1-h1
+Error parsing move Re2xf2: no legal move matches Re2xf2
+Error parsing move Rd1-d8+: no legal move matches Rd1-d8+
+Error parsing move Kg8-f7: no legal move matches Kg8-f7
+Error parsing move Nb1-d2: no legal move matches Nb1-d2
+Error parsing move Rf2-e2: no legal move matches Rf2-e2
+Error parsing move Rd8-d7+: no legal move matches Rd8-d7+
+Error parsing move Bh3xd7: no legal move matches Bh3xd7
+Error parsing move h2-h3: no legal move matches h2-h3
+Error parsing move Bd7-c6+: no legal move matches Bd7-c6+
+Error parsing move Nd2-e4: no legal move matches Nd2-e4
+Error parsing move Bc6xe4+): no legal move matches Bc6xe4+)
+Error parsing move 0}: no legal move matches 0}
+Error parsing move Kh1: no legal move matches Kh1
+Error parsing move Rxf2: no legal move matches Rxf2
+Error parsing move 0}: no legal move matches 0}
+Error parsing move Rd8+: no legal move matches Rd8+
+Move 36: Kf7 -> r2qr3/p3bkpp/2pp1p2/3n4/P1NQP3/6P1/1PP2P1P/1R3RK1 w - - 1 1
+Error parsing move Rd7+: no legal move matches Rd7+
+Error parsing move Bxd7: no legal move matches Bxd7
+Error parsing move Rc2xd2+): no legal move matches Rc2xd2+)
+Error parsing move 0}: no legal move matches 0}
+Move 37: h3 -> r2qr3/p3bkpp/2pp1p2/3n4/P1NQP3/6PP/1PP2P2/1R3RK1 b - - 0 1
+Error parsing move Rxc2: no legal move matches Rxc2
+Error parsing move g4: no legal move matches g4
+Error parsing move Bc6#: no legal move matches Bc6#

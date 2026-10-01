@@ -1,0 +1,30 @@
+[
+  {
+    "label": "engine-compile",
+    "command": [
+      "/usr/local/go/bin/go",
+      "test",
+      "-short",
+      "./engine",
+      "-run",
+      "^TestNoSuchReleaseCompileProbe$",
+      "-count=1"
+    ],
+    "exit_code": 0,
+    "seconds": 4.109
+  },
+  {
+    "label": "all-compile",
+    "command": [
+      "/usr/local/go/bin/go",
+      "test",
+      "-short",
+      "./...",
+      "-run",
+      "^TestNoSuchReleaseCompileProbe$",
+      "-count=1"
+    ],
+    "exit_code": 1,
+    "seconds": 7.499
+  }
+]

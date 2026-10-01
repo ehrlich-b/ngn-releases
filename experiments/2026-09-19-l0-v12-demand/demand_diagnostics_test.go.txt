@@ -1,0 +1,108 @@
+package rodentv12eval
+
+import "testing"
+
+func pushDemandMove(t *testing.T, context *SearchContext, delta MoveDelta, post Position) {
+	t.Helper()
+	if err := context.PushMove(delta, post); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func popDemandMove(t *testing.T, context *SearchContext) {
+	t.Helper()
+	if err := context.Pop(); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestDemandDiagnosticsTraceDependenciesAcrossPerspectiveRefresh(t *testing.T) {
+	model := incrementalTestModel()
+	root := contextPosition(White,
+		contextPiece{WhiteKing, 0}, contextPiece{BlackKing, 60},
+		contextPiece{WhiteKnight, 18}, contextPiece{BlackKnight, 45})
+	context, err := model.NewSearchContext(root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := context.EnableDemandDiagnostics(); err != nil {
+		t.Fatal(err)
+	}
+
+	postA := contextPost(root,
+		[]contextPiece{{WhiteKnight, 18}},
+		[]contextPiece{{WhiteKnight, 35}})
+	pushDemandMove(t, context, MoveDelta{MovingPlane: WhiteKnight, From: 18, To: 35}, postA)
+	postB := contextPost(postA,
+		[]contextPiece{{BlackKnight, 45}},
+		[]contextPiece{{BlackKnight, 28}})
+	pushDemandMove(t, context, MoveDelta{MovingPlane: BlackKnight, From: 45, To: 28}, postB)
+	postC := contextPost(postB,
+		[]contextPiece{{WhiteKing, 0}},
+		[]contextPiece{{WhiteKing, 8}})
+	pushDemandMove(t, context, MoveDelta{MovingPlane: WhiteKing, From: 0, To: 8}, postC)
+	if _, err := context.EvaluateRaw(); err != nil {
+		t.Fatal(err)
+	}
+	popDemandMove(t, context)
+	popDemandMove(t, context)
+	popDemandMove(t, context)
+
+	got := context.DiagnosticDemandCounts()
+	if got.EvaluationCalls != 1 || got.MovePushes != 3 || got.NullPushes != 0 || got.MaxDepth != 3 || got.UnbalancedResets != 0 {
+		t.Fatalf("top-level counts = %+v", got)
+	}
+	if got.MoveFramesRequired != 3 || got.MoveFramesDirect != 1 || got.MoveFramesDescendantOnly != 2 || got.MoveFramesAbandoned != 0 {
+		t.Fatalf("move frame classification = %+v", got)
+	}
+	if got.MoveCopyPerspectivesTotal != 6 || got.MoveCopyPerspectivesRequired != 3 || got.MoveCopyPerspectivesAbandoned != 3 {
+		t.Fatalf("move copy classification = %+v", got)
+	}
+	if got.Update2PerspectivesTotal != 5 || got.Update2PerspectivesRequired != 3 || got.Update2PerspectivesAbandoned != 2 {
+		t.Fatalf("update-2 classification = %+v", got)
+	}
+	if got.RefreshPerspectivesTotal != 1 || got.RefreshPerspectivesRequired != 1 || got.RefreshPerspectivesAbandoned != 0 {
+		t.Fatalf("refresh classification = %+v", got)
+	}
+}
+
+func TestDemandDiagnosticsClassifyAbandonedMoveAndNullFrames(t *testing.T) {
+	model := incrementalTestModel()
+	root := contextPosition(White,
+		contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60},
+		contextPiece{WhiteKnight, 18})
+	context, err := model.NewSearchContext(root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := context.EnableDemandDiagnostics(); err != nil {
+		t.Fatal(err)
+	}
+	post := contextPost(root,
+		[]contextPiece{{WhiteKnight, 18}},
+		[]contextPiece{{WhiteKnight, 35}})
+	pushDemandMove(t, context, MoveDelta{MovingPlane: WhiteKnight, From: 18, To: 35}, post)
+	if err := context.PushNull(); err != nil {
+		t.Fatal(err)
+	}
+	popDemandMove(t, context)
+	popDemandMove(t, context)
+
+	got := context.DiagnosticDemandCounts()
+	if got.MoveFramesAbandoned != 1 || got.NullFramesAbandoned != 1 {
+		t.Fatalf("abandoned frames = %+v", got)
+	}
+	if got.MoveCopyPerspectivesTotal != 2 || got.MoveCopyPerspectivesAbandoned != 2 ||
+		got.NullCopyPerspectivesTotal != 2 || got.NullCopyPerspectivesAbandoned != 2 {
+		t.Fatalf("abandoned copies = %+v", got)
+	}
+	if got.Update2PerspectivesTotal != 2 || got.Update2PerspectivesAbandoned != 2 {
+		t.Fatalf("abandoned updates = %+v", got)
+	}
+	if err := context.ResetDiagnosticDemandCounts(); err != nil {
+		t.Fatal(err)
+	}
+	if got := context.DiagnosticDemandCounts(); got != (DemandDiagnostics{}) {
+		t.Fatalf("reset counts = %+v", got)
+	}
+}

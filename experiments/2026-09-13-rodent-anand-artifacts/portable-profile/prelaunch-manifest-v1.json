@@ -1,0 +1,51 @@
+{
+  "schema": "ngn-rodent-cold-profile-manifest-v1",
+  "release_state": "RELEASED_BY_ROOT_2026-09-13",
+  "purpose": "diagnostic CPU and allocation profile only; no timing ratio, Elo, or strength inference",
+  "source": {
+    "accepted_commit": "637043a6e5ed46e2328a65097f81d33ea1dc7524",
+    "isolated_base_commit": "203830ae698b3890cd636b8f0c69a4485cd538cd",
+    "slice_c_patch_path": "/home/ehrli/repos/ngn-rodent-engine-slicec-v2-20260913/output/rodent-slicec-20260913/rodent-slicec-final.patch",
+    "slice_c_patch_sha256": "0101bc5c6cee25dcf80529a8dd917f8d863adb645f13124d993c092b569038e3",
+    "equivalence_review": "root confirmed isolated base plus exact Slice C patch has the same Go source as accepted commit"
+  },
+  "probe": {
+    "path": "/home/ehrli/repos/ngn-rodent-profile-20260913/engine/rodent_transition_profile_test.go",
+    "sha256": "4430f607d4a56c2ab3f951a0907b5effa5b2731833acb0542b8cb105a55d4347",
+    "fixtures": 6,
+    "measured_iterations_per_fixture": 5,
+    "possible_calibration_iterations_per_fixture": 1,
+    "node_limit": 400000,
+    "hash_mb": 128,
+    "threads": 1
+  },
+  "binary": {
+    "path": "/home/ehrli/repos/ngn-rodent-profile-20260913/output/rodent-cold-profile-20260913/inputs/engine-rodent-profile.test",
+    "sha256": "7ee4fc0404ed7e2fc9497acdcae092de5df0bc36016e0b0c0dc63c06467e2f67",
+    "bytes": 20089784,
+    "build_command": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-profile-20260913 test -p 2 -c -o /home/ehrli/repos/ngn-rodent-profile-20260913/output/rodent-cold-profile-20260913/inputs/engine-rodent-profile.test ./engine",
+    "go_version": "go version go1.25.5 linux/amd64"
+  },
+  "model": {
+    "path": "/home/ehrli/rodent-v1.1-anand-sliceb-gate-20260913/run-002/inputs/network/rodent_anand_512hl.bin",
+    "sha256": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb",
+    "bytes": 789568
+  },
+  "supervisor": {
+    "path": "/home/ehrli/repos/ngn-rodent-profile-20260913/scripts/candidate-match/process_supervisor.py",
+    "sha256": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+    "child_cpu": "4",
+    "supervisor_cpu": "6",
+    "limit_seconds": 300,
+    "memory_limit_kib": 1048576
+  },
+  "launcher": {
+    "path": "/home/ehrli/repos/ngn-rodent-profile-20260913/output/rodent-cold-profile-20260913/launch-held-v1.sh",
+    "sha256": "0d2b0aa70e16cd5d1e4929bc70f287709e9057df59074be933638feba046cb6b"
+  },
+  "interpretation": {
+    "cpu_hotspots": "use only samples with pprof tag scope=search",
+    "allocation_profile": "process-global samples; do not call them search-only without attributable labels",
+    "counter_comparator": "descriptive only because evaluator choice changes the search tree"
+  }
+}

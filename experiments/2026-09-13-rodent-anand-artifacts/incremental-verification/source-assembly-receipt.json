@@ -1,0 +1,11 @@
+{
+  "base_commit": "0a78fd861b9f8081fb10f350f531fa8f0bd53249",
+  "base_tree": "fbd9ab73663c01a42fc35f543441d71ef74500a2",
+  "git_archive_sha256": "21db13ba7f9481da52b305d539545291d51fc6cc237f36a8bbd7f8df4735f8d9",
+  "overlays": {
+    "rodenteval/context.go": "f10c6ef9d7413878398ab080aa2895b966095e708120061d6f4d8b5169174ce3",
+    "rodenteval/context_oracle_test.go": "3235b2643d0aa9c4d2da0b136c78602d0528106366c94aaaf09efc7acbc7a9da",
+    "rodenteval/context_test.go": "d46db3ab881e599836f74bd1574a6a33c840fcf26be7db13931b22a40a70af6e"
+  },
+  "schema": "ngn-rodenteval-slice-b-source-assembly-v1"
+}

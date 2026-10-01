@@ -1,0 +1,105 @@
+{
+  "driver_sha256": "9c35fe89ef99a854deba2919e230af4decf6d7f93e55cb10c96444e8c51b2455",
+  "engines": {
+    "base": {
+      "path": "/home/ehrli/repos/ngn-qpromo-base-b7ffdc8-20260912/build/ngn_qpromo_base_b7ffdc8",
+      "sha256": "86ef7473fa5f53e4fdd800f550f4fe3f182db09056afacbad98cf174d88554bc",
+      "source_commit": "b7ffdc886a56516af673243cae2dbd7597115cc0"
+    },
+    "candidate": {
+      "base_commit": "b7ffdc886a56516af673243cae2dbd7597115cc0",
+      "path": "/home/ehrli/repos/ngn-qpromo-candidate-20260912/build/ngn_qpromo_candidate_b7ffdc8",
+      "production_patch_sha256": "171cfea254797ec0f756ed3503ea295ec4a5175bf88bd486a0cbb2009870bbb7",
+      "regression_test_patch_sha256": "34aaf0f0de0d979013a57fd2ecc438eb35bafb44b284ebb4c1128eebf11a9326",
+      "sha256": "3a0300324e3f1727f62d6d64b88e382075a7b6f33381ec76f4bb42468aca55a2"
+    }
+  },
+  "frozen_sources": {
+    "audit_fastchess_match.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/audit_fastchess_match.py",
+      "sha256": "2665c86e9cefd089757a44d30bc7e26a4481eb456bd4ed248849a71660e91bc1"
+    },
+    "candidate_build_test_receipt": {
+      "path": "/home/ehrli/repos/ngn-qpromo-candidate-20260912/output/qpromo-receipt/qpromo-build-test-receipt-20260912.json",
+      "sha256": "aa709d5e9e6e63a1e27bcc7a3fae66e8143ec25f114010cab36f9cdca5141d5a"
+    },
+    "candidate_production_patch": {
+      "path": "/home/ehrli/repos/ngn-qpromo-candidate-20260912/output/qpromo-receipt/quiet-promotion-production.patch",
+      "sha256": "171cfea254797ec0f756ed3503ea295ec4a5175bf88bd486a0cbb2009870bbb7"
+    },
+    "candidate_regression_patch": {
+      "path": "/home/ehrli/repos/ngn-qpromo-candidate-20260912/output/qpromo-receipt/quiet-promotion-regression.patch",
+      "sha256": "34aaf0f0de0d979013a57fd2ecc438eb35bafb44b284ebb4c1128eebf11a9326"
+    },
+    "common.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/common.py",
+      "sha256": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807"
+    },
+    "fastchess": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/inputs/tools/fastchess",
+      "sha256": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00"
+    },
+    "model": {
+      "path": "/home/ehrli/repos/ngn/build/releases/ngn-a51233b-counter55-v1/n-30-5268.nn",
+      "sha256": "3488baed71f4d432d028e05b65e2ff13f8c9afe7f91974d1a3c34a0691d6670c"
+    },
+    "openings": {
+      "path": "/home/ehrli/repos/ngn-m4c-sprt-runner/output/sprt-inputs-v1/openings-first200.pgn",
+      "sha256": "1ae6a65a0224d7a4ff893a3c999542cd3d05e9a7f0e989fe2deee1cff7b8bf5a"
+    },
+    "prefixes": {
+      "path": "/home/ehrli/repos/ngn-m4c-sprt-runner/output/sprt-inputs-v1/opening-prefixes-first200.txt",
+      "sha256": "2257ecfb9af03f1ee0bff68f71ec97dbe363cdb9f535fab1a0ebc5af1abaaf33"
+    },
+    "process_supervisor.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/process_supervisor.py",
+      "sha256": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f"
+    },
+    "resource_amendment_receipt": {
+      "path": "/home/ehrli/repos/ngn-qpromo-gate-20260912/qpromo_gate_resource_amendment_v2.json",
+      "sha256": "a672be9ff284171c5dcd79ee69f770fab438d26635bfde029220d3ba20e404c8"
+    },
+    "role_exec.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/role_exec.py",
+      "sha256": "d859a8f6610124bfcbf0e92af3286733c45184cff1377346b5be854b25c2337a"
+    },
+    "run001_supervisor_receipt": {
+      "path": "/home/ehrli/repos/ngn-qpromo-gate-20260912/run-001/aa/supervisor.json",
+      "sha256": "fdc3d73fee2eb47ef4dacab26f8c5748d51570ef6eedff4dd4128496a1098bab"
+    },
+    "run_match_stage.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/run_match_stage.py",
+      "sha256": "5ce5e6fed89cb9124d169feb65c0e0fcc1cb3c739ec234993d706cf07efbbe34"
+    },
+    "stockfish": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/inputs/tools/stockfish",
+      "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+    },
+    "trace_audit.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/trace_audit.py",
+      "sha256": "423872b4cd7ad3e335e72df58bf14df3366e94819ca2f517d4dd0fc17263b380"
+    },
+    "uci_preflight.py": {
+      "path": "/home/ehrli/repos/ngn-counter55-sprt-capability/output/counter55-vs-hce-sprt-20260906-attempt1/source/uci_preflight.py",
+      "sha256": "d627b51033d2bebf4451262c8f3cadf676c6a59acaa539e2d8afc6a230ffd6b1"
+    }
+  },
+  "protocol": {
+    "aa_games": 100,
+    "bootstrap_replicates": 100000,
+    "bootstrap_seed": 2026091201,
+    "candidate_games": 400,
+    "concurrency": 4,
+    "physical_cpu_mask": [
+      "0",
+      "2",
+      "4",
+      "6"
+    ],
+    "seed": 20260912,
+    "tc": "10+0.1"
+  },
+  "release_state": "RELEASED_AFTER_INDEPENDENT_REVIEW",
+  "run_root": "/home/ehrli/repos/ngn-qpromo-gate-20260912/run-002",
+  "schema": "ngn-qpromo-fixed-gate-v1"
+}

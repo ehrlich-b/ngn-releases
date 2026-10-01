@@ -55,6 +55,10 @@ func ParseFEN(fenString string) (*Position, error) {
 			position.EnPassant = NoSquare
 		}
 	}
+	// Preserve the raw adjacency/X-FEN target above for move generation and
+	// Polyglot books, while recording separately whether it is legal and may
+	// distinguish the ordinary repetition/TT key.
+	position.refreshEnPassantHash()
 
 	// 5. Parse halfmove clock
 	halfmove, err := strconv.Atoi(parts[4])

@@ -1,0 +1,185 @@
+{
+  "cells": [
+    {
+      "limit_seconds": 1800,
+      "minimum_remaining_seconds": 46800,
+      "name": "smoke",
+      "pairs": 6,
+      "purpose": "smoke"
+    },
+    {
+      "limit_seconds": 10800,
+      "minimum_remaining_seconds": 45000,
+      "name": "aa",
+      "pairs": 64,
+      "purpose": "aa"
+    },
+    {
+      "limit_seconds": 32400,
+      "minimum_remaining_seconds": 34200,
+      "name": "anchor",
+      "pairs": 200,
+      "purpose": "anchor"
+    }
+  ],
+  "claim_boundary": "Released NGN 0.2.0-rc.1 versus the official unmodified Zahak 10 Linux AVX release, one physical CPU per game, Threads1 Hash128 and equal 100 ms move overhead at 120+1 on the same WSL host. This is relative strength evidence at the nominal CCRL Blitz clock format; host calibration differs and no official CCRL rating or absolute Elo transfer is claimed.",
+  "common": {
+    "auditor": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/source/audit_fastchess_match.py",
+      "sha256": "4c4d7374c16fe7fa9104429aecbb22ea582e1525d70712c6769d6ae28d16d224"
+    },
+    "concurrency": 6,
+    "cpus": [
+      4,
+      6,
+      8,
+      10,
+      12,
+      14
+    ],
+    "fastchess": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/tools/fastchess",
+      "sha256": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00"
+    },
+    "input_pool": {
+      "auditor": {
+        "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/audit_fastchess_match.py",
+        "sha256": "4c4d7374c16fe7fa9104429aecbb22ea582e1525d70712c6769d6ae28d16d224"
+      },
+      "fastchess": {
+        "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/fastchess",
+        "sha256": "e61220f6651599b2a40a7bd1d7535cf59be8e3eaa1f74dd2f6d5dc2fb1c0bc00"
+      },
+      "stockfish": {
+        "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/stockfish18",
+        "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+      }
+    },
+    "maximum_trace_bytes": 2147483648,
+    "minimum_windows_free_gib": 25,
+    "opening_plies": 6,
+    "seed": 2026093022,
+    "stockfish": {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-pilot-screen-40-v1/inputs/tools/stockfish18",
+      "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+    },
+    "strict": true,
+    "tc": "120+1",
+    "trace_storage": "ram-gzip"
+  },
+  "controller": {
+    "path": "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1/benchmark-source/scripts/ownedbenchmark.py",
+    "sha256": "56595613f95366d46deed92587980bc18adb71155e4905aae38a89fd77217fd8"
+  },
+  "deadline_utc": "2026-10-01T12:00:00Z",
+  "frontier_analysis": "Report the existing fixed-cap 95% paired verdict and independently recount the final PGN. In the wider top-three assessment also compute a 99% paired confidence interval as predeclared here; do not convert the result into a official absolute rating.",
+  "initial_remaining_seconds": 46800,
+  "instrument": {
+    "common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+    "ownedmatch.py": "76c9f2e972de789bdc203971f33eea53bbea7dbb403bbffa469ca80568638690",
+    "ownedstorage.py": "a3a892cede5d2b0a65291bbc38829bf566f288ca7b23b419df754678c60f23f2",
+    "process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+    "quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3",
+    "role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+    "run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+    "trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+    "uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+  },
+  "minimum_windows_free_gib": 30,
+  "opening_receipt": {
+    "path": "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1/openings/receipt.json",
+    "sha256": "3a8fcb8e386907eb3ec9b78e70f6d1d6ac76dcc9816bd79c85e520dba5216e16"
+  },
+  "opening_selection_receipt": {
+    "path": "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1/openings/selection.json",
+    "sha256": "6af9a6f0e27284b6dec0b667e23d63b3464dd75ed89e3252bdc675b2a4435d71"
+  },
+  "opponent_download_receipt": {
+    "path": "/home/ehrli/nnue-owned-top3-20260930/opponents/download-receipt.json",
+    "sha256": "43610cb75519bf427c4940e6b65c12393f4ad1a0db4edb9d47e14902693bf3b4"
+  },
+  "roles": [
+    {
+      "engine": {
+        "path": "/home/ehrli/nnue-owned-continuation-20260928/release-build-0.2.0-rc.1/ngn",
+        "sha256": "de86da92c75ada0f5449ae47d66d55879e221054731190e0c7c885d02123937f"
+      },
+      "name": "NGN-0.2.0-rc.1",
+      "network": {
+        "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue",
+        "sha256": "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29"
+      },
+      "options": [
+        [
+          "Threads",
+          1
+        ],
+        [
+          "OwnBook",
+          false
+        ],
+        [
+          "EvalFile",
+          "$NETWORK"
+        ],
+        [
+          "EvalBackend",
+          "ngn-k4-768-v1"
+        ],
+        [
+          "Hash",
+          128
+        ],
+        [
+          "Move Overhead",
+          100
+        ],
+        [
+          "K4EvalScale",
+          60
+        ]
+      ]
+    },
+    {
+      "engine": {
+        "path": "/home/ehrli/nnue-owned-top3-20260930/opponents/zahak-10/zahak-linux-amd64-10.0-avx",
+        "sha256": "fdb23a317860bf8ec847d4818c62557a40601c7ee61a176acb764c17104beac0"
+      },
+      "name": "Zahak-10.0",
+      "network": null,
+      "options": [
+        [
+          "Threads",
+          1
+        ],
+        [
+          "Hash",
+          128
+        ],
+        [
+          "Ponder",
+          false
+        ],
+        [
+          "OwnBook",
+          false
+        ],
+        [
+          "MoveOverhead",
+          100
+        ]
+      ]
+    }
+  ],
+  "schema": "ngn-owned-external-benchmark-plan-v1",
+  "source_receipt": {
+    "path": "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1/source-receipt.json",
+    "sha256": "fb80ee7d1203d240595e9e074bf11300b18700a97888fd7258c711630bf1d655"
+  },
+  "stop_rules": "Any failed control, process/legal/operational audit, declared cap, deadline or capacity guard leaves the trial unscored. No extension, partial verdict, restart or pooling. Every unknown warning remains rejected.",
+  "trial": "One fresh fixed-cap trial, all six-ply opening prefixes disjoint from both declared September 30 morning receipts. No prior games, partial scores or stopped trials are pooled.",
+  "validation": {
+    "path": "/home/ehrli/nnue-owned-morning-20260930/validation-v2/report.json",
+    "sha256": "476f26646412767ac8943beedffb772be185a2d16ea0ef9963eea09e8408949d"
+  }
+}

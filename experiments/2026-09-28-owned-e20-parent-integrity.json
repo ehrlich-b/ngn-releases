@@ -1,0 +1,196 @@
+{
+  "schema": "ngn-e20-preserved-checkpoint-integrity-v1",
+  "started": 1790641182.304323,
+  "checked": [
+    {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/receipt.json",
+      "receipt_sha256": "0bd40087aff8dc25412ac85cf212813752787debdfeaf8561795d5766eafcbfa",
+      "completed_updates": 2375680,
+      "pass": false,
+      "files": [
+        {
+          "kind": "raw",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/raw.bin",
+          "expected": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/raw.bin",
+            "bytes": 9489440,
+            "sha256": "01ff3121b494357d53356d083de634a3538fadd62fe31e86ede719e756f185a8"
+          },
+          "exists": true,
+          "bytes": 9489440,
+          "sha256": "01ff3121b494357d53356d083de634a3538fadd62fe31e86ede719e756f185a8",
+          "modified": 1790571997.5884516,
+          "pass": true
+        },
+        {
+          "kind": "quantised",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/quantised.bin",
+          "expected": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/quantised.bin",
+            "bytes": 4744768,
+            "sha256": "50c40ced10f11942963eb8ed26c61ecf0ee8cf74c18f8339d30d81f60b1f67d0"
+          },
+          "exists": true,
+          "bytes": 4744768,
+          "sha256": "99c1d420b1b6b2e93331a6ec4f9c2cac1dd538d4f683e0a7865305186d47f3ea",
+          "modified": 1790571997.5603056,
+          "pass": false
+        },
+        {
+          "kind": "weights",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/optimiser_state/weights.bin",
+          "expected": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/optimiser_state/weights.bin",
+            "bytes": 11848796,
+            "sha256": "ad1fb7200d2f9803d9547c490c7fef04cf3e083a0d7a2ae8c362d70653e10e8f"
+          },
+          "exists": true,
+          "bytes": 11848796,
+          "sha256": "b8c092e938324288bff2292a0740ff5919b0cc8434e2199786ee4aaa26c5c818",
+          "modified": 1790571997.4798882,
+          "pass": false
+        },
+        {
+          "kind": "momentum",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/optimiser_state/momentum.bin",
+          "expected": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/optimiser_state/momentum.bin",
+            "bytes": 11848796,
+            "sha256": "1e54c0136ba399dffb6533f48ae3f9cc24a0030d14fdb3fd8d070e6fc7bcef83"
+          },
+          "exists": true,
+          "bytes": 11848796,
+          "sha256": "b8c092e938324288bff2292a0740ff5919b0cc8434e2199786ee4aaa26c5c818",
+          "modified": 1790571997.4999926,
+          "pass": false
+        },
+        {
+          "kind": "velocity",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/optimiser_state/velocity.bin",
+          "expected": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/optimiser_state/velocity.bin",
+            "bytes": 11848796,
+            "sha256": "9a84338af2de0b3b6ed7b81094e2cb36a40c1611fd16a3424d170fb3578fdbe2"
+          },
+          "exists": true,
+          "bytes": 11848796,
+          "sha256": "b8c092e938324288bff2292a0740ff5919b0cc8434e2199786ee4aaa26c5c818",
+          "modified": 1790571997.5080342,
+          "pass": false
+        },
+        {
+          "kind": "log",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/log.txt",
+          "expected": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2375680/log.txt",
+            "bytes": 11290,
+            "sha256": "29c731d59f7a88978b462392b4f0bd1619dd30c4c0d0be72ac23fbf579d9631f"
+          },
+          "exists": true,
+          "bytes": 11290,
+          "sha256": "29c731d59f7a88978b462392b4f0bd1619dd30c4c0d0be72ac23fbf579d9631f",
+          "modified": 1790571997.5643265,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/receipt.json",
+      "receipt_sha256": "835a5900eb619b830bdc629956f10f7ea5d4d7903f1246efd996977e61df5011",
+      "completed_updates": 2359296,
+      "pass": true,
+      "files": [
+        {
+          "kind": "raw",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/raw.bin",
+          "expected": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/raw.bin",
+            "bytes": 9489440,
+            "sha256": "5bcc6de1c1d750e535758a3976ed84acd0641d3e3272d58548648dfae443ac85"
+          },
+          "exists": true,
+          "bytes": 9489440,
+          "sha256": "5bcc6de1c1d750e535758a3976ed84acd0641d3e3272d58548648dfae443ac85",
+          "modified": 1790571897.1004286,
+          "pass": true
+        },
+        {
+          "kind": "quantised",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/quantised.bin",
+          "expected": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/quantised.bin",
+            "bytes": 4744768,
+            "sha256": "83fa49e461ca748287a8cc0d5b1e32aae07b1d12ba609984b9ebc5497c029d15"
+          },
+          "exists": true,
+          "bytes": 4744768,
+          "sha256": "83fa49e461ca748287a8cc0d5b1e32aae07b1d12ba609984b9ebc5497c029d15",
+          "modified": 1790571897.072378,
+          "pass": true
+        },
+        {
+          "kind": "weights",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/optimiser_state/weights.bin",
+          "expected": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/optimiser_state/weights.bin",
+            "bytes": 11848796,
+            "sha256": "4e69be672d564fe68379a90a1b9635af48d452f21e2bbacd56f6c13a0526a810"
+          },
+          "exists": true,
+          "bytes": 11848796,
+          "sha256": "4e69be672d564fe68379a90a1b9635af48d452f21e2bbacd56f6c13a0526a810",
+          "modified": 1790571896.9882407,
+          "pass": true
+        },
+        {
+          "kind": "momentum",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/optimiser_state/momentum.bin",
+          "expected": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/optimiser_state/momentum.bin",
+            "bytes": 11848796,
+            "sha256": "6054bef5f70d61d6b685ad25f3d33c613b3fa9a5c2a3ad590636f4e071bc324f"
+          },
+          "exists": true,
+          "bytes": 11848796,
+          "sha256": "6054bef5f70d61d6b685ad25f3d33c613b3fa9a5c2a3ad590636f4e071bc324f",
+          "modified": 1790571897.0002472,
+          "pass": true
+        },
+        {
+          "kind": "velocity",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/optimiser_state/velocity.bin",
+          "expected": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/optimiser_state/velocity.bin",
+            "bytes": 11848796,
+            "sha256": "3f1c260c2088976e2012104c9f81a26353c83b05d9c195a1e1853936127451e0"
+          },
+          "exists": true,
+          "bytes": 11848796,
+          "sha256": "3f1c260c2088976e2012104c9f81a26353c83b05d9c195a1e1853936127451e0",
+          "modified": 1790571897.0082617,
+          "pass": true
+        },
+        {
+          "kind": "log",
+          "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/log.txt",
+          "expected": {
+            "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/log.txt",
+            "bytes": 11312,
+            "sha256": "d52586cb27c7b91a109e8f750ceba37052b94219f525b2216621ec4bfce36361"
+          },
+          "exists": true,
+          "bytes": 11312,
+          "sha256": "d52586cb27c7b91a109e8f750ceba37052b94219f525b2216621ec4bfce36361",
+          "modified": 1790571897.072378,
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "first_intact_parent": {
+    "path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/receipt.json",
+    "sha256": "835a5900eb619b830bdc629956f10f7ea5d4d7903f1246efd996977e61df5011",
+    "completed_updates": 2359296
+  },
+  "completed": 1790641182.3988154
+}

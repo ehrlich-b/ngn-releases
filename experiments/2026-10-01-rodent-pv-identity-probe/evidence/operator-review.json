@@ -1,0 +1,37 @@
+{
+  "completed_at_utc": "2026-10-01T04:09:05.048297+00:00",
+  "checks": [
+    {
+      "name": "review-python-syntax",
+      "exit": 0
+    },
+    {
+      "name": "review-source-gofmt",
+      "exit": 0
+    },
+    {
+      "name": "review-source-model",
+      "exit": 0
+    },
+    {
+      "name": "review-classifier",
+      "exit": 0
+    }
+  ],
+  "source_sha256": "84a6b6002df42d1564ea102a50a793a44cdaeccabdefcc9dfba4c5d4e84fb45f",
+  "report_sha256": "82bc78fbae3df47511937c27c06adb644afe517d587ab5c1cd645b993747c962",
+  "oracle_sha256": "1fde6a8e932508d14b31f6a584497b49c2969fc3c7cdc675347f819f0d667a5b",
+  "allowed_cpus": [
+    0,
+    2
+  ],
+  "cpu_max": "50000 100000",
+  "memory_max": "4294967296",
+  "nice": 10,
+  "native_goal_limit_not_provider_denial": true,
+  "no_new_searches": true,
+  "production_changes": false,
+  "new_runtime_reproduction": false,
+  "historical_witness_preserved": true,
+  "native_compatibility_gate": "CLOSED"
+}

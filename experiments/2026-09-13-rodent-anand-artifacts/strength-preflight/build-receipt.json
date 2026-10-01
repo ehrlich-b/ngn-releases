@@ -1,0 +1,41 @@
+{
+  "schema": "ngn-rodent-counter-shared-build-receipt-v1",
+  "status": "PASS",
+  "source": {
+    "worktree": "/home/ehrli/repos/ngn-rodent-counter-strength-build-20260913",
+    "commit": "762377947c0907d1ce6be74cb71e01521610bd76",
+    "tree": "59587882012a4bd0a64fdac2678a0b0cee01c143",
+    "status_porcelain": ""
+  },
+  "toolchain": "go version go1.25.5 linux/amd64",
+  "build": {
+    "command": "env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly GOTOOLCHAIN=local /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-counter-strength-build-20260913 build -p 2 -o /home/ehrli/repos/ngn-rodent-counter-strength-build-20260913/output/rodent-counter-strength-build-20260913/ngn-rodent-counter-shared .",
+    "exit": 0,
+    "log": {
+      "path": "/home/ehrli/repos/ngn-rodent-counter-strength-build-20260913/output/rodent-counter-strength-build-20260913/build.log",
+      "sha256": "e3e675151c9f297856884136ddc5fdb88c41c214bf7cac534bd7f05fccbe0ea3"
+    },
+    "binary": {
+      "path": "/home/ehrli/repos/ngn-rodent-counter-strength-build-20260913/output/rodent-counter-strength-build-20260913/ngn-rodent-counter-shared",
+      "bytes": 3956602,
+      "sha256": "5547e3481f63789df59f0ab5d059212bb6c61e2780c898f93ee7afb82c73dbf8"
+    }
+  },
+  "configured_preflight": {
+    "status": "PASS",
+    "contract": "same binary, Threads=1, OwnBook=false, EvalFile before EvalBackend, Hash=128, Move Overhead=100; exact selected-backend diagnostic and depth-2 non-book search",
+    "roles": ["counter-5.5", "rodent-v1.1-anand"],
+    "summary": {
+      "path": "/home/ehrli/repos/ngn-rodent-counter-strength-build-20260913/output/rodent-counter-strength-build-20260913/configured-preflight/summary.json",
+      "sha256": "944fec6be699ca0610ba330cd79c5cc885bb486c71e7ccca1bcbe07c58337d83"
+    },
+    "runner": {
+      "path": "/home/ehrli/repos/ngn-rodent-counter-strength-build-20260913/output/rodent-counter-strength-build-20260913/run-configured-preflights.py",
+      "sha256": "9962d8e563448ad843cb9174e781c79c02d1681957bc7b1bec5996a93ba17a18"
+    },
+    "counter_model_sha256": "3488baed71f4d432d028e05b65e2ff13f8c9afe7f91974d1a3c34a0691d6670c",
+    "rodent_model_sha256": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb"
+  },
+  "match_launched": false,
+  "deployed": false
+}

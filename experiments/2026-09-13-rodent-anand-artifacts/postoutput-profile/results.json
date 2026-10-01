@@ -1,0 +1,132 @@
+{
+  "schema": "ngn-rodent-postoutput-search-profile-v1",
+  "purpose": "Identify the remaining Rodent search-scope CPU bottleneck after the accepted exact-integer AVX2 output kernel; this is hotspot evidence, not a speed or strength verdict.",
+  "source": {
+    "commit": "762377947c0907d1ce6be74cb71e01521610bd76",
+    "worktree": "/home/ehrli/repos/ngn-rodent-postoutput-profile-20260913",
+    "go_version": "go version go1.25.5 linux/amd64",
+    "goamd64": "v3",
+    "profile_probe_sha256": "4430f607d4a56c2ab3f951a0907b5effa5b2731833acb0542b8cb105a55d4347",
+    "model_sha256": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb",
+    "binary_sha256": "413e8138872cbcbcc9e5d6a7575962072e1cd5dce5c3c1199ecf3daf17be5445"
+  },
+  "protocol": {
+    "fixtures": [
+      "start_white",
+      "start_black",
+      "kiwipete_white",
+      "kiwipete_black",
+      "asymmetric_white",
+      "asymmetric_black"
+    ],
+    "minimum_nodes_per_search": 400000,
+    "hash_mb": 128,
+    "threads": 1,
+    "reported_searches": 30,
+    "calibration_searches": 6,
+    "profile_scope": "search",
+    "cpu": 4,
+    "timeout_seconds": 300,
+    "memory_limit_kib": 1048576,
+    "gomaxprocs": 1
+  },
+  "execution": {
+    "state": "COMPLETE",
+    "command_returncode": 0,
+    "supervisor_returncode": 0,
+    "elapsed_seconds": 24.386375306989066,
+    "timed_out": false,
+    "memory_limit_exceeded": false,
+    "orphan_detected": false,
+    "surviving_processes": [],
+    "peak_sampled_process_tree_rss_kib": 313984,
+    "benchmark_stderr_empty": true,
+    "build_exit": 0,
+    "build_stdout_empty": true,
+    "build_stderr_empty": true
+  },
+  "profile": {
+    "total_samples_seconds": 24.17,
+    "search_scope_samples_seconds": 24.15,
+    "search_scope_percent_of_total": 99.92,
+    "top_flat": [
+      {
+        "function": "rodenteval.(*Model).applyUpdates",
+        "seconds": 14.07,
+        "percent": 58.21,
+        "cumulative_seconds": 14.79,
+        "cumulative_percent": 61.19
+      },
+      {
+        "function": "engine.(*CachedEval).LoadKey",
+        "seconds": 0.95,
+        "percent": 3.93
+      },
+      {
+        "function": "engine.selectNextMove",
+        "seconds": 0.89,
+        "percent": 3.68
+      },
+      {
+        "function": "engine.alphaBetaPV",
+        "seconds": 0.85,
+        "percent": 3.52
+      },
+      {
+        "function": "runtime.duffcopy",
+        "seconds": 0.75,
+        "percent": 3.10
+      },
+      {
+        "function": "rodenteval.rodentOutputDotAVX2",
+        "seconds": 0.65,
+        "percent": 2.69
+      },
+      {
+        "function": "rodenteval.(*Model).refreshPerspective",
+        "seconds": 0.63,
+        "percent": 2.61
+      },
+      {
+        "function": "engine.(*workerHistory).scoreMovesIntoBuffer",
+        "seconds": 0.32,
+        "percent": 1.32
+      }
+    ],
+    "relevant_cumulative": [
+      {
+        "function": "rodenteval.(*SearchContext).PushMove",
+        "seconds": 16.04,
+        "percent": 66.36
+      },
+      {
+        "function": "engine.(*workerEvaluator).PushMove",
+        "seconds": 16.37,
+        "percent": 67.73
+      },
+      {
+        "function": "rodenteval.(*Model).evaluateAccumulator",
+        "seconds": 0.76,
+        "percent": 3.14
+      }
+    ]
+  },
+  "finding": {
+    "next_target": "rodenteval.(*Model).applyUpdates",
+    "reason": "It is the dominant post-output hotspot at 58.21% flat search-scope CPU. The accepted AVX2 output dot is now 2.69%; refreshPerspective is 2.61%. The current update path performs exact ordered modular int16 add/subtract operations over 512 lanes for each non-refreshed perspective after the separate frame copy.",
+    "smallest_future_experiment": "A dispatched AVX2 implementation of the existing 2/3/4-row ordered int16 update loop, retaining the portable scalar oracle and all current transaction, growth, refresh, null, and pop behavior. Keep VPADDW/VPSUBW in semantic update order and measure it as one candidate before considering copy fusion.",
+    "falsifier": "Reject before games if exhaustive lane-bit parity, special-transition/oracle parity, or CPU fallback fails; reject the speed candidate if direct update rows regress or the same six-fixture search gate does not improve materially.",
+    "limitations": "A sampled CPU profile identifies where time is spent. It does not establish Elo, strength, or a before/after speed ratio; the prior portable profile is context only and was not rerun here."
+  },
+  "evidence_sha256": {
+    "stdout.txt": "71004d286110951a01238370e7dfe45b71c51b9cd4a31d767d51ead7e415420b",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "supervisor-receipt.json": "d55d3cf49257eb0ecae4387b7e0e5155b2c33c0c451db62ce3936e4c57c3a115",
+    "time.txt": "dc8fa9933a29f11267e68e5aee273057f982c548d0ffaf27ca60d40872c24cdf",
+    "pprof-search-top.txt": "04999c52b11dcb727043eafa2d834197dfb8558a7fad748dbe1185f7f963bfd7",
+    "pprof-search-cum.txt": "1e05b48dc71fc82d7a0ab8e7e30dcf7f7ad69d7ff37702269e50ca1e5a259f30",
+    "pprof-tags.txt": "47d953b3a04a9201108080a1d10a5b4ab6e03006bd04448451f1f9b1fcf333ea",
+    "pprof-apply-updates-list.txt": "26a9d8cc96a64a8d27c38359a3d85e6d430217bb881386da4951c07711c7a0bd",
+    "cpu.pb.gz_not_archived": "7485a271eb5616744a0e74043c4d6312816f0f6744cdff1c9f8b16c88021b618"
+  }
+}

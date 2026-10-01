@@ -1,0 +1,1146 @@
+{
+  "decision": "PASS_PERFORMANCE",
+  "direct": [
+    {
+      "block": 1,
+      "order": "portable-first",
+      "ratios": {
+        "all": 0.09994572100597068,
+        "asymmetric_black": 0.09866305329719964,
+        "asymmetric_white": 0.0988021778584392,
+        "kiwipete_black": 0.09707964601769911,
+        "kiwipete_white": 0.09894927536231883,
+        "start_black": 0.10091257528746121,
+        "start_white": 0.09989015012815818
+      },
+      "raw": {
+        "portable": {
+          "all": 552.7,
+          "asymmetric_black": 553.5,
+          "asymmetric_white": 551.0,
+          "kiwipete_black": 565.0,
+          "kiwipete_white": 552.0,
+          "start_black": 547.9,
+          "start_white": 546.2
+        },
+        "selected": {
+          "all": 55.24,
+          "asymmetric_black": 54.61,
+          "asymmetric_white": 54.44,
+          "kiwipete_black": 54.85,
+          "kiwipete_white": 54.62,
+          "start_black": 55.29,
+          "start_white": 54.56
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": "selected-first",
+      "ratios": {
+        "all": 0.09922897615205307,
+        "asymmetric_black": 0.09410548086866598,
+        "asymmetric_white": 0.09458145189301842,
+        "kiwipete_black": 0.09615789473684211,
+        "kiwipete_white": 0.0963302752293578,
+        "start_black": 0.09911070780399274,
+        "start_white": 0.0996580888968868
+      },
+      "raw": {
+        "portable": {
+          "all": 557.7,
+          "asymmetric_black": 580.2,
+          "asymmetric_white": 575.8,
+          "kiwipete_black": 570.0,
+          "kiwipete_white": 566.8,
+          "start_black": 551.0,
+          "start_white": 555.7
+        },
+        "selected": {
+          "all": 55.34,
+          "asymmetric_black": 54.6,
+          "asymmetric_white": 54.46,
+          "kiwipete_black": 54.81,
+          "kiwipete_white": 54.6,
+          "start_black": 54.61,
+          "start_white": 55.38
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": "portable-first",
+      "ratios": {
+        "all": 0.09901380670611439,
+        "asymmetric_black": 0.09998183139534884,
+        "asymmetric_white": 0.09852941176470588,
+        "kiwipete_black": 0.09872095117996757,
+        "kiwipete_white": 0.09335711858647638,
+        "start_black": 0.09880239520958084,
+        "start_white": 0.09972607742878013
+      },
+      "raw": {
+        "portable": {
+          "all": 557.7,
+          "asymmetric_black": 550.4,
+          "asymmetric_white": 557.6,
+          "kiwipete_black": 555.1,
+          "kiwipete_white": 588.6,
+          "start_black": 551.1,
+          "start_white": 547.6
+        },
+        "selected": {
+          "all": 55.22,
+          "asymmetric_black": 55.03,
+          "asymmetric_white": 54.94,
+          "kiwipete_black": 54.8,
+          "kiwipete_white": 54.95,
+          "start_black": 54.45,
+          "start_white": 54.61
+        }
+      }
+    },
+    {
+      "block": 4,
+      "order": "selected-first",
+      "ratios": {
+        "all": 0.09958333333333333,
+        "asymmetric_black": 0.09823626676465186,
+        "asymmetric_white": 0.09909743967581507,
+        "kiwipete_black": 0.09921489866715355,
+        "kiwipete_white": 0.09889968824500275,
+        "start_black": 0.09998145056575773,
+        "start_white": 0.09981593962819806
+      },
+      "raw": {
+        "portable": {
+          "all": 552.0,
+          "asymmetric_black": 544.3,
+          "asymmetric_white": 542.9,
+          "kiwipete_black": 547.7,
+          "kiwipete_white": 545.3,
+          "start_black": 539.1,
+          "start_white": 543.3
+        },
+        "selected": {
+          "all": 54.97,
+          "asymmetric_black": 53.47,
+          "asymmetric_white": 53.8,
+          "kiwipete_black": 54.34,
+          "kiwipete_white": 53.93,
+          "start_black": 53.9,
+          "start_white": 54.23
+        }
+      }
+    },
+    {
+      "block": 5,
+      "order": "portable-first",
+      "ratios": {
+        "all": 0.09884351282977956,
+        "asymmetric_black": 0.09881732168850073,
+        "asymmetric_white": 0.09886716608806871,
+        "kiwipete_black": 0.09861667273389152,
+        "kiwipete_white": 0.09824116047144152,
+        "start_black": 0.09990805443177639,
+        "start_white": 0.1000739918608953
+      },
+      "raw": {
+        "portable": {
+          "all": 553.4,
+          "asymmetric_black": 549.6,
+          "asymmetric_white": 547.3,
+          "kiwipete_black": 549.4,
+          "kiwipete_white": 551.5,
+          "start_black": 543.8,
+          "start_white": 540.6
+        },
+        "selected": {
+          "all": 54.7,
+          "asymmetric_black": 54.31,
+          "asymmetric_white": 54.11,
+          "kiwipete_black": 54.18,
+          "kiwipete_white": 54.18,
+          "start_black": 54.33,
+          "start_white": 54.1
+        }
+      }
+    },
+    {
+      "block": 6,
+      "order": "selected-first",
+      "ratios": {
+        "all": 0.09974614687216682,
+        "asymmetric_black": 0.09967039003845449,
+        "asymmetric_white": 0.09728134501878018,
+        "kiwipete_black": 0.09903881030105187,
+        "kiwipete_white": 0.09772768259693417,
+        "start_black": 0.0996147495872317,
+        "start_white": 0.09896514161220044
+      },
+      "raw": {
+        "portable": {
+          "all": 551.5,
+          "asymmetric_black": 546.1,
+          "asymmetric_white": 559.1,
+          "kiwipete_black": 551.4,
+          "kiwipete_white": 554.5,
+          "start_black": 545.1,
+          "start_white": 550.8
+        },
+        "selected": {
+          "all": 55.01,
+          "asymmetric_black": 54.43,
+          "asymmetric_white": 54.39,
+          "kiwipete_black": 54.61,
+          "kiwipete_white": 54.19,
+          "start_black": 54.3,
+          "start_white": 54.51
+        }
+      }
+    },
+    {
+      "block": 7,
+      "order": "portable-first",
+      "ratios": {
+        "all": 0.09915147138472649,
+        "asymmetric_black": 0.09939670932358317,
+        "asymmetric_white": 0.09891225525743293,
+        "kiwipete_black": 0.0980748470672904,
+        "kiwipete_white": 0.09916922521220876,
+        "start_black": 0.09952589350838804,
+        "start_white": 0.10047935103244839
+      },
+      "raw": {
+        "portable": {
+          "all": 553.9,
+          "asymmetric_black": 547.0,
+          "asymmetric_white": 551.6,
+          "kiwipete_black": 555.8,
+          "kiwipete_white": 553.7,
+          "start_black": 548.4,
+          "start_white": 542.4
+        },
+        "selected": {
+          "all": 54.92,
+          "asymmetric_black": 54.37,
+          "asymmetric_white": 54.56,
+          "kiwipete_black": 54.51,
+          "kiwipete_white": 54.91,
+          "start_black": 54.58,
+          "start_white": 54.5
+        }
+      }
+    },
+    {
+      "block": 8,
+      "order": "selected-first",
+      "ratios": {
+        "all": 0.09885139985642497,
+        "asymmetric_black": 0.09880239520958084,
+        "asymmetric_white": 0.09941944847605223,
+        "kiwipete_black": 0.09895212285456188,
+        "kiwipete_white": 0.09902667627974045,
+        "start_black": 0.09927060539752006,
+        "start_white": 0.09926993977003103
+      },
+      "raw": {
+        "portable": {
+          "all": 557.2,
+          "asymmetric_black": 551.1,
+          "asymmetric_white": 551.2,
+          "kiwipete_black": 553.5,
+          "kiwipete_white": 554.8,
+          "start_black": 548.4,
+          "start_white": 547.9
+        },
+        "selected": {
+          "all": 55.08,
+          "asymmetric_black": 54.45,
+          "asymmetric_white": 54.8,
+          "kiwipete_black": 54.77,
+          "kiwipete_white": 54.94,
+          "start_black": 54.44,
+          "start_white": 54.39
+        }
+      }
+    },
+    {
+      "block": 9,
+      "order": "portable-first",
+      "ratios": {
+        "all": 0.09855176112998391,
+        "asymmetric_black": 0.09880456439050896,
+        "asymmetric_white": 0.0993622448979592,
+        "kiwipete_black": 0.0983739837398374,
+        "kiwipete_white": 0.09844933285250632,
+        "start_black": 0.09970861409579311,
+        "start_white": 0.09901871706341997
+      },
+      "raw": {
+        "portable": {
+          "all": 559.3,
+          "asymmetric_black": 552.1,
+          "asymmetric_white": 548.8,
+          "kiwipete_black": 553.5,
+          "kiwipete_white": 554.6,
+          "start_black": 549.1,
+          "start_white": 550.3
+        },
+        "selected": {
+          "all": 55.12,
+          "asymmetric_black": 54.55,
+          "asymmetric_white": 54.53,
+          "kiwipete_black": 54.45,
+          "kiwipete_white": 54.6,
+          "start_black": 54.75,
+          "start_white": 54.49
+        }
+      }
+    },
+    {
+      "block": 10,
+      "order": "selected-first",
+      "ratios": {
+        "all": 0.09931556195965417,
+        "asymmetric_black": 0.10083302480562753,
+        "asymmetric_white": 0.10165519806583595,
+        "kiwipete_black": 0.10036907178446208,
+        "kiwipete_white": 0.10016589861751153,
+        "start_black": 0.0995260663507109,
+        "start_white": 0.09936154688070047
+      },
+      "raw": {
+        "portable": {
+          "all": 555.2,
+          "asymmetric_black": 540.2,
+          "asymmetric_white": 537.7,
+          "kiwipete_black": 541.9,
+          "kiwipete_white": 542.5,
+          "start_black": 548.6,
+          "start_white": 548.2
+        },
+        "selected": {
+          "all": 55.14,
+          "asymmetric_black": 54.47,
+          "asymmetric_white": 54.66,
+          "kiwipete_black": 54.39,
+          "kiwipete_white": 54.34,
+          "start_black": 54.6,
+          "start_white": 54.47
+        }
+      }
+    }
+  ],
+  "direct_medians": {
+    "all": 0.09919022376838979,
+    "asymmetric_black": 0.09881094303950484,
+    "asymmetric_white": 0.09888971067275082,
+    "kiwipete_black": 0.09866881195692954,
+    "kiwipete_white": 0.09867451054875453,
+    "start_black": 0.09957040796897129,
+    "start_white": 0.09969208316283347
+  },
+  "direct_order_medians": {
+    "portable-first": 0.09901380670611439,
+    "selected-first": 0.09931556195965417
+  },
+  "equal_weight_median": 0.5444771458731007,
+  "fixture_medians": {
+    "asymmetric_black": 0.5506651863847256,
+    "asymmetric_white": 0.5312684668799605,
+    "kiwipete_black": 0.5382891053614758,
+    "kiwipete_white": 0.5294991084483855,
+    "start_black": 0.5739669366682201,
+    "start_white": 0.589699913837292
+  },
+  "order_medians": {
+    "base-first": 0.5459628772569581,
+    "candidate-first": 0.5465333725374775
+  },
+  "schema": "ngn-rodent-output-gate-decision-v1",
+  "search": [
+    {
+      "block": 1,
+      "order": "base-first",
+      "ratios": {
+        "asymmetric_black": 0.5477299239969252,
+        "asymmetric_white": 0.5271192170713437,
+        "kiwipete_black": 0.5349416711419309,
+        "kiwipete_white": 0.5163942956072535,
+        "start_black": 0.574937808625987,
+        "start_white": 0.5933447457747071
+      },
+      "raw": {
+        "base": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1163395431.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1241013408.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1325927295.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1435903656.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1098832452.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1105551937.0
+          }
+        },
+        "candidate": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 637226491.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 654162016.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 709293763.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 741492457.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 631760322.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 655973433.0
+          }
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": "candidate-first",
+      "ratios": {
+        "asymmetric_black": 0.5515791305137302,
+        "asymmetric_white": 0.5409759420798713,
+        "kiwipete_black": 0.5419083126259715,
+        "kiwipete_white": 0.5164488472662139,
+        "start_black": 0.559569316799201,
+        "start_white": 0.5821187901887303
+      },
+      "raw": {
+        "base": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1174494498.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1236477087.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1327589445.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1439819254.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1139572101.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1140060433.0
+          }
+        },
+        "candidate": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 647826654.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 668904357.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 719431756.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 743592994.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 637669582.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 663650600.0
+          }
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": "base-first",
+      "ratios": {
+        "asymmetric_black": 0.5503372951158864,
+        "asymmetric_white": 0.5279061661241792,
+        "kiwipete_black": 0.5361130937911701,
+        "kiwipete_white": 0.5211896213216674,
+        "start_black": 0.5589953619914932,
+        "start_white": 0.5799478641584366
+      },
+      "raw": {
+        "base": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1160245825.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1236113834.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1320723538.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1412200815.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1117556165.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1124922860.0
+          }
+        },
+        "candidate": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 638526549.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 652552115.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 708057182.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 736024408.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 624708713.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 652396610.0
+          }
+        }
+      }
+    },
+    {
+      "block": 4,
+      "order": "candidate-first",
+      "ratios": {
+        "asymmetric_black": 0.5462100833020619,
+        "asymmetric_white": 0.5365550773487942,
+        "kiwipete_black": 0.5288694657642105,
+        "kiwipete_white": 0.5310719546171208,
+        "start_black": 0.5817796227653391,
+        "start_white": 0.5896786854567928
+      },
+      "raw": {
+        "base": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1165015580.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1238504957.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1342467828.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1410927138.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1113080434.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1122065271.0
+          }
+        },
+        "candidate": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 636343257.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 664526123.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 709990243.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 749303833.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 647567515.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 661657974.0
+          }
+        }
+      }
+    },
+    {
+      "block": 5,
+      "order": "base-first",
+      "ratios": {
+        "asymmetric_black": 0.5509930776535648,
+        "asymmetric_white": 0.5280537309145289,
+        "kiwipete_black": 0.544195830516991,
+        "kiwipete_white": 0.532291299375523,
+        "start_black": 0.5784539108441132,
+        "start_white": 0.6077874037484019
+      },
+      "raw": {
+        "base": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1167098913.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1253794107.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1326385019.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1419460331.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1110904008.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1122330456.0
+          }
+        },
+        "candidate": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 643063422.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 662070656.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 721813197.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 755566384.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 642606768.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 682138314.0
+          }
+        }
+      }
+    },
+    {
+      "block": 6,
+      "order": "candidate-first",
+      "ratios": {
+        "asymmetric_black": 0.5616545662132477,
+        "asymmetric_white": 0.5403149310436816,
+        "kiwipete_black": 0.5488535481568365,
+        "kiwipete_white": 0.540730403366444,
+        "start_black": 0.5607145851663782,
+        "start_white": 0.594985922587134
+      },
+      "raw": {
+        "base": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1155590719.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1221881068.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1306969594.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1396002465.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1135240022.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1115828963.0
+          }
+        },
+        "candidate": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 649042804.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 660200585.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 717334899.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 754860976.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 636545638.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 663902525.0
+          }
+        }
+      }
+    },
+    {
+      "block": 7,
+      "order": "base-first",
+      "ratios": {
+        "asymmetric_black": 0.5526540941085661,
+        "asymmetric_white": 0.529666019089953,
+        "kiwipete_black": 0.5356618492731319,
+        "kiwipete_white": 0.5301243713134023,
+        "start_black": 0.5812535924025174,
+        "start_white": 0.592212435402404
+      },
+      "raw": {
+        "base": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1165630936.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1236928871.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1335140871.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1425396220.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1107032475.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1117929372.0
+          }
+        },
+        "candidate": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 644190709.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 655159191.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 715184028.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 755637275.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 643466603.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 662051676.0
+          }
+        }
+      }
+    },
+    {
+      "block": 8,
+      "order": "candidate-first",
+      "ratios": {
+        "asymmetric_black": 0.5561016338854907,
+        "asymmetric_white": 0.5320905841953976,
+        "kiwipete_black": 0.5456680176186189,
+        "kiwipete_white": 0.5288738455833688,
+        "start_black": 0.5693462019241792,
+        "start_white": 0.5822062818049294
+      },
+      "raw": {
+        "base": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1167138218.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1246775947.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1334398802.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1415322212.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1116108011.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1150852069.0
+          }
+        },
+        "candidate": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 649047470.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 663397742.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 728138749.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 748526901.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 635451857.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 670033304.0
+          }
+        }
+      }
+    },
+    {
+      "block": 9,
+      "order": "base-first",
+      "ratios": {
+        "asymmetric_black": 0.5499302298659638,
+        "asymmetric_white": 0.5347460074731454,
+        "kiwipete_black": 0.5404651169317816,
+        "kiwipete_white": 0.5335632746363652,
+        "start_black": 0.5729960647104531,
+        "start_white": 0.5897211422177913
+      },
+      "raw": {
+        "base": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1159933274.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1222228598.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1311166630.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1395040368.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1096506864.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1114103711.0
+          }
+        },
+        "candidate": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 637882372.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 653581863.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 708639826.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 744342307.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 628294118.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 657010513.0
+          }
+        }
+      }
+    },
+    {
+      "block": 10,
+      "order": "candidate-first",
+      "ratios": {
+        "asymmetric_black": 0.5468566617728932,
+        "asymmetric_white": 0.5304463495645235,
+        "kiwipete_black": 0.5324431258149571,
+        "kiwipete_white": 0.5248986331064412,
+        "start_black": 0.5766503210350397,
+        "start_white": 0.587442907408727
+      },
+      "raw": {
+        "base": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1169130534.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1239633964.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1339220772.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1413109300.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1113366785.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 1124733062.0
+          }
+        },
+        "candidate": {
+          "asymmetric_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 639346821.0
+          },
+          "asymmetric_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 657559311.0
+          },
+          "kiwipete_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 713058894.0
+          },
+          "kiwipete_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 741739140.0
+          },
+          "start_black": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 642023314.0
+          },
+          "start_white": {
+            "B/op": 135409224,
+            "allocs/op": 12,
+            "ns": 660716460.0
+          }
+        }
+      }
+    }
+  ],
+  "search_identity_sha256": "07574e16014b30afbe99980e445e77f034255447d5504205f07074e6a6a86333",
+  "state": "COMPLETE"
+}

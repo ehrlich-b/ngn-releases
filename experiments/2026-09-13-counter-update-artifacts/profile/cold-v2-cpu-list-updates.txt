@@ -1,0 +1,24 @@
+Total: 21.73s
+ROUTINE ======================== github.com/ehrlich-b/ngn/countereval.applyFeatureUpdates in repos/ngn-counter-profile-20260913/countereval/context.go
+      20ms      1.25s (flat, cum)  5.75% of Total
+         .          .    156:func applyFeatureUpdates(
+         .          .    157:	accumulator *[HiddenSize]float32,
+         .          .    158:	model *Model,
+         .          .    159:	updates *[4]featureUpdate,
+         .          .    160:	updateCount int,
+         .          .    161:) {
+      10ms       10ms    162:	for _, update := range updates[:updateCount] {
+         .          .    163:		base := update.feature * HiddenSize
+         .          .    164:		weights := (*[HiddenSize]float32)(model.hiddenWeights[base : base+HiddenSize])
+         .          .    165:		if update.add {
+         .      610ms    166:			addFeatureRow(accumulator, weights)
+         .          .    167:		} else {
+         .      620ms    168:			subFeatureRow(accumulator, weights)
+         .          .    169:		}
+         .          .    170:	}
+      10ms       10ms    171:}
+         .          .    172:
+         .          .    173:// Pop restores the preceding frame without inverse arithmetic.
+         .          .    174:func (context *Context) Pop() error {
+         .          .    175:	if err := context.validate(); err != nil {
+         .          .    176:		return err

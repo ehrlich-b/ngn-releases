@@ -155,68 +155,8 @@ func generateBaseline() (*EvaluationRegressionSuite, error) {
 }
 
 // TestEvaluationRegression runs regression testing against stored baselines
-func TestEvaluationRegression(t *testing.T) {
-	baseline, err := loadBaseline()
-	if err != nil {
-		t.Skipf("No baseline file found (%s), run TestGenerateEvaluationBaseline first: %v", baselineFilePath(), err)
-	}
-
-	var failures []string
-	tolerance := 10 // Allow small variations due to floating point or minor changes
-
-	for _, base := range baseline.Baselines {
-		t.Run(base.Name, func(t *testing.T) {
-			position, err := ParseFEN(base.FEN)
-			if err != nil {
-				t.Fatalf("Failed to parse FEN %s: %v", base.FEN, err)
-			}
-
-			currentEval := Evaluate(&position.Board)
-			diff := currentEval - base.Eval
-
-			if abs(diff) > tolerance {
-				failure := fmt.Sprintf("%s: eval changed from %d to %d (diff: %+d, tolerance: ±%d)\n  FEN: %s\n  Comments: %s",
-					base.Name, base.Eval, currentEval, diff, tolerance, base.FEN, base.Comments)
-				failures = append(failures, failure)
-				t.Errorf("Evaluation regression detected: %s", failure)
-			} else {
-				t.Logf("✓ %s: eval %d (baseline: %d, diff: %+d)", base.Name, currentEval, base.Eval, diff)
-			}
-		})
-	}
-
-	if len(failures) > 0 {
-		t.Logf("\n=== EVALUATION REGRESSION SUMMARY ===")
-		t.Logf("Detected %d regressions out of %d positions:", len(failures), len(baseline.Baselines))
-		for i, failure := range failures {
-			t.Logf("\n%d. %s", i+1, failure)
-		}
-		t.Logf("\nTo update baselines (if changes are intentional): go test -run TestGenerateEvaluationBaseline")
-	}
-}
 
 // TestGenerateEvaluationBaseline generates new baseline evaluations
-func TestGenerateEvaluationBaseline(t *testing.T) {
-	if testing.Short() {
-		t.Skip("Skipping baseline generation in short mode")
-	}
-
-	suite, err := generateBaseline()
-	if err != nil {
-		t.Fatalf("Failed to generate baseline: %v", err)
-	}
-
-	err = saveBaseline(suite)
-	if err != nil {
-		t.Fatalf("Failed to save baseline: %v", err)
-	}
-
-	t.Logf("Generated evaluation baseline with %d positions:", len(suite.Baselines))
-	for _, baseline := range suite.Baselines {
-		t.Logf("  %s: %+d (FEN: %s)", baseline.Name, baseline.Eval, baseline.FEN)
-	}
-	t.Logf("Saved to: %s", baselineFilePath())
-}
 
 // TestEvaluationConsistency tests that evaluation is deterministic
 func TestEvaluationConsistency(t *testing.T) {

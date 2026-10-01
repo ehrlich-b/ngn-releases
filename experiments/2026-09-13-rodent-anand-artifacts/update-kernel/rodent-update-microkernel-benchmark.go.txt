@@ -1,0 +1,123 @@
+//go:build rodentupdatebench
+
+package rodenteval
+
+import (
+	"os"
+	"testing"
+)
+
+var rodentUpdateBenchmarkSink [HiddenSize]int16
+
+type rodentUpdateBenchmarkClass struct {
+	name        string
+	updateCount int
+}
+
+type rodentUpdateBenchmarkRole struct {
+	name string
+	run  func(*[HiddenSize]int16, *[4]*[HiddenSize]int16, int)
+}
+
+func BenchmarkRodentApplyUpdatesMicrokernel(b *testing.B) {
+	modelPath := os.Getenv("RODENT_V11_ANAND_MODEL")
+	if modelPath == "" {
+		b.Fatal("RODENT_V11_ANAND_MODEL is required")
+	}
+	model, err := LoadV11Anand(modelPath)
+	if err != nil {
+		b.Fatalf("load Rodent V1.1 Anand model: %v", err)
+	}
+
+	initial := model.inputBiases
+	rows := [4]*[HiddenSize]int16{
+		&model.inputWeights[0],
+		&model.inputWeights[1],
+		&model.inputWeights[2],
+		&model.inputWeights[3],
+	}
+	classes := []rodentUpdateBenchmarkClass{
+		{name: "all"},
+		{name: "as", updateCount: 2},
+		{name: "ass", updateCount: 3},
+		{name: "asas", updateCount: 4},
+	}
+	original := rodentUpdateBenchmarkRole{
+		name: "original_generic",
+		run:  rodentApplyUpdatesOriginalGeneric,
+	}
+	selected := rodentUpdateBenchmarkRole{
+		name: "selected",
+		run:  rodentApplyUpdatesSelected,
+	}
+	roles := []rodentUpdateBenchmarkRole{original, selected}
+	switch os.Getenv("NGN_RODENT_UPDATE_BENCH_ORDER") {
+	case "", "original-first":
+	case "selected-first":
+		roles[0], roles[1] = roles[1], roles[0]
+	default:
+		b.Fatal("NGN_RODENT_UPDATE_BENCH_ORDER must be original-first or selected-first")
+	}
+
+	for _, role := range roles {
+		role := role
+		b.Run(role.name, func(b *testing.B) {
+			for _, class := range classes {
+				class := class
+				b.Run(class.name, func(b *testing.B) {
+					destination := initial
+					b.ReportAllocs()
+					b.ResetTimer()
+					if class.updateCount != 0 {
+						for iteration := 0; iteration < b.N; iteration++ {
+							role.run(&destination, &rows, class.updateCount)
+						}
+					} else {
+						for iteration := 0; iteration < b.N; iteration++ {
+							role.run(&destination, &rows, 2+iteration%3)
+						}
+					}
+					b.StopTimer()
+					rodentUpdateBenchmarkSink = destination
+				})
+			}
+		})
+	}
+}
+
+//go:noinline
+func rodentApplyUpdatesOriginalGeneric(
+	destination *[HiddenSize]int16,
+	rows *[4]*[HiddenSize]int16,
+	updateCount int,
+) {
+	add := [4]bool{true, false, updateCount == 4, false}
+	for hidden := 0; hidden < HiddenSize; hidden++ {
+		value := destination[hidden]
+		for index := 0; index < updateCount; index++ {
+			if add[index] {
+				value += rows[index][hidden]
+			} else {
+				value -= rows[index][hidden]
+			}
+		}
+		destination[hidden] = value
+	}
+}
+
+func rodentApplyUpdatesSelected(
+	destination *[HiddenSize]int16,
+	rows *[4]*[HiddenSize]int16,
+	updateCount int,
+) {
+	switch updateCount {
+	case 2:
+		rodentApplyUpdates2(destination, rows[0], rows[1])
+	case 3:
+		rodentApplyUpdates3(destination, rows[0], rows[1], rows[2])
+	case 4:
+		rodentApplyUpdates4(destination, rows[0], rows[1], rows[2], rows[3])
+	default:
+		panic("unsupported Rodent update benchmark row count")
+	}
+}

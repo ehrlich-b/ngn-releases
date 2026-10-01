@@ -50,48 +50,16 @@ func newSearchWorkerPool(workers []*searchWorker) *searchWorkerPool {
 // intentionally non-reentrant there. Different receivers own independent
 // mutable state and may search concurrently under one immutable HCE generation.
 type SearchEngine struct {
-	sessionMu          sync.Mutex
-	worker             searchWorker
-	workerPool         atomic.Pointer[searchWorkerPool]
-	evaluatorModel     evaluatorModel
-	k4EvalScalePercent int64
-	tt                 *Cache
-	hashMB             int
-	ttMode             TTMode
-	ttGeneration       uint64
-	ttIdentity         evaluatorModelIdentity
-	smpHooks           *smpSearchHooks
-}
-
-// K4EvalScale reports this receiver's configured owned-network score scale.
-// A zero-value SearchEngine preserves the historical 100 percent default.
-func (e *SearchEngine) K4EvalScale() int {
-	e.sessionMu.Lock()
-	defer e.sessionMu.Unlock()
-	return int(e.k4EvalScale())
-}
-
-func (e *SearchEngine) k4EvalScale() int64 {
-	if e.k4EvalScalePercent == 0 {
-		return 100
-	}
-	return e.k4EvalScalePercent
-}
-
-// SetK4EvalScale publishes a receiver-local scale while idle. A changed K4
-// identity invalidates TT scores and worker histories through the existing
-// evaluator lifecycle before any subsequent search or diagnostic uses them.
-func (e *SearchEngine) SetK4EvalScale(percent int) error {
-	if percent < minK4EvalScalePercent || percent > maxK4EvalScalePercent {
-		return fmt.Errorf("K4EvalScale must be between %d and %d", minK4EvalScalePercent, maxK4EvalScalePercent)
-	}
-	e.sessionMu.Lock()
-	defer e.sessionMu.Unlock()
-	e.k4EvalScalePercent = int64(percent)
-	if e.evaluatorModel.identity.backend == evaluatorBackendNGNK4 {
-		e.evaluatorModel.identity.ngnK4ScalePercent = int64(percent)
-	}
-	return nil
+	sessionMu      sync.Mutex
+	worker         searchWorker
+	workerPool     atomic.Pointer[searchWorkerPool]
+	evaluatorModel evaluatorModel
+	tt             *Cache
+	hashMB         int
+	ttMode         TTMode
+	ttGeneration   uint64
+	ttIdentity     evaluatorModelIdentity
+	smpHooks       *smpSearchHooks
 }
 
 const (

@@ -1,0 +1,100 @@
+{
+  "schema": "ngn-sf18-big-feasibility-v3",
+  "status": "n1c-complete-route-open",
+  "base_commit": "cdf55556c96126c763f8151a1d380aee63e7f890",
+  "scope": {
+    "included": [
+      "worker-private demand-driven BIG context",
+      "full-position and semantic-delta push adapters",
+      "null push and exact pop/unwind",
+      "independent base and FullThreats donors and refresh boundaries",
+      "measured scalar replay-versus-refresh cutoff",
+      "exact upstream-oracle and pinned-core cost gates"
+    ],
+    "excluded": [
+      "engine search integration",
+      "UCI option or default change",
+      "SIMD or Stockfish fused/double updates",
+      "matches or Elo claim"
+    ]
+  },
+  "design": {
+    "max_context_ply": 256,
+    "frame_bytes": 9408,
+    "context_bytes": 2418152,
+    "push_numeric_bytes_copied_or_cleared": 0,
+    "max_incremental_donor_plies": 3,
+    "adaptive_policy": "refresh current frame when no fully computed donor exists within three plies",
+    "model_bytes_shared": 137844032
+  },
+  "oracle": {
+    "source_commit": "cb3d4ee9b47d0c5aae855b12379378ea1439675c",
+    "network_sha256": "c288c895ea924429ea9092e3f36b2b3c1f00f2a3a4c759ff7e57e79e3b43e4a7",
+    "rows": 1203,
+    "transitions": 1048,
+    "core_sha256": "8bba456867d8e2f3acce20b59f830625bbecd74ca839ad60d018cb84efa0cb03",
+    "growth_sha256": "dba955766db11b756cbbb5dc1e61e7566911aacf8666029e18aa00d47c78dddc",
+    "representative_sha256": "d0f55e6e20c30d0b05fba852f514a6aad16ccf1bf078472ad93d09ba851ded4",
+    "coverage": [
+      "one-ply computed donors on every row",
+      "eight-ply sparse evaluation forcing adaptive full refresh",
+      "full pop/unwind to every case root",
+      "exact base/threat accumulators and PSQT for both perspectives",
+      "exact active threats, transform and selected output"
+    ],
+    "result": "PASS"
+  },
+  "benchmark": {
+    "host": "AMD Ryzen 7 9800X3D 8-Core Processor",
+    "os_arch": "linux/amd64",
+    "go": "go1.25.5",
+    "goamd64": "v3",
+    "gomaxprocs": 1,
+    "taskset_core": 2,
+    "blocks": 10,
+    "seconds_per_block": 1,
+    "representative_blocks": 12,
+    "dirty_plies_per_block": 8,
+    "all_allocs_per_op": 0,
+    "median_ns": {
+      "push_pop_per_transition": 208.75,
+      "evaluate_every_ply_per_evaluated_node": 28668,
+      "evaluate_after_2_dirty": 51942.5,
+      "evaluate_after_3_dirty": 66772.5,
+      "evaluate_after_4_dirty_adaptive": 77729.5,
+      "evaluate_after_8_dirty_adaptive": 76740.5,
+      "repeat_computed_output": 7254.5,
+      "same_position_selected_full_refresh": 72512
+    },
+    "diagnostic_before_adaptive_ns": {
+      "evaluate_after_8_dirty": 138947
+    },
+    "derived": {
+      "one_ply_vs_same_position_full_refresh_ratio": 0.39535,
+      "one_ply_reduction_percent": 60.465,
+      "eight_ply_adaptive_vs_unbounded_replay_ratio": 0.5523,
+      "eight_ply_adaptive_reduction_percent": 44.77,
+      "eight_ply_adaptive_over_same_position_refresh_percent_including_push_pop": 5.83
+    }
+  },
+  "validation": {
+    "official_oracle_forward_sparse_and_unwind": "PASS",
+    "focused_context_regressions": "PASS",
+    "focused_vet": "PASS",
+    "focused_race": "PASS",
+    "repository_short_suite": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "source_sha256": {
+    "nnue/sf18big/context.go": "51c4a03263ba083767158edaa40894df0a8d816e7bf0862d10f41a982cb23e86",
+    "nnue/sf18big/context_test.go": "c0de758d50776fcd796c44e6906816343cb87e5edd6e7bbdc7c9974739558a94",
+    "nnue/sf18big/threats.go": "76e9f15b8a2dc13ddcc351b7aa0205bb52313ef16659e0021eb129782c6e25d9",
+    "nnue/sf18big/reference_oracle_test.go": "13b0990082e6ac3960e1585be64bfa0fb5fd614cd62c70222e7fe5b3fc850aa9",
+    "nnue/sf18big/reference_benchmark_test.go": "959334d42d2550025d1f4eb4221e221fa4cbd677c0dc047e602db163df9457db"
+  },
+  "decision": {
+    "n1c": "pass",
+    "route": "open",
+    "next_gate": "research-only BIG search adapter plus fixed-position/fixed-node NPS and profile comparison; no match until reviewed"
+  }
+}

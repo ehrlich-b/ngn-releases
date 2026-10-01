@@ -1,0 +1,24 @@
+diff --git a/home/ehrli/repos/ngn-counter-profile-20260913/output/probe-v1.go b/home/ehrli/repos/ngn-counter-profile-20260913/engine/counter_post_output_profile_test.go
+index c4faf55..27e2fe5 100755
+--- a/home/ehrli/repos/ngn-counter-profile-20260913/output/probe-v1.go
++++ b/home/ehrli/repos/ngn-counter-profile-20260913/engine/counter_post_output_profile_test.go
+@@ -151,7 +151,18 @@ func requireCounterProfileSearch(tb testing.TB, searcher *SearchEngine, position
+ 	if final == nil || !final.Stopped || final.Nodes < counterTransitionProfileNodes || final.EffectiveThreads != 1 {
+ 		tb.Fatalf("incomplete profile search: %+v", final)
+ 	}
+-	requireCounterTransitionProfilePV(tb, position, final)
++	// Nil-callback profiling deliberately avoids reporting-only TT/PV refresh.
++	// The separate snapshot test exercises and validates every full PV.
++	legalBestMove := false
++	for _, move := range GenerateLegalMoves(position) {
++		if move == final.BestMove {
++			legalBestMove = true
++			break
++		}
++	}
++	if final.BestMove == EmptyMove || !legalBestMove {
++		tb.Fatalf("profile search returned illegal best move %s", final.BestMove.ToString())
++	}
+ 	if !reflect.DeepEqual(snapshotPVPosition(position), before) {
+ 		tb.Fatal("profile search changed root position/history")
+ 	}

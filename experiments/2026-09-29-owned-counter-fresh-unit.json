@@ -1,0 +1,25 @@
+{
+  "unit": "ngn-owned-counter-fresh-20260929",
+  "started": 1790671563.3360722,
+  "command": [
+    "systemd-run",
+    "--user",
+    "--unit",
+    "ngn-owned-counter-fresh-20260929",
+    "--collect",
+    "--property=RuntimeMaxSec=8h",
+    "--property=TimeoutStopSec=15",
+    "--property=KillMode=control-group",
+    "--property=MemoryMax=12G",
+    "--working-directory",
+    "/home/ehrli/nnue-owned-continuation-20260928",
+    "python3",
+    "/home/ehrli/nnue-owned-continuation-20260928/source/scripts/ownedexternal.py",
+    "--root",
+    "/home/ehrli/nnue-owned-continuation-20260928",
+    "--plan",
+    "/home/ehrli/nnue-owned-continuation-20260928/source/experiments/2026-09-29-owned-counter-fresh-plan.json"
+  ],
+  "plan_sha256": "33317fb4e76b218592e73462033fdb498aa9c17565ec058c09902f3ee15b98b7",
+  "driver_sha256": "1849668bdbe885a906737675ede4f6f72ab079eb7a92543caa0f11313e16735f"
+}

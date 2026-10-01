@@ -1,0 +1,82 @@
+{
+  "configuration": {
+    "barriers": [
+      "readyok",
+      "readyok",
+      "readyok",
+      "readyok",
+      "readyok",
+      "readyok"
+    ],
+    "ownbook_advertised": false,
+    "uci_lines": [
+      "info string reading book file \"books/empty.bin\": failure: open books/empty.bin: no such file or directory",
+      "info string reading book file \"books/empty.bin\": failure: open books/empty.bin: no such file or directory",
+      "",
+      "   ___          __         __   _   __",
+      "  / _ \\___  ___/ /__ ___  / /_ | | / /",
+      " / , _/ _ \\/ _  / -_) _ \\/ __/ | |/ /",
+      "/_/|_|\\___/\\_,_/\\__/_//_/\\__/  |___/",
+      "",
+      "         Rodent V 1.2",
+      "      Type 'uci' or 'help'",
+      "id name Rodent V 1.2 AVX2",
+      "id author Naman Thanki, Pawel Koziol, based on Sungorus by Pablo Vazquez",
+      "option name Hash type spin default 16 min 1 max 4096",
+      "option name Clear Hash type button",
+      "option name UCI_Chess960 type check default false",
+      "option name UCI_LimitStrength type check default false",
+      "option name UCI_Elo type spin default 3000 min 800 max 3000",
+      "option name Threads type spin default 1 min 1 max 256",
+      "info string Loaded NNUE network: nets/rodent_4kb_768hl_8ob_v2.bin",
+      "uciok"
+    ]
+  },
+  "cwd_empty_after": true,
+  "cwd_empty_before": true,
+  "finished_utc": "2026-10-01T03:53:18Z",
+  "name": "promotion-node-control",
+  "process_end": {
+    "cpus_allowed_list": "0,2",
+    "cwd": "/home/ehrli/ngn-personal-correctness-20261001/rodent-probe-runtime/promotion-node-control",
+    "exe": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-fixed-comparisons-20260908-attempt4/rodent-v1.2-nontal-testers-t1-30p0d3/inputs/opponent/engine",
+    "mems_allowed_list": "0",
+    "nice": 10,
+    "pgid": 40,
+    "pid": 40,
+    "threads": 3
+  },
+  "process_start": {
+    "cpus_allowed_list": "0,2",
+    "cwd": "/home/ehrli/ngn-personal-correctness-20261001/rodent-probe-runtime/promotion-node-control",
+    "exe": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-fixed-comparisons-20260908-attempt4/rodent-v1.2-nontal-testers-t1-30p0d3/inputs/opponent/engine",
+    "mems_allowed_list": "0",
+    "nice": 10,
+    "pgid": 40,
+    "pid": 40,
+    "threads": 3
+  },
+  "returncode": 0,
+  "searches": [
+    {
+      "bestmove": "bestmove f3f2 ponder b5b4",
+      "command": "go depth 4",
+      "depth": 4,
+      "info_lines": [
+        "info depth 1 seldepth 4 multipv 1 time 1 nodes 13 nps 13000 hashfull 0 score cp -530 pv f3e2 g7g2 e2e3",
+        "info depth 1 seldepth 5 multipv 1 time 1 nodes 20 nps 20000 hashfull 0 score cp -384 pv f3f2",
+        "info depth 2 seldepth 6 multipv 1 time 1 nodes 75 nps 75000 hashfull 0 score cp -355 pv f3f2 b5b4 g2g1q g7g1 f2g1",
+        "info depth 3 seldepth 6 multipv 1 time 1 nodes 198 nps 198000 hashfull 0 score cp -354 pv f3f2 b5b4 g2g1b",
+        "info depth 4 seldepth 6 multipv 1 time 1 nodes 337 nps 337000 hashfull 0 score cp -355 pv f3f2 b5b4 g2g1q g7g1 f2g1"
+      ],
+      "max_reported_depth": 4,
+      "max_reported_nodes": 337,
+      "name": "promotion-node-control",
+      "position": "8/6R1/8/1K6/1p6/1P3k2/6p1/8 b - - 5 83",
+      "position_kind": "fen",
+      "process_cpu_seconds": 0.0,
+      "wall_seconds": 0.016232661000685766
+    }
+  ],
+  "started_utc": "2026-10-01T03:53:18Z"
+}

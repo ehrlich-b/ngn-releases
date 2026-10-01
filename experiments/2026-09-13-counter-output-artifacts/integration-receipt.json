@@ -1,0 +1,72 @@
+{
+  "schema": "ngn-counter-output-integration-receipt-v1",
+  "date": "2026-09-13",
+  "worktree": "/home/ehrli/repos/ngn-counter-output-20260913",
+  "base_commit": "a12e1976981fbf89b148a5b229689bf06916a8ba",
+  "accepted_candidate_patch": {
+    "path": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/receipts/candidate-v2.patch",
+    "sha256": "8966b491a3c8e57588b94009e44fe8e27983ccace2a867e9f3558dc5ac732786"
+  },
+  "accepted_candidate_receipt": {
+    "path": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/receipts/receipt-v2.json",
+    "sha256": "0368d17f4d1a063eeba7ab3efb60f072d9336706deacbc4d7c9f8584f438b6fe"
+  },
+  "toolchain": {
+    "go_version": "go version go1.25.5 linux/amd64",
+    "cgo_enabled": "0",
+    "gomaxprocs": "2",
+    "goflags": "-mod=readonly",
+    "build_parallelism": "-p 2"
+  },
+  "format_check": {
+    "command": "/usr/local/go/bin/gofmt -l <seven new .go files>",
+    "exit": 0,
+    "stdout": "",
+    "files": [
+      "countereval/output_dot.go",
+      "countereval/output_dot_fallback.go",
+      "countereval/output_dot_amd64_v3.go",
+      "countereval/output_dot_test.go",
+      "countereval/output_dot_fallback_test.go",
+      "countereval/output_dot_amd64_v3_test.go",
+      "countereval/output_dot_benchmark_test.go"
+    ],
+    "note": "The eighth new file is Plan 9 assembly, countereval/output_dot_amd64_v3.s; gofmt does not accept assembly and both target builds compiled it successfully."
+  },
+  "source_sha256": {
+    "countereval/context.go": "2d7314cc73959a06ddd6d28f058841f87c61628f28ecaf6a908ec3c2cd7e1980",
+    "countereval/model.go": "a7a519b4f763552584f46151673067737db04fddd2848072c591623d5db618d0",
+    "countereval/output_dot.go": "0ac54cdac5ccdfabc303099046e7b3c91f91511c15983a83cdd20333d794d113",
+    "countereval/output_dot_fallback.go": "917403144b32b10b852bc3cb6bccf97d0d358a692799d18c239317125e84297a",
+    "countereval/output_dot_amd64_v3.go": "de260cb086eb6e90467614fe87171abdf968edd1cda785a8ce80da158ad0c0c3",
+    "countereval/output_dot_amd64_v3.s": "a649eb1375f10255fece026242ecc5241ec424370a67fb46fa42d38e169b8642",
+    "countereval/output_dot_test.go": "4da554bdd7ddc505160f3bde9a4af714413be8220231181ed4dfb8de0acd0281",
+    "countereval/output_dot_fallback_test.go": "9e030aa43975476b27691ff5c8fe53f71f764caa581715fc0c940844ee76a009",
+    "countereval/output_dot_amd64_v3_test.go": "ea99f4adc48625c01575891916fa06411a4305d1ed5686b10dfc24993166f581",
+    "countereval/output_dot_benchmark_test.go": "0a72f724991eda98c3e1a8280ab32d85a49411cb6899ae614db91c60657f85ee"
+  },
+  "builds": [
+    {
+      "target": "linux/amd64/v3",
+      "command": "env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-counter-output-20260913 build -p 2 -o /home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/integration/ngn-linux-amd64-v3 .",
+      "exit": 0,
+      "path": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/integration/ngn-linux-amd64-v3",
+      "sha256": "dc564a928ee476330f25c78f426396bcd201761d8c05779525ada536b8266dca"
+    },
+    {
+      "target": "windows/amd64/v3",
+      "command": "env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-counter-output-20260913 build -p 2 -o /home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/integration/ngn-windows-amd64-v3.exe .",
+      "exit": 0,
+      "path": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/integration/ngn-windows-amd64-v3.exe",
+      "sha256": "2feeeafb6fae875abfdd35f83e62033977af186516cf4272f9e102afb4a9d9be"
+    }
+  ],
+  "execution": {
+    "tests_rerun": false,
+    "games": false,
+    "benchmarks": false,
+    "profiles": false,
+    "engine_executed": false
+  },
+  "frozen_candidate_mutated": false
+}

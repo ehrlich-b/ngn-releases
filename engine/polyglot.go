@@ -30,31 +30,6 @@ var polyglotPieces = [12]Piece{
 	BlackKing, WhiteKing,
 }
 
-// Polyglot random numbers for Zobrist hashing
-// These are the standard Polyglot random numbers
-var polyglotRandom [781]uint64
-
-func init() {
-	// Initialize Polyglot random numbers
-	// Using the standard Polyglot PRNG seed
-	initPolyglotRandom()
-}
-
-// PRNG for Polyglot (same algorithm used in original Polyglot)
-func polyglotPRNG(seed *uint64) uint64 {
-	*seed ^= *seed >> 12
-	*seed ^= *seed << 25
-	*seed ^= *seed >> 27
-	return *seed * 2685821657736338717
-}
-
-func initPolyglotRandom() {
-	seed := uint64(1)
-	for i := 0; i < 781; i++ {
-		polyglotRandom[i] = polyglotPRNG(&seed)
-	}
-}
-
 // PolyglotHash computes the Polyglot hash for a position
 func PolyglotHash(pos *Position) uint64 {
 	var hash uint64
@@ -111,7 +86,8 @@ func PolyglotHash(pos *Position) uint64 {
 		hash ^= polyglotRandom[771]
 	}
 
-	// En passant (only if capture is possible)
+	// En passant uses the Polyglot book contract: hash the file when an
+	// adjacent pawn could capture geometrically, without a king-safety test.
 	if pos.EnPassant != NoSquare {
 		epFile := int(pos.EnPassant) % 8
 		// Check if there's actually a pawn that can capture
@@ -128,7 +104,9 @@ func PolyglotHash(pos *Position) uint64 {
 	return hash
 }
 
-// canCaptureEnPassant checks if en passant capture is actually possible
+// canCaptureEnPassant checks the pseudo-legal adjacent-pawn condition required
+// by Polyglot. It deliberately does not test whether king safety makes the
+// capture legal for repetition identity.
 func canCaptureEnPassant(pos *Position) bool {
 	if pos.EnPassant == NoSquare {
 		return false
@@ -278,11 +256,27 @@ func polyglotMoveToMove(pos *Position, polyMove uint16) Move {
 	promoPiece := (polyMove >> 12) & 0x7
 
 	movingPiece := pos.Board.PieceAt(fromSq)
-	capturedPiece := pos.Board.PieceAt(toSq)
 
 	if movingPiece == NoPiece {
 		return EmptyMove
 	}
+
+	// Standard Polyglot encodes orthodox castling as king-to-own-rook.
+	// Normalize that destination before capture and castle-tag classification;
+	// retain the already-supported king-to-g/c representation as-is.
+	if movingPiece.Type() == King && pos.Board.PieceAt(toSq) == GetPiece(Rook, movingPiece.Color()) {
+		switch {
+		case fromSq == E1 && toSq == H1:
+			toSq = G1
+		case fromSq == E1 && toSq == A1:
+			toSq = C1
+		case fromSq == E8 && toSq == H8:
+			toSq = G8
+		case fromSq == E8 && toSq == A8:
+			toSq = C8
+		}
+	}
+	capturedPiece := pos.Board.PieceAt(toSq)
 
 	// Determine move flags
 	var tag MoveTag

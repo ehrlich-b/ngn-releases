@@ -1,0 +1,87 @@
+{
+  "schema": "ngn-rodent-v12-demand-trace-manifest-v1",
+  "state": "held-before-execution",
+  "date": "2026-09-19",
+  "source_commit": "9c8ecc7ba97fa8d5eb8bd6143bb08f35c907301b",
+  "target_backend": "rodent-v1.2-default",
+  "model": {
+    "bytes": 4744768,
+    "sha256": "c35a1abc1b8c1cb1d5f4221454d494c1a6da1ed9088fd51ab27038bfa74b5053"
+  },
+  "platform": {
+    "host": "WSL Linux on AMD Ryzen 7 9800X3D",
+    "go": "1.25.5",
+    "goamd64": "v3",
+    "gomaxprocs": 1,
+    "engine_threads": 1,
+    "hash_mb": 128
+  },
+  "workloads": {
+    "cold": {
+      "nodes_per_search": 400000,
+      "fixtures": [
+        "start_white",
+        "start_black",
+        "kiwipete_white",
+        "kiwipete_black",
+        "asymmetric_white",
+        "asymmetric_black"
+      ]
+    },
+    "warm": {
+      "nodes_per_search": 200000,
+      "selection": "first three games in immutable PGN; no result or position selection",
+      "source_pgn_sha256": "35bdd00b28f585224e6c04392bdbf79cd4472c9ea7549b84acfc4379b07847d2",
+      "prefix_file_sha256": "067e3cc3bb62b5d544d0bf0ce9d18c2de7c94e46bf721e443b53f9a64b47303e",
+      "target_after_plies": [23, 48],
+      "lifecycle": "same searcher, TT, history, evaluator, and full game position from ply 23 through ply 48; NewGame between games"
+    }
+  },
+  "observer": {
+    "mode": "eager arithmetic retained; demand metadata only",
+    "dependency_rule": "an evaluation demands both current perspectives; pop propagates each demanded perspective to its parent except across that perspective's king refresh boundary",
+    "classifies": [
+      "direct and descendant-only move/null frames",
+      "required and abandoned move/null accumulator-copy perspectives",
+      "required and abandoned update-2/update-3/update-4 perspective calls",
+      "required and abandoned king-perspective refreshes"
+    ],
+    "identity_gate": "each baseline and observed fixed-node trajectory must match exactly in nodes, depth, seldepth, best move, score, and PV",
+    "integrity_gates": [
+      "all total=required+abandoned partitions",
+      "required frame=direct+descendant-only",
+      "zero unbalanced resets",
+      "balanced evaluator depth after every search",
+      "legal best move and unchanged root"
+    ]
+  },
+  "cost_model": {
+    "profile_file_sha256": "6ea2f1a77edb5813ca3ade209e5cf48d5d3d2774586b7b9287d11352519eea14",
+    "whole_search_percent": {
+      "move_accumulator_copy": 2.01,
+      "apply_updates_cumulative": 10.46,
+      "update2_flat": 2.87,
+      "update3_flat": 2.29,
+      "refresh_flat": 1.58,
+      "apply_updates_residual": 3.72
+    },
+    "attributed_opportunity_formula": "2.01*move_copy_abandoned_fraction + 2.87*update2_abandoned_fraction + 2.29*update3_abandoned_fraction + 1.58*refresh_abandoned_fraction",
+    "optimistic_ceiling_formula": "attributed opportunity + 3.72*max(update2,update3,update4,refresh abandoned fraction)",
+    "uncredited": [
+      "update4 flat cost, except inside the optimistic residual",
+      "null accumulator-copy cost until separately isolated",
+      "transition derivation, position copying, output evaluation, and unrelated search work"
+    ]
+  },
+  "decision_rule": {
+    "threshold_whole_search_percent": 3.0,
+    "below_threshold": "shelve L1 and record a reopen condition",
+    "at_or_above_threshold": "admit one exact lazy implementation to the separately frozen L1 parity and timing gate",
+    "forbidden_inference": "1 - evaluation_calls / pushes"
+  },
+  "artifacts": {
+    "diagnostic_patch_sha256": "6358387612759de3c5c9986825829b014e65390ca5f22505dc72dc920fcaf957",
+    "diagnostic_unit_test_sha256": "bedb710d4cb72a76dc698348fd72bf4624fc18b811f4e68b43736423c8f0339f",
+    "probe_test_sha256": "8dcf4aaec802c7f6a9712cfb936ef8c2d00b95203865a4b2791f3ab7f9811365"
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "aggregate": {
+    "entry_at_limit": {
+      "minor": 0,
+      "nonpawn": 0,
+      "pawn": 0
+    },
+    "main_nodes": 1119127,
+    "predicates": {
+      "futility": {
+        "eligible": 1106498,
+        "live_true": 69931,
+        "minor_off_true": 73811,
+        "turned_off_by_minor": 3888,
+        "turned_on_by_minor": 8
+      },
+      "nmp": {
+        "eligible": 299416,
+        "live_true": 261181,
+        "minor_off_true": 244640,
+        "turned_off_by_minor": 169,
+        "turned_on_by_minor": 16710
+      },
+      "q_stand_pat_alpha": {
+        "eligible": 765191,
+        "live_true": 467008,
+        "minor_off_true": 410872,
+        "turned_off_by_minor": 747,
+        "turned_on_by_minor": 56883
+      },
+      "q_stand_pat_beta": {
+        "eligible": 765191,
+        "live_true": 465324,
+        "minor_off_true": 409635,
+        "turned_off_by_minor": 778,
+        "turned_on_by_minor": 56467
+      },
+      "rfp": {
+        "eligible": 1103306,
+        "live_true": 599114,
+        "minor_off_true": 562694,
+        "turned_off_by_minor": 302,
+        "turned_on_by_minor": 36722
+      }
+    },
+    "q_nodes": 765191,
+    "terms_all_same_nonzero_sign": 393693,
+    "terms_mixed_sign": 225829,
+    "tt": {
+      "compatible": 160571,
+      "eligibility_changed": 17842,
+      "hits": 166760,
+      "live_applied": 79559,
+      "minor_off_applied": 81651
+    },
+    "values": {
+      "aggregate": {
+        "abs_sum": 51069698,
+        "count": 1884322,
+        "max": 129,
+        "min": -44,
+        "negative": 60579,
+        "nonzero": 1780065,
+        "positive": 1719486,
+        "sum": 50311002
+      },
+      "minor_term": {
+        "abs_sum": 28119970,
+        "count": 1884322,
+        "max": 47,
+        "min": -25,
+        "negative": 70349,
+        "nonzero": 1568815,
+        "positive": 1498466,
+        "sum": 27335814
+      },
+      "nonpawn_term": {
+        "abs_sum": 6654790,
+        "count": 1884322,
+        "max": 46,
+        "min": -34,
+        "negative": 132969,
+        "nonzero": 783648,
+        "positive": 650679,
+        "sum": 5676252
+      },
+      "pawn_term": {
+        "abs_sum": 17986724,
+        "count": 1884322,
+        "max": 48,
+        "min": -26,
+        "negative": 85506,
+        "nonzero": 1297052,
+        "positive": 1211546,
+        "sum": 17298936
+      },
+      "raw_static": {
+        "abs_sum": 339445890,
+        "count": 1884322,
+        "max": 3127,
+        "min": -3429,
+        "negative": 834392,
+        "nonzero": 1847762,
+        "positive": 1013370,
+        "sum": 19950760
+      }
+    }
+  },
+  "frozen_baseline_sha256": "8eb00369a0f89d8a9e60bd0116beb70115905aec3adeb89510eec80651c71591",
+  "identity": [
+    {
+      "after_ply": 23,
+      "completed_iterations": 13,
+      "final_best_move": "a8d8",
+      "final_best_score": -28,
+      "final_nodes": 400000,
+      "frozen_baseline_identity": true,
+      "game_index": 1,
+      "off_on_identity": true,
+      "trajectory_sha256": "df998bfa147f074cbf4ad6fa08b775a59cffc6ed17bd78d44fc1cbd14d1c2c0d"
+    },
+    {
+      "after_ply": 48,
+      "completed_iterations": 14,
+      "final_best_move": "f8e8",
+      "final_best_score": 8,
+      "final_nodes": 400001,
+      "frozen_baseline_identity": true,
+      "game_index": 1,
+      "off_on_identity": true,
+      "trajectory_sha256": "da598766dde5e84d67bfc6bf884716c62986e880a21afe29e6fbbec7bbdbdcb9"
+    },
+    {
+      "after_ply": 23,
+      "completed_iterations": 13,
+      "final_best_move": "a8d8",
+      "final_best_score": -28,
+      "final_nodes": 400000,
+      "frozen_baseline_identity": true,
+      "game_index": 2,
+      "off_on_identity": true,
+      "trajectory_sha256": "df998bfa147f074cbf4ad6fa08b775a59cffc6ed17bd78d44fc1cbd14d1c2c0d"
+    },
+    {
+      "after_ply": 48,
+      "completed_iterations": 12,
+      "final_best_move": "c4c5",
+      "final_best_score": 180,
+      "final_nodes": 400000,
+      "frozen_baseline_identity": true,
+      "game_index": 2,
+      "off_on_identity": true,
+      "trajectory_sha256": "273925d25ccc2a0039173bac2521390a4f1880df62da53433fd0cb3f110b4d84"
+    },
+    {
+      "after_ply": 23,
+      "completed_iterations": 15,
+      "final_best_move": "a7a5",
+      "final_best_score": -49,
+      "final_nodes": 400000,
+      "frozen_baseline_identity": true,
+      "game_index": 3,
+      "off_on_identity": true,
+      "trajectory_sha256": "f60f9c7cf354c61cd97ac5669602fb367d41f6a9cc245b9bfa6e9c2adb26bfba"
+    },
+    {
+      "after_ply": 48,
+      "completed_iterations": 13,
+      "final_best_move": "e1d1",
+      "final_best_score": 6,
+      "final_nodes": 400000,
+      "frozen_baseline_identity": true,
+      "game_index": 3,
+      "off_on_identity": true,
+      "trajectory_sha256": "3fbb294f667ceee3c579217db18247381e30903f67abc6ae91dc1f7c0b8bc3f3"
+    }
+  ],
+  "interpretation_limit": "local partial predicate opportunities on the baseline-reached path, holding actual improving and eligibility fixed; not full minor-off behavior, an ablation, or Elo evidence",
+  "observed_sha256": "545462126185600889cedf50ebafc08915be5f1f829be2ca7edd80c6287cda66",
+  "schema": "ngn-counter-correction-profile-summary-v1"
+}

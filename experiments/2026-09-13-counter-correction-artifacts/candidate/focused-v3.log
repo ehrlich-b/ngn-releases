@@ -1,0 +1,38 @@
+=== RUN   TestCounterMinorCorrectionExcludedAtRootInteriorAndQStandPat
+--- PASS: TestCounterMinorCorrectionExcludedAtRootInteriorAndQStandPat (0.01s)
+=== RUN   TestMinorCorrectionPolicyPreservesHCEAndNGNV1
+--- PASS: TestMinorCorrectionPolicyPreservesHCEAndNGNV1 (0.00s)
+=== RUN   TestCounterMinorCorrectionLearningExcludedAndOtherTermsUnchanged
+=== RUN   TestCounterMinorCorrectionLearningExcludedAndOtherTermsUnchanged/hce
+=== RUN   TestCounterMinorCorrectionLearningExcludedAndOtherTermsUnchanged/ngnv1
+--- PASS: TestCounterMinorCorrectionLearningExcludedAndOtherTermsUnchanged (0.00s)
+    --- PASS: TestCounterMinorCorrectionLearningExcludedAndOtherTermsUnchanged/hce (0.00s)
+    --- PASS: TestCounterMinorCorrectionLearningExcludedAndOtherTermsUnchanged/ngnv1 (0.00s)
+=== RUN   TestStaticEvalTTRefinementBoundariesUnchanged
+=== RUN   TestStaticEvalTTRefinementBoundariesUnchanged/exact
+=== RUN   TestStaticEvalTTRefinementBoundariesUnchanged/lower-better
+=== RUN   TestStaticEvalTTRefinementBoundariesUnchanged/lower-equal
+=== RUN   TestStaticEvalTTRefinementBoundariesUnchanged/lower-worse
+=== RUN   TestStaticEvalTTRefinementBoundariesUnchanged/upper-better
+=== RUN   TestStaticEvalTTRefinementBoundariesUnchanged/upper-equal
+=== RUN   TestStaticEvalTTRefinementBoundariesUnchanged/upper-worse
+=== RUN   TestStaticEvalTTRefinementBoundariesUnchanged/mate-boundary
+=== RUN   TestStaticEvalTTRefinementBoundariesUnchanged/singular
+=== RUN   TestStaticEvalTTRefinementBoundariesUnchanged/miss
+--- PASS: TestStaticEvalTTRefinementBoundariesUnchanged (0.00s)
+    --- PASS: TestStaticEvalTTRefinementBoundariesUnchanged/exact (0.00s)
+    --- PASS: TestStaticEvalTTRefinementBoundariesUnchanged/lower-better (0.00s)
+    --- PASS: TestStaticEvalTTRefinementBoundariesUnchanged/lower-equal (0.00s)
+    --- PASS: TestStaticEvalTTRefinementBoundariesUnchanged/lower-worse (0.00s)
+    --- PASS: TestStaticEvalTTRefinementBoundariesUnchanged/upper-better (0.00s)
+    --- PASS: TestStaticEvalTTRefinementBoundariesUnchanged/upper-equal (0.00s)
+    --- PASS: TestStaticEvalTTRefinementBoundariesUnchanged/upper-worse (0.00s)
+    --- PASS: TestStaticEvalTTRefinementBoundariesUnchanged/mate-boundary (0.00s)
+    --- PASS: TestStaticEvalTTRefinementBoundariesUnchanged/singular (0.00s)
+    --- PASS: TestStaticEvalTTRefinementBoundariesUnchanged/miss (0.00s)
+=== RUN   TestLazySMPCounterContextsStayPrivateBalancedAndReusable
+--- PASS: TestLazySMPCounterContextsStayPrivateBalancedAndReusable (0.01s)
+=== RUN   TestCounterSelectionFailureAndModelReplacementAreTransactional
+--- PASS: TestCounterSelectionFailureAndModelReplacementAreTransactional (0.01s)
+PASS
+ok  	github.com/ehrlich-b/ngn/engine	0.044s

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/ehrli/ngn-personal-correctness-20261001/repo/experiments/2026-10-01-rodent-pv-identity-probe/rodent_pv_probe.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/ehrli/ngn-personal-correctness-20261001/repo/experiments/2026-10-01-rodent-pv-identity-probe/rodent_pv_probe.py", line 431, in main
+    raise RuntimeError(f"promotion-node bestmove is not one of the four legal promotions: {promotion_move}")
+RuntimeError: promotion-node bestmove is not one of the four legal promotions: f3f2

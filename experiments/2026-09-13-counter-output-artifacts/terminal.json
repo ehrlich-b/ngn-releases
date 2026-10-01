@@ -1,0 +1,11 @@
+{
+  "decision": "PASS_PERFORMANCE",
+  "decision_sha256": "bea643ca183d908d11b4037fb09c0faa2495313d1f1719513a4c0239d1b64f46",
+  "driver_sha256": "1f396790b256304e101665304994597f50357f051827e2712d38838165821f35",
+  "inventory_sha256": "c7828dc1be74fdea7577d00994a5e45338d84013bfc00c47013142241ae22e15",
+  "manifest_sha256": "c330271481d508319d1b114378c75dd5a47a9b373c8358a0a241637a52aae591",
+  "schema": "ngn-counter-output-terminal-v1",
+  "state": "COMPLETE",
+  "timing_evidence_rejected": false,
+  "verified_clean_stage_receipts": 42
+}

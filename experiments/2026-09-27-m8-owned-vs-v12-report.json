@@ -1,0 +1,40 @@
+{
+  "schema": "ngn-quickmatch-report-v1",
+  "candidate": "NGN-Owned-K4-A1-E10-Scale60",
+  "games": 800,
+  "pairs": 400,
+  "legal_plies": 128605,
+  "results": {
+    "1/2-1/2": 409,
+    "0-1": 165,
+    "1-0": 226
+  },
+  "reasons": {
+    "Draw by 3-fold repetition": 291,
+    "Black mates": 165,
+    "White mates": 226,
+    "Draw by fifty moves rule": 57,
+    "Draw by insufficient mating material": 59,
+    "Draw by stalemate": 2
+  },
+  "penta_0_to_4": [
+    6,
+    108,
+    165,
+    103,
+    18
+  ],
+  "score": 0.511875,
+  "score_interval_95": [
+    0.490625,
+    0.533125
+  ],
+  "elo": 8.253147153247228,
+  "elo_interval_95": [
+    -6.515180797889627,
+    23.051371740849657
+  ],
+  "audit_sha256": "5772d9b3ca40e5c435efdc591fddb064d835e7b0c65f95f834c97ecdae055a70",
+  "pgn_sha256": "7c70967058e302f01f9c8b6ac483ee9b9e74f58aefbebb323f9a400018e4e158",
+  "bootstrap": "percentile over pair scores, 20000 resamples, seed 2026092701"
+}

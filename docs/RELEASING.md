@@ -1,59 +1,30 @@
-# Owned NNUE releases
+# NGN 0.2.0 HCE release
 
-The owned release profile starts with the selected `ngn.nnue` beside the executable,
-backend `ngn-k4-768-v1`, scale 60, OwnBook false, Threads 1, Hash 128 MiB and
-Move Overhead 100 ms. A missing or invalid model prevents startup. `-version`
-works without a model. UCI Threads also controls Go's scheduler unless the caller
-explicitly sets GOMAXPROCS. Keep one-worker playing claims separate from SMP smoke
-checks and width-specific measurements.
+0.2.0 uses the independent HCE-only runtime. Owned/research neural profiles and
+external evaluator selection are retired. No network or opening book is bundled.
+Prior NNUE estimates and historical HCE matches do not rate this version.
 
-Ordinary development builds retain the explicit research profile. All engine
-builds, tests and execution in this project run on the authorized WSL worker.
-Changing a production default or search behavior requires a new verified build;
-changing a network requires export parity, the frozen playing verdict, and
-executable verification with that exact network.
+All engine builds, tests and execution run on the authorized personal WSL host,
+under the documented shared CPU0/2 50% NGN quota, nice10 and serial Go limits.
+The Mac is a text-review/publication terminal. Preserve the existing benchmark
+owner, protected CPUs and shared services.
 
-The release procedure is:
+1. Verify a clean immutable source head and the recorded short/race/vet checks.
+   Source/document-only changes may reuse the identical tested engine tree;
+   record this binding instead of claiming tests ran on a different tree.
+2. Retain LICENSE, NOTICE, complete LICENSES and docs/THIRD_PARTY.md in binary
+   packages and the exact matching source archive. Check every referenced
+   component notice is present and bind all archive hashes to the source head.
+3. Build Linux and Windows amd64-v1 with Go 1.25.5, CGO_ENABLED=0, GOAMD64=v1
+   and -ldflags '-X main.releaseProfile=hce -X main.releaseVersion=0.2.0'.
+   Version/UCI/model-backend rejection and legal-move smoke must pass.
+   Record Windows as cross-compiled unless native execution is verified.
+4. Preserve the old public source history. Add corrected author attribution
+   first, then replace the current tree; never rewrite/delete old releases.
+5. Publish only with the user's release authority and exact approved forum text.
+   Do not attach an Elo estimate or promise competition acceptance.
 
-1. Commit the application source. Verify the full short suite, short race suite,
-   owned startup tests and independent move-generation oracle on WSL. Retain their
-   commands, complete output, return codes and source identity.
-2. Build both executables with `scripts/build_owned_release.py`, or
-   `make build-owned-release RELEASE_VERIFICATION=/path/to/report.json`.
-   Specify an immutable source commit and a version; the output directory must be
-   new. The build manifest records every Go/assembly source hash, compiler version,
-   CGO/ISA settings, startup configuration and executable hashes. Compare all
-   source hashes with the stated Git commit before packaging.
-3. Run `scripts/verify_owned_release.py` with the build directory and exact selected
-   net. It tests the actual Linux and native Windows executables without startup
-   flags, in paths containing spaces and outside their bundle directory; checks
-   missing-model failure, version output, stop/restart/newgame, evaluator scale
-   changes and Threads 8; then compares 88 depth-12 searches with the gate binary.
-   The independent startup tests verify scheduler behavior and explicit environment
-   overrides. The lifecycle check establishes no SMP Elo gain.
-4. Package each executable with the same named network, usage instructions,
-   manifest, checksums, applicable notices and corresponding source. Read the
-   archives back and verify their member hashes. Retain the playing records and
-   rejected attempts outside Git; commit the compact receipts.
-   `scripts/package_owned_release.py` also verifies and includes the complete
-   training alteration-method archive and its exact filter/map inputs. Include
-   the compact build, test, executable and provenance receipts in the source
-   archive so its documentation links remain usable after extraction.
-5. Resolve the project's license and model distribution provenance before an
-   external release. Draft the exact release text and destination for Bryan's
-   approval, following the external communication agreement. Do not turn a
-   within-engine evaluator comparison into an absolute rating claim.
-
-The initial `0.2.0-rc.1` application source is
-`8b440bf959bc527d74bd44dc39f994718453d1b3`. Its 436 source files match the recorded
-WSL build, and both actual executables pass startup/lifecycle verification.
-With WDL25, all 88 search results match the accepted gate binary exactly.
-The alternating three-round timing ratio is 0.978; this is a descriptive timing
-check on a shared worker, not a measured speed improvement.
-
-See the [build receipt](../experiments/2026-09-29-owned-release-build.json),
-[source and upstream provenance](../experiments/2026-09-29-owned-release-provenance.json),
-[test receipt](../experiments/2026-09-29-owned-release-source-tests.json), and
-[actual executable verification](../experiments/2026-09-29-owned-release-executables.json).
-The overall >3500/competition objective remains open until direct playing evidence
-and calibration support it; a release profile or an owned model alone does not.
+The earlier owned-network procedure is preserved in
+[the historical rc.1 document](historical/RELEASING-owned-0.2.0-rc.1.md).
+Current correctness/generation records are in
+[the independent HCE experiment](../experiments/2026-10-01-original-hce-release/report.md).

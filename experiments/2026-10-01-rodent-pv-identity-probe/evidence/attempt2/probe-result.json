@@ -1,0 +1,3553 @@
+{
+  "binary": {
+    "bytes": 7311522,
+    "path": "/home/ehrli/repos/ngn-external-opponents-v1/output/external-fixed-comparisons-20260908-attempt4/rodent-v1.2-nontal-testers-t1-30p0d3/inputs/opponent/engine",
+    "sha256": "9cfb8195207ee5695c1973a89664ab73b34b5bcbc10ad3bc0f0afe28b9713cbc"
+  },
+  "budget": {
+    "conditional_warm_tt_executed": true,
+    "conditional_warm_tt_reason": "fresh/full-history probes did not reproduce, so the predeclared two-search warm control ran",
+    "maximum_cpu_seconds": 120.0,
+    "maximum_depth": 18,
+    "maximum_search_wall_seconds": 180.0,
+    "maximum_searches": 9,
+    "per_search_timeout_seconds": 10.0,
+    "searches": 9,
+    "total_process_cpu_seconds": 0.33999999999999997,
+    "total_search_wall_seconds": 0.8026259790131007
+  },
+  "controls": {
+    "forced_promotion_bestmove": "g2g1q",
+    "ordinary_negative_all_pvs_legal": true,
+    "promotion_node_bestmove": "f3f2"
+  },
+  "embedded_network": {
+    "bytes": 4744768,
+    "offset": 2538080,
+    "sha256": "c35a1abc1b8c1cb1d5f4221454d494c1a6da1ed9088fd51ab27038bfa74b5053"
+  },
+  "frozen_input_sha256": "5120826c58a688e9891d188d3b58c72414027fd72795f1f12aee3f743486c97e",
+  "legal_promotions": [
+    "g2g1q",
+    "g2g1r",
+    "g2g1b",
+    "g2g1n"
+  ],
+  "new_runtime": [
+    {
+      "bestmove_classification": {
+        "final_fen": "8/7R/8/3K4/1p6/1P4p1/5k2/8 b - - 5 79",
+        "legal": true,
+        "plies": 1
+      },
+      "name": "fresh-root-depth17",
+      "pv_lines": [
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/8/1p6/1P4p1/5k2/7R b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 1 multipv 1 time 1 nodes 2 nps 2000 hashfull 0 score cp 194 pv h7h1",
+          "tokens": [
+            "h7h1"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/8/1p5R/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 7 nps 7000 hashfull 0 score cp 222 pv h7h4",
+          "tokens": [
+            "h7h4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/7R/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 9 nps 9000 hashfull 0 score cp 251 pv h7h5",
+          "tokens": [
+            "h7h5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K2R/8/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 11 nps 11000 hashfull 0 score cp 281 pv h7h6",
+          "tokens": [
+            "h7h6"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/5R2/4K3/8/1p6/1P2k1p1/8/8 w - - 6 80",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 30 nps 30000 hashfull 0 score cp 296 pv h7f7 f2e3",
+          "tokens": [
+            "h7f7",
+            "f2e3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/7R/8/3K4/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 34 nps 34000 hashfull 0 score cp 338 pv e6d5",
+          "tokens": [
+            "e6d5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/7R/8/3K4/1p6/1P6/5kp1/8 w - - 0 80",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 2 seldepth 2 multipv 1 time 1 nodes 54 nps 54000 hashfull 0 score cp 319 pv e6d5 g3g2",
+          "tokens": [
+            "e6d5",
+            "g3g2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/5R2/8/3K4/1p6/1P4p1/4k3/8 b - - 7 80",
+            "legal": true,
+            "plies": 3
+          },
+          "line": "info depth 2 seldepth 4 multipv 1 time 1 nodes 144 nps 144000 hashfull 0 score cp 324 pv h7f7 f2e2 e6d5",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/4K3/8/1p6/1P4p1/5k2/8 w - - 8 81",
+            "legal": true,
+            "plies": 4
+          },
+          "line": "info depth 3 seldepth 6 multipv 1 time 1 nodes 377 nps 377000 hashfull 0 score cp 330 pv h7f7 f2e1 f7g7 e1f2",
+          "tokens": [
+            "h7f7",
+            "f2e1",
+            "f7g7",
+            "e1f2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/3K4/1p6/1P2k1p1/8/8 b - - 9 81",
+            "legal": true,
+            "plies": 5
+          },
+          "line": "info depth 4 seldepth 8 multipv 1 time 1 nodes 690 nps 690000 hashfull 0 score cp 374 pv h7f7 f2e2 e6d5 e2e3 f7g7",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "e2e3",
+            "f7g7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/3K4/1p6/1P6/5kp1/8 w - - 2 82",
+            "legal": true,
+            "plies": 6
+          },
+          "line": "info depth 5 seldepth 9 multipv 1 time 1 nodes 1099 nps 1099000 hashfull 0 score cp 349 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f2",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 6 seldepth 11 multipv 1 time 2 nodes 1551 nps 775500 hashfull 0 score cp 321 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f2 d5c4 g2g1q g7g1 f2g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f2",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1p6/1P6/8/6k1 b - - 1 82",
+            "legal": true,
+            "plies": 7
+          },
+          "line": "info depth 7 seldepth 11 multipv 1 time 2 nodes 2488 nps 1244000 hashfull 0 score cp 310 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 8 seldepth 12 multipv 1 time 3 nodes 4007 nps 1335666 hashfull 0 score cp 317 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 9 seldepth 13 multipv 1 time 4 nodes 5244 nps 1311000 hashfull 0 score cp 317 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/8/1P6/5k2/8 b - - 2 85",
+            "legal": true,
+            "plies": 13
+          },
+          "line": "info depth 10 seldepth 15 multipv 1 time 5 nodes 12390 nps 2478000 hashfull 0 score cp 242 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/8/1P4k1/8/8 w - - 3 86",
+            "legal": true,
+            "plies": 14
+          },
+          "line": "info depth 11 seldepth 15 multipv 1 time 6 nodes 15628 nps 2604666 hashfull 0 score cp 255 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2g3",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2g3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 12 seldepth 17 multipv 1 time 8 nodes 20737 nps 2592125 hashfull 0 score cp 239 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2e3 b3b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 9 nodes 26054 nps 2894888 hashfull 0 score cp 247 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2e3 b3b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/2k5/8/8 w - - 1 86",
+            "legal": true,
+            "plies": 14
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 9 nodes 29112 nps 3234666 hashfull 0 score cp 291 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3d3 b3b4 d3c3",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3d3",
+            "b3b4",
+            "d3c3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1PK1k3/8/8/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 10 nodes 31463 nps 3146300 hashfull 0 score cp 279 pv h7g7 g3g2 e6d5 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e5 b4b5",
+          "tokens": [
+            "h7g7",
+            "g3g2",
+            "e6d5",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e5",
+            "b4b5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1PK5/8/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 11 nodes 34433 nps 3130272 hashfull 0 score cp 340 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e3 b4b5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e3",
+            "b4b5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1P1K4/8/2k5/8/8 w - - 3 88",
+            "legal": true,
+            "plies": 18
+          },
+          "line": "info depth 14 seldepth 22 multipv 1 time 16 nodes 55542 nps 3471375 hashfull 0 score cp 440 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e3 b4b5 e3d2 c5d5 d2c3",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e3",
+            "b4b5",
+            "e3d2",
+            "c5d5",
+            "d2c3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/8/2K5/4k3/8/8/8 b - - 0 89",
+            "legal": true,
+            "plies": 21
+          },
+          "line": "info depth 15 seldepth 32 multipv 1 time 86 nodes 138448 nps 1609860 hashfull 0 score cp 542 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e4 b6b7",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e4",
+            "b6b7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/3K4/8/2k5/8/8/8 b - - 4 92",
+            "legal": true,
+            "plies": 27
+          },
+          "line": "info depth 16 seldepth 32 multipv 1 time 98 nodes 183645 nps 1873928 hashfull 1 score cp 551 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c4 f2e3 c4d5 e3d2 b3b4 d2c3 b4b5 c3b4 b5b6 b4a4 b6b7 a4b4 d5c6 b4c4 c6d6",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c4",
+            "f2e3",
+            "c4d5",
+            "e3d2",
+            "b3b4",
+            "d2c3",
+            "b4b5",
+            "c3b4",
+            "b5b6",
+            "b4a4",
+            "b6b7",
+            "a4b4",
+            "d5c6",
+            "b4c4",
+            "c6d6"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/4k3/2K5/8/8/8/8 b - - 2 91",
+            "legal": true,
+            "plies": 25
+          },
+          "line": "info depth 17 seldepth 32 multipv 1 time 107 nodes 221390 nps 2069065 hashfull 1 score cp 551 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e6 c5c6 e6e7 b6b7 e7e6 c6c5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e6",
+            "c5c6",
+            "e6e7",
+            "b6b7",
+            "e7e6",
+            "c6c5"
+          ]
+        }
+      ]
+    },
+    {
+      "bestmove_classification": {
+        "final_fen": "8/7R/8/3K4/1p6/1P4p1/5k2/8 b - - 5 79",
+        "legal": true,
+        "plies": 1
+      },
+      "name": "fresh-root-depth18",
+      "pv_lines": [
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/8/1p6/1P4p1/5k2/7R b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 1 multipv 1 time 1 nodes 2 nps 2000 hashfull 0 score cp 194 pv h7h1",
+          "tokens": [
+            "h7h1"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/8/1p5R/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 7 nps 7000 hashfull 0 score cp 222 pv h7h4",
+          "tokens": [
+            "h7h4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/7R/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 9 nps 9000 hashfull 0 score cp 251 pv h7h5",
+          "tokens": [
+            "h7h5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K2R/8/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 11 nps 11000 hashfull 0 score cp 281 pv h7h6",
+          "tokens": [
+            "h7h6"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/5R2/4K3/8/1p6/1P2k1p1/8/8 w - - 6 80",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 30 nps 30000 hashfull 0 score cp 296 pv h7f7 f2e3",
+          "tokens": [
+            "h7f7",
+            "f2e3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/7R/8/3K4/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 34 nps 34000 hashfull 0 score cp 338 pv e6d5",
+          "tokens": [
+            "e6d5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/7R/8/3K4/1p6/1P6/5kp1/8 w - - 0 80",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 2 seldepth 2 multipv 1 time 1 nodes 54 nps 54000 hashfull 0 score cp 319 pv e6d5 g3g2",
+          "tokens": [
+            "e6d5",
+            "g3g2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/5R2/8/3K4/1p6/1P4p1/4k3/8 b - - 7 80",
+            "legal": true,
+            "plies": 3
+          },
+          "line": "info depth 2 seldepth 4 multipv 1 time 1 nodes 144 nps 144000 hashfull 0 score cp 324 pv h7f7 f2e2 e6d5",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/4K3/8/1p6/1P4p1/5k2/8 w - - 8 81",
+            "legal": true,
+            "plies": 4
+          },
+          "line": "info depth 3 seldepth 6 multipv 1 time 1 nodes 377 nps 377000 hashfull 0 score cp 330 pv h7f7 f2e1 f7g7 e1f2",
+          "tokens": [
+            "h7f7",
+            "f2e1",
+            "f7g7",
+            "e1f2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/3K4/1p6/1P2k1p1/8/8 b - - 9 81",
+            "legal": true,
+            "plies": 5
+          },
+          "line": "info depth 4 seldepth 8 multipv 1 time 1 nodes 690 nps 690000 hashfull 0 score cp 374 pv h7f7 f2e2 e6d5 e2e3 f7g7",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "e2e3",
+            "f7g7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/3K4/1p6/1P6/5kp1/8 w - - 2 82",
+            "legal": true,
+            "plies": 6
+          },
+          "line": "info depth 5 seldepth 9 multipv 1 time 1 nodes 1099 nps 1099000 hashfull 0 score cp 349 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f2",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 6 seldepth 11 multipv 1 time 1 nodes 1551 nps 1551000 hashfull 0 score cp 321 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f2 d5c4 g2g1q g7g1 f2g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f2",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1p6/1P6/8/6k1 b - - 1 82",
+            "legal": true,
+            "plies": 7
+          },
+          "line": "info depth 7 seldepth 11 multipv 1 time 1 nodes 2488 nps 2488000 hashfull 0 score cp 310 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 8 seldepth 12 multipv 1 time 2 nodes 4007 nps 2003500 hashfull 0 score cp 317 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 9 seldepth 13 multipv 1 time 2 nodes 5244 nps 2622000 hashfull 0 score cp 317 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/8/1P6/5k2/8 b - - 2 85",
+            "legal": true,
+            "plies": 13
+          },
+          "line": "info depth 10 seldepth 15 multipv 1 time 4 nodes 12390 nps 3097500 hashfull 0 score cp 242 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/8/1P4k1/8/8 w - - 3 86",
+            "legal": true,
+            "plies": 14
+          },
+          "line": "info depth 11 seldepth 15 multipv 1 time 5 nodes 15628 nps 3125600 hashfull 0 score cp 255 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2g3",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2g3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 12 seldepth 17 multipv 1 time 6 nodes 20737 nps 3456166 hashfull 0 score cp 239 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2e3 b3b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 7 nodes 26054 nps 3722000 hashfull 0 score cp 247 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2e3 b3b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/2k5/8/8 w - - 1 86",
+            "legal": true,
+            "plies": 14
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 8 nodes 29112 nps 3639000 hashfull 0 score cp 291 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3d3 b3b4 d3c3",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3d3",
+            "b3b4",
+            "d3c3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1PK1k3/8/8/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 9 nodes 31463 nps 3495888 hashfull 0 score cp 279 pv h7g7 g3g2 e6d5 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e5 b4b5",
+          "tokens": [
+            "h7g7",
+            "g3g2",
+            "e6d5",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e5",
+            "b4b5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1PK5/8/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 9 nodes 34433 nps 3825888 hashfull 0 score cp 340 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e3 b4b5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e3",
+            "b4b5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1P1K4/8/2k5/8/8 w - - 3 88",
+            "legal": true,
+            "plies": 18
+          },
+          "line": "info depth 14 seldepth 22 multipv 1 time 17 nodes 55542 nps 3267176 hashfull 0 score cp 440 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e3 b4b5 e3d2 c5d5 d2c3",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e3",
+            "b4b5",
+            "e3d2",
+            "c5d5",
+            "d2c3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/8/2K5/4k3/8/8/8 b - - 0 89",
+            "legal": true,
+            "plies": 21
+          },
+          "line": "info depth 15 seldepth 32 multipv 1 time 83 nodes 138448 nps 1668048 hashfull 0 score cp 542 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e4 b6b7",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e4",
+            "b6b7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/3K4/8/2k5/8/8/8 b - - 4 92",
+            "legal": true,
+            "plies": 27
+          },
+          "line": "info depth 16 seldepth 32 multipv 1 time 95 nodes 183645 nps 1933105 hashfull 1 score cp 551 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c4 f2e3 c4d5 e3d2 b3b4 d2c3 b4b5 c3b4 b5b6 b4a4 b6b7 a4b4 d5c6 b4c4 c6d6",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c4",
+            "f2e3",
+            "c4d5",
+            "e3d2",
+            "b3b4",
+            "d2c3",
+            "b4b5",
+            "c3b4",
+            "b5b6",
+            "b4a4",
+            "b6b7",
+            "a4b4",
+            "d5c6",
+            "b4c4",
+            "c6d6"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/4k3/2K5/8/8/8/8 b - - 2 91",
+            "legal": true,
+            "plies": 25
+          },
+          "line": "info depth 17 seldepth 32 multipv 1 time 104 nodes 221390 nps 2128750 hashfull 1 score cp 551 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e6 c5c6 e6e7 b6b7 e7e6 c6c5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e6",
+            "c5c6",
+            "e6e7",
+            "b6b7",
+            "e7e6",
+            "c6c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/4k3/1PK5/8/8/8/8/8 w - - 3 90",
+            "legal": true,
+            "plies": 22
+          },
+          "line": "info depth 18 seldepth 32 multipv 1 time 112 nodes 248974 nps 2222982 hashfull 1 score cp 536 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e6 c5c6 e6e7",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e6",
+            "c5c6",
+            "e6e7"
+          ]
+        }
+      ]
+    },
+    {
+      "bestmove_classification": {
+        "final_fen": "8/7R/8/3K4/1p6/1P4p1/5k2/8 b - - 5 79",
+        "legal": true,
+        "plies": 1
+      },
+      "name": "full-history-depth17",
+      "pv_lines": [
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/8/1p6/1P4p1/5k2/7R b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 1 multipv 1 time 1 nodes 2 nps 2000 hashfull 0 score cp 194 pv h7h1",
+          "tokens": [
+            "h7h1"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/8/1p5R/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 7 nps 7000 hashfull 0 score cp 222 pv h7h4",
+          "tokens": [
+            "h7h4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/7R/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 9 nps 9000 hashfull 0 score cp 251 pv h7h5",
+          "tokens": [
+            "h7h5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K2R/8/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 11 nps 11000 hashfull 0 score cp 281 pv h7h6",
+          "tokens": [
+            "h7h6"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/5R2/4K3/8/1p6/1P2k1p1/8/8 w - - 6 80",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 30 nps 30000 hashfull 0 score cp 296 pv h7f7 f2e3",
+          "tokens": [
+            "h7f7",
+            "f2e3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/7R/8/3K4/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 34 nps 34000 hashfull 0 score cp 338 pv e6d5",
+          "tokens": [
+            "e6d5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/7R/8/3K4/1p6/1P6/5kp1/8 w - - 0 80",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 2 seldepth 2 multipv 1 time 1 nodes 54 nps 54000 hashfull 0 score cp 319 pv e6d5 g3g2",
+          "tokens": [
+            "e6d5",
+            "g3g2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/5R2/8/3K4/1p6/1P4p1/4k3/8 b - - 7 80",
+            "legal": true,
+            "plies": 3
+          },
+          "line": "info depth 2 seldepth 4 multipv 1 time 1 nodes 144 nps 144000 hashfull 0 score cp 324 pv h7f7 f2e2 e6d5",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/4K3/8/1p6/1P4p1/5k2/8 w - - 8 81",
+            "legal": true,
+            "plies": 4
+          },
+          "line": "info depth 3 seldepth 6 multipv 1 time 1 nodes 377 nps 377000 hashfull 0 score cp 330 pv h7f7 f2e1 f7g7 e1f2",
+          "tokens": [
+            "h7f7",
+            "f2e1",
+            "f7g7",
+            "e1f2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/3K4/1p6/1P2k1p1/8/8 b - - 9 81",
+            "legal": true,
+            "plies": 5
+          },
+          "line": "info depth 4 seldepth 8 multipv 1 time 1 nodes 690 nps 690000 hashfull 0 score cp 374 pv h7f7 f2e2 e6d5 e2e3 f7g7",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "e2e3",
+            "f7g7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/3K4/1p6/1P6/5kp1/8 w - - 2 82",
+            "legal": true,
+            "plies": 6
+          },
+          "line": "info depth 5 seldepth 9 multipv 1 time 1 nodes 1099 nps 1099000 hashfull 0 score cp 349 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f2",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 6 seldepth 11 multipv 1 time 1 nodes 1551 nps 1551000 hashfull 0 score cp 321 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f2 d5c4 g2g1q g7g1 f2g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f2",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1p6/1P6/8/6k1 b - - 1 82",
+            "legal": true,
+            "plies": 7
+          },
+          "line": "info depth 7 seldepth 11 multipv 1 time 2 nodes 2488 nps 1244000 hashfull 0 score cp 310 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 8 seldepth 12 multipv 1 time 2 nodes 4007 nps 2003500 hashfull 0 score cp 317 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 9 seldepth 13 multipv 1 time 3 nodes 5244 nps 1748000 hashfull 0 score cp 317 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/8/1P6/5k2/8 b - - 2 85",
+            "legal": true,
+            "plies": 13
+          },
+          "line": "info depth 10 seldepth 15 multipv 1 time 4 nodes 12390 nps 3097500 hashfull 0 score cp 242 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/8/1P4k1/8/8 w - - 3 86",
+            "legal": true,
+            "plies": 14
+          },
+          "line": "info depth 11 seldepth 15 multipv 1 time 5 nodes 15628 nps 3125600 hashfull 0 score cp 255 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2g3",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2g3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 12 seldepth 17 multipv 1 time 6 nodes 20737 nps 3456166 hashfull 0 score cp 239 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2e3 b3b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 7 nodes 26054 nps 3722000 hashfull 0 score cp 247 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2e3 b3b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/2k5/8/8 w - - 1 86",
+            "legal": true,
+            "plies": 14
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 8 nodes 29112 nps 3639000 hashfull 0 score cp 291 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3d3 b3b4 d3c3",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3d3",
+            "b3b4",
+            "d3c3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1PK1k3/8/8/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 9 nodes 31463 nps 3495888 hashfull 0 score cp 279 pv h7g7 g3g2 e6d5 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e5 b4b5",
+          "tokens": [
+            "h7g7",
+            "g3g2",
+            "e6d5",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e5",
+            "b4b5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1PK5/8/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 9 nodes 34433 nps 3825888 hashfull 0 score cp 340 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e3 b4b5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e3",
+            "b4b5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1P1K4/8/2k5/8/8 w - - 3 88",
+            "legal": true,
+            "plies": 18
+          },
+          "line": "info depth 14 seldepth 22 multipv 1 time 15 nodes 55542 nps 3702800 hashfull 0 score cp 440 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e3 b4b5 e3d2 c5d5 d2c3",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e3",
+            "b4b5",
+            "e3d2",
+            "c5d5",
+            "d2c3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/8/2K5/4k3/8/8/8 b - - 0 89",
+            "legal": true,
+            "plies": 21
+          },
+          "line": "info depth 15 seldepth 32 multipv 1 time 77 nodes 138448 nps 1798025 hashfull 0 score cp 542 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e4 b6b7",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e4",
+            "b6b7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/3K4/8/2k5/8/8/8 b - - 4 92",
+            "legal": true,
+            "plies": 27
+          },
+          "line": "info depth 16 seldepth 32 multipv 1 time 95 nodes 183645 nps 1933105 hashfull 1 score cp 551 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c4 f2e3 c4d5 e3d2 b3b4 d2c3 b4b5 c3b4 b5b6 b4a4 b6b7 a4b4 d5c6 b4c4 c6d6",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c4",
+            "f2e3",
+            "c4d5",
+            "e3d2",
+            "b3b4",
+            "d2c3",
+            "b4b5",
+            "c3b4",
+            "b5b6",
+            "b4a4",
+            "b6b7",
+            "a4b4",
+            "d5c6",
+            "b4c4",
+            "c6d6"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/4k3/2K5/8/8/8/8 b - - 2 91",
+            "legal": true,
+            "plies": 25
+          },
+          "line": "info depth 17 seldepth 32 multipv 1 time 171 nodes 221390 nps 1294678 hashfull 1 score cp 551 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e6 c5c6 e6e7 b6b7 e7e6 c6c5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e6",
+            "c5c6",
+            "e6e7",
+            "b6b7",
+            "e7e6",
+            "c6c5"
+          ]
+        }
+      ]
+    },
+    {
+      "bestmove_classification": {
+        "final_fen": "8/7R/8/3K4/1p6/1P4p1/5k2/8 b - - 5 79",
+        "legal": true,
+        "plies": 1
+      },
+      "name": "full-history-depth18",
+      "pv_lines": [
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/8/1p6/1P4p1/5k2/7R b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 1 multipv 1 time 1 nodes 2 nps 2000 hashfull 0 score cp 194 pv h7h1",
+          "tokens": [
+            "h7h1"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/8/1p5R/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 7 nps 7000 hashfull 0 score cp 222 pv h7h4",
+          "tokens": [
+            "h7h4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/7R/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 9 nps 9000 hashfull 0 score cp 251 pv h7h5",
+          "tokens": [
+            "h7h5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K2R/8/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 11 nps 11000 hashfull 0 score cp 281 pv h7h6",
+          "tokens": [
+            "h7h6"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/5R2/4K3/8/1p6/1P2k1p1/8/8 w - - 6 80",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 30 nps 30000 hashfull 0 score cp 296 pv h7f7 f2e3",
+          "tokens": [
+            "h7f7",
+            "f2e3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/7R/8/3K4/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 34 nps 34000 hashfull 0 score cp 338 pv e6d5",
+          "tokens": [
+            "e6d5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/7R/8/3K4/1p6/1P6/5kp1/8 w - - 0 80",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 2 seldepth 2 multipv 1 time 1 nodes 54 nps 54000 hashfull 0 score cp 319 pv e6d5 g3g2",
+          "tokens": [
+            "e6d5",
+            "g3g2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/5R2/8/3K4/1p6/1P4p1/4k3/8 b - - 7 80",
+            "legal": true,
+            "plies": 3
+          },
+          "line": "info depth 2 seldepth 4 multipv 1 time 1 nodes 144 nps 144000 hashfull 0 score cp 324 pv h7f7 f2e2 e6d5",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/4K3/8/1p6/1P4p1/5k2/8 w - - 8 81",
+            "legal": true,
+            "plies": 4
+          },
+          "line": "info depth 3 seldepth 6 multipv 1 time 1 nodes 377 nps 377000 hashfull 0 score cp 330 pv h7f7 f2e1 f7g7 e1f2",
+          "tokens": [
+            "h7f7",
+            "f2e1",
+            "f7g7",
+            "e1f2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/3K4/1p6/1P2k1p1/8/8 b - - 9 81",
+            "legal": true,
+            "plies": 5
+          },
+          "line": "info depth 4 seldepth 8 multipv 1 time 1 nodes 690 nps 690000 hashfull 0 score cp 374 pv h7f7 f2e2 e6d5 e2e3 f7g7",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "e2e3",
+            "f7g7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/3K4/1p6/1P6/5kp1/8 w - - 2 82",
+            "legal": true,
+            "plies": 6
+          },
+          "line": "info depth 5 seldepth 9 multipv 1 time 1 nodes 1099 nps 1099000 hashfull 0 score cp 349 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f2",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 6 seldepth 11 multipv 1 time 1 nodes 1551 nps 1551000 hashfull 0 score cp 321 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f2 d5c4 g2g1q g7g1 f2g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f2",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1p6/1P6/8/6k1 b - - 1 82",
+            "legal": true,
+            "plies": 7
+          },
+          "line": "info depth 7 seldepth 11 multipv 1 time 1 nodes 2488 nps 2488000 hashfull 0 score cp 310 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 8 seldepth 12 multipv 1 time 2 nodes 4007 nps 2003500 hashfull 0 score cp 317 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 9 seldepth 13 multipv 1 time 2 nodes 5244 nps 2622000 hashfull 0 score cp 317 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/8/1P6/5k2/8 b - - 2 85",
+            "legal": true,
+            "plies": 13
+          },
+          "line": "info depth 10 seldepth 15 multipv 1 time 4 nodes 12390 nps 3097500 hashfull 0 score cp 242 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/8/1P4k1/8/8 w - - 3 86",
+            "legal": true,
+            "plies": 14
+          },
+          "line": "info depth 11 seldepth 15 multipv 1 time 5 nodes 15628 nps 3125600 hashfull 0 score cp 255 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2g3",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2g3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 12 seldepth 17 multipv 1 time 6 nodes 20737 nps 3456166 hashfull 0 score cp 239 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2e3 b3b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 7 nodes 26054 nps 3722000 hashfull 0 score cp 247 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2e3 b3b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/2k5/8/8 w - - 1 86",
+            "legal": true,
+            "plies": 14
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 8 nodes 29112 nps 3639000 hashfull 0 score cp 291 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3d3 b3b4 d3c3",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3d3",
+            "b3b4",
+            "d3c3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1PK1k3/8/8/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 8 nodes 31463 nps 3932875 hashfull 0 score cp 279 pv h7g7 g3g2 e6d5 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e5 b4b5",
+          "tokens": [
+            "h7g7",
+            "g3g2",
+            "e6d5",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e5",
+            "b4b5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1PK5/8/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 9 nodes 34433 nps 3825888 hashfull 0 score cp 340 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e3 b4b5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e3",
+            "b4b5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1P1K4/8/2k5/8/8 w - - 3 88",
+            "legal": true,
+            "plies": 18
+          },
+          "line": "info depth 14 seldepth 22 multipv 1 time 15 nodes 55542 nps 3702800 hashfull 0 score cp 440 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e3 b4b5 e3d2 c5d5 d2c3",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e3",
+            "b4b5",
+            "e3d2",
+            "c5d5",
+            "d2c3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/8/2K5/4k3/8/8/8 b - - 0 89",
+            "legal": true,
+            "plies": 21
+          },
+          "line": "info depth 15 seldepth 32 multipv 1 time 72 nodes 138448 nps 1922888 hashfull 0 score cp 542 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e4 b6b7",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e4",
+            "b6b7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/3K4/8/2k5/8/8/8 b - - 4 92",
+            "legal": true,
+            "plies": 27
+          },
+          "line": "info depth 16 seldepth 32 multipv 1 time 84 nodes 183645 nps 2186250 hashfull 1 score cp 551 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c4 f2e3 c4d5 e3d2 b3b4 d2c3 b4b5 c3b4 b5b6 b4a4 b6b7 a4b4 d5c6 b4c4 c6d6",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c4",
+            "f2e3",
+            "c4d5",
+            "e3d2",
+            "b3b4",
+            "d2c3",
+            "b4b5",
+            "c3b4",
+            "b5b6",
+            "b4a4",
+            "b6b7",
+            "a4b4",
+            "d5c6",
+            "b4c4",
+            "c6d6"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/4k3/2K5/8/8/8/8 b - - 2 91",
+            "legal": true,
+            "plies": 25
+          },
+          "line": "info depth 17 seldepth 32 multipv 1 time 98 nodes 221390 nps 2259081 hashfull 1 score cp 551 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e6 c5c6 e6e7 b6b7 e7e6 c6c5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e6",
+            "c5c6",
+            "e6e7",
+            "b6b7",
+            "e7e6",
+            "c6c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/4k3/1PK5/8/8/8/8/8 w - - 3 90",
+            "legal": true,
+            "plies": 22
+          },
+          "line": "info depth 18 seldepth 32 multipv 1 time 105 nodes 248974 nps 2371180 hashfull 1 score cp 536 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e6 c5c6 e6e7",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e6",
+            "c5c6",
+            "e6e7"
+          ]
+        }
+      ]
+    },
+    {
+      "bestmove_classification": {
+        "final_fen": "k7/7R/8/4B3/8/8/8/K5q1 w - - 0 2",
+        "legal": true,
+        "plies": 1
+      },
+      "name": "forced-promotion-positive",
+      "pv_lines": [
+        {
+          "classification": {
+            "final_fen": "k7/7R/8/4B3/8/8/1K6/6q1 b - - 1 2",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 5 nps 5000 hashfull 0 score cp 103 pv g2g1q a1b2",
+          "tokens": [
+            "g2g1q",
+            "a1b2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "k7/7R/8/4B3/8/8/5q2/2K5 b - - 3 3",
+            "legal": true,
+            "plies": 4
+          },
+          "line": "info depth 2 seldepth 6 multipv 1 time 1 nodes 102 nps 102000 hashfull 0 score cp 146 pv g2g1q a1b2 g1f2 b2c1",
+          "tokens": [
+            "g2g1q",
+            "a1b2",
+            "g1f2",
+            "b2c1"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "k7/7R/8/4q3/8/8/8/2K5 b - - 1 5",
+            "legal": true,
+            "plies": 8
+          },
+          "line": "info depth 3 seldepth 8 multipv 1 time 1 nodes 631 nps 631000 hashfull 0 score cp 169 pv g2g1q a1b2 g1b6 b2c1 b6e3 c1b2 e3e5 b2c1",
+          "tokens": [
+            "g2g1q",
+            "a1b2",
+            "g1b6",
+            "b2c1",
+            "b6e3",
+            "c1b2",
+            "e3e5",
+            "b2c1"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "k7/7R/8/4q3/8/8/8/2K5 b - - 1 5",
+            "legal": true,
+            "plies": 8
+          },
+          "line": "info depth 4 seldepth 10 multipv 1 time 1 nodes 944 nps 944000 hashfull 0 score cp 177 pv g2g1q a1b2 g1b6 b2c1 b6e3 c1b2 e3e5 b2c1",
+          "tokens": [
+            "g2g1q",
+            "a1b2",
+            "g1b6",
+            "b2c1",
+            "b6e3",
+            "c1b2",
+            "e3e5",
+            "b2c1"
+          ]
+        }
+      ]
+    },
+    {
+      "bestmove_classification": {
+        "final_fen": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1",
+        "legal": true,
+        "plies": 1
+      },
+      "name": "ordinary-negative",
+      "pv_lines": [
+        {
+          "classification": {
+            "final_fen": "rnbqkbnr/pppppppp/8/8/P7/8/1PPPPPPP/RNBQKBNR b KQkq - 0 1",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 1 multipv 1 time 1 nodes 2 nps 2000 hashfull 0 score cp -6 pv a2a4",
+          "tokens": [
+            "a2a4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b KQkq - 0 1",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 1 multipv 1 time 1 nodes 5 nps 5000 hashfull 0 score cp 9 pv c2c4",
+          "tokens": [
+            "c2c4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 1 multipv 1 time 1 nodes 7 nps 7000 hashfull 0 score cp 37 pv d2d4",
+          "tokens": [
+            "d2d4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 2 seldepth 3 multipv 1 time 1 nodes 47 nps 47000 hashfull 0 score cp 19 pv d2d4 d7d5",
+          "tokens": [
+            "d2d4",
+            "d7d5"
+          ]
+        }
+      ]
+    },
+    {
+      "bestmove_classification": {
+        "final_fen": "8/6R1/8/1K6/1p6/1P6/5kp1/8 w - - 6 84",
+        "legal": true,
+        "plies": 1
+      },
+      "name": "promotion-node-control",
+      "pv_lines": [
+        {
+          "classification": {
+            "final_fen": "8/8/8/1K6/1p6/1P2k3/6R1/8 w - - 1 85",
+            "legal": true,
+            "plies": 3
+          },
+          "line": "info depth 1 seldepth 4 multipv 1 time 1 nodes 13 nps 13000 hashfull 0 score cp -530 pv f3e2 g7g2 e2e3",
+          "tokens": [
+            "f3e2",
+            "g7g2",
+            "e2e3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/1K6/1p6/1P6/5kp1/8 w - - 6 84",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 5 multipv 1 time 1 nodes 20 nps 20000 hashfull 0 score cp -384 pv f3f2",
+          "tokens": [
+            "f3f2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 w - - 0 86",
+            "legal": true,
+            "plies": 5
+          },
+          "line": "info depth 2 seldepth 6 multipv 1 time 1 nodes 75 nps 75000 hashfull 0 score cp -355 pv f3f2 b5b4 g2g1q g7g1 f2g1",
+          "tokens": [
+            "f3f2",
+            "b5b4",
+            "g2g1q",
+            "g7g1",
+            "f2g1"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/8/1K6/1P6/5k2/6b1 w - - 0 85",
+            "legal": true,
+            "plies": 3
+          },
+          "line": "info depth 3 seldepth 6 multipv 1 time 1 nodes 198 nps 198000 hashfull 0 score cp -354 pv f3f2 b5b4 g2g1b",
+          "tokens": [
+            "f3f2",
+            "b5b4",
+            "g2g1b"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 w - - 0 86",
+            "legal": true,
+            "plies": 5
+          },
+          "line": "info depth 4 seldepth 6 multipv 1 time 1 nodes 337 nps 337000 hashfull 0 score cp -355 pv f3f2 b5b4 g2g1q g7g1 f2g1",
+          "tokens": [
+            "f3f2",
+            "b5b4",
+            "g2g1q",
+            "g7g1",
+            "f2g1"
+          ]
+        }
+      ]
+    },
+    {
+      "bestmove_classification": {
+        "final_fen": "8/7R/8/3K4/1p6/1P4p1/5k2/8 b - - 5 79",
+        "legal": true,
+        "plies": 1
+      },
+      "name": "warm-root-depth18",
+      "pv_lines": [
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/8/1p6/1P4p1/5k2/7R b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 1 multipv 1 time 1 nodes 2 nps 2000 hashfull 0 score cp 194 pv h7h1",
+          "tokens": [
+            "h7h1"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/8/1p5R/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 7 nps 7000 hashfull 0 score cp 222 pv h7h4",
+          "tokens": [
+            "h7h4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K3/7R/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 9 nps 9000 hashfull 0 score cp 251 pv h7h5",
+          "tokens": [
+            "h7h5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/4K2R/8/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 11 nps 11000 hashfull 0 score cp 281 pv h7h6",
+          "tokens": [
+            "h7h6"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/5R2/4K3/8/1p6/1P2k1p1/8/8 w - - 6 80",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 30 nps 30000 hashfull 0 score cp 296 pv h7f7 f2e3",
+          "tokens": [
+            "h7f7",
+            "f2e3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/7R/8/3K4/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 2 multipv 1 time 1 nodes 34 nps 34000 hashfull 0 score cp 338 pv e6d5",
+          "tokens": [
+            "e6d5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/7R/8/3K4/1p6/1P6/5kp1/8 w - - 0 80",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 2 seldepth 2 multipv 1 time 1 nodes 54 nps 54000 hashfull 0 score cp 319 pv e6d5 g3g2",
+          "tokens": [
+            "e6d5",
+            "g3g2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/5R2/8/3K4/1p6/1P4p1/4k3/8 b - - 7 80",
+            "legal": true,
+            "plies": 3
+          },
+          "line": "info depth 2 seldepth 4 multipv 1 time 1 nodes 144 nps 144000 hashfull 0 score cp 324 pv h7f7 f2e2 e6d5",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/4K3/8/1p6/1P4p1/5k2/8 w - - 8 81",
+            "legal": true,
+            "plies": 4
+          },
+          "line": "info depth 3 seldepth 6 multipv 1 time 1 nodes 377 nps 377000 hashfull 0 score cp 330 pv h7f7 f2e1 f7g7 e1f2",
+          "tokens": [
+            "h7f7",
+            "f2e1",
+            "f7g7",
+            "e1f2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/3K4/1p6/1P2k1p1/8/8 b - - 9 81",
+            "legal": true,
+            "plies": 5
+          },
+          "line": "info depth 4 seldepth 8 multipv 1 time 1 nodes 690 nps 690000 hashfull 0 score cp 374 pv h7f7 f2e2 e6d5 e2e3 f7g7",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "e2e3",
+            "f7g7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/3K4/1p6/1P6/5kp1/8 w - - 2 82",
+            "legal": true,
+            "plies": 6
+          },
+          "line": "info depth 5 seldepth 9 multipv 1 time 1 nodes 1099 nps 1099000 hashfull 0 score cp 349 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f2",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 6 seldepth 11 multipv 1 time 1 nodes 1551 nps 1551000 hashfull 0 score cp 321 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f2 d5c4 g2g1q g7g1 f2g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f2",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1p6/1P6/8/6k1 b - - 1 82",
+            "legal": true,
+            "plies": 7
+          },
+          "line": "info depth 7 seldepth 11 multipv 1 time 1 nodes 2488 nps 2488000 hashfull 0 score cp 310 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 8 seldepth 12 multipv 1 time 2 nodes 4007 nps 2003500 hashfull 0 score cp 317 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 9 seldepth 13 multipv 1 time 2 nodes 5244 nps 2622000 hashfull 0 score cp 317 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/8/1P6/5k2/8 b - - 2 85",
+            "legal": true,
+            "plies": 13
+          },
+          "line": "info depth 10 seldepth 15 multipv 1 time 4 nodes 12390 nps 3097500 hashfull 0 score cp 242 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/8/1P4k1/8/8 w - - 3 86",
+            "legal": true,
+            "plies": 14
+          },
+          "line": "info depth 11 seldepth 15 multipv 1 time 5 nodes 15628 nps 3125600 hashfull 0 score cp 255 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2g3",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2g3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 12 seldepth 17 multipv 1 time 6 nodes 20737 nps 3456166 hashfull 0 score cp 239 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2e3 b3b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 8 nodes 26054 nps 3256750 hashfull 0 score cp 247 pv h7f7 f2e2 e6d5 g3g2 f7g7 e2f1 d5c4 g2g1q g7g1 f1g1 c4b4 g1f2 b4c5 f2e3 b3b4",
+          "tokens": [
+            "h7f7",
+            "f2e2",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e2f1",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f1g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/2k5/8/8 w - - 1 86",
+            "legal": true,
+            "plies": 14
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 8 nodes 29112 nps 3639000 hashfull 0 score cp 291 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3d3 b3b4 d3c3",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3d3",
+            "b3b4",
+            "d3c3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1PK1k3/8/8/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 9 nodes 31463 nps 3495888 hashfull 0 score cp 279 pv h7g7 g3g2 e6d5 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e5 b4b5",
+          "tokens": [
+            "h7g7",
+            "g3g2",
+            "e6d5",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e5",
+            "b4b5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1PK5/8/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 18 multipv 1 time 10 nodes 34433 nps 3443300 hashfull 0 score cp 340 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e3 b4b5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e3",
+            "b4b5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/1P1K4/8/2k5/8/8 w - - 3 88",
+            "legal": true,
+            "plies": 18
+          },
+          "line": "info depth 14 seldepth 22 multipv 1 time 15 nodes 55542 nps 3702800 hashfull 0 score cp 440 pv e6d5 g3g2 h7g7 g2g1r g7g1 f2g1 d5c5 g1f2 c5b4 f2e3 b4c5 e3e4 b3b4 e4e3 b4b5 e3d2 c5d5 d2c3",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7g7",
+            "g2g1r",
+            "g7g1",
+            "f2g1",
+            "d5c5",
+            "g1f2",
+            "c5b4",
+            "f2e3",
+            "b4c5",
+            "e3e4",
+            "b3b4",
+            "e4e3",
+            "b4b5",
+            "e3d2",
+            "c5d5",
+            "d2c3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/8/2K5/4k3/8/8/8 b - - 0 89",
+            "legal": true,
+            "plies": 21
+          },
+          "line": "info depth 15 seldepth 32 multipv 1 time 36 nodes 138448 nps 3845777 hashfull 0 score cp 542 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e4 b6b7",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e4",
+            "b6b7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/3K4/8/2k5/8/8/8 b - - 4 92",
+            "legal": true,
+            "plies": 27
+          },
+          "line": "info depth 16 seldepth 32 multipv 1 time 92 nodes 183645 nps 1996141 hashfull 1 score cp 551 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c4 f2e3 c4d5 e3d2 b3b4 d2c3 b4b5 c3b4 b5b6 b4a4 b6b7 a4b4 d5c6 b4c4 c6d6",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c4",
+            "f2e3",
+            "c4d5",
+            "e3d2",
+            "b3b4",
+            "d2c3",
+            "b4b5",
+            "c3b4",
+            "b5b6",
+            "b4a4",
+            "b6b7",
+            "a4b4",
+            "d5c6",
+            "b4c4",
+            "c6d6"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/4k3/2K5/8/8/8/8 b - - 2 91",
+            "legal": true,
+            "plies": 25
+          },
+          "line": "info depth 17 seldepth 32 multipv 1 time 101 nodes 221390 nps 2191980 hashfull 1 score cp 551 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e6 c5c6 e6e7 b6b7 e7e6 c6c5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e6",
+            "c5c6",
+            "e6e7",
+            "b6b7",
+            "e7e6",
+            "c6c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/4k3/1PK5/8/8/8/8/8 w - - 3 90",
+            "legal": true,
+            "plies": 22
+          },
+          "line": "info depth 18 seldepth 32 multipv 1 time 108 nodes 248974 nps 2305314 hashfull 1 score cp 536 pv e6d5 g3g2 h7f7 f2g3 f7g7 g3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e6 c5c6 e6e7",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2g3",
+            "f7g7",
+            "g3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e6",
+            "c5c6",
+            "e6e7"
+          ]
+        }
+      ]
+    },
+    {
+      "bestmove_classification": {
+        "final_fen": "8/7R/8/3K4/1p6/1P4p1/5k2/8 b - - 5 79",
+        "legal": true,
+        "plies": 1
+      },
+      "name": "warm-root-repeat-depth17",
+      "pv_lines": [
+        {
+          "classification": {
+            "final_fen": "8/7R/8/3K4/1p6/1P4p1/5k2/8 b - - 5 79",
+            "legal": true,
+            "plies": 1
+          },
+          "line": "info depth 1 seldepth 1 multipv 1 time 1 nodes 2 nps 2000 hashfull 1 score cp 536 pv e6d5",
+          "tokens": [
+            "e6d5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/7R/8/3K4/1p6/1P6/5kp1/8 w - - 0 80",
+            "legal": true,
+            "plies": 2
+          },
+          "line": "info depth 2 seldepth 2 multipv 1 time 1 nodes 33 nps 33000 hashfull 1 score cp 536 pv e6d5 g3g2",
+          "tokens": [
+            "e6d5",
+            "g3g2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/5R2/8/3K4/1p6/1P6/4k1p1/8 w - - 2 81",
+            "legal": true,
+            "plies": 4
+          },
+          "line": "info depth 3 seldepth 4 multipv 1 time 1 nodes 92 nps 92000 hashfull 1 score cp 439 pv e6d5 g3g2 h7f7 f2e2",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2e2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/5R2/8/3K4/1p6/1P2k3/6p1/8 w - - 0 81",
+            "legal": true,
+            "plies": 4
+          },
+          "line": "info depth 3 seldepth 5 multipv 1 time 1 nodes 148 nps 148000 hashfull 1 score cp 461 pv h7f7 f2e3 e6d5 g3g2",
+          "tokens": [
+            "h7f7",
+            "f2e3",
+            "e6d5",
+            "g3g2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/3K4/1p6/1P2k3/6p1/8 b - - 1 81",
+            "legal": true,
+            "plies": 5
+          },
+          "line": "info depth 4 seldepth 6 multipv 1 time 1 nodes 257 nps 257000 hashfull 1 score cp 429 pv h7f7 f2e3 e6d5 g3g2 f7g7",
+          "tokens": [
+            "h7f7",
+            "f2e3",
+            "e6d5",
+            "g3g2",
+            "f7g7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/3K4/1p6/1P6/5kp1/8 w - - 2 82",
+            "legal": true,
+            "plies": 6
+          },
+          "line": "info depth 5 seldepth 6 multipv 1 time 1 nodes 437 nps 437000 hashfull 1 score cp 536 pv h7f7 f2e3 e6d5 g3g2 f7g7 e3f2",
+          "tokens": [
+            "h7f7",
+            "f2e3",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e3f2"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/2K5/1p6/1P6/5kp1/8 b - - 3 82",
+            "legal": true,
+            "plies": 7
+          },
+          "line": "info depth 6 seldepth 7 multipv 1 time 1 nodes 594 nps 594000 hashfull 1 score cp 536 pv h7f7 f2e3 e6d5 g3g2 f7g7 e3f2 d5c5",
+          "tokens": [
+            "h7f7",
+            "f2e3",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e3f2",
+            "d5c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/6R1/8/2K5/1p6/1P6/5k2/6q1 w - - 0 83",
+            "legal": true,
+            "plies": 8
+          },
+          "line": "info depth 7 seldepth 9 multipv 1 time 1 nodes 812 nps 812000 hashfull 1 score cp 536 pv h7f7 f2e3 e6d5 g3g2 f7g7 e3f2 d5c5 g2g1q",
+          "tokens": [
+            "h7f7",
+            "f2e3",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e3f2",
+            "d5c5",
+            "g2g1q"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1p6/1P6/8/6k1 w - - 0 84",
+            "legal": true,
+            "plies": 10
+          },
+          "line": "info depth 8 seldepth 12 multipv 1 time 1 nodes 2054 nps 2054000 hashfull 1 score cp 446 pv h7f7 f2e3 e6d5 g3g2 f7g7 e3f2 d5c5 g2g1q g7g1 f2g1",
+          "tokens": [
+            "h7f7",
+            "f2e3",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1p6/1P6/8/6k1 w - - 0 84",
+            "legal": true,
+            "plies": 10
+          },
+          "line": "info depth 9 seldepth 12 multipv 1 time 1 nodes 2556 nps 2556000 hashfull 1 score cp 449 pv h7f7 f2e3 e6d5 g3g2 f7g7 e3f2 d5c5 g2g1q g7g1 f2g1",
+          "tokens": [
+            "h7f7",
+            "f2e3",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/8/1P6/5k2/8 b - - 2 85",
+            "legal": true,
+            "plies": 13
+          },
+          "line": "info depth 10 seldepth 20 multipv 1 time 2 nodes 7261 nps 3630500 hashfull 1 score cp 379 pv h7f7 f2e3 f7g7 e3f2 e6d5 g3g2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5",
+          "tokens": [
+            "h7f7",
+            "f2e3",
+            "f7g7",
+            "e3f2",
+            "e6d5",
+            "g3g2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/8/1K6/1P6/8/6k1 b - - 0 84",
+            "legal": true,
+            "plies": 11
+          },
+          "line": "info depth 10 seldepth 20 multipv 1 time 2 nodes 7699 nps 3849500 hashfull 1 score cp 408 pv e6d5 g3g2 h7f7 f2e3 f7g7 e3f2 d5c5 g2g1q g7g1 f2g1 c5b4",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2e3",
+            "f7g7",
+            "e3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/8/1P2k3/8/8 w - - 3 86",
+            "legal": true,
+            "plies": 14
+          },
+          "line": "info depth 11 seldepth 20 multipv 1 time 2 nodes 8496 nps 4248000 hashfull 1 score cp 378 pv e6d5 g3g2 h7f7 f2e3 f7g7 e3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2e3",
+            "f7g7",
+            "e3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/2K5/1P6/4k3/8/8 b - - 0 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 11 seldepth 20 multipv 1 time 2 nodes 10474 nps 5237000 hashfull 1 score cp 422 pv h7f7 f2e3 f7g7 e3f2 e6d5 g3g2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4",
+          "tokens": [
+            "h7f7",
+            "f2e3",
+            "f7g7",
+            "e3f2",
+            "e6d5",
+            "g3g2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/3K4/1P6/8/3k4/8 b - - 0 87",
+            "legal": true,
+            "plies": 17
+          },
+          "line": "info depth 12 seldepth 20 multipv 1 time 3 nodes 15431 nps 5143666 hashfull 1 score cp 428 pv h7f7 f2e3 f7g7 e3f2 e6d5 g3g2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 c5d5 e3d2 b3b4",
+          "tokens": [
+            "h7f7",
+            "f2e3",
+            "f7g7",
+            "e3f2",
+            "e6d5",
+            "g3g2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "c5d5",
+            "e3d2",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/3K4/8/1P6/4k3/8 b - - 4 86",
+            "legal": true,
+            "plies": 15
+          },
+          "line": "info depth 13 seldepth 20 multipv 1 time 4 nodes 19360 nps 4840000 hashfull 1 score cp 412 pv h7f7 f2e3 e6d5 g3g2 f7g7 e3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c4 f2e2 c4d5",
+          "tokens": [
+            "h7f7",
+            "f2e3",
+            "e6d5",
+            "g3g2",
+            "f7g7",
+            "e3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c4",
+            "f2e2",
+            "c4d5"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/8/3K4/1P6/8/3k4/8 b - - 0 87",
+            "legal": true,
+            "plies": 17
+          },
+          "line": "info depth 13 seldepth 20 multipv 1 time 5 nodes 20837 nps 4167400 hashfull 1 score cp 429 pv e6d5 g3g2 h7f7 f2e3 f7g7 e3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c4 f2e2 c4d5 e2d2 b3b4",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2e3",
+            "f7g7",
+            "e3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c4",
+            "f2e2",
+            "c4d5",
+            "e2d2",
+            "b3b4"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/8/1P2k3/2K5/8/8/8/8 w - - 1 89",
+            "legal": true,
+            "plies": 20
+          },
+          "line": "info depth 14 seldepth 21 multipv 1 time 6 nodes 27358 nps 4559666 hashfull 1 score cp 509 pv e6d5 g3g2 h7f7 f2e3 f7g7 e3f2 d5c5 g2g1q g7g1 f2g1 c5b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e6",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2e3",
+            "f7g7",
+            "e3f2",
+            "d5c5",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c5b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e6"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/4k3/2K5/8/8/8/8 b - - 0 89",
+            "legal": true,
+            "plies": 21
+          },
+          "line": "info depth 15 seldepth 25 multipv 1 time 8 nodes 35475 nps 4434375 hashfull 1 score cp 550 pv e6d5 g3g2 h7f7 f2e3 f7g7 e3f2 d5c4 g2g1q g7g1 f2g1 c4b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e6 b6b7",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2e3",
+            "f7g7",
+            "e3f2",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e6",
+            "b6b7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P2k3/2K5/8/8/8/8/8 b - - 0 90",
+            "legal": true,
+            "plies": 23
+          },
+          "line": "info depth 16 seldepth 30 multipv 1 time 11 nodes 48767 nps 4433363 hashfull 1 score cp 556 pv e6d5 g3g2 h7f7 f2e3 f7g7 e3f2 d5c4 g2g1q g7g1 f2g1 c4b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e6 c5c6 e6e7 b6b7",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2e3",
+            "f7g7",
+            "e3f2",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e6",
+            "c5c6",
+            "e6e7",
+            "b6b7"
+          ]
+        },
+        {
+          "classification": {
+            "final_fen": "8/1P6/8/2K1k3/8/8/8/8 w - - 1 90",
+            "legal": true,
+            "plies": 22
+          },
+          "line": "info depth 17 seldepth 30 multipv 1 time 13 nodes 60651 nps 4665461 hashfull 1 score cp 533 pv e6d5 g3g2 h7f7 f2e3 f7g7 e3f2 d5c4 g2g1q g7g1 f2g1 c4b4 g1f2 b4c5 f2e3 b3b4 e3e4 b4b5 e4e5 b5b6 e5e6 b6b7 e6e5",
+          "tokens": [
+            "e6d5",
+            "g3g2",
+            "h7f7",
+            "f2e3",
+            "f7g7",
+            "e3f2",
+            "d5c4",
+            "g2g1q",
+            "g7g1",
+            "f2g1",
+            "c4b4",
+            "g1f2",
+            "b4c5",
+            "f2e3",
+            "b3b4",
+            "e3e4",
+            "b4b5",
+            "e4e5",
+            "b5b6",
+            "e5e6",
+            "b6b7",
+            "e6e5"
+          ]
+        }
+      ]
+    }
+  ],
+  "nine_ply_prefix": [
+    "h7f7",
+    "f2e1",
+    "e6d5",
+    "g3g2",
+    "f7g7",
+    "e1f2",
+    "d5c4",
+    "f2f3",
+    "c4b5"
+  ],
+  "promotion_fen": "8/6R1/8/1K6/1p6/1P3k2/6p1/8 b - - 5 83",
+  "python_chess": {
+    "path": "/home/ehrli/nnue-owned-continuation-20260928/counterdraw-deps/chess-1.11.2/chess/__init__.py",
+    "sha256": "1fde6a8e932508d14b31f6a584497b49c2969fc3c7cdc675347f819f0d667a5b",
+    "version": "1.11.2"
+  },
+  "recorded_historical": [
+    {
+      "classification": {
+        "fen": "8/6R1/8/1K6/1p6/1P3k2/6p1/8 b - - 5 83",
+        "index": 9,
+        "legal": false,
+        "legal_promotion_alternatives": [
+          "g2g1b",
+          "g2g1n",
+          "g2g1q",
+          "g2g1r"
+        ],
+        "piece": "p",
+        "suffixless_last_rank_pawn": true,
+        "token": "g2g1"
+      },
+      "promotion_completions": [
+        {
+          "every_move_legal": false,
+          "replacement": "g2g1q"
+        },
+        {
+          "every_move_legal": true,
+          "replacement": "g2g1r"
+        },
+        {
+          "every_move_legal": false,
+          "replacement": "g2g1b"
+        },
+        {
+          "every_move_legal": true,
+          "replacement": "g2g1n"
+        }
+      ],
+      "recorded_bestmove": "h7f7",
+      "recorded_bestmove_classification": {
+        "final_fen": "8/5R2/4K3/8/1p6/1P4p1/5k2/8 b - - 5 79",
+        "legal": true,
+        "plies": 1
+      },
+      "recorded_info": "info depth 17 seldepth 36 multipv 1 time 52 nodes 190109 nps 3655942 hashfull 49 score cp 1438 pv h7f7 f2e1 e6d5 g3g2 f7g7 e1f2 d5c4 f2f3 c4b5 g2g1 b5c5 f3e3 g7g1 e3e4 c5b4 e4e5 b4c3 e5d6 g1b1 d6e6 b3b4 e6d7 b1b2 d7e8"
+    },
+    {
+      "classification": {
+        "fen": "8/6R1/8/1K6/1p6/1P3k2/6p1/8 b - - 5 83",
+        "index": 9,
+        "legal": false,
+        "legal_promotion_alternatives": [
+          "g2g1b",
+          "g2g1n",
+          "g2g1q",
+          "g2g1r"
+        ],
+        "piece": "p",
+        "suffixless_last_rank_pawn": true,
+        "token": "g2g1"
+      },
+      "promotion_completions": [
+        {
+          "every_move_legal": true,
+          "replacement": "g2g1q"
+        },
+        {
+          "every_move_legal": true,
+          "replacement": "g2g1r"
+        },
+        {
+          "every_move_legal": true,
+          "replacement": "g2g1b"
+        },
+        {
+          "every_move_legal": true,
+          "replacement": "g2g1n"
+        }
+      ],
+      "recorded_bestmove": "h7f7",
+      "recorded_bestmove_classification": {
+        "final_fen": "8/5R2/4K3/8/1p6/1P4p1/5k2/8 b - - 5 79",
+        "legal": true,
+        "plies": 1
+      },
+      "recorded_info": "info depth 18 seldepth 38 multipv 1 time 79 nodes 304777 nps 3857936 hashfull 49 score cp 1330 pv h7f7 f2e1 e6d5 g3g2 f7g7 e1f2 d5c4 f2f3 c4b5 g2g1 g7g1 f3e4 b5b4 e4e5 b4c3 e5d6 g1b1 d6e6 b3b4 e6d7 b4b5 d7c7 b5b6 c7b7 c3c4 b7c6 b6b7 c6d6 b7b8q d6e6"
+    }
+  ],
+  "root_fen": "8/7R/4K3/8/1p6/1P4p1/5k2/8 w - - 4 79",
+  "runtime_witness": false,
+  "schema": "ngn-rodent-pv-identity-probe-v1",
+  "state": "NOT_REPRODUCED_IN_BOUNDED_PLAN"
+}

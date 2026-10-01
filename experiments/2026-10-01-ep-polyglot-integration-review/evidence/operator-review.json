@@ -1,0 +1,81 @@
+{
+  "completed_at_utc": "2026-10-01T06:25:20.747222+00:00",
+  "base": "28d66322debef23d01645a1bc73d7e942ada9813",
+  "book_component_commit": "780c89dfb3177c115e682a8c1524ee8101ccaaec",
+  "production_exact_components_verified": true,
+  "other_production_unchanged": true,
+  "immutable_oracles_unchanged": true,
+  "only12_test_constant_transitions_plus_comment_and_error_label": true,
+  "source_sha256": "a5a0a6716c04a6d4a3a207f05a91d2ac28f401b40c3c8ad6e331fec99848bf76",
+  "model_sha256": "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29",
+  "required_actual_net_suites": [
+    {
+      "name": "short-all-actual-net",
+      "command": "env NGN_EP_OWNED_NNUE=/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue GOTOOLCHAIN=local GOMAXPROCS=1 GOFLAGS=-p=1 GOCACHE=/home/ehrli/ngn-personal-correctness-20261001/.gocache-ep-repair /usr/local/go/bin/go test -short ./... -count=1",
+      "actual_exit": 0,
+      "stdout_sha256": "2638edd9092cc4a2d276087dc0020b2c2e024396515cbaec5219b33fda3ea579",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "short-engine-actual-net",
+      "command": "env NGN_EP_OWNED_NNUE=/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue GOTOOLCHAIN=local GOMAXPROCS=1 GOFLAGS=-p=1 GOCACHE=/home/ehrli/ngn-personal-correctness-20261001/.gocache-ep-repair /usr/local/go/bin/go test -short ./engine -count=1",
+      "actual_exit": 0,
+      "stdout_sha256": "aa0a5b3b1750ccb9c7d9235c96df22ea5f4846beb080742939d1c790e91f3cd9",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "short-race-all-actual-net",
+      "command": "env NGN_EP_OWNED_NNUE=/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue GOTOOLCHAIN=local GOMAXPROCS=1 GOFLAGS=-p=1 GOCACHE=/home/ehrli/ngn-personal-correctness-20261001/.gocache-ep-repair /usr/local/go/bin/go test -short -race ./... -count=1",
+      "actual_exit": 0,
+      "stdout_sha256": "484f69858295cd6e4efb1465e15fa1e40e8c506873422cbdee923023427ce7bc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "short-race-engine-actual-net",
+      "command": "env NGN_EP_OWNED_NNUE=/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue GOTOOLCHAIN=local GOMAXPROCS=1 GOFLAGS=-p=1 GOCACHE=/home/ehrli/ngn-personal-correctness-20261001/.gocache-ep-repair /usr/local/go/bin/go test -short -race ./engine -count=1",
+      "actual_exit": 0,
+      "stdout_sha256": "80f19a746728c431237c526ab6be0fa85dba8781892b263c952d3484cf34d0b9",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "operator_focused_race": {
+    "argv": [
+      "/usr/local/go/bin/go",
+      "test",
+      "-short",
+      "-race",
+      "./engine",
+      "-run",
+      "^(TestEnPassantHashCapturabilityGate|TestEnPassantSecondCapturerCanBeLegal|TestEnPassantNullDescendantRestoresKey|TestLegalEnPassantOrdinaryHashAndPinnedOracle|TestIllegalEnPassantPlayedThreefold|TestEnPassantKeyTransitionRestoration|TestLegalEnPassantPredicateEdgesAndPurity|TestOwnedK4EnPassantRepetitionReadiness|TestCanonicalPolyglotRandomTable|TestExternalPolyglotSpecialMoveContract|TestExternalPolyglotBookMoveContract|TestPolyglotOrthodoxCastleDestinationCompatibility|TestPolyglotHash|TestExternalPolyglotBookInterop|TestEmbeddedBook.*)$",
+      "-count=1",
+      "-v"
+    ],
+    "cwd": "/home/ehrli/ngn-personal-correctness-20261001/integration-review",
+    "actual_exit": 0,
+    "elapsed_wall_seconds": 7.83565124800225,
+    "environment": {
+      "GOMAXPROCS": "1",
+      "GOFLAGS": "-p=1",
+      "GOTOOLCHAIN": "local",
+      "GOCACHE": "/home/ehrli/ngn-personal-correctness-20261001/.gocache-ep-repair",
+      "NGN_EP_OWNED_NNUE": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue"
+    },
+    "test_source_sha256": "a5a0a6716c04a6d4a3a207f05a91d2ac28f401b40c3c8ad6e331fec99848bf76",
+    "model_sha256": "1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29"
+  },
+  "nnue_non_skipped_cases": 16,
+  "true_threefold_histories": 4,
+  "canonical_book_key_observations": 302,
+  "book_move_cases": 23,
+  "book_move_perft2_nodes": 7651,
+  "legacy_castle_alias_controls": 4,
+  "allowed_cpus": [
+    0,
+    2
+  ],
+  "cpu_max": "50000 100000",
+  "memory_max": "4294967296",
+  "nice": 10,
+  "no_owner_or_default_integration": true,
+  "no_strength_claim": true
+}

@@ -1,0 +1,8 @@
+{
+  "error": "VerificationError: frozen input copy absent: run001_supervisor_receipt",
+  "run_root": "/home/ehrli/repos/ngn-qpromo-gate-20260912/run-002",
+  "schema": "ngn-qpromo-run002-independent-terminal-review-v3",
+  "state": "FAILED",
+  "verified_utc": "2026-09-12T23:08:27.334195+00:00",
+  "verifier_sha256": "fbcc3410fe853abd2a739e6a7bda1d319257d9a637d8925f7c158c440439da17"
+}

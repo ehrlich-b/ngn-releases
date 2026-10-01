@@ -1,0 +1,81 @@
+{
+  "schema": "ngn-rodent-output-avx2-candidate-receipt-v1",
+  "status": "VALIDATION_PASS_PERFORMANCE_HELD",
+  "base": {
+    "commit": "637043a6e5ed46e2328a65097f81d33ea1dc7524",
+    "tree": "189528825577cdd54ad758968ad60f210aaa1526"
+  },
+  "worktrees": {
+    "candidate": "/home/ehrli/repos/ngn-rodent-output-avx2-20260913",
+    "base": "/home/ehrli/repos/ngn-rodent-output-base-20260913"
+  },
+  "toolchain": "go version go1.25.5 linux/amd64",
+  "normalized_patches": {
+    "production": {"path":"/home/ehrli/repos/ngn-rodent-output-avx2-20260913/output/rodent-output-avx2-20260913/production-final.patch","sha256":"2c3d77447b591329cbb45a479c62dd6493d2d01a3b2c52dc320a1df88b099f1a"},
+    "tests_and_private_benchmark": {"path":"/home/ehrli/repos/ngn-rodent-output-avx2-20260913/output/rodent-output-avx2-20260913/tests-final.patch","sha256":"2f90e1c6b489fcd782f824f28cd84237dc9ed0390e91f072eb713aa5f214b4df"}
+  },
+  "superseded_mode_patches": {
+    "production_sha256": "60847abc9f7ae5b0de939b162d4618c9553a1e0e4bfe48a06041c9fdbd107d8a",
+    "tests_sha256": "438073d367a451672238ed4030e33b7890b320cbfb8d0e073725bd699d026497",
+    "reason": "recorded new files as 100755; preserved but do not bind the normalized 100644 candidate"
+  },
+  "source_sha256": {
+    "rodenteval/evaluate.go": "9f608b1b2df10f8569f2554822cb1698e96f5a45c0209758f4239a9cf51df041",
+    "rodenteval/output_dot.go": "74b3fafc37c566ee63152f746e48b94d97e898bb061bf87a53e0acf561743bf2",
+    "rodenteval/output_dot_amd64_v3.go": "0cc0830133b847665549ed4f549b8ac104decc57e119dd9fa67d2b9f01bd71f1",
+    "rodenteval/output_dot_amd64_v3.s": "5f872d113b927413e845282d79fe9b7899e15fb748d6c512d815c5e35104afaf",
+    "rodenteval/output_dot_fallback.go": "5156c04c31a6236a7f588f4b4d634df8a2f4d57c85942c0b66ad8e45d5c683ce",
+    "rodenteval/output_dot_test.go": "66fdf6a9d128c468bc7d0d028f3a278d874bf70b418e65f8a0161d13a0a41995",
+    "rodenteval/output_dot_amd64_v3_test.go": "4030ccc7948dd9ac23b45497708eee8d2342fe08e4861777b9ddc4c57dbdf00b",
+    "rodenteval/output_dot_fallback_test.go": "9fe2dced8aee589409d8244393ca38f7c4318ecd52d784a80f71348b2b836fe2",
+    "rodenteval/output_dot_benchmark_test.go": "62cb63caf191a3138388d02dd0b6ae54c8bc93e5013e0a0d7578ab64e2c03b8b"
+  },
+  "frozen_probes": {
+    "engine/rodent_transition_profile_test.go": "4430f607d4a56c2ab3f951a0907b5effa5b2731833acb0542b8cb105a55d4347",
+    "engine/rodent_output_gate_snapshot_test.go": "50f7053f7cd186efa32bf5d34c78b619b5013d3a5a67f43d0b39b29015ba3664"
+  },
+  "inputs": {
+    "model": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb",
+    "release_corpus": "2685ecfae535fedd55fdce00d8c816b60955cf4f93873bda836366e409f97cb8",
+    "transition_fixtures": "f9e26de0ed7a9663011f1fe8844ee0d8beb7a1bea4a2e4da50805fdbbf9579d4",
+    "tagged_transition_oracle": "415c956859d923153fe3dabd4e7591991561710f7eb4f02a9183fb42bb389d25",
+    "release_transition_oracle": "5f110afab9f9e8c9df8381c64d229b7b1797511366174200720afbc8f2f48853"
+  },
+  "validation": {
+    "exact_command_script": {"path":"/home/ehrli/repos/ngn-rodent-output-avx2-20260913/output/rodent-output-avx2-20260913/run-validation.sh","sha256":"c698c0fd253745cecc3af48808ab46b467b5fad10c77d415a5e6ecbbc71b4ad9"},
+    "raw_directory": "/home/ehrli/repos/ngn-rodent-output-avx2-20260913/output/rodent-output-avx2-20260913/validation",
+    "stages": [
+      {"name":"oracle-v1","exit":0,"command":"env CGO_ENABLED=0 GOAMD64=v1 GOMAXPROCS=2 GOFLAGS=-mod=readonly <five exact Rodent input envs> /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-output-avx2-20260913 test -p 2 -tags rodentoracle ./rodenteval -count=1 -v"},
+      {"name":"oracle-v3","exit":0,"command":"env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly <five exact Rodent input envs> /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-output-avx2-20260913 test -p 2 -tags rodentoracle ./rodenteval -count=1 -v"},
+      {"name":"engine-rodent-v3","exit":0,"command":"env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly RODENT_V11_ANAND_MODEL=<exact model> /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-output-avx2-20260913 test -p 2 -tags rodentoracle ./engine -run Rodent -count=1 -v"},
+      {"name":"full-short-v3","exit":0,"command":"env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-output-avx2-20260913 test -short -p 2 ./... -count=1"},
+      {"name":"full-short-race-v3","exit":0,"command":"env GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-output-avx2-20260913 test -short -race -p 2 ./... -count=1"},
+      {"name":"build-linux-v3","exit":0,"command":"env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-output-avx2-20260913 build -p 2 -o /home/ehrli/repos/ngn-rodent-output-avx2-20260913/output/rodent-output-avx2-20260913/ngn-rodent-output-linux-amd64-v3 ."},
+      {"name":"build-windows-v3","exit":0,"command":"env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-output-avx2-20260913 build -p 2 -o /home/ehrli/repos/ngn-rodent-output-avx2-20260913/output/rodent-output-avx2-20260913/ngn-rodent-output-windows-amd64-v3.exe ."}
+    ]
+  },
+  "gate_binaries": {
+    "base_engine_test": {"path":"/home/ehrli/repos/ngn-rodent-output-base-20260913/output/rodent-output-avx2-20260913/engine-output-base.test","sha256":"e5fc61c64e6772b5f415895a8116410397a2690275e5b2f38762186efa540603"},
+    "candidate_engine_test": {"path":"/home/ehrli/repos/ngn-rodent-output-avx2-20260913/output/rodent-output-avx2-20260913/engine-output-candidate.test","sha256":"933c5d95185552f584e3a16f175c16271a274401391bb7513314ec6786d22bc3"},
+    "base_rodenteval_test": {"path":"/home/ehrli/repos/ngn-rodent-output-base-20260913/output/rodent-output-avx2-20260913/rodenteval-output-base.test","sha256":"f3d068848653c5c89206fd3ac411fdd89a009f480fdfad598f89400989831b99"},
+    "candidate_rodenteval_test": {"path":"/home/ehrli/repos/ngn-rodent-output-avx2-20260913/output/rodent-output-avx2-20260913/rodenteval-output-candidate.test","sha256":"973b7597df86ef8add266391387ff8c2d8727aa2d97ec8e3b13d9b058348f68b"}
+  },
+  "gate_binary_build_commands": {
+    "base_engine_test": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-output-base-20260913 test -p 2 -c -o /home/ehrli/repos/ngn-rodent-output-base-20260913/output/rodent-output-avx2-20260913/engine-output-base.test ./engine",
+    "candidate_engine_test": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-output-avx2-20260913 test -p 2 -c -o /home/ehrli/repos/ngn-rodent-output-avx2-20260913/output/rodent-output-avx2-20260913/engine-output-candidate.test ./engine",
+    "base_rodenteval_test": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-output-base-20260913 test -p 2 -c -tags rodentoracle -o /home/ehrli/repos/ngn-rodent-output-base-20260913/output/rodent-output-avx2-20260913/rodenteval-output-base.test ./rodenteval",
+    "candidate_rodenteval_test": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-output-avx2-20260913 test -p 2 -c -tags rodentoracle -o /home/ehrli/repos/ngn-rodent-output-avx2-20260913/output/rodent-output-avx2-20260913/rodenteval-output-candidate.test ./rodenteval"
+  },
+  "cross_binaries": {
+    "linux_amd64_v3": "53c220d06d48bd54ad687cac859c9b257eb7e89db4a798723dcbf924214369c0",
+    "windows_amd64_v3": "a9e30c5227d33a09f684c203f563d371490a59883eaef6a7382c28acf7f008bd"
+  },
+  "disassembly": {"path":"/home/ehrli/repos/ngn-rodent-output-avx2-20260913/output/rodent-output-avx2-20260913/disassembly.txt","sha256":"8655f2b0dfaa11c1673847b4e76e278e7ecc95dffa66c6c28fd91c649122c786"},
+  "gate_contract": {
+    "performance_launched": false,
+    "direct_benchmark": "BenchmarkRodentOutputDotCapturedCorpus/{portable|selected}/{all|start_white|start_black|kiwipete_white|kiwipete_black|asymmetric_white|asymmetric_black}",
+    "direct_order": ["all","start_white","start_black","kiwipete_white","kiwipete_black","asymmetric_white","asymmetric_black"],
+    "engine_correctness_test": "TestRodentOutputFixedNodeSnapshot",
+    "rodenteval_correctness_tests": ["TestV11AnandExactReleaseCorpusParity","TestV11AnandIncrementalTaggedAndReleaseOracleParity"]
+  }
+}

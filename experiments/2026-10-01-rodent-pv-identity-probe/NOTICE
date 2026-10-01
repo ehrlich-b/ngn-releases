@@ -1,0 +1,10 @@
+Historical Rodent source-derived diagnostic
+
+Rodent V source authors: Naman Thanki and Pawel Koziol.
+Source-derived move renderer, TT packing and pawn validation evidence is retained
+in source_mechanism_model.go and archived native-source files in this directory.
+Pinned source/tag identities and modifications are recorded in the experiment
+receipts. License: GNU GPL version 3, complete text SOURCE-LICENSE-GPL-3.0.
+The source model is modified diagnostic evidence, not the historical binary.
+This directory is not imported by the current NGN executable or evaluator.
+See the root NOTICE for the author and historical component inventory.

@@ -1,0 +1,25 @@
+{
+  "unit": "ngn-owned-followup-20260928",
+  "started": 1790645198.1739602,
+  "command": [
+    "systemd-run",
+    "--user",
+    "--unit",
+    "ngn-owned-followup-20260928",
+    "--collect",
+    "--property=RuntimeMaxSec=12h",
+    "--property=TimeoutStopSec=15",
+    "--property=KillMode=control-group",
+    "--property=MemoryMax=12G",
+    "--working-directory",
+    "/home/ehrli/nnue-owned-continuation-20260928",
+    "python3",
+    "/home/ehrli/nnue-owned-continuation-20260928/source/scripts/ownedfollowup.py",
+    "--root",
+    "/home/ehrli/nnue-owned-continuation-20260928",
+    "--plan",
+    "/home/ehrli/nnue-owned-continuation-20260928/source/experiments/2026-09-28-owned-e20-followup-plan.json"
+  ],
+  "plan_sha256": "6ae3ad9aea36fcac11a3561cf40c9dcb6b711e1a68cb117041b5f8ccf6bc8b3a",
+  "driver_sha256": "743cd7505d15056b6c3b5f2b26d4428268dca9f84d6da877cecf4da3456a5f75"
+}

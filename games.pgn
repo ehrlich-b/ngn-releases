@@ -1,0 +1,9 @@
+[Event "NGN vs Stockfish Test"]
+[Round "1"]
+[White "NGN"]
+[Black "Stockfish (1320 ELO)"]
+[Result "1/2-1/2"]
+[TimeControl "1s"]
+
+1. e2e4 e7e5 2. g1f3 d7d6 3. b1c3 f8e7 4. f1c4 g8f6 5. e1g1 c7c6 6. d2d4 e5d4 7. f3d4 a7a6 8. d1d3 d6d5 9. e4d5 c6d5 10. c3d5 f6d5 11. c4d5 d8d5 12. f1e1 b8c6 13. d4c6 d5c6 14. c1g5 c8e6 15. g5e7 e8e7 16. d3e4 h8e8 17. e4h7 c6c5 18. h7g7 e8g8 19. g7h7 c5g5 20. h7e4 b7b5 21. e4b7 e7f6 22. b7f3 f6g6 23. f3d3 g6h6 24. d3f3 a8c8 25. f3e4 c8c4 26. e4f3 c4c2 27. e1b1 c2c4 28. b1e1 c4f4 29. f3c6 g5f6 30. c6c1 h6h7 31. c1b1 h7g7 32. f2f3 g7h6 33. b1c1 f6g5 34. e1e6 f7e6 35. c1f1 g8d8 36. f1c1 f4f5 37. c1c3 f5e5 38. a1e1 e5e1 39. c3e1 g5c5 40. g1h1 h6g7 41. e1g3 g7f8 42. g3f4 f8e7 43. f4h4 e7d7 44. h4e1 c5d6 45. e1b1 d6d5 46. h1g1 d5c5 47. g1h1 c5e3 48. b1h7 d7c6 49. h7c2 c6d7 50. c2h7 d7c8 51. h7c2 c8b7 52. c2h7 b7c6 53. h7c2 c6b7 54. c2h7 b7b8 55. h7b1 d8c8 56. b1g1 c8c1 57. g1c1 e3c1 1/2-1/2
+

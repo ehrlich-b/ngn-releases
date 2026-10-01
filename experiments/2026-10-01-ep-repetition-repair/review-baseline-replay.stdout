@@ -1,0 +1,35 @@
+=== RUN   TestLegalEnPassantOrdinaryHashAndPinnedOracle
+=== RUN   TestLegalEnPassantOrdinaryHashAndPinnedOracle/pinned_white_capturer
+    enpassant_repetition_correctness_test.go:227: illegal EP changed ordinary key: real/EP=8E29B3E8B604F0EA no-EP=20B03C7203AC9AB6
+=== RUN   TestLegalEnPassantOrdinaryHashAndPinnedOracle/pinned_black_capturer
+    enpassant_repetition_correctness_test.go:227: illegal EP changed ordinary key: real/EP=E00ACB0FEEFCFDA4 no-EP=70032EBF22DB1832
+=== RUN   TestLegalEnPassantOrdinaryHashAndPinnedOracle/unrelated_check_white_capturer
+    enpassant_repetition_correctness_test.go:227: illegal EP changed ordinary key: real/EP=43F64A5636D4CDDC no-EP=ED6FC5CC837CA780
+=== RUN   TestLegalEnPassantOrdinaryHashAndPinnedOracle/unrelated_check_black_capturer
+    enpassant_repetition_correctness_test.go:227: illegal EP changed ordinary key: real/EP=998A289EA9585E34 no-EP=0983CD2E657FBBA2
+=== RUN   TestLegalEnPassantOrdinaryHashAndPinnedOracle/legal_white_capturer
+=== RUN   TestLegalEnPassantOrdinaryHashAndPinnedOracle/legal_black_capturer
+--- FAIL: TestLegalEnPassantOrdinaryHashAndPinnedOracle (0.00s)
+    --- FAIL: TestLegalEnPassantOrdinaryHashAndPinnedOracle/pinned_white_capturer (0.00s)
+    --- FAIL: TestLegalEnPassantOrdinaryHashAndPinnedOracle/pinned_black_capturer (0.00s)
+    --- FAIL: TestLegalEnPassantOrdinaryHashAndPinnedOracle/unrelated_check_white_capturer (0.00s)
+    --- FAIL: TestLegalEnPassantOrdinaryHashAndPinnedOracle/unrelated_check_black_capturer (0.00s)
+    --- PASS: TestLegalEnPassantOrdinaryHashAndPinnedOracle/legal_white_capturer (0.00s)
+    --- PASS: TestLegalEnPassantOrdinaryHashAndPinnedOracle/legal_black_capturer (0.00s)
+=== RUN   TestIllegalEnPassantPlayedThreefold
+=== RUN   TestIllegalEnPassantPlayedThreefold/pinned_white_capturer
+    enpassant_repetition_correctness_test.go:262: true repeated position split: first=8E29B3E8B604F0EA third=20B03C7203AC9AB6
+=== RUN   TestIllegalEnPassantPlayedThreefold/pinned_black_capturer
+    enpassant_repetition_correctness_test.go:262: true repeated position split: first=E00ACB0FEEFCFDA4 third=70032EBF22DB1832
+=== RUN   TestIllegalEnPassantPlayedThreefold/unrelated_check_white_capturer
+    enpassant_repetition_correctness_test.go:262: true repeated position split: first=43F64A5636D4CDDC third=ED6FC5CC837CA780
+=== RUN   TestIllegalEnPassantPlayedThreefold/unrelated_check_black_capturer
+    enpassant_repetition_correctness_test.go:262: true repeated position split: first=998A289EA9585E34 third=0983CD2E657FBBA2
+--- FAIL: TestIllegalEnPassantPlayedThreefold (0.00s)
+    --- FAIL: TestIllegalEnPassantPlayedThreefold/pinned_white_capturer (0.00s)
+    --- FAIL: TestIllegalEnPassantPlayedThreefold/pinned_black_capturer (0.00s)
+    --- FAIL: TestIllegalEnPassantPlayedThreefold/unrelated_check_white_capturer (0.00s)
+    --- FAIL: TestIllegalEnPassantPlayedThreefold/unrelated_check_black_capturer (0.00s)
+FAIL
+FAIL	github.com/ehrlich-b/ngn/engine	0.004s
+FAIL

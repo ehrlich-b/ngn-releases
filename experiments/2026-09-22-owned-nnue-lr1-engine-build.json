@@ -1,0 +1,22 @@
+{
+  "schema": "ngn-k4-lr1-screen-engine-build-v1",
+  "source_commit": "7f6b1f447d4307920437a46747f89434dcb9d23f",
+  "source_tree": "20547216adfc5ab021b647ae0ee49016f410280e",
+  "source_status": "clean detached worktree",
+  "builder": "go version go1.26.2 darwin/arm64",
+  "build_command": [
+    "env",
+    "CGO_ENABLED=0",
+    "GOOS=linux",
+    "GOARCH=amd64",
+    "GOAMD64=v3",
+    "go",
+    "build",
+    "-trimpath",
+    "-ldflags=-buildid=",
+    "-o",
+    "/private/tmp/ngn-k4-lr1-screen-v1",
+    "."
+  ],
+  "binary_sha256": "1f2502844f0eab41832cd0818f57c81d59ec66a774e1a09756e0cc72c0c6d1be"
+}

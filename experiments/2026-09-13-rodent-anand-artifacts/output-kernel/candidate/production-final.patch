@@ -1,0 +1,171 @@
+diff --git a/rodenteval/evaluate.go b/rodenteval/evaluate.go
+index 6cbaa4c..bed764d 100644
+--- a/rodenteval/evaluate.go
++++ b/rodenteval/evaluate.go
+@@ -81,11 +81,12 @@ func clippedSquaredWeighted(value, weight int16) int32 {
+ }
+ 
+ func (model *Model) evaluateAccumulator(accumulator *accumulator, sideToMove Color) int {
+-	var sum int32
+-	for hidden := 0; hidden < HiddenSize; hidden++ {
+-		sum += clippedSquaredWeighted(accumulator[sideToMove][hidden], model.outputWeights[0][hidden])
+-		sum += clippedSquaredWeighted(accumulator[sideToMove^1][hidden], model.outputWeights[1][hidden])
+-	}
++	sum := rodentOutputDot(
++		&accumulator[sideToMove],
++		&accumulator[sideToMove^1],
++		&model.outputWeights[0],
++		&model.outputWeights[1],
++	)
+ 	sum = sum/inputScale + int32(model.outputBias)
+ 	return int(sum * outputScale / (inputScale * layerScale))
+ }
+diff --git a/rodenteval/output_dot.go b/rodenteval/output_dot.go
+new file mode 100644
+index 0000000..e0ab378
+--- /dev/null
++++ b/rodenteval/output_dot.go
+@@ -0,0 +1,14 @@
++package rodenteval
++
++// rodentOutputDotPortable is the canonical output-layer accumulator. Each
++// addition intentionally wraps in int32, matching the released evaluator.
++func rodentOutputDotPortable(
++	us, them, usWeights, themWeights *[HiddenSize]int16,
++) int32 {
++	var sum int32
++	for hidden := 0; hidden < HiddenSize; hidden++ {
++		sum += clippedSquaredWeighted(us[hidden], usWeights[hidden])
++		sum += clippedSquaredWeighted(them[hidden], themWeights[hidden])
++	}
++	return sum
++}
+diff --git a/rodenteval/output_dot_amd64_v3.go b/rodenteval/output_dot_amd64_v3.go
+new file mode 100644
+index 0000000..4faac50
+--- /dev/null
++++ b/rodenteval/output_dot_amd64_v3.go
+@@ -0,0 +1,23 @@
++//go:build amd64 && amd64.v3
++
++package rodenteval
++
++const rodentOutputDotUsesAVX2 = true
++
++// These pairs fail compilation if the fixed Anand hidden width changes
++// without a corresponding kernel review.
++var (
++	_ [HiddenSize - 512]byte
++	_ [512 - HiddenSize]byte
++)
++
++func rodentOutputDot(
++	us, them, usWeights, themWeights *[HiddenSize]int16,
++) int32 {
++	return rodentOutputDotAVX2(us, them, usWeights, themWeights)
++}
++
++//go:noescape
++func rodentOutputDotAVX2(
++	us, them, usWeights, themWeights *[HiddenSize]int16,
++) int32
+diff --git a/rodenteval/output_dot_amd64_v3.s b/rodenteval/output_dot_amd64_v3.s
+new file mode 100644
+index 0000000..ab0dc2c
+--- /dev/null
++++ b/rodenteval/output_dot_amd64_v3.s
+@@ -0,0 +1,77 @@
++//go:build amd64 && amd64.v3
++
++#include "textflag.h"
++
++// rodentOutputDotAVX2 computes the exact modular int32 output sum. For each
++// clipped lane v, v² is split into the two signed-int16-safe products
++// v*floor(v/2) and v*ceil(v/2). PMADDWD multiplies those by duplicated signed
++// weights and reconstructs v²*w exactly, including w=-32768. All vector and
++// horizontal additions wrap modulo 2³², matching Go int32 addition.
++TEXT ·rodentOutputDotAVX2(SB), NOSPLIT, $0-36
++	MOVQ us+0(FP), AX
++	MOVQ them+8(FP), BX
++	MOVQ usWeights+16(FP), CX
++	MOVQ themWeights+24(FP), DX
++
++	VPXOR Y12, Y12, Y12
++	VPXOR Y15, Y15, Y15
++	MOVL $0x00ff00ff, R8
++	VMOVD R8, X14
++	VPBROADCASTD X14, Y14
++	MOVL $0x00010001, R8
++	VMOVD R8, X13
++	VPBROADCASTD X13, Y13
++
++	MOVL $32, R9
++output_block:
++	VMOVDQU (AX), Y0
++	VPMAXSW Y15, Y0, Y0
++	VPMINSW Y14, Y0, Y0
++	VPSRLW $1, Y0, Y1
++	VPAND Y13, Y0, Y2
++	VPADDW Y1, Y2, Y2
++	VPMULLW Y0, Y1, Y1
++	VPMULLW Y0, Y2, Y2
++	VPUNPCKLWD Y2, Y1, Y3
++	VPUNPCKHWD Y2, Y1, Y4
++	VMOVDQU (CX), Y5
++	VPUNPCKLWD Y5, Y5, Y6
++	VPUNPCKHWD Y5, Y5, Y7
++	VPMADDWD Y6, Y3, Y3
++	VPMADDWD Y7, Y4, Y4
++	VPADDD Y3, Y12, Y12
++	VPADDD Y4, Y12, Y12
++
++	VMOVDQU (BX), Y0
++	VPMAXSW Y15, Y0, Y0
++	VPMINSW Y14, Y0, Y0
++	VPSRLW $1, Y0, Y1
++	VPAND Y13, Y0, Y2
++	VPADDW Y1, Y2, Y2
++	VPMULLW Y0, Y1, Y1
++	VPMULLW Y0, Y2, Y2
++	VPUNPCKLWD Y2, Y1, Y3
++	VPUNPCKHWD Y2, Y1, Y4
++	VMOVDQU (DX), Y5
++	VPUNPCKLWD Y5, Y5, Y6
++	VPUNPCKHWD Y5, Y5, Y7
++	VPMADDWD Y6, Y3, Y3
++	VPMADDWD Y7, Y4, Y4
++	VPADDD Y3, Y12, Y12
++	VPADDD Y4, Y12, Y12
++
++	ADDQ $32, AX
++	ADDQ $32, BX
++	ADDQ $32, CX
++	ADDQ $32, DX
++	DECL R9
++	JNZ output_block
++
++	VEXTRACTI128 $1, Y12, X0
++	VPADDD X0, X12, X12
++	VPHADDD X12, X12, X12
++	VPHADDD X12, X12, X12
++	VMOVD X12, R8
++	MOVL R8, ret+32(FP)
++	VZEROUPPER
++	RET
+diff --git a/rodenteval/output_dot_fallback.go b/rodenteval/output_dot_fallback.go
+new file mode 100644
+index 0000000..6a51507
+--- /dev/null
++++ b/rodenteval/output_dot_fallback.go
+@@ -0,0 +1,11 @@
++//go:build !amd64 || !amd64.v3
++
++package rodenteval
++
++const rodentOutputDotUsesAVX2 = false
++
++func rodentOutputDot(
++	us, them, usWeights, themWeights *[HiddenSize]int16,
++) int32 {
++	return rodentOutputDotPortable(us, them, usWeights, themWeights)
++}

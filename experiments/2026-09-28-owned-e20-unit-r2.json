@@ -1,0 +1,27 @@
+{
+  "unit": "ngn-owned-training-20260928-r2",
+  "started": 1790641257.4255993,
+  "command": [
+    "systemd-run",
+    "--user",
+    "--unit",
+    "ngn-owned-training-20260928-r2",
+    "--collect",
+    "--property=RuntimeMaxSec=4h",
+    "--property=TimeoutStopSec=15",
+    "--property=KillMode=control-group",
+    "--property=MemoryMax=8G",
+    "--working-directory",
+    "/home/ehrli/nnue-owned-continuation-20260928",
+    "python3",
+    "/home/ehrli/nnue-owned-continuation-20260928/source/scripts/ownednight.py",
+    "training",
+    "--root",
+    "/home/ehrli/nnue-owned-continuation-20260928",
+    "--plan",
+    "/home/ehrli/nnue-owned-continuation-20260928/specs/e20-recovery-plan.json"
+  ],
+  "plan_sha256": "9af564ced4eececbb5bb4eb8e4c832a91a8b7005b2765259f564bfc1ea439022",
+  "parent": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/e20/candidates/candidate-2359296/receipt.json",
+  "parent_receipt_sha256": "835a5900eb619b830bdc629956f10f7ea5d4d7903f1246efd996977e61df5011"
+}

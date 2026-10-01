@@ -1,0 +1,66 @@
+{
+  "candidate_patch_paths": [
+    "countereval/context.go",
+    "countereval/model.go",
+    "countereval/output_dot.go",
+    "countereval/output_dot_amd64_v3.go",
+    "countereval/output_dot_amd64_v3.s",
+    "countereval/output_dot_amd64_v3_test.go",
+    "countereval/output_dot_benchmark_test.go",
+    "countereval/output_dot_fallback.go",
+    "countereval/output_dot_fallback_test.go",
+    "countereval/output_dot_test.go",
+    "engine/counter_transition_profile_test.go"
+  ],
+  "correctness_receipts_byte_identical": true,
+  "correctness_sha256": "2ffbc729295f3794883502e2c74779614623ef132844c795dc72c8d2e1dd1656",
+  "decision_sha256": "bea643ca183d908d11b4037fb09c0faa2495313d1f1719513a4c0239d1b64f46",
+  "direct": {
+    "median_ratio": 0.49453514906146484,
+    "order_medians": {
+      "portable-first": 0.4934645115952213,
+      "selected-first": 0.49496503496503497
+    },
+    "ratio_range": [
+      0.4918994413407822,
+      0.5018131101813109
+    ],
+    "speedup": 2.0221009606654103
+  },
+  "interpretation": "The direct 12-record corpus measures only the output fold; the fixed-node search ratio measures the whole engine. Their different effect sizes are expected and are not pooled.",
+  "inventory_sha256": "c7828dc1be74fdea7577d00994a5e45338d84013bfc00c47013142241ae22e15",
+  "manifest_sha256": "c330271481d508319d1b114378c75dd5a47a9b373c8358a0a241637a52aae591",
+  "operations": {
+    "interference_samples": 14,
+    "max_sampled_non_owned_cores": 0.23194574009863164,
+    "prelaunch_non_owned_cores": 0.2039430799741518,
+    "stages_non_overlapping": true
+  },
+  "run": "/home/ehrli/repos/ngn-counter-output-gate-20260913/run-001",
+  "schema": "ngn-counter-output-independent-review-v1",
+  "search": {
+    "all_pair_ratio_range": [
+      0.6883319081654542,
+      0.7620813959778215
+    ],
+    "equal_weight_median_ratio": 0.7215471566855822,
+    "fixture_medians": {
+      "asymmetric_black": 0.7183993582455921,
+      "asymmetric_white": 0.7246949551255724,
+      "kiwipete_black": 0.7148958962198058,
+      "kiwipete_white": 0.711213105046052,
+      "start_black": 0.7418687792859321,
+      "start_white": 0.7512161464075106
+    },
+    "order_medians": {
+      "base-first": 0.7220547497082934,
+      "candidate-first": 0.7227228430171623
+    },
+    "time_reduction": 0.2784528433144178
+  },
+  "state": "ACCEPT",
+  "terminal_sha256": "29c84885e57071edca32a0cad8c687bf32fb5fb863195257f1c86cf96c6e0c0a",
+  "verified_external_inputs": 15,
+  "verified_inventory_files": 275,
+  "verified_stage_receipts": 42
+}

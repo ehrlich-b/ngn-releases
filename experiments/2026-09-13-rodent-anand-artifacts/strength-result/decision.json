@@ -1,0 +1,78 @@
+{
+  "decision": "ADOPT",
+  "frozen_manifest_sha256": "26b43905dae929a559721465fe96b2d77e63264260b6880c40b88e551e0dba9d",
+  "results": {
+    "aa": {
+      "audit": "/home/ehrli/repos/ngn-rodent-counter-strength-gate-20260913/run-001/aa/audit-match.json",
+      "backend_a": "counter-5.5",
+      "backend_b": "counter-5.5",
+      "engine_a": "counter",
+      "engine_b": "counter",
+      "evidence_sha256": {
+        "audit-match.json": "3cf6a1ffeec9d528664f34df2b9cc518b175fe2644cd1ec21242a13e6002be49",
+        "audit-operational.json": "90a53fd0000f155dbaa7d0fb1d9f2c6edef2650e1a9f9a5d032e52f86d4c552a",
+        "fastchess.log": "08668cec00952b69fa9e2a287f232f16c44f3da55faa669b6d6a8c166e10a048",
+        "final.epd": "40c1a292d7589640d4c5bc867a329c1c54ec21a9bd98b083d4d8cd3b7662a0e3",
+        "games.pgn": "58926aa45b7e420f538354e3437f0889d3ec7555d3674676ed55ea31d22ed220",
+        "match-witness.json": "2331d85108e69b17e57c0255a9bf53b5fa0c19de2b884a21142894a67cc5e983",
+        "match.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "match.stdout": "1046a34620c877c36850f409bd3ddb81bfb045e5419373f2541553bbaee2e3d4",
+        "non-owned-cpu.json": "ac5403eff62d931fd1d402c566d49a5f907a9f81d7f0b923ffb3bf46a3baea2e",
+        "supervisor.json": "ddd5ed024006f1f31fa57d14bf46af67fa6021b6775ab78c91583d2c6be145bf"
+      },
+      "paired_bootstrap_ci": {
+        "elo": 17.386277512436145,
+        "lower95_elo": -27.85437125655775,
+        "method": "paired nonparametric percentile bootstrap",
+        "pairs": 50,
+        "replicates": 100000,
+        "seed": 2026091201,
+        "upper95_elo": 63.22726196896343
+      },
+      "paired_normal_ci": {
+        "elo": 17.386277512436145,
+        "lower95_elo": -27.076142952460465,
+        "pairs": 50,
+        "score": 0.525,
+        "upper95_elo": 62.42830973969561
+      }
+    },
+    "candidate": {
+      "audit": "/home/ehrli/repos/ngn-rodent-counter-strength-gate-20260913/run-001/candidate/audit-match.json",
+      "backend_a": "rodent-v1.1-anand",
+      "backend_b": "counter-5.5",
+      "engine_a": "rodent",
+      "engine_b": "counter",
+      "evidence_sha256": {
+        "audit-match.json": "3697b3990fce61168c55775a5b234ba82333f871006ceb801e2677976c6fdca9",
+        "audit-operational.json": "1fdbe21829d752b7b020e5b0dfee48c9b6303635ae7ba0298494b156886d2a9c",
+        "fastchess.log": "5370ae5da0c21193785737724a1aa0f93728b18f51bea2f26ae11d01284831d0",
+        "final.epd": "6da0bc0ce5d33fa69b2e2c112aff568a27053f7bc7dba45cabbb38abff718777",
+        "games.pgn": "1c32dd373c86fb372b5a833d24cc55b95454601606b0fca6a3e3a07b9e00c95a",
+        "match-witness.json": "7bf7db460166b91d9dfbca984d49b57b570e530592bb49e2caaf7d6e6cf9e57e",
+        "match.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "match.stdout": "8f43d279f26152f69f59c9d7236ca6c94bde0552a6af97f404bc87cac5a3da45",
+        "non-owned-cpu.json": "2ec3783e38b42f3b1b8450c886f0f1e8b7bce34f058d10b53251007ad5409a70",
+        "supervisor.json": "1f6a3872c3319c80e6035a20111aa99b4c8394bcb83834806636bdeab77cf0fc"
+      },
+      "paired_bootstrap_ci": {
+        "elo": 96.19234433420041,
+        "lower95_elo": 69.53219240387646,
+        "method": "paired nonparametric percentile bootstrap",
+        "pairs": 200,
+        "replicates": 100000,
+        "seed": 2026091201,
+        "upper95_elo": 123.02434512917564
+      },
+      "paired_normal_ci": {
+        "elo": 96.19234433420041,
+        "lower95_elo": 70.09191559329739,
+        "pairs": 200,
+        "score": 0.635,
+        "upper95_elo": 123.39860037416695
+      }
+    }
+  },
+  "rule": "ADOPT Rodent iff fixed 400-game paired lower95 relative Elo > 0; otherwise SHELVE; never extend after observing score",
+  "schema": "ngn-rodent-counter-fixed-gate-decision-v1"
+}

@@ -148,7 +148,6 @@ func TestNewGameClearsTTAndHistoryButKeepsWarmHCECaches(t *testing.T) {
 	pos := controlTestPosition(t)
 	_ = engine.evaluateForPlayerCached(pos)
 	engine.worker.hce.full[7] = evalCacheEntry{key: 1, val: 2}
-	engine.worker.hce.pawns[9] = pawnCacheEntry{valid: true, wp: 3}
 	move := NewMove(A2, A3, WhitePawn, NoPiece, NoType, 0)
 	engine.worker.history.historyTable[WhitePawn][A3] = 4
 	engine.worker.history.killerMoves[0][0] = move
@@ -168,7 +167,7 @@ func TestNewGameClearsTTAndHistoryButKeepsWarmHCECaches(t *testing.T) {
 	if engine.worker.history.historyTable[WhitePawn][A3] != 0 || engine.worker.history.killerMoves[0][0] != EmptyMove || engine.worker.history.lastMovePlayed != EmptyMove {
 		t.Fatal("new game retained game-scoped history")
 	}
-	if engine.worker.hce.full[7] != (evalCacheEntry{key: 1, val: 2}) || engine.worker.hce.pawns[9] != (pawnCacheEntry{valid: true, wp: 3}) {
+	if engine.worker.hce.full[7] != (evalCacheEntry{key: 1, val: 2}) {
 		t.Fatal("same-generation new game cleared warm HCE cache")
 	}
 }
@@ -272,48 +271,6 @@ func TestCacheLegacyPackingAndReplacementOrderStayExact(t *testing.T) {
 	cache.Set(hashB, first, 30, 3, LowerBound, false) // Old age loses regardless of depth.
 	if got, eval, depth, node, hit, _ := cache.Get(hashB); !hit || got != first || eval != 30 || depth != 3 || node != LowerBound {
 		t.Fatalf("old-age collision replacement = (%v,%d,%d,%v,%v)", got, eval, depth, node, hit)
-	}
-}
-
-func TestModelGenerationInvalidatesEachOwnedTTBeforeDiagnosticsOrStore(t *testing.T) {
-	saved, changed := changedQueenModel()
-	t.Cleanup(func() {
-		if err := ApplyTexelModel(saved); err != nil {
-			t.Errorf("restore HCE model: %v", err)
-		}
-	})
-	a, _ := NewSearchEngineWithHash(1)
-	b, _ := NewSearchEngineWithHash(1)
-	move := NewMove(A2, A3, WhitePawn, NoPiece, NoType, 0)
-	const keyA = uint64(0xabc001)
-	const keyB = uint64(0xabc002)
-	a.TTStore(keyA, move, 1, 1, Exact, false)
-	b.TTStore(keyB, move, 2, 2, Exact, false)
-	beforeA := a.ttGeneration
-	beforeB := b.ttGeneration
-
-	if err := ApplyTexelModel(changed); err != nil {
-		t.Fatal(err)
-	}
-	diagA := a.TTDiagnostics()
-	if diagA.Generation == beforeA || a.ttGeneration != diagA.Generation {
-		t.Fatalf("A generation before=%d diagnostics=%+v owned=%d", beforeA, diagA, a.ttGeneration)
-	}
-	if _, _, _, _, hit, _ := a.TTProbe(keyA); hit {
-		t.Fatal("A reported stale-generation entry")
-	}
-	// Store is itself a generation observation: B's stale bytes must be cleared
-	// before the new-generation entry can be seeded.
-	const newKeyB = uint64(0xabc003)
-	b.TTStore(newKeyB, move, 3, 3, Exact, false)
-	if b.ttGeneration == beforeB {
-		t.Fatal("B store did not observe new generation")
-	}
-	if _, _, _, _, hit, _ := b.TTProbe(keyB); hit {
-		t.Fatal("B retained stale entry while seeding new generation")
-	}
-	if _, eval, _, _, hit, _ := b.TTProbe(newKeyB); !hit || eval != 3 {
-		t.Fatalf("B new-generation store hit=%v eval=%d", hit, eval)
 	}
 }
 

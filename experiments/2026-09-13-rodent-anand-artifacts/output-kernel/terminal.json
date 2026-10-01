@@ -1,0 +1,11 @@
+{
+  "decision": "PASS_PERFORMANCE",
+  "decision_sha256": "3ed26b49f261719e18e64c407d5376e64656110657187c8ecae49ab4c03a0b96",
+  "driver_sha256": "bd267987f921e0ad059485aed654d88114757313a5c2467c24722ad65b84f9f1",
+  "inventory_sha256": "2c7dde422f617fe6f3ecbc719fd6bb9f74045270edd9df066ffd9d88cc24f949",
+  "manifest_sha256": "e65edffd6b39e21eb1a90bae397bffc968f155732511b5cc69a7644365da332f",
+  "schema": "ngn-rodent-output-terminal-v1",
+  "state": "COMPLETE",
+  "timing_evidence_rejected": false,
+  "verified_clean_stage_receipts": 44
+}

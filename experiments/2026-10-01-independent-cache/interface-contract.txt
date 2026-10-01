@@ -1,0 +1,92 @@
+Implement a Go transposition cache from this behavior contract in this blank
+standalone module, package engine. Use only your own files and the Go standard
+library/toolchain; do not inspect parent/sibling repositories, external source,
+history, networks, credentials, models or other implementations. No delegation.
+The eventual integrator has separate hidden compatibility and search oracles.
+
+The requirement is original implementation expression with exact compatibility,
+not new chess heuristics or a new cache design. No performance claim is needed.
+Do not change any specified odd behavior as a correctness improvement. Produce
+cache.go, focused meaningful tests, and RESULT.md explaining actual commands,
+remaining limitations and any ambiguities. Do not narrate the task in source
+comments. The controller handles licensing and commits; .git is read-only.
+Resource limits are enforced: CPU0/2 shared, 50% CPU, nice10, memory4GiB. All Go
+commands must be serial, GOMAXPROCS=1, GOFLAGS=-p=1, GOPROXY=off and local Go.
+Finish this bounded implementation within 15 minutes. Run test, race and vet.
+
+Required public types and names:
+- Move is an existing uint32 defined in supplied contract_types.go; do not
+  redeclare it in cache.go (the stub will not be integrated).
+- NodeType uint8; Exact=1, UpperBound=2, LowerBound=4.
+- TTMode uint8; TTDirect=0, TTSynchronized=1.
+- CachedEval is exactly two uint64 fields named Key and Data, in that order,
+  size16. Methods on *CachedEval: LoadKey()uint64, LoadData()uint64,
+  Update(key uint64,data uint64). These methods are plain direct reads/writes;
+  the owning cache protects the pair when it uses synchronized mode.
+- Constants: ttStripeCount=256, OldAge uint16=5, DEFAULT_CACHE_SIZE=128,
+  MAX_CACHE_SIZE=120000. Variable CACHE_ENTRY_SIZE int is16, compatible with the
+  actual CachedEval record size. Do not clamp a request to the constants here.
+- Cache has these compatibility fields: items []CachedEval, size int,
+  length uint64, mask uint, age uint16, mode TTMode, ageMu sync.Mutex,
+  stripes [256]sync.Mutex. It must not be copied after use. Preserve fields;
+  internal helpers and function order are your choice.
+
+Packed record contract (all input bit patterns supported):
+MOVE_MASK uint64 covers28 low bits, EVAL_MASK16 low bits, DEPTH_MASK7,
+TYPE_MASK3, AGE_MASK9, TTPV_MASK1. Pack(hashmove Move,eval int16,depth int8,
+nodeType NodeType,age uint16,ttPv bool)uint64 packs move into bits0..27,
+evaluation bits28..43, depth44..50, node type51..53, age54..62, PV flag63.
+Each numeric input is truncated to its field width; negative eval/depth use
+the low two's-complement bits. Unpack(data uint64) returns
+(hashmove Move,eval int16,depth int8,nodeType NodeType,age uint16,ttPv bool).
+The 16-bit evaluation is signed int16; the 7-bit depth decodes as0..127;
+type0..7 and age0..511. Preserve every opaque record bit in re-packing.
+
+Construction and utility contract:
+- RoundPowerOfTwo(size int)int is the largest power of two not exceeding size;
+  for zero or negative size it returns1. Operational nonnegative input sizes
+  are at most MAX_CACHE_SIZE*1024*1024/16; do not loop indefinitely at overflow.
+- NewCache(megabytes int)*Cache constructs direct mode. The internal constructor
+  newCacheWithMode(megabytes int,mode TTMode)*Cache also exists. Nonpositive
+  megabytes returns nil. For positive operational requests (<=MAX_CACHE_SIZE),
+  record count is floorPowerOfTwo(megabytes*1024*1024/16), size remains the exact
+  requested megabytes, length is record count, mask is count-1, age begins0.
+  New records are zero initialized. Callers control admitted allocation sizes.
+- Size()int returns the requested megabytes. index(hash uint64)uint is the low
+  address bits selected by mask (on64-bit Go).
+- Clear() zeros all records and age, preserving size, length, mask and mode;
+  callers hold exclusive idle ownership. Clear is not concurrent with access.
+- AdvanceAge() increments age modulo1024, deliberately a 10-bit age even
+  though records serialize only9 bits. Synchronized mode protects age.
+- Consumed()int reports the number of nonzero Data records among indices0..999;
+  it ignores stored age/key. Every admitted positive cache has >=1000 records.
+
+Set(hash uint64,hashmove Move,eval int16,depth int8,nodeType NodeType,
+ttPv bool) and Get(hash uint64)(Move,int16,int8,NodeType,bool,bool):
+- Each hash selects one record; there are no buckets or alternate slots.
+- A stored record's hash checksum is Key XOR Data. A written Key equals the
+  packed Data XOR incoming hash. Reads in synchronized mode observe the pair
+  together under stripe index modulo256.
+- Get succeeds exactly if requested hash == (Key XOR Data). On success return
+  unpacked move/eval/depth/type, true, unpackedPV; otherwise all numeric zero
+  and both booleans false. This deliberately means an empty cache Get(0)
+  succeeds with zero fields. Do not add an empty-record rejection.
+- Set samples the current full10-bit age. It replaces the selected old record
+  if old Data is zero. Otherwise compute the old checksum and decoded depth
+  and age. If checksum equals incoming hash, replace iff incoming depth is at
+  least old decoded depth minus3, OR incoming nodeType is exactly Exact.
+  If hashes differ, replace iff decoded old9-bit age differs from current
+  full10-bit age, OR incoming depth is at least old decoded depth. Retained
+  records are unchanged, including move, age andPV. On replacement pack the
+  incoming values and sampled age, and store checksum and payload together.
+- Direct mode requires exclusive single-thread ownership and uses no locks.
+  Synchronized mode supports concurrent Get/Set/Consumed/AdvanceAge: protect
+  age with ageMu and each record pair with its stripe; never hold ageMu while
+  waiting for a record stripe. Set samples age then releases ageMu before
+  obtaining a stripe. Consumed locks each sampled record stripe while reading.
+  Do not add worker goroutines, atomic mismatches, races or table resizing.
+
+Testing should cover opaque pack records, signed extrema, collision/replacement
+thresholds, PV, retained records, age9/10-bit boundary and wrapping, empty hash0,
+occupancy sampling, size rounding/clear, and coherent synchronized readers and
+writers. Keep memory/test runtime bounded. No strength games or benchmarking.

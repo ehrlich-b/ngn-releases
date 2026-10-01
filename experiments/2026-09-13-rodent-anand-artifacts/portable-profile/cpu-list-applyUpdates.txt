@@ -1,0 +1,44 @@
+Total: 44.29s
+ROUTINE ======================== github.com/ehrlich-b/ngn/rodenteval.(*Model).applyUpdates in repos/ngn-rodent-profile-20260913/rodenteval/context.go
+    14.14s     14.92s (flat, cum) 33.69% of Total
+         .          .    326:func (model *Model) applyUpdates(
+         .          .    327:	destination *accumulator,
+         .          .    328:	postBoard Board,
+         .          .    329:	updates *[4]featureUpdate,
+         .          .    330:	updateCount int,
+         .          .    331:	refresh Color,
+         .          .    332:) {
+         .          .    333:	kingSquares := [2]int{
+         .          .    334:		bits.TrailingZeros64(postBoard[WhiteKing]),
+         .          .    335:		bits.TrailingZeros64(postBoard[BlackKing]),
+         .          .    336:	}
+      80ms       80ms    337:	for perspective := White; perspective <= Black; perspective++ {
+      80ms       80ms    338:		if perspective == refresh {
+         .      700ms    339:			model.refreshPerspective(&destination[perspective], postBoard, perspective, kingSquares[perspective])
+         .          .    340:			continue
+         .          .    341:		}
+         .          .    342:		var rows [4]*[HiddenSize]int16
+      20ms       20ms    343:		for index, update := range updates[:updateCount] {
+      30ms       30ms    344:			color := Color(update.plane / colorPlanes)
+      30ms       30ms    345:			pieceType := update.plane % colorPlanes
+      10ms       70ms    346:			feature := featureIndex(color, pieceType, update.square, kingSquares[perspective], perspective)
+         .          .    347:			rows[index] = &model.inputWeights[feature]
+         .          .    348:		}
+     1.15s      1.15s    349:		for hidden := 0; hidden < HiddenSize; hidden++ {
+     1.16s      1.16s    350:			value := destination[perspective][hidden]
+     6.32s      6.34s    351:			for index, update := range updates[:updateCount] {
+     1.33s      1.33s    352:				if update.add {
+     1.09s      1.09s    353:					value += rows[index][hidden]
+         .          .    354:				} else {
+     2.77s      2.77s    355:					value -= rows[index][hidden]
+         .          .    356:				}
+         .          .    357:			}
+         .          .    358:			destination[perspective][hidden] = value
+         .          .    359:		}
+         .          .    360:	}
+      70ms       70ms    361:}
+         .          .    362:
+         .          .    363:func (model *Model) refreshPerspective(
+         .          .    364:	destination *[HiddenSize]int16,
+         .          .    365:	board Board,
+         .          .    366:	perspective Color,

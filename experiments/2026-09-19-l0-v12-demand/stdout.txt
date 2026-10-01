@@ -1,0 +1,17 @@
+=== RUN   TestRodentV12DemandTrace
+    rodent_v12_demand_trace_test.go:300: L0_DEMAND_RECEIPT=/home/ehrli/l0-v12-demand-20260919/run-001/probe.json searches=12
+    rodent_v12_demand_trace_test.go:302: L0_DEMAND workload=cold name=start_white moves=307294 abandoned_move_frames=15966/307294 abandoned_move_copy_perspectives=45371/614588 abandoned_null_copy_perspectives=4200/66906
+    rodent_v12_demand_trace_test.go:302: L0_DEMAND workload=cold name=start_black moves=306859 abandoned_move_frames=17402/306859 abandoned_move_copy_perspectives=46217/613718 abandoned_null_copy_perspectives=3752/67772
+    rodent_v12_demand_trace_test.go:302: L0_DEMAND workload=cold name=kiwipete_white moves=346892 abandoned_move_frames=23733/346892 abandoned_move_copy_perspectives=86704/693784 abandoned_null_copy_perspectives=5614/47392
+    rodent_v12_demand_trace_test.go:302: L0_DEMAND workload=cold name=kiwipete_black moves=332299 abandoned_move_frames=18932/332299 abandoned_move_copy_perspectives=74812/664598 abandoned_null_copy_perspectives=3410/46940
+    rodent_v12_demand_trace_test.go:302: L0_DEMAND workload=cold name=asymmetric_white moves=314230 abandoned_move_frames=16409/314230 abandoned_move_copy_perspectives=52245/628460 abandoned_null_copy_perspectives=4890/64562
+    rodent_v12_demand_trace_test.go:302: L0_DEMAND workload=cold name=asymmetric_black moves=307989 abandoned_move_frames=12985/307989 abandoned_move_copy_perspectives=42233/615978 abandoned_null_copy_perspectives=2702/53356
+    rodent_v12_demand_trace_test.go:302: L0_DEMAND workload=warm name=game1_ply23 moves=148422 abandoned_move_frames=9346/148422 abandoned_move_copy_perspectives=40419/296844 abandoned_null_copy_perspectives=2672/30174
+    rodent_v12_demand_trace_test.go:302: L0_DEMAND workload=warm name=game1_ply48 moves=167775 abandoned_move_frames=14957/167775 abandoned_move_copy_perspectives=61680/335550 abandoned_null_copy_perspectives=7122/37018
+    rodent_v12_demand_trace_test.go:302: L0_DEMAND workload=warm name=game2_ply23 moves=148422 abandoned_move_frames=9346/148422 abandoned_move_copy_perspectives=40419/296844 abandoned_null_copy_perspectives=2672/30174
+    rodent_v12_demand_trace_test.go:302: L0_DEMAND workload=warm name=game2_ply48 moves=161557 abandoned_move_frames=10507/161557 abandoned_move_copy_perspectives=28767/323114 abandoned_null_copy_perspectives=2716/27990
+    rodent_v12_demand_trace_test.go:302: L0_DEMAND workload=warm name=game3_ply23 moves=154577 abandoned_move_frames=8776/154577 abandoned_move_copy_perspectives=19461/309154 abandoned_null_copy_perspectives=1878/32120
+    rodent_v12_demand_trace_test.go:302: L0_DEMAND workload=warm name=game3_ply48 moves=153839 abandoned_move_frames=5654/153839 abandoned_move_copy_perspectives=20304/307678 abandoned_null_copy_perspectives=1220/25668
+--- PASS: TestRodentV12DemandTrace (5.31s)
+PASS
+ok  	github.com/ehrlich-b/ngn/engine	5.322s

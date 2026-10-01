@@ -1,0 +1,11 @@
+ fixture: Total 24.15s of 24.17s (99.92%)
+          4.47s (18.49%): kiwipete_white
+          4.28s (17.71%): kiwipete_black
+          3.94s (16.30%): asymmetric_white
+          3.83s (15.85%): asymmetric_black
+          3.82s (15.80%): start_white
+          3.81s (15.76%): start_black
+
+ scope: Total 24.15s of 24.17s (99.92%)
+        24.15s (99.92%): search
+

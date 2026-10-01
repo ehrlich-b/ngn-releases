@@ -1,0 +1,319 @@
+package engine
+
+import (
+	"encoding/json"
+	"os"
+	"reflect"
+	"runtime"
+	"testing"
+
+	"github.com/ehrlich-b/ngn/rodentv12eval"
+)
+
+const (
+	l0ModelEnv  = "RODENT_V12_DEFAULT_MODEL"
+	l0OutputEnv = "L0_DEMAND_OUTPUT"
+	l0ModelSHA  = "c35a1abc1b8c1cb1d5f4221454d494c1a6da1ed9088fd51ab27038bfa74b5053"
+	l0ColdNodes = uint64(400_000)
+	l0WarmNodes = uint64(200_000)
+	l0HashMB    = 128
+	l0StartFEN  = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+	l0PrefixSHA = "35bdd00b28f585224e6c04392bdbf79cd4472c9ea7549b84acfc4379b07847d2"
+)
+
+var l0ColdFixtures = []struct {
+	name string
+	fen  string
+}{
+	{"start_white", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+	{"start_black", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1"},
+	{"kiwipete_white", "r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 37 1"},
+	{"kiwipete_black", "r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R b KQkq - 37 1"},
+	{"asymmetric_white", "r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 w kq - 0 15"},
+	{"asymmetric_black", "r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 b kq - 0 15"},
+}
+
+var l0WarmGames = []struct {
+	name  string
+	moves []string
+}{
+	{"game1", []string{
+		"e2e4", "c7c5", "g1f3", "e7e6", "b1c3", "b8c6", "d2d4", "c5d4",
+		"f3d4", "g8f6", "g2g3", "d7d5", "e4d5", "f6d5", "f1g2", "d5c3",
+		"b2c3", "c8d7", "d4c6", "d7c6", "g2c6", "b7c6", "d1d8", "e8d8",
+		"a1b1", "f8c5", "e1e2", "h8e8", "b1b7", "e8e7", "h1d1", "d8c8",
+		"b7b3", "e6e5", "a2a4", "f7f6", "a4a5", "a8b8", "d1d8", "c8d8",
+		"b3b8", "d8c7", "b8h8", "g7g6", "h8f8", "f6f5", "h2h3", "e7d7",
+	}},
+	{"game2", []string{
+		"e2e4", "c7c5", "g1f3", "e7e6", "b1c3", "b8c6", "d2d4", "c5d4",
+		"f3d4", "g8f6", "g2g3", "d7d5", "e4d5", "f6d5", "f1g2", "d5c3",
+		"b2c3", "c8d7", "d4c6", "d7c6", "g2c6", "b7c6", "d1d8", "a8d8",
+		"c1e3", "f8d6", "a1b1", "d6e5", "b1b3", "d8d5", "b3a3", "d5b5",
+		"e1e2", "e8g8", "a3a7", "b5b2", "e2d3", "e5b8", "a7a6", "b8e5",
+		"a2a4", "b2a2", "h1b1", "h7h5", "d3c4", "a2a3", "b1b3", "a3a2",
+	}},
+	{"game3", []string{
+		"d2d4", "g8f6", "g1f3", "e7e6", "c2c4", "b7b6", "e2e3", "c8b7",
+		"f1d3", "f8b4", "c1d2", "b4d2", "b1d2", "e8g8", "e3e4", "d7d6",
+		"e1g1", "e6e5", "d4d5", "b8d7", "f1e1", "d7c5", "d3c2", "a7a5",
+		"d2f1", "c7c6", "f1g3", "b6b5", "d5c6", "b7c6", "c4b5", "c6b5",
+		"h2h3", "a8a6", "b2b3", "g7g6", "a1c1", "a6c6", "c2b1", "d8c7",
+		"d1d2", "f8c8", "d2h6", "c7e7", "g1h2", "c5e6", "c1c6", "c8c6",
+	}},
+}
+
+type l0Trajectory struct {
+	Name      string   `json:"name"`
+	Workload  string   `json:"workload"`
+	NodeLimit uint64   `json:"node_limit"`
+	Nodes     uint64   `json:"nodes"`
+	Depth     int      `json:"depth"`
+	SelDepth  int      `json:"seldepth"`
+	BestMove  string   `json:"best_move"`
+	BestScore int      `json:"best_score"`
+	PV        []string `json:"pv"`
+}
+
+type l0TraceRecord struct {
+	Trajectory l0Trajectory                    `json:"trajectory"`
+	Demand     rodentv12eval.DemandDiagnostics `json:"demand"`
+}
+
+type l0ProbeReceipt struct {
+	Schema                string          `json:"schema"`
+	GoVersion             string          `json:"go_version"`
+	GOAMD64               string          `json:"goamd64"`
+	GOMAXPROCS            int             `json:"gomaxprocs"`
+	EngineThreads         int             `json:"engine_threads"`
+	HashMB                int             `json:"hash_mb"`
+	ModelSHA256           string          `json:"model_sha256"`
+	ModelBytes            int             `json:"model_bytes"`
+	PrefixSourcePGNSHA256 string          `json:"prefix_source_pgn_sha256"`
+	WarmGamePolicy        string          `json:"warm_game_policy"`
+	Baseline              []l0Trajectory  `json:"baseline"`
+	Trace                 []l0TraceRecord `json:"trace"`
+	TrajectoryIdentity    bool            `json:"trajectory_identity"`
+}
+
+func l0LoadModel(t *testing.T) *rodentv12eval.Model {
+	t.Helper()
+	path := os.Getenv(l0ModelEnv)
+	if path == "" {
+		t.Fatalf("set %s", l0ModelEnv)
+	}
+	model, err := rodentv12eval.LoadV12Default(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	metadata, err := model.Metadata()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if metadata.SHA256 != l0ModelSHA || metadata.Bytes != 4_744_768 {
+		t.Fatalf("model identity sha=%s bytes=%d", metadata.SHA256, metadata.Bytes)
+	}
+	return model
+}
+
+func l0NewSearcher(t *testing.T, model *rodentv12eval.Model, trace bool) *SearchEngine {
+	t.Helper()
+	searcher, err := NewSearchEngineWithHash(l0HashMB)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := searcher.SelectRodentV12DefaultEvaluator(model); err != nil {
+		t.Fatal(err)
+	}
+	if err := searcher.ConfigureThreads(1); err != nil {
+		t.Fatal(err)
+	}
+	if trace {
+		context := searcher.worker.evaluator.rodentV12Context
+		if context == nil {
+			t.Fatal("selected V1.2 searcher has no context")
+		}
+		if err := context.EnableDemandDiagnostics(); err != nil {
+			t.Fatal(err)
+		}
+	}
+	return searcher
+}
+
+func l0Search(t *testing.T, searcher *SearchEngine, position *Position, name, workload string, nodeLimit uint64, trace bool) l0TraceRecord {
+	t.Helper()
+	searcher.SetMaxNodes(nodeLimit)
+	before := snapshotPVPosition(position)
+	result := searcher.SearchIterativeDeepening(position, MaximumDepth, nil)
+	if result == nil || !result.Stopped || result.Nodes < nodeLimit || result.EffectiveThreads != 1 {
+		t.Fatalf("%s incomplete fixed-node result: %+v", name, result)
+	}
+	legal := false
+	for _, move := range GenerateLegalMoves(position) {
+		if move == result.BestMove {
+			legal = true
+			break
+		}
+	}
+	if !legal || !reflect.DeepEqual(snapshotPVPosition(position), before) {
+		t.Fatalf("%s illegal result or changed root", name)
+	}
+	trajectory := l0Trajectory{
+		Name: name, Workload: workload, NodeLimit: nodeLimit, Nodes: result.Nodes,
+		Depth: result.Depth, SelDepth: result.SelDepth, BestMove: result.BestMove.ToString(), BestScore: result.BestScore,
+		PV: make([]string, result.PVLength),
+	}
+	for index := range trajectory.PV {
+		trajectory.PV[index] = result.PV[index].ToString()
+	}
+	record := l0TraceRecord{Trajectory: trajectory}
+	if trace {
+		context := searcher.worker.evaluator.rodentV12Context
+		if context.Depth() != 0 {
+			t.Fatalf("%s evaluator depth=%d, want 0", name, context.Depth())
+		}
+		record.Demand = context.DiagnosticDemandCounts()
+		l0RequireDemandInvariants(t, name, record.Demand)
+		if err := context.ResetDiagnosticDemandCounts(); err != nil {
+			t.Fatal(err)
+		}
+	}
+	return record
+}
+
+func l0RequireDemandInvariants(t *testing.T, name string, d rodentv12eval.DemandDiagnostics) {
+	t.Helper()
+	requirePartition := func(label string, total, required, abandoned uint64) {
+		t.Helper()
+		if total != required+abandoned {
+			t.Fatalf("%s %s partition total=%d required=%d abandoned=%d", name, label, total, required, abandoned)
+		}
+	}
+	if d.UnbalancedResets != 0 || d.MovePushes == 0 || d.EvaluationCalls == 0 {
+		t.Fatalf("%s invalid top-level demand counts: %+v", name, d)
+	}
+	requirePartition("move frames", d.MovePushes, d.MoveFramesRequired, d.MoveFramesAbandoned)
+	requirePartition("null frames", d.NullPushes, d.NullFramesRequired, d.NullFramesAbandoned)
+	if d.MoveFramesRequired != d.MoveFramesDirect+d.MoveFramesDescendantOnly ||
+		d.NullFramesRequired != d.NullFramesDirect+d.NullFramesDescendantOnly {
+		t.Fatalf("%s direct/descendant frame partition failed: %+v", name, d)
+	}
+	requirePartition("move copies", d.MoveCopyPerspectivesTotal, d.MoveCopyPerspectivesRequired, d.MoveCopyPerspectivesAbandoned)
+	requirePartition("null copies", d.NullCopyPerspectivesTotal, d.NullCopyPerspectivesRequired, d.NullCopyPerspectivesAbandoned)
+	requirePartition("update2", d.Update2PerspectivesTotal, d.Update2PerspectivesRequired, d.Update2PerspectivesAbandoned)
+	requirePartition("update3", d.Update3PerspectivesTotal, d.Update3PerspectivesRequired, d.Update3PerspectivesAbandoned)
+	requirePartition("update4", d.Update4PerspectivesTotal, d.Update4PerspectivesRequired, d.Update4PerspectivesAbandoned)
+	requirePartition("refresh", d.RefreshPerspectivesTotal, d.RefreshPerspectivesRequired, d.RefreshPerspectivesAbandoned)
+}
+
+func l0RunCold(t *testing.T, model *rodentv12eval.Model, trace bool) []l0TraceRecord {
+	t.Helper()
+	records := make([]l0TraceRecord, 0, len(l0ColdFixtures))
+	for _, fixture := range l0ColdFixtures {
+		searcher := l0NewSearcher(t, model, trace)
+		position, err := ParseFEN(fixture.fen)
+		if err != nil {
+			t.Fatal(err)
+		}
+		records = append(records, l0Search(t, searcher, position, fixture.name, "cold", l0ColdNodes, trace))
+	}
+	return records
+}
+
+func l0ApplyGameMoves(t *testing.T, position *Position, moves []string) {
+	t.Helper()
+	for _, text := range moves {
+		move, err := ParseUCIMove(position, text)
+		if err != nil {
+			t.Fatalf("move %s: %v", text, err)
+		}
+		if _, _, _, legal := position.GameMakeMove(move); !legal {
+			t.Fatalf("move %s became illegal", text)
+		}
+	}
+}
+
+func l0RunWarm(t *testing.T, model *rodentv12eval.Model, trace bool) []l0TraceRecord {
+	t.Helper()
+	searcher := l0NewSearcher(t, model, trace)
+	records := make([]l0TraceRecord, 0, 2*len(l0WarmGames))
+	for _, game := range l0WarmGames {
+		searcher.NewGame()
+		position, err := ParseFEN(l0StartFEN)
+		if err != nil {
+			t.Fatal(err)
+		}
+		l0ApplyGameMoves(t, position, game.moves[:23])
+		records = append(records, l0Search(t, searcher, position, game.name+"_ply23", "warm", l0WarmNodes, trace))
+		l0ApplyGameMoves(t, position, game.moves[23:48])
+		records = append(records, l0Search(t, searcher, position, game.name+"_ply48", "warm", l0WarmNodes, trace))
+	}
+	return records
+}
+
+func l0Trajectories(records []l0TraceRecord) []l0Trajectory {
+	trajectories := make([]l0Trajectory, len(records))
+	for index := range records {
+		trajectories[index] = records[index].Trajectory
+	}
+	return trajectories
+}
+
+func TestRodentV12DemandTrace(t *testing.T) {
+	if runtime.GOMAXPROCS(0) != 1 {
+		t.Fatalf("GOMAXPROCS=%d, want 1", runtime.GOMAXPROCS(0))
+	}
+	output := os.Getenv(l0OutputEnv)
+	if output == "" {
+		t.Fatalf("set %s", l0OutputEnv)
+	}
+	model := l0LoadModel(t)
+	metadata, err := model.Metadata()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	baselineRecords := append(l0RunCold(t, model, false), l0RunWarm(t, model, false)...)
+	runtime.GC()
+	traceRecords := append(l0RunCold(t, model, true), l0RunWarm(t, model, true)...)
+	baseline := l0Trajectories(baselineRecords)
+	tracedTrajectories := l0Trajectories(traceRecords)
+	if !reflect.DeepEqual(baseline, tracedTrajectories) {
+		t.Fatalf("observer changed fixed-node trajectories\nbaseline=%+v\ntraced=%+v", baseline, tracedTrajectories)
+	}
+
+	receipt := l0ProbeReceipt{
+		Schema: "ngn-rodent-v12-demand-trace-v1", GoVersion: runtime.Version(), GOAMD64: os.Getenv("GOAMD64"),
+		GOMAXPROCS: runtime.GOMAXPROCS(0), EngineThreads: 1, HashMB: l0HashMB,
+		ModelSHA256: metadata.SHA256, ModelBytes: metadata.Bytes, PrefixSourcePGNSHA256: l0PrefixSHA,
+		WarmGamePolicy: "first three frozen games; ucinewgame-equivalent clear between games; same searcher, TT, history, evaluator and full game position retained from ply 23 to ply 48",
+		Baseline:       baseline, Trace: traceRecords, TrajectoryIdentity: true,
+	}
+	encoded, err := json.MarshalIndent(receipt, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	encoded = append(encoded, '\n')
+	if err := os.WriteFile(output, encoded, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("L0_DEMAND_RECEIPT=%s searches=%d", output, len(traceRecords))
+	for _, record := range traceRecords {
+		t.Logf("L0_DEMAND workload=%s name=%s moves=%d abandoned_move_frames=%d/%d abandoned_move_copy_perspectives=%d/%d abandoned_null_copy_perspectives=%d/%d",
+			record.Trajectory.Workload, record.Trajectory.Name,
+			record.Demand.MovePushes, record.Demand.MoveFramesAbandoned, record.Demand.MovePushes,
+			record.Demand.MoveCopyPerspectivesAbandoned, record.Demand.MoveCopyPerspectivesTotal,
+			record.Demand.NullCopyPerspectivesAbandoned, record.Demand.NullCopyPerspectivesTotal)
+	}
+}
+
+func TestRodentV12DemandTracePrefixShape(t *testing.T) {
+	if len(l0WarmGames) != 3 {
+		t.Fatalf("warm games=%d, want 3", len(l0WarmGames))
+	}
+	for _, game := range l0WarmGames {
+		if len(game.moves) != 48 {
+			t.Fatalf("%s plies=%d, want 48", game.name, len(game.moves))
+		}
+	}
+}

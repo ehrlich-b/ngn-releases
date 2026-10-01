@@ -1,0 +1,75 @@
+{
+  "schema": "ngn-rodenteval-slice-a-receipt-v1",
+  "status": "PASS",
+  "date": "2026-09-13",
+  "source": {
+    "worktree": "/home/ehrli/repos/ngn-rodenteval-slicea-20260913",
+    "base_commit": "270c73563139996d03f3c34b2840015b8e130df9",
+    "base_tree": "2356d5e024e8593d096332257a9647f05b15f9bf",
+    "committed": false,
+    "patch": {
+      "path": "/home/ehrli/repos/ngn-rodenteval-slicea-20260913/output/rodenteval-slicea-20260913/final/slice-a-final.patch",
+      "sha256": "2c2811139e7deeda9b296c504ca802d837a953e1afbb4ca1ea1eec28b8cff61a"
+    },
+    "files": {
+      "rodenteval/doc.go": "5a09f054a2987984b7f0c102aedca041738cdb2f35ab1493a1215ac10e6f060d",
+      "rodenteval/evaluate.go": "3f49627b9c7bde884c3b54525c712461ca7b84791d98352c2d8b4ceb022a3048",
+      "rodenteval/evaluate_test.go": "0dda1c22a20aa2a50d8ed9d73dcb91bb63dcfe5937f5c7509dc2287770c92ea2",
+      "rodenteval/load.go": "9ee14b3f3c0dec76397d3af044b61c6668d8c9f4bec3d525d30d82b6a7a71630",
+      "rodenteval/load_test.go": "a49975b282e3a245405a8731285598a1850bbbc693d5b08df959a987eefdd0db",
+      "rodenteval/model.go": "dd6e265ff1ebb41e1b1e42cec0190762e0a8395857bd6734ccaddbd9ef743999",
+      "rodenteval/oracle_parity_test.go": "2d2d5b309429aaec4fae87efe7277cf78ef0b2893a3ac624599fe8c06bb57266"
+    }
+  },
+  "toolchain": "go version go1.25.5 linux/amd64",
+  "environment": {
+    "GOMAXPROCS": "2",
+    "GOFLAGS": "-mod=readonly",
+    "test_parallelism": "-p 2"
+  },
+  "external_authorities": {
+    "network": {
+      "path": "/home/ehrli/rodent-v1.1-public-preflight-20260906/extracted/release/release-1-1/nets/rodent_anand_512hl.bin",
+      "sha256": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb"
+    },
+    "oracle": {
+      "path": "/home/ehrli/rodent-v1.1-anand-oracle-20260913/run-003/oracle.json",
+      "sha256": "2685ecfae535fedd55fdce00d8c816b60955cf4f93873bda836366e409f97cb8",
+      "records": 72,
+      "unique_names": 72,
+      "unique_full_fens": 72,
+      "white_to_move": 36,
+      "black_to_move": 36
+    }
+  },
+  "checks": [
+    {
+      "name": "package-race",
+      "command": "env GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodenteval-slicea-20260913 test -p 2 -race -count=1 ./rodenteval",
+      "exit": 0,
+      "log_path": "/home/ehrli/repos/ngn-rodenteval-slicea-20260913/output/rodenteval-slicea-20260913/final/race.log",
+      "log_sha256": "2852e7e18cd70637eafd77bd058efdb69bd210032ddf318c6c384552f442b6b3",
+      "exit_path": "/home/ehrli/repos/ngn-rodenteval-slicea-20260913/output/rodenteval-slicea-20260913/final/race.exit",
+      "exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "name": "repository-full-short",
+      "command": "env GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodenteval-slicea-20260913 test -p 2 -short -count=1 ./...",
+      "exit": 0,
+      "log_path": "/home/ehrli/repos/ngn-rodenteval-slicea-20260913/output/rodenteval-slicea-20260913/final/fullshort.log",
+      "log_sha256": "7dda93bdb87bd96469cd05beaa97f487b33bf9542ecc5ebdd679859d76ce1795",
+      "exit_path": "/home/ehrli/repos/ngn-rodenteval-slicea-20260913/output/rodenteval-slicea-20260913/final/fullshort.exit",
+      "exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "name": "exact-release-oracle-parity",
+      "command": "env GOMAXPROCS=2 GOFLAGS=-mod=readonly RODENT_V11_ANAND_MODEL=/home/ehrli/rodent-v1.1-public-preflight-20260906/extracted/release/release-1-1/nets/rodent_anand_512hl.bin RODENT_V11_ANAND_ORACLE_JSON=/home/ehrli/rodent-v1.1-anand-oracle-20260913/run-003/oracle.json /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodenteval-slicea-20260913 test -p 2 -count=1 -tags rodentoracle -run TestV11AnandExactReleaseCorpusParity -v ./rodenteval",
+      "exit": 0,
+      "log_path": "/home/ehrli/repos/ngn-rodenteval-slicea-20260913/output/rodenteval-slicea-20260913/final/oracle-parity.log",
+      "log_sha256": "073276c41242974795dae29d7c65ca02b7417dff09ff97428db9d2ba503559a8",
+      "exit_path": "/home/ehrli/repos/ngn-rodenteval-slicea-20260913/output/rodenteval-slicea-20260913/final/oracle-parity.exit",
+      "exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    }
+  ],
+  "scope": "Standalone immutable strict loader and portable full-refresh evaluator only; no engine/UCI wiring, incremental context, SIMD, policy, model bundling, games, or deployment."
+}

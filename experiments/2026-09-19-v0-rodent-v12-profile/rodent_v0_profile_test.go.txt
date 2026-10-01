@@ -1,0 +1,482 @@
+package engine
+
+import (
+	"context"
+	"os"
+	"reflect"
+	"runtime"
+	"runtime/pprof"
+	"testing"
+
+	"github.com/ehrlich-b/ngn/rodenteval"
+	"github.com/ehrlich-b/ngn/rodentv12eval"
+)
+
+const (
+	v0V11ModelEnv = "RODENT_V11_ANAND_MODEL"
+	v0V11ModelSHA = "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb"
+	v0V12ModelEnv = "RODENT_V12_DEFAULT_MODEL"
+	v0V12ModelSHA = "c35a1abc1b8c1cb1d5f4221454d494c1a6da1ed9088fd51ab27038bfa74b5053"
+
+	v0ColdNodes       = uint64(400_000)
+	v0PersistentNodes = uint64(200_000)
+	v0HashMB          = 128
+)
+
+var v0ColdFixtures = []struct {
+	name string
+	fen  string
+}{
+	{"start_white", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+	{"start_black", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1"},
+	{"kiwipete_white", "r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 37 1"},
+	{"kiwipete_black", "r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R b KQkq - 37 1"},
+	{"asymmetric_white", "r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 w kq - 0 15"},
+	{"asymmetric_black", "r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 b kq - 0 15"},
+}
+
+var v0PersistentPrefixes = []struct {
+	name string
+	fen  string
+}{
+	{"start", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+	{"accepted_pair_ply23", "r2Qkb1r/p4ppp/2p1p3/8/8/2P3P1/P1P2P1P/R1B1K2R b KQkq - 0 1"},
+	{"accepted_game1_ply48", "5R2/p1kr3p/2p3p1/P1b1pp2/8/2P3PP/2P1KP2/2B5 w - - 1 1"},
+	{"accepted_game2_ply48", "5rk1/5pp1/R1p1p3/4b2p/P1K5/1RP1B1P1/r1P2P1P/8 w - - 4 1"},
+}
+
+var v0V12CoverageFENs = []string{
+	"4k3/8/8/8/8/8/8/4K3 w - - 0 1",
+	"1n2k1n1/8/8/8/8/8/8/1N2K1N1 w - - 0 1",
+	"rn2k1nr/8/8/8/8/8/8/RN2K1NR w - - 0 1",
+	"rnb1kb1r/8/8/8/8/8/8/RNB1KB1R w - - 0 1",
+	"rnbqkbnr/4p3/8/8/8/8/4P3/RNBQKBNR w - - 0 1",
+	"rnbqkbnr/ppp5/8/8/8/8/PPP5/RNBQKBNR w - - 0 1",
+	"rnbqkbnr/ppppp3/8/8/8/8/PPPPP3/RNBQKBNR w - - 0 1",
+	"rnbqkbnr/ppppppp1/8/8/8/8/PPPPPPP1/RNBQKBNR w - - 0 1",
+	"4k3/8/8/4n3/3N4/8/8/2K5 w - - 0 1",
+	"4k3/8/8/4n3/3N4/8/8/K7 w - - 0 1",
+	"4k3/8/8/4n3/3N4/8/K7/8 w - - 0 1",
+	"4k3/8/8/4n3/3N4/K7/8/8 w - - 0 1",
+	"2k5/8/8/4n3/3N4/8/8/4K3 w - - 0 1",
+	"k7/8/8/4n3/3N4/8/8/4K3 w - - 0 1",
+	"8/k7/8/4n3/3N4/8/8/4K3 w - - 0 1",
+	"8/8/k7/4n3/3N4/8/8/4K3 w - - 0 1",
+}
+
+var v0V12KingTransitions = []struct {
+	name string
+	fen  string
+	move string
+}{
+	{"white_mirror", "4k3/8/8/8/8/8/8/3K4 w - - 0 1", "d1e1"},
+	{"white_bucket", "4k3/8/8/8/8/8/8/K7 w - - 0 1", "a1a2"},
+	{"black_mirror", "3k4/8/8/8/8/8/8/4K3 b - - 0 1", "d8e8"},
+	{"black_bucket", "k7/8/8/8/8/8/8/4K3 b - - 0 1", "a8a7"},
+}
+
+func loadV0V11Model(tb testing.TB) *rodenteval.Model {
+	tb.Helper()
+	path := os.Getenv(v0V11ModelEnv)
+	if path == "" {
+		tb.Fatalf("set %s", v0V11ModelEnv)
+	}
+	model, err := rodenteval.LoadV11Anand(path)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	metadata, err := model.Metadata()
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if metadata.SHA256 != v0V11ModelSHA || metadata.Bytes != 789568 {
+		tb.Fatalf("V1.1 identity sha=%s bytes=%d", metadata.SHA256, metadata.Bytes)
+	}
+	return model
+}
+
+func loadV0V12Model(tb testing.TB) *rodentv12eval.Model {
+	tb.Helper()
+	path := os.Getenv(v0V12ModelEnv)
+	if path == "" {
+		tb.Fatalf("set %s", v0V12ModelEnv)
+	}
+	model, err := rodentv12eval.LoadV12Default(path)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	metadata, err := model.Metadata()
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if metadata.SHA256 != v0V12ModelSHA || metadata.Bytes != 4744768 {
+		tb.Fatalf("V1.2 identity sha=%s bytes=%d", metadata.SHA256, metadata.Bytes)
+	}
+	return model
+}
+
+func v0Position(tb testing.TB, fen string) *Position {
+	tb.Helper()
+	position, err := ParseFEN(fen)
+	if err != nil {
+		tb.Fatalf("ParseFEN(%q): %v", fen, err)
+	}
+	return position
+}
+
+func newV0V11Search(tb testing.TB, model *rodenteval.Model, fen string, nodes uint64) (*SearchEngine, *Position, pvPositionSnapshot, rodenteval.Position) {
+	tb.Helper()
+	if runtime.GOMAXPROCS(0) != 1 {
+		tb.Fatalf("GOMAXPROCS=%d, want 1", runtime.GOMAXPROCS(0))
+	}
+	searcher, err := NewSearchEngineWithHash(v0HashMB)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if err := searcher.SelectRodentV11AnandEvaluator(model); err != nil {
+		tb.Fatal(err)
+	}
+	if err := searcher.ConfigureThreads(1); err != nil {
+		tb.Fatal(err)
+	}
+	searcher.SetMaxNodes(nodes)
+	position := v0Position(tb, fen)
+	root, err := rodentPositionFromPosition(position)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	return searcher, position, snapshotPVPosition(position), root
+}
+
+func newV0V12Search(tb testing.TB, model *rodentv12eval.Model, fen string, nodes uint64) (*SearchEngine, *Position, pvPositionSnapshot, rodentv12eval.Position) {
+	tb.Helper()
+	if runtime.GOMAXPROCS(0) != 1 {
+		tb.Fatalf("GOMAXPROCS=%d, want 1", runtime.GOMAXPROCS(0))
+	}
+	searcher, err := NewSearchEngineWithHash(v0HashMB)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if err := searcher.SelectRodentV12DefaultEvaluator(model); err != nil {
+		tb.Fatal(err)
+	}
+	if err := searcher.ConfigureThreads(1); err != nil {
+		tb.Fatal(err)
+	}
+	searcher.SetMaxNodes(nodes)
+	position := v0Position(tb, fen)
+	root, err := rodentV12PositionFromPosition(position)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	return searcher, position, snapshotPVPosition(position), root
+}
+
+func requireV0LegalResult(tb testing.TB, position *Position, before pvPositionSnapshot, result *SearchInfo, minimumNodes uint64) {
+	tb.Helper()
+	if result == nil || !result.Stopped || result.Nodes < minimumNodes || result.EffectiveThreads != 1 {
+		tb.Fatalf("incomplete fixed-node result: %+v", result)
+	}
+	legal := false
+	for _, move := range GenerateLegalMoves(position) {
+		if move == result.BestMove {
+			legal = true
+			break
+		}
+	}
+	if !legal {
+		tb.Fatalf("best move %v is not legal", result.BestMove)
+	}
+	if !reflect.DeepEqual(snapshotPVPosition(position), before) {
+		tb.Fatal("search changed root position")
+	}
+}
+
+func requireV0V11Result(tb testing.TB, model *rodenteval.Model, searcher *SearchEngine, position *Position, before pvPositionSnapshot, root rodenteval.Position, result *SearchInfo, nodes uint64) {
+	tb.Helper()
+	requireV0LegalResult(tb, position, before, result, nodes)
+	worker := searcher.worker.evaluator
+	if worker == nil || worker.rodentContext == nil || worker.rodentContext.Depth() != 0 || worker.rodentContext.Position() != root {
+		tb.Fatal("V1.1 worker did not restore its root frame")
+	}
+	incremental, err := worker.rodentContext.EvaluateReleaseStatic()
+	if err != nil {
+		tb.Fatal(err)
+	}
+	fresh, err := model.EvaluateReleaseStatic(root)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if incremental != fresh || worker.SearchSTM(position) != rodentSearchScore(fresh) {
+		tb.Fatalf("V1.1 restored score incremental=%d fresh=%d SearchSTM=%d", incremental, fresh, worker.SearchSTM(position))
+	}
+}
+
+func requireV0V12Result(tb testing.TB, model *rodentv12eval.Model, searcher *SearchEngine, position *Position, before pvPositionSnapshot, root rodentv12eval.Position, result *SearchInfo, nodes uint64) {
+	tb.Helper()
+	requireV0LegalResult(tb, position, before, result, nodes)
+	worker := searcher.worker.evaluator
+	if worker == nil || worker.rodentV12Context == nil || worker.rodentV12Context.Depth() != 0 || worker.rodentV12Context.Position() != root {
+		tb.Fatal("V1.2 worker did not restore its root frame")
+	}
+	incremental, err := worker.rodentV12Context.EvaluateReleaseStatic()
+	if err != nil {
+		tb.Fatal(err)
+	}
+	fresh, err := model.EvaluateReleaseStatic(root)
+	if err != nil {
+		tb.Fatal(err)
+	}
+	if incremental != fresh || worker.SearchSTM(position) != rodentSearchScore(fresh) {
+		tb.Fatalf("V1.2 restored score incremental=%d fresh=%d SearchSTM=%d", incremental, fresh, worker.SearchSTM(position))
+	}
+}
+
+func BenchmarkRodentV0ColdFixedNodes(b *testing.B) {
+	b.Run("v11_anand", func(b *testing.B) {
+		model := loadV0V11Model(b)
+		for _, fixture := range v0ColdFixtures {
+			fixture := fixture
+			b.Run(fixture.name, func(b *testing.B) {
+				b.ReportAllocs()
+				var actual uint64
+				for iteration := 0; iteration < b.N; iteration++ {
+					b.StopTimer()
+					searcher, position, before, root := newV0V11Search(b, model, fixture.fen, v0ColdNodes)
+					var result *SearchInfo
+					b.StartTimer()
+					pprof.Do(context.Background(), pprof.Labels("scope", "search", "backend", "v11_anand", "workload", "cold", "fixture", fixture.name), func(context.Context) {
+						result = searcher.SearchIterativeDeepening(position, MaximumDepth, nil)
+					})
+					b.StopTimer()
+					requireV0V11Result(b, model, searcher, position, before, root, result, v0ColdNodes)
+					actual += result.Nodes
+				}
+				b.ReportMetric(float64(actual)/float64(b.N), "nodes/op")
+			})
+		}
+	})
+
+	b.Run("v12_default", func(b *testing.B) {
+		model := loadV0V12Model(b)
+		for _, fixture := range v0ColdFixtures {
+			fixture := fixture
+			b.Run(fixture.name, func(b *testing.B) {
+				b.ReportAllocs()
+				var actual uint64
+				for iteration := 0; iteration < b.N; iteration++ {
+					b.StopTimer()
+					searcher, position, before, root := newV0V12Search(b, model, fixture.fen, v0ColdNodes)
+					var result *SearchInfo
+					b.StartTimer()
+					pprof.Do(context.Background(), pprof.Labels("scope", "search", "backend", "v12_default", "workload", "cold", "fixture", fixture.name), func(context.Context) {
+						result = searcher.SearchIterativeDeepening(position, MaximumDepth, nil)
+					})
+					b.StopTimer()
+					requireV0V12Result(b, model, searcher, position, before, root, result, v0ColdNodes)
+					actual += result.Nodes
+				}
+				b.ReportMetric(float64(actual)/float64(b.N), "nodes/op")
+			})
+		}
+	})
+}
+
+func BenchmarkRodentV0PersistentPrefixes(b *testing.B) {
+	b.Run("v11_anand", func(b *testing.B) {
+		model := loadV0V11Model(b)
+		b.ReportAllocs()
+		var actual uint64
+		for iteration := 0; iteration < b.N; iteration++ {
+			b.StopTimer()
+			searcher, err := NewSearchEngineWithHash(v0HashMB)
+			if err != nil {
+				b.Fatal(err)
+			}
+			if err := searcher.SelectRodentV11AnandEvaluator(model); err != nil {
+				b.Fatal(err)
+			}
+			if err := searcher.ConfigureThreads(1); err != nil {
+				b.Fatal(err)
+			}
+			searcher.SetMaxNodes(v0PersistentNodes)
+			for _, fixture := range v0PersistentPrefixes {
+				position := v0Position(b, fixture.fen)
+				before := snapshotPVPosition(position)
+				root, err := rodentPositionFromPosition(position)
+				if err != nil {
+					b.Fatal(err)
+				}
+				var result *SearchInfo
+				b.StartTimer()
+				pprof.Do(context.Background(), pprof.Labels("scope", "search", "backend", "v11_anand", "workload", "persistent", "fixture", fixture.name), func(context.Context) {
+					result = searcher.SearchIterativeDeepening(position, MaximumDepth, nil)
+				})
+				b.StopTimer()
+				requireV0V11Result(b, model, searcher, position, before, root, result, v0PersistentNodes)
+				actual += result.Nodes
+			}
+		}
+		b.ReportMetric(float64(actual)/float64(b.N), "nodes/op")
+	})
+
+	b.Run("v12_default", func(b *testing.B) {
+		model := loadV0V12Model(b)
+		b.ReportAllocs()
+		var actual uint64
+		for iteration := 0; iteration < b.N; iteration++ {
+			b.StopTimer()
+			searcher, err := NewSearchEngineWithHash(v0HashMB)
+			if err != nil {
+				b.Fatal(err)
+			}
+			if err := searcher.SelectRodentV12DefaultEvaluator(model); err != nil {
+				b.Fatal(err)
+			}
+			if err := searcher.ConfigureThreads(1); err != nil {
+				b.Fatal(err)
+			}
+			searcher.SetMaxNodes(v0PersistentNodes)
+			for _, fixture := range v0PersistentPrefixes {
+				position := v0Position(b, fixture.fen)
+				before := snapshotPVPosition(position)
+				root, err := rodentV12PositionFromPosition(position)
+				if err != nil {
+					b.Fatal(err)
+				}
+				var result *SearchInfo
+				b.StartTimer()
+				pprof.Do(context.Background(), pprof.Labels("scope", "search", "backend", "v12_default", "workload", "persistent", "fixture", fixture.name), func(context.Context) {
+					result = searcher.SearchIterativeDeepening(position, MaximumDepth, nil)
+				})
+				b.StopTimer()
+				requireV0V12Result(b, model, searcher, position, before, root, result, v0PersistentNodes)
+				actual += result.Nodes
+			}
+		}
+		b.ReportMetric(float64(actual)/float64(b.N), "nodes/op")
+	})
+}
+
+func addV0TransitionDiagnostics(total *rodentv12eval.TransitionDiagnostics, sample rodentv12eval.TransitionDiagnostics) {
+	total.MovePushes += sample.MovePushes
+	total.NullPushes += sample.NullPushes
+	total.UpdateCount2 += sample.UpdateCount2
+	total.UpdateCount3 += sample.UpdateCount3
+	total.UpdateCount4 += sample.UpdateCount4
+	total.WhiteRefreshes += sample.WhiteRefreshes
+	total.BlackRefreshes += sample.BlackRefreshes
+}
+
+func logAndResetV0TransitionDiagnostics(t *testing.T, total *rodentv12eval.TransitionDiagnostics, searcher *SearchEngine) {
+	t.Helper()
+	context := searcher.worker.evaluator.rodentV12Context
+	if context == nil {
+		t.Fatal("V1.2 search did not create an evaluator context")
+	}
+	addV0TransitionDiagnostics(total, context.DiagnosticTransitionCounts())
+	context.ResetDiagnosticTransitionCounts()
+}
+
+func TestRodentV0V12TransitionIncidence(t *testing.T) {
+	model := loadV0V12Model(t)
+	var cold rodentv12eval.TransitionDiagnostics
+	for _, fixture := range v0ColdFixtures {
+		searcher, position, before, root := newV0V12Search(t, model, fixture.fen, v0ColdNodes)
+		result := searcher.SearchIterativeDeepening(position, MaximumDepth, nil)
+		logAndResetV0TransitionDiagnostics(t, &cold, searcher)
+		requireV0V12Result(t, model, searcher, position, before, root, result, v0ColdNodes)
+	}
+	t.Logf("V0_TRANSITIONS workload=cold %+v", cold)
+
+	searcher, err := NewSearchEngineWithHash(v0HashMB)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := searcher.SelectRodentV12DefaultEvaluator(model); err != nil {
+		t.Fatal(err)
+	}
+	if err := searcher.ConfigureThreads(1); err != nil {
+		t.Fatal(err)
+	}
+	searcher.SetMaxNodes(v0PersistentNodes)
+	var persistent rodentv12eval.TransitionDiagnostics
+	for _, fixture := range v0PersistentPrefixes {
+		position := v0Position(t, fixture.fen)
+		before := snapshotPVPosition(position)
+		root, err := rodentV12PositionFromPosition(position)
+		if err != nil {
+			t.Fatal(err)
+		}
+		result := searcher.SearchIterativeDeepening(position, MaximumDepth, nil)
+		logAndResetV0TransitionDiagnostics(t, &persistent, searcher)
+		requireV0V12Result(t, model, searcher, position, before, root, result, v0PersistentNodes)
+	}
+	t.Logf("V0_TRANSITIONS workload=persistent %+v", persistent)
+}
+
+func TestRodentV0V12CoverageSet(t *testing.T) {
+	model := loadV0V12Model(t)
+	for _, fen := range v0V12CoverageFENs {
+		position := v0Position(t, fen)
+		root, err := rodentV12PositionFromPosition(position)
+		if err != nil {
+			t.Fatal(err)
+		}
+		context, err := model.NewSearchContext(root)
+		if err != nil {
+			t.Fatal(err)
+		}
+		got, err := context.EvaluateReleaseStatic()
+		if err != nil {
+			t.Fatal(err)
+		}
+		want, err := model.EvaluateReleaseStatic(root)
+		if err != nil || got != want {
+			t.Fatalf("coverage FEN %q incremental=%d fresh=%d err=%v", fen, got, want, err)
+		}
+	}
+
+	for _, transition := range v0V12KingTransitions {
+		t.Run(transition.name, func(t *testing.T) {
+			position := v0Position(t, transition.fen)
+			before := snapshotPVPosition(position)
+			root, err := rodentV12PositionFromPosition(position)
+			if err != nil {
+				t.Fatal(err)
+			}
+			context, err := model.NewSearchContext(root)
+			if err != nil {
+				t.Fatal(err)
+			}
+			move := adapterLegalMove(t, position, transition.move)
+			delta, err := rodentV12MoveDelta(position, move)
+			if err != nil {
+				t.Fatal(err)
+			}
+			ep, tag, clock, _ := position.MakeMove(move)
+			post, err := validateRodentV12MoveAfter(position, delta)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err := context.PushMove(delta, post); err != nil {
+				t.Fatal(err)
+			}
+			got, err := context.EvaluateReleaseStatic()
+			if err != nil {
+				t.Fatal(err)
+			}
+			want, err := model.EvaluateReleaseStatic(post)
+			if err != nil || got != want {
+				t.Fatalf("transition incremental=%d fresh=%d err=%v", got, want, err)
+			}
+			if err := context.Pop(); err != nil {
+				t.Fatal(err)
+			}
+			position.UnMakeMove(move, tag, ep, clock)
+			if context.Depth() != 0 || context.Position() != root || !reflect.DeepEqual(snapshotPVPosition(position), before) {
+				t.Fatal("king transition did not restore root state")
+			}
+		})
+	}
+}

@@ -1,0 +1,6 @@
+opening_branch	rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1	e2e4 e7e5 g1f3 b8c6 f1b5 a7a6 b5c6 d7c6 pop pop null pop
+white_ep	k7/8/8/3pP3/8/8/8/7K w - d6 0 1	e5d6 pop null pop
+black_ep	k7/8/8/8/3pP3/8/8/7K b - e3 0 1	d4e3 pop
+castles_both_colors	r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1	e1g1 pop e1c1 pop null e8g8 pop e8c8 pop pop
+white_promotions	k6r/6P1/8/8/8/8/8/1K6 w - - 0 1	g7h8q pop g7g8n pop
+black_promotions	7k/8/8/8/8/8/1p6/R6K b - - 0 1	b2a1q pop b2b1n pop

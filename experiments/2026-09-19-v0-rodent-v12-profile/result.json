@@ -1,0 +1,77 @@
+{
+  "schema": "ngn.rodent-v12-cost-profile.v1",
+  "date": "2026-09-19",
+  "source_commit": "5254b09971af9ffc8ae51b321accbc842fd52bfd",
+  "host_cpu": "AMD Ryzen 7 9800X3D 8-Core Processor",
+  "goamd64": "v3",
+  "threads": 1,
+  "hash_mb": 128,
+  "repetitions": 3,
+  "cold_nodes_per_search": 400000,
+  "persistent_nodes_per_search": 200000,
+  "models": {
+    "v11_anand": {
+      "sha256": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb",
+      "bytes": 789568
+    },
+    "v12_default": {
+      "sha256": "c35a1abc1b8c1cb1d5f4221454d494c1a6da1ed9088fd51ab27038bfa74b5053",
+      "bytes": 4744768
+    }
+  },
+  "aggregate_ratios": {
+    "v12_over_v11_cold_ns_per_equal_node_budget": 6.214,
+    "v12_over_v11_persistent_ns_per_equal_node_budget": 6.489
+  },
+  "v12_cpu_seconds": {
+    "labeled_search_total": 54.05,
+    "apply_updates_cumulative": 24.93,
+    "evaluate_accumulator_cumulative": 20.42,
+    "refresh_perspective_cumulative": 4.00,
+    "push_move_accumulator_copy": 0.14
+  },
+  "v12_share_of_labeled_search_percent": {
+    "apply_updates": 46.12,
+    "evaluate_accumulator": 37.78,
+    "refresh_perspective": 7.40,
+    "push_move_accumulator_copy": 0.26,
+    "apply_plus_output": 83.90
+  },
+  "transition_incidence": {
+    "cold": {
+      "move_pushes": 1915563,
+      "null_pushes": 173464,
+      "update_count_2": 1191606,
+      "update_count_3": 668391,
+      "update_count_4": 55566,
+      "white_refreshes": 68799,
+      "black_refreshes": 67512,
+      "refreshes_per_move_push_percent": 7.116
+    },
+    "persistent": {
+      "move_pushes": 626799,
+      "null_pushes": 63556,
+      "update_count_2": 465092,
+      "update_count_3": 156373,
+      "update_count_4": 5334,
+      "white_refreshes": 33873,
+      "black_refreshes": 35471,
+      "refreshes_per_move_push_percent": 11.063
+    }
+  },
+  "profile_artifacts": {
+    "diagnostic_binary_sha256": "da1698f4b15ce9c15d98cf79526bd5f70d111f1a0ed7154c922827250a1ebd58",
+    "cpu_profile_sha256": "1b299fd2c1410236a090cb505601b525f3d3e4f1d36f175447ce44ab58ee9885",
+    "allocation_profile_sha256": "2cda22299ce871d72ddea3d1d3829d103d206b9a79165e446e81543eddee71da",
+    "benchmark_stdout_sha256": "e5c8229dc794920e39547f8318fb473e01136e133659571aac39293dfb06fb28",
+    "supervisor_receipt_sha256": "d4bd0d09e0ffa087f529fc06f537b6299f18008f8a888317bfa29b72148a3970",
+    "probe_sha256": "a92f86fa554d91880f9702edb3d0360e188f55398e4823af9681e8a01d002754",
+    "diagnostic_patch_sha256": "f4a751afd6db80efea012c9874c3ef1d8f5116e7e7f3c05240525341169d0684"
+  },
+  "decision": {
+    "v1": "AVX2 exact V1.2 clipped-squared output kernel",
+    "v2": "AVX2 exact V1.2 2/3/4-row incremental update kernels",
+    "v3_if_still_material": "vectorized V1.2 king-perspective refresh",
+    "copy_optimization": "reject"
+  }
+}

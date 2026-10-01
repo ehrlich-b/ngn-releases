@@ -1,0 +1,35 @@
+{
+  "schema": "ngn-rodent-update-avx2-packaging-v1",
+  "status": "PASS",
+  "source": {
+    "base_commit": "762377947c0907d1ce6be74cb71e01521610bd76",
+    "candidate_production_patch_sha256": "120ebb3831dbef82963ca9af153e50d74e850edb341ed093d7c8ab6fc1f6487f",
+    "candidate_tests_patch_sha256": "f7c96508f8d2789a3ab86baf0bdd8edc7e7f903ccb85c24afdefbb78c56c18bd",
+    "candidate_byte_identity_unchanged_after_gate": true
+  },
+  "toolchain": "go version go1.25.5 linux/amd64",
+  "script": {
+    "path": "/home/ehrli/repos/ngn-rodent-update-avx2-20260913/output/rodent-update-avx2-20260913/run-package-v1.sh",
+    "sha256": "c592223b064c9d827592c64f35ab5b8e0b708f000469dbc74a66a676ea0830da"
+  },
+  "builds": [
+    {
+      "name": "linux-amd64-v3",
+      "command": "env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-update-avx2-20260913 build -p 2 -o <packaging>/ngn-rodent-update-linux-amd64-v3 .",
+      "exit": 0,
+      "stdout_empty": true,
+      "stderr_empty": true,
+      "binary_sha256": "13f9d02db57df344f521ae30f4da4fb18852c73169bffb8e4552f0c9fb731c7b"
+    },
+    {
+      "name": "windows-amd64-v3",
+      "command": "env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-update-avx2-20260913 build -p 2 -o <packaging>/ngn-rodent-update-windows-amd64-v3.exe .",
+      "exit": 0,
+      "stdout_empty": true,
+      "stderr_empty": true,
+      "binary_sha256": "4c9f92dad459a3939663f2cf308b8f39fd488d0667e370b8b7f85d6d00e7e5d4"
+    }
+  ],
+  "binaries_archived_in_repository": false,
+  "mac_execution": false
+}

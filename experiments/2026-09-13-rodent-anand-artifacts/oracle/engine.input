@@ -1,0 +1,434 @@
+uci
+position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+nnue
+isready
+position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1
+nnue
+isready
+position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 50 1
+nnue
+isready
+position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 50 1
+nnue
+isready
+position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 99 1
+nnue
+isready
+position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 99 1
+nnue
+isready
+position fen r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 0 1
+nnue
+isready
+position fen r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R b KQkq - 0 1
+nnue
+isready
+position fen r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 50 1
+nnue
+isready
+position fen r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R b KQkq - 50 1
+nnue
+isready
+position fen r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 99 1
+nnue
+isready
+position fen r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R b KQkq - 99 1
+nnue
+isready
+position fen 7k/8/8/3pP3/8/8/8/K7 w - d6 0 1
+nnue
+isready
+position fen 7k/8/8/3pP3/8/8/8/K7 b - d6 0 1
+nnue
+isready
+position fen 7k/8/8/8/3Pp3/8/8/K7 w - d3 0 1
+nnue
+isready
+position fen 7k/8/8/8/3Pp3/8/8/K7 b - d3 0 1
+nnue
+isready
+position fen 7k/Q7/1Q6/8/8/8/6q1/K7 w - - 0 1
+nnue
+isready
+position fen 7k/Q7/1Q6/8/8/8/6q1/K7 b - - 0 1
+nnue
+isready
+position fen 7k/Q7/1Q6/8/8/8/6q1/K7 w - - 50 1
+nnue
+isready
+position fen 7k/Q7/1Q6/8/8/8/6q1/K7 b - - 50 1
+nnue
+isready
+position fen 7k/Q7/1Q6/8/8/8/6q1/K7 w - - 99 1
+nnue
+isready
+position fen 7k/Q7/1Q6/8/8/8/6q1/K7 b - - 99 1
+nnue
+isready
+position fen r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 w kq - 0 15
+nnue
+isready
+position fen r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 b kq - 0 15
+nnue
+isready
+position fen r2Qkb1r/p4ppp/2p1p3/8/8/2P3P1/P1P2P1P/R1B1K2R w KQkq - 0 1
+nnue
+isready
+position fen r2Qkb1r/p4ppp/2p1p3/8/8/2P3P1/P1P2P1P/R1B1K2R b KQkq - 0 1
+nnue
+isready
+position fen 5R2/p1kr3p/2p3p1/P1b1pp2/8/2P3PP/2P1KP2/2B5 w - - 1 1
+nnue
+isready
+position fen 5R2/p1kr3p/2p3p1/P1b1pp2/8/2P3PP/2P1KP2/2B5 b - - 1 1
+nnue
+isready
+position fen 5rk1/5pp1/R1p1p3/4b2p/P1K5/1RP1B1P1/r1P2P1P/8 w - - 4 1
+nnue
+isready
+position fen 5rk1/5pp1/R1p1p3/4b2p/P1K5/1RP1B1P1/r1P2P1P/8 b - - 4 1
+nnue
+isready
+position fen r2q1rk1/pbp2ppp/1p1p1n2/2nPp3/2P1P3/5N2/PPBN1PPP/R2QR1K1 w - - 4 1
+nnue
+isready
+position fen r2q1rk1/pbp2ppp/1p1p1n2/2nPp3/2P1P3/5N2/PPBN1PPP/R2QR1K1 b - - 4 1
+nnue
+isready
+position fen 6k1/4qp1p/2rpnnpQ/pb2p3/4P3/1P3NNP/P4PPK/1B2R3 w - - 0 1
+nnue
+isready
+position fen 6k1/4qp1p/2rpnnpQ/pb2p3/4P3/1P3NNP/P4PPK/1B2R3 b - - 0 1
+nnue
+isready
+position fen 6k1/4qp1p/2rpnnpQ/pb2p3/4P3/1P3NNP/P4PPK/1B2R3 w - - 50 1
+nnue
+isready
+position fen 6k1/4qp1p/2rpnnpQ/pb2p3/4P3/1P3NNP/P4PPK/1B2R3 b - - 50 1
+nnue
+isready
+position fen 6k1/4qp1p/2rpnnpQ/pb2p3/4P3/1P3NNP/P4PPK/1B2R3 w - - 99 1
+nnue
+isready
+position fen 6k1/4qp1p/2rpnnpQ/pb2p3/4P3/1P3NNP/P4PPK/1B2R3 b - - 99 1
+nnue
+isready
+position fen r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1
+nnue
+isready
+position fen r3k2r/8/8/8/8/8/8/R3K2R b KQkq - 0 1
+nnue
+isready
+position fen k6r/6P1/8/8/8/8/8/1K6 w - - 0 1
+nnue
+isready
+position fen k6r/6P1/8/8/8/8/8/1K6 b - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/1p6/R6K w - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/1p6/R6K b - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/8/K7 w - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/8/K7 b - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/8/K7 w - - 50 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/8/K7 b - - 50 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/8/K7 w - - 99 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/8/K7 b - - 99 1
+nnue
+isready
+position fen 3k4/6p1/2n5/8/1P6/5N2/P7/3K4 w - - 0 1
+nnue
+isready
+position fen 3k4/6p1/2n5/8/1P6/5N2/P7/3K4 b - - 0 1
+nnue
+isready
+position fen 4k3/1p6/5n2/8/6P1/2N5/7P/4K3 w - - 0 1
+nnue
+isready
+position fen 4k3/1p6/5n2/8/6P1/2N5/7P/4K3 b - - 0 1
+nnue
+isready
+position fen 4k3/p7/7b/3P4/8/2N5/6P1/3K4 w - - 0 1
+nnue
+isready
+position fen 4k3/p7/7b/3P4/8/2N5/6P1/3K4 b - - 0 1
+nnue
+isready
+position fen 3k4/7p/b7/4P3/8/5N2/1P6/4K3 w - - 0 1
+nnue
+isready
+position fen 3k4/7p/b7/4P3/8/5N2/1P6/4K3 b - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/2B5/K7 w - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/2B5/K7 b - - 0 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/8/K7 w - - 0 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/8/K7 b - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/R7/K7 w - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/R7/K7 b - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/7r/K7 w - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/7r/K7 b - - 0 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/R1B4r/K7 w - - 0 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/R1B4r/K7 b - - 0 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/R1B4r/K7 w - - 50 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/R1B4r/K7 b - - 50 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/R1B4r/K7 w - - 99 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/R1B4r/K7 b - - 99 1
+nnue
+isready
+position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+nnue
+isready
+position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1
+nnue
+isready
+position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 50 1
+nnue
+isready
+position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 50 1
+nnue
+isready
+position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 99 1
+nnue
+isready
+position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 99 1
+nnue
+isready
+position fen r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 0 1
+nnue
+isready
+position fen r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R b KQkq - 0 1
+nnue
+isready
+position fen r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 50 1
+nnue
+isready
+position fen r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R b KQkq - 50 1
+nnue
+isready
+position fen r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 99 1
+nnue
+isready
+position fen r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R b KQkq - 99 1
+nnue
+isready
+position fen 7k/8/8/3pP3/8/8/8/K7 w - d6 0 1
+nnue
+isready
+position fen 7k/8/8/3pP3/8/8/8/K7 b - d6 0 1
+nnue
+isready
+position fen 7k/8/8/8/3Pp3/8/8/K7 w - d3 0 1
+nnue
+isready
+position fen 7k/8/8/8/3Pp3/8/8/K7 b - d3 0 1
+nnue
+isready
+position fen 7k/Q7/1Q6/8/8/8/6q1/K7 w - - 0 1
+nnue
+isready
+position fen 7k/Q7/1Q6/8/8/8/6q1/K7 b - - 0 1
+nnue
+isready
+position fen 7k/Q7/1Q6/8/8/8/6q1/K7 w - - 50 1
+nnue
+isready
+position fen 7k/Q7/1Q6/8/8/8/6q1/K7 b - - 50 1
+nnue
+isready
+position fen 7k/Q7/1Q6/8/8/8/6q1/K7 w - - 99 1
+nnue
+isready
+position fen 7k/Q7/1Q6/8/8/8/6q1/K7 b - - 99 1
+nnue
+isready
+position fen r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 w kq - 0 15
+nnue
+isready
+position fen r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 b kq - 0 15
+nnue
+isready
+position fen r2Qkb1r/p4ppp/2p1p3/8/8/2P3P1/P1P2P1P/R1B1K2R w KQkq - 0 1
+nnue
+isready
+position fen r2Qkb1r/p4ppp/2p1p3/8/8/2P3P1/P1P2P1P/R1B1K2R b KQkq - 0 1
+nnue
+isready
+position fen 5R2/p1kr3p/2p3p1/P1b1pp2/8/2P3PP/2P1KP2/2B5 w - - 1 1
+nnue
+isready
+position fen 5R2/p1kr3p/2p3p1/P1b1pp2/8/2P3PP/2P1KP2/2B5 b - - 1 1
+nnue
+isready
+position fen 5rk1/5pp1/R1p1p3/4b2p/P1K5/1RP1B1P1/r1P2P1P/8 w - - 4 1
+nnue
+isready
+position fen 5rk1/5pp1/R1p1p3/4b2p/P1K5/1RP1B1P1/r1P2P1P/8 b - - 4 1
+nnue
+isready
+position fen r2q1rk1/pbp2ppp/1p1p1n2/2nPp3/2P1P3/5N2/PPBN1PPP/R2QR1K1 w - - 4 1
+nnue
+isready
+position fen r2q1rk1/pbp2ppp/1p1p1n2/2nPp3/2P1P3/5N2/PPBN1PPP/R2QR1K1 b - - 4 1
+nnue
+isready
+position fen 6k1/4qp1p/2rpnnpQ/pb2p3/4P3/1P3NNP/P4PPK/1B2R3 w - - 0 1
+nnue
+isready
+position fen 6k1/4qp1p/2rpnnpQ/pb2p3/4P3/1P3NNP/P4PPK/1B2R3 b - - 0 1
+nnue
+isready
+position fen 6k1/4qp1p/2rpnnpQ/pb2p3/4P3/1P3NNP/P4PPK/1B2R3 w - - 50 1
+nnue
+isready
+position fen 6k1/4qp1p/2rpnnpQ/pb2p3/4P3/1P3NNP/P4PPK/1B2R3 b - - 50 1
+nnue
+isready
+position fen 6k1/4qp1p/2rpnnpQ/pb2p3/4P3/1P3NNP/P4PPK/1B2R3 w - - 99 1
+nnue
+isready
+position fen 6k1/4qp1p/2rpnnpQ/pb2p3/4P3/1P3NNP/P4PPK/1B2R3 b - - 99 1
+nnue
+isready
+position fen r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1
+nnue
+isready
+position fen r3k2r/8/8/8/8/8/8/R3K2R b KQkq - 0 1
+nnue
+isready
+position fen k6r/6P1/8/8/8/8/8/1K6 w - - 0 1
+nnue
+isready
+position fen k6r/6P1/8/8/8/8/8/1K6 b - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/1p6/R6K w - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/1p6/R6K b - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/8/K7 w - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/8/K7 b - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/8/K7 w - - 50 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/8/K7 b - - 50 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/8/K7 w - - 99 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/8/K7 b - - 99 1
+nnue
+isready
+position fen 3k4/6p1/2n5/8/1P6/5N2/P7/3K4 w - - 0 1
+nnue
+isready
+position fen 3k4/6p1/2n5/8/1P6/5N2/P7/3K4 b - - 0 1
+nnue
+isready
+position fen 4k3/1p6/5n2/8/6P1/2N5/7P/4K3 w - - 0 1
+nnue
+isready
+position fen 4k3/1p6/5n2/8/6P1/2N5/7P/4K3 b - - 0 1
+nnue
+isready
+position fen 4k3/p7/7b/3P4/8/2N5/6P1/3K4 w - - 0 1
+nnue
+isready
+position fen 4k3/p7/7b/3P4/8/2N5/6P1/3K4 b - - 0 1
+nnue
+isready
+position fen 3k4/7p/b7/4P3/8/5N2/1P6/4K3 w - - 0 1
+nnue
+isready
+position fen 3k4/7p/b7/4P3/8/5N2/1P6/4K3 b - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/2B5/K7 w - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/2B5/K7 b - - 0 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/8/K7 w - - 0 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/8/K7 b - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/R7/K7 w - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/R7/K7 b - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/7r/K7 w - - 0 1
+nnue
+isready
+position fen 7k/8/8/8/8/8/7r/K7 b - - 0 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/R1B4r/K7 w - - 0 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/R1B4r/K7 b - - 0 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/R1B4r/K7 w - - 50 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/R1B4r/K7 b - - 50 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/R1B4r/K7 w - - 99 1
+nnue
+isready
+position fen 2b4k/8/8/8/8/8/R1B4r/K7 b - - 99 1
+nnue
+isready
+quit

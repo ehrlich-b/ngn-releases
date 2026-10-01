@@ -1,0 +1,15 @@
+{
+  "mirror": "https://github.com/KierenP/ChessTrainingSets",
+  "revision": "ef85c314b9f0c0ff814a0d870f6b0b7c7c7f4b87",
+  "revision_date": "2020-09-07T06:28:10Z",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2020 Kieren Pearson",
+  "credited_contributor": "Alexandru Mo\u0219oi (quiet-labeled.epd)",
+  "license_git_blob": "511aa17fb96ba6b85f2cf8623a7a0abfc2e5251e",
+  "license_sha256": "c890afdc17439cc9fd10286fd57917bfcf782095b113e37acd28da0525351fb3",
+  "dataset_git_blob": "73c2a0baa1a1dc42f719f2501073c7bc451b36fc",
+  "dataset_bytes": 40950642,
+  "ngn_source_record": "bb12a487adaff89c592795c5e702270329a30f4a:TODO.md names this mirror and describes EPD c9-result conversion and PST tuning",
+  "exact_local_training_file_match": "not yet verified",
+  "original_contributor_permission_chain": "not yet independently verified"
+}

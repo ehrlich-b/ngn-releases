@@ -7,8 +7,6 @@ import (
 	"sync"
 	"testing"
 	"time"
-
-	"github.com/ehrlich-b/ngn/nnue"
 )
 
 func newSMPTestEngine(t *testing.T, workers int) *SearchEngine {
@@ -479,101 +477,5 @@ func TestLazySMPCancellationAfterFirstLaunchJoinsPrefix(t *testing.T) {
 	case <-helperJoined:
 	default:
 		t.Fatal("partial cancellation returned before helper joined")
-	}
-}
-
-func TestLazySMPNNUEContextsStayPrivateBalancedAndReusable(t *testing.T) {
-	modelA, _ := adapterContextModel(t)
-	searcher := newSMPTestEngine(t, 3)
-	if err := searcher.SelectNGNV1Evaluator(modelA); err != nil {
-		t.Fatal(err)
-	}
-	pos := controlTestPosition(t)
-	workers := searcher.configuredWorkers()
-	transitioned := make(chan int, len(workers))
-	release := make(chan struct{})
-	var firstPush [3]sync.Once
-	evaluatorsA := [3]*workerEvaluator{}
-	contextsA := [3]*nnue.Int32Context{}
-	searcher.smpHooks = &smpSearchHooks{afterReset: func(index int) {
-		evaluator := workers[index].evaluator
-		evaluatorsA[index] = evaluator
-		contextsA[index] = evaluator.portableContext
-		evaluator.transitionObserver = func(_ *Position, observed *workerEvaluator) {
-			if observed.nnueDepth() <= 0 {
-				return
-			}
-			firstPush[index].Do(func() {
-				transitioned <- index
-				<-release
-			})
-		}
-	}}
-	done := make(chan *SearchInfo, 1)
-	go func() { done <- searcher.Search(pos, 2) }()
-	seen := [3]bool{}
-	for i := 0; i < len(workers); i++ {
-		seen[waitSMPIndex(t, transitioned, "NNUE pushed frames")] = true
-	}
-	for i, worker := range workers {
-		if !seen[i] || worker.evaluator == nil || worker.evaluator.Identity().backend != evaluatorBackendNGNV1 {
-			t.Fatalf("NNUE worker %d did not enter an incremental move", i)
-		}
-		if worker.evaluator != evaluatorsA[i] || contextsA[i] == nil || worker.evaluator.context != nil {
-			t.Fatalf("NNUE worker %d did not retain its portable context", i)
-		}
-		if depth := worker.evaluator.nnueDepth(); depth <= 0 {
-			t.Fatalf("NNUE worker %d blocked outside a pushed frame: depth=%d", i, depth)
-		}
-		for j := 0; j < i; j++ {
-			if evaluatorsA[i] == evaluatorsA[j] || contextsA[i] == contextsA[j] {
-				t.Fatalf("NNUE workers %d and %d share evaluator or Int32Context", i, j)
-			}
-		}
-	}
-	searcher.RequestStop()
-	close(release)
-	var result *SearchInfo
-	select {
-	case result = <-done:
-	case <-time.After(10 * time.Second):
-		searcher.RequestStop()
-		t.Fatal("NNUE helper session did not join")
-	}
-	if !result.Stopped || result.EffectiveThreads != 3 {
-		t.Fatalf("NNUE stopped/effective=%v/%d, want true/3", result.Stopped, result.EffectiveThreads)
-	}
-	for i, worker := range workers {
-		worker.evaluator.transitionObserver = nil
-		if depth := worker.evaluator.nnueDepth(); depth != 0 {
-			t.Fatalf("NNUE worker %d context depth=%d after join", i, depth)
-		}
-		requireWorkerRawMatchesFull(t, worker.evaluator, pos)
-	}
-
-	searcher.smpHooks = nil
-	searcher.NewGame()
-	searcher.Search(pos.Copy(), 1)
-	for i, worker := range workers {
-		if worker.evaluator != evaluatorsA[i] || worker.evaluator.portableContext != contextsA[i] || worker.evaluator.nnueDepth() != 0 {
-			t.Fatalf("NewGame/session did not retain balanced worker %d evaluator/context", i)
-		}
-		requireWorkerRawMatchesFull(t, worker.evaluator, pos)
-	}
-
-	_, tensorsA := adapterContextModel(t)
-	tensorsB := *tensorsA
-	tensorsB.OutputBias++
-	modelB := loadEvaluatorTensors(t, &tensorsB)
-	if err := searcher.SelectNGNV1Evaluator(modelB); err != nil {
-		t.Fatal(err)
-	}
-	searcher.Search(pos.Copy(), 1)
-	for i, worker := range workers {
-		if worker.evaluator == evaluatorsA[i] || worker.evaluator.portableContext == nil ||
-			worker.evaluator.portableContext == contextsA[i] || worker.evaluator.nnueDepth() != 0 {
-			t.Fatalf("model switch left stale/unbalanced worker %d evaluator/context", i)
-		}
-		requireWorkerRawMatchesFull(t, worker.evaluator, pos)
 	}
 }

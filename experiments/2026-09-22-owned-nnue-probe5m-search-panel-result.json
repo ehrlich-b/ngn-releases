@@ -1,0 +1,3239 @@
+{
+  "schema": "ngn-k4-search-panel-result-v1",
+  "panel_sha256": "5355e777634fe6e104081fac17e5a9aab962644dba3b8c61d9e5e185b38655d5",
+  "script_sha256": "e5a32d1b61a39d1fff67b4c994a6876aa0116757505e6cb66efbc69f70164d25",
+  "binary_sha256": {
+    "engine": "d17740084a5d7c96c3bb150ef55f8be3567779de33dddcb2faa95956458c475b",
+    "k4": "d5262a2157c74f13463bbb35fbf81341c154f96fd30867dbfe0b22d9ee6b9459",
+    "rodent": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb",
+    "teacher": "174270346ae9ed600713d165fa745dfa87fc084e44907c8084767f2b905e86d3"
+  },
+  "cpu_affinity": [
+    12
+  ],
+  "nice": 10,
+  "summaries": {
+    "equal_nodes": {
+      "hce": {
+        "teacher_move_agreement": 15,
+        "positions": 32,
+        "mean_depth": 10.09375,
+        "mean_nodes": 70076.34375,
+        "mean_elapsed_ms": 50.55028125,
+        "mean_wall_ns_per_node": 764.8815
+      },
+      "k4": {
+        "teacher_move_agreement": 13,
+        "positions": 32,
+        "mean_depth": 10.09375,
+        "mean_nodes": 71717.40625,
+        "mean_elapsed_ms": 83.0504375,
+        "mean_wall_ns_per_node": 1273.2399375
+      },
+      "rodent": {
+        "teacher_move_agreement": 17,
+        "positions": 32,
+        "mean_depth": 10.4375,
+        "mean_nodes": 69324.15625,
+        "mean_elapsed_ms": 64.86365625,
+        "mean_wall_ns_per_node": 1023.97803125
+      }
+    },
+    "equal_time": {
+      "hce": {
+        "teacher_move_agreement": 17,
+        "positions": 32,
+        "mean_depth": 12.28125,
+        "mean_nodes": 222162.65625,
+        "mean_elapsed_ms": 148.89240625,
+        "mean_wall_ns_per_node": 732.9343125
+      },
+      "k4": {
+        "teacher_move_agreement": 14,
+        "positions": 32,
+        "mean_depth": 11.1875,
+        "mean_nodes": 127507.75,
+        "mean_elapsed_ms": 150.22228125,
+        "mean_wall_ns_per_node": 1272.17434375
+      },
+      "rodent": {
+        "teacher_move_agreement": 15,
+        "positions": 32,
+        "mean_depth": 12.1875,
+        "mean_nodes": 178792.8125,
+        "mean_elapsed_ms": 150.19090625,
+        "mean_wall_ns_per_node": 884.50315625
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "07652d817bf3e9dbbceec00f3d757e26c262eb135db45ff79deefbc76058774e",
+      "fen": "4b3/p3k1p1/P3pp1p/3n4/1r1P3P/2r2N2/3R1PP1/R4BK1 b - - 0 1",
+      "teacher": {
+        "best_move": "e7d6",
+        "elapsed_ms": 149.529,
+        "wall_ns_per_reported_node": 747.496,
+        "depth": 18,
+        "seldepth": 30,
+        "nodes": 200040,
+        "time": 149,
+        "nps": 1342550,
+        "score_kind": "cp",
+        "score": 130,
+        "pv_move": "e7d6"
+      },
+      "equal_nodes": {
+        "hce": {
+          "best_move": "e8h5",
+          "elapsed_ms": 76.911,
+          "wall_ns_per_reported_node": 1278.891,
+          "depth": 9,
+          "seldepth": 18,
+          "nodes": 60139,
+          "time": 56,
+          "nps": 1072353,
+          "score_kind": "cp",
+          "score": 69,
+          "pv_move": "e8h5"
+        },
+        "k4": {
+          "best_move": "e8b5",
+          "elapsed_ms": 88.206,
+          "wall_ns_per_reported_node": 1488.382,
+          "depth": 11,
+          "seldepth": 18,
+          "nodes": 59263,
+          "time": 55,
+          "nps": 1069818,
+          "score_kind": "cp",
+          "score": 161,
+          "pv_move": "e8b5"
+        },
+        "rodent": {
+          "best_move": "e7d6",
+          "elapsed_ms": 70.862,
+          "wall_ns_per_reported_node": 800.179,
+          "depth": 12,
+          "seldepth": 22,
+          "nodes": 88558,
+          "time": 63,
+          "nps": 1389230,
+          "score_kind": "cp",
+          "score": 133,
+          "pv_move": "e7d6"
+        }
+      },
+      "equal_time": {
+        "hce": {
+          "best_move": "e8g6",
+          "elapsed_ms": 150.146,
+          "wall_ns_per_reported_node": 768.65,
+          "depth": 11,
+          "seldepth": 18,
+          "nodes": 195338,
+          "time": 93,
+          "nps": 2095723,
+          "score_kind": "cp",
+          "score": 42,
+          "pv_move": "e8g6"
+        },
+        "k4": {
+          "best_move": "e8b5",
+          "elapsed_ms": 150.526,
+          "wall_ns_per_reported_node": 1195.934,
+          "depth": 12,
+          "seldepth": 21,
+          "nodes": 125865,
+          "time": 100,
+          "nps": 1251745,
+          "score_kind": "cp",
+          "score": 142,
+          "pv_move": "e8b5"
+        },
+        "rodent": {
+          "best_move": "e7d6",
+          "elapsed_ms": 150.14,
+          "wall_ns_per_reported_node": 920.371,
+          "depth": 13,
+          "seldepth": 24,
+          "nodes": 163130,
+          "time": 104,
+          "nps": 1565425,
+          "score_kind": "cp",
+          "score": 120,
+          "pv_move": "e7d6"
+        }
+      }
+    },
+    {
+      "id": "55d6c88e0bc4620edd19f5a57348a9e165916ec99bbc5f58598311b304134475",
+      "fen": "5rk1/2p3pp/2r1pnn1/8/8/P1N2q2/1P3PQP/2BR1RK1 b - - 0 1",
+      "teacher": {
+        "best_move": "g6h4",
+        "elapsed_ms": 141.277,
+        "wall_ns_per_reported_node": 768.118,
+        "depth": 17,
+        "seldepth": 45,
+        "nodes": 183926,
+        "time": 131,
+        "nps": 1404015,
+        "score_kind": "cp",
+        "score": 56,
+        "pv_move": "g6h4"
+      },
+      "equal_nodes": {
+        "k4": {
+          "best_move": "f3g2",
+          "elapsed_ms": 82.648,
+          "wall_ns_per_reported_node": 1101.12,
+          "depth": 10,
+          "seldepth": 22,
+          "nodes": 75058,
+          "time": 62,
+          "nps": 1203002,
+          "score_kind": "cp",
+          "score": 80,
+          "pv_move": "f3g2"
+        },
+        "rodent": {
+          "best_move": "f3g2",
+          "elapsed_ms": 60.567,
+          "wall_ns_per_reported_node": 998.708,
+          "depth": 10,
+          "seldepth": 16,
+          "nodes": 60645,
+          "time": 36,
+          "nps": 1656012,
+          "score_kind": "cp",
+          "score": 30,
+          "pv_move": "f3g2"
+        },
+        "hce": {
+          "best_move": "g6h4",
+          "elapsed_ms": 54.171,
+          "wall_ns_per_reported_node": 545.198,
+          "depth": 10,
+          "seldepth": 26,
+          "nodes": 99361,
+          "time": 53,
+          "nps": 1848500,
+          "score_kind": "cp",
+          "score": 79,
+          "pv_move": "g6h4"
+        }
+      },
+      "equal_time": {
+        "k4": {
+          "best_move": "f3g2",
+          "elapsed_ms": 150.206,
+          "wall_ns_per_reported_node": 2001.196,
+          "depth": 10,
+          "seldepth": 22,
+          "nodes": 75058,
+          "time": 62,
+          "nps": 1206534,
+          "score_kind": "cp",
+          "score": 80,
+          "pv_move": "f3g2"
+        },
+        "rodent": {
+          "best_move": "f3g2",
+          "elapsed_ms": 150.176,
+          "wall_ns_per_reported_node": 865.637,
+          "depth": 12,
+          "seldepth": 21,
+          "nodes": 173486,
+          "time": 105,
+          "nps": 1639081,
+          "score_kind": "cp",
+          "score": 32,
+          "pv_move": "f3g2"
+        },
+        "hce": {
+          "best_move": "g6h4",
+          "elapsed_ms": 150.12,
+          "wall_ns_per_reported_node": 566.467,
+          "depth": 12,
+          "seldepth": 25,
+          "nodes": 265012,
+          "time": 139,
+          "nps": 1899917,
+          "score_kind": "cp",
+          "score": 91,
+          "pv_move": "g6h4"
+        }
+      }
+    },
+    {
+      "id": "605956ee465753d82af80c2d269c7435f1e3bb7cb121e20b1f11d8f2ac661da6",
+      "fen": "r2r2k1/pq3pb1/1pp1bnpp/4p3/2P1P3/1PN4P/P1QBBPP1/3R1RK1 w - - 0 1",
+      "teacher": {
+        "best_move": "d2e3",
+        "elapsed_ms": 157.572,
+        "wall_ns_per_reported_node": 1127.51,
+        "depth": 16,
+        "seldepth": 23,
+        "nodes": 139752,
+        "time": 110,
+        "nps": 1270472,
+        "score_kind": "cp",
+        "score": 11,
+        "pv_move": "d2e3"
+      },
+      "equal_nodes": {
+        "rodent": {
+          "best_move": "d2e3",
+          "elapsed_ms": 62.056,
+          "wall_ns_per_reported_node": 720.191,
+          "depth": 11,
+          "seldepth": 25,
+          "nodes": 86166,
+          "time": 54,
+          "nps": 1591636,
+          "score_kind": "cp",
+          "score": 18,
+          "pv_move": "d2e3"
+        },
+        "hce": {
+          "best_move": "g1h1",
+          "elapsed_ms": 55.35,
+          "wall_ns_per_reported_node": 1049.87,
+          "depth": 9,
+          "seldepth": 19,
+          "nodes": 52721,
+          "time": 29,
+          "nps": 1807767,
+          "score_kind": "cp",
+          "score": 29,
+          "pv_move": "g1h1"
+        },
+        "k4": {
+          "best_move": "d2e3",
+          "elapsed_ms": 77.815,
+          "wall_ns_per_reported_node": 1201.919,
+          "depth": 9,
+          "seldepth": 16,
+          "nodes": 64742,
+          "time": 49,
+          "nps": 1297745,
+          "score_kind": "cp",
+          "score": 96,
+          "pv_move": "d2e3"
+        }
+      },
+      "equal_time": {
+        "rodent": {
+          "best_move": "d2e3",
+          "elapsed_ms": 150.212,
+          "wall_ns_per_reported_node": 707.063,
+          "depth": 13,
+          "seldepth": 25,
+          "nodes": 212445,
+          "time": 132,
+          "nps": 1605333,
+          "score_kind": "cp",
+          "score": 13,
+          "pv_move": "d2e3"
+        },
+        "hce": {
+          "best_move": "f2f4",
+          "elapsed_ms": 150.162,
+          "wall_ns_per_reported_node": 731.318,
+          "depth": 11,
+          "seldepth": 26,
+          "nodes": 205331,
+          "time": 99,
+          "nps": 2053851,
+          "score_kind": "cp",
+          "score": 4,
+          "pv_move": "f2f4"
+        },
+        "k4": {
+          "best_move": "d2e3",
+          "elapsed_ms": 150.139,
+          "wall_ns_per_reported_node": 1186.439,
+          "depth": 10,
+          "seldepth": 19,
+          "nodes": 126546,
+          "time": 97,
+          "nps": 1291286,
+          "score_kind": "cp",
+          "score": 80,
+          "pv_move": "d2e3"
+        }
+      }
+    },
+    {
+      "id": "a2ffaced2dc542357ef7ac47b48b4363a4a8af52baf5cc4a40103e24c8e6491b",
+      "fen": "8/p1r1nppk/7p/R2p4/3Pn3/P3P1P1/1P3P1P/4RK2 w - - 0 1",
+      "teacher": {
+        "best_move": "b2b4",
+        "elapsed_ms": 139.198,
+        "wall_ns_per_reported_node": 695.977,
+        "depth": 15,
+        "seldepth": 27,
+        "nodes": 200004,
+        "time": 139,
+        "nps": 1438877,
+        "score_kind": "cp",
+        "score": 65,
+        "pv_move": "b2b4"
+      },
+      "equal_nodes": {
+        "hce": {
+          "best_move": "f1g1",
+          "elapsed_ms": 47.939,
+          "wall_ns_per_reported_node": 694.422,
+          "depth": 11,
+          "seldepth": 15,
+          "nodes": 69034,
+          "time": 33,
+          "nps": 2083116,
+          "score_kind": "cp",
+          "score": 49,
+          "pv_move": "f1g1"
+        },
+        "k4": {
+          "best_move": "e1e2",
+          "elapsed_ms": 79.254,
+          "wall_ns_per_reported_node": 939.351,
+          "depth": 10,
+          "seldepth": 19,
+          "nodes": 84371,
+          "time": 66,
+          "nps": 1261499,
+          "score_kind": "cp",
+          "score": 72,
+          "pv_move": "e1e2"
+        },
+        "rodent": {
+          "best_move": "e1e2",
+          "elapsed_ms": 58.569,
+          "wall_ns_per_reported_node": 762.233,
+          "depth": 10,
+          "seldepth": 19,
+          "nodes": 76839,
+          "time": 44,
+          "nps": 1713517,
+          "score_kind": "cp",
+          "score": 66,
+          "pv_move": "e1e2"
+        }
+      },
+      "equal_time": {
+        "hce": {
+          "best_move": "e1e2",
+          "elapsed_ms": 150.167,
+          "wall_ns_per_reported_node": 492.642,
+          "depth": 12,
+          "seldepth": 20,
+          "nodes": 304819,
+          "time": 128,
+          "nps": 2363666,
+          "score_kind": "cp",
+          "score": 83,
+          "pv_move": "e1e2"
+        },
+        "k4": {
+          "best_move": "e1e2",
+          "elapsed_ms": 150.198,
+          "wall_ns_per_reported_node": 1259.571,
+          "depth": 11,
+          "seldepth": 20,
+          "nodes": 119245,
+          "time": 94,
+          "nps": 1265243,
+          "score_kind": "cp",
+          "score": 135,
+          "pv_move": "e1e2"
+        },
+        "rodent": {
+          "best_move": "e1e2",
+          "elapsed_ms": 150.201,
+          "wall_ns_per_reported_node": 844.489,
+          "depth": 12,
+          "seldepth": 23,
+          "nodes": 177860,
+          "time": 108,
+          "nps": 1643673,
+          "score_kind": "cp",
+          "score": 58,
+          "pv_move": "e1e2"
+        }
+      }
+    },
+    {
+      "id": "d2eba3032a3092a8ca963272c1a369593596bd6c768e0ef73b1d9685b4a7f376",
+      "fen": "2rq2k1/1p3pp1/5nbp/1pQP4/8/P1N3NP/5PP1/R5K1 w - - 0 1",
+      "teacher": {
+        "best_move": "c5d4",
+        "elapsed_ms": 134.988,
+        "wall_ns_per_reported_node": 1023.036,
+        "depth": 14,
+        "seldepth": 35,
+        "nodes": 131948,
+        "time": 90,
+        "nps": 1466088,
+        "score_kind": "cp",
+        "score": -55,
+        "pv_move": "c5d4"
+      },
+      "equal_nodes": {
+        "k4": {
+          "best_move": "c5d4",
+          "elapsed_ms": 80.134,
+          "wall_ns_per_reported_node": 983.141,
+          "depth": 11,
+          "seldepth": 20,
+          "nodes": 81508,
+          "time": 64,
+          "nps": 1273357,
+          "score_kind": "cp",
+          "score": -42,
+          "pv_move": "c5d4"
+        },
+        "rodent": {
+          "best_move": "c5d4",
+          "elapsed_ms": 63.725,
+          "wall_ns_per_reported_node": 1095.633,
+          "depth": 11,
+          "seldepth": 20,
+          "nodes": 58163,
+          "time": 36,
+          "nps": 1591892,
+          "score_kind": "cp",
+          "score": -52,
+          "pv_move": "c5d4"
+        },
+        "hce": {
+          "best_move": "c5d4",
+          "elapsed_ms": 54.368,
+          "wall_ns_per_reported_node": 574.697,
+          "depth": 12,
+          "seldepth": 19,
+          "nodes": 94603,
+          "time": 51,
+          "nps": 1831009,
+          "score_kind": "cp",
+          "score": -9,
+          "pv_move": "c5d4"
+        }
+      },
+      "equal_time": {
+        "k4": {
+          "best_move": "c5d4",
+          "elapsed_ms": 150.089,
+          "wall_ns_per_reported_node": 1097.377,
+          "depth": 12,
+          "seldepth": 23,
+          "nodes": 136771,
+          "time": 111,
+          "nps": 1227495,
+          "score_kind": "cp",
+          "score": -51,
+          "pv_move": "c5d4"
+        },
+        "rodent": {
+          "best_move": "c5d4",
+          "elapsed_ms": 150.171,
+          "wall_ns_per_reported_node": 703.248,
+          "depth": 13,
+          "seldepth": 25,
+          "nodes": 213539,
+          "time": 135,
+          "nps": 1573171,
+          "score_kind": "cp",
+          "score": -27,
+          "pv_move": "c5d4"
+        },
+        "hce": {
+          "best_move": "c5d4",
+          "elapsed_ms": 150.204,
+          "wall_ns_per_reported_node": 506.284,
+          "depth": 15,
+          "seldepth": 27,
+          "nodes": 296680,
+          "time": 144,
+          "nps": 2053569,
+          "score_kind": "cp",
+          "score": 0,
+          "pv_move": "c5d4"
+        }
+      }
+    },
+    {
+      "id": "6a2a017c3055df6cdb8192e4abd3c245b743b3fdbb98d1d5ef89d1bbcdbe742b",
+      "fen": "8/3N1p1k/1R5p/5p1P/1P2p3/2b1B3/2r5/5K2 b - - 0 1",
+      "teacher": {
+        "best_move": "c3d2",
+        "elapsed_ms": 115.145,
+        "wall_ns_per_reported_node": 575.179,
+        "depth": 18,
+        "seldepth": 34,
+        "nodes": 200189,
+        "time": 115,
+        "nps": 1740773,
+        "score_kind": "cp",
+        "score": -304,
+        "pv_move": "c3d2"
+      },
+      "equal_nodes": {
+        "rodent": {
+          "best_move": "c2h2",
+          "elapsed_ms": 65.823,
+          "wall_ns_per_reported_node": 1220.292,
+          "depth": 9,
+          "seldepth": 22,
+          "nodes": 53940,
+          "time": 35,
+          "nps": 1535046,
+          "score_kind": "cp",
+          "score": -226,
+          "pv_move": "c2h2"
+        },
+        "hce": {
+          "best_move": "c3d2",
+          "elapsed_ms": 45.955,
+          "wall_ns_per_reported_node": 1181.092,
+          "depth": 9,
+          "seldepth": 29,
+          "nodes": 38909,
+          "time": 19,
+          "nps": 2004183,
+          "score_kind": "cp",
+          "score": -228,
+          "pv_move": "c3d2"
+        },
+        "k4": {
+          "best_move": "c2h2",
+          "elapsed_ms": 85.483,
+          "wall_ns_per_reported_node": 1953.53,
+          "depth": 8,
+          "seldepth": 22,
+          "nodes": 43758,
+          "time": 36,
+          "nps": 1202628,
+          "score_kind": "cp",
+          "score": -315,
+          "pv_move": "c2h2"
+        }
+      },
+      "equal_time": {
+        "rodent": {
+          "best_move": "c2b2",
+          "elapsed_ms": 150.177,
+          "wall_ns_per_reported_node": 1305.446,
+          "depth": 10,
+          "seldepth": 28,
+          "nodes": 115039,
+          "time": 75,
+          "nps": 1524734,
+          "score_kind": "cp",
+          "score": -220,
+          "pv_move": "c2b2"
+        },
+        "hce": {
+          "best_move": "c3d2",
+          "elapsed_ms": 150.155,
+          "wall_ns_per_reported_node": 793.438,
+          "depth": 11,
+          "seldepth": 35,
+          "nodes": 189246,
+          "time": 79,
+          "nps": 2378237,
+          "score_kind": "cp",
+          "score": -153,
+          "pv_move": "c3d2"
+        },
+        "k4": {
+          "best_move": "c2b2",
+          "elapsed_ms": 150.237,
+          "wall_ns_per_reported_node": 1273.421,
+          "depth": 9,
+          "seldepth": 27,
+          "nodes": 117979,
+          "time": 98,
+          "nps": 1199271,
+          "score_kind": "cp",
+          "score": -288,
+          "pv_move": "c2b2"
+        }
+      }
+    },
+    {
+      "id": "c816a392fc98ac274cd6a1259b232b0db9498d0b15e9f37ef458bfcc27b5fab2",
+      "fen": "4r1k1/1br2pb1/pR2p1p1/6Bp/PP2P2P/2q2BP1/4QP2/2R3K1 b - - 0 1",
+      "teacher": {
+        "best_move": "c3d4",
+        "elapsed_ms": 148.816,
+        "wall_ns_per_reported_node": 743.949,
+        "depth": 17,
+        "seldepth": 28,
+        "nodes": 200035,
+        "time": 149,
+        "nps": 1342516,
+        "score_kind": "cp",
+        "score": -206,
+        "pv_move": "c3d4"
+      },
+      "equal_nodes": {
+        "hce": {
+          "best_move": "c3e5",
+          "elapsed_ms": 53.823,
+          "wall_ns_per_reported_node": 803.916,
+          "depth": 10,
+          "seldepth": 21,
+          "nodes": 66951,
+          "time": 35,
+          "nps": 1894334,
+          "score_kind": "cp",
+          "score": -131,
+          "pv_move": "c3e5"
+        },
+        "k4": {
+          "best_move": "c3e5",
+          "elapsed_ms": 83.801,
+          "wall_ns_per_reported_node": 1504.776,
+          "depth": 10,
+          "seldepth": 18,
+          "nodes": 55690,
+          "time": 44,
+          "nps": 1243797,
+          "score_kind": "cp",
+          "score": -241,
+          "pv_move": "c3e5"
+        },
+        "rodent": {
+          "best_move": "c3d4",
+          "elapsed_ms": 64.305,
+          "wall_ns_per_reported_node": 651.373,
+          "depth": 10,
+          "seldepth": 22,
+          "nodes": 98723,
+          "time": 63,
+          "nps": 1555563,
+          "score_kind": "cp",
+          "score": -197,
+          "pv_move": "c3d4"
+        }
+      },
+      "equal_time": {
+        "hce": {
+          "best_move": "c3e5",
+          "elapsed_ms": 150.158,
+          "wall_ns_per_reported_node": 797.389,
+          "depth": 12,
+          "seldepth": 25,
+          "nodes": 188312,
+          "time": 90,
+          "nps": 2086598,
+          "score_kind": "cp",
+          "score": -134,
+          "pv_move": "c3e5"
+        },
+        "k4": {
+          "best_move": "c3e5",
+          "elapsed_ms": 150.172,
+          "wall_ns_per_reported_node": 1141.736,
+          "depth": 11,
+          "seldepth": 23,
+          "nodes": 131530,
+          "time": 108,
+          "nps": 1207142,
+          "score_kind": "cp",
+          "score": -314,
+          "pv_move": "c3e5"
+        },
+        "rodent": {
+          "best_move": "c3d4",
+          "elapsed_ms": 150.284,
+          "wall_ns_per_reported_node": 724.202,
+          "depth": 12,
+          "seldepth": 23,
+          "nodes": 207517,
+          "time": 135,
+          "nps": 1533065,
+          "score_kind": "cp",
+          "score": -197,
+          "pv_move": "c3d4"
+        }
+      }
+    },
+    {
+      "id": "c8148d5e157c8242285d6d853293dee0c6953faa0d2c7c696a0149ef57a03709",
+      "fen": "6k1/7p/5p2/8/1p1N1p2/1Pn1P3/3r1PP1/4R1K1 w - - 0 1",
+      "teacher": {
+        "best_move": "d4c6",
+        "elapsed_ms": 115.838,
+        "wall_ns_per_reported_node": 793.035,
+        "depth": 20,
+        "seldepth": 23,
+        "nodes": 146069,
+        "time": 87,
+        "nps": 1678954,
+        "score_kind": "cp",
+        "score": 3,
+        "pv_move": "d4c6"
+      },
+      "equal_nodes": {
+        "k4": {
+          "best_move": "d4f5",
+          "elapsed_ms": 79.575,
+          "wall_ns_per_reported_node": 1962.492,
+          "depth": 9,
+          "seldepth": 17,
+          "nodes": 40548,
+          "time": 31,
+          "nps": 1287540,
+          "score_kind": "cp",
+          "score": -11,
+          "pv_move": "d4f5"
+        },
+        "rodent": {
+          "best_move": "d4c6",
+          "elapsed_ms": 58.282,
+          "wall_ns_per_reported_node": 790.124,
+          "depth": 13,
+          "seldepth": 17,
+          "nodes": 73763,
+          "time": 43,
+          "nps": 1703378,
+          "score_kind": "cp",
+          "score": 11,
+          "pv_move": "d4c6"
+        },
+        "hce": {
+          "best_move": "d4c6",
+          "elapsed_ms": 41.507,
+          "wall_ns_per_reported_node": 540.121,
+          "depth": 11,
+          "seldepth": 23,
+          "nodes": 76848,
+          "time": 32,
+          "nps": 2399771,
+          "score_kind": "cp",
+          "score": 57,
+          "pv_move": "d4c6"
+        }
+      },
+      "equal_time": {
+        "k4": {
+          "best_move": "d4f5",
+          "elapsed_ms": 150.198,
+          "wall_ns_per_reported_node": 1015.788,
+          "depth": 12,
+          "seldepth": 24,
+          "nodes": 147864,
+          "time": 122,
+          "nps": 1211556,
+          "score_kind": "cp",
+          "score": 0,
+          "pv_move": "d4f5"
+        },
+        "rodent": {
+          "best_move": "d4c6",
+          "elapsed_ms": 150.2,
+          "wall_ns_per_reported_node": 610.593,
+          "depth": 15,
+          "seldepth": 26,
+          "nodes": 245990,
+          "time": 140,
+          "nps": 1750038,
+          "score_kind": "cp",
+          "score": 5,
+          "pv_move": "d4c6"
+        },
+        "hce": {
+          "best_move": "d4c6",
+          "elapsed_ms": 150.128,
+          "wall_ns_per_reported_node": 432.62,
+          "depth": 13,
+          "seldepth": 26,
+          "nodes": 347020,
+          "time": 140,
+          "nps": 2467647,
+          "score_kind": "cp",
+          "score": 58,
+          "pv_move": "d4c6"
+        }
+      }
+    },
+    {
+      "id": "ddceb0eb1048dd48b31338a7290f02cc0c66f7f76257c78da25cfd3ba12dcc28",
+      "fen": "8/4p1kp/1p1ppnp1/1P4N1/7P/6P1/4qP2/Q5K1 b - - 0 1",
+      "teacher": {
+        "best_move": "h7h6",
+        "elapsed_ms": 113.365,
+        "wall_ns_per_reported_node": 566.096,
+        "depth": 17,
+        "seldepth": 38,
+        "nodes": 200258,
+        "time": 119,
+        "nps": 1682840,
+        "score_kind": "cp",
+        "score": 315,
+        "pv_move": "h7h6"
+      },
+      "equal_nodes": {
+        "rodent": {
+          "best_move": "h7h6",
+          "elapsed_ms": 62.823,
+          "wall_ns_per_reported_node": 653.619,
+          "depth": 11,
+          "seldepth": 26,
+          "nodes": 96115,
+          "time": 60,
+          "nps": 1594564,
+          "score_kind": "cp",
+          "score": 225,
+          "pv_move": "h7h6"
+        },
+        "hce": {
+          "best_move": "h7h6",
+          "elapsed_ms": 50.275,
+          "wall_ns_per_reported_node": 794.951,
+          "depth": 10,
+          "seldepth": 23,
+          "nodes": 63243,
+          "time": 32,
+          "nps": 1963839,
+          "score_kind": "cp",
+          "score": 245,
+          "pv_move": "h7h6"
+        },
+        "k4": {
+          "best_move": "h7h6",
+          "elapsed_ms": 84.401,
+          "wall_ns_per_reported_node": 946.281,
+          "depth": 11,
+          "seldepth": 27,
+          "nodes": 89192,
+          "time": 74,
+          "nps": 1190285,
+          "score_kind": "cp",
+          "score": 197,
+          "pv_move": "h7h6"
+        }
+      },
+      "equal_time": {
+        "rodent": {
+          "best_move": "h7h6",
+          "elapsed_ms": 150.258,
+          "wall_ns_per_reported_node": 688.055,
+          "depth": 12,
+          "seldepth": 29,
+          "nodes": 218380,
+          "time": 143,
+          "nps": 1525372,
+          "score_kind": "cp",
+          "score": 251,
+          "pv_move": "h7h6"
+        },
+        "hce": {
+          "best_move": "h7h6",
+          "elapsed_ms": 150.143,
+          "wall_ns_per_reported_node": 598.988,
+          "depth": 12,
+          "seldepth": 28,
+          "nodes": 250661,
+          "time": 105,
+          "nps": 2368243,
+          "score_kind": "cp",
+          "score": 246,
+          "pv_move": "h7h6"
+        },
+        "k4": {
+          "best_move": "h7h6",
+          "elapsed_ms": 150.294,
+          "wall_ns_per_reported_node": 1255.023,
+          "depth": 12,
+          "seldepth": 29,
+          "nodes": 119754,
+          "time": 103,
+          "nps": 1158704,
+          "score_kind": "cp",
+          "score": 204,
+          "pv_move": "h7h6"
+        }
+      }
+    },
+    {
+      "id": "5d6686132234a6be8b7ff4e19b20abcbbc78c44274025181ab2d37234c77624b",
+      "fen": "r4rk1/2p2pbp/np1p2p1/p2P1bq1/NPP1p3/P3P2P/4BPPK/R2QBR2 w - - 0 1",
+      "teacher": {
+        "best_move": "e1c3",
+        "elapsed_ms": 154.262,
+        "wall_ns_per_reported_node": 771.162,
+        "depth": 17,
+        "seldepth": 18,
+        "nodes": 200039,
+        "time": 154,
+        "nps": 1298954,
+        "score_kind": "cp",
+        "score": -56,
+        "pv_move": "e1c3"
+      },
+      "equal_nodes": {
+        "hce": {
+          "best_move": "a1b1",
+          "elapsed_ms": 53.272,
+          "wall_ns_per_reported_node": 981.686,
+          "depth": 9,
+          "seldepth": 19,
+          "nodes": 54266,
+          "time": 27,
+          "nps": 1966272,
+          "score_kind": "cp",
+          "score": 6,
+          "pv_move": "a1b1"
+        },
+        "k4": {
+          "best_move": "a1b1",
+          "elapsed_ms": 85.478,
+          "wall_ns_per_reported_node": 1406.51,
+          "depth": 9,
+          "seldepth": 23,
+          "nodes": 60773,
+          "time": 51,
+          "nps": 1181773,
+          "score_kind": "cp",
+          "score": -22,
+          "pv_move": "a1b1"
+        },
+        "rodent": {
+          "best_move": "e1c3",
+          "elapsed_ms": 63.882,
+          "wall_ns_per_reported_node": 1278.657,
+          "depth": 10,
+          "seldepth": 23,
+          "nodes": 49960,
+          "time": 33,
+          "nps": 1512209,
+          "score_kind": "cp",
+          "score": -29,
+          "pv_move": "e1c3"
+        }
+      },
+      "equal_time": {
+        "hce": {
+          "best_move": "a1b1",
+          "elapsed_ms": 150.222,
+          "wall_ns_per_reported_node": 735.479,
+          "depth": 11,
+          "seldepth": 24,
+          "nodes": 204250,
+          "time": 98,
+          "nps": 2066793,
+          "score_kind": "cp",
+          "score": 21,
+          "pv_move": "a1b1"
+        },
+        "k4": {
+          "best_move": "b4b5",
+          "elapsed_ms": 150.163,
+          "wall_ns_per_reported_node": 1203.606,
+          "depth": 10,
+          "seldepth": 20,
+          "nodes": 124761,
+          "time": 103,
+          "nps": 1209214,
+          "score_kind": "cp",
+          "score": -46,
+          "pv_move": "b4b5"
+        },
+        "rodent": {
+          "best_move": "a1b1",
+          "elapsed_ms": 150.129,
+          "wall_ns_per_reported_node": 766.885,
+          "depth": 11,
+          "seldepth": 27,
+          "nodes": 195765,
+          "time": 124,
+          "nps": 1573387,
+          "score_kind": "cp",
+          "score": -67,
+          "pv_move": "a1b1"
+        }
+      }
+    },
+    {
+      "id": "e80313e6cf662e822d620ae8bf598fecfd3509b0f41196942008dd163e1444bf",
+      "fen": "6k1/4b1pp/6r1/4pp2/pp5P/3R1PPK/PPr5/1R3B2 w - - 0 1",
+      "teacher": {
+        "best_move": "d3d7",
+        "elapsed_ms": 128.098,
+        "wall_ns_per_reported_node": 640.233,
+        "depth": 17,
+        "seldepth": 30,
+        "nodes": 200080,
+        "time": 128,
+        "nps": 1563125,
+        "score_kind": "cp",
+        "score": -98,
+        "pv_move": "d3d7"
+      },
+      "equal_nodes": {
+        "k4": {
+          "best_move": "d3d7",
+          "elapsed_ms": 84.958,
+          "wall_ns_per_reported_node": 959.057,
+          "depth": 11,
+          "seldepth": 22,
+          "nodes": 88585,
+          "time": 74,
+          "nps": 1192885,
+          "score_kind": "cp",
+          "score": -51,
+          "pv_move": "d3d7"
+        },
+        "rodent": {
+          "best_move": "d3d7",
+          "elapsed_ms": 64.401,
+          "wall_ns_per_reported_node": 1148.708,
+          "depth": 11,
+          "seldepth": 19,
+          "nodes": 56064,
+          "time": 35,
+          "nps": 1562329,
+          "score_kind": "cp",
+          "score": -15,
+          "pv_move": "d3d7"
+        },
+        "hce": {
+          "best_move": "d3d7",
+          "elapsed_ms": 51.77,
+          "wall_ns_per_reported_node": 572.933,
+          "depth": 12,
+          "seldepth": 24,
+          "nodes": 90359,
+          "time": 46,
+          "nps": 1926194,
+          "score_kind": "cp",
+          "score": -77,
+          "pv_move": "d3d7"
+        }
+      },
+      "equal_time": {
+        "k4": {
+          "best_move": "d3d7",
+          "elapsed_ms": 150.282,
+          "wall_ns_per_reported_node": 1113.349,
+          "depth": 12,
+          "seldepth": 21,
+          "nodes": 134982,
+          "time": 115,
+          "nps": 1170573,
+          "score_kind": "cp",
+          "score": -22,
+          "pv_move": "d3d7"
+        },
+        "rodent": {
+          "best_move": "d3d7",
+          "elapsed_ms": 150.223,
+          "wall_ns_per_reported_node": 1159.91,
+          "depth": 12,
+          "seldepth": 23,
+          "nodes": 129513,
+          "time": 84,
+          "nps": 1540868,
+          "score_kind": "cp",
+          "score": -42,
+          "pv_move": "d3d7"
+        },
+        "hce": {
+          "best_move": "d3d7",
+          "elapsed_ms": 150.117,
+          "wall_ns_per_reported_node": 663.854,
+          "depth": 14,
+          "seldepth": 31,
+          "nodes": 226129,
+          "time": 105,
+          "nps": 2136610,
+          "score_kind": "cp",
+          "score": -77,
+          "pv_move": "d3d7"
+        }
+      }
+    },
+    {
+      "id": "f33ec6a5fc02bb536461dcaafa49784c6098e8e494ce1e77f35d6f71528713ec",
+      "fen": "1rr5/1p2nk1p/5pp1/PPP1p3/2Rp4/1N5P/5PP1/R5K1 w - - 0 1",
+      "teacher": {
+        "best_move": "a1c1",
+        "elapsed_ms": 135.91,
+        "wall_ns_per_reported_node": 1825.932,
+        "depth": 14,
+        "seldepth": 23,
+        "nodes": 74433,
+        "time": 52,
+        "nps": 1431403,
+        "score_kind": "cp",
+        "score": 149,
+        "pv_move": "f2f4"
+      },
+      "equal_nodes": {
+        "rodent": {
+          "best_move": "c5c6",
+          "elapsed_ms": 66.267,
+          "wall_ns_per_reported_node": 674.34,
+          "depth": 11,
+          "seldepth": 22,
+          "nodes": 98270,
+          "time": 64,
+          "nps": 1519170,
+          "score_kind": "cp",
+          "score": 125,
+          "pv_move": "c5c6"
+        },
+        "hce": {
+          "best_move": "b5b6",
+          "elapsed_ms": 47.596,
+          "wall_ns_per_reported_node": 511.221,
+          "depth": 12,
+          "seldepth": 24,
+          "nodes": 93102,
+          "time": 44,
+          "nps": 2114030,
+          "score_kind": "cp",
+          "score": 87,
+          "pv_move": "b5b6"
+        },
+        "k4": {
+          "best_move": "b3d2",
+          "elapsed_ms": 84.943,
+          "wall_ns_per_reported_node": 1159.901,
+          "depth": 10,
+          "seldepth": 20,
+          "nodes": 73233,
+          "time": 61,
+          "nps": 1183623,
+          "score_kind": "cp",
+          "score": 120,
+          "pv_move": "b3d2"
+        }
+      },
+      "equal_time": {
+        "rodent": {
+          "best_move": "c5c6",
+          "elapsed_ms": 150.19,
+          "wall_ns_per_reported_node": 1528.34,
+          "depth": 11,
+          "seldepth": 22,
+          "nodes": 98270,
+          "time": 64,
+          "nps": 1533833,
+          "score_kind": "cp",
+          "score": 125,
+          "pv_move": "c5c6"
+        },
+        "hce": {
+          "best_move": "b5b6",
+          "elapsed_ms": 150.118,
+          "wall_ns_per_reported_node": 1212.75,
+          "depth": 13,
+          "seldepth": 23,
+          "nodes": 123783,
+          "time": 47,
+          "nps": 2593760,
+          "score_kind": "cp",
+          "score": 89,
+          "pv_move": "b5b6"
+        },
+        "k4": {
+          "best_move": "b3d2",
+          "elapsed_ms": 150.156,
+          "wall_ns_per_reported_node": 889.911,
+          "depth": 12,
+          "seldepth": 26,
+          "nodes": 168731,
+          "time": 141,
+          "nps": 1195844,
+          "score_kind": "cp",
+          "score": 97,
+          "pv_move": "b3d2"
+        }
+      }
+    },
+    {
+      "id": "b2948fefedb47f992494f2bf8c5e5584c1882c4bc071ef38c0a24ae63849ff5a",
+      "fen": "r4r1k/1bq1b1pp/pp3n2/2n5/2B5/1PN1P3/PB2QPPP/3R1RK1 b - - 0 1",
+      "teacher": {
+        "best_move": "b6b5",
+        "elapsed_ms": 140.126,
+        "wall_ns_per_reported_node": 700.488,
+        "depth": 18,
+        "seldepth": 34,
+        "nodes": 200041,
+        "time": 140,
+        "nps": 1428864,
+        "score_kind": "cp",
+        "score": 277,
+        "pv_move": "b6b5"
+      },
+      "equal_nodes": {
+        "hce": {
+          "best_move": "a8c8",
+          "elapsed_ms": 56.837,
+          "wall_ns_per_reported_node": 1006.685,
+          "depth": 10,
+          "seldepth": 20,
+          "nodes": 56460,
+          "time": 32,
+          "nps": 1743133,
+          "score_kind": "cp",
+          "score": 156,
+          "pv_move": "a8c8"
+        },
+        "k4": {
+          "best_move": "a8d8",
+          "elapsed_ms": 82.0,
+          "wall_ns_per_reported_node": 1979.423,
+          "depth": 9,
+          "seldepth": 15,
+          "nodes": 41426,
+          "time": 34,
+          "nps": 1207161,
+          "score_kind": "cp",
+          "score": 189,
+          "pv_move": "a8d8"
+        },
+        "rodent": {
+          "best_move": "a8d8",
+          "elapsed_ms": 70.544,
+          "wall_ns_per_reported_node": 1758.241,
+          "depth": 10,
+          "seldepth": 18,
+          "nodes": 40122,
+          "time": 28,
+          "nps": 1393781,
+          "score_kind": "cp",
+          "score": 187,
+          "pv_move": "a8d8"
+        }
+      },
+      "equal_time": {
+        "hce": {
+          "best_move": "a8d8",
+          "elapsed_ms": 150.149,
+          "wall_ns_per_reported_node": 665.635,
+          "depth": 12,
+          "seldepth": 25,
+          "nodes": 225573,
+          "time": 121,
+          "nps": 1853857,
+          "score_kind": "cp",
+          "score": 141,
+          "pv_move": "a8d8"
+        },
+        "k4": {
+          "best_move": "a8d8",
+          "elapsed_ms": 150.288,
+          "wall_ns_per_reported_node": 1201.958,
+          "depth": 10,
+          "seldepth": 22,
+          "nodes": 125036,
+          "time": 102,
+          "nps": 1216032,
+          "score_kind": "cp",
+          "score": 140,
+          "pv_move": "a8d8"
+        },
+        "rodent": {
+          "best_move": "a8d8",
+          "elapsed_ms": 150.185,
+          "wall_ns_per_reported_node": 844.996,
+          "depth": 11,
+          "seldepth": 26,
+          "nodes": 177735,
+          "time": 124,
+          "nps": 1422492,
+          "score_kind": "cp",
+          "score": 179,
+          "pv_move": "a8d8"
+        }
+      }
+    },
+    {
+      "id": "05ff7d1b5e2d933cacb45d8a19d5f7045d2cceaec74142e50180824f1942241d",
+      "fen": "3r3r/p1k2p2/Ppp2n2/2Pp1p2/3P3P/2B1P1P1/6K1/RR6 b - - 0 1",
+      "teacher": {
+        "best_move": "f6e4",
+        "elapsed_ms": 127.476,
+        "wall_ns_per_reported_node": 1034.992,
+        "depth": 16,
+        "seldepth": 25,
+        "nodes": 123166,
+        "time": 80,
+        "nps": 1539575,
+        "score_kind": "cp",
+        "score": -25,
+        "pv_move": "f6e4"
+      },
+      "equal_nodes": {
+        "k4": {
+          "best_move": "f6e4",
+          "elapsed_ms": 86.645,
+          "wall_ns_per_reported_node": 1258.977,
+          "depth": 9,
+          "seldepth": 21,
+          "nodes": 68822,
+          "time": 59,
+          "nps": 1150999,
+          "score_kind": "cp",
+          "score": 0,
+          "pv_move": "f6e4"
+        },
+        "rodent": {
+          "best_move": "f6e4",
+          "elapsed_ms": 65.131,
+          "wall_ns_per_reported_node": 1377.245,
+          "depth": 10,
+          "seldepth": 22,
+          "nodes": 47291,
+          "time": 30,
+          "nps": 1559151,
+          "score_kind": "cp",
+          "score": -13,
+          "pv_move": "f6e4"
+        },
+        "hce": {
+          "best_move": "d8e8",
+          "elapsed_ms": 51.063,
+          "wall_ns_per_reported_node": 938.912,
+          "depth": 8,
+          "seldepth": 26,
+          "nodes": 54385,
+          "time": 28,
+          "nps": 1904094,
+          "score_kind": "cp",
+          "score": -126,
+          "pv_move": "d8e8"
+        }
+      },
+      "equal_time": {
+        "k4": {
+          "best_move": "f6e4",
+          "elapsed_ms": 150.22,
+          "wall_ns_per_reported_node": 995.817,
+          "depth": 10,
+          "seldepth": 24,
+          "nodes": 150851,
+          "time": 130,
+          "nps": 1155899,
+          "score_kind": "cp",
+          "score": -52,
+          "pv_move": "f6e4"
+        },
+        "rodent": {
+          "best_move": "f6e4",
+          "elapsed_ms": 150.167,
+          "wall_ns_per_reported_node": 765.194,
+          "depth": 12,
+          "seldepth": 30,
+          "nodes": 196247,
+          "time": 129,
+          "nps": 1511134,
+          "score_kind": "cp",
+          "score": -20,
+          "pv_move": "f6e4"
+        },
+        "hce": {
+          "best_move": "f6e4",
+          "elapsed_ms": 150.151,
+          "wall_ns_per_reported_node": 629.595,
+          "depth": 10,
+          "seldepth": 31,
+          "nodes": 238488,
+          "time": 116,
+          "nps": 2039136,
+          "score_kind": "cp",
+          "score": -137,
+          "pv_move": "f6e4"
+        }
+      }
+    },
+    {
+      "id": "1ea0516e48cd1bb957c068d850c8f825b966bca1df429090444a7985b1454c25",
+      "fen": "8/4k1p1/2bb1p1p/1p6/2p1PPPP/4B3/1P2K3/rBR5 w - - 0 1",
+      "teacher": {
+        "best_move": "h4h5",
+        "elapsed_ms": 132.654,
+        "wall_ns_per_reported_node": 1610.371,
+        "depth": 14,
+        "seldepth": 20,
+        "nodes": 82375,
+        "time": 54,
+        "nps": 1525462,
+        "score_kind": "cp",
+        "score": -29,
+        "pv_move": "h4h5"
+      },
+      "equal_nodes": {
+        "rodent": {
+          "best_move": "e2f2",
+          "elapsed_ms": 72.877,
+          "wall_ns_per_reported_node": 970.53,
+          "depth": 11,
+          "seldepth": 18,
+          "nodes": 75090,
+          "time": 55,
+          "nps": 1365065,
+          "score_kind": "cp",
+          "score": -45,
+          "pv_move": "e2f2"
+        },
+        "hce": {
+          "best_move": "e2f3",
+          "elapsed_ms": 49.709,
+          "wall_ns_per_reported_node": 830.345,
+          "depth": 9,
+          "seldepth": 16,
+          "nodes": 59865,
+          "time": 30,
+          "nps": 1963193,
+          "score_kind": "cp",
+          "score": -59,
+          "pv_move": "e2f3"
+        },
+        "k4": {
+          "best_move": "e2d2",
+          "elapsed_ms": 84.579,
+          "wall_ns_per_reported_node": 1769.695,
+          "depth": 9,
+          "seldepth": 22,
+          "nodes": 47793,
+          "time": 41,
+          "nps": 1149523,
+          "score_kind": "cp",
+          "score": -108,
+          "pv_move": "e2d2"
+        }
+      },
+      "equal_time": {
+        "rodent": {
+          "best_move": "e2f2",
+          "elapsed_ms": 150.212,
+          "wall_ns_per_reported_node": 867.662,
+          "depth": 12,
+          "seldepth": 22,
+          "nodes": 173123,
+          "time": 121,
+          "nps": 1430746,
+          "score_kind": "cp",
+          "score": -38,
+          "pv_move": "e2f2"
+        },
+        "hce": {
+          "best_move": "e2f3",
+          "elapsed_ms": 150.226,
+          "wall_ns_per_reported_node": 544.032,
+          "depth": 11,
+          "seldepth": 27,
+          "nodes": 276134,
+          "time": 122,
+          "nps": 2254370,
+          "score_kind": "cp",
+          "score": -86,
+          "pv_move": "e2f3"
+        },
+        "k4": {
+          "best_move": "h4h5",
+          "elapsed_ms": 150.211,
+          "wall_ns_per_reported_node": 1317.005,
+          "depth": 10,
+          "seldepth": 23,
+          "nodes": 114055,
+          "time": 97,
+          "nps": 1164939,
+          "score_kind": "cp",
+          "score": -125,
+          "pv_move": "h4h5"
+        }
+      }
+    },
+    {
+      "id": "e414ea40718ba1d8d976f6203ba0778a16e00cbd2acd3d2d96215d977be651fe",
+      "fen": "6r1/2Q3bk/p5p1/3qPp2/3p1PpP/6P1/3B1R1K/8 w - - 0 1",
+      "teacher": {
+        "best_move": "d2b4",
+        "elapsed_ms": 134.193,
+        "wall_ns_per_reported_node": 961.792,
+        "depth": 14,
+        "seldepth": 32,
+        "nodes": 139524,
+        "time": 94,
+        "nps": 1484297,
+        "score_kind": "cp",
+        "score": -71,
+        "pv_move": "d2b4"
+      },
+      "equal_nodes": {
+        "hce": {
+          "best_move": "d2e1",
+          "elapsed_ms": 51.231,
+          "wall_ns_per_reported_node": 620.277,
+          "depth": 9,
+          "seldepth": 16,
+          "nodes": 82593,
+          "time": 41,
+          "nps": 1982898,
+          "score_kind": "cp",
+          "score": -76,
+          "pv_move": "d2e1"
+        },
+        "k4": {
+          "best_move": "d2b4",
+          "elapsed_ms": 83.99,
+          "wall_ns_per_reported_node": 929.736,
+          "depth": 10,
+          "seldepth": 19,
+          "nodes": 90337,
+          "time": 74,
+          "nps": 1209012,
+          "score_kind": "cp",
+          "score": -84,
+          "pv_move": "d2b4"
+        },
+        "rodent": {
+          "best_move": "d2b4",
+          "elapsed_ms": 64.956,
+          "wall_ns_per_reported_node": 1027.437,
+          "depth": 10,
+          "seldepth": 20,
+          "nodes": 63221,
+          "time": 41,
+          "nps": 1522430,
+          "score_kind": "cp",
+          "score": -92,
+          "pv_move": "d2b4"
+        }
+      },
+      "equal_time": {
+        "hce": {
+          "best_move": "d2b4",
+          "elapsed_ms": 150.083,
+          "wall_ns_per_reported_node": 540.708,
+          "depth": 11,
+          "seldepth": 21,
+          "nodes": 277568,
+          "time": 132,
+          "nps": 2098722,
+          "score_kind": "cp",
+          "score": -43,
+          "pv_move": "d2b4"
+        },
+        "k4": {
+          "best_move": "d2b4",
+          "elapsed_ms": 150.279,
+          "wall_ns_per_reported_node": 1663.539,
+          "depth": 10,
+          "seldepth": 19,
+          "nodes": 90337,
+          "time": 71,
+          "nps": 1261884,
+          "score_kind": "cp",
+          "score": -84,
+          "pv_move": "d2b4"
+        },
+        "rodent": {
+          "best_move": "d2a5",
+          "elapsed_ms": 150.18,
+          "wall_ns_per_reported_node": 763.398,
+          "depth": 12,
+          "seldepth": 27,
+          "nodes": 196726,
+          "time": 128,
+          "nps": 1525292,
+          "score_kind": "cp",
+          "score": -48,
+          "pv_move": "d2a5"
+        }
+      }
+    },
+    {
+      "id": "3f07ac6b5edc3abea1212ee402194ec8e8dec8ea8f381a5d4f9c37982d8626c6",
+      "fen": "8/5kpp/3q4/1p6/5P1P/pP3BP1/P3R2K/8 w - - 0 1",
+      "teacher": {
+        "best_move": "h4h5",
+        "elapsed_ms": 105.812,
+        "wall_ns_per_reported_node": 640.591,
+        "depth": 16,
+        "seldepth": 28,
+        "nodes": 165178,
+        "time": 89,
+        "nps": 1855932,
+        "score_kind": "cp",
+        "score": 0,
+        "pv_move": "h4h5"
+      },
+      "equal_nodes": {
+        "k4": {
+          "best_move": "f3e4",
+          "elapsed_ms": 85.176,
+          "wall_ns_per_reported_node": 962.63,
+          "depth": 11,
+          "seldepth": 21,
+          "nodes": 88483,
+          "time": 75,
+          "nps": 1177104,
+          "score_kind": "cp",
+          "score": -101,
+          "pv_move": "f3e4"
+        },
+        "rodent": {
+          "best_move": "h2g2",
+          "elapsed_ms": 60.404,
+          "wall_ns_per_reported_node": 1695.179,
+          "depth": 9,
+          "seldepth": 18,
+          "nodes": 35633,
+          "time": 23,
+          "nps": 1538327,
+          "score_kind": "cp",
+          "score": -62,
+          "pv_move": "h2g2"
+        },
+        "hce": {
+          "best_move": "h4h5",
+          "elapsed_ms": 46.086,
+          "wall_ns_per_reported_node": 581.319,
+          "depth": 9,
+          "seldepth": 19,
+          "nodes": 79279,
+          "time": 36,
+          "nps": 2145740,
+          "score_kind": "cp",
+          "score": -105,
+          "pv_move": "h4h5"
+        }
+      },
+      "equal_time": {
+        "k4": {
+          "best_move": "f3e4",
+          "elapsed_ms": 150.116,
+          "wall_ns_per_reported_node": 1696.554,
+          "depth": 11,
+          "seldepth": 21,
+          "nodes": 88483,
+          "time": 74,
+          "nps": 1190893,
+          "score_kind": "cp",
+          "score": -101,
+          "pv_move": "f3e4"
+        },
+        "rodent": {
+          "best_move": "h2g2",
+          "elapsed_ms": 150.182,
+          "wall_ns_per_reported_node": 1098.639,
+          "depth": 13,
+          "seldepth": 18,
+          "nodes": 136698,
+          "time": 82,
+          "nps": 1664806,
+          "score_kind": "cp",
+          "score": -72,
+          "pv_move": "h2g2"
+        },
+        "hce": {
+          "best_move": "h4h5",
+          "elapsed_ms": 150.172,
+          "wall_ns_per_reported_node": 557.46,
+          "depth": 11,
+          "seldepth": 26,
+          "nodes": 269387,
+          "time": 115,
+          "nps": 2333542,
+          "score_kind": "cp",
+          "score": -131,
+          "pv_move": "h4h5"
+        }
+      }
+    },
+    {
+      "id": "256479a58831ec197ae57c45f8587a48649fea76657139deaf0c86a1dd75c442",
+      "fen": "1kbr1b2/pp6/2p5/3BP3/2P1NP2/1P1n4/P7/R1B3K1 w - - 0 1",
+      "teacher": {
+        "best_move": "d5f7",
+        "elapsed_ms": 124.581,
+        "wall_ns_per_reported_node": 622.601,
+        "depth": 17,
+        "seldepth": 35,
+        "nodes": 200097,
+        "time": 125,
+        "nps": 1600776,
+        "score_kind": "cp",
+        "score": 39,
+        "pv_move": "d5f7"
+      },
+      "equal_nodes": {
+        "rodent": {
+          "best_move": "d5f7",
+          "elapsed_ms": 64.363,
+          "wall_ns_per_reported_node": 677.345,
+          "depth": 11,
+          "seldepth": 24,
+          "nodes": 95022,
+          "time": 61,
+          "nps": 1544504,
+          "score_kind": "cp",
+          "score": 53,
+          "pv_move": "d5f7"
+        },
+        "hce": {
+          "best_move": "d5f7",
+          "elapsed_ms": 47.471,
+          "wall_ns_per_reported_node": 629.077,
+          "depth": 10,
+          "seldepth": 24,
+          "nodes": 75462,
+          "time": 35,
+          "nps": 2117952,
+          "score_kind": "cp",
+          "score": 64,
+          "pv_move": "d5f7"
+        },
+        "k4": {
+          "best_move": "d5f7",
+          "elapsed_ms": 85.181,
+          "wall_ns_per_reported_node": 1152.038,
+          "depth": 10,
+          "seldepth": 21,
+          "nodes": 73939,
+          "time": 63,
+          "nps": 1166917,
+          "score_kind": "cp",
+          "score": 113,
+          "pv_move": "d5f7"
+        }
+      },
+      "equal_time": {
+        "rodent": {
+          "best_move": "d5f7",
+          "elapsed_ms": 150.18,
+          "wall_ns_per_reported_node": 705.785,
+          "depth": 13,
+          "seldepth": 29,
+          "nodes": 212785,
+          "time": 133,
+          "nps": 1596287,
+          "score_kind": "cp",
+          "score": 40,
+          "pv_move": "d5f7"
+        },
+        "hce": {
+          "best_move": "d5f7",
+          "elapsed_ms": 150.11,
+          "wall_ns_per_reported_node": 661.089,
+          "depth": 12,
+          "seldepth": 32,
+          "nodes": 227065,
+          "time": 99,
+          "nps": 2282896,
+          "score_kind": "cp",
+          "score": 41,
+          "pv_move": "d5f7"
+        },
+        "k4": {
+          "best_move": "d5f7",
+          "elapsed_ms": 150.186,
+          "wall_ns_per_reported_node": 1206.335,
+          "depth": 11,
+          "seldepth": 25,
+          "nodes": 124498,
+          "time": 105,
+          "nps": 1178082,
+          "score_kind": "cp",
+          "score": 42,
+          "pv_move": "d5f7"
+        }
+      }
+    },
+    {
+      "id": "dcd555bf031601b66d5756afc490df000abc6c3482ce758ad46df30eb1ab1c36",
+      "fen": "8/3k1p2/1pn1p3/1b1pPpPp/3P1N2/1PR5/2N2K1P/1r6 b - - 0 1",
+      "teacher": {
+        "best_move": "b1f1",
+        "elapsed_ms": 136.593,
+        "wall_ns_per_reported_node": 682.223,
+        "depth": 19,
+        "seldepth": 43,
+        "nodes": 200218,
+        "time": 136,
+        "nps": 1472191,
+        "score_kind": "cp",
+        "score": 212,
+        "pv_move": "b1f1"
+      },
+      "equal_nodes": {
+        "hce": {
+          "best_move": "h5h4",
+          "elapsed_ms": 54.298,
+          "wall_ns_per_reported_node": 634.689,
+          "depth": 10,
+          "seldepth": 23,
+          "nodes": 85551,
+          "time": 46,
+          "nps": 1838817,
+          "score_kind": "cp",
+          "score": 133,
+          "pv_move": "h5h4"
+        },
+        "k4": {
+          "best_move": "h5h4",
+          "elapsed_ms": 92.857,
+          "wall_ns_per_reported_node": 1467.232,
+          "depth": 10,
+          "seldepth": 22,
+          "nodes": 63287,
+          "time": 59,
+          "nps": 1069179,
+          "score_kind": "cp",
+          "score": 147,
+          "pv_move": "h5h4"
+        },
+        "rodent": {
+          "best_move": "h5h4",
+          "elapsed_ms": 78.547,
+          "wall_ns_per_reported_node": 1031.294,
+          "depth": 11,
+          "seldepth": 25,
+          "nodes": 76164,
+          "time": 60,
+          "nps": 1253188,
+          "score_kind": "cp",
+          "score": 106,
+          "pv_move": "h5h4"
+        }
+      },
+      "equal_time": {
+        "hce": {
+          "best_move": "h5h4",
+          "elapsed_ms": 150.115,
+          "wall_ns_per_reported_node": 863.295,
+          "depth": 12,
+          "seldepth": 26,
+          "nodes": 173886,
+          "time": 80,
+          "nps": 2161173,
+          "score_kind": "cp",
+          "score": 148,
+          "pv_move": "h5h4"
+        },
+        "k4": {
+          "best_move": "h5h4",
+          "elapsed_ms": 150.496,
+          "wall_ns_per_reported_node": 2377.99,
+          "depth": 10,
+          "seldepth": 22,
+          "nodes": 63287,
+          "time": 58,
+          "nps": 1075259,
+          "score_kind": "cp",
+          "score": 147,
+          "pv_move": "h5h4"
+        },
+        "rodent": {
+          "best_move": "h5h4",
+          "elapsed_ms": 150.231,
+          "wall_ns_per_reported_node": 941.442,
+          "depth": 12,
+          "seldepth": 32,
+          "nodes": 159575,
+          "time": 125,
+          "nps": 1266562,
+          "score_kind": "cp",
+          "score": 115,
+          "pv_move": "h5h4"
+        }
+      }
+    },
+    {
+      "id": "2f4d1100ad0796ce26eef1c7b7e9ef33811b9a0c0f03f0e5bd24b8f58185aa3c",
+      "fen": "r7/2R5/8/p5nk/3N1Kp1/4P3/8/8 w - - 0 1",
+      "teacher": {
+        "best_move": "c7c5",
+        "elapsed_ms": 116.732,
+        "wall_ns_per_reported_node": 583.03,
+        "depth": 19,
+        "seldepth": 30,
+        "nodes": 200217,
+        "time": 117,
+        "nps": 1711256,
+        "score_kind": "cp",
+        "score": 0,
+        "pv_move": "c7c5"
+      },
+      "equal_nodes": {
+        "k4": {
+          "best_move": "c7c5",
+          "elapsed_ms": 81.056,
+          "wall_ns_per_reported_node": 1591.853,
+          "depth": 11,
+          "seldepth": 25,
+          "nodes": 50919,
+          "time": 41,
+          "nps": 1228099,
+          "score_kind": "cp",
+          "score": -100,
+          "pv_move": "c7c5"
+        },
+        "rodent": {
+          "best_move": "c7c5",
+          "elapsed_ms": 60.53,
+          "wall_ns_per_reported_node": 1045.598,
+          "depth": 10,
+          "seldepth": 26,
+          "nodes": 57890,
+          "time": 35,
+          "nps": 1609814,
+          "score_kind": "cp",
+          "score": -13,
+          "pv_move": "c7c5"
+        },
+        "hce": {
+          "best_move": "c7c5",
+          "elapsed_ms": 45.252,
+          "wall_ns_per_reported_node": 559.435,
+          "depth": 9,
+          "seldepth": 27,
+          "nodes": 80888,
+          "time": 36,
+          "nps": 2227142,
+          "score_kind": "cp",
+          "score": -58,
+          "pv_move": "c7c5"
+        }
+      },
+      "equal_time": {
+        "k4": {
+          "best_move": "c7c5",
+          "elapsed_ms": 150.204,
+          "wall_ns_per_reported_node": 1395.646,
+          "depth": 12,
+          "seldepth": 29,
+          "nodes": 107623,
+          "time": 87,
+          "nps": 1226951,
+          "score_kind": "cp",
+          "score": -92,
+          "pv_move": "c7c5"
+        },
+        "rodent": {
+          "best_move": "c7c5",
+          "elapsed_ms": 150.142,
+          "wall_ns_per_reported_node": 632.716,
+          "depth": 13,
+          "seldepth": 30,
+          "nodes": 237297,
+          "time": 144,
+          "nps": 1640604,
+          "score_kind": "cp",
+          "score": 0,
+          "pv_move": "c7c5"
+        },
+        "hce": {
+          "best_move": "c7c5",
+          "elapsed_ms": 150.133,
+          "wall_ns_per_reported_node": 537.156,
+          "depth": 11,
+          "seldepth": 32,
+          "nodes": 279496,
+          "time": 124,
+          "nps": 2246938,
+          "score_kind": "cp",
+          "score": -28,
+          "pv_move": "c7c5"
+        }
+      }
+    },
+    {
+      "id": "023fddbf793372b962d254aa57c7281a6ef752daca279b1b982cf7f260c3b8d9",
+      "fen": "6k1/8/6K1/3rPn2/5P2/7R/8/8 b - - 0 1",
+      "teacher": {
+        "best_move": "f5g7",
+        "elapsed_ms": 101.2,
+        "wall_ns_per_reported_node": 505.98,
+        "depth": 19,
+        "seldepth": 16,
+        "nodes": 200007,
+        "time": 101,
+        "nps": 1980267,
+        "score_kind": "cp",
+        "score": 0,
+        "pv_move": "f5g7"
+      },
+      "equal_nodes": {
+        "rodent": {
+          "best_move": "f5e7",
+          "elapsed_ms": 59.321,
+          "wall_ns_per_reported_node": 1935.131,
+          "depth": 9,
+          "seldepth": 21,
+          "nodes": 30655,
+          "time": 19,
+          "nps": 1572229,
+          "score_kind": "cp",
+          "score": -19,
+          "pv_move": "f5e7"
+        },
+        "hce": {
+          "best_move": "f5e7",
+          "elapsed_ms": 41.484,
+          "wall_ns_per_reported_node": 823.224,
+          "depth": 9,
+          "seldepth": 21,
+          "nodes": 50392,
+          "time": 22,
+          "nps": 2282242,
+          "score_kind": "cp",
+          "score": -59,
+          "pv_move": "f5e7"
+        },
+        "k4": {
+          "best_move": "f5e7",
+          "elapsed_ms": 76.641,
+          "wall_ns_per_reported_node": 1398.338,
+          "depth": 11,
+          "seldepth": 27,
+          "nodes": 54809,
+          "time": 41,
+          "nps": 1332529,
+          "score_kind": "cp",
+          "score": -62,
+          "pv_move": "f5e7"
+        }
+      },
+      "equal_time": {
+        "rodent": {
+          "best_move": "f5e7",
+          "elapsed_ms": 150.25,
+          "wall_ns_per_reported_node": 1017.951,
+          "depth": 11,
+          "seldepth": 33,
+          "nodes": 147600,
+          "time": 87,
+          "nps": 1690854,
+          "score_kind": "cp",
+          "score": -12,
+          "pv_move": "f5e7"
+        },
+        "hce": {
+          "best_move": "f5e7",
+          "elapsed_ms": 150.103,
+          "wall_ns_per_reported_node": 564.035,
+          "depth": 11,
+          "seldepth": 33,
+          "nodes": 266123,
+          "time": 103,
+          "nps": 2566707,
+          "score_kind": "cp",
+          "score": -44,
+          "pv_move": "f5e7"
+        },
+        "k4": {
+          "best_move": "f5e7",
+          "elapsed_ms": 150.285,
+          "wall_ns_per_reported_node": 2741.98,
+          "depth": 11,
+          "seldepth": 27,
+          "nodes": 54809,
+          "time": 41,
+          "nps": 1305869,
+          "score_kind": "cp",
+          "score": -62,
+          "pv_move": "f5e7"
+        }
+      }
+    },
+    {
+      "id": "e108707058bbe3e20c9a566306cabfbd8c544356e03e7ea29210e72e0854694c",
+      "fen": "8/8/8/7n/5n2/4kP1p/1p5K/1B6 b - - 0 1",
+      "teacher": {
+        "best_move": "e3f3",
+        "elapsed_ms": 79.066,
+        "wall_ns_per_reported_node": 395.065,
+        "depth": 36,
+        "seldepth": 14,
+        "nodes": 200134,
+        "time": 79,
+        "nps": 2533341,
+        "score_kind": "mate",
+        "score": 7,
+        "pv_move": "e3f3"
+      },
+      "equal_nodes": {
+        "hce": {
+          "best_move": "e3f3",
+          "elapsed_ms": 36.837,
+          "wall_ns_per_reported_node": 1002.067,
+          "depth": 11,
+          "seldepth": 20,
+          "nodes": 36761,
+          "time": 14,
+          "nps": 2523698,
+          "score_kind": "cp",
+          "score": 2141,
+          "pv_move": "e3f3"
+        },
+        "k4": {
+          "best_move": "e3f3",
+          "elapsed_ms": 73.331,
+          "wall_ns_per_reported_node": 964.117,
+          "depth": 12,
+          "seldepth": 29,
+          "nodes": 76060,
+          "time": 55,
+          "nps": 1371526,
+          "score_kind": "cp",
+          "score": 2358,
+          "pv_move": "e3f3"
+        },
+        "rodent": {
+          "best_move": "e3d2",
+          "elapsed_ms": 58.303,
+          "wall_ns_per_reported_node": 787.515,
+          "depth": 11,
+          "seldepth": 24,
+          "nodes": 74034,
+          "time": 42,
+          "nps": 1723877,
+          "score_kind": "cp",
+          "score": 947,
+          "pv_move": "e3d2"
+        }
+      },
+      "equal_time": {
+        "hce": {
+          "best_move": "e3f3",
+          "elapsed_ms": 109.949,
+          "wall_ns_per_reported_node": 370.093,
+          "depth": 22,
+          "seldepth": 24,
+          "nodes": 297085,
+          "time": 109,
+          "nps": 2704983,
+          "score_kind": "mate",
+          "score": 8,
+          "pv_move": "e3f3"
+        },
+        "k4": {
+          "best_move": "e3f3",
+          "elapsed_ms": 150.155,
+          "wall_ns_per_reported_node": 835.296,
+          "depth": 14,
+          "seldepth": 35,
+          "nodes": 179763,
+          "time": 133,
+          "nps": 1350124,
+          "score_kind": "cp",
+          "score": 3565,
+          "pv_move": "e3f3"
+        },
+        "rodent": {
+          "best_move": "e3d2",
+          "elapsed_ms": 150.173,
+          "wall_ns_per_reported_node": 877.946,
+          "depth": 14,
+          "seldepth": 29,
+          "nodes": 171051,
+          "time": 100,
+          "nps": 1695293,
+          "score_kind": "cp",
+          "score": 990,
+          "pv_move": "e3d2"
+        }
+      }
+    },
+    {
+      "id": "99fe8d69444f1079630281d1000f0ffd46b71d6abaed639f4ba04855f15bb84c",
+      "fen": "r2qr1k1/pRb2pp1/2p4p/3p1n2/P1nP4/2N2BPP/1PP2P2/2BQ1RK1 b - - 0 1",
+      "teacher": {
+        "best_move": "c7b6",
+        "elapsed_ms": 158.873,
+        "wall_ns_per_reported_node": 1184.114,
+        "depth": 16,
+        "seldepth": 27,
+        "nodes": 134170,
+        "time": 109,
+        "nps": 1230917,
+        "score_kind": "cp",
+        "score": 77,
+        "pv_move": "c7b6"
+      },
+      "equal_nodes": {
+        "k4": {
+          "best_move": "c7b6",
+          "elapsed_ms": 80.508,
+          "wall_ns_per_reported_node": 1129.133,
+          "depth": 10,
+          "seldepth": 19,
+          "nodes": 71301,
+          "time": 58,
+          "nps": 1228135,
+          "score_kind": "cp",
+          "score": 50,
+          "pv_move": "c7b6"
+        },
+        "rodent": {
+          "best_move": "c7b6",
+          "elapsed_ms": 66.909,
+          "wall_ns_per_reported_node": 831.592,
+          "depth": 11,
+          "seldepth": 15,
+          "nodes": 80459,
+          "time": 53,
+          "nps": 1497283,
+          "score_kind": "cp",
+          "score": 59,
+          "pv_move": "c7b6"
+        },
+        "hce": {
+          "best_move": "c7b6",
+          "elapsed_ms": 56.364,
+          "wall_ns_per_reported_node": 888.627,
+          "depth": 10,
+          "seldepth": 22,
+          "nodes": 63428,
+          "time": 34,
+          "nps": 1820311,
+          "score_kind": "cp",
+          "score": 77,
+          "pv_move": "c7b6"
+        }
+      },
+      "equal_time": {
+        "k4": {
+          "best_move": "c7b6",
+          "elapsed_ms": 150.215,
+          "wall_ns_per_reported_node": 1154.194,
+          "depth": 12,
+          "seldepth": 22,
+          "nodes": 130147,
+          "time": 104,
+          "nps": 1248864,
+          "score_kind": "cp",
+          "score": 55,
+          "pv_move": "c7b6"
+        },
+        "rodent": {
+          "best_move": "c7b6",
+          "elapsed_ms": 150.313,
+          "wall_ns_per_reported_node": 746.182,
+          "depth": 14,
+          "seldepth": 24,
+          "nodes": 201443,
+          "time": 135,
+          "nps": 1482644,
+          "score_kind": "cp",
+          "score": 51,
+          "pv_move": "c7b6"
+        },
+        "hce": {
+          "best_move": "c7b6",
+          "elapsed_ms": 150.175,
+          "wall_ns_per_reported_node": 884.853,
+          "depth": 12,
+          "seldepth": 20,
+          "nodes": 169718,
+          "time": 82,
+          "nps": 2050073,
+          "score_kind": "cp",
+          "score": 80,
+          "pv_move": "c7b6"
+        }
+      }
+    },
+    {
+      "id": "94af3ffdc22bd4568e13bd99f300fd7c97bd186e615d4717164151017a764f78",
+      "fen": "6k1/5ppp/2pq4/8/4Q3/5P1P/2P3P1/6K1 b - - 0 1",
+      "teacher": {
+        "best_move": "g8f8",
+        "elapsed_ms": 107.574,
+        "wall_ns_per_reported_node": 537.627,
+        "depth": 25,
+        "seldepth": 7,
+        "nodes": 200090,
+        "time": 112,
+        "nps": 1786517,
+        "score_kind": "cp",
+        "score": 0,
+        "pv_move": "g8f8"
+      },
+      "equal_nodes": {
+        "rodent": {
+          "best_move": "g7g6",
+          "elapsed_ms": 61.174,
+          "wall_ns_per_reported_node": 1397.615,
+          "depth": 9,
+          "seldepth": 14,
+          "nodes": 43770,
+          "time": 26,
+          "nps": 1632572,
+          "score_kind": "cp",
+          "score": 19,
+          "pv_move": "g7g6"
+        },
+        "hce": {
+          "best_move": "g7g6",
+          "elapsed_ms": 44.528,
+          "wall_ns_per_reported_node": 688.295,
+          "depth": 8,
+          "seldepth": 26,
+          "nodes": 64693,
+          "time": 29,
+          "nps": 2206917,
+          "score_kind": "cp",
+          "score": 41,
+          "pv_move": "g7g6"
+        },
+        "k4": {
+          "best_move": "g7g6",
+          "elapsed_ms": 76.923,
+          "wall_ns_per_reported_node": 1239.766,
+          "depth": 9,
+          "seldepth": 20,
+          "nodes": 62046,
+          "time": 48,
+          "nps": 1286093,
+          "score_kind": "cp",
+          "score": 37,
+          "pv_move": "g7g6"
+        }
+      },
+      "equal_time": {
+        "rodent": {
+          "best_move": "g7g6",
+          "elapsed_ms": 150.174,
+          "wall_ns_per_reported_node": 676.921,
+          "depth": 12,
+          "seldepth": 22,
+          "nodes": 221848,
+          "time": 139,
+          "nps": 1588700,
+          "score_kind": "cp",
+          "score": 0,
+          "pv_move": "g7g6"
+        },
+        "hce": {
+          "best_move": "g7g6",
+          "elapsed_ms": 150.133,
+          "wall_ns_per_reported_node": 704.597,
+          "depth": 12,
+          "seldepth": 24,
+          "nodes": 213077,
+          "time": 87,
+          "nps": 2424637,
+          "score_kind": "cp",
+          "score": 10,
+          "pv_move": "g7g6"
+        },
+        "k4": {
+          "best_move": "g7g6",
+          "elapsed_ms": 150.257,
+          "wall_ns_per_reported_node": 976.193,
+          "depth": 11,
+          "seldepth": 22,
+          "nodes": 153921,
+          "time": 118,
+          "nps": 1300536,
+          "score_kind": "cp",
+          "score": 28,
+          "pv_move": "g7g6"
+        }
+      }
+    },
+    {
+      "id": "b6a3897b4d72fd180d9cbd0af43d282943a2d4d2977155f47dab322c132190dc",
+      "fen": "2k5/1pp3p1/p4p2/P3p3/r3N3/5P1r/1KP4P/4B2R w - - 0 1",
+      "teacher": {
+        "best_move": "h1f1",
+        "elapsed_ms": 136.494,
+        "wall_ns_per_reported_node": 682.116,
+        "depth": 18,
+        "seldepth": 34,
+        "nodes": 200104,
+        "time": 137,
+        "nps": 1460613,
+        "score_kind": "cp",
+        "score": -126,
+        "pv_move": "h1f1"
+      },
+      "equal_nodes": {
+        "hce": {
+          "best_move": "h1f1",
+          "elapsed_ms": 45.942,
+          "wall_ns_per_reported_node": 737.972,
+          "depth": 10,
+          "seldepth": 17,
+          "nodes": 62254,
+          "time": 29,
+          "nps": 2145784,
+          "score_kind": "cp",
+          "score": -134,
+          "pv_move": "h1f1"
+        },
+        "k4": {
+          "best_move": "h1f1",
+          "elapsed_ms": 83.668,
+          "wall_ns_per_reported_node": 3016.59,
+          "depth": 10,
+          "seldepth": 15,
+          "nodes": 27736,
+          "time": 23,
+          "nps": 1167527,
+          "score_kind": "cp",
+          "score": -218,
+          "pv_move": "h1f1"
+        },
+        "rodent": {
+          "best_move": "h1f1",
+          "elapsed_ms": 65.808,
+          "wall_ns_per_reported_node": 831.076,
+          "depth": 10,
+          "seldepth": 24,
+          "nodes": 79184,
+          "time": 50,
+          "nps": 1552832,
+          "score_kind": "cp",
+          "score": -71,
+          "pv_move": "h1f1"
+        }
+      },
+      "equal_time": {
+        "hce": {
+          "best_move": "h1f1",
+          "elapsed_ms": 150.157,
+          "wall_ns_per_reported_node": 463.588,
+          "depth": 13,
+          "seldepth": 28,
+          "nodes": 323902,
+          "time": 142,
+          "nps": 2280466,
+          "score_kind": "cp",
+          "score": -155,
+          "pv_move": "h1f1"
+        },
+        "k4": {
+          "best_move": "h1f1",
+          "elapsed_ms": 150.264,
+          "wall_ns_per_reported_node": 1456.44,
+          "depth": 11,
+          "seldepth": 19,
+          "nodes": 103172,
+          "time": 86,
+          "nps": 1194775,
+          "score_kind": "cp",
+          "score": -214,
+          "pv_move": "h1f1"
+        },
+        "rodent": {
+          "best_move": "h1f1",
+          "elapsed_ms": 150.184,
+          "wall_ns_per_reported_node": 825.268,
+          "depth": 11,
+          "seldepth": 22,
+          "nodes": 181982,
+          "time": 116,
+          "nps": 1555798,
+          "score_kind": "cp",
+          "score": -127,
+          "pv_move": "h1f1"
+        }
+      }
+    },
+    {
+      "id": "1ed2ab7407423a4accbf393b0159d7464c963ac324ca2a74cbbf786eb1ce1d30",
+      "fen": "1r4k1/r6p/6n1/4PR2/p2P1p2/B4P1P/R4K2/8 b - - 0 1",
+      "teacher": {
+        "best_move": "a7b7",
+        "elapsed_ms": 126.874,
+        "wall_ns_per_reported_node": 908.334,
+        "depth": 14,
+        "seldepth": 21,
+        "nodes": 139678,
+        "time": 88,
+        "nps": 1587250,
+        "score_kind": "cp",
+        "score": -168,
+        "pv_move": "a7g7"
+      },
+      "equal_nodes": {
+        "k4": {
+          "best_move": "b8b5",
+          "elapsed_ms": 80.988,
+          "wall_ns_per_reported_node": 826.44,
+          "depth": 10,
+          "seldepth": 23,
+          "nodes": 97996,
+          "time": 79,
+          "nps": 1236778,
+          "score_kind": "cp",
+          "score": -195,
+          "pv_move": "b8b5"
+        },
+        "rodent": {
+          "best_move": "b8b5",
+          "elapsed_ms": 65.36,
+          "wall_ns_per_reported_node": 740.492,
+          "depth": 10,
+          "seldepth": 23,
+          "nodes": 88266,
+          "time": 56,
+          "nps": 1556012,
+          "score_kind": "cp",
+          "score": -186,
+          "pv_move": "b8b5"
+        },
+        "hce": {
+          "best_move": "a7a5",
+          "elapsed_ms": 52.75,
+          "wall_ns_per_reported_node": 898.726,
+          "depth": 9,
+          "seldepth": 30,
+          "nodes": 58694,
+          "time": 30,
+          "nps": 1910548,
+          "score_kind": "cp",
+          "score": -193,
+          "pv_move": "a7a5"
+        }
+      },
+      "equal_time": {
+        "k4": {
+          "best_move": "b8b5",
+          "elapsed_ms": 150.168,
+          "wall_ns_per_reported_node": 914.105,
+          "depth": 11,
+          "seldepth": 25,
+          "nodes": 164279,
+          "time": 137,
+          "nps": 1196712,
+          "score_kind": "cp",
+          "score": -251,
+          "pv_move": "b8b5"
+        },
+        "rodent": {
+          "best_move": "b8b5",
+          "elapsed_ms": 150.157,
+          "wall_ns_per_reported_node": 672.074,
+          "depth": 12,
+          "seldepth": 30,
+          "nodes": 223423,
+          "time": 147,
+          "nps": 1511860,
+          "score_kind": "cp",
+          "score": -195,
+          "pv_move": "b8b5"
+        },
+        "hce": {
+          "best_move": "a7f7",
+          "elapsed_ms": 150.116,
+          "wall_ns_per_reported_node": 913.643,
+          "depth": 11,
+          "seldepth": 23,
+          "nodes": 164305,
+          "time": 73,
+          "nps": 2233756,
+          "score_kind": "cp",
+          "score": -209,
+          "pv_move": "a7f7"
+        }
+      }
+    },
+    {
+      "id": "cdd2f026f80f642e55fd916f73c842bca9cbfa8afdc29b544a3b0704b93ca65d",
+      "fen": "6k1/5p2/1p4p1/1Npn4/P4PPp/R1p2K1P/2r2P2/8 w - - 0 1",
+      "teacher": {
+        "best_move": "f3e4",
+        "elapsed_ms": 107.162,
+        "wall_ns_per_reported_node": 1438.924,
+        "depth": 14,
+        "seldepth": 43,
+        "nodes": 74474,
+        "time": 44,
+        "nps": 1692590,
+        "score_kind": "cp",
+        "score": -201,
+        "pv_move": "f3e4"
+      },
+      "equal_nodes": {
+        "rodent": {
+          "best_move": "f3e4",
+          "elapsed_ms": 64.448,
+          "wall_ns_per_reported_node": 1137.842,
+          "depth": 11,
+          "seldepth": 28,
+          "nodes": 56641,
+          "time": 36,
+          "nps": 1536990,
+          "score_kind": "cp",
+          "score": -113,
+          "pv_move": "f3e4"
+        },
+        "hce": {
+          "best_move": "f3e4",
+          "elapsed_ms": 44.578,
+          "wall_ns_per_reported_node": 446.076,
+          "depth": 10,
+          "seldepth": 24,
+          "nodes": 99933,
+          "time": 44,
+          "nps": 2251575,
+          "score_kind": "cp",
+          "score": -255,
+          "pv_move": "f3e4"
+        },
+        "k4": {
+          "best_move": "f3e4",
+          "elapsed_ms": 78.801,
+          "wall_ns_per_reported_node": 800.508,
+          "depth": 11,
+          "seldepth": 24,
+          "nodes": 98439,
+          "time": 77,
+          "nps": 1272196,
+          "score_kind": "cp",
+          "score": -169,
+          "pv_move": "f3e4"
+        }
+      },
+      "equal_time": {
+        "rodent": {
+          "best_move": "f3e4",
+          "elapsed_ms": 150.223,
+          "wall_ns_per_reported_node": 956.256,
+          "depth": 12,
+          "seldepth": 29,
+          "nodes": 157095,
+          "time": 99,
+          "nps": 1580892,
+          "score_kind": "cp",
+          "score": -131,
+          "pv_move": "f3e4"
+        },
+        "hce": {
+          "best_move": "f3e4",
+          "elapsed_ms": 150.13,
+          "wall_ns_per_reported_node": 962.162,
+          "depth": 11,
+          "seldepth": 31,
+          "nodes": 156034,
+          "time": 56,
+          "nps": 2739597,
+          "score_kind": "cp",
+          "score": -248,
+          "pv_move": "f3e4"
+        },
+        "k4": {
+          "best_move": "f3e4",
+          "elapsed_ms": 150.236,
+          "wall_ns_per_reported_node": 859.844,
+          "depth": 12,
+          "seldepth": 28,
+          "nodes": 174725,
+          "time": 140,
+          "nps": 1242711,
+          "score_kind": "cp",
+          "score": -151,
+          "pv_move": "f3e4"
+        }
+      }
+    },
+    {
+      "id": "4a3386215db03644255f2f5b9b6d234119fc59f6aa145a1a9ef45d519a4fd372",
+      "fen": "2r3k1/3R3p/p5p1/1p2p1Q1/4n2P/5BP1/P1q2PK1/8 w - - 0 1",
+      "teacher": {
+        "best_move": "g5e3",
+        "elapsed_ms": 141.79,
+        "wall_ns_per_reported_node": 708.696,
+        "depth": 17,
+        "seldepth": 34,
+        "nodes": 200072,
+        "time": 142,
+        "nps": 1408957,
+        "score_kind": "cp",
+        "score": 135,
+        "pv_move": "g5e3"
+      },
+      "equal_nodes": {
+        "hce": {
+          "best_move": "d7d8",
+          "elapsed_ms": 61.973,
+          "wall_ns_per_reported_node": 648.786,
+          "depth": 15,
+          "seldepth": 25,
+          "nodes": 95522,
+          "time": 59,
+          "nps": 1618968,
+          "score_kind": "cp",
+          "score": 0,
+          "pv_move": "d7d8"
+        },
+        "k4": {
+          "best_move": "d7d8",
+          "elapsed_ms": 94.097,
+          "wall_ns_per_reported_node": 1042.472,
+          "depth": 11,
+          "seldepth": 24,
+          "nodes": 90263,
+          "time": 85,
+          "nps": 1058252,
+          "score_kind": "cp",
+          "score": 99,
+          "pv_move": "d7d8"
+        },
+        "rodent": {
+          "best_move": "d7d8",
+          "elapsed_ms": 71.984,
+          "wall_ns_per_reported_node": 771.621,
+          "depth": 10,
+          "seldepth": 27,
+          "nodes": 93289,
+          "time": 66,
+          "nps": 1392433,
+          "score_kind": "cp",
+          "score": 122,
+          "pv_move": "d7d8"
+        }
+      },
+      "equal_time": {
+        "hce": {
+          "best_move": "d7d8",
+          "elapsed_ms": 150.106,
+          "wall_ns_per_reported_node": 1571.425,
+          "depth": 15,
+          "seldepth": 25,
+          "nodes": 95522,
+          "time": 51,
+          "nps": 1864665,
+          "score_kind": "cp",
+          "score": 0,
+          "pv_move": "d7d8"
+        },
+        "k4": {
+          "best_move": "d7d8",
+          "elapsed_ms": 150.197,
+          "wall_ns_per_reported_node": 1147.956,
+          "depth": 12,
+          "seldepth": 27,
+          "nodes": 130839,
+          "time": 125,
+          "nps": 1045228,
+          "score_kind": "cp",
+          "score": 100,
+          "pv_move": "d7d8"
+        },
+        "rodent": {
+          "best_move": "d7d8",
+          "elapsed_ms": 150.174,
+          "wall_ns_per_reported_node": 901.88,
+          "depth": 12,
+          "seldepth": 31,
+          "nodes": 166512,
+          "time": 116,
+          "nps": 1426330,
+          "score_kind": "cp",
+          "score": 124,
+          "pv_move": "d7d8"
+        }
+      }
+    },
+    {
+      "id": "debaaf710eb1bafadc9c8500f173b163c86669fb1c3a954cfbaef2ad3034824b",
+      "fen": "1r1b2k1/3b3r/5p2/3P1Np1/p1R1P1P1/B7/6K1/2R5 b - - 0 1",
+      "teacher": {
+        "best_move": "d8a5",
+        "elapsed_ms": 133.331,
+        "wall_ns_per_reported_node": 1180.951,
+        "depth": 20,
+        "seldepth": 12,
+        "nodes": 112901,
+        "time": 75,
+        "nps": 1505346,
+        "score_kind": "cp",
+        "score": 0,
+        "pv_move": "d8a5"
+      },
+      "equal_nodes": {
+        "k4": {
+          "best_move": "b8b3",
+          "elapsed_ms": 87.66,
+          "wall_ns_per_reported_node": 881.047,
+          "depth": 11,
+          "seldepth": 21,
+          "nodes": 99495,
+          "time": 87,
+          "nps": 1143333,
+          "score_kind": "cp",
+          "score": 0,
+          "pv_move": "b8b3"
+        },
+        "rodent": {
+          "best_move": "g8f7",
+          "elapsed_ms": 66.261,
+          "wall_ns_per_reported_node": 787.032,
+          "depth": 10,
+          "seldepth": 20,
+          "nodes": 84191,
+          "time": 55,
+          "nps": 1516703,
+          "score_kind": "cp",
+          "score": 0,
+          "pv_move": "g8f7"
+        },
+        "hce": {
+          "best_move": "b8b3",
+          "elapsed_ms": 53.036,
+          "wall_ns_per_reported_node": 1082.115,
+          "depth": 10,
+          "seldepth": 17,
+          "nodes": 49011,
+          "time": 26,
+          "nps": 1866308,
+          "score_kind": "cp",
+          "score": 24,
+          "pv_move": "b8b3"
+        }
+      },
+      "equal_time": {
+        "k4": {
+          "best_move": "b8b3",
+          "elapsed_ms": 150.228,
+          "wall_ns_per_reported_node": 1290.976,
+          "depth": 12,
+          "seldepth": 23,
+          "nodes": 116368,
+          "time": 103,
+          "nps": 1124839,
+          "score_kind": "cp",
+          "score": 0,
+          "pv_move": "b8b3"
+        },
+        "rodent": {
+          "best_move": "g8f7",
+          "elapsed_ms": 150.143,
+          "wall_ns_per_reported_node": 992.699,
+          "depth": 12,
+          "seldepth": 17,
+          "nodes": 151247,
+          "time": 98,
+          "nps": 1535225,
+          "score_kind": "cp",
+          "score": 0,
+          "pv_move": "g8f7"
+        },
+        "hce": {
+          "best_move": "b8b3",
+          "elapsed_ms": 150.269,
+          "wall_ns_per_reported_node": 1033.587,
+          "depth": 12,
+          "seldepth": 19,
+          "nodes": 145386,
+          "time": 66,
+          "nps": 2173299,
+          "score_kind": "cp",
+          "score": 0,
+          "pv_move": "b8b3"
+        }
+      }
+    },
+    {
+      "id": "c6fa474828aa419b2f856b68478016a06fd1185954b928d232933f11f3e48d93",
+      "fen": "6k1/5p2/p5p1/6P1/2R4P/1P4K1/r1r5/3R4 b - - 0 1",
+      "teacher": {
+        "best_move": "c2g2",
+        "elapsed_ms": 110.291,
+        "wall_ns_per_reported_node": 550.985,
+        "depth": 27,
+        "seldepth": 27,
+        "nodes": 200170,
+        "time": 110,
+        "nps": 1819727,
+        "score_kind": "cp",
+        "score": 0,
+        "pv_move": "c2g2"
+      },
+      "equal_nodes": {
+        "rodent": {
+          "best_move": "c2g2",
+          "elapsed_ms": 67.036,
+          "wall_ns_per_reported_node": 715.497,
+          "depth": 11,
+          "seldepth": 18,
+          "nodes": 93691,
+          "time": 62,
+          "nps": 1491554,
+          "score_kind": "cp",
+          "score": 68,
+          "pv_move": "c2g2"
+        },
+        "hce": {
+          "best_move": "c2g2",
+          "elapsed_ms": 45.901,
+          "wall_ns_per_reported_node": 665.982,
+          "depth": 10,
+          "seldepth": 20,
+          "nodes": 68922,
+          "time": 31,
+          "nps": 2161701,
+          "score_kind": "cp",
+          "score": 67,
+          "pv_move": "c2g2"
+        },
+        "k4": {
+          "best_move": "c2b2",
+          "elapsed_ms": 81.087,
+          "wall_ns_per_reported_node": 840.314,
+          "depth": 10,
+          "seldepth": 23,
+          "nodes": 96496,
+          "time": 78,
+          "nps": 1229609,
+          "score_kind": "cp",
+          "score": 36,
+          "pv_move": "c2b2"
+        }
+      },
+      "equal_time": {
+        "rodent": {
+          "best_move": "c2g2",
+          "elapsed_ms": 150.128,
+          "wall_ns_per_reported_node": 700.089,
+          "depth": 13,
+          "seldepth": 21,
+          "nodes": 214441,
+          "time": 146,
+          "nps": 1467667,
+          "score_kind": "cp",
+          "score": 65,
+          "pv_move": "c2g2"
+        },
+        "hce": {
+          "best_move": "c2g2",
+          "elapsed_ms": 150.157,
+          "wall_ns_per_reported_node": 1028.457,
+          "depth": 11,
+          "seldepth": 20,
+          "nodes": 146002,
+          "time": 60,
+          "nps": 2413749,
+          "score_kind": "cp",
+          "score": 65,
+          "pv_move": "c2g2"
+        },
+        "k4": {
+          "best_move": "g8g7",
+          "elapsed_ms": 150.171,
+          "wall_ns_per_reported_node": 1071.284,
+          "depth": 11,
+          "seldepth": 21,
+          "nodes": 140179,
+          "time": 112,
+          "nps": 1247779,
+          "score_kind": "cp",
+          "score": 65,
+          "pv_move": "g8g7"
+        }
+      }
+    },
+    {
+      "id": "320b0ce45131266d4828c2cec23303e5101d384fccaa14bd807c298a6257a82e",
+      "fen": "4Q3/4r3/prp1k3/2R5/1P1qp1P1/4P2P/2p2P2/6K1 w - - 0 1",
+      "teacher": {
+        "best_move": "e8g8",
+        "elapsed_ms": 80.811,
+        "wall_ns_per_reported_node": 403.859,
+        "depth": 16,
+        "seldepth": 26,
+        "nodes": 200097,
+        "time": 86,
+        "nps": 2326709,
+        "score_kind": "cp",
+        "score": 507,
+        "pv_move": "e8g8"
+      },
+      "equal_nodes": {
+        "hce": {
+          "best_move": "e8g8",
+          "elapsed_ms": 49.61,
+          "wall_ns_per_reported_node": 566.193,
+          "depth": 12,
+          "seldepth": 23,
+          "nodes": 87621,
+          "time": 43,
+          "nps": 2005264,
+          "score_kind": "cp",
+          "score": 736,
+          "pv_move": "e8g8"
+        },
+        "k4": {
+          "best_move": "e8g8",
+          "elapsed_ms": 88.183,
+          "wall_ns_per_reported_node": 1097.621,
+          "depth": 11,
+          "seldepth": 28,
+          "nodes": 80340,
+          "time": 71,
+          "nps": 1126965,
+          "score_kind": "cp",
+          "score": 969,
+          "pv_move": "e8g8"
+        },
+        "rodent": {
+          "best_move": "e8g8",
+          "elapsed_ms": 70.06,
+          "wall_ns_per_reported_node": 1374.192,
+          "depth": 10,
+          "seldepth": 22,
+          "nodes": 50983,
+          "time": 35,
+          "nps": 1421642,
+          "score_kind": "cp",
+          "score": 686,
+          "pv_move": "e8g8"
+        }
+      },
+      "equal_time": {
+        "hce": {
+          "best_move": "e8g8",
+          "elapsed_ms": 150.118,
+          "wall_ns_per_reported_node": 933.216,
+          "depth": 13,
+          "seldepth": 29,
+          "nodes": 160861,
+          "time": 70,
+          "nps": 2274246,
+          "score_kind": "cp",
+          "score": 739,
+          "pv_move": "e8g8"
+        },
+        "k4": {
+          "best_move": "e8g8",
+          "elapsed_ms": 150.19,
+          "wall_ns_per_reported_node": 901.199,
+          "depth": 13,
+          "seldepth": 27,
+          "nodes": 166656,
+          "time": 149,
+          "nps": 1112883,
+          "score_kind": "cp",
+          "score": 983,
+          "pv_move": "e8g8"
+        },
+        "rodent": {
+          "best_move": "e8g8",
+          "elapsed_ms": 150.164,
+          "wall_ns_per_reported_node": 1116.821,
+          "depth": 11,
+          "seldepth": 30,
+          "nodes": 134457,
+          "time": 95,
+          "nps": 1408530,
+          "score_kind": "cp",
+          "score": 759,
+          "pv_move": "e8g8"
+        }
+      }
+    },
+    {
+      "id": "b0d179e1849f25c6dcc5a8d1e117b7c0cf4ebeb3214e93287798e00f37c70e25",
+      "fen": "5nk1/5p2/5bp1/3R4/B3p2P/4B1P1/1r3PK1/8 w - - 0 1",
+      "teacher": {
+        "best_move": "d5d6",
+        "elapsed_ms": 126.074,
+        "wall_ns_per_reported_node": 991.237,
+        "depth": 16,
+        "seldepth": 28,
+        "nodes": 127189,
+        "time": 82,
+        "nps": 1551085,
+        "score_kind": "cp",
+        "score": 27,
+        "pv_move": "d5d6"
+      },
+      "equal_nodes": {
+        "k4": {
+          "best_move": "a4c6",
+          "elapsed_ms": 77.547,
+          "wall_ns_per_reported_node": 789.288,
+          "depth": 9,
+          "seldepth": 19,
+          "nodes": 98249,
+          "time": 76,
+          "nps": 1291785,
+          "score_kind": "cp",
+          "score": 122,
+          "pv_move": "a4c6"
+        },
+        "rodent": {
+          "best_move": "a4c6",
+          "elapsed_ms": 60.059,
+          "wall_ns_per_reported_node": 1080.766,
+          "depth": 11,
+          "seldepth": 18,
+          "nodes": 55571,
+          "time": 33,
+          "nps": 1671002,
+          "score_kind": "cp",
+          "score": 56,
+          "pv_move": "a4c6"
+        },
+        "hce": {
+          "best_move": "h4h5",
+          "elapsed_ms": 49.722,
+          "wall_ns_per_reported_node": 698.408,
+          "depth": 11,
+          "seldepth": 21,
+          "nodes": 71193,
+          "time": 34,
+          "nps": 2043390,
+          "score_kind": "cp",
+          "score": 50,
+          "pv_move": "h4h5"
+        }
+      },
+      "equal_time": {
+        "k4": {
+          "best_move": "a4c6",
+          "elapsed_ms": 150.087,
+          "wall_ns_per_reported_node": 871.917,
+          "depth": 11,
+          "seldepth": 20,
+          "nodes": 172134,
+          "time": 133,
+          "nps": 1288763,
+          "score_kind": "cp",
+          "score": 110,
+          "pv_move": "a4c6"
+        },
+        "rodent": {
+          "best_move": "a4c6",
+          "elapsed_ms": 150.186,
+          "wall_ns_per_reported_node": 1375.943,
+          "depth": 12,
+          "seldepth": 22,
+          "nodes": 109151,
+          "time": 66,
+          "nps": 1650927,
+          "score_kind": "cp",
+          "score": 64,
+          "pv_move": "a4c6"
+        },
+        "hce": {
+          "best_move": "h4h5",
+          "elapsed_ms": 150.165,
+          "wall_ns_per_reported_node": 725.393,
+          "depth": 13,
+          "seldepth": 29,
+          "nodes": 207012,
+          "time": 89,
+          "nps": 2324557,
+          "score_kind": "cp",
+          "score": 63,
+          "pv_move": "h4h5"
+        }
+      }
+    }
+  ]
+}

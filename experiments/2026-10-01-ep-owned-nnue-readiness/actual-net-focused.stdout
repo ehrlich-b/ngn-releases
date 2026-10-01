@@ -1,0 +1,46 @@
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths/pinned_white_capturer
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths/pinned_black_capturer
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths/unrelated_check_white_capturer
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths/unrelated_check_black_capturer
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths/legal_white_capturer
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths/legal_black_capturer
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse/pinned_white_capturer
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse/pinned_black_capturer
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse/unrelated_check_white_capturer
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse/unrelated_check_black_capturer
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse/legal_white_capturer
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse/legal_black_capturer
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/finite_search_restores_caller
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/finite_search_restores_caller/pinned_white_capturer
+    enpassant_owned_nnue_integration_test.go:370: depth-2 search restored caller after 33 committed evaluator frames
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/finite_search_restores_caller/pinned_black_capturer
+    enpassant_owned_nnue_integration_test.go:370: depth-2 search restored caller after 33 committed evaluator frames
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/finite_search_restores_caller/legal_white_capturer
+    enpassant_owned_nnue_integration_test.go:370: depth-2 search restored caller after 27 committed evaluator frames
+=== RUN   TestOwnedK4EnPassantRepetitionReadiness/finite_search_restores_caller/legal_black_capturer
+    enpassant_owned_nnue_integration_test.go:370: depth-2 search restored caller after 27 committed evaluator frames
+--- PASS: TestOwnedK4EnPassantRepetitionReadiness (0.30s)
+    --- PASS: TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths (0.04s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths/pinned_white_capturer (0.02s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths/pinned_black_capturer (0.01s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths/unrelated_check_white_capturer (0.01s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths/unrelated_check_black_capturer (0.01s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths/legal_white_capturer (0.00s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/played_histories_and_inverse_paths/legal_black_capturer (0.00s)
+    --- PASS: TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse (0.06s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse/pinned_white_capturer (0.00s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse/pinned_black_capturer (0.05s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse/unrelated_check_white_capturer (0.00s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse/unrelated_check_black_capturer (0.00s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse/legal_white_capturer (0.00s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/null_quiet_child_and_inverse/legal_black_capturer (0.00s)
+    --- PASS: TestOwnedK4EnPassantRepetitionReadiness/finite_search_restores_caller (0.13s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/finite_search_restores_caller/pinned_white_capturer (0.03s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/finite_search_restores_caller/pinned_black_capturer (0.08s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/finite_search_restores_caller/legal_white_capturer (0.01s)
+        --- PASS: TestOwnedK4EnPassantRepetitionReadiness/finite_search_restores_caller/legal_black_capturer (0.01s)
+PASS
+ok  	github.com/ehrlich-b/ngn/engine	0.366s

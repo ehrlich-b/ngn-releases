@@ -1,0 +1,62 @@
+{
+  "claim": "Frozen fixed-cap native benchmark has been launched. No partial score is a verdict. Every declared control and final audit must pass before the 400-game comparison is admitted.",
+  "launch": {
+    "command": [
+      "systemd-run",
+      "--user",
+      "--unit=ngn-owned-top3-zahak-120p1-20260930",
+      "--property=WorkingDirectory=/home/ehrli/nnue-owned-top3-20260930/zahak-120p1",
+      "--property=KillMode=control-group",
+      "--property=TimeoutStopSec=30",
+      "--property=RuntimeMaxSec=75666",
+      "--property=MemoryMax=8G",
+      "--property=CPUAffinity=4 6 8 10 12 14",
+      "/usr/bin/python3",
+      "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1/benchmark-source/scripts/ownedbenchmark.py",
+      "--root",
+      "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1",
+      "--plan",
+      "/home/ehrli/nnue-owned-top3-20260930/zahak-120p1/plan.json"
+    ],
+    "initial_status": "MainPID=12024\nActiveState=active\nSubState=running\n",
+    "memory_available_gib": 13.230499267578125,
+    "plan_sha256": "bc6b4c24067294b5d8171597cb670f17b5397d4b0ed2557d876faef488b7a86c",
+    "scope": "Smoke, fresh identical-instrument A/A, then one fixed 400-game scored anchor. Keep both hopper workers on CPUs0,2, with no concurrent engine build/training on the six benchmark CPUs.",
+    "started_at_unix": 1790780333.7177846,
+    "unit": "ngn-owned-top3-zahak-120p1-20260930",
+    "windows_free_gib": 125.47846603393555
+  },
+  "opening_selection": {
+    "algorithm": "Python 3.12 random.Random(2026093021).sample(ascending master indices retaining the first occurrence of each unique six-ply prefix after excluding all 1004 entries AND all equal six-ply prefixes from both September 30 morning receipts,270). Fixed before any new games.",
+    "converter": {
+      "path": "/home/ehrli/repos/ngn-next/output/nnue-smp-b0-20260905/opening-pgn-conversion/convert_uci_openings",
+      "sha256": "3c99382a07760ac72e7cf0461f5d04a3ff9614338a9058dbcd6f3dcf49cdbcb5"
+    },
+    "created_at_unix": 1790777151.7082481,
+    "eligible_unique_prefixes": 3996,
+    "excluded_indices": 1004,
+    "excluded_receipts": [
+      {
+        "path": "/home/ehrli/nnue-owned-morning-20260930/openings-v2/receipt.json",
+        "sha256": "a691dc9349d56c14cfb989867897a1ea65a98f30af3aac1b9ae182e66038f0e4"
+      },
+      {
+        "path": "/home/ehrli/nnue-owned-morning-20260930/native-v4/openings/receipt.json",
+        "sha256": "8cb97b6536cf2e4a931151154a1e8206c80539429ed8c67a11501becbcf3b21d"
+      }
+    ],
+    "excluded_unique_six_ply_prefixes": 1004,
+    "freshness": "Disjoint indices and six-ply prefixes across these three cells and the two declared recent morning receipts. Older historical book entries and training examples may recur; this is not a held-out training-data claim. No prior games or stopped trial scores are pooled.",
+    "master_sha256": "974e4b5ab871a9e106d0c766bfa39fc83676222337fb7702f61782e2ac5b3222",
+    "pairs": 270,
+    "seed": 2026093021
+  },
+  "plan_sha256": "bc6b4c24067294b5d8171597cb670f17b5397d4b0ed2557d876faef488b7a86c",
+  "schema": "ngn-owned-top3-zahak-start-v1",
+  "state_at_export": {
+    "completed": 1790780708.1243196,
+    "error": "external benchmark cell lacks accepted terminal: smoke",
+    "state": "FAILED"
+  },
+  "unit_status_at_export": "MainPID=0\nResult=exit-code\nActiveState=failed\nSubState=failed\n"
+}

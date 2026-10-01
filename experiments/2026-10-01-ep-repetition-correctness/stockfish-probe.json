@@ -1,0 +1,2070 @@
+{
+  "assertions": [
+    "pinned_white_capturer: all 9 played plies legal; normalized Stockfish key repeats at plies 1,5,9",
+    "pinned_black_capturer: all 9 played plies legal; normalized Stockfish key repeats at plies 1,5,9",
+    "unrelated_check_white_capturer: all 9 played plies legal; normalized Stockfish key repeats at plies 1,5,9",
+    "unrelated_check_black_capturer: all 9 played plies legal; normalized Stockfish key repeats at plies 1,5,9",
+    "legal_white_capturer: ordinary legal EP appears only with EP right and distinguishes key",
+    "legal_black_capturer: ordinary legal EP appears only with EP right and distinguishes key"
+  ],
+  "environment": {
+    "allowed_cpus": [
+      0,
+      2
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/ngn-personal-ep-correctness-20261001-resume.service",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3"
+  },
+  "fixtures": [
+    {
+      "fen_ep": {
+        "command": "position fen 6k1/8/8/K2pP2r/8/8/8/8 w - d6 0 2",
+        "fen": "6k1/8/8/K2pP2r/8/8/8/8 w - d6 0 2",
+        "key": "DB5FED5254C85AE2",
+        "perft": {
+          "1": {
+            "moves": {
+              "a5a4": 1,
+              "a5a6": 1,
+              "a5b4": 1,
+              "a5b5": 1,
+              "a5b6": 1,
+              "e5e6": 1
+            },
+            "nodes": 6
+          },
+          "2": {
+            "moves": {
+              "a5a4": 16,
+              "a5a6": 16,
+              "a5b4": 16,
+              "a5b5": 16,
+              "a5b6": 16,
+              "e5e6": 15
+            },
+            "nodes": 95
+          }
+        }
+      },
+      "fen_no_ep": {
+        "command": "position fen 6k1/8/8/K2pP2r/8/8/8/8 w - - 0 2",
+        "fen": "6k1/8/8/K2pP2r/8/8/8/8 w - - 0 2",
+        "key": "B7B0D64149BD86A0",
+        "perft": {
+          "1": {
+            "moves": {
+              "a5a4": 1,
+              "a5a6": 1,
+              "a5b4": 1,
+              "a5b5": 1,
+              "a5b6": 1,
+              "e5e6": 1
+            },
+            "nodes": 6
+          },
+          "2": {
+            "moves": {
+              "a5a4": 16,
+              "a5a6": 16,
+              "a5b4": 16,
+              "a5b5": 16,
+              "a5b6": 16,
+              "e5e6": 15
+            },
+            "nodes": 95
+          }
+        }
+      },
+      "fixture": {
+        "cycle": [
+          "a5a4",
+          "h5h6",
+          "a4a5",
+          "h6h5"
+        ],
+        "ep_fen": "6k1/8/8/K2pP2r/8/8/8/8 w - d6 0 2",
+        "ep_move": "e5d6",
+        "kind": "illegal_pin",
+        "name": "pinned_white_capturer",
+        "no_ep_fen": "6k1/8/8/K2pP2r/8/8/8/8 w - - 0 2",
+        "push": "d7d5",
+        "start_fen": "6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1"
+      },
+      "history": [
+        {
+          "after": {
+            "command": "position fen 6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1 moves d7d5",
+            "fen": "6k1/8/8/K2pP2r/8/8/8/8 w - - 0 2",
+            "key": "B7B0D64149BD86A0",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a5a4": 1,
+                  "a5a6": 1,
+                  "a5b4": 1,
+                  "a5b5": 1,
+                  "a5b6": 1,
+                  "e5e6": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "a5a4": 16,
+                  "a5a6": 16,
+                  "a5b4": 16,
+                  "a5b5": 16,
+                  "a5b6": 16,
+                  "e5e6": 15
+                },
+                "nodes": 95
+              }
+            }
+          },
+          "move": "d7d5",
+          "ply": 1
+        },
+        {
+          "after": {
+            "command": "position fen 6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1 moves d7d5 a5a4",
+            "fen": "6k1/8/8/3pP2r/K7/8/8/8 b - - 1 2",
+            "key": "95E71B13BE2BD274",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d5d4": 1,
+                  "g8f7": 1,
+                  "g8f8": 1,
+                  "g8g7": 1,
+                  "g8h7": 1,
+                  "g8h8": 1,
+                  "h5e5": 1,
+                  "h5f5": 1,
+                  "h5g5": 1,
+                  "h5h1": 1,
+                  "h5h2": 1,
+                  "h5h3": 1,
+                  "h5h4": 1,
+                  "h5h6": 1,
+                  "h5h7": 1,
+                  "h5h8": 1
+                },
+                "nodes": 16
+              },
+              "2": {
+                "moves": {
+                  "d5d4": 6,
+                  "g8f7": 6,
+                  "g8f8": 6,
+                  "g8g7": 6,
+                  "g8h7": 6,
+                  "g8h8": 6,
+                  "h5e5": 5,
+                  "h5f5": 6,
+                  "h5g5": 6,
+                  "h5h1": 6,
+                  "h5h2": 6,
+                  "h5h3": 4,
+                  "h5h4": 4,
+                  "h5h6": 6,
+                  "h5h7": 6,
+                  "h5h8": 6
+                },
+                "nodes": 91
+              }
+            }
+          },
+          "move": "a5a4",
+          "ply": 2
+        },
+        {
+          "after": {
+            "command": "position fen 6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1 moves d7d5 a5a4 h5h6",
+            "fen": "6k1/8/7r/3pP3/K7/8/8/8 w - - 2 3",
+            "key": "A14B478D82FE85C9",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a4a3": 1,
+                  "a4a5": 1,
+                  "a4b3": 1,
+                  "a4b4": 1,
+                  "a4b5": 1,
+                  "e5e6": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "a4a3": 20,
+                  "a4a5": 20,
+                  "a4b3": 20,
+                  "a4b4": 20,
+                  "a4b5": 20,
+                  "e5e6": 15
+                },
+                "nodes": 115
+              }
+            }
+          },
+          "move": "h5h6",
+          "ply": 3
+        },
+        {
+          "after": {
+            "command": "position fen 6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1 moves d7d5 a5a4 h5h6 a4a5",
+            "fen": "6k1/8/7r/K2pP3/8/8/8/8 b - - 3 3",
+            "key": "831C8ADF7568D11D",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d5d4": 1,
+                  "g8f7": 1,
+                  "g8f8": 1,
+                  "g8g7": 1,
+                  "g8h7": 1,
+                  "g8h8": 1,
+                  "h6a6": 1,
+                  "h6b6": 1,
+                  "h6c6": 1,
+                  "h6d6": 1,
+                  "h6e6": 1,
+                  "h6f6": 1,
+                  "h6g6": 1,
+                  "h6h1": 1,
+                  "h6h2": 1,
+                  "h6h3": 1,
+                  "h6h4": 1,
+                  "h6h5": 1,
+                  "h6h7": 1,
+                  "h6h8": 1
+                },
+                "nodes": 20
+              },
+              "2": {
+                "moves": {
+                  "d5d4": 4,
+                  "g8f7": 4,
+                  "g8f8": 4,
+                  "g8g7": 4,
+                  "g8h7": 4,
+                  "g8h8": 4,
+                  "h6a6": 3,
+                  "h6b6": 3,
+                  "h6c6": 4,
+                  "h6d6": 5,
+                  "h6e6": 3,
+                  "h6f6": 5,
+                  "h6g6": 4,
+                  "h6h1": 6,
+                  "h6h2": 6,
+                  "h6h3": 6,
+                  "h6h4": 4,
+                  "h6h5": 6,
+                  "h6h7": 6,
+                  "h6h8": 6
+                },
+                "nodes": 91
+              }
+            }
+          },
+          "move": "a4a5",
+          "ply": 4
+        },
+        {
+          "after": {
+            "command": "position fen 6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1 moves d7d5 a5a4 h5h6 a4a5 h6h5",
+            "fen": "6k1/8/8/K2pP2r/8/8/8/8 w - - 4 4",
+            "key": "B7B0D64149BD86A0",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a5a4": 1,
+                  "a5a6": 1,
+                  "a5b4": 1,
+                  "a5b5": 1,
+                  "a5b6": 1,
+                  "e5e6": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "a5a4": 16,
+                  "a5a6": 16,
+                  "a5b4": 16,
+                  "a5b5": 16,
+                  "a5b6": 16,
+                  "e5e6": 15
+                },
+                "nodes": 95
+              }
+            }
+          },
+          "move": "h6h5",
+          "ply": 5
+        },
+        {
+          "after": {
+            "command": "position fen 6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1 moves d7d5 a5a4 h5h6 a4a5 h6h5 a5a4",
+            "fen": "6k1/8/8/3pP2r/K7/8/8/8 b - - 5 4",
+            "key": "95E71B13BE2BD274",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d5d4": 1,
+                  "g8f7": 1,
+                  "g8f8": 1,
+                  "g8g7": 1,
+                  "g8h7": 1,
+                  "g8h8": 1,
+                  "h5e5": 1,
+                  "h5f5": 1,
+                  "h5g5": 1,
+                  "h5h1": 1,
+                  "h5h2": 1,
+                  "h5h3": 1,
+                  "h5h4": 1,
+                  "h5h6": 1,
+                  "h5h7": 1,
+                  "h5h8": 1
+                },
+                "nodes": 16
+              },
+              "2": {
+                "moves": {
+                  "d5d4": 6,
+                  "g8f7": 6,
+                  "g8f8": 6,
+                  "g8g7": 6,
+                  "g8h7": 6,
+                  "g8h8": 6,
+                  "h5e5": 5,
+                  "h5f5": 6,
+                  "h5g5": 6,
+                  "h5h1": 6,
+                  "h5h2": 6,
+                  "h5h3": 4,
+                  "h5h4": 4,
+                  "h5h6": 6,
+                  "h5h7": 6,
+                  "h5h8": 6
+                },
+                "nodes": 91
+              }
+            }
+          },
+          "move": "a5a4",
+          "ply": 6
+        },
+        {
+          "after": {
+            "command": "position fen 6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1 moves d7d5 a5a4 h5h6 a4a5 h6h5 a5a4 h5h6",
+            "fen": "6k1/8/7r/3pP3/K7/8/8/8 w - - 6 5",
+            "key": "A14B478D82FE85C9",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a4a3": 1,
+                  "a4a5": 1,
+                  "a4b3": 1,
+                  "a4b4": 1,
+                  "a4b5": 1,
+                  "e5e6": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "a4a3": 20,
+                  "a4a5": 20,
+                  "a4b3": 20,
+                  "a4b4": 20,
+                  "a4b5": 20,
+                  "e5e6": 15
+                },
+                "nodes": 115
+              }
+            }
+          },
+          "move": "h5h6",
+          "ply": 7
+        },
+        {
+          "after": {
+            "command": "position fen 6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1 moves d7d5 a5a4 h5h6 a4a5 h6h5 a5a4 h5h6 a4a5",
+            "fen": "6k1/8/7r/K2pP3/8/8/8/8 b - - 7 5",
+            "key": "831C8ADF7568D11D",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d5d4": 1,
+                  "g8f7": 1,
+                  "g8f8": 1,
+                  "g8g7": 1,
+                  "g8h7": 1,
+                  "g8h8": 1,
+                  "h6a6": 1,
+                  "h6b6": 1,
+                  "h6c6": 1,
+                  "h6d6": 1,
+                  "h6e6": 1,
+                  "h6f6": 1,
+                  "h6g6": 1,
+                  "h6h1": 1,
+                  "h6h2": 1,
+                  "h6h3": 1,
+                  "h6h4": 1,
+                  "h6h5": 1,
+                  "h6h7": 1,
+                  "h6h8": 1
+                },
+                "nodes": 20
+              },
+              "2": {
+                "moves": {
+                  "d5d4": 4,
+                  "g8f7": 4,
+                  "g8f8": 4,
+                  "g8g7": 4,
+                  "g8h7": 4,
+                  "g8h8": 4,
+                  "h6a6": 3,
+                  "h6b6": 3,
+                  "h6c6": 4,
+                  "h6d6": 5,
+                  "h6e6": 3,
+                  "h6f6": 5,
+                  "h6g6": 4,
+                  "h6h1": 6,
+                  "h6h2": 6,
+                  "h6h3": 6,
+                  "h6h4": 4,
+                  "h6h5": 6,
+                  "h6h7": 6,
+                  "h6h8": 6
+                },
+                "nodes": 91
+              }
+            }
+          },
+          "move": "a4a5",
+          "ply": 8
+        },
+        {
+          "after": {
+            "command": "position fen 6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1 moves d7d5 a5a4 h5h6 a4a5 h6h5 a5a4 h5h6 a4a5 h6h5",
+            "fen": "6k1/8/8/K2pP2r/8/8/8/8 w - - 8 6",
+            "key": "B7B0D64149BD86A0",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a5a4": 1,
+                  "a5a6": 1,
+                  "a5b4": 1,
+                  "a5b5": 1,
+                  "a5b6": 1,
+                  "e5e6": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "a5a4": 16,
+                  "a5a6": 16,
+                  "a5b4": 16,
+                  "a5b5": 16,
+                  "a5b6": 16,
+                  "e5e6": 15
+                },
+                "nodes": 95
+              }
+            }
+          },
+          "move": "h6h5",
+          "ply": 9
+        }
+      ],
+      "incremental": {
+        "command": "position fen 6k1/3p4/8/K3P2r/8/8/8/8 b - - 0 1 moves d7d5",
+        "fen": "6k1/8/8/K2pP2r/8/8/8/8 w - - 0 2",
+        "key": "B7B0D64149BD86A0",
+        "perft": {
+          "1": {
+            "moves": {
+              "a5a4": 1,
+              "a5a6": 1,
+              "a5b4": 1,
+              "a5b5": 1,
+              "a5b6": 1,
+              "e5e6": 1
+            },
+            "nodes": 6
+          },
+          "2": {
+            "moves": {
+              "a5a4": 16,
+              "a5a6": 16,
+              "a5b4": 16,
+              "a5b5": 16,
+              "a5b6": 16,
+              "e5e6": 15
+            },
+            "nodes": 95
+          }
+        }
+      },
+      "kind": "illegal_pin",
+      "name": "pinned_white_capturer"
+    },
+    {
+      "fen_ep": {
+        "command": "position fen 8/8/8/8/R2pP2k/8/8/1K6 b - e3 0 1",
+        "fen": "8/8/8/8/R2pP2k/8/8/1K6 b - e3 0 1",
+        "key": "944EA550AB65A55A",
+        "perft": {
+          "1": {
+            "moves": {
+              "d4d3": 1,
+              "h4g3": 1,
+              "h4g4": 1,
+              "h4g5": 1,
+              "h4h3": 1,
+              "h4h5": 1
+            },
+            "nodes": 6
+          },
+          "2": {
+            "moves": {
+              "d4d3": 15,
+              "h4g3": 16,
+              "h4g4": 16,
+              "h4g5": 16,
+              "h4h3": 16,
+              "h4h5": 16
+            },
+            "nodes": 95
+          }
+        }
+      },
+      "fen_no_ep": {
+        "command": "position fen 8/8/8/8/R2pP2k/8/8/1K6 b - - 0 1",
+        "fen": "8/8/8/8/R2pP2k/8/8/1K6 b - - 0 1",
+        "key": "4A43D48DA3210858",
+        "perft": {
+          "1": {
+            "moves": {
+              "d4d3": 1,
+              "h4g3": 1,
+              "h4g4": 1,
+              "h4g5": 1,
+              "h4h3": 1,
+              "h4h5": 1
+            },
+            "nodes": 6
+          },
+          "2": {
+            "moves": {
+              "d4d3": 15,
+              "h4g3": 16,
+              "h4g4": 16,
+              "h4g5": 16,
+              "h4h3": 16,
+              "h4h5": 16
+            },
+            "nodes": 95
+          }
+        }
+      },
+      "fixture": {
+        "cycle": [
+          "h4h5",
+          "a4a3",
+          "h5h4",
+          "a3a4"
+        ],
+        "ep_fen": "8/8/8/8/R2pP2k/8/8/1K6 b - e3 0 1",
+        "ep_move": "d4e3",
+        "kind": "illegal_pin",
+        "name": "pinned_black_capturer",
+        "no_ep_fen": "8/8/8/8/R2pP2k/8/8/1K6 b - - 0 1",
+        "push": "e2e4",
+        "start_fen": "8/8/8/8/R2p3k/8/4P3/1K6 w - - 0 1"
+      },
+      "history": [
+        {
+          "after": {
+            "command": "position fen 8/8/8/8/R2p3k/8/4P3/1K6 w - - 0 1 moves e2e4",
+            "fen": "8/8/8/8/R2pP2k/8/8/1K6 b - - 0 1",
+            "key": "4A43D48DA3210858",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d4d3": 1,
+                  "h4g3": 1,
+                  "h4g4": 1,
+                  "h4g5": 1,
+                  "h4h3": 1,
+                  "h4h5": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "d4d3": 15,
+                  "h4g3": 16,
+                  "h4g4": 16,
+                  "h4g5": 16,
+                  "h4h3": 16,
+                  "h4h5": 16
+                },
+                "nodes": 95
+              }
+            }
+          },
+          "move": "e2e4",
+          "ply": 1
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/8/R2p3k/8/4P3/1K6 w - - 0 1 moves e2e4 h4h5",
+            "fen": "8/8/8/7k/R2pP3/8/8/1K6 w - - 1 2",
+            "key": "4C48BD772994FFDE",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a4a1": 1,
+                  "a4a2": 1,
+                  "a4a3": 1,
+                  "a4a5": 1,
+                  "a4a6": 1,
+                  "a4a7": 1,
+                  "a4a8": 1,
+                  "a4b4": 1,
+                  "a4c4": 1,
+                  "a4d4": 1,
+                  "b1a1": 1,
+                  "b1a2": 1,
+                  "b1b2": 1,
+                  "b1c1": 1,
+                  "b1c2": 1,
+                  "e4e5": 1
+                },
+                "nodes": 16
+              },
+              "2": {
+                "moves": {
+                  "a4a1": 6,
+                  "a4a2": 6,
+                  "a4a3": 6,
+                  "a4a5": 4,
+                  "a4a6": 4,
+                  "a4a7": 6,
+                  "a4a8": 6,
+                  "a4b4": 6,
+                  "a4c4": 6,
+                  "a4d4": 5,
+                  "b1a1": 6,
+                  "b1a2": 6,
+                  "b1b2": 6,
+                  "b1c1": 6,
+                  "b1c2": 6,
+                  "e4e5": 6
+                },
+                "nodes": 91
+              }
+            }
+          },
+          "move": "h4h5",
+          "ply": 2
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/8/R2p3k/8/4P3/1K6 w - - 0 1 moves e2e4 h4h5 a4a3",
+            "fen": "8/8/8/7k/3pP3/R7/8/1K6 b - - 2 2",
+            "key": "00ED30381109141F",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d4d3": 1,
+                  "h5g4": 1,
+                  "h5g5": 1,
+                  "h5g6": 1,
+                  "h5h4": 1,
+                  "h5h6": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "d4d3": 15,
+                  "h5g4": 20,
+                  "h5g5": 20,
+                  "h5g6": 20,
+                  "h5h4": 20,
+                  "h5h6": 20
+                },
+                "nodes": 115
+              }
+            }
+          },
+          "move": "a4a3",
+          "ply": 3
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/8/R2p3k/8/4P3/1K6 w - - 0 1 moves e2e4 h4h5 a4a3 h5h4",
+            "fen": "8/8/8/8/3pP2k/R7/8/1K6 w - - 3 3",
+            "key": "06E659C29BBCE399",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a3a1": 1,
+                  "a3a2": 1,
+                  "a3a4": 1,
+                  "a3a5": 1,
+                  "a3a6": 1,
+                  "a3a7": 1,
+                  "a3a8": 1,
+                  "a3b3": 1,
+                  "a3c3": 1,
+                  "a3d3": 1,
+                  "a3e3": 1,
+                  "a3f3": 1,
+                  "a3g3": 1,
+                  "a3h3": 1,
+                  "b1a1": 1,
+                  "b1a2": 1,
+                  "b1b2": 1,
+                  "b1c1": 1,
+                  "b1c2": 1,
+                  "e4e5": 1
+                },
+                "nodes": 20
+              },
+              "2": {
+                "moves": {
+                  "a3a1": 6,
+                  "a3a2": 6,
+                  "a3a4": 6,
+                  "a3a5": 4,
+                  "a3a6": 6,
+                  "a3a7": 6,
+                  "a3a8": 6,
+                  "a3b3": 4,
+                  "a3c3": 5,
+                  "a3d3": 3,
+                  "a3e3": 5,
+                  "a3f3": 4,
+                  "a3g3": 3,
+                  "a3h3": 3,
+                  "b1a1": 4,
+                  "b1a2": 4,
+                  "b1b2": 4,
+                  "b1c1": 4,
+                  "b1c2": 4,
+                  "e4e5": 4
+                },
+                "nodes": 91
+              }
+            }
+          },
+          "move": "h5h4",
+          "ply": 4
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/8/R2p3k/8/4P3/1K6 w - - 0 1 moves e2e4 h4h5 a4a3 h5h4 a3a4",
+            "fen": "8/8/8/8/R2pP2k/8/8/1K6 b - - 4 3",
+            "key": "4A43D48DA3210858",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d4d3": 1,
+                  "h4g3": 1,
+                  "h4g4": 1,
+                  "h4g5": 1,
+                  "h4h3": 1,
+                  "h4h5": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "d4d3": 15,
+                  "h4g3": 16,
+                  "h4g4": 16,
+                  "h4g5": 16,
+                  "h4h3": 16,
+                  "h4h5": 16
+                },
+                "nodes": 95
+              }
+            }
+          },
+          "move": "a3a4",
+          "ply": 5
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/8/R2p3k/8/4P3/1K6 w - - 0 1 moves e2e4 h4h5 a4a3 h5h4 a3a4 h4h5",
+            "fen": "8/8/8/7k/R2pP3/8/8/1K6 w - - 5 4",
+            "key": "4C48BD772994FFDE",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a4a1": 1,
+                  "a4a2": 1,
+                  "a4a3": 1,
+                  "a4a5": 1,
+                  "a4a6": 1,
+                  "a4a7": 1,
+                  "a4a8": 1,
+                  "a4b4": 1,
+                  "a4c4": 1,
+                  "a4d4": 1,
+                  "b1a1": 1,
+                  "b1a2": 1,
+                  "b1b2": 1,
+                  "b1c1": 1,
+                  "b1c2": 1,
+                  "e4e5": 1
+                },
+                "nodes": 16
+              },
+              "2": {
+                "moves": {
+                  "a4a1": 6,
+                  "a4a2": 6,
+                  "a4a3": 6,
+                  "a4a5": 4,
+                  "a4a6": 4,
+                  "a4a7": 6,
+                  "a4a8": 6,
+                  "a4b4": 6,
+                  "a4c4": 6,
+                  "a4d4": 5,
+                  "b1a1": 6,
+                  "b1a2": 6,
+                  "b1b2": 6,
+                  "b1c1": 6,
+                  "b1c2": 6,
+                  "e4e5": 6
+                },
+                "nodes": 91
+              }
+            }
+          },
+          "move": "h4h5",
+          "ply": 6
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/8/R2p3k/8/4P3/1K6 w - - 0 1 moves e2e4 h4h5 a4a3 h5h4 a3a4 h4h5 a4a3",
+            "fen": "8/8/8/7k/3pP3/R7/8/1K6 b - - 6 4",
+            "key": "00ED30381109141F",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d4d3": 1,
+                  "h5g4": 1,
+                  "h5g5": 1,
+                  "h5g6": 1,
+                  "h5h4": 1,
+                  "h5h6": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "d4d3": 15,
+                  "h5g4": 20,
+                  "h5g5": 20,
+                  "h5g6": 20,
+                  "h5h4": 20,
+                  "h5h6": 20
+                },
+                "nodes": 115
+              }
+            }
+          },
+          "move": "a4a3",
+          "ply": 7
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/8/R2p3k/8/4P3/1K6 w - - 0 1 moves e2e4 h4h5 a4a3 h5h4 a3a4 h4h5 a4a3 h5h4",
+            "fen": "8/8/8/8/3pP2k/R7/8/1K6 w - - 7 5",
+            "key": "06E659C29BBCE399",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a3a1": 1,
+                  "a3a2": 1,
+                  "a3a4": 1,
+                  "a3a5": 1,
+                  "a3a6": 1,
+                  "a3a7": 1,
+                  "a3a8": 1,
+                  "a3b3": 1,
+                  "a3c3": 1,
+                  "a3d3": 1,
+                  "a3e3": 1,
+                  "a3f3": 1,
+                  "a3g3": 1,
+                  "a3h3": 1,
+                  "b1a1": 1,
+                  "b1a2": 1,
+                  "b1b2": 1,
+                  "b1c1": 1,
+                  "b1c2": 1,
+                  "e4e5": 1
+                },
+                "nodes": 20
+              },
+              "2": {
+                "moves": {
+                  "a3a1": 6,
+                  "a3a2": 6,
+                  "a3a4": 6,
+                  "a3a5": 4,
+                  "a3a6": 6,
+                  "a3a7": 6,
+                  "a3a8": 6,
+                  "a3b3": 4,
+                  "a3c3": 5,
+                  "a3d3": 3,
+                  "a3e3": 5,
+                  "a3f3": 4,
+                  "a3g3": 3,
+                  "a3h3": 3,
+                  "b1a1": 4,
+                  "b1a2": 4,
+                  "b1b2": 4,
+                  "b1c1": 4,
+                  "b1c2": 4,
+                  "e4e5": 4
+                },
+                "nodes": 91
+              }
+            }
+          },
+          "move": "h5h4",
+          "ply": 8
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/8/R2p3k/8/4P3/1K6 w - - 0 1 moves e2e4 h4h5 a4a3 h5h4 a3a4 h4h5 a4a3 h5h4 a3a4",
+            "fen": "8/8/8/8/R2pP2k/8/8/1K6 b - - 8 5",
+            "key": "4A43D48DA3210858",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d4d3": 1,
+                  "h4g3": 1,
+                  "h4g4": 1,
+                  "h4g5": 1,
+                  "h4h3": 1,
+                  "h4h5": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "d4d3": 15,
+                  "h4g3": 16,
+                  "h4g4": 16,
+                  "h4g5": 16,
+                  "h4h3": 16,
+                  "h4h5": 16
+                },
+                "nodes": 95
+              }
+            }
+          },
+          "move": "a3a4",
+          "ply": 9
+        }
+      ],
+      "incremental": {
+        "command": "position fen 8/8/8/8/R2p3k/8/4P3/1K6 w - - 0 1 moves e2e4",
+        "fen": "8/8/8/8/R2pP2k/8/8/1K6 b - - 0 1",
+        "key": "4A43D48DA3210858",
+        "perft": {
+          "1": {
+            "moves": {
+              "d4d3": 1,
+              "h4g3": 1,
+              "h4g4": 1,
+              "h4g5": 1,
+              "h4h3": 1,
+              "h4h5": 1
+            },
+            "nodes": 6
+          },
+          "2": {
+            "moves": {
+              "d4d3": 15,
+              "h4g3": 16,
+              "h4g4": 16,
+              "h4g5": 16,
+              "h4h3": 16,
+              "h4h5": 16
+            },
+            "nodes": 95
+          }
+        }
+      },
+      "kind": "illegal_pin",
+      "name": "pinned_black_capturer"
+    },
+    {
+      "fen_ep": {
+        "command": "position fen 4b1k1/8/8/3pP3/K7/8/8/8 w - d6 0 2",
+        "fen": "4b1k1/8/8/3pP3/K7/8/8/8 w - d6 0 2",
+        "key": "6294CFF9413AE2AE",
+        "perft": {
+          "1": {
+            "moves": {
+              "a4a3": 1,
+              "a4a5": 1,
+              "a4b3": 1,
+              "a4b4": 1
+            },
+            "nodes": 4
+          },
+          "2": {
+            "moves": {
+              "a4a3": 13,
+              "a4a5": 13,
+              "a4b3": 13,
+              "a4b4": 13
+            },
+            "nodes": 52
+          }
+        }
+      },
+      "fen_no_ep": {
+        "command": "position fen 4b1k1/8/8/3pP3/K7/8/8/8 w - - 0 2",
+        "fen": "4b1k1/8/8/3pP3/K7/8/8/8 w - - 0 2",
+        "key": "0E7BF4EA5C4F3EEC",
+        "perft": {
+          "1": {
+            "moves": {
+              "a4a3": 1,
+              "a4a5": 1,
+              "a4b3": 1,
+              "a4b4": 1
+            },
+            "nodes": 4
+          },
+          "2": {
+            "moves": {
+              "a4a3": 13,
+              "a4a5": 13,
+              "a4b3": 13,
+              "a4b4": 13
+            },
+            "nodes": 52
+          }
+        }
+      },
+      "fixture": {
+        "cycle": [
+          "a4a3",
+          "e8f7",
+          "a3a4",
+          "f7e8"
+        ],
+        "ep_fen": "4b1k1/8/8/3pP3/K7/8/8/8 w - d6 0 2",
+        "ep_move": "e5d6",
+        "kind": "illegal_unrelated_check",
+        "name": "unrelated_check_white_capturer",
+        "no_ep_fen": "4b1k1/8/8/3pP3/K7/8/8/8 w - - 0 2",
+        "push": "d7d5",
+        "start_fen": "4b1k1/3p4/8/4P3/K7/8/8/8 b - - 0 1"
+      },
+      "history": [
+        {
+          "after": {
+            "command": "position fen 4b1k1/3p4/8/4P3/K7/8/8/8 b - - 0 1 moves d7d5",
+            "fen": "4b1k1/8/8/3pP3/K7/8/8/8 w - - 0 2",
+            "key": "0E7BF4EA5C4F3EEC",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a4a3": 1,
+                  "a4a5": 1,
+                  "a4b3": 1,
+                  "a4b4": 1
+                },
+                "nodes": 4
+              },
+              "2": {
+                "moves": {
+                  "a4a3": 13,
+                  "a4a5": 13,
+                  "a4b3": 13,
+                  "a4b4": 13
+                },
+                "nodes": 52
+              }
+            }
+          },
+          "move": "d7d5",
+          "ply": 1
+        },
+        {
+          "after": {
+            "command": "position fen 4b1k1/3p4/8/4P3/K7/8/8/8 b - - 0 1 moves d7d5 a4a3",
+            "fen": "4b1k1/8/8/3pP3/8/K7/8/8 b - - 1 2",
+            "key": "2278A870DA39E950",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d5d4": 1,
+                  "e8a4": 1,
+                  "e8b5": 1,
+                  "e8c6": 1,
+                  "e8d7": 1,
+                  "e8f7": 1,
+                  "e8g6": 1,
+                  "e8h5": 1,
+                  "g8f7": 1,
+                  "g8f8": 1,
+                  "g8g7": 1,
+                  "g8h7": 1,
+                  "g8h8": 1
+                },
+                "nodes": 13
+              },
+              "2": {
+                "moves": {
+                  "d5d4": 5,
+                  "e8a4": 5,
+                  "e8b5": 5,
+                  "e8c6": 5,
+                  "e8d7": 5,
+                  "e8f7": 6,
+                  "e8g6": 6,
+                  "e8h5": 6,
+                  "g8f7": 5,
+                  "g8f8": 5,
+                  "g8g7": 5,
+                  "g8h7": 5,
+                  "g8h8": 5
+                },
+                "nodes": 68
+              }
+            }
+          },
+          "move": "a4a3",
+          "ply": 2
+        },
+        {
+          "after": {
+            "command": "position fen 4b1k1/3p4/8/4P3/K7/8/8/8 b - - 0 1 moves d7d5 a4a3 e8f7",
+            "fen": "6k1/5b2/8/3pP3/8/K7/8/8 w - - 2 3",
+            "key": "D8B980F1F983325A",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a3a2": 1,
+                  "a3a4": 1,
+                  "a3b2": 1,
+                  "a3b3": 1,
+                  "a3b4": 1,
+                  "e5e6": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "a3a2": 9,
+                  "a3a4": 9,
+                  "a3b2": 9,
+                  "a3b3": 9,
+                  "a3b4": 9,
+                  "e5e6": 9
+                },
+                "nodes": 54
+              }
+            }
+          },
+          "move": "e8f7",
+          "ply": 3
+        },
+        {
+          "after": {
+            "command": "position fen 4b1k1/3p4/8/4P3/K7/8/8/8 b - - 0 1 moves d7d5 a4a3 e8f7 a3a4",
+            "fen": "6k1/5b2/8/3pP3/K7/8/8/8 b - - 3 3",
+            "key": "F4BADC6B7FF5E5E6",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d5d4": 1,
+                  "f7e6": 1,
+                  "f7e8": 1,
+                  "f7g6": 1,
+                  "f7h5": 1,
+                  "g8f8": 1,
+                  "g8g7": 1,
+                  "g8h7": 1,
+                  "g8h8": 1
+                },
+                "nodes": 9
+              },
+              "2": {
+                "moves": {
+                  "d5d4": 5,
+                  "f7e6": 5,
+                  "f7e8": 4,
+                  "f7g6": 6,
+                  "f7h5": 6,
+                  "g8f8": 6,
+                  "g8g7": 6,
+                  "g8h7": 6,
+                  "g8h8": 6
+                },
+                "nodes": 50
+              }
+            }
+          },
+          "move": "a3a4",
+          "ply": 4
+        },
+        {
+          "after": {
+            "command": "position fen 4b1k1/3p4/8/4P3/K7/8/8/8 b - - 0 1 moves d7d5 a4a3 e8f7 a3a4 f7e8",
+            "fen": "4b1k1/8/8/3pP3/K7/8/8/8 w - - 4 4",
+            "key": "0E7BF4EA5C4F3EEC",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a4a3": 1,
+                  "a4a5": 1,
+                  "a4b3": 1,
+                  "a4b4": 1
+                },
+                "nodes": 4
+              },
+              "2": {
+                "moves": {
+                  "a4a3": 13,
+                  "a4a5": 13,
+                  "a4b3": 13,
+                  "a4b4": 13
+                },
+                "nodes": 52
+              }
+            }
+          },
+          "move": "f7e8",
+          "ply": 5
+        },
+        {
+          "after": {
+            "command": "position fen 4b1k1/3p4/8/4P3/K7/8/8/8 b - - 0 1 moves d7d5 a4a3 e8f7 a3a4 f7e8 a4a3",
+            "fen": "4b1k1/8/8/3pP3/8/K7/8/8 b - - 5 4",
+            "key": "2278A870DA39E950",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d5d4": 1,
+                  "e8a4": 1,
+                  "e8b5": 1,
+                  "e8c6": 1,
+                  "e8d7": 1,
+                  "e8f7": 1,
+                  "e8g6": 1,
+                  "e8h5": 1,
+                  "g8f7": 1,
+                  "g8f8": 1,
+                  "g8g7": 1,
+                  "g8h7": 1,
+                  "g8h8": 1
+                },
+                "nodes": 13
+              },
+              "2": {
+                "moves": {
+                  "d5d4": 5,
+                  "e8a4": 5,
+                  "e8b5": 5,
+                  "e8c6": 5,
+                  "e8d7": 5,
+                  "e8f7": 6,
+                  "e8g6": 6,
+                  "e8h5": 6,
+                  "g8f7": 5,
+                  "g8f8": 5,
+                  "g8g7": 5,
+                  "g8h7": 5,
+                  "g8h8": 5
+                },
+                "nodes": 68
+              }
+            }
+          },
+          "move": "a4a3",
+          "ply": 6
+        },
+        {
+          "after": {
+            "command": "position fen 4b1k1/3p4/8/4P3/K7/8/8/8 b - - 0 1 moves d7d5 a4a3 e8f7 a3a4 f7e8 a4a3 e8f7",
+            "fen": "6k1/5b2/8/3pP3/8/K7/8/8 w - - 6 5",
+            "key": "D8B980F1F983325A",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a3a2": 1,
+                  "a3a4": 1,
+                  "a3b2": 1,
+                  "a3b3": 1,
+                  "a3b4": 1,
+                  "e5e6": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "a3a2": 9,
+                  "a3a4": 9,
+                  "a3b2": 9,
+                  "a3b3": 9,
+                  "a3b4": 9,
+                  "e5e6": 9
+                },
+                "nodes": 54
+              }
+            }
+          },
+          "move": "e8f7",
+          "ply": 7
+        },
+        {
+          "after": {
+            "command": "position fen 4b1k1/3p4/8/4P3/K7/8/8/8 b - - 0 1 moves d7d5 a4a3 e8f7 a3a4 f7e8 a4a3 e8f7 a3a4",
+            "fen": "6k1/5b2/8/3pP3/K7/8/8/8 b - - 7 5",
+            "key": "F4BADC6B7FF5E5E6",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d5d4": 1,
+                  "f7e6": 1,
+                  "f7e8": 1,
+                  "f7g6": 1,
+                  "f7h5": 1,
+                  "g8f8": 1,
+                  "g8g7": 1,
+                  "g8h7": 1,
+                  "g8h8": 1
+                },
+                "nodes": 9
+              },
+              "2": {
+                "moves": {
+                  "d5d4": 5,
+                  "f7e6": 5,
+                  "f7e8": 4,
+                  "f7g6": 6,
+                  "f7h5": 6,
+                  "g8f8": 6,
+                  "g8g7": 6,
+                  "g8h7": 6,
+                  "g8h8": 6
+                },
+                "nodes": 50
+              }
+            }
+          },
+          "move": "a3a4",
+          "ply": 8
+        },
+        {
+          "after": {
+            "command": "position fen 4b1k1/3p4/8/4P3/K7/8/8/8 b - - 0 1 moves d7d5 a4a3 e8f7 a3a4 f7e8 a4a3 e8f7 a3a4 f7e8",
+            "fen": "4b1k1/8/8/3pP3/K7/8/8/8 w - - 8 6",
+            "key": "0E7BF4EA5C4F3EEC",
+            "perft": {
+              "1": {
+                "moves": {
+                  "a4a3": 1,
+                  "a4a5": 1,
+                  "a4b3": 1,
+                  "a4b4": 1
+                },
+                "nodes": 4
+              },
+              "2": {
+                "moves": {
+                  "a4a3": 13,
+                  "a4a5": 13,
+                  "a4b3": 13,
+                  "a4b4": 13
+                },
+                "nodes": 52
+              }
+            }
+          },
+          "move": "f7e8",
+          "ply": 9
+        }
+      ],
+      "incremental": {
+        "command": "position fen 4b1k1/3p4/8/4P3/K7/8/8/8 b - - 0 1 moves d7d5",
+        "fen": "4b1k1/8/8/3pP3/K7/8/8/8 w - - 0 2",
+        "key": "0E7BF4EA5C4F3EEC",
+        "perft": {
+          "1": {
+            "moves": {
+              "a4a3": 1,
+              "a4a5": 1,
+              "a4b3": 1,
+              "a4b4": 1
+            },
+            "nodes": 4
+          },
+          "2": {
+            "moves": {
+              "a4a3": 13,
+              "a4a5": 13,
+              "a4b3": 13,
+              "a4b4": 13
+            },
+            "nodes": 52
+          }
+        }
+      },
+      "kind": "illegal_unrelated_check",
+      "name": "unrelated_check_white_capturer"
+    },
+    {
+      "fen_ep": {
+        "command": "position fen 8/8/8/7k/3pP3/8/8/1K1B4 b - e3 0 1",
+        "fen": "8/8/8/7k/3pP3/8/8/1K1B4 b - e3 0 1",
+        "key": "678FCAAC167F8CAC",
+        "perft": {
+          "1": {
+            "moves": {
+              "h5g5": 1,
+              "h5g6": 1,
+              "h5h4": 1,
+              "h5h6": 1
+            },
+            "nodes": 4
+          },
+          "2": {
+            "moves": {
+              "h5g5": 13,
+              "h5g6": 13,
+              "h5h4": 13,
+              "h5h6": 13
+            },
+            "nodes": 52
+          }
+        }
+      },
+      "fen_no_ep": {
+        "command": "position fen 8/8/8/7k/3pP3/8/8/1K1B4 b - - 0 1",
+        "fen": "8/8/8/7k/3pP3/8/8/1K1B4 b - - 0 1",
+        "key": "B982BB711E3B21AE",
+        "perft": {
+          "1": {
+            "moves": {
+              "h5g5": 1,
+              "h5g6": 1,
+              "h5h4": 1,
+              "h5h6": 1
+            },
+            "nodes": 4
+          },
+          "2": {
+            "moves": {
+              "h5g5": 13,
+              "h5g6": 13,
+              "h5h4": 13,
+              "h5h6": 13
+            },
+            "nodes": 52
+          }
+        }
+      },
+      "fixture": {
+        "cycle": [
+          "h5h6",
+          "d1c2",
+          "h6h5",
+          "c2d1"
+        ],
+        "ep_fen": "8/8/8/7k/3pP3/8/8/1K1B4 b - e3 0 1",
+        "ep_move": "d4e3",
+        "kind": "illegal_unrelated_check",
+        "name": "unrelated_check_black_capturer",
+        "no_ep_fen": "8/8/8/7k/3pP3/8/8/1K1B4 b - - 0 1",
+        "push": "e2e4",
+        "start_fen": "8/8/8/7k/3p4/8/4P3/1K1B4 w - - 0 1"
+      },
+      "history": [
+        {
+          "after": {
+            "command": "position fen 8/8/8/7k/3p4/8/4P3/1K1B4 w - - 0 1 moves e2e4",
+            "fen": "8/8/8/7k/3pP3/8/8/1K1B4 b - - 0 1",
+            "key": "B982BB711E3B21AE",
+            "perft": {
+              "1": {
+                "moves": {
+                  "h5g5": 1,
+                  "h5g6": 1,
+                  "h5h4": 1,
+                  "h5h6": 1
+                },
+                "nodes": 4
+              },
+              "2": {
+                "moves": {
+                  "h5g5": 13,
+                  "h5g6": 13,
+                  "h5h4": 13,
+                  "h5h6": 13
+                },
+                "nodes": 52
+              }
+            }
+          },
+          "move": "e2e4",
+          "ply": 1
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/7k/3p4/8/4P3/1K1B4 w - - 0 1 moves e2e4 h5h6",
+            "fen": "8/8/7k/8/3pP3/8/8/1K1B4 w - - 1 2",
+            "key": "C70CD2B833A669CD",
+            "perft": {
+              "1": {
+                "moves": {
+                  "b1a1": 1,
+                  "b1a2": 1,
+                  "b1b2": 1,
+                  "b1c1": 1,
+                  "b1c2": 1,
+                  "d1a4": 1,
+                  "d1b3": 1,
+                  "d1c2": 1,
+                  "d1e2": 1,
+                  "d1f3": 1,
+                  "d1g4": 1,
+                  "d1h5": 1,
+                  "e4e5": 1
+                },
+                "nodes": 13
+              },
+              "2": {
+                "moves": {
+                  "b1a1": 5,
+                  "b1a2": 5,
+                  "b1b2": 5,
+                  "b1c1": 5,
+                  "b1c2": 5,
+                  "d1a4": 6,
+                  "d1b3": 6,
+                  "d1c2": 6,
+                  "d1e2": 5,
+                  "d1f3": 5,
+                  "d1g4": 5,
+                  "d1h5": 5,
+                  "e4e5": 5
+                },
+                "nodes": 68
+              }
+            }
+          },
+          "move": "h5h6",
+          "ply": 2
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/7k/3p4/8/4P3/1K1B4 w - - 0 1 moves e2e4 h5h6 d1c2",
+            "fen": "8/8/7k/8/3pP3/8/2B5/1K6 b - - 2 2",
+            "key": "4CAF857CD5F9AD39",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d4d3": 1,
+                  "h6g5": 1,
+                  "h6g6": 1,
+                  "h6g7": 1,
+                  "h6h5": 1,
+                  "h6h7": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "d4d3": 9,
+                  "h6g5": 9,
+                  "h6g6": 9,
+                  "h6g7": 9,
+                  "h6h5": 9,
+                  "h6h7": 9
+                },
+                "nodes": 54
+              }
+            }
+          },
+          "move": "d1c2",
+          "ply": 3
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/7k/3p4/8/4P3/1K1B4 w - - 0 1 moves e2e4 h5h6 d1c2 h6h5",
+            "fen": "8/8/8/7k/3pP3/8/2B5/1K6 w - - 3 3",
+            "key": "3221ECB5F864E55A",
+            "perft": {
+              "1": {
+                "moves": {
+                  "b1a1": 1,
+                  "b1a2": 1,
+                  "b1b2": 1,
+                  "b1c1": 1,
+                  "c2a4": 1,
+                  "c2b3": 1,
+                  "c2d1": 1,
+                  "c2d3": 1,
+                  "e4e5": 1
+                },
+                "nodes": 9
+              },
+              "2": {
+                "moves": {
+                  "b1a1": 6,
+                  "b1a2": 6,
+                  "b1b2": 6,
+                  "b1c1": 6,
+                  "c2a4": 6,
+                  "c2b3": 6,
+                  "c2d1": 4,
+                  "c2d3": 5,
+                  "e4e5": 5
+                },
+                "nodes": 50
+              }
+            }
+          },
+          "move": "h6h5",
+          "ply": 4
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/7k/3p4/8/4P3/1K1B4 w - - 0 1 moves e2e4 h5h6 d1c2 h6h5 c2d1",
+            "fen": "8/8/8/7k/3pP3/8/8/1K1B4 b - - 4 3",
+            "key": "B982BB711E3B21AE",
+            "perft": {
+              "1": {
+                "moves": {
+                  "h5g5": 1,
+                  "h5g6": 1,
+                  "h5h4": 1,
+                  "h5h6": 1
+                },
+                "nodes": 4
+              },
+              "2": {
+                "moves": {
+                  "h5g5": 13,
+                  "h5g6": 13,
+                  "h5h4": 13,
+                  "h5h6": 13
+                },
+                "nodes": 52
+              }
+            }
+          },
+          "move": "c2d1",
+          "ply": 5
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/7k/3p4/8/4P3/1K1B4 w - - 0 1 moves e2e4 h5h6 d1c2 h6h5 c2d1 h5h6",
+            "fen": "8/8/7k/8/3pP3/8/8/1K1B4 w - - 5 4",
+            "key": "C70CD2B833A669CD",
+            "perft": {
+              "1": {
+                "moves": {
+                  "b1a1": 1,
+                  "b1a2": 1,
+                  "b1b2": 1,
+                  "b1c1": 1,
+                  "b1c2": 1,
+                  "d1a4": 1,
+                  "d1b3": 1,
+                  "d1c2": 1,
+                  "d1e2": 1,
+                  "d1f3": 1,
+                  "d1g4": 1,
+                  "d1h5": 1,
+                  "e4e5": 1
+                },
+                "nodes": 13
+              },
+              "2": {
+                "moves": {
+                  "b1a1": 5,
+                  "b1a2": 5,
+                  "b1b2": 5,
+                  "b1c1": 5,
+                  "b1c2": 5,
+                  "d1a4": 6,
+                  "d1b3": 6,
+                  "d1c2": 6,
+                  "d1e2": 5,
+                  "d1f3": 5,
+                  "d1g4": 5,
+                  "d1h5": 5,
+                  "e4e5": 5
+                },
+                "nodes": 68
+              }
+            }
+          },
+          "move": "h5h6",
+          "ply": 6
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/7k/3p4/8/4P3/1K1B4 w - - 0 1 moves e2e4 h5h6 d1c2 h6h5 c2d1 h5h6 d1c2",
+            "fen": "8/8/7k/8/3pP3/8/2B5/1K6 b - - 6 4",
+            "key": "4CAF857CD5F9AD39",
+            "perft": {
+              "1": {
+                "moves": {
+                  "d4d3": 1,
+                  "h6g5": 1,
+                  "h6g6": 1,
+                  "h6g7": 1,
+                  "h6h5": 1,
+                  "h6h7": 1
+                },
+                "nodes": 6
+              },
+              "2": {
+                "moves": {
+                  "d4d3": 9,
+                  "h6g5": 9,
+                  "h6g6": 9,
+                  "h6g7": 9,
+                  "h6h5": 9,
+                  "h6h7": 9
+                },
+                "nodes": 54
+              }
+            }
+          },
+          "move": "d1c2",
+          "ply": 7
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/7k/3p4/8/4P3/1K1B4 w - - 0 1 moves e2e4 h5h6 d1c2 h6h5 c2d1 h5h6 d1c2 h6h5",
+            "fen": "8/8/8/7k/3pP3/8/2B5/1K6 w - - 7 5",
+            "key": "3221ECB5F864E55A",
+            "perft": {
+              "1": {
+                "moves": {
+                  "b1a1": 1,
+                  "b1a2": 1,
+                  "b1b2": 1,
+                  "b1c1": 1,
+                  "c2a4": 1,
+                  "c2b3": 1,
+                  "c2d1": 1,
+                  "c2d3": 1,
+                  "e4e5": 1
+                },
+                "nodes": 9
+              },
+              "2": {
+                "moves": {
+                  "b1a1": 6,
+                  "b1a2": 6,
+                  "b1b2": 6,
+                  "b1c1": 6,
+                  "c2a4": 6,
+                  "c2b3": 6,
+                  "c2d1": 4,
+                  "c2d3": 5,
+                  "e4e5": 5
+                },
+                "nodes": 50
+              }
+            }
+          },
+          "move": "h6h5",
+          "ply": 8
+        },
+        {
+          "after": {
+            "command": "position fen 8/8/8/7k/3p4/8/4P3/1K1B4 w - - 0 1 moves e2e4 h5h6 d1c2 h6h5 c2d1 h5h6 d1c2 h6h5 c2d1",
+            "fen": "8/8/8/7k/3pP3/8/8/1K1B4 b - - 8 5",
+            "key": "B982BB711E3B21AE",
+            "perft": {
+              "1": {
+                "moves": {
+                  "h5g5": 1,
+                  "h5g6": 1,
+                  "h5h4": 1,
+                  "h5h6": 1
+                },
+                "nodes": 4
+              },
+              "2": {
+                "moves": {
+                  "h5g5": 13,
+                  "h5g6": 13,
+                  "h5h4": 13,
+                  "h5h6": 13
+                },
+                "nodes": 52
+              }
+            }
+          },
+          "move": "c2d1",
+          "ply": 9
+        }
+      ],
+      "incremental": {
+        "command": "position fen 8/8/8/7k/3p4/8/4P3/1K1B4 w - - 0 1 moves e2e4",
+        "fen": "8/8/8/7k/3pP3/8/8/1K1B4 b - - 0 1",
+        "key": "B982BB711E3B21AE",
+        "perft": {
+          "1": {
+            "moves": {
+              "h5g5": 1,
+              "h5g6": 1,
+              "h5h4": 1,
+              "h5h6": 1
+            },
+            "nodes": 4
+          },
+          "2": {
+            "moves": {
+              "h5g5": 13,
+              "h5g6": 13,
+              "h5h4": 13,
+              "h5h6": 13
+            },
+            "nodes": 52
+          }
+        }
+      },
+      "kind": "illegal_unrelated_check",
+      "name": "unrelated_check_black_capturer"
+    },
+    {
+      "fen_ep": {
+        "command": "position fen 6k1/8/7r/K2pP3/8/8/8/8 w - d6 0 2",
+        "fen": "6k1/8/7r/K2pP3/8/8/8/8 w - d6 0 2",
+        "key": "4F069168A1E75693",
+        "perft": {
+          "1": {
+            "moves": {
+              "a5a4": 1,
+              "a5b4": 1,
+              "a5b5": 1,
+              "e5d6": 1,
+              "e5e6": 1
+            },
+            "nodes": 5
+          },
+          "2": {
+            "moves": {
+              "a5a4": 20,
+              "a5b4": 20,
+              "a5b5": 20,
+              "e5d6": 16,
+              "e5e6": 15
+            },
+            "nodes": 91
+          }
+        }
+      },
+      "fen_no_ep": {
+        "command": "position fen 6k1/8/7r/K2pP3/8/8/8/8 w - - 0 2",
+        "fen": "6k1/8/7r/K2pP3/8/8/8/8 w - - 0 2",
+        "key": "23E9AA7BBC928AD1",
+        "perft": {
+          "1": {
+            "moves": {
+              "a5a4": 1,
+              "a5b4": 1,
+              "a5b5": 1,
+              "e5e6": 1
+            },
+            "nodes": 4
+          },
+          "2": {
+            "moves": {
+              "a5a4": 20,
+              "a5b4": 20,
+              "a5b5": 20,
+              "e5e6": 15
+            },
+            "nodes": 75
+          }
+        }
+      },
+      "fixture": {
+        "cycle": [],
+        "ep_fen": "6k1/8/7r/K2pP3/8/8/8/8 w - d6 0 2",
+        "ep_move": "e5d6",
+        "kind": "legal_control",
+        "name": "legal_white_capturer",
+        "no_ep_fen": "6k1/8/7r/K2pP3/8/8/8/8 w - - 0 2",
+        "push": "d7d5",
+        "start_fen": "6k1/3p4/7r/K3P3/8/8/8/8 b - - 0 1"
+      },
+      "history": [],
+      "incremental": {
+        "command": "position fen 6k1/3p4/7r/K3P3/8/8/8/8 b - - 0 1 moves d7d5",
+        "fen": "6k1/8/7r/K2pP3/8/8/8/8 w - d6 0 2",
+        "key": "4F069168A1E75693",
+        "perft": {
+          "1": {
+            "moves": {
+              "a5a4": 1,
+              "a5b4": 1,
+              "a5b5": 1,
+              "e5d6": 1,
+              "e5e6": 1
+            },
+            "nodes": 5
+          },
+          "2": {
+            "moves": {
+              "a5a4": 20,
+              "a5b4": 20,
+              "a5b5": 20,
+              "e5d6": 16,
+              "e5e6": 15
+            },
+            "nodes": 91
+          }
+        }
+      },
+      "kind": "legal_control",
+      "name": "legal_white_capturer"
+    },
+    {
+      "fen_ep": {
+        "command": "position fen 8/8/8/8/3pP2k/R7/8/1K6 b - e3 0 1",
+        "fen": "8/8/8/8/3pP2k/R7/8/1K6 b - e3 0 1",
+        "key": "781E08BB5A021557",
+        "perft": {
+          "1": {
+            "moves": {
+              "d4d3": 1,
+              "d4e3": 1,
+              "h4g4": 1,
+              "h4g5": 1,
+              "h4h5": 1
+            },
+            "nodes": 5
+          },
+          "2": {
+            "moves": {
+              "d4d3": 15,
+              "d4e3": 16,
+              "h4g4": 20,
+              "h4g5": 20,
+              "h4h5": 20
+            },
+            "nodes": 91
+          }
+        }
+      },
+      "fen_no_ep": {
+        "command": "position fen 8/8/8/8/3pP2k/R7/8/1K6 b - - 0 1",
+        "fen": "8/8/8/8/3pP2k/R7/8/1K6 b - - 0 1",
+        "key": "A61379665246B855",
+        "perft": {
+          "1": {
+            "moves": {
+              "d4d3": 1,
+              "h4g4": 1,
+              "h4g5": 1,
+              "h4h5": 1
+            },
+            "nodes": 4
+          },
+          "2": {
+            "moves": {
+              "d4d3": 15,
+              "h4g4": 20,
+              "h4g5": 20,
+              "h4h5": 20
+            },
+            "nodes": 75
+          }
+        }
+      },
+      "fixture": {
+        "cycle": [],
+        "ep_fen": "8/8/8/8/3pP2k/R7/8/1K6 b - e3 0 1",
+        "ep_move": "d4e3",
+        "kind": "legal_control",
+        "name": "legal_black_capturer",
+        "no_ep_fen": "8/8/8/8/3pP2k/R7/8/1K6 b - - 0 1",
+        "push": "e2e4",
+        "start_fen": "8/8/8/8/3p3k/R7/4P3/1K6 w - - 0 1"
+      },
+      "history": [],
+      "incremental": {
+        "command": "position fen 8/8/8/8/3p3k/R7/4P3/1K6 w - - 0 1 moves e2e4",
+        "fen": "8/8/8/8/3pP2k/R7/8/1K6 b - e3 0 1",
+        "key": "781E08BB5A021557",
+        "perft": {
+          "1": {
+            "moves": {
+              "d4d3": 1,
+              "d4e3": 1,
+              "h4g4": 1,
+              "h4g5": 1,
+              "h4h5": 1
+            },
+            "nodes": 5
+          },
+          "2": {
+            "moves": {
+              "d4d3": 15,
+              "d4e3": 16,
+              "h4g4": 20,
+              "h4g5": 20,
+              "h4h5": 20
+            },
+            "nodes": 91
+          }
+        }
+      },
+      "kind": "legal_control",
+      "name": "legal_black_capturer"
+    }
+  ],
+  "generated_at_utc": "2026-10-01T00:27:56.758495+00:00",
+  "process": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout_tail": "\n"
+  },
+  "schema": "ngn-ep-repetition-stockfish-probe-v1",
+  "source_head": "701328646490f1bc8ed214002f578a58c9b0723e",
+  "stockfish": {
+    "banner": "Stockfish 18 by the Stockfish developers (see AUTHORS file)",
+    "path": "/home/ehrli/nnue-owned-morning-20260930/inputs/stockfish18",
+    "sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9",
+    "uci_id": [
+      "id name Stockfish 18",
+      "id author the Stockfish developers (see AUTHORS file)"
+    ]
+  }
+}

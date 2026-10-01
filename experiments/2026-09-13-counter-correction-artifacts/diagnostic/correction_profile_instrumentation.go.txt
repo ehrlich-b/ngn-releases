@@ -1,0 +1,218 @@
+package engine
+
+// Experiment-only passive instrumentation. Search never reads these counters.
+
+type correctionProfileValueStats struct {
+	Count        uint64            `json:"count"`
+	NonZero      uint64            `json:"nonzero"`
+	Positive     uint64            `json:"positive"`
+	Negative     uint64            `json:"negative"`
+	Sum          int64             `json:"sum"`
+	AbsSum       uint64            `json:"abs_sum"`
+	Min          int               `json:"min"`
+	Max          int               `json:"max"`
+	AbsHistogram map[string]uint64 `json:"abs_histogram,omitempty"`
+}
+
+func (s *correctionProfileValueStats) record(value int) {
+	if s.Count == 0 {
+		s.Min, s.Max = value, value
+	} else {
+		if value < s.Min {
+			s.Min = value
+		}
+		if value > s.Max {
+			s.Max = value
+		}
+	}
+	s.Count++
+	s.Sum += int64(value)
+	abs := value
+	if abs < 0 {
+		abs = -abs
+	}
+	s.AbsSum += uint64(abs)
+	if value > 0 {
+		s.Positive++
+	} else if value < 0 {
+		s.Negative++
+	} else {
+		return
+	}
+	s.NonZero++
+	if s.AbsHistogram == nil {
+		s.AbsHistogram = make(map[string]uint64)
+	}
+	var bucket string
+	switch {
+	case abs <= 4:
+		bucket = "1-4"
+	case abs <= 9:
+		bucket = "5-9"
+	case abs <= 19:
+		bucket = "10-19"
+	case abs <= 32:
+		bucket = "20-32"
+	case abs <= 48:
+		bucket = "33-48"
+	case abs <= 96:
+		bucket = "49-96"
+	default:
+		bucket = "97+"
+	}
+	s.AbsHistogram[bucket]++
+}
+
+type correctionProfilePredicateStats struct {
+	Eligible         uint64 `json:"eligible"`
+	LiveTrue         uint64 `json:"live_true"`
+	MinorOffTrue     uint64 `json:"minor_off_true"`
+	TurnedOnByMinor  uint64 `json:"turned_on_by_minor"`
+	TurnedOffByMinor uint64 `json:"turned_off_by_minor"`
+}
+
+func (s *correctionProfilePredicateStats) record(eligible, live, minorOff bool) {
+	if !eligible {
+		return
+	}
+	s.Eligible++
+	if live {
+		s.LiveTrue++
+	}
+	if minorOff {
+		s.MinorOffTrue++
+	}
+	if live && !minorOff {
+		s.TurnedOnByMinor++
+	}
+	if !live && minorOff {
+		s.TurnedOffByMinor++
+	}
+}
+
+type correctionProfileTTStats struct {
+	Hits               uint64            `json:"hits"`
+	Compatible         uint64            `json:"compatible"`
+	LiveApplied        uint64            `json:"live_applied"`
+	MinorOffApplied    uint64            `json:"minor_off_applied"`
+	EligibilityChanged uint64            `json:"eligibility_changed"`
+	NodeTypes          map[string]uint64 `json:"node_types,omitempty"`
+}
+
+type correctionProfileStats struct {
+	MainNodes               uint64                          `json:"main_nodes"`
+	RootNodes               uint64                          `json:"root_nodes"`
+	QNodes                  uint64                          `json:"q_nodes"`
+	RawStatic               correctionProfileValueStats     `json:"raw_static"`
+	PawnTerm                correctionProfileValueStats     `json:"pawn_term"`
+	NonPawnTerm             correctionProfileValueStats     `json:"nonpawn_term"`
+	MinorTerm               correctionProfileValueStats     `json:"minor_term"`
+	Aggregate               correctionProfileValueStats     `json:"aggregate"`
+	LivePolicyStatic        correctionProfileValueStats     `json:"live_policy_static"`
+	MinorOffPolicyStatic    correctionProfileValueStats     `json:"minor_off_policy_static"`
+	PawnEntryAtLimit        uint64                          `json:"pawn_entry_at_limit"`
+	NonPawnEntryAtLimit     uint64                          `json:"nonpawn_entry_at_limit"`
+	MinorEntryAtLimit       uint64                          `json:"minor_entry_at_limit"`
+	TermsAllSameNonzeroSign uint64                          `json:"terms_all_same_nonzero_sign"`
+	TermsMixedSign          uint64                          `json:"terms_mixed_sign"`
+	TT                      correctionProfileTTStats        `json:"tt"`
+	RFP                     correctionProfilePredicateStats `json:"rfp"`
+	Futility                correctionProfilePredicateStats `json:"futility"`
+	NMP                     correctionProfilePredicateStats `json:"nmp"`
+	QStandPatBeta           correctionProfilePredicateStats `json:"q_stand_pat_beta"`
+	QStandPatAlpha          correctionProfilePredicateStats `json:"q_stand_pat_alpha"`
+}
+
+type correctionProfileRecorder struct{ Stats correctionProfileStats }
+
+func correctionProfileNodeType(nodeType NodeType) string {
+	switch nodeType {
+	case Exact:
+		return "exact"
+	case LowerBound:
+		return "lower"
+	case UpperBound:
+		return "upper"
+	default:
+		return "?"
+	}
+}
+
+func correctionProfileRefine(base, ttEval int, ttHit, inSingular bool, nodeType NodeType) (int, bool, bool) {
+	compatible := ttHit && !inSingular && abs(ttEval) < MATE_IN_MAX
+	if !compatible {
+		return base, false, false
+	}
+	applied := nodeType == Exact || (nodeType == LowerBound && ttEval > base) || (nodeType == UpperBound && ttEval < base)
+	if applied {
+		return ttEval, true, true
+	}
+	return base, false, true
+}
+
+func (r *correctionProfileRecorder) recordValues(raw, pawn, nonPawn, minor, live, minorOff int, entries [3]int) {
+	r.Stats.RawStatic.record(raw)
+	r.Stats.PawnTerm.record(pawn)
+	r.Stats.NonPawnTerm.record(nonPawn)
+	r.Stats.MinorTerm.record(minor)
+	r.Stats.Aggregate.record(pawn + nonPawn + minor)
+	r.Stats.LivePolicyStatic.record(live)
+	r.Stats.MinorOffPolicyStatic.record(minorOff)
+	if entries[0] == corrHistLimit || entries[0] == -corrHistLimit {
+		r.Stats.PawnEntryAtLimit++
+	}
+	if entries[1] == corrHistLimit || entries[1] == -corrHistLimit {
+		r.Stats.NonPawnEntryAtLimit++
+	}
+	if entries[2] == corrHistLimit || entries[2] == -corrHistLimit {
+		r.Stats.MinorEntryAtLimit++
+	}
+	if pawn != 0 && nonPawn != 0 && minor != 0 && ((pawn > 0 && nonPawn > 0 && minor > 0) || (pawn < 0 && nonPawn < 0 && minor < 0)) {
+		r.Stats.TermsAllSameNonzeroSign++
+	} else if (pawn < 0 || nonPawn < 0 || minor < 0) && (pawn > 0 || nonPawn > 0 || minor > 0) {
+		r.Stats.TermsMixedSign++
+	}
+}
+
+func (r *correctionProfileRecorder) recordRoot(raw, pawn, nonPawn, minor int, entries [3]int) {
+	r.Stats.RootNodes++
+	r.recordValues(raw, pawn, nonPawn, minor, raw+pawn+nonPawn+minor, raw+pawn+nonPawn, entries)
+}
+
+func (r *correctionProfileRecorder) recordMain(raw, pawn, nonPawn, minor, live, minorOff int, entries [3]int,
+	ttHit, ttCompatible, liveApplied, minorOffApplied bool, ttType NodeType,
+	rfpEligible, rfpLive, rfpMinorOff, futilityEligible, futilityLive, futilityMinorOff,
+	nmpEligible, nmpLive, nmpMinorOff bool) {
+	r.Stats.MainNodes++
+	r.recordValues(raw, pawn, nonPawn, minor, live, minorOff, entries)
+	if ttHit {
+		r.Stats.TT.Hits++
+	}
+	if ttCompatible {
+		r.Stats.TT.Compatible++
+		if r.Stats.TT.NodeTypes == nil {
+			r.Stats.TT.NodeTypes = make(map[string]uint64)
+		}
+		r.Stats.TT.NodeTypes[correctionProfileNodeType(ttType)]++
+	}
+	if liveApplied {
+		r.Stats.TT.LiveApplied++
+	}
+	if minorOffApplied {
+		r.Stats.TT.MinorOffApplied++
+	}
+	if liveApplied != minorOffApplied {
+		r.Stats.TT.EligibilityChanged++
+	}
+	r.Stats.RFP.record(rfpEligible, rfpLive, rfpMinorOff)
+	r.Stats.Futility.record(futilityEligible, futilityLive, futilityMinorOff)
+	r.Stats.NMP.record(nmpEligible, nmpLive, nmpMinorOff)
+}
+
+func (r *correctionProfileRecorder) recordQ(raw, pawn, nonPawn, minor, standPat, alpha, beta int, entries [3]int) {
+	r.Stats.QNodes++
+	minorOff := raw + pawn + nonPawn
+	r.recordValues(raw, pawn, nonPawn, minor, standPat, minorOff, entries)
+	r.Stats.QStandPatBeta.record(true, standPat >= beta, minorOff >= beta)
+	r.Stats.QStandPatAlpha.record(true, standPat > alpha, minorOff > alpha)
+}

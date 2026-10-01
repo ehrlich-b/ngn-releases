@@ -1,0 +1,117 @@
+{
+  "schema": "ngn-h1-history-policy-result-v1",
+  "state": "COMPLETE",
+  "decision": "ACCEPT",
+  "accepted_policy": "11",
+  "claim_boundary": "Relative Threads=1 Rodent-V1.2 quiet-history policy evidence at 10+0.1 on the shared WSL host; not an absolute rating or 3300 proof",
+  "engine_source": {
+    "commit": "2cde3b31f6e09f8c03eab4ee723b823322645aa7",
+    "tree": "f3fbeb453dee83a355c9160c3f3b4e9a323141c2",
+    "policy_00_sha256": "87162e7c941d2d88f5c12696fd43783c1cf7edf1a3bb1f5ce00151b88d2d22f9",
+    "policy_11_sha256": "9d1fa460f23a0ceb544dc2474ec211626b105f738ec2bae19edfd829de2828b5"
+  },
+  "protocol": {
+    "time_control": "10+0.1",
+    "threads": 1,
+    "hash_mb": 128,
+    "concurrency": 4,
+    "evaluator": "rodent-v1.2-default",
+    "bootstrap_replicates": 100000
+  },
+  "phases": {
+    "aa": {
+      "pairs": 50,
+      "score_rate": 0.485,
+      "elo": -10.426196175570977,
+      "lower95_elo": -48.962560037161964,
+      "upper95_elo": 24.36033165250981,
+      "penta_0_to_4": [
+        2,
+        10,
+        27,
+        11,
+        0
+      ]
+    },
+    "pilot_10_vs_00": {
+      "pairs": 64,
+      "score_rate": 0.55859375,
+      "elo": 40.90303759265683,
+      "lower95_elo": 10.86089841744591,
+      "upper95_elo": 71.56821962981816,
+      "penta_0_to_4": [
+        0,
+        9,
+        33,
+        20,
+        2
+      ]
+    },
+    "pilot_11_vs_01": {
+      "pairs": 64,
+      "score_rate": 0.54296875,
+      "elo": 29.931575403173355,
+      "lower95_elo": -5.4291228757095285,
+      "upper95_elo": 65.9240994583969,
+      "penta_0_to_4": [
+        0,
+        13,
+        30,
+        18,
+        3
+      ]
+    },
+    "pilot_11_vs_00": {
+      "pairs": 64,
+      "score_rate": 0.58984375,
+      "elo": 63.11505928929254,
+      "lower95_elo": 24.469442305550416,
+      "upper95_elo": 100.42240828085703,
+      "penta_0_to_4": [
+        2,
+        8,
+        22,
+        29,
+        3
+      ]
+    },
+    "confirmation_11_vs_00": {
+      "pairs": 200,
+      "games": 400,
+      "score_rate": 0.58125,
+      "elo": 56.96325834124352,
+      "lower95_elo": 38.3731888566979,
+      "upper95_elo": 75.88264847563141,
+      "penta_0_to_4": [
+        1,
+        23,
+        97,
+        68,
+        11
+      ]
+    }
+  },
+  "interaction": {
+    "definition": "Elo(11/01) - Elo(10/00)",
+    "elo_difference": -10.971462189483475,
+    "lower95_elo_difference": -55.384770483637155,
+    "upper95_elo_difference": 35.658347646997235,
+    "classification": "NO_MATERIAL_INTERACTION_RESOLVED"
+  },
+  "evidence": {
+    "run_root": "/home/ehrli/h1-history-policy-gate-20260919/run-001",
+    "frozen_manifest_sha256": "661c0463bc30a9e503ced54e8174161a8e6613f2b8ef5846a6bd02a8b80ad98e",
+    "recovery_manifest_sha256": "47fce46df72cf8f55a4aad9d8e0f95a86c20ffc7c8a08b89b742db710b161a16",
+    "decision_sha256": "f84449b899c264bee51238425210afa2e0a734ae41fec2455a2062a0b848f91d",
+    "inventory_sha256": "2dcc6e00b7e8eafa56c80478beeef32b1fcae6e7b688b121a6fb6b376ece13a9",
+    "terminal_sha256": "e8765effb2efdfd6286a555469e6263428d0ba6e3acf4ceb59b394717c28ff42",
+    "inventory_files": 201,
+    "inventory_verification": "PASS",
+    "all_legal_operational_and_process_gates": "PASS"
+  },
+  "recovery": {
+    "match_replayed": false,
+    "limitation": "The direct 11/00 pilot lacks continuous non-owned CPU telemetry after a controller procfs race; its independent supervisor and process witness completed cleanly, and background CPU was predeclared non-gating.",
+    "confirmation_telemetry": "COMPLETE"
+  }
+}

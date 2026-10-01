@@ -1,0 +1,55 @@
+ok  	github.com/ehrlich-b/ngn	2.948s
+?   	github.com/ehrlich-b/ngn/cmd/analyze_position	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/benchmark	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/blunder-finder	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/combined-report	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/elo-assess	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/eval_breakdown	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/evaltune	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/gametest	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/gauntlet	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/lossxray	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/moves_to_fen	[no test files]
+ok  	github.com/ehrlich-b/ngn/cmd/ngnk4bridge	4.615s
+?   	github.com/ehrlich-b/ngn/cmd/ngnk4finalize	[no test files]
+ok  	github.com/ehrlich-b/ngn/cmd/ngnk4label	1.082s
+ok  	github.com/ehrlich-b/ngn/cmd/ngnk4pack	1.031s
+ok  	github.com/ehrlich-b/ngn/cmd/ngnk4staticdump	1.029s
+ok  	github.com/ehrlich-b/ngn/cmd/ngnk4teachercheck	1.036s
+ok  	github.com/ehrlich-b/ngn/cmd/nnuebridge	2.426s
+?   	github.com/ehrlich-b/ngn/cmd/oracle	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/pgn-test	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/pgn_to_fens	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/pgnify	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/pruning-analysis	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/pruning-comparison	[no test files]
+ok  	github.com/ehrlich-b/ngn/cmd/searchsnapshot	1.185s
+?   	github.com/ehrlich-b/ngn/cmd/sf18big-research	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/sfpv	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/simple-test	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/smoke	[no test files]
+ok  	github.com/ehrlich-b/ngn/cmd/sprt	1.077s
+?   	github.com/ehrlich-b/ngn/cmd/spsa	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/tactical-test	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/test-harness	[no test files]
+ok  	github.com/ehrlich-b/ngn/cmd/texel	1.107s
+ok  	github.com/ehrlich-b/ngn/cmd/texelcorpus	1.235s
+?   	github.com/ehrlich-b/ngn/cmd/trace_move	[no test files]
+?   	github.com/ehrlich-b/ngn/cmd/zzbias	[no test files]
+ok  	github.com/ehrlich-b/ngn/countereval	4.198s
+ok  	github.com/ehrlich-b/ngn/engine	101.683s
+?   	github.com/ehrlich-b/ngn/experiments/2026-10-01-ep-repetition-correctness	[no test files]
+?   	github.com/ehrlich-b/ngn/experiments/2026-10-01-rodent-pv-identity-probe	[no test files]
+?   	github.com/ehrlich-b/ngn/internal/history	[no test files]
+?   	github.com/ehrlich-b/ngn/internal/rating	[no test files]
+ok  	github.com/ehrlich-b/ngn/internal/texeldata	1.608s
+ok  	github.com/ehrlich-b/ngn/internal/uci	1.096s
+ok  	github.com/ehrlich-b/ngn/nnue	2.013s
+ok  	github.com/ehrlich-b/ngn/nnue/ngnk4	4.993s
+ok  	github.com/ehrlich-b/ngn/nnue/sf18big	1.040s
+ok  	github.com/ehrlich-b/ngn/nnue/sf18small	36.616s
+ok  	github.com/ehrlich-b/ngn/rodenteval	1.207s
+ok  	github.com/ehrlich-b/ngn/rodentv12eval	1.712s
+ok  	github.com/ehrlich-b/ngn/training/nnue/k4finalize	1.117s
+ok  	github.com/ehrlich-b/ngn/training/nnue/k4label	5.445s
+ok  	github.com/ehrlich-b/ngn/training/nnue/k4pack	1.112s

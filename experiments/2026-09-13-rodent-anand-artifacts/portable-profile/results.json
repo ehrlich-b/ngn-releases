@@ -1,0 +1,73 @@
+{
+  "schema": "ngn-rodent-portable-profile-results-v1",
+  "status": "PASS_DIAGNOSTIC",
+  "scope": "one-thread cold fixed-node profiling; no timing ratio, Elo, or strength inference",
+  "run": {
+    "wsl_root": "/home/ehrli/repos/ngn-rodent-profile-20260913/output/rodent-cold-profile-20260913/run-001",
+    "fixtures": 6,
+    "nodes_per_search": 400000,
+    "measured_searches": 30,
+    "benchmark_calibration_searches": 6,
+    "profiled_searches_total": 36,
+    "elapsed_seconds": 44.5874353479594,
+    "peak_sampled_process_tree_rss_kib": 314496,
+    "command_returncode": 0,
+    "supervisor_returncode": 0,
+    "survivors": 0
+  },
+  "fixture_measurements": [
+    {"name":"start_white","iterations":5,"ns_per_op":1109033584,"bytes_per_op":135444308,"allocs_per_op":16},
+    {"name":"start_black","iterations":5,"ns_per_op":1106374726,"bytes_per_op":135447742,"allocs_per_op":16},
+    {"name":"kiwipete_white","iterations":5,"ns_per_op":1418249832,"bytes_per_op":135464961,"allocs_per_op":18},
+    {"name":"kiwipete_black","iterations":5,"ns_per_op":1330845687,"bytes_per_op":135446907,"allocs_per_op":16},
+    {"name":"asymmetric_white","iterations":5,"ns_per_op":1248779476,"bytes_per_op":135473185,"allocs_per_op":19},
+    {"name":"asymmetric_black","iterations":5,"ns_per_op":1165715464,"bytes_per_op":135440353,"allocs_per_op":15}
+  ],
+  "cpu_profile": {
+    "raw_wsl_path": "/home/ehrli/repos/ngn-rodent-profile-20260913/output/rodent-cold-profile-20260913/run-001/cpu.pb.gz",
+    "raw_sha256": "ee7738f7a03f2daabb3066fd594dd93cf2a59a3f5e850e0d75fd68e45344e728",
+    "total_samples_seconds": 44.29,
+    "scope_search_samples_seconds": 44.25,
+    "hotspots": [
+      {"function":"github.com/ehrlich-b/ngn/rodenteval.(*Model).evaluateAccumulator","cumulative_seconds":20.42,"cumulative_percent_of_total":46.11,"note":"includes clippedSquaredWeighted"},
+      {"function":"github.com/ehrlich-b/ngn/rodenteval.(*Model).applyUpdates","flat_seconds":14.14,"flat_percent_of_total":31.93,"cumulative_seconds":14.92,"cumulative_percent_of_total":33.69},
+      {"function":"github.com/ehrlich-b/ngn/rodenteval.(*Model).refreshPerspective","cumulative_seconds":0.70,"cumulative_percent_of_total":1.58}
+    ],
+    "interpretation": "The output transform is the largest individual attributable search hotspot and is the best first optimization mechanism to investigate. This profile does not project a speedup or admit an implementation."
+  },
+  "allocation_profile": {
+    "raw_wsl_path": "/home/ehrli/repos/ngn-rodent-profile-20260913/output/rodent-cold-profile-20260913/run-001/alloc.pb.gz",
+    "raw_sha256": "c26c8805b54ac3a5932cb230b3fc7b7c61f67bf02c6db7986f84e16fa703a644",
+    "scope": "process-global, including benchmark calibration and construction",
+    "interpretation": "The roughly 135 MB/op benchmark values are dominated by lazy 128 MiB TT allocation during first search admission for each cold engine, plus smaller search/history allocations. Global alloc_space also attributes 0.41 GB to NewSearchEngineWithHash outside the timed region. These values are not retained memory and do not show per-node Rodent evaluator allocation."
+  },
+  "frozen_inputs": {
+    "accepted_commit": "637043a6e5ed46e2328a65097f81d33ea1dc7524",
+    "isolated_base_commit": "203830ae698b3890cd636b8f0c69a4485cd538cd",
+    "slice_c_patch_wsl_path": "/home/ehrli/repos/ngn-rodent-engine-slicec-v2-20260913/output/rodent-slicec-20260913/rodent-slicec-final.patch",
+    "slice_c_patch_sha256": "0101bc5c6cee25dcf80529a8dd917f8d863adb645f13124d993c092b569038e3",
+    "binary_wsl_path": "/home/ehrli/repos/ngn-rodent-profile-20260913/output/rodent-cold-profile-20260913/inputs/engine-rodent-profile.test",
+    "binary_sha256": "7ee4fc0404ed7e2fc9497acdcae092de5df0bc36016e0b0c0dc63c06467e2f67",
+    "model_wsl_path": "/home/ehrli/rodent-v1.1-anand-sliceb-gate-20260913/run-002/inputs/network/rodent_anand_512hl.bin",
+    "model_sha256": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb",
+    "supervisor_wsl_path": "/home/ehrli/repos/ngn-rodent-profile-20260913/scripts/candidate-match/process_supervisor.py",
+    "supervisor_sha256": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f"
+  },
+  "archived_text": {
+    "probe":{"path":"rodent_transition_profile_test.go.txt","sha256":"4430f607d4a56c2ab3f951a0907b5effa5b2731833acb0542b8cb105a55d4347"},
+    "launcher":{"path":"launch-held-v1.sh","sha256":"0d2b0aa70e16cd5d1e4929bc70f287709e9057df59074be933638feba046cb6b"},
+    "prelaunch_manifest":{"path":"prelaunch-manifest-v1.json","sha256":"7a87a5521906012ff7c7b9ac82199da5a000c01080b46ef57d9bbbd2f6c9cd7b"},
+    "stdout":{"path":"stdout.txt","sha256":"deb7d67974e4ca6d70c9cea0f1b99c057400f7459fdcc79308d1c00c961973dd"},
+    "stderr":{"path":"stderr.txt","sha256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+    "supervisor_receipt":{"path":"supervisor-receipt.json","sha256":"55211144817854187879f7e0016def5359606a3dcda8a52817af86fa959362fd"},
+    "cpu_top_search":{"path":"cpu-top-search.txt","sha256":"63826f47de34fc666055170365a3ef0c39b02a24a781062e14cb398ef4b7aaca"},
+    "cpu_list_apply_updates":{"path":"cpu-list-applyUpdates.txt","sha256":"b67b514c8604dee02c5f3fb40bbd293ee93c7840db1079062ce027c065a63678"},
+    "cpu_list_evaluate":{"path":"cpu-list-evaluateAccumulator.txt","sha256":"de0275c4e9ab23a484c3be540e71d94779290e20e22f3a1468093c6f6f5d0cf6"},
+    "cpu_list_clipped":{"path":"cpu-list-clippedSquaredWeighted.txt","sha256":"ad8d7559894166fb0476b6ced703cf6ea8ff435fc838230f5ef900183aae0c9b"},
+    "alloc_top_global":{"path":"alloc-top-global.txt","sha256":"6313acc59dd68f0108815460cbf0e0179bb1f833092641d7d3f7eeca4c6cb27a"}
+  },
+  "unarchived_wsl_evidence": {
+    "process_tree":{"path":"/home/ehrli/repos/ngn-rodent-profile-20260913/output/rodent-cold-profile-20260913/run-001/process-tree.jsonl","sha256":"9effa720103132748741b662e3ec89390930ece9a90666202a94bef37ea3ed07"},
+    "time":{"path":"/home/ehrli/repos/ngn-rodent-profile-20260913/output/rodent-cold-profile-20260913/run-001/time.txt","sha256":"1c18255a6f53ff2f94f54f65bd571f1c81496ae6405a5e94446906f3c67f5c23"}
+  }
+}

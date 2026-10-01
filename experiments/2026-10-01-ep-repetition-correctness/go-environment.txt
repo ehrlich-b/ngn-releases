@@ -1,0 +1,43 @@
+2026-10-01T00:39:47+00:00
+head=701328646490f1bc8ed214002f578a58c9b0723e
+branch=task/ep-repetition-correctness-20261001
+go=go version go1.25.5 linux/amd64
+GOMAXPROCS=1
+GOFLAGS=-p=1
+--- cpu coordination marker ---
+{
+  "approved": true,
+  "observed_at_utc": "2026-10-01T00:39:47.672395+00:00",
+  "basis": "Parent instructed documented shared CPU 0/2 allowance; go-ublk owner explicitly confirmed its enforced limits after receiving that instruction.",
+  "owner_thread": "01a0f4ae-2e2d-7432-96f4-84eb56d870ca",
+  "owner_acknowledgement": "The resource probe confirms affinity {0,2}, nice 10, a 50% CPU quota, and a 4 GiB memory ceiling. The corrected full test run is approved and running with serial Go compilation. Those controls apply only to this task\u2019s transient service.",
+  "ngn_limits": {
+    "cpus": [
+      0,
+      2
+    ],
+    "cpu_quota_percent": 50,
+    "nice": 10,
+    "memory_max_bytes": 4294967296,
+    "gomaxprocs": 1,
+    "go_parallelism": 1
+  },
+  "protected_zahak_cpus": [
+    4,
+    6,
+    8,
+    10,
+    12,
+    14
+  ]
+}
+--- process controls ---
+    PID    PPID  NI PSR COMMAND
+    241       1   0   1 systemd
+ 493077     241  10   2 bash
+Cpus_allowed_list:	0,2
+Mems_allowed_list:	0
+0::/user.slice/user-1000.slice/user@1000.service/app.slice/ngn-personal-ep-proof-gates-20261001.service
+--- cgroup limits ---
+cpu.max=50000 100000
+memory.max=4294967296

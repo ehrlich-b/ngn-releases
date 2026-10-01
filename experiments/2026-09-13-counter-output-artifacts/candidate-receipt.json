@@ -1,0 +1,123 @@
+{
+  "schema": "ngn-counter-output-avx2-candidate-v1",
+  "date": "2026-09-13",
+  "worktree": "/home/ehrli/repos/ngn-counter-output-20260913",
+  "branch": "sprint/counter-output-avx2-20260913",
+  "base_commit": "a12e1976981fbf89b148a5b229689bf06916a8ba",
+  "candidate_state": "uncommitted by instruction",
+  "go_version": "go version go1.25.5 linux/amd64",
+  "production_contract": {
+    "hidden_width": 512,
+    "portable_fallback": true,
+    "amd64_v3_dispatch": true,
+    "predicate": "ordered accumulator lane > +0",
+    "inactive_lane_handling": "comparison mask is ANDed into accumulator before VMULPS; inactive products are never added",
+    "product_order": "eight independent VMULPS products per block; no FMA",
+    "sum_order": "BSF visits active mask bits in ascending order and serial VADDSS preserves the portable lane order across all 64 blocks",
+    "bias_order": "output bias is added once in Go after the dot product",
+    "api_eval_search_changes": false
+  },
+  "source": {
+    "candidate_patch": {
+      "path": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/receipts/candidate.patch",
+      "sha256": "8966b491a3c8e57588b94009e44fe8e27983ccace2a867e9f3558dc5ac732786"
+    },
+    "profile_fixture": {
+      "path": "/home/ehrli/repos/ngn-counter-output-20260913/engine/counter_transition_profile_test.go",
+      "sha256": "8623a3f8d486f9fcd3231b835469890ece52e79a9cabcf5bb6d5562d664dea4c",
+      "classification": "benchmark-only copied accepted fixture"
+    },
+    "direct_benchmark": {
+      "path": "/home/ehrli/repos/ngn-counter-output-20260913/countereval/output_dot_benchmark_test.go",
+      "sha256": "0a72f724991eda98c3e1a8280ab32d85a49411cb6899ae614db91c60657f85ee"
+    }
+  },
+  "accepted_inputs": {
+    "model": {
+      "path": "/home/ehrli/repos/ngn-counter-pretrained-control/output/counter-pretrained-incremental-v6-attempt2/source/upstream/pkg/eval/nnue/n-30-5268.nn",
+      "sha256": "3488baed71f4d432d028e05b65e2ff13f8c9afe7f91974d1a3c34a0691d6670c"
+    },
+    "oracle": {
+      "path": "/home/ehrli/repos/ngn-counter-pretrained-control/output/counter-pretrained-incremental-v6-attempt2/artifacts/oracle.json",
+      "sha256": "c2d7414b7dbdd082071e9a7b47f52a029b8b9cc644ef47fae234b287eec7994d",
+      "records": 12
+    },
+    "fixtures": {
+      "path": "/home/ehrli/repos/ngn-counter-pretrained-control/output/counter-pretrained-incremental-v6-attempt2/inputs/fixtures.tsv",
+      "sha256": "83aa1db1ebdc1caeec2c3537ea35711b0a039a887d69ba5f104e76d971c908fe"
+    },
+    "transition_fixtures_sha256": "396491f42cfd9057d81ceea222d5d4b5508c5871f329a474af24a2ffe15b10fb",
+    "transition_oracle_sha256": "2bff817dbe3449d329c0e029916fa3167bcc654dc5d51aa941113ce45006602c"
+  },
+  "binaries": {
+    "engine_test": {
+      "path": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/binaries/engine.test",
+      "sha256": "e30d8adf28fe81f698af4039d571940e1ed96c973940c9113f838875629a63e0",
+      "command": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 /usr/local/go/bin/go -C /home/ehrli/repos/ngn-counter-output-20260913 test -p 2 -c -o /home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/binaries/engine.test ./engine",
+      "tags": []
+    },
+    "countereval_test": {
+      "path": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/binaries/countereval.test",
+      "sha256": "2d71071988faa543e46cb79b7dd70dc393128dedf1506e6ea4e534cab4c57b06",
+      "command": "env CGO_ENABLED=0 GOAMD64=v3 GOMAXPROCS=2 /usr/local/go/bin/go -C /home/ehrli/repos/ngn-counter-output-20260913 test -p 2 -c -tags counteroracle -o /home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/binaries/countereval.test ./countereval",
+      "tags": ["counteroracle"]
+    }
+  },
+  "tests": [
+    {
+      "name": "shortengine",
+      "exit": 0,
+      "log": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/logs/shortengine.log",
+      "sha256": "23b3843ac782a85661d50e1d231d9cc817e18bd6b69e70ffa60dea6b8e9fcba7"
+    },
+    {
+      "name": "raceengine",
+      "exit": 0,
+      "log": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/logs/raceengine.log",
+      "sha256": "4335062fba6449af8b35018565f96112051c8046ab87d9e01183768f92298bd7"
+    },
+    {
+      "name": "fullshort",
+      "exit": 0,
+      "log": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/logs/fullshort.log",
+      "sha256": "d261b7606466b594ceccc0f8c3b9c3716d8a7f1f3986b8992cef7d4b7283a59d"
+    },
+    {
+      "name": "counteroracle-v1",
+      "exit": 0,
+      "log": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/logs/counteroracle-v1.log",
+      "sha256": "71d9c99ed962030a04317af553f8a634240d509f69f5074830048f3dd505d4f1"
+    },
+    {
+      "name": "counteroracle-v3",
+      "exit": 0,
+      "log": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/logs/counteroracle-v3.log",
+      "sha256": "e40697147b3a6c652fa4d203f038050b35b3b3fb3d3e2357f686f9411d12c23e"
+    },
+    {
+      "name": "accepted-profile-correctness",
+      "exit": 0,
+      "log": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/logs/profile-correctness.log",
+      "sha256": "561670810d44a8ec640bc482f69f9640517fa7a821effab7e4fcc58bff822fd4",
+      "output_sha256": "2ffbc729295f3794883502e2c74779614623ef132844c795dc72c8d2e1dd1656"
+    }
+  ],
+  "disassembly": {
+    "path": "/home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/logs/counter-output-disassembly.log",
+    "sha256": "801dc21d7c29bfca691135ee7dca20b2cd02c8ef5297e863e304b9902770528c",
+    "observed_order": ["vcmpgt_oqps", "vandps", "vmulps", "vmovmskps", "bsf", "vaddss"],
+    "fma_or_horizontal_reduction": false
+  },
+  "benchmark_contract": {
+    "name": "BenchmarkCounterOutputDotCapturedCorpus",
+    "subcases": ["portable", "selected"],
+    "order_env": "NGN_COUNTER_OUTPUT_BENCH_ORDER=portable-first|selected-first",
+    "corpus": "all 12 accepted oracle.json accumulator records in cyclic order",
+    "data_identity": "both subcases use the same preloaded accumulator slice and the same loaded model output-weight array; all loading and decoding occurs outside timed subcase loops",
+    "escape": "package-level float32 sink",
+    "expected_allocations": "0 B/op, 0 allocs/op",
+    "planned_cli_template": "env GOMAXPROCS=1 COUNTER_MODEL=<accepted-model> COUNTER_ORACLE_JSON=<accepted-oracle> NGN_COUNTER_OUTPUT_BENCH_ORDER=<portable-first|selected-first> /home/ehrli/repos/ngn-counter-output-20260913/output/counter-output-20260913/binaries/countereval.test -test.run ^$ -test.bench ^BenchmarkCounterOutputDotCapturedCorpus$ -test.benchtime=250ms -test.count=1 -test.benchmem",
+    "executed": false
+  },
+  "performance_or_game_execution": false
+}

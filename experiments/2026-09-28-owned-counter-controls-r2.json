@@ -1,0 +1,45 @@
+{
+  "instrument": {
+    "common.py": "bdece7f8d066253f995a4ee98d1dbce692d03274054a9a3a1d8af16ce16c1807",
+    "ownedmatch.py": "581fe4ddb5a8033b109769dd9a988bed6e4368a1ea41415a9b11a370c5d7b1f8",
+    "process_supervisor.py": "4771585ee567615467cbf5eb3255a78dd234efe6f8fc9fe02885bb9815a7209f",
+    "quickmatch.py": "4c0390fb9ba8cd67e269dd41bd131084651dd639ef60096bfd96676634268aa3",
+    "role_exec.py": "2562ed5ae7a021c93258056422156d49dfc3209647cf1f36e64f1179ba2cfdd4",
+    "run_match_stage.py": "95cc51423602c812eb250566bb827014df137d072e414a5fff32d3a4edaccb40",
+    "trace_audit.py": "9e78cfd91a9ff36358de9af931b48d7dd5d56ae595a9b5753e184a5cdabc909b",
+    "uci_preflight.py": "33b9ac8b0360b1e7b42cffc76da0e5fa37ea67509cca421d2c5cbcd244c1f171"
+  },
+  "pass": true,
+  "positive_run": "/home/ehrli/nnue-owned-continuation-20260928/matches/smoke-counter-v7",
+  "positive_startup_records": 4,
+  "protocol_cases": {
+    "duplicate": {
+      "preserved_lines": 3,
+      "unexpected_stderr": 1
+    },
+    "exact_release": {
+      "preserved_lines": 2,
+      "unexpected_stderr": 0
+    },
+    "fatal_stderr": {
+      "preserved_lines": 3,
+      "unexpected_stderr": 1
+    },
+    "foreign_engine": {
+      "preserved_lines": 2,
+      "unexpected_stderr": 2
+    }
+  },
+  "rejected_mutations": {
+    "banner_from_ngn": "trace audit failures: line 13152: non-allowlisted stderr from Owned-WDL25: 2026/09/28 23:26:55 main.go:39: Counter VersionName 5.5 BuildDate 2024-01-12 GitRevision 63c487ca724c620f71c129d62129c6fb9109c872 RuntimeVersion go1.21.0 GOARCH amd64 GOOS linux NumCPU 1",
+    "duplicate_banner": "native Counter startup-record count differs from process witness",
+    "illegal_pv": "native Counter startup-record count differs from process witness",
+    "missing_weights": "native Counter startup-record count differs from process witness",
+    "warning_banner": "native Counter startup-record count differs from process witness",
+    "wrong_executable_hash": "trace audit failures: line 53: non-allowlisted stderr from Counter-5.5: 2026/09/28 23:26:55 main.go:39: Counter VersionName 5.5 BuildDate 2024-01-12 GitRevision 63c487ca724c620f71c129d62129c6fb9109c872 RuntimeVersion go1.21.0 GOARCH amd64 GOOS linux NumCPU 1 | line 107: non-allowlisted stderr from C",
+    "wrong_revision": "native Counter startup-record count differs from process witness",
+    "wrong_runtime": "native Counter startup-record count differs from process witness"
+  },
+  "schema": "ngn-owned-counter-compatibility-controls-v1",
+  "trace_sha256": "6c416211be3650a838161449dd55b2f5d15767ec584e02d721f372c78e4074f8"
+}

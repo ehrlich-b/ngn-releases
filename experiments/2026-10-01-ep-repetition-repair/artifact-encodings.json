@@ -1,0 +1,32 @@
+[
+  {
+    "original_path": "experiments/2026-10-01-ep-repetition-repair/candidate.patch",
+    "stored_path": "experiments/2026-10-01-ep-repetition-repair/candidate.patch.gz",
+    "uncompressed_sha256": "27160751be1277649abeb0cb0bcc632eaa77552200905a0a0e830b562a25e3ae",
+    "gzip_sha256": "2f1c4ca7d8c697ab4865f7b42c8eb0f83b1b4da3eedeecb6ba6f7a716a7c06c9"
+  },
+  {
+    "original_path": "experiments/2026-10-01-ep-repetition-repair/failing-before-regression.patch",
+    "stored_path": "experiments/2026-10-01-ep-repetition-repair/failing-before-regression.patch.gz",
+    "uncompressed_sha256": "47c588211425d604af49dbd9409eac5ac3bc3c84e2d44fe0c17ec5d389c28282",
+    "gzip_sha256": "194852b576cf2a7e87e7764860f143b73eb4ef52db8569ccb510a02a9f5e3ef4"
+  },
+  {
+    "original_path": "experiments/2026-10-01-ep-repetition-repair/reviewed-candidate.patch",
+    "stored_path": "experiments/2026-10-01-ep-repetition-repair/reviewed-candidate.patch.gz",
+    "uncompressed_sha256": "cda71468a598733a662f71b769e02ef0b2e7ed54a16cecf3d7856eebaa756e96",
+    "gzip_sha256": "53f9c97123714c0dc0bc3e15379fd463ebef9563ec3a9ec6e6366df97b1fe1ef"
+  },
+  {
+    "original_path": "experiments/2026-10-01-ep-repetition-repair/review-stockfish-white.stdout",
+    "stored_path": "experiments/2026-10-01-ep-repetition-repair/review-stockfish-white.stdout.gz",
+    "uncompressed_sha256": "c3ff74770986c446c60e3394688e5e92ad20a8198a2b258c3f57d220c0730d7d",
+    "gzip_sha256": "92b51516a886d26cb27ba865d09c4432c649bbda2fe2330db14f7fc6700fbdac"
+  },
+  {
+    "original_path": "experiments/2026-10-01-ep-repetition-repair/review-stockfish-black.stdout",
+    "stored_path": "experiments/2026-10-01-ep-repetition-repair/review-stockfish-black.stdout.gz",
+    "uncompressed_sha256": "82acc02d419539b0c25ee805b0fc597e3422ba63aa10e1a64fc5a817a0ad9e5e",
+    "gzip_sha256": "03d1562f3aaa7e096c3058f17bde4f10bc812125095b89629362ee9194348ffd"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "schema": "ngn-k4-bullet-completion-v1",
+  "attempt_contract": {
+    "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-main-m1-lr1-20260922/training/attempt.json",
+    "bytes": 1332,
+    "sha256": "f13ecf885edd562b671ef3227fd4be22dce35fdf3a50c44e6cae6ded2ceddcd8"
+  },
+  "final_checkpoint": {
+    "path": "/home/ehrli/nnue-owned-k4-20260920/runs/k4-main-m1-lr1-20260922/training/candidates/candidate-131072/receipt.json",
+    "bytes": 3357,
+    "sha256": "3ab7f08a10396a7306fa8d7af8b22674df0a657c0aa35c88500f1a9c7a2773f9"
+  },
+  "completed_updates": 131072,
+  "presentations": 2147483648,
+  "data_cursor": 7483648
+}

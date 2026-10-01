@@ -1,0 +1,8 @@
+{
+  "decision": "ADOPT",
+  "decision_sha256": "72eb68607041a51e5dc2520d6363bfaab42a16e3189085973786a248a385e285",
+  "inventory_sha256": "e64ba129bb935c4a5348f264319ecfdb9973ffc47f400105ba7970aa68efa6ef",
+  "no_extension_after_observation": true,
+  "schema": "ngn-rodent-counter-fixed-gate-terminal-v1",
+  "state": "COMPLETE"
+}

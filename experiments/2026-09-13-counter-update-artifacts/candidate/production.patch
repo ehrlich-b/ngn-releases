@@ -1,0 +1,175 @@
+diff --git a/countereval/feature_updates_amd64_v3.go b/countereval/feature_updates_amd64_v3.go
+index 7d02e3b..8af96be 100644
+--- a/countereval/feature_updates_amd64_v3.go
++++ b/countereval/feature_updates_amd64_v3.go
+@@ -3,6 +3,7 @@
+ package countereval
+ 
+ const featureUpdateRowsUseAVX2 = true
++const fusedFeatureUpdatesUseAVX2 = true
+ 
+ // These pairs fail compilation if the fixed Counter hidden width changes
+ // without a corresponding kernel review.
+@@ -24,3 +25,37 @@ func addFeatureRowAVX2(accumulator, weights *[HiddenSize]float32)
+ 
+ //go:noescape
+ func subFeatureRowAVX2(accumulator, weights *[HiddenSize]float32)
++
++// copyAndApplyFeatureUpdates handles only deriveTransition's three reachable
++// semantic sequences. Its child and parent arguments refer to distinct search
++// frames and are acquired only after any stack growth.
++func copyAndApplyFeatureUpdates(
++	child, parent *[HiddenSize]float32,
++	model *Model,
++	updates *[4]featureUpdate,
++	updateCount int,
++) {
++	row := func(index int) *[HiddenSize]float32 {
++		base := updates[index].feature * HiddenSize
++		return (*[HiddenSize]float32)(model.hiddenWeights[base : base+HiddenSize])
++	}
++	switch updateCount {
++	case 2: // moving piece remove, destination add
++		copyAndUpdate2AVX2(child, parent, row(0), row(1))
++	case 3: // moving piece remove, capture remove, destination add
++		copyAndUpdate3AVX2(child, parent, row(0), row(1), row(2))
++	case 4: // king remove/add, rook remove/add
++		copyAndUpdate4AVX2(child, parent, row(0), row(1), row(2), row(3))
++	default:
++		panic("counter evaluator: unreachable fused feature-update count")
++	}
++}
++
++//go:noescape
++func copyAndUpdate2AVX2(child, parent, remove, add *[HiddenSize]float32)
++
++//go:noescape
++func copyAndUpdate3AVX2(child, parent, remove0, remove1, add *[HiddenSize]float32)
++
++//go:noescape
++func copyAndUpdate4AVX2(child, parent, remove0, add0, remove1, add1 *[HiddenSize]float32)
+diff --git a/countereval/feature_updates_amd64_v3.s b/countereval/feature_updates_amd64_v3.s
+index 1e3fb30..4cf6fdb 100644
+--- a/countereval/feature_updates_amd64_v3.s
++++ b/countereval/feature_updates_amd64_v3.s
+@@ -34,3 +34,75 @@ sub_loop:
+ 	JNZ sub_loop
+ 	VZEROUPPER
+ 	RET
++
++// Copy a parent frame and apply the ordinary move sequence: subtract, add.
++TEXT ·copyAndUpdate2AVX2(SB), NOSPLIT, $0-32
++	MOVQ child+0(FP), AX
++	MOVQ parent+8(FP), BX
++	MOVQ remove+16(FP), CX
++	MOVQ add+24(FP), DX
++	MOVL $64, SI
++copy_update2_loop:
++	VMOVUPS (BX), Y0
++	VSUBPS (CX), Y0, Y0
++	VADDPS (DX), Y0, Y0
++	VMOVUPS Y0, (AX)
++	ADDQ $32, AX
++	ADDQ $32, BX
++	ADDQ $32, CX
++	ADDQ $32, DX
++	DECL SI
++	JNZ copy_update2_loop
++	VZEROUPPER
++	RET
++
++// Copy a parent frame and apply a capture sequence: subtract, subtract, add.
++TEXT ·copyAndUpdate3AVX2(SB), NOSPLIT, $0-40
++	MOVQ child+0(FP), AX
++	MOVQ parent+8(FP), BX
++	MOVQ remove0+16(FP), CX
++	MOVQ remove1+24(FP), DX
++	MOVQ add+32(FP), SI
++	MOVL $64, DI
++copy_update3_loop:
++	VMOVUPS (BX), Y0
++	VSUBPS (CX), Y0, Y0
++	VSUBPS (DX), Y0, Y0
++	VADDPS (SI), Y0, Y0
++	VMOVUPS Y0, (AX)
++	ADDQ $32, AX
++	ADDQ $32, BX
++	ADDQ $32, CX
++	ADDQ $32, DX
++	ADDQ $32, SI
++	DECL DI
++	JNZ copy_update3_loop
++	VZEROUPPER
++	RET
++
++// Copy a parent frame and apply castling: subtract, add, subtract, add.
++TEXT ·copyAndUpdate4AVX2(SB), NOSPLIT, $0-48
++	MOVQ child+0(FP), AX
++	MOVQ parent+8(FP), BX
++	MOVQ remove0+16(FP), CX
++	MOVQ add0+24(FP), DX
++	MOVQ remove1+32(FP), SI
++	MOVQ add1+40(FP), DI
++	MOVL $64, R8
++copy_update4_loop:
++	VMOVUPS (BX), Y0
++	VSUBPS (CX), Y0, Y0
++	VADDPS (DX), Y0, Y0
++	VSUBPS (SI), Y0, Y0
++	VADDPS (DI), Y0, Y0
++	VMOVUPS Y0, (AX)
++	ADDQ $32, AX
++	ADDQ $32, BX
++	ADDQ $32, CX
++	ADDQ $32, DX
++	ADDQ $32, SI
++	ADDQ $32, DI
++	DECL R8
++	JNZ copy_update4_loop
++	VZEROUPPER
++	RET
+diff --git a/countereval/feature_updates_fallback.go b/countereval/feature_updates_fallback.go
+index 10b60ce..91e9d99 100644
+--- a/countereval/feature_updates_fallback.go
++++ b/countereval/feature_updates_fallback.go
+@@ -3,6 +3,7 @@
+ package countereval
+ 
+ const featureUpdateRowsUseAVX2 = false
++const fusedFeatureUpdatesUseAVX2 = false
+ 
+ func addFeatureRow(accumulator, weights *[HiddenSize]float32) {
+ 	addFeatureRowPortable(accumulator, weights)
+@@ -11,3 +12,16 @@ func addFeatureRow(accumulator, weights *[HiddenSize]float32) {
+ func subFeatureRow(accumulator, weights *[HiddenSize]float32) {
+ 	subFeatureRowPortable(accumulator, weights)
+ }
++
++// Preserve the established portable copy followed by ordered complete-row
++// updates. Only amd64.v3 replaces this sequence with fused lane-independent
++// arithmetic.
++func copyAndApplyFeatureUpdates(
++	child, parent *[HiddenSize]float32,
++	model *Model,
++	updates *[4]featureUpdate,
++	updateCount int,
++) {
++	*child = *parent
++	applyFeatureUpdates(child, model, updates, updateCount)
++}
+diff --git a/countereval/search_context.go b/countereval/search_context.go
+index d9f6447..8d3aa31 100644
+--- a/countereval/search_context.go
++++ b/countereval/search_context.go
+@@ -104,8 +104,9 @@ func (context *SearchContext) PushMove(delta MoveDelta, expectedPost Board) erro
+ 	}
+ 
+ 	next := context.depth + 1
+-	context.accumulators[next] = context.accumulators[context.depth]
+-	applyFeatureUpdates(&context.accumulators[next], context.model, &updates, updateCount)
++	parent := &context.accumulators[context.depth]
++	child := &context.accumulators[next]
++	copyAndApplyFeatureUpdates(child, parent, context.model, &updates, updateCount)
+ 	context.boards[next] = nextBoard
+ 	context.depth = next
+ 	return nil

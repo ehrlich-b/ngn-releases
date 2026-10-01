@@ -1,0 +1,339 @@
+{
+ "joined": 104278,
+ "calibration_bf_records": 100000,
+ "parity_boards_found": 97103,
+ "parity_scores_match": 97103,
+ "best_linear": {
+  "wdl_mse": 0.02540981411609217,
+  "factor": 0.52
+ },
+ "best_tanh": {
+  "wdl_mse": 0.009221039410479002,
+  "scale": 375,
+  "knee": 475,
+  "slope_at_zero": 0.7894736842105263
+ },
+ "central_slope_abs_raw_le_300": 0.7073732979488091,
+ "quantile_bins": [
+  {
+   "raw_lo": -26624,
+   "raw_hi": -10900,
+   "raw_median": -23694,
+   "ngn_median": -1242,
+   "ngn_mean": -1269.4293937068303,
+   "n": 2606
+  },
+  {
+   "raw_lo": -10894,
+   "raw_hi": -1296,
+   "raw_median": -2176,
+   "ngn_median": -615,
+   "ngn_mean": -671.9144610663598,
+   "n": 2607
+  },
+  {
+   "raw_lo": -1296,
+   "raw_hi": -752,
+   "raw_median": -953,
+   "ngn_median": -447,
+   "ngn_mean": -448.23590333716913,
+   "n": 2607
+  },
+  {
+   "raw_lo": -751,
+   "raw_hi": -550,
+   "raw_median": -633,
+   "ngn_median": -358,
+   "ngn_mean": -352.3927886459532,
+   "n": 2607
+  },
+  {
+   "raw_lo": -550,
+   "raw_hi": -444,
+   "raw_median": -490,
+   "ngn_median": -295,
+   "ngn_mean": -290.198695818949,
+   "n": 2607
+  },
+  {
+   "raw_lo": -444,
+   "raw_hi": -367,
+   "raw_median": -403,
+   "ngn_median": -241,
+   "ngn_mean": -239.56309934790949,
+   "n": 2607
+  },
+  {
+   "raw_lo": -367,
+   "raw_hi": -300,
+   "raw_median": -332,
+   "ngn_median": -203,
+   "ngn_mean": -199.36248561565017,
+   "n": 2607
+  },
+  {
+   "raw_lo": -300,
+   "raw_hi": -245,
+   "raw_median": -272,
+   "ngn_median": -168,
+   "ngn_mean": -166.79746835443038,
+   "n": 2607
+  },
+  {
+   "raw_lo": -245,
+   "raw_hi": -196,
+   "raw_median": -220,
+   "ngn_median": -140,
+   "ngn_mean": -139.73110855389336,
+   "n": 2607
+  },
+  {
+   "raw_lo": -196,
+   "raw_hi": -157,
+   "raw_median": -176,
+   "ngn_median": -115,
+   "ngn_mean": -114.0095895665516,
+   "n": 2607
+  },
+  {
+   "raw_lo": -157,
+   "raw_hi": -120,
+   "raw_median": -137,
+   "ngn_median": -91,
+   "ngn_mean": -90.97391637897967,
+   "n": 2607
+  },
+  {
+   "raw_lo": -120,
+   "raw_hi": -90,
+   "raw_median": -105,
+   "ngn_median": -70,
+   "ngn_mean": -70.89528193325661,
+   "n": 2607
+  },
+  {
+   "raw_lo": -90,
+   "raw_hi": -64,
+   "raw_median": -76,
+   "ngn_median": -52,
+   "ngn_mean": -51.59033371691599,
+   "n": 2607
+  },
+  {
+   "raw_lo": -64,
+   "raw_hi": -43,
+   "raw_median": -52,
+   "ngn_median": -35,
+   "ngn_mean": -34.83467587265056,
+   "n": 2607
+  },
+  {
+   "raw_lo": -43,
+   "raw_hi": -25,
+   "raw_median": -34,
+   "ngn_median": -22,
+   "ngn_mean": -21.579976985040275,
+   "n": 2607
+  },
+  {
+   "raw_lo": -25,
+   "raw_hi": -11,
+   "raw_median": -18,
+   "ngn_median": -11,
+   "ngn_mean": -8.675105485232068,
+   "n": 2607
+  },
+  {
+   "raw_lo": -11,
+   "raw_hi": -1,
+   "raw_median": -5,
+   "ngn_median": -2,
+   "ngn_mean": 1.1852704257767548,
+   "n": 2607
+  },
+  {
+   "raw_lo": -1,
+   "raw_hi": 7,
+   "raw_median": 3,
+   "ngn_median": 7,
+   "ngn_mean": 10.798235519754508,
+   "n": 2607
+  },
+  {
+   "raw_lo": 7,
+   "raw_hi": 16,
+   "raw_median": 12,
+   "ngn_median": 17,
+   "ngn_mean": 19.016110471806673,
+   "n": 2607
+  },
+  {
+   "raw_lo": 16,
+   "raw_hi": 28,
+   "raw_median": 22,
+   "ngn_median": 22,
+   "ngn_mean": 27.56770233985424,
+   "n": 2607
+  },
+  {
+   "raw_lo": 28,
+   "raw_hi": 42,
+   "raw_median": 34,
+   "ngn_median": 35,
+   "ngn_mean": 41.04528012279356,
+   "n": 2606
+  },
+  {
+   "raw_lo": 42,
+   "raw_hi": 57,
+   "raw_median": 49,
+   "ngn_median": 45,
+   "ngn_mean": 50.99386267740698,
+   "n": 2607
+  },
+  {
+   "raw_lo": 57,
+   "raw_hi": 76,
+   "raw_median": 66,
+   "ngn_median": 57,
+   "ngn_mean": 65.19179133103184,
+   "n": 2607
+  },
+  {
+   "raw_lo": 76,
+   "raw_hi": 99,
+   "raw_median": 88,
+   "ngn_median": 72,
+   "ngn_mean": 79.98810893747603,
+   "n": 2607
+  },
+  {
+   "raw_lo": 99,
+   "raw_hi": 126,
+   "raw_median": 112,
+   "ngn_median": 92,
+   "ngn_mean": 98.41426927502877,
+   "n": 2607
+  },
+  {
+   "raw_lo": 126,
+   "raw_hi": 160,
+   "raw_median": 142,
+   "ngn_median": 111,
+   "ngn_mean": 116.15535097813579,
+   "n": 2607
+  },
+  {
+   "raw_lo": 160,
+   "raw_hi": 199,
+   "raw_median": 179,
+   "ngn_median": 134,
+   "ngn_mean": 141.11430763329497,
+   "n": 2607
+  },
+  {
+   "raw_lo": 199,
+   "raw_hi": 246,
+   "raw_median": 221,
+   "ngn_median": 163,
+   "ngn_mean": 166.50441120061373,
+   "n": 2607
+  },
+  {
+   "raw_lo": 246,
+   "raw_hi": 304,
+   "raw_median": 274,
+   "ngn_median": 191,
+   "ngn_mean": 196.7656309934791,
+   "n": 2607
+  },
+  {
+   "raw_lo": 304,
+   "raw_hi": 369,
+   "raw_median": 333,
+   "ngn_median": 227,
+   "ngn_mean": 232.07748369773685,
+   "n": 2607
+  },
+  {
+   "raw_lo": 369,
+   "raw_hi": 447,
+   "raw_median": 406,
+   "ngn_median": 267,
+   "ngn_mean": 270.6148830072881,
+   "n": 2607
+  },
+  {
+   "raw_lo": 447,
+   "raw_hi": 559,
+   "raw_median": 495,
+   "ngn_median": 317,
+   "ngn_mean": 319.5469888761028,
+   "n": 2607
+  },
+  {
+   "raw_lo": 560,
+   "raw_hi": 777,
+   "raw_median": 648,
+   "ngn_median": 376,
+   "ngn_mean": 378.51285001917915,
+   "n": 2607
+  },
+  {
+   "raw_lo": 777,
+   "raw_hi": 1395,
+   "raw_median": 995,
+   "ngn_median": 455,
+   "ngn_mean": 466.30034522439587,
+   "n": 2607
+  },
+  {
+   "raw_lo": 1396,
+   "raw_hi": 12777,
+   "raw_median": 2269,
+   "ngn_median": 595,
+   "ngn_mean": 645.9286536248561,
+   "n": 2607
+  },
+  {
+   "raw_lo": 12827,
+   "raw_hi": 32002,
+   "raw_median": 24703,
+   "ngn_median": 1186,
+   "ngn_mean": 1026.205216724204,
+   "n": 2607
+  },
+  {
+   "raw_lo": 32002,
+   "raw_hi": 32002,
+   "raw_median": 32002,
+   "ngn_median": -77,
+   "ngn_mean": -94.43076332949751,
+   "n": 2607
+  },
+  {
+   "raw_lo": 32002,
+   "raw_hi": 32002,
+   "raw_median": 32002,
+   "ngn_median": 7,
+   "ngn_mean": 9.222861526658996,
+   "n": 2607
+  },
+  {
+   "raw_lo": 32002,
+   "raw_hi": 32002,
+   "raw_median": 32002,
+   "ngn_median": 106,
+   "ngn_mean": 107.36708860759494,
+   "n": 2607
+  },
+  {
+   "raw_lo": 32002,
+   "raw_hi": 32002,
+   "raw_median": 32002,
+   "ngn_median": 267,
+   "ngn_mean": 387.7188339087073,
+   "n": 2607
+  }
+ ]
+}

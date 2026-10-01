@@ -1,0 +1,113 @@
+//go:build rodentoracle
+
+package rodenteval
+
+import (
+	"os"
+	"testing"
+)
+
+const rodentOutputBenchOrderEnv = "NGN_RODENT_OUTPUT_BENCH_ORDER"
+
+var rodentOutputBenchFixtures = []struct {
+	name string
+	fen  string
+}{
+	{"start_white", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
+	{"start_black", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1"},
+	{"kiwipete_white", "r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 37 1"},
+	{"kiwipete_black", "r3k2r/p1ppqpb1/bn2pnp1/2Pp4/1p2P3/2N2N2/PPQBBPPP/R3K2R b KQkq - 37 1"},
+	{"asymmetric_white", "r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 w kq - 0 15"},
+	{"asymmetric_black", "r3k2r/ppp2ppp/2n1bn2/3qp3/3P4/2N1PN2/PPP2PPP/R2Q1RK1 b kq - 0 15"},
+}
+
+type rodentOutputBenchRecord struct {
+	name     string
+	us       [HiddenSize]int16
+	them     [HiddenSize]int16
+	weights0 *[HiddenSize]int16
+	weights1 *[HiddenSize]int16
+}
+
+// BenchmarkRodentOutputDotCapturedCorpus compares the scalar oracle and the
+// selected kernel over the exact six fixed-search profiling positions. Setup,
+// parsing and full refresh occur outside every timed region.
+func BenchmarkRodentOutputDotCapturedCorpus(b *testing.B) {
+	modelPath := os.Getenv("RODENT_V11_ANAND_MODEL")
+	if modelPath == "" {
+		b.Fatal("RODENT_V11_ANAND_MODEL is required")
+	}
+	model, err := LoadV11Anand(modelPath)
+	if err != nil {
+		b.Fatal(err)
+	}
+	metadata, err := model.Metadata()
+	if err != nil {
+		b.Fatal(err)
+	}
+	if metadata.SHA256 != V11AnandSHA256 {
+		b.Fatalf("Rodent model SHA = %s, want %s", metadata.SHA256, V11AnandSHA256)
+	}
+
+	records := make([]rodentOutputBenchRecord, len(rodentOutputBenchFixtures))
+	for index, fixture := range rodentOutputBenchFixtures {
+		position, err := parseOracleFEN(fixture.fen)
+		if err != nil {
+			b.Fatal(err)
+		}
+		accumulator := model.fullRefresh(position.Board)
+		records[index] = rodentOutputBenchRecord{
+			name:     fixture.name,
+			us:       accumulator[position.SideToMove],
+			them:     accumulator[position.SideToMove^1],
+			weights0: &model.outputWeights[0],
+			weights1: &model.outputWeights[1],
+		}
+	}
+
+	portable := func(record *rodentOutputBenchRecord) int32 {
+		return rodentOutputDotPortable(&record.us, &record.them, record.weights0, record.weights1)
+	}
+	selected := func(record *rodentOutputBenchRecord) int32 {
+		return rodentOutputDot(&record.us, &record.them, record.weights0, record.weights1)
+	}
+	order := os.Getenv(rodentOutputBenchOrderEnv)
+	switch order {
+	case "portable-first":
+		runRodentOutputDotBenchmarks(b, "portable", records, portable)
+		runRodentOutputDotBenchmarks(b, "selected", records, selected)
+	case "selected-first":
+		runRodentOutputDotBenchmarks(b, "selected", records, selected)
+		runRodentOutputDotBenchmarks(b, "portable", records, portable)
+	default:
+		b.Fatalf("%s=%q, want portable-first or selected-first", rodentOutputBenchOrderEnv, order)
+	}
+}
+
+func runRodentOutputDotBenchmarks(
+	b *testing.B,
+	name string,
+	records []rodentOutputBenchRecord,
+	kernel func(*rodentOutputBenchRecord) int32,
+) {
+	b.Run(name, func(b *testing.B) {
+		b.Run("all", func(b *testing.B) {
+			b.ReportAllocs()
+			b.ResetTimer()
+			for iteration := 0; iteration < b.N; iteration++ {
+				record := &records[iteration%len(records)]
+				rodentOutputDotSink = kernel(record)
+			}
+		})
+		for index := range records {
+			record := &records[index]
+			b.Run(record.name, func(b *testing.B) {
+				b.ReportAllocs()
+				b.ResetTimer()
+				for iteration := 0; iteration < b.N; iteration++ {
+					rodentOutputDotSink = kernel(record)
+				}
+			})
+		}
+	})
+}

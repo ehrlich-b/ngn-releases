@@ -1,0 +1,40 @@
+{
+  "schema": "ngn-k4-vs-rodent200-fixednodes-report-v1",
+  "held_sha256": "c8ebf895a25b144813b977ab9523f46113e3ec4f5ac0ae6eb4bc624511c328ce",
+  "chess_audit_sha256": "6d4b29a88e6149c4a37b0b586358b7603c52dc423947b1edbea15fe4c6e80d67",
+  "operational_audit_sha256": "53382924530618130a6c93e9de130992c64fe337e146a9c64decbea38a2f136e",
+  "terminal_sha256": "e1b3bb742485a093bdb3efcda9dac404276f548a16450af8788a35470946dbfb",
+  "clock_audit_sha256": "5a491ff7186ef3efeee41ae6e5808b9c2e5e8a8901a0202683e1ce816900bc9e",
+  "games": 200,
+  "pairs": 100,
+  "fixed_node_limit_per_move": 160000,
+  "fixed_nodes_k4_outcomes": {
+    "wins": 12,
+    "draws": 50,
+    "losses": 138
+  },
+  "fixed_nodes_k4_points": 37.0,
+  "fixed_nodes_k4_score": 0.185,
+  "fixed_nodes_score_interval_95": [
+    0.1475,
+    0.225
+  ],
+  "fixed_nodes_relative_elo": -257.59435213478514,
+  "fixed_nodes_relative_elo_interval_95": [
+    -304.7609469401414,
+    -214.84767375797915
+  ],
+  "clock_k4_score": 0.1725,
+  "fixed_minus_clock_score": 0.012500000000000011,
+  "fixed_minus_clock_score_interval_95": [
+    -0.0375,
+    0.065
+  ],
+  "bootstrap": {
+    "method": "nonparametric percentile, paired by exact six-ply opening prefix",
+    "score_seed": 2026092302,
+    "delta_seed": 2026092303,
+    "resamples": 100000
+  },
+  "absolute_rating_3k": "NOT_ESTABLISHED"
+}

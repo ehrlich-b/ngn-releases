@@ -1,0 +1,4 @@
+Total: 24.17s
+ROUTINE ======================== github.com/ehrlich-b/ngn/rodenteval.(*Model).applyUpdates in /home/ehrli/repos/ngn-rodent-postoutput-profile-20260913/rodenteval/context.go
+    14.07s     14.79s (flat, cum) 61.19% of Total
+ Error: could not find file repos/ngn-rodent-postoutput-profile-20260913/rodenteval/context.go on path /mnt/c/Users/ehrli

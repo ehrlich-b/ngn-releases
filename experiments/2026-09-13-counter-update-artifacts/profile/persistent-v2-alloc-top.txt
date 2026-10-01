@@ -1,0 +1,25 @@
+File: engine-profile-v2.test
+Build ID: 41a0c43ef27f3bd707af8448c89a5fd8dff878e3
+Type: alloc_space
+Time: 2026-09-13 11:48:14 EDT
+Showing nodes accounting for 4685.28MB, 99.39% of 4713.93MB total
+Dropped 50 nodes (cum <= 23.57MB)
+      flat  flat%   sum%        cum   cum%
+    4224MB 89.61% 89.61%     4224MB 89.61%  github.com/ehrlich-b/ngn/engine.newCacheWithMode (inline)
+  388.34MB  8.24% 97.84%   388.34MB  8.24%  github.com/ehrlich-b/ngn/engine.NewSearchEngineWithHash
+   72.94MB  1.55% 99.39%    72.94MB  1.55%  github.com/ehrlich-b/ngn/engine.searchIterativeDeepeningWorkerUnsafe
+         0     0% 99.39%     4224MB 89.61%  github.com/ehrlich-b/ngn/engine.(*SearchEngine).NewGame
+         0     0% 99.39%    72.94MB  1.55%  github.com/ehrlich-b/ngn/engine.(*SearchEngine).SearchIterativeDeepening (inline)
+         0     0% 99.39%    72.94MB  1.55%  github.com/ehrlich-b/ngn/engine.(*SearchEngine).SearchIterativeDeepeningWithCallback
+         0     0% 99.39%     4224MB 89.61%  github.com/ehrlich-b/ngn/engine.(*SearchEngine).prepareTTGeneration
+         0     0% 99.39%    72.94MB  1.55%  github.com/ehrlich-b/ngn/engine.(*SearchEngine).searchIterativeDeepeningLocked
+         0     0% 99.39%  4687.99MB 99.45%  github.com/ehrlich-b/ngn/engine.BenchmarkCounterProfilePersistent.func1
+         0     0% 99.39%  4609.05MB 97.78%  github.com/ehrlich-b/ngn/engine.newCounterProfileGame
+         0     0% 99.39%   385.05MB  8.17%  github.com/ehrlich-b/ngn/engine.newCounterTransitionProfileSearch
+         0     0% 99.39%    72.94MB  1.55%  github.com/ehrlich-b/ngn/engine.runLabelledCounterProfileSearch
+         0     0% 99.39%    72.94MB  1.55%  github.com/ehrlich-b/ngn/engine.runLabelledCounterProfileSearch.func1
+         0     0% 99.39%    72.94MB  1.55%  github.com/ehrlich-b/ngn/engine.searchIterativeDeepeningUnsafe (inline)
+         0     0% 99.39%    72.94MB  1.55%  runtime/pprof.Do
+         0     0% 99.39%  4261.54MB 90.40%  testing.(*B).launch
+         0     0% 99.39%   435.74MB  9.24%  testing.(*B).run1.func1
+         0     0% 99.39%  4697.29MB 99.65%  testing.(*B).runN

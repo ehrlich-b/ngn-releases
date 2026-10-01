@@ -1,0 +1,1548 @@
+diff --git a/rodenteval/context.go b/rodenteval/context.go
+new file mode 100644
+index 0000000..13617d5
+--- /dev/null
++++ b/rodenteval/context.go
+@@ -0,0 +1,408 @@
++package rodenteval
++
++import (
++	"fmt"
++	"math/bits"
++)
++
++const initialSearchFrameCount = 128
++
++const (
++	pawnTypePlane = 0
++	rookTypePlane = 3
++	kingTypePlane = 5
++	colorPlanes   = 6
++)
++
++// MoveDelta describes one semantic board transition. It deliberately carries
++// no chess-legality policy; the engine adapter is responsible for producing it
++// from an already admitted move.
++type MoveDelta struct {
++	MovingPlane uint8
++	From        uint8
++	To          uint8
++
++	HasCapture    bool
++	CapturedPlane uint8
++	CaptureSquare uint8
++
++	HasPromotion   bool
++	PromotionPlane uint8
++
++	HasCastleRook  bool
++	CastleRookFrom uint8
++	CastleRookTo   uint8
++}
++
++type featureUpdate struct {
++	plane  int
++	square int
++	add    bool
++}
++
++// SearchContext is one worker's dynamically growing Anand accumulator stack.
++// Frames own both evaluator input state and the two-perspective accumulator.
++type SearchContext struct {
++	model        *Model
++	accumulators []accumulator
++	positions    []Position
++	depth        int
++}
++
++// NewSearchContext validates and fully refreshes the root before publishing a
++// context. The model is immutable and may be shared; the context may not.
++func (model *Model) NewSearchContext(root Position) (*SearchContext, error) {
++	if err := model.validate(); err != nil {
++		return nil, err
++	}
++	if err := validatePosition(root); err != nil {
++		return nil, err
++	}
++	accumulators := make([]accumulator, initialSearchFrameCount)
++	positions := make([]Position, initialSearchFrameCount)
++	accumulators[0] = model.fullRefresh(root.Board)
++	positions[0] = root
++	return &SearchContext{model: model, accumulators: accumulators, positions: positions}, nil
++}
++
++// Reset replaces the root by full refresh while retaining frame storage.
++// Failure preserves the current root, stack, depth, and capacity.
++func (context *SearchContext) Reset(root Position) error {
++	if err := context.validate(); err != nil {
++		return err
++	}
++	if err := validatePosition(root); err != nil {
++		return err
++	}
++	refreshed := context.model.fullRefresh(root.Board)
++	context.accumulators[0] = refreshed
++	context.positions[0] = root
++	context.depth = 0
++	return nil
++}
++
++// Depth reports pushes above the root frame.
++func (context *SearchContext) Depth() int {
++	if context == nil {
++		return 0
++	}
++	return context.depth
++}
++
++// FrameCapacity reports allocated frames for ownership and growth diagnostics.
++func (context *SearchContext) FrameCapacity() int {
++	if context == nil {
++		return 0
++	}
++	return len(context.accumulators)
++}
++
++// Position returns the current evaluator input value.
++func (context *SearchContext) Position() Position {
++	return context.positions[context.depth]
++}
++
++// EvaluateRaw returns the current exact Anand score before the release material
++// adapter.
++func (context *SearchContext) EvaluateRaw() (int, error) {
++	if err := context.validate(); err != nil {
++		return 0, err
++	}
++	position := context.positions[context.depth]
++	return context.model.evaluateAccumulator(&context.accumulators[context.depth], position.SideToMove), nil
++}
++
++// EvaluateReleaseStatic returns the current exact testers-release static score.
++func (context *SearchContext) EvaluateReleaseStatic() (int, error) {
++	raw, err := context.EvaluateRaw()
++	if err != nil {
++		return 0, err
++	}
++	return scaleReleaseStatic(raw, context.positions[context.depth].Board), nil
++}
++
++// PushMove validates the complete transition before stack growth. All
++// operations after growth are infallible, so rejected moves cannot change the
++// context or its capacity.
++func (context *SearchContext) PushMove(delta MoveDelta, expectedPost Position) error {
++	if err := context.validate(); err != nil {
++		return err
++	}
++	if err := validatePosition(expectedPost); err != nil {
++		return fmt.Errorf("rodent v1.1 Anand search context: expected post position: %w", err)
++	}
++	current := context.positions[context.depth]
++	nextPosition, updates, updateCount, refreshPerspective, err := deriveTransition(current, delta)
++	if err != nil {
++		return err
++	}
++	if nextPosition != expectedPost {
++		return fmt.Errorf("rodent v1.1 Anand search context: derived post position differs from expected post position")
++	}
++	if err := context.ensurePushCapacity(); err != nil {
++		return err
++	}
++
++	// Growth may reallocate both slices, so acquire frame addresses only now.
++	next := context.depth + 1
++	parent := &context.accumulators[context.depth]
++	child := &context.accumulators[next]
++	*child = *parent
++	context.model.applyUpdates(child, nextPosition.Board, &updates, updateCount, refreshPerspective)
++	context.positions[next] = nextPosition
++	context.depth = next
++	return nil
++}
++
++// PushNull copies the accumulator and board exactly and changes only side to
++// move. It performs no inverse or feature arithmetic.
++func (context *SearchContext) PushNull() error {
++	if err := context.validate(); err != nil {
++		return err
++	}
++	if err := context.ensurePushCapacity(); err != nil {
++		return err
++	}
++	next := context.depth + 1
++	context.accumulators[next] = context.accumulators[context.depth]
++	context.positions[next] = context.positions[context.depth]
++	context.positions[next].SideToMove ^= 1
++	context.depth = next
++	return nil
++}
++
++// Pop restores the parent frame without inverse arithmetic.
++func (context *SearchContext) Pop() error {
++	if err := context.validate(); err != nil {
++		return err
++	}
++	if context.depth == 0 {
++		return fmt.Errorf("rodent v1.1 Anand search context: cannot pop root frame")
++	}
++	context.depth--
++	return nil
++}
++
++func (context *SearchContext) validate() error {
++	if context == nil || context.model == nil {
++		return fmt.Errorf("rodent v1.1 Anand search context: nil context or model")
++	}
++	if err := context.model.validate(); err != nil {
++		return err
++	}
++	if len(context.accumulators) == 0 || len(context.accumulators) != len(context.positions) ||
++		context.depth < 0 || context.depth >= len(context.accumulators) {
++		return fmt.Errorf("rodent v1.1 Anand search context: invalid frame state")
++	}
++	return nil
++}
++
++func (context *SearchContext) ensurePushCapacity() error {
++	if context.depth+1 < len(context.accumulators) {
++		return nil
++	}
++	oldFrames := len(context.accumulators)
++	maximumInt := int(^uint(0) >> 1)
++	if oldFrames <= 0 || oldFrames > maximumInt/2 {
++		return fmt.Errorf("rodent v1.1 Anand search context: frame capacity overflow at %d", oldFrames)
++	}
++	newFrames := oldFrames * 2
++	grownAccumulators := make([]accumulator, newFrames)
++	copy(grownAccumulators, context.accumulators)
++	grownPositions := make([]Position, newFrames)
++	copy(grownPositions, context.positions)
++	context.accumulators = grownAccumulators
++	context.positions = grownPositions
++	return nil
++}
++
++// deriveTransition validates evaluator semantics, not chess legality. Updates
++// follow the tagged release helper order: destination, source, captured piece;
++// castling interleaves king and rook destination/source pairs.
++func deriveTransition(current Position, delta MoveDelta) (Position, [4]featureUpdate, int, Color, error) {
++	if err := validatePosition(current); err != nil {
++		return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: current position: %w", err)
++	}
++	if delta.MovingPlane >= FeaturePlaneCount {
++		return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: moving plane %d out of range", delta.MovingPlane)
++	}
++	if delta.From >= 64 || delta.To >= 64 || delta.From == delta.To {
++		return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: invalid move squares %d -> %d", delta.From, delta.To)
++	}
++	if !delta.HasCapture && (delta.CapturedPlane != 0 || delta.CaptureSquare != 0) {
++		return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: capture fields set without capture")
++	}
++	if !delta.HasPromotion && delta.PromotionPlane != 0 {
++		return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: promotion plane set without promotion")
++	}
++	if !delta.HasCastleRook && (delta.CastleRookFrom != 0 || delta.CastleRookTo != 0) {
++		return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: rook fields set without castling")
++	}
++
++	movingPlane := int(delta.MovingPlane)
++	from := int(delta.From)
++	to := int(delta.To)
++	movingColor := Color(movingPlane / colorPlanes)
++	if movingColor != current.SideToMove {
++		return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: mover color %d differs from side to move %d", movingColor, current.SideToMove)
++	}
++	targetPlane := movingPlane
++	if delta.HasPromotion {
++		promotionPlane := int(delta.PromotionPlane)
++		if promotionPlane >= FeaturePlaneCount || movingPlane%colorPlanes != pawnTypePlane ||
++			promotionPlane/colorPlanes != movingPlane/colorPlanes ||
++			promotionPlane%colorPlanes < 1 || promotionPlane%colorPlanes > 4 {
++			return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: invalid promotion plane %d for moving plane %d", promotionPlane, movingPlane)
++		}
++		targetPlane = promotionPlane
++	}
++	if delta.HasCastleRook {
++		if delta.CastleRookFrom >= 64 || delta.CastleRookTo >= 64 ||
++			delta.CastleRookFrom == delta.CastleRookTo || movingPlane%colorPlanes != kingTypePlane ||
++			delta.HasCapture || delta.HasPromotion {
++			return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: invalid castling metadata")
++		}
++	}
++
++	next := current
++	if err := removeBoardPiece(&next.Board, movingPlane, from); err != nil {
++		return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: moving piece: %w", err)
++	}
++	if delta.HasCapture {
++		capturedPlane := int(delta.CapturedPlane)
++		captureSquare := int(delta.CaptureSquare)
++		if capturedPlane >= FeaturePlaneCount || captureSquare >= 64 ||
++			capturedPlane/colorPlanes == movingPlane/colorPlanes || capturedPlane%colorPlanes == kingTypePlane {
++			return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: invalid captured plane/square")
++		}
++		if captureSquare != to &&
++			(delta.HasPromotion || movingPlane%colorPlanes != pawnTypePlane || capturedPlane%colorPlanes != pawnTypePlane) {
++			return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: displaced capture is not pawn en passant")
++		}
++		if err := removeBoardPiece(&next.Board, capturedPlane, captureSquare); err != nil {
++			return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: captured piece: %w", err)
++		}
++	}
++	if err := addBoardPiece(&next.Board, targetPlane, to); err != nil {
++		return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: destination: %w", err)
++	}
++	if delta.HasCastleRook {
++		rookPlane := movingPlane/colorPlanes*colorPlanes + rookTypePlane
++		if err := removeBoardPiece(&next.Board, rookPlane, int(delta.CastleRookFrom)); err != nil {
++			return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: castling rook: %w", err)
++		}
++		if err := addBoardPiece(&next.Board, rookPlane, int(delta.CastleRookTo)); err != nil {
++			return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: castling rook destination: %w", err)
++		}
++	}
++	next.SideToMove ^= 1
++	if err := validatePosition(next); err != nil {
++		return Position{}, [4]featureUpdate{}, 0, Color(2), fmt.Errorf("rodent v1.1 Anand search context: derived post position: %w", err)
++	}
++
++	updates := [4]featureUpdate{
++		{plane: targetPlane, square: to, add: true},
++		{plane: movingPlane, square: from},
++	}
++	updateCount := 2
++	if delta.HasCapture {
++		updates[updateCount] = featureUpdate{plane: int(delta.CapturedPlane), square: int(delta.CaptureSquare)}
++		updateCount++
++	}
++	if delta.HasCastleRook {
++		rookPlane := movingPlane/colorPlanes*colorPlanes + rookTypePlane
++		updates[updateCount] = featureUpdate{plane: rookPlane, square: int(delta.CastleRookTo), add: true}
++		updates[updateCount+1] = featureUpdate{plane: rookPlane, square: int(delta.CastleRookFrom)}
++		updateCount += 2
++	}
++
++	refreshPerspective := Color(2)
++	if movingPlane%colorPlanes == kingTypePlane && (from%8 > 3) != (to%8 > 3) {
++		refreshPerspective = movingColor
++	}
++	return next, updates, updateCount, refreshPerspective, nil
++}
++
++func (model *Model) applyUpdates(
++	destination *accumulator,
++	postBoard Board,
++	updates *[4]featureUpdate,
++	updateCount int,
++	refresh Color,
++) {
++	kingSquares := [2]int{
++		bits.TrailingZeros64(postBoard[WhiteKing]),
++		bits.TrailingZeros64(postBoard[BlackKing]),
++	}
++	for perspective := White; perspective <= Black; perspective++ {
++		if perspective == refresh {
++			model.refreshPerspective(&destination[perspective], postBoard, perspective, kingSquares[perspective])
++			continue
++		}
++		var rows [4]*[HiddenSize]int16
++		for index, update := range updates[:updateCount] {
++			color := Color(update.plane / colorPlanes)
++			pieceType := update.plane % colorPlanes
++			feature := featureIndex(color, pieceType, update.square, kingSquares[perspective], perspective)
++			rows[index] = &model.inputWeights[feature]
++		}
++		for hidden := 0; hidden < HiddenSize; hidden++ {
++			value := destination[perspective][hidden]
++			for index, update := range updates[:updateCount] {
++				if update.add {
++					value += rows[index][hidden]
++				} else {
++					value -= rows[index][hidden]
++				}
++			}
++			destination[perspective][hidden] = value
++		}
++	}
++}
++
++func (model *Model) refreshPerspective(
++	destination *[HiddenSize]int16,
++	board Board,
++	perspective Color,
++	kingSquare int,
++) {
++	copy(destination[:], model.inputBiases[:])
++	for plane, pieceBits := range board {
++		color := Color(plane / colorPlanes)
++		pieceType := plane % colorPlanes
++		for pieceBits != 0 {
++			square := bits.TrailingZeros64(pieceBits)
++			pieceBits &= pieceBits - 1
++			row := &model.inputWeights[featureIndex(color, pieceType, square, kingSquare, perspective)]
++			for hidden := 0; hidden < HiddenSize; hidden++ {
++				destination[hidden] += row[hidden]
++			}
++		}
++	}
++}
++
++func removeBoardPiece(board *Board, plane, square int) error {
++	mask := uint64(1) << square
++	if board[plane]&mask == 0 {
++		return fmt.Errorf("plane %d has no piece at square %d", plane, square)
++	}
++	board[plane] &^= mask
++	return nil
++}
++
++func addBoardPiece(board *Board, plane, square int) error {
++	mask := uint64(1) << square
++	if occupiedBoard(*board)&mask != 0 {
++		return fmt.Errorf("square %d is occupied", square)
++	}
++	board[plane] |= mask
++	return nil
++}
++
++func occupiedBoard(board Board) uint64 {
++	var occupied uint64
++	for _, pieces := range board {
++		occupied |= pieces
++	}
++	return occupied
++}
+diff --git a/rodenteval/context_oracle_test.go b/rodenteval/context_oracle_test.go
+new file mode 100644
+index 0000000..c9d7997
+--- /dev/null
++++ b/rodenteval/context_oracle_test.go
+@@ -0,0 +1,529 @@
++//go:build rodentoracle
++
++package rodenteval
++
++import (
++	"bytes"
++	"crypto/sha256"
++	"encoding/binary"
++	"encoding/hex"
++	"encoding/json"
++	"io"
++	"os"
++	"strings"
++	"testing"
++)
++
++const (
++	transitionFixtureSchema  = "rodent-v1.1-anand-transition-fixtures-v1"
++	transitionFixtureSHA256  = "f9e26de0ed7a9663011f1fe8844ee0d8beb7a1bea4a2e4da50805fdbbf9579d4"
++	taggedOracleSchema       = "rodent-v1.1-anand-tagged-transition-oracle-v1"
++	releaseOracleSchema      = "rodent-v1.1-anand-slice-b-release-raw-oracle-v1"
++	taggedSourceTree         = "be0effaf52855fcbdf4a288fc1c203e1febcb5ce"
++	taggedSourceArchiveSHA   = "929f560996c3b0a8609e594923e587ab0eef61c9c013afbbd4497045113523fd"
++	taggedUCISHA             = "f452492b01ac32fc0cf987383bf85b4d934bdefcc6da7f1800b3686121ce082e"
++	taggedOptionsSHA         = "d71f036cc77bb2788fe6351ebdf6d48911363a8ad7d65d20047c4f60999bc13c"
++	taggedNNUESHA            = "bb6689c3465996fe982bcc77272c1033744fa53030958a4afb737523d55995bc"
++	taggedEvalSHA            = "2a8b8b955ad2f2d692f721eb5b39b03ed27b576970d80de1d393fee8fb7a9891"
++	transitionDigestEncoding = "perspective 0 lanes 0..511 as little-endian int16, followed by perspective 1 lanes 0..511; per-perspective digests hash each 1024-byte half"
++)
++
++type transitionIdentities struct {
++	TaggedSourceCommit     string `json:"tagged_source_commit"`
++	TaggedSourceTree       string `json:"tagged_source_tree"`
++	TaggedSourceArchiveSHA string `json:"tagged_source_archive_sha256"`
++	TaggedUCISHA           string `json:"tagged_uci_go_sha256"`
++	TaggedOptionsSHA       string `json:"tagged_options_go_sha256"`
++	TaggedNNUESHA          string `json:"tagged_nnue_go_sha256"`
++	TaggedEvalSHA          string `json:"tagged_eval_go_sha256"`
++	ReleaseBinarySHA       string `json:"release_binary_sha256"`
++	NetworkSHA             string `json:"network_sha256"`
++	PersonalitySHA         string `json:"personality_sha256"`
++}
++
++type transitionConfiguration struct {
++	HCEWeight           int `json:"hce_weight"`
++	NNUEWeight          int `json:"nnue_weight"`
++	NNUEScale           int `json:"nnue_scale"`
++	HorizontalMirroring int `json:"horizontal_mirroring"`
++}
++
++type transitionDelta struct {
++	MovingPlane    int  `json:"moving_plane"`
++	From           int  `json:"from"`
++	To             int  `json:"to"`
++	HasCapture     bool `json:"has_capture"`
++	CapturedPlane  int  `json:"captured_plane"`
++	CaptureSquare  int  `json:"capture_square"`
++	HasPromotion   bool `json:"has_promotion"`
++	PromotionPlane int  `json:"promotion_plane"`
++	HasCastleRook  bool `json:"has_castle_rook"`
++	CastleRookFrom int  `json:"castle_rook_from"`
++	CastleRookTo   int  `json:"castle_rook_to"`
++}
++
++type transitionStep struct {
++	Name        string           `json:"name"`
++	Operation   string           `json:"op"`
++	TaggedKind  string           `json:"tagged_kind"`
++	Delta       *transitionDelta `json:"delta"`
++	ExpectedFEN string           `json:"expected_fen"`
++	Repeat      int              `json:"repeat"`
++}
++
++type transitionSequence struct {
++	Name    string           `json:"name"`
++	RootFEN string           `json:"root_fen"`
++	Steps   []transitionStep `json:"steps"`
++}
++
++type transitionFixture struct {
++	Schema              string                  `json:"schema"`
++	Classification      string                  `json:"classification"`
++	Identities          transitionIdentities    `json:"identities"`
++	TaggedConfiguration transitionConfiguration `json:"tagged_configuration"`
++	PlaneOrder          []string                `json:"plane_order"`
++	DigestEncoding      string                  `json:"digest_encoding"`
++	Sequences           []transitionSequence    `json:"sequences"`
++}
++
++type taggedTransitionRecord struct {
++	Checkpoint         string `json:"checkpoint"`
++	FEN                string `json:"fen"`
++	Operation          string `json:"operation"`
++	Depth              int    `json:"depth"`
++	Raw                int    `json:"raw"`
++	AccumulatorSHA     string `json:"accumulator_sha256"`
++	WhiteSHA           string `json:"white_accumulator_sha256"`
++	BlackSHA           string `json:"black_accumulator_sha256"`
++	MatchedFullRefresh bool   `json:"matched_full_refresh"`
++}
++
++type taggedTransitionOracle struct {
++	Schema              string                   `json:"schema"`
++	Classification      string                   `json:"classification"`
++	FixtureSHA          string                   `json:"fixture_sha256"`
++	NetworkSHA          string                   `json:"network_sha256"`
++	TaggedSourceCommit  string                   `json:"tagged_source_commit"`
++	TaggedConfiguration transitionConfiguration  `json:"tagged_configuration"`
++	DigestEncoding      string                   `json:"digest_encoding"`
++	Records             []taggedTransitionRecord `json:"records"`
++}
++
++type releaseDeterminism struct {
++	Passes         int  `json:"passes"`
++	Matched        bool `json:"matched"`
++	RecordsPerPass int  `json:"records_per_pass"`
++}
++
++type releaseTransitionRecord struct {
++	Name    string   `json:"name"`
++	FEN     string   `json:"fen"`
++	Origins []string `json:"origins"`
++	Raw     int      `json:"raw"`
++}
++
++type releaseTransitionOracle struct {
++	Schema             string                    `json:"schema"`
++	Classification     string                    `json:"classification"`
++	ReleaseBinarySHA   string                    `json:"release_binary_sha256"`
++	NetworkSHA         string                    `json:"network_sha256"`
++	PersonalitySHA     string                    `json:"personality_sha256"`
++	FixtureSHA         string                    `json:"fixture_sha256"`
++	RawOracleCommand   string                    `json:"raw_oracle_command"`
++	RawOracleSemantics string                    `json:"raw_oracle_semantics"`
++	Determinism        releaseDeterminism        `json:"determinism"`
++	LaneBoundary       string                    `json:"lane_boundary"`
++	Records            []releaseTransitionRecord `json:"records"`
++}
++
++type expectedTransitionCheckpoint struct {
++	FEN       string
++	Operation string
++	Depth     int
++}
++
++func TestV11AnandIncrementalTaggedAndReleaseOracleParity(t *testing.T) {
++	modelPath := os.Getenv("RODENT_V11_ANAND_MODEL")
++	fixturePath := os.Getenv("RODENT_V11_ANAND_TRANSITION_FIXTURES")
++	taggedPath := os.Getenv("RODENT_V11_ANAND_TAGGED_TRANSITION_ORACLE")
++	releasePath := os.Getenv("RODENT_V11_ANAND_RELEASE_TRANSITION_ORACLE")
++	if modelPath == "" || fixturePath == "" || taggedPath == "" || releasePath == "" {
++		t.Fatal("RODENT_V11_ANAND_MODEL, RODENT_V11_ANAND_TRANSITION_FIXTURES, RODENT_V11_ANAND_TAGGED_TRANSITION_ORACLE, and RODENT_V11_ANAND_RELEASE_TRANSITION_ORACLE are required")
++	}
++
++	model, err := LoadV11Anand(modelPath)
++	if err != nil {
++		t.Fatal(err)
++	}
++	fixtureData := readTransitionFile(t, fixturePath)
++	if got := transitionSHA256(fixtureData); got != transitionFixtureSHA256 {
++		t.Fatalf("transition fixture SHA-256 = %s, want %s", got, transitionFixtureSHA256)
++	}
++	var fixture transitionFixture
++	decodeTransitionJSON(t, fixtureData, &fixture)
++	expected := validateTransitionFixture(t, fixture)
++
++	var tagged taggedTransitionOracle
++	decodeTransitionJSON(t, readTransitionFile(t, taggedPath), &tagged)
++	taggedByCheckpoint := validateTaggedTransitionOracle(t, tagged, expected)
++
++	var release releaseTransitionOracle
++	decodeTransitionJSON(t, readTransitionFile(t, releasePath), &release)
++	releaseByCheckpoint := validateReleaseTransitionOracle(t, release, expected)
++
++	for _, sequence := range fixture.Sequences {
++		t.Run(sequence.Name, func(t *testing.T) {
++			root := parseTransitionPosition(t, sequence.RootFEN)
++			context, err := model.NewSearchContext(root)
++			if err != nil {
++				t.Fatal(err)
++			}
++			assertTransitionCheckpoint(t, model, context, sequence.Name+"/root", taggedByCheckpoint, releaseByCheckpoint)
++			for _, step := range sequence.Steps {
++				checkpoint := sequence.Name + "/" + step.Name
++				expectedPost := parseTransitionPosition(t, step.ExpectedFEN)
++				switch step.Operation {
++				case "move":
++					delta := candidateTransitionDelta(t, step.Delta)
++					if err := context.PushMove(delta, expectedPost); err != nil {
++						t.Fatalf("%s: %v", checkpoint, err)
++					}
++				case "null":
++					if err := context.PushNull(); err != nil {
++						t.Fatalf("%s: %v", checkpoint, err)
++					}
++				case "pop":
++					if err := context.Pop(); err != nil {
++						t.Fatalf("%s: %v", checkpoint, err)
++					}
++				case "null_repeat":
++					for repeat := 0; repeat < step.Repeat; repeat++ {
++						parentDepth := context.depth
++						parentPosition := context.positions[parentDepth]
++						parentAccumulator := context.accumulators[parentDepth]
++						if err := context.PushNull(); err != nil {
++							t.Fatalf("%s repetition %d: %v", checkpoint, repeat+1, err)
++						}
++						if context.depth != parentDepth+1 {
++							t.Fatalf("%s repetition %d: depth = %d, want %d", checkpoint, repeat+1, context.depth, parentDepth+1)
++						}
++						wantPosition := parentPosition
++						wantPosition.SideToMove ^= 1
++						if context.positions[context.depth] != wantPosition {
++							t.Fatalf("%s repetition %d: null position = %+v, want %+v", checkpoint, repeat+1, context.positions[context.depth], wantPosition)
++						}
++						if context.accumulators[context.depth] != parentAccumulator {
++							t.Fatalf("%s repetition %d: null accumulator differs from parent", checkpoint, repeat+1)
++						}
++					}
++				default:
++					t.Fatalf("%s: unknown operation %q", checkpoint, step.Operation)
++				}
++				if context.Position() != expectedPost {
++					t.Fatalf("%s: context position = %+v, want %+v", checkpoint, context.Position(), expectedPost)
++				}
++				if context.Depth() != expected[checkpoint].Depth {
++					t.Fatalf("%s: context depth = %d, want %d", checkpoint, context.Depth(), expected[checkpoint].Depth)
++				}
++				assertTransitionCheckpoint(t, model, context, checkpoint, taggedByCheckpoint, releaseByCheckpoint)
++			}
++		})
++	}
++}
++
++func validateTransitionFixture(t *testing.T, fixture transitionFixture) map[string]expectedTransitionCheckpoint {
++	t.Helper()
++	wantIdentities := transitionIdentities{
++		TaggedSourceCommit: taggedSourceCommit, TaggedSourceTree: taggedSourceTree,
++		TaggedSourceArchiveSHA: taggedSourceArchiveSHA, TaggedUCISHA: taggedUCISHA,
++		TaggedOptionsSHA: taggedOptionsSHA, TaggedNNUESHA: taggedNNUESHA,
++		TaggedEvalSHA: taggedEvalSHA, ReleaseBinarySHA: releaseBinarySHA256,
++		NetworkSHA: V11AnandSHA256, PersonalitySHA: anandPersonalitySHA,
++	}
++	wantConfiguration := transitionConfiguration{HCEWeight: 0, NNUEWeight: 100, NNUEScale: outputScale, HorizontalMirroring: 1}
++	if fixture.Schema != transitionFixtureSchema || fixture.Classification != "source-selected transition semantics; no score selection" ||
++		fixture.Identities != wantIdentities || fixture.TaggedConfiguration != wantConfiguration ||
++		strings.Join(fixture.PlaneOrder, ",") != "WP,WN,WB,WR,WQ,WK,BP,BN,BB,BR,BQ,BK" ||
++		fixture.DigestEncoding != transitionDigestEncoding {
++		t.Fatal("transition fixture provenance or encoding differs")
++	}
++	if len(fixture.Sequences) != 22 {
++		t.Fatalf("transition sequence count = %d, want 22", len(fixture.Sequences))
++	}
++	expected := make(map[string]expectedTransitionCheckpoint, 75)
++	stepCount := 0
++	operations := make(map[string]bool)
++	taggedKinds := make(map[string]bool)
++	for _, sequence := range fixture.Sequences {
++		if sequence.Name == "" || strings.Contains(sequence.Name, "/") || sequence.RootFEN == "" || len(sequence.Steps) == 0 {
++			t.Fatalf("invalid transition sequence %q", sequence.Name)
++		}
++		rootKey := sequence.Name + "/root"
++		if _, exists := expected[rootKey]; exists {
++			t.Fatalf("duplicate transition sequence %q", sequence.Name)
++		}
++		parseTransitionPosition(t, sequence.RootFEN)
++		expected[rootKey] = expectedTransitionCheckpoint{FEN: sequence.RootFEN, Operation: "root", Depth: 0}
++		depth := 0
++		for _, step := range sequence.Steps {
++			stepCount++
++			checkpoint := sequence.Name + "/" + step.Name
++			if step.Name == "" || strings.Contains(step.Name, "/") || step.ExpectedFEN == "" {
++				t.Fatalf("invalid transition checkpoint %q", checkpoint)
++			}
++			if _, exists := expected[checkpoint]; exists {
++				t.Fatalf("duplicate transition checkpoint %q", checkpoint)
++			}
++			parseTransitionPosition(t, step.ExpectedFEN)
++			operations[step.Operation] = true
++			switch step.Operation {
++			case "move":
++				if step.Delta == nil || step.Repeat != 0 || step.TaggedKind == "" {
++					t.Fatalf("%s: malformed move fixture", checkpoint)
++				}
++				candidateTransitionDelta(t, step.Delta)
++				taggedKinds[step.TaggedKind] = true
++				depth++
++			case "null":
++				if step.Delta != nil || step.Repeat != 0 || step.TaggedKind != "" {
++					t.Fatalf("%s: malformed null fixture", checkpoint)
++				}
++				depth++
++			case "pop":
++				if step.Delta != nil || step.Repeat != 0 || step.TaggedKind != "" || depth == 0 {
++					t.Fatalf("%s: malformed pop fixture", checkpoint)
++				}
++				depth--
++			case "null_repeat":
++				if step.Delta != nil || step.Repeat != 128 || step.TaggedKind != "" || depth != 0 {
++					t.Fatalf("%s: malformed growth fixture", checkpoint)
++				}
++				depth += step.Repeat
++			default:
++				t.Fatalf("%s: unknown operation %q", checkpoint, step.Operation)
++			}
++			expected[checkpoint] = expectedTransitionCheckpoint{FEN: step.ExpectedFEN, Operation: step.Operation, Depth: depth}
++		}
++	}
++	if stepCount != 53 || len(expected) != 75 ||
++		!sameTransitionSet(operations, []string{"move", "null", "pop", "null_repeat"}) ||
++		!sameTransitionSet(taggedKinds, []string{"normal", "ep_set", "capture", "ep_capture", "castle", "promotion", "promotion_capture"}) {
++		t.Fatalf("transition coverage shrank: steps=%d records=%d operations=%v kinds=%v", stepCount, len(expected), operations, taggedKinds)
++	}
++	return expected
++}
++
++func validateTaggedTransitionOracle(
++	t *testing.T,
++	oracle taggedTransitionOracle,
++	expected map[string]expectedTransitionCheckpoint,
++) map[string]taggedTransitionRecord {
++	t.Helper()
++	wantConfiguration := transitionConfiguration{HCEWeight: 0, NNUEWeight: 100, NNUEScale: outputScale, HorizontalMirroring: 1}
++	if oracle.Schema != taggedOracleSchema ||
++		oracle.Classification != "tagged-source mechanism oracle: incremental accumulator equals tagged full refresh; stack/null/pop/growth are harness machinery; not exact-release lane evidence" ||
++		oracle.FixtureSHA != transitionFixtureSHA256 || oracle.NetworkSHA != V11AnandSHA256 ||
++		oracle.TaggedSourceCommit != taggedSourceCommit || oracle.TaggedConfiguration != wantConfiguration ||
++		oracle.DigestEncoding != transitionDigestEncoding || len(oracle.Records) != len(expected) {
++		t.Fatal("tagged transition oracle provenance, encoding, or record count differs")
++	}
++	result := make(map[string]taggedTransitionRecord, len(expected))
++	for _, record := range oracle.Records {
++		want, exists := expected[record.Checkpoint]
++		if !exists || record.FEN != want.FEN || record.Operation != want.Operation || record.Depth != want.Depth || !record.MatchedFullRefresh {
++			t.Fatalf("tagged transition record %q differs from fixture: %+v", record.Checkpoint, record)
++		}
++		if _, duplicate := result[record.Checkpoint]; duplicate {
++			t.Fatalf("duplicate tagged transition checkpoint %q", record.Checkpoint)
++		}
++		for label, digest := range map[string]string{"whole": record.AccumulatorSHA, "white": record.WhiteSHA, "black": record.BlackSHA} {
++			if !validTransitionSHA256(digest) {
++				t.Fatalf("tagged transition %s digest at %q is invalid: %q", label, record.Checkpoint, digest)
++			}
++		}
++		result[record.Checkpoint] = record
++	}
++	return result
++}
++
++func validateReleaseTransitionOracle(
++	t *testing.T,
++	oracle releaseTransitionOracle,
++	expected map[string]expectedTransitionCheckpoint,
++) map[string]releaseTransitionRecord {
++	t.Helper()
++	wantByFEN := make(map[string]map[string]bool)
++	for checkpoint, record := range expected {
++		if wantByFEN[record.FEN] == nil {
++			wantByFEN[record.FEN] = make(map[string]bool)
++		}
++		wantByFEN[record.FEN][checkpoint] = true
++	}
++	if oracle.Schema != releaseOracleSchema ||
++		oracle.Classification != "exact-release full-refresh raw runtime oracle at transition checkpoint FENs; no exact-release lane claim" ||
++		oracle.ReleaseBinarySHA != releaseBinarySHA256 || oracle.NetworkSHA != V11AnandSHA256 ||
++		oracle.PersonalitySHA != anandPersonalitySHA || oracle.FixtureSHA != transitionFixtureSHA256 ||
++		oracle.RawOracleCommand != "position fen <FEN>; nnue; isready; parse ^(-?[0-9]+)readyok$" ||
++		oracle.RawOracleSemantics != "side-to-move full-refresh getEval integer before material factor" ||
++		oracle.LaneBoundary != "the release exposes no accumulator lanes; tagged-source lane oracle is separate mechanism evidence" ||
++		oracle.Determinism != (releaseDeterminism{Passes: 2, Matched: true, RecordsPerPass: len(wantByFEN)}) ||
++		len(oracle.Records) != len(wantByFEN) {
++		t.Fatal("exact-release transition oracle provenance, semantics, determinism, or record count differs")
++	}
++	result := make(map[string]releaseTransitionRecord, len(expected))
++	seenNames := make(map[string]bool, len(oracle.Records))
++	seenFENs := make(map[string]bool, len(oracle.Records))
++	for _, record := range oracle.Records {
++		wantOrigins, exists := wantByFEN[record.FEN]
++		if record.Name == "" || seenNames[record.Name] || seenFENs[record.FEN] || !exists || len(record.Origins) != len(wantOrigins) {
++			t.Fatalf("invalid or duplicate exact-release record %+v", record)
++		}
++		seenNames[record.Name] = true
++		seenFENs[record.FEN] = true
++		for _, origin := range record.Origins {
++			if !wantOrigins[origin] {
++				t.Fatalf("exact-release record %q has unexpected origin %q", record.Name, origin)
++			}
++			if _, duplicate := result[origin]; duplicate {
++				t.Fatalf("exact-release origin %q appears more than once", origin)
++			}
++			result[origin] = record
++		}
++	}
++	if len(result) != len(expected) {
++		t.Fatalf("exact-release origins cover %d checkpoints, want %d", len(result), len(expected))
++	}
++	return result
++}
++
++func assertTransitionCheckpoint(
++	t *testing.T,
++	model *Model,
++	context *SearchContext,
++	checkpoint string,
++	tagged map[string]taggedTransitionRecord,
++	release map[string]releaseTransitionRecord,
++) {
++	t.Helper()
++	position := context.Position()
++	current := context.accumulators[context.depth]
++	refresh := model.fullRefresh(position.Board)
++	assertAccumulatorEqual(t, current, refresh)
++	whole, white, black := transitionAccumulatorDigests(&current)
++	taggedRecord := tagged[checkpoint]
++	if whole != taggedRecord.AccumulatorSHA || white != taggedRecord.WhiteSHA || black != taggedRecord.BlackSHA {
++		t.Fatalf("%s: candidate lanes differ from tagged-source mechanism oracle: whole=%s/%s white=%s/%s black=%s/%s",
++			checkpoint, whole, taggedRecord.AccumulatorSHA, white, taggedRecord.WhiteSHA, black, taggedRecord.BlackSHA)
++	}
++	raw, err := context.EvaluateRaw()
++	if err != nil {
++		t.Fatal(err)
++	}
++	if raw != taggedRecord.Raw {
++		t.Fatalf("%s: candidate output %d differs from tagged-source mechanism output %d", checkpoint, raw, taggedRecord.Raw)
++	}
++	releaseRecord := release[checkpoint]
++	if raw != releaseRecord.Raw {
++		t.Fatalf("%s: candidate raw %d differs from exact-release authority %d", checkpoint, raw, releaseRecord.Raw)
++	}
++	static, err := context.EvaluateReleaseStatic()
++	if err != nil {
++		t.Fatal(err)
++	}
++	if want := independentlyScaleReleaseStatic(releaseRecord.Raw, position.Board); static != want {
++		t.Fatalf("%s: candidate release static %d, independently derived from release raw %d", checkpoint, static, want)
++	}
++}
++
++func candidateTransitionDelta(t *testing.T, input *transitionDelta) MoveDelta {
++	t.Helper()
++	if input == nil {
++		t.Fatal("move fixture has no delta")
++	}
++	values := map[string]int{
++		"moving_plane": input.MovingPlane, "from": input.From, "to": input.To,
++		"captured_plane": input.CapturedPlane, "capture_square": input.CaptureSquare,
++		"promotion_plane": input.PromotionPlane, "castle_rook_from": input.CastleRookFrom,
++		"castle_rook_to": input.CastleRookTo,
++	}
++	for name, value := range values {
++		if value < 0 || value > 255 {
++			t.Fatalf("transition delta %s = %d is outside uint8", name, value)
++		}
++	}
++	return MoveDelta{
++		MovingPlane: uint8(input.MovingPlane), From: uint8(input.From), To: uint8(input.To),
++		HasCapture: input.HasCapture, CapturedPlane: uint8(input.CapturedPlane), CaptureSquare: uint8(input.CaptureSquare),
++		HasPromotion: input.HasPromotion, PromotionPlane: uint8(input.PromotionPlane),
++		HasCastleRook: input.HasCastleRook, CastleRookFrom: uint8(input.CastleRookFrom), CastleRookTo: uint8(input.CastleRookTo),
++	}
++}
++
++func transitionAccumulatorDigests(accumulator *accumulator) (string, string, string) {
++	data := make([]byte, 2*HiddenSize*2)
++	offset := 0
++	for perspective := White; perspective <= Black; perspective++ {
++		for lane := 0; lane < HiddenSize; lane++ {
++			binary.LittleEndian.PutUint16(data[offset:offset+2], uint16(accumulator[perspective][lane]))
++			offset += 2
++		}
++	}
++	half := HiddenSize * 2
++	return transitionSHA256(data), transitionSHA256(data[:half]), transitionSHA256(data[half:])
++}
++
++func parseTransitionPosition(t *testing.T, fen string) Position {
++	t.Helper()
++	position, err := parseOracleFEN(fen)
++	if err != nil {
++		t.Fatalf("parse transition FEN %q: %v", fen, err)
++	}
++	return position
++}
++
++func sameTransitionSet(got map[string]bool, want []string) bool {
++	if len(got) != len(want) {
++		return false
++	}
++	for _, value := range want {
++		if !got[value] {
++			return false
++		}
++	}
++	return true
++}
++
++func readTransitionFile(t *testing.T, path string) []byte {
++	t.Helper()
++	data, err := os.ReadFile(path)
++	if err != nil {
++		t.Fatal(err)
++	}
++	return data
++}
++
++func decodeTransitionJSON(t *testing.T, data []byte, destination any) {
++	t.Helper()
++	decoder := json.NewDecoder(bytes.NewReader(data))
++	decoder.DisallowUnknownFields()
++	if err := decoder.Decode(destination); err != nil {
++		t.Fatal(err)
++	}
++	if err := decoder.Decode(&struct{}{}); err != io.EOF {
++		t.Fatalf("JSON has trailing value: %v", err)
++	}
++}
++
++func transitionSHA256(data []byte) string {
++	digest := sha256.Sum256(data)
++	return hex.EncodeToString(digest[:])
++}
++
++func validTransitionSHA256(value string) bool {
++	if len(value) != sha256.Size*2 || strings.ToLower(value) != value {
++		return false
++	}
++	decoded, err := hex.DecodeString(value)
++	return err == nil && len(decoded) == sha256.Size
++}
+diff --git a/rodenteval/context_test.go b/rodenteval/context_test.go
+new file mode 100644
+index 0000000..810e012
+--- /dev/null
++++ b/rodenteval/context_test.go
+@@ -0,0 +1,593 @@
++package rodenteval
++
++import (
++	"strings"
++	"testing"
++)
++
++type contextPiece struct {
++	plane  int
++	square int
++}
++
++func contextPosition(side Color, pieces ...contextPiece) Position {
++	var position Position
++	position.SideToMove = side
++	for _, piece := range pieces {
++		position.Board[piece.plane] |= uint64(1) << piece.square
++	}
++	return position
++}
++
++func contextPost(root Position, remove, add []contextPiece) Position {
++	post := root
++	for _, piece := range remove {
++		post.Board[piece.plane] &^= uint64(1) << piece.square
++	}
++	for _, piece := range add {
++		post.Board[piece.plane] |= uint64(1) << piece.square
++	}
++	post.SideToMove ^= 1
++	return post
++}
++
++func incrementalTestModel() *Model {
++	model := testModel()
++	for hidden := 0; hidden < HiddenSize; hidden++ {
++		model.inputBiases[hidden] = int16(uint16(hidden*251 + 0x8001))
++	}
++	for feature := 0; feature < InputSize; feature++ {
++		for hidden := 0; hidden < HiddenSize; hidden++ {
++			value := uint32(feature*HiddenSize+hidden)*1664525 + 1013904223
++			model.inputWeights[feature][hidden] = int16(uint16(value >> 8))
++		}
++	}
++	for hidden := 0; hidden < HiddenSize; hidden++ {
++		model.outputWeights[0][hidden] = int16(uint16(hidden*97 + 31))
++		model.outputWeights[1][hidden] = int16(uint16(hidden*193 + 17))
++	}
++	model.outputBias = -117
++	return model
++}
++
++func poisonContextFrame(context *SearchContext, frame int) {
++	for perspective := White; perspective <= Black; perspective++ {
++		for hidden := 0; hidden < HiddenSize; hidden++ {
++			context.accumulators[frame][perspective][hidden] = int16(uint16(0x5a5a + hidden + int(perspective)))
++		}
++	}
++	context.positions[frame] = Position{SideToMove: Color(7)}
++}
++
++func assertAccumulatorEqual(t *testing.T, got, want accumulator) {
++	t.Helper()
++	if got == want {
++		return
++	}
++	for perspective := White; perspective <= Black; perspective++ {
++		for hidden := 0; hidden < HiddenSize; hidden++ {
++			if got[perspective][hidden] != want[perspective][hidden] {
++				t.Fatalf("accumulator perspective %d lane %d = %d, want %d", perspective, hidden, got[perspective][hidden], want[perspective][hidden])
++			}
++		}
++	}
++}
++
++func runContextTransition(t *testing.T, model *Model, root Position, delta MoveDelta, post Position) {
++	t.Helper()
++	context, err := model.NewSearchContext(root)
++	if err != nil {
++		t.Fatal(err)
++	}
++	parentAccumulator := context.accumulators[0]
++	parentPosition := context.positions[0]
++	poisonContextFrame(context, 1)
++
++	if err := context.PushMove(delta, post); err != nil {
++		t.Fatal(err)
++	}
++	if context.Depth() != 1 || context.Position() != post {
++		t.Fatalf("child state depth/position = %d/%+v, want 1/%+v", context.Depth(), context.Position(), post)
++	}
++	if context.accumulators[0] != parentAccumulator || context.positions[0] != parentPosition {
++		t.Fatal("push mutated parent frame")
++	}
++	wantAccumulator := model.fullRefresh(post.Board)
++	assertAccumulatorEqual(t, context.accumulators[1], wantAccumulator)
++	wantRaw, err := model.EvaluateRaw(post)
++	if err != nil {
++		t.Fatal(err)
++	}
++	if gotRaw, err := context.EvaluateRaw(); err != nil || gotRaw != wantRaw {
++		t.Fatalf("incremental raw = %d, %v; full refresh = %d", gotRaw, err, wantRaw)
++	}
++	wantStatic, err := model.EvaluateReleaseStatic(post)
++	if err != nil {
++		t.Fatal(err)
++	}
++	if gotStatic, err := context.EvaluateReleaseStatic(); err != nil || gotStatic != wantStatic {
++		t.Fatalf("incremental static = %d, %v; full refresh = %d", gotStatic, err, wantStatic)
++	}
++	if err := context.Pop(); err != nil {
++		t.Fatal(err)
++	}
++	if context.Depth() != 0 || context.Position() != root || context.accumulators[0] != parentAccumulator {
++		t.Fatal("pop did not restore exact parent frame")
++	}
++}
++
++func TestSearchContextMoveFamiliesMatchFullRefreshAllLanes(t *testing.T) {
++	model := incrementalTestModel()
++	modelBefore := *model
++	tests := []struct {
++		name  string
++		root  Position
++		delta MoveDelta
++		post  Position
++	}{
++		{
++			name: "white quiet",
++			root: contextPosition(White,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhiteKnight, 1}),
++			delta: MoveDelta{MovingPlane: WhiteKnight, From: 1, To: 18},
++			post: contextPosition(Black,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhiteKnight, 18}),
++		},
++		{
++			name: "black double pawn",
++			root: contextPosition(Black,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{BlackPawn, 51}),
++			delta: MoveDelta{MovingPlane: BlackPawn, From: 51, To: 35},
++			post: contextPosition(White,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{BlackPawn, 35}),
++		},
++		{
++			name: "ordinary capture",
++			root: contextPosition(White,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhiteBishop, 26}, contextPiece{BlackKnight, 35}),
++			delta: MoveDelta{MovingPlane: WhiteBishop, From: 26, To: 35, HasCapture: true, CapturedPlane: BlackKnight, CaptureSquare: 35},
++			post: contextPosition(Black,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhiteBishop, 35}),
++		},
++		{
++			name: "white en passant",
++			root: contextPosition(White,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhitePawn, 36}, contextPiece{BlackPawn, 35}),
++			delta: MoveDelta{MovingPlane: WhitePawn, From: 36, To: 43, HasCapture: true, CapturedPlane: BlackPawn, CaptureSquare: 35},
++			post: contextPosition(Black,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhitePawn, 43}),
++		},
++		{
++			name: "black en passant",
++			root: contextPosition(Black,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{BlackPawn, 27}, contextPiece{WhitePawn, 28}),
++			delta: MoveDelta{MovingPlane: BlackPawn, From: 27, To: 20, HasCapture: true, CapturedPlane: WhitePawn, CaptureSquare: 28},
++			post: contextPosition(White,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{BlackPawn, 20}),
++		},
++		{
++			name: "white king castle",
++			root: contextPosition(White,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhiteRook, 7}),
++			delta: MoveDelta{MovingPlane: WhiteKing, From: 4, To: 6, HasCastleRook: true, CastleRookFrom: 7, CastleRookTo: 5},
++			post: contextPosition(Black,
++				contextPiece{WhiteKing, 6}, contextPiece{BlackKing, 60}, contextPiece{WhiteRook, 5}),
++		},
++		{
++			name: "white queen castle crosses mirror",
++			root: contextPosition(White,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhiteRook, 0}),
++			delta: MoveDelta{MovingPlane: WhiteKing, From: 4, To: 2, HasCastleRook: true, CastleRookFrom: 0, CastleRookTo: 3},
++			post: contextPosition(Black,
++				contextPiece{WhiteKing, 2}, contextPiece{BlackKing, 60}, contextPiece{WhiteRook, 3}),
++		},
++		{
++			name: "black king castle",
++			root: contextPosition(Black,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{BlackRook, 63}),
++			delta: MoveDelta{MovingPlane: BlackKing, From: 60, To: 62, HasCastleRook: true, CastleRookFrom: 63, CastleRookTo: 61},
++			post: contextPosition(White,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 62}, contextPiece{BlackRook, 61}),
++		},
++		{
++			name: "black queen castle crosses mirror",
++			root: contextPosition(Black,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{BlackRook, 56}),
++			delta: MoveDelta{MovingPlane: BlackKing, From: 60, To: 58, HasCastleRook: true, CastleRookFrom: 56, CastleRookTo: 59},
++			post: contextPosition(White,
++				contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 58}, contextPiece{BlackRook, 59}),
++		},
++	}
++	for _, test := range tests {
++		t.Run(test.name, func(t *testing.T) {
++			runContextTransition(t, model, test.root, test.delta, test.post)
++		})
++	}
++	if *model != modelBefore {
++		t.Fatal("incremental transitions mutated immutable model")
++	}
++}
++
++func TestSearchContextAllPromotionsMatchFullRefreshAllLanes(t *testing.T) {
++	model := incrementalTestModel()
++	for _, color := range []Color{White, Black} {
++		for pieceType := 1; pieceType <= 4; pieceType++ {
++			for _, capture := range []bool{false, true} {
++				name := []string{"white", "black"}[color] + "_type_" + string(rune('0'+pieceType))
++				if capture {
++					name += "_capture"
++				}
++				t.Run(name, func(t *testing.T) {
++					movingPlane := int(color) * colorPlanes
++					targetPlane := movingPlane + pieceType
++					from, to := 48, 56
++					rootPieces := []contextPiece{{WhiteKing, 4}, {BlackKing, 60}, {movingPlane, from}}
++					remove := []contextPiece{{movingPlane, from}}
++					delta := MoveDelta{MovingPlane: uint8(movingPlane), From: uint8(from), To: uint8(to), HasPromotion: true, PromotionPlane: uint8(targetPlane)}
++					if color == Black {
++						from, to = 8, 0
++						rootPieces[2].square = from
++						remove[0].square = from
++						delta.From, delta.To = uint8(from), uint8(to)
++					}
++					if capture {
++						to ^= 1
++						delta.To = uint8(to)
++						capturedPlane := BlackRook
++						if color == Black {
++							capturedPlane = WhiteRook
++						}
++						rootPieces = append(rootPieces, contextPiece{capturedPlane, to})
++						remove = append(remove, contextPiece{capturedPlane, to})
++						delta.HasCapture = true
++						delta.CapturedPlane = uint8(capturedPlane)
++						delta.CaptureSquare = uint8(to)
++					}
++					root := contextPosition(color, rootPieces...)
++					post := contextPost(root, remove, []contextPiece{{targetPlane, to}})
++					runContextTransition(t, model, root, delta, post)
++				})
++			}
++		}
++	}
++}
++
++func TestSearchContextKingMirrorBoundaryBothDirectionsAndColors(t *testing.T) {
++	model := incrementalTestModel()
++	tests := []struct {
++		name         string
++		color        Color
++		from, to     int
++		movingPlane  int
++		friendlyPawn int
++	}{
++		{name: "white d to e", color: White, from: 3, to: 4, movingPlane: WhiteKing, friendlyPawn: 10},
++		{name: "white e to d", color: White, from: 4, to: 3, movingPlane: WhiteKing, friendlyPawn: 10},
++		{name: "black d to e", color: Black, from: 59, to: 60, movingPlane: BlackKing, friendlyPawn: 50},
++		{name: "black e to d", color: Black, from: 60, to: 59, movingPlane: BlackKing, friendlyPawn: 50},
++	}
++	for _, test := range tests {
++		t.Run(test.name, func(t *testing.T) {
++			pieces := []contextPiece{{WhiteKing, 4}, {BlackKing, 60}, {WhiteKnight, 18}, {BlackBishop, 45}}
++			pieces[test.color] = contextPiece{test.movingPlane, test.from}
++			pawnPlane := WhitePawn
++			if test.color == Black {
++				pawnPlane = BlackPawn
++			}
++			pieces = append(pieces, contextPiece{pawnPlane, test.friendlyPawn})
++			root := contextPosition(test.color, pieces...)
++			post := contextPost(root,
++				[]contextPiece{{test.movingPlane, test.from}},
++				[]contextPiece{{test.movingPlane, test.to}})
++			delta := MoveDelta{MovingPlane: uint8(test.movingPlane), From: uint8(test.from), To: uint8(test.to)}
++			runContextTransition(t, model, root, delta, post)
++		})
++	}
++}
++
++func TestSearchContextMultiPlyUnwindAndSiblingReuse(t *testing.T) {
++	model := incrementalTestModel()
++	root := contextPosition(White,
++		contextPiece{WhiteKing, 3}, contextPiece{BlackKing, 60},
++		contextPiece{WhiteKnight, 1}, contextPiece{BlackKnight, 57},
++		contextPiece{WhitePawn, 12}, contextPiece{BlackPawn, 52})
++	context, err := model.NewSearchContext(root)
++	if err != nil {
++		t.Fatal(err)
++	}
++	positions := []Position{root}
++	accumulators := []accumulator{context.accumulators[0]}
++	push := func(delta MoveDelta, post Position) {
++		t.Helper()
++		if err := context.PushMove(delta, post); err != nil {
++			t.Fatal(err)
++		}
++		assertAccumulatorEqual(t, context.accumulators[context.depth], model.fullRefresh(post.Board))
++		for depth := range positions {
++			if context.positions[depth] != positions[depth] || context.accumulators[depth] != accumulators[depth] {
++				t.Fatalf("push at depth %d mutated ancestor frame %d", context.depth, depth)
++			}
++		}
++		positions = append(positions, post)
++		accumulators = append(accumulators, context.accumulators[context.depth])
++	}
++	post := contextPost(root, []contextPiece{{WhiteKing, 3}}, []contextPiece{{WhiteKing, 4}})
++	push(MoveDelta{MovingPlane: WhiteKing, From: 3, To: 4}, post)
++	post = contextPost(post, []contextPiece{{BlackKnight, 57}}, []contextPiece{{BlackKnight, 42}})
++	push(MoveDelta{MovingPlane: BlackKnight, From: 57, To: 42}, post)
++	branchRoot := post
++	post = contextPost(post, []contextPiece{{WhiteKnight, 1}}, []contextPiece{{WhiteKnight, 18}})
++	push(MoveDelta{MovingPlane: WhiteKnight, From: 1, To: 18}, post)
++	post = contextPost(post, []contextPiece{{BlackKing, 60}}, []contextPiece{{BlackKing, 59}})
++	push(MoveDelta{MovingPlane: BlackKing, From: 60, To: 59}, post)
++	post = contextPost(post, []contextPiece{{WhitePawn, 12}}, []contextPiece{{WhitePawn, 28}})
++	push(MoveDelta{MovingPlane: WhitePawn, From: 12, To: 28}, post)
++
++	for context.Depth() > 2 {
++		if err := context.Pop(); err != nil {
++			t.Fatal(err)
++		}
++		positions = positions[:len(positions)-1]
++		accumulators = accumulators[:len(accumulators)-1]
++		if context.Position() != positions[len(positions)-1] {
++			t.Fatalf("unwind depth %d restored wrong position", context.Depth())
++		}
++		assertAccumulatorEqual(t, context.accumulators[context.depth], accumulators[len(accumulators)-1])
++	}
++
++	// First sibling overwrites the old depth-3/4 frames with a pawn branch.
++	post = contextPost(branchRoot, []contextPiece{{WhitePawn, 12}}, []contextPiece{{WhitePawn, 20}})
++	push(MoveDelta{MovingPlane: WhitePawn, From: 12, To: 20}, post)
++	post = contextPost(post, []contextPiece{{BlackPawn, 52}}, []contextPiece{{BlackPawn, 36}})
++	push(MoveDelta{MovingPlane: BlackPawn, From: 52, To: 36}, post)
++	for context.Depth() > 2 {
++		if err := context.Pop(); err != nil {
++			t.Fatal(err)
++		}
++		positions = positions[:len(positions)-1]
++		accumulators = accumulators[:len(accumulators)-1]
++	}
++
++	// A different sibling reuses the same poisoned-by-history child frames.
++	post = contextPost(branchRoot, []contextPiece{{WhiteKnight, 1}}, []contextPiece{{WhiteKnight, 16}})
++	push(MoveDelta{MovingPlane: WhiteKnight, From: 1, To: 16}, post)
++	post = contextPost(post, []contextPiece{{BlackKing, 60}}, []contextPiece{{BlackKing, 59}})
++	push(MoveDelta{MovingPlane: BlackKing, From: 60, To: 59}, post)
++}
++
++func TestApplyUpdatesRefreshesOnlyCrossingKingPerspective(t *testing.T) {
++	model := incrementalTestModel()
++	post := contextPosition(Black,
++		contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60},
++		contextPiece{WhiteKnight, 18}, contextPiece{BlackBishop, 45})
++	var destination accumulator
++	for perspective := White; perspective <= Black; perspective++ {
++		for hidden := 0; hidden < HiddenSize; hidden++ {
++			destination[perspective][hidden] = int16(uint16(0x4000 + hidden*17 + int(perspective)))
++		}
++	}
++	blackBefore := destination[Black]
++	updates := [4]featureUpdate{
++		{plane: WhiteKing, square: 4, add: true},
++		{plane: WhiteKing, square: 3},
++	}
++
++	model.applyUpdates(&destination, post.Board, &updates, 2, White)
++	wantRefresh := model.fullRefresh(post.Board)
++	if destination[White] != wantRefresh[White] {
++		t.Fatal("crossing White perspective was not fully refreshed")
++	}
++	blackKingSquare := 60
++	toRow := &model.inputWeights[featureIndex(White, kingTypePlane, 4, blackKingSquare, Black)]
++	fromRow := &model.inputWeights[featureIndex(White, kingTypePlane, 3, blackKingSquare, Black)]
++	for hidden := 0; hidden < HiddenSize; hidden++ {
++		want := blackBefore[hidden] + toRow[hidden] - fromRow[hidden]
++		if destination[Black][hidden] != want {
++			t.Fatalf("incremental Black perspective lane %d = %d, want sentinel delta %d", hidden, destination[Black][hidden], want)
++		}
++	}
++	if destination[Black] == wantRefresh[Black] {
++		t.Fatal("non-crossing Black perspective was unexpectedly refreshed")
++	}
++}
++
++func TestSearchContextIncrementalArithmeticWrapsInt16(t *testing.T) {
++	model := testModel()
++	root := contextPosition(White,
++		contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhiteKnight, 1})
++	post := contextPosition(Black,
++		contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhiteKnight, 18})
++	for perspective := White; perspective <= Black; perspective++ {
++		kingSquare := 4
++		if perspective == Black {
++			kingSquare = 60
++		}
++		from := featureIndex(White, 1, 1, kingSquare, perspective)
++		to := featureIndex(White, 1, 18, kingSquare, perspective)
++		model.inputBiases[0] = 32760
++		model.inputWeights[from][0] = -20
++		model.inputWeights[to][0] = 100
++	}
++	context, err := model.NewSearchContext(root)
++	if err != nil {
++		t.Fatal(err)
++	}
++	if err := context.PushMove(MoveDelta{MovingPlane: WhiteKnight, From: 1, To: 18}, post); err != nil {
++		t.Fatal(err)
++	}
++	assertAccumulatorEqual(t, context.accumulators[1], model.fullRefresh(post.Board))
++	for perspective := White; perspective <= Black; perspective++ {
++		if got := context.accumulators[1][perspective][0]; got != -32676 {
++			t.Fatalf("wrapped perspective %d lane 0 = %d, want -32676", perspective, got)
++		}
++	}
++}
++
++func TestSearchContextRejectsTransitionsTransactionally(t *testing.T) {
++	model := incrementalTestModel()
++	root := contextPosition(White,
++		contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhiteKnight, 1}, contextPiece{BlackPawn, 35})
++	validDelta := MoveDelta{MovingPlane: WhiteKnight, From: 1, To: 18}
++	validPost := contextPost(root, []contextPiece{{WhiteKnight, 1}}, []contextPiece{{WhiteKnight, 18}})
++	tests := []struct {
++		name  string
++		delta MoveDelta
++		post  Position
++		want  string
++	}{
++		{name: "mover side", delta: MoveDelta{MovingPlane: BlackPawn, From: 35, To: 27}, post: Position{Board: root.Board, SideToMove: Black}, want: "mover color"},
++		{name: "expected side", delta: validDelta, post: Position{Board: validPost.Board, SideToMove: White}, want: "differs from expected"},
++		{name: "expected board", delta: validDelta, post: Position{Board: root.Board, SideToMove: Black}, want: "differs from expected"},
++		{name: "capture fields", delta: MoveDelta{MovingPlane: WhiteKnight, From: 1, To: 18, CapturedPlane: BlackPawn}, post: validPost, want: "without capture"},
++		{name: "own capture", delta: MoveDelta{MovingPlane: WhiteKnight, From: 1, To: 4, HasCapture: true, CapturedPlane: WhiteKing, CaptureSquare: 4}, post: validPost, want: "invalid captured"},
++		{name: "king capture", delta: MoveDelta{MovingPlane: WhiteKnight, From: 1, To: 60, HasCapture: true, CapturedPlane: BlackKing, CaptureSquare: 60}, post: validPost, want: "invalid captured"},
++		{name: "bad promotion", delta: MoveDelta{MovingPlane: WhiteKnight, From: 1, To: 18, HasPromotion: true, PromotionPlane: WhiteQueen}, post: validPost, want: "invalid promotion"},
++		{name: "bad castle", delta: MoveDelta{MovingPlane: WhiteKnight, From: 1, To: 18, HasCastleRook: true, CastleRookFrom: 7, CastleRookTo: 5}, post: validPost, want: "invalid castling"},
++	}
++	for _, test := range tests {
++		t.Run(test.name, func(t *testing.T) {
++			context, err := model.NewSearchContext(root)
++			if err != nil {
++				t.Fatal(err)
++			}
++			beforeAccumulator := context.accumulators[0]
++			beforePosition := context.positions[0]
++			beforeCapacity := context.FrameCapacity()
++			if err := context.PushMove(test.delta, test.post); err == nil || !strings.Contains(err.Error(), test.want) {
++				t.Fatalf("PushMove error = %v, want substring %q", err, test.want)
++			}
++			if context.Depth() != 0 || context.FrameCapacity() != beforeCapacity ||
++				context.accumulators[0] != beforeAccumulator || context.positions[0] != beforePosition {
++				t.Fatal("rejected transition mutated context or capacity")
++			}
++		})
++	}
++}
++
++func TestSearchContextNullPopResetAndCapacityGrowth(t *testing.T) {
++	model := incrementalTestModel()
++	root := contextPosition(White,
++		contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhiteKnight, 1}, contextPiece{BlackKnight, 57})
++	context, err := model.NewSearchContext(root)
++	if err != nil {
++		t.Fatal(err)
++	}
++	rootAccumulator := context.accumulators[0]
++	if err := context.PushNull(); err != nil {
++		t.Fatal(err)
++	}
++	if context.Position().Board != root.Board || context.Position().SideToMove != Black {
++		t.Fatalf("null position = %+v, want unchanged board and Black STM", context.Position())
++	}
++	assertAccumulatorEqual(t, context.accumulators[1], rootAccumulator)
++	if err := context.Pop(); err != nil {
++		t.Fatal(err)
++	}
++	if context.Position() != root || context.accumulators[0] != rootAccumulator {
++		t.Fatal("pop after null did not restore root")
++	}
++	if err := context.Pop(); err == nil || !strings.Contains(err.Error(), "cannot pop root") {
++		t.Fatalf("root Pop error = %v", err)
++	}
++
++	for context.Depth() < initialSearchFrameCount-1 {
++		if err := context.PushNull(); err != nil {
++			t.Fatal(err)
++		}
++	}
++	if context.FrameCapacity() != initialSearchFrameCount || context.Position().SideToMove != Black {
++		t.Fatalf("boundary state depth/capacity/STM = %d/%d/%d", context.Depth(), context.FrameCapacity(), context.Position().SideToMove)
++	}
++	boundaryAccumulator := context.accumulators[context.depth]
++	boundaryPosition := context.positions[context.depth]
++	basePointer := &context.accumulators[0]
++	badDelta := MoveDelta{MovingPlane: WhiteKnight, From: 1, To: 18}
++	badPost := contextPost(boundaryPosition, []contextPiece{{WhiteKnight, 1}}, []contextPiece{{WhiteKnight, 18}})
++	if err := context.PushMove(badDelta, badPost); err == nil || !strings.Contains(err.Error(), "mover color") {
++		t.Fatalf("boundary rejected PushMove error = %v", err)
++	}
++	if context.Depth() != initialSearchFrameCount-1 || context.FrameCapacity() != initialSearchFrameCount ||
++		&context.accumulators[0] != basePointer || context.accumulators[context.depth] != boundaryAccumulator ||
++		context.positions[context.depth] != boundaryPosition {
++		t.Fatal("rejected boundary push mutated frames or grew capacity")
++	}
++
++	validDelta := MoveDelta{MovingPlane: BlackKnight, From: 57, To: 42}
++	validPost := contextPost(boundaryPosition, []contextPiece{{BlackKnight, 57}}, []contextPiece{{BlackKnight, 42}})
++	if err := context.PushMove(validDelta, validPost); err != nil {
++		t.Fatal(err)
++	}
++	if context.Depth() != initialSearchFrameCount || context.FrameCapacity() != initialSearchFrameCount*2 {
++		t.Fatalf("successful growth depth/capacity = %d/%d, want %d/%d", context.Depth(), context.FrameCapacity(), initialSearchFrameCount, initialSearchFrameCount*2)
++	}
++	if context.accumulators[initialSearchFrameCount-1] != boundaryAccumulator ||
++		context.positions[initialSearchFrameCount-1] != boundaryPosition {
++		t.Fatal("growth mutated parent frame")
++	}
++	assertAccumulatorEqual(t, context.accumulators[context.depth], model.fullRefresh(validPost.Board))
++
++	beforeDepth := context.Depth()
++	beforeCapacity := context.FrameCapacity()
++	beforePosition := context.Position()
++	beforeAccumulator := context.accumulators[context.depth]
++	invalidRoot := root
++	invalidRoot.SideToMove = Color(9)
++	if err := context.Reset(invalidRoot); err == nil {
++		t.Fatal("Reset accepted invalid root")
++	}
++	if context.Depth() != beforeDepth || context.FrameCapacity() != beforeCapacity ||
++		context.Position() != beforePosition || context.accumulators[context.depth] != beforeAccumulator {
++		t.Fatal("rejected Reset mutated context")
++	}
++
++	newRoot := contextPosition(Black,
++		contextPiece{WhiteKing, 3}, contextPiece{BlackKing, 59}, contextPiece{WhiteRook, 0}, contextPiece{BlackRook, 63})
++	if err := context.Reset(newRoot); err != nil {
++		t.Fatal(err)
++	}
++	if context.Depth() != 0 || context.FrameCapacity() != beforeCapacity || context.Position() != newRoot {
++		t.Fatalf("Reset state depth/capacity/position = %d/%d/%+v", context.Depth(), context.FrameCapacity(), context.Position())
++	}
++	assertAccumulatorEqual(t, context.accumulators[0], model.fullRefresh(newRoot.Board))
++}
++
++func TestSearchContextsOwnIndependentFrames(t *testing.T) {
++	model := incrementalTestModel()
++	root := contextPosition(White,
++		contextPiece{WhiteKing, 4}, contextPiece{BlackKing, 60}, contextPiece{WhiteKnight, 1})
++	left, err := model.NewSearchContext(root)
++	if err != nil {
++		t.Fatal(err)
++	}
++	right, err := model.NewSearchContext(root)
++	if err != nil {
++		t.Fatal(err)
++	}
++	if &left.accumulators[0] == &right.accumulators[0] || &left.positions[0] == &right.positions[0] {
++		t.Fatal("contexts share frame backing storage")
++	}
++	rightAccumulator := right.accumulators[0]
++	rightPosition := right.positions[0]
++	rightCapacity := right.FrameCapacity()
++	post := contextPost(root, []contextPiece{{WhiteKnight, 1}}, []contextPiece{{WhiteKnight, 18}})
++	if err := left.PushMove(MoveDelta{MovingPlane: WhiteKnight, From: 1, To: 18}, post); err != nil {
++		t.Fatal(err)
++	}
++	if right.Depth() != 0 || right.FrameCapacity() != rightCapacity ||
++		right.positions[0] != rightPosition || right.accumulators[0] != rightAccumulator {
++		t.Fatal("pushing one worker context mutated another")
++	}
++}
++
++func TestSearchContextRejectsUnvalidatedModelAndPosition(t *testing.T) {
++	var zero Model
++	if context, err := zero.NewSearchContext(minimalPosition(White)); err == nil || context != nil {
++		t.Fatalf("zero model context = %v, %v", context, err)
++	}
++	model := testModel()
++	invalid := minimalPosition(White)
++	invalid.Board[WhiteQueen] = invalid.Board[WhiteKing]
++	if context, err := model.NewSearchContext(invalid); err == nil || context != nil {
++		t.Fatalf("invalid root context = %v, %v", context, err)
++	}
++}

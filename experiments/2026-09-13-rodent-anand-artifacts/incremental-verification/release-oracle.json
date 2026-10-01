@@ -1,0 +1,492 @@
+{
+  "schema": "rodent-v1.1-anand-slice-b-release-raw-oracle-v1",
+  "classification": "exact-release full-refresh raw runtime oracle at transition checkpoint FENs; no exact-release lane claim",
+  "release_binary_sha256": "9c68d7b39dc933eff5fd2da88bd4be1b0d009f6d2add7485c121cfc0d1308531",
+  "network_sha256": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb",
+  "personality_sha256": "b0e336bc8892043063e6b1fcc42193bbbc6cacf347e9d561d089ddcb602bf3aa",
+  "fixture_sha256": "f9e26de0ed7a9663011f1fe8844ee0d8beb7a1bea4a2e4da50805fdbbf9579d4",
+  "raw_oracle_command": "position fen <FEN>; nnue; isready; parse ^(-?[0-9]+)readyok$",
+  "raw_oracle_semantics": "side-to-move full-refresh getEval integer before material factor",
+  "determinism": {
+    "passes": 2,
+    "matched": true,
+    "records_per_pass": 57
+  },
+  "lane_boundary": "the release exposes no accumulator lanes; tagged-source lane oracle is separate mechanism evidence",
+  "records": [
+    {
+      "name": "slice_b_001",
+      "fen": "4k3/8/8/8/8/8/8/1N2K3 w - - 0 1",
+      "origins": [
+        "white_quiet/root"
+      ],
+      "raw": 65
+    },
+    {
+      "name": "slice_b_002",
+      "fen": "4k3/8/8/8/8/2N5/8/4K3 b - - 1 1",
+      "origins": [
+        "white_quiet/b1c3"
+      ],
+      "raw": -48
+    },
+    {
+      "name": "slice_b_003",
+      "fen": "1n2k3/8/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "black_quiet/root"
+      ],
+      "raw": 65
+    },
+    {
+      "name": "slice_b_004",
+      "fen": "4k3/8/2n5/8/8/8/8/4K3 w - - 1 2",
+      "origins": [
+        "black_quiet/b8c6"
+      ],
+      "raw": -48
+    },
+    {
+      "name": "slice_b_005",
+      "fen": "4k3/8/8/8/8/8/4P3/4K3 w - - 0 1",
+      "origins": [
+        "white_double/root"
+      ],
+      "raw": 201
+    },
+    {
+      "name": "slice_b_006",
+      "fen": "4k3/8/8/8/4P3/8/8/4K3 b - - 0 1",
+      "origins": [
+        "white_double/e2e4"
+      ],
+      "raw": -211
+    },
+    {
+      "name": "slice_b_007",
+      "fen": "4k3/3p4/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "black_double/root"
+      ],
+      "raw": 214
+    },
+    {
+      "name": "slice_b_008",
+      "fen": "4k3/8/8/3p4/8/8/8/4K3 w - - 0 2",
+      "origins": [
+        "black_double/d7d5"
+      ],
+      "raw": -229
+    },
+    {
+      "name": "slice_b_009",
+      "fen": "4k3/5n2/8/8/2B5/8/8/4K3 w - - 0 1",
+      "origins": [
+        "white_capture/root"
+      ],
+      "raw": -9
+    },
+    {
+      "name": "slice_b_010",
+      "fen": "4k3/5B2/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "white_capture/c4f7"
+      ],
+      "raw": -39
+    },
+    {
+      "name": "slice_b_011",
+      "fen": "4k3/8/8/2b5/8/8/5N2/4K3 b - - 0 1",
+      "origins": [
+        "black_capture/root"
+      ],
+      "raw": -9
+    },
+    {
+      "name": "slice_b_012",
+      "fen": "4k3/8/8/8/8/8/5b2/4K3 w - - 0 2",
+      "origins": [
+        "black_capture/c5f2"
+      ],
+      "raw": -39
+    },
+    {
+      "name": "slice_b_013",
+      "fen": "4k3/8/8/3pP3/8/8/8/4K3 w - d6 0 1",
+      "origins": [
+        "white_en_passant/root"
+      ],
+      "raw": -15
+    },
+    {
+      "name": "slice_b_014",
+      "fen": "4k3/8/3P4/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "white_en_passant/e5d6"
+      ],
+      "raw": -179
+    },
+    {
+      "name": "slice_b_015",
+      "fen": "4k3/8/8/8/3pP3/8/8/4K3 b - e3 0 1",
+      "origins": [
+        "black_en_passant/root"
+      ],
+      "raw": -5
+    },
+    {
+      "name": "slice_b_016",
+      "fen": "4k3/8/8/8/8/4p3/8/4K3 w - - 0 2",
+      "origins": [
+        "black_en_passant/d4e3"
+      ],
+      "raw": -143
+    },
+    {
+      "name": "slice_b_017",
+      "fen": "4k3/8/8/8/8/8/8/4K2R w K - 0 1",
+      "origins": [
+        "white_kingside_castle/root"
+      ],
+      "raw": 471
+    },
+    {
+      "name": "slice_b_018",
+      "fen": "4k3/8/8/8/8/8/8/5RK1 b - - 1 1",
+      "origins": [
+        "white_kingside_castle/e1g1"
+      ],
+      "raw": -517
+    },
+    {
+      "name": "slice_b_019",
+      "fen": "4k3/8/8/8/8/8/8/R3K3 w Q - 0 1",
+      "origins": [
+        "white_queenside_castle/root"
+      ],
+      "raw": 455
+    },
+    {
+      "name": "slice_b_020",
+      "fen": "4k3/8/8/8/8/8/8/2KR4 b - - 1 1",
+      "origins": [
+        "white_queenside_castle/e1c1"
+      ],
+      "raw": -483
+    },
+    {
+      "name": "slice_b_021",
+      "fen": "4k2r/8/8/8/8/8/8/4K3 b k - 0 1",
+      "origins": [
+        "black_kingside_castle/root"
+      ],
+      "raw": 471
+    },
+    {
+      "name": "slice_b_022",
+      "fen": "5rk1/8/8/8/8/8/8/4K3 w - - 1 2",
+      "origins": [
+        "black_kingside_castle/e8g8"
+      ],
+      "raw": -517
+    },
+    {
+      "name": "slice_b_023",
+      "fen": "r3k3/8/8/8/8/8/8/4K3 b q - 0 1",
+      "origins": [
+        "black_queenside_castle/root"
+      ],
+      "raw": 455
+    },
+    {
+      "name": "slice_b_024",
+      "fen": "2kr4/8/8/8/8/8/8/4K3 w - - 1 2",
+      "origins": [
+        "black_queenside_castle/e8c8"
+      ],
+      "raw": -483
+    },
+    {
+      "name": "slice_b_025",
+      "fen": "4k3/P7/8/8/8/8/8/4K3 w - - 0 1",
+      "origins": [
+        "white_promotions/root",
+        "white_promotions/restore",
+        "white_promotions/restore2",
+        "white_promotions/restore3"
+      ],
+      "raw": 697
+    },
+    {
+      "name": "slice_b_026",
+      "fen": "N3k3/8/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "white_promotions/a7a8n"
+      ],
+      "raw": -59
+    },
+    {
+      "name": "slice_b_027",
+      "fen": "B3k3/8/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "white_promotions/a7a8b"
+      ],
+      "raw": -39
+    },
+    {
+      "name": "slice_b_028",
+      "fen": "R3k3/8/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "white_promotions/a7a8r"
+      ],
+      "raw": -540
+    },
+    {
+      "name": "slice_b_029",
+      "fen": "Q3k3/8/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "white_promotions/a7a8q"
+      ],
+      "raw": -659
+    },
+    {
+      "name": "slice_b_030",
+      "fen": "4k3/8/8/8/8/8/7p/4K3 b - - 0 1",
+      "origins": [
+        "black_promotions/root",
+        "black_promotions/restore",
+        "black_promotions/restore2",
+        "black_promotions/restore3"
+      ],
+      "raw": 454
+    },
+    {
+      "name": "slice_b_031",
+      "fen": "4k3/8/8/8/8/8/8/4K2n w - - 0 2",
+      "origins": [
+        "black_promotions/h2h1n"
+      ],
+      "raw": -59
+    },
+    {
+      "name": "slice_b_032",
+      "fen": "4k3/8/8/8/8/8/8/4K2b w - - 0 2",
+      "origins": [
+        "black_promotions/h2h1b"
+      ],
+      "raw": -43
+    },
+    {
+      "name": "slice_b_033",
+      "fen": "4k3/8/8/8/8/8/8/4K2r w - - 0 2",
+      "origins": [
+        "black_promotions/h2h1r"
+      ],
+      "raw": -507
+    },
+    {
+      "name": "slice_b_034",
+      "fen": "4k3/8/8/8/8/8/8/4K2q w - - 0 2",
+      "origins": [
+        "black_promotions/h2h1q"
+      ],
+      "raw": -564
+    },
+    {
+      "name": "slice_b_035",
+      "fen": "1r2k3/P7/8/8/8/8/8/4K3 w - - 0 1",
+      "origins": [
+        "white_promotion_capture/root",
+        "white_promotion_capture/restore",
+        "white_promotion_capture/restore2",
+        "white_promotion_capture/restore3"
+      ],
+      "raw": -357
+    },
+    {
+      "name": "slice_b_036",
+      "fen": "1N2k3/8/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "white_promotion_capture/a7b8n"
+      ],
+      "raw": -23
+    },
+    {
+      "name": "slice_b_037",
+      "fen": "1B2k3/8/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "white_promotion_capture/a7b8b"
+      ],
+      "raw": -55
+    },
+    {
+      "name": "slice_b_038",
+      "fen": "1R2k3/8/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "white_promotion_capture/a7b8r"
+      ],
+      "raw": -548
+    },
+    {
+      "name": "slice_b_039",
+      "fen": "1Q2k3/8/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "white_promotion_capture/a7b8q"
+      ],
+      "raw": -680
+    },
+    {
+      "name": "slice_b_040",
+      "fen": "4k3/8/8/8/8/8/7p/4K1R1 b - - 0 1",
+      "origins": [
+        "black_promotion_capture/root",
+        "black_promotion_capture/restore",
+        "black_promotion_capture/restore2",
+        "black_promotion_capture/restore3"
+      ],
+      "raw": -176
+    },
+    {
+      "name": "slice_b_041",
+      "fen": "4k3/8/8/8/8/8/8/4K1n1 w - - 0 2",
+      "origins": [
+        "black_promotion_capture/h2g1n"
+      ],
+      "raw": -41
+    },
+    {
+      "name": "slice_b_042",
+      "fen": "4k3/8/8/8/8/8/8/4K1b1 w - - 0 2",
+      "origins": [
+        "black_promotion_capture/h2g1b"
+      ],
+      "raw": -25
+    },
+    {
+      "name": "slice_b_043",
+      "fen": "4k3/8/8/8/8/8/8/4K1r1 w - - 0 2",
+      "origins": [
+        "black_promotion_capture/h2g1r"
+      ],
+      "raw": -547
+    },
+    {
+      "name": "slice_b_044",
+      "fen": "4k3/8/8/8/8/8/8/4K1q1 w - - 0 2",
+      "origins": [
+        "black_promotion_capture/h2g1q"
+      ],
+      "raw": -618
+    },
+    {
+      "name": "slice_b_045",
+      "fen": "4k3/8/8/8/8/8/8/3K4 w - - 0 1",
+      "origins": [
+        "white_king_d_to_e/root"
+      ],
+      "raw": -9
+    },
+    {
+      "name": "slice_b_046",
+      "fen": "4k3/8/8/8/8/8/8/4K3 b - - 1 1",
+      "origins": [
+        "white_king_d_to_e/d1e1"
+      ],
+      "raw": -8
+    },
+    {
+      "name": "slice_b_047",
+      "fen": "4k3/8/8/8/8/8/8/4K3 w - - 0 1",
+      "origins": [
+        "white_king_e_to_d/root",
+        "null_growth_128_to_256/root",
+        "null_growth_128_to_256/push_128_nulls"
+      ],
+      "raw": -8
+    },
+    {
+      "name": "slice_b_048",
+      "fen": "4k3/8/8/8/8/8/8/3K4 b - - 1 1",
+      "origins": [
+        "white_king_e_to_d/e1d1"
+      ],
+      "raw": -9
+    },
+    {
+      "name": "slice_b_049",
+      "fen": "3k4/8/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "black_king_d_to_e/root"
+      ],
+      "raw": -9
+    },
+    {
+      "name": "slice_b_050",
+      "fen": "4k3/8/8/8/8/8/8/4K3 w - - 1 2",
+      "origins": [
+        "black_king_d_to_e/d8e8"
+      ],
+      "raw": -8
+    },
+    {
+      "name": "slice_b_051",
+      "fen": "4k3/8/8/8/8/8/8/4K3 b - - 0 1",
+      "origins": [
+        "black_king_e_to_d/root",
+        "null_growth_128_to_256/pop_after_growth"
+      ],
+      "raw": -8
+    },
+    {
+      "name": "slice_b_052",
+      "fen": "3k4/8/8/8/8/8/8/4K3 w - - 1 2",
+      "origins": [
+        "black_king_e_to_d/e8d8"
+      ],
+      "raw": -9
+    },
+    {
+      "name": "slice_b_053",
+      "fen": "4k1n1/8/8/8/8/8/8/1N2K1N1 w - - 0 1",
+      "origins": [
+        "multi_ply_null_pop_sibling/root",
+        "multi_ply_null_pop_sibling/pop_white_move"
+      ],
+      "raw": 66
+    },
+    {
+      "name": "slice_b_054",
+      "fen": "4k1n1/8/8/8/8/2N5/8/4K1N1 b - - 1 1",
+      "origins": [
+        "multi_ply_null_pop_sibling/b1c3",
+        "multi_ply_null_pop_sibling/pop_black_move"
+      ],
+      "raw": -14
+    },
+    {
+      "name": "slice_b_055",
+      "fen": "4k3/8/5n2/8/8/2N5/8/4K1N1 w - - 2 2",
+      "origins": [
+        "multi_ply_null_pop_sibling/g8f6",
+        "multi_ply_null_pop_sibling/pop_null"
+      ],
+      "raw": 0
+    },
+    {
+      "name": "slice_b_056",
+      "fen": "4k3/8/5n2/8/8/2N5/8/4K1N1 b - - 2 2",
+      "origins": [
+        "multi_ply_null_pop_sibling/null"
+      ],
+      "raw": -5
+    },
+    {
+      "name": "slice_b_057",
+      "fen": "4k1n1/8/8/8/8/5N2/8/1N2K3 b - - 1 1",
+      "origins": [
+        "multi_ply_null_pop_sibling/g1f3_sibling"
+      ],
+      "raw": -43
+    }
+  ]
+}

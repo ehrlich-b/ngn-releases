@@ -1,0 +1,25 @@
+{
+  "bridge_version": "ngn-k4-768-v1-bullet629ee5-patchf7f5e0-v2",
+  "bullet_commit": "629ee50000b2afb7b3337595401c830d3b1e0f42",
+  "command": [
+    "ngnk4bridge",
+    "convert",
+    "-in",
+    "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/k8w1024-e10/candidates/candidate-1458176/quantised.bin",
+    "-manifest",
+    "/home/ehrli/nnue-owned-k4-20260920/archive-a1/corpus-a1/manifest.json",
+    "-out",
+    "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/k8w1024-e10.nnue"
+  ],
+  "source_path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/k8w1024-e10/candidates/candidate-1458176/quantised.bin",
+  "source_bytes": 12617792,
+  "source_sha256": "12d890ead44864d4db13aa6f446c10a30ca27ff4f1b060ec34e7be9b4988b73f",
+  "manifest_path": "/home/ehrli/nnue-owned-k4-20260920/archive-a1/corpus-a1/manifest.json",
+  "manifest_bytes": 3992,
+  "manifest_sha256": "5119735957a271252f1521b95999ee6b05ddb04be3e37161f2d6222643b97c50",
+  "payload_sha256": "05b80d0ea0a89873bd4e71fb8bab260e38c1e2a1ac4ce028306b518a0bbf26fd",
+  "output_path": "/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/k8w1024-e10.nnue",
+  "output_bytes": 12618000,
+  "output_sha256": "88d377f42bfc4360a318daa60bb1b0e1d2012e0b799ae577598f5fedd7cdbf24",
+  "payload_round_trip": true
+}

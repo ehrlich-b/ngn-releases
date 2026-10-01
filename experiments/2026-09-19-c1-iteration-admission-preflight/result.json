@@ -1,0 +1,65 @@
+{
+  "schema": "ngn.c1-iteration-admission-preflight.v1",
+  "date": "2026-09-19",
+  "base_commit": "5f33622",
+  "configuration": {
+    "backend": "rodent-v1.1-anand",
+    "model_sha256": "5f7480b56538e9e64ee02fb5b4842bf0394ee44b707dae3a63ec7f902abd0afb",
+    "threads": 1,
+    "hash_mb": 128,
+    "clock": "10+0.1",
+    "passes": 3,
+    "fixtures": 4,
+    "goamd64": "v3"
+  },
+  "baseline": {
+    "elapsed_microseconds": 7839050,
+    "tail_microseconds": 2017880,
+    "tail_fraction": 0.2574,
+    "soft_admission": 0,
+    "soft_abort": 12,
+    "hard_deadline": 0
+  },
+  "candidate": {
+    "elapsed_microseconds": 12316675,
+    "tail_microseconds": 2571027,
+    "tail_fraction": 0.2087,
+    "soft_admission": 11,
+    "soft_abort": 0,
+    "hard_deadline": 1,
+    "elapsed_ratio_over_baseline": 1.5712,
+    "hard_abort": {
+      "pass": 2,
+      "fixture": "accepted_game1_ply48",
+      "hard_microseconds": 2955000,
+      "stop_elapsed_microseconds": 2955135,
+      "completed_depth": 21,
+      "last_completed_iteration_microseconds": 101329,
+      "discarded_tail_microseconds": 2571027,
+      "nodes": 4165516,
+      "qnodes": 1208888
+    }
+  },
+  "candidate_observations": [
+    {"pass": 1, "fixture": "start", "reason": "soft-admission", "stop_depth": 15, "elapsed_us": 302855, "soft_us": 408333, "hard_us": 1633333, "completed_depth": 14, "last_iteration_us": 178363, "last_attempts": 1, "tail_us": 0, "nodes": 407947, "qnodes": 135440, "move": 5900, "score": 23},
+    {"pass": 1, "fixture": "accepted_pair_ply23", "reason": "soft-admission", "stop_depth": 17, "elapsed_us": 583135, "soft_us": 783571, "hard_us": 2955000, "completed_depth": 16, "last_iteration_us": 100981, "last_attempts": 1, "tail_us": 0, "nodes": 860337, "qnodes": 275556, "move": 33935100, "score": -47},
+    {"pass": 1, "fixture": "accepted_game1_ply48", "reason": "soft-admission", "stop_depth": 25, "elapsed_us": 1190669, "soft_us": 1065000, "hard_us": 2955000, "completed_depth": 24, "last_iteration_us": 444648, "last_attempts": 1, "tail_us": 0, "nodes": 1677068, "qnodes": 484144, "move": 19325, "score": 0},
+    {"pass": 1, "fixture": "accepted_game2_ply48", "reason": "soft-admission", "stop_depth": 17, "elapsed_us": 1110746, "soft_us": 1065000, "hard_us": 2955000, "completed_depth": 16, "last_iteration_us": 553251, "last_attempts": 3, "tail_us": 0, "nodes": 1684332, "qnodes": 498665, "move": 6168, "score": 200},
+    {"pass": 2, "fixture": "start", "reason": "soft-admission", "stop_depth": 16, "elapsed_us": 248803, "soft_us": 408333, "hard_us": 1633333, "completed_depth": 15, "last_iteration_us": 226683, "last_attempts": 1, "tail_us": 0, "nodes": 371640, "qnodes": 117208, "move": 5900, "score": 22},
+    {"pass": 2, "fixture": "accepted_pair_ply23", "reason": "soft-admission", "stop_depth": 18, "elapsed_us": 1195806, "soft_us": 783571, "hard_us": 2955000, "completed_depth": 17, "last_iteration_us": 657729, "last_attempts": 1, "tail_us": 0, "nodes": 1685251, "qnodes": 499687, "move": 33935100, "score": -45},
+    {"pass": 2, "fixture": "accepted_game1_ply48", "reason": "hard-deadline", "stop_depth": 6, "elapsed_us": 2955135, "soft_us": 1065000, "hard_us": 2955000, "completed_depth": 21, "last_iteration_us": 101329, "last_attempts": 1, "tail_us": 2571027, "nodes": 4165516, "qnodes": 1208888, "move": 20285, "score": 0},
+    {"pass": 2, "fixture": "accepted_game2_ply48", "reason": "soft-admission", "stop_depth": 18, "elapsed_us": 866723, "soft_us": 1065000, "hard_us": 2955000, "completed_depth": 17, "last_iteration_us": 446843, "last_attempts": 4, "tail_us": 0, "nodes": 1299646, "qnodes": 329567, "move": 14484, "score": 264},
+    {"pass": 3, "fixture": "start", "reason": "soft-admission", "stop_depth": 17, "elapsed_us": 560437, "soft_us": 408333, "hard_us": 1633333, "completed_depth": 16, "last_iteration_us": 528516, "last_attempts": 1, "tail_us": 0, "nodes": 836575, "qnodes": 257926, "move": 5835, "score": 20},
+    {"pass": 3, "fixture": "accepted_pair_ply23", "reason": "soft-admission", "stop_depth": 18, "elapsed_us": 397784, "soft_us": 783571, "hard_us": 2955000, "completed_depth": 17, "last_iteration_us": 245885, "last_attempts": 1, "tail_us": 0, "nodes": 532026, "qnodes": 156841, "move": 33935100, "score": -44},
+    {"pass": 3, "fixture": "accepted_game1_ply48", "reason": "soft-admission", "stop_depth": 23, "elapsed_us": 966447, "soft_us": 1065000, "hard_us": 2955000, "completed_depth": 22, "last_iteration_us": 510645, "last_attempts": 1, "tail_us": 0, "nodes": 1243231, "qnodes": 349491, "move": 20285, "score": 0},
+    {"pass": 3, "fixture": "accepted_game2_ply48", "reason": "soft-admission", "stop_depth": 20, "elapsed_us": 1938135, "soft_us": 1065000, "hard_us": 2955000, "completed_depth": 19, "last_iteration_us": 1128907, "last_attempts": 4, "tail_us": 0, "nodes": 2662134, "qnodes": 655137, "move": 14484, "score": 293}
+  ],
+  "hashes": {
+    "candidate_patch": "fd3feadc29827570f1a0bf60f93a3861802ea18818fb8dccd682ad7a3ed7a982",
+    "candidate_time_go": "9f9b44f305ef6c44394cb9d6b72c9b6896e55555a2d61dba2cb56f0ab7df87e0",
+    "candidate_search_go": "a38e8225c3608c8dc6b2b5a20260ddd419c91a71880a8fa82d5761b9b3a52047",
+    "candidate_observer_tests": "9132362a0b4f88a84cd00f3f136475c4d6a0451eb9cca3b51dbb44d85c8c1ea1",
+    "candidate_admission_tests": "866273b6a0cf0d64c9448779b0cf3ff05eeb9831f3f00774b33587445652d5ae"
+  },
+  "verdict": "shelved-before-game"
+}

@@ -1,0 +1,74 @@
+{
+  "decision": "SHELVE",
+  "frozen_manifest_sha256": "0fde74caace183f2c95c2b1c160833b7083c7c5e16c82a3fe4a9619edba09dae",
+  "results": {
+    "aa": {
+      "audit": "/home/ehrli/repos/ngn-qpromo-gate-20260912/run-002/aa/audit-match.json",
+      "engine_a": "base-a",
+      "engine_b": "base-b",
+      "evidence_sha256": {
+        "audit-match.json": "bf27de630136758e321fcc6199db739462c001a0d8a589bbbc4402f4782478ca",
+        "audit-operational.json": "a0e3b3e945abfbfc38a80dec30fe9c73cfb406c349e44907b88975b659ac1394",
+        "fastchess.log": "f767cf1b80dd113d54c4b00efb60c759c6f0456fc7c15da1bdc5778a80779e80",
+        "final.epd": "f33d04ebfe50599fa2bba35acdc0939194021a8029ae18ac18b30377390eebad",
+        "games.pgn": "29f3f263faf0a4da06ece71fad7f74f793d29d0dd2b7ad109347c8477cf9df1c",
+        "match-witness.json": "834753f0d2a097f75847a128be1a16c7080e8a03822f7e22f05147bdb027306d",
+        "match.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "match.stdout": "6c281f68f434e407745a4835f23f16e06252d5b683d2bbdc43c4e2ab1db6fc3b",
+        "non-owned-cpu.json": "00cd557ca965a463faa934c5476b36c39e3d8815358dfd5bdbb249a7bf5f4ebc",
+        "supervisor.json": "d8baba21f1ef586e976e6f76c1ed57d114a389d14c6acc284c4e2e478d94b5f4"
+      },
+      "paired_bootstrap_ci": {
+        "elo": -13.904842503684801,
+        "lower95_elo": -59.64310774803512,
+        "method": "paired nonparametric percentile bootstrap",
+        "pairs": 50,
+        "replicates": 100000,
+        "seed": 2026091201,
+        "upper95_elo": 31.354042247812043
+      },
+      "paired_normal_ci": {
+        "elo": -13.904842503684801,
+        "lower95_elo": -59.476998649055965,
+        "pairs": 50,
+        "score": 0.48,
+        "upper95_elo": 31.191410066098484
+      }
+    },
+    "candidate": {
+      "audit": "/home/ehrli/repos/ngn-qpromo-gate-20260912/run-002/candidate/audit-match.json",
+      "engine_a": "candidate",
+      "engine_b": "base",
+      "evidence_sha256": {
+        "audit-match.json": "4dc4a6187f268bc726bb1c3ad3107ceb4068fc2f9b5efb94e691b53f34b2f9d0",
+        "audit-operational.json": "44657fb31d916d58bf0ee22b9017204e8ea0b3f83dc559ab372db5da12fd4416",
+        "fastchess.log": "47c648a6be8cf5518796f5fc474999ef190b2b260ab8da7e4e437f71c1471ae2",
+        "final.epd": "358ce7d759236987548813fa269154adbe95bff0ae5207e72929b054e41f9e26",
+        "games.pgn": "40240b36605329f1f51d610682ae1653a1a2699d9b5c342a4b067bd610a8c5b6",
+        "match-witness.json": "e3a2253bf97150aafe7329cc1c485ca818dee70ec37e933ec5fb1dd4e2afac29",
+        "match.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "match.stdout": "50c93acc5b917bdaf52cf986ff6c2453654006cfc0573bd92b3bc2b5e5bf8814",
+        "non-owned-cpu.json": "60d0c5b663d3d45eb09c6d88d3a25bcd110f09aa14ca443d49452f24ce3740c1",
+        "supervisor.json": "f93a17b8580c92866bdd9344106c6e3d9cefd2ba9d15efa8b410eef0407487aa"
+      },
+      "paired_bootstrap_ci": {
+        "elo": 12.16521457965757,
+        "lower95_elo": -11.295634654995819,
+        "method": "paired nonparametric percentile bootstrap",
+        "pairs": 200,
+        "replicates": 100000,
+        "seed": 2026091201,
+        "upper95_elo": 34.86007028756008
+      },
+      "paired_normal_ci": {
+        "elo": 12.16521457965757,
+        "lower95_elo": -10.999865300970024,
+        "pairs": 200,
+        "score": 0.5175,
+        "upper95_elo": 35.43908034413381
+      }
+    }
+  },
+  "rule": "ADOPT iff fixed 400-game paired lower95 Elo > 0; never extend after observing score",
+  "schema": "ngn-qpromo-fixed-gate-decision-v1"
+}

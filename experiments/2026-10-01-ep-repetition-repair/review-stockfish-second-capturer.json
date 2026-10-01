@@ -1,0 +1,40 @@
+[
+  {
+    "name": "white",
+    "start_fen": "2r3k1/3p4/8/2P1P3/8/8/8/2K5 b - - 0 1",
+    "push": "d7d5",
+    "legal_ep_moves": [
+      "e5d6"
+    ],
+    "legal_moves": [
+      "c1b1",
+      "c1b2",
+      "c1c2",
+      "c1d1",
+      "c1d2",
+      "c5c6",
+      "e5d6",
+      "e5e6"
+    ],
+    "stockfish_sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+  },
+  {
+    "name": "black",
+    "start_fen": "2k5/8/8/8/2p1p3/8/3P4/2R3K1 w - - 0 1",
+    "push": "d2d4",
+    "legal_ep_moves": [
+      "e4d3"
+    ],
+    "legal_moves": [
+      "c4c3",
+      "c8b7",
+      "c8b8",
+      "c8c7",
+      "c8d7",
+      "c8d8",
+      "e4d3",
+      "e4e3"
+    ],
+    "stockfish_sha256": "6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9"
+  }
+]

@@ -1,0 +1,148 @@
+=== RUN   TestV11AnandExactReleaseCorpusParity
+=== RUN   TestV11AnandExactReleaseCorpusParity/start_w_clock0
+=== RUN   TestV11AnandExactReleaseCorpusParity/start_b_clock0
+=== RUN   TestV11AnandExactReleaseCorpusParity/start_w_clock50
+=== RUN   TestV11AnandExactReleaseCorpusParity/start_b_clock50
+=== RUN   TestV11AnandExactReleaseCorpusParity/start_w_clock99
+=== RUN   TestV11AnandExactReleaseCorpusParity/start_b_clock99
+=== RUN   TestV11AnandExactReleaseCorpusParity/kiwipete_w_clock0
+=== RUN   TestV11AnandExactReleaseCorpusParity/kiwipete_b_clock0
+=== RUN   TestV11AnandExactReleaseCorpusParity/kiwipete_w_clock50
+=== RUN   TestV11AnandExactReleaseCorpusParity/kiwipete_b_clock50
+=== RUN   TestV11AnandExactReleaseCorpusParity/kiwipete_w_clock99
+=== RUN   TestV11AnandExactReleaseCorpusParity/kiwipete_b_clock99
+=== RUN   TestV11AnandExactReleaseCorpusParity/ep_white_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/ep_white_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/ep_black_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/ep_black_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/promoted_mix_w_clock0
+=== RUN   TestV11AnandExactReleaseCorpusParity/promoted_mix_b_clock0
+=== RUN   TestV11AnandExactReleaseCorpusParity/promoted_mix_w_clock50
+=== RUN   TestV11AnandExactReleaseCorpusParity/promoted_mix_b_clock50
+=== RUN   TestV11AnandExactReleaseCorpusParity/promoted_mix_w_clock99
+=== RUN   TestV11AnandExactReleaseCorpusParity/promoted_mix_b_clock99
+=== RUN   TestV11AnandExactReleaseCorpusParity/asymmetric_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/asymmetric_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g1_g2_p23_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g1_g2_p23_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g1_p48_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g1_p48_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g2_p48_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g2_p48_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g3_p23_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g3_p23_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g3_p48_w_clock0
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g3_p48_b_clock0
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g3_p48_w_clock50
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g3_p48_b_clock50
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g3_p48_w_clock99
+=== RUN   TestV11AnandExactReleaseCorpusParity/prefix_g3_p48_b_clock99
+=== RUN   TestV11AnandExactReleaseCorpusParity/castles_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/castles_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/white_promotion_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/white_promotion_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/black_promotion_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/black_promotion_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/kings_only_w_clock0
+=== RUN   TestV11AnandExactReleaseCorpusParity/kings_only_b_clock0
+=== RUN   TestV11AnandExactReleaseCorpusParity/kings_only_w_clock50
+=== RUN   TestV11AnandExactReleaseCorpusParity/kings_only_b_clock50
+=== RUN   TestV11AnandExactReleaseCorpusParity/kings_only_w_clock99
+=== RUN   TestV11AnandExactReleaseCorpusParity/kings_only_b_clock99
+=== RUN   TestV11AnandExactReleaseCorpusParity/mirror_a_d_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/mirror_a_d_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/mirror_a_e_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/mirror_a_e_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/mirror_b_d_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/mirror_b_d_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/mirror_b_e_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/mirror_b_e_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/white_bishop_only_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/white_bishop_only_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/black_bishop_only_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/black_bishop_only_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/white_rook_only_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/white_rook_only_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/black_rook_only_w
+=== RUN   TestV11AnandExactReleaseCorpusParity/black_rook_only_b
+=== RUN   TestV11AnandExactReleaseCorpusParity/material_quirk_combo_w_clock0
+=== RUN   TestV11AnandExactReleaseCorpusParity/material_quirk_combo_b_clock0
+=== RUN   TestV11AnandExactReleaseCorpusParity/material_quirk_combo_w_clock50
+=== RUN   TestV11AnandExactReleaseCorpusParity/material_quirk_combo_b_clock50
+=== RUN   TestV11AnandExactReleaseCorpusParity/material_quirk_combo_w_clock99
+=== RUN   TestV11AnandExactReleaseCorpusParity/material_quirk_combo_b_clock99
+--- PASS: TestV11AnandExactReleaseCorpusParity (0.01s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/start_w_clock0 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/start_b_clock0 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/start_w_clock50 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/start_b_clock50 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/start_w_clock99 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/start_b_clock99 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/kiwipete_w_clock0 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/kiwipete_b_clock0 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/kiwipete_w_clock50 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/kiwipete_b_clock50 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/kiwipete_w_clock99 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/kiwipete_b_clock99 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/ep_white_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/ep_white_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/ep_black_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/ep_black_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/promoted_mix_w_clock0 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/promoted_mix_b_clock0 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/promoted_mix_w_clock50 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/promoted_mix_b_clock50 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/promoted_mix_w_clock99 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/promoted_mix_b_clock99 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/asymmetric_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/asymmetric_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g1_g2_p23_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g1_g2_p23_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g1_p48_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g1_p48_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g2_p48_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g2_p48_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g3_p23_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g3_p23_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g3_p48_w_clock0 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g3_p48_b_clock0 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g3_p48_w_clock50 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g3_p48_b_clock50 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g3_p48_w_clock99 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/prefix_g3_p48_b_clock99 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/castles_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/castles_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/white_promotion_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/white_promotion_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/black_promotion_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/black_promotion_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/kings_only_w_clock0 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/kings_only_b_clock0 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/kings_only_w_clock50 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/kings_only_b_clock50 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/kings_only_w_clock99 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/kings_only_b_clock99 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/mirror_a_d_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/mirror_a_d_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/mirror_a_e_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/mirror_a_e_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/mirror_b_d_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/mirror_b_d_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/mirror_b_e_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/mirror_b_e_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/white_bishop_only_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/white_bishop_only_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/black_bishop_only_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/black_bishop_only_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/white_rook_only_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/white_rook_only_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/black_rook_only_w (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/black_rook_only_b (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/material_quirk_combo_w_clock0 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/material_quirk_combo_b_clock0 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/material_quirk_combo_w_clock50 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/material_quirk_combo_b_clock50 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/material_quirk_combo_w_clock99 (0.00s)
+    --- PASS: TestV11AnandExactReleaseCorpusParity/material_quirk_combo_b_clock99 (0.00s)
+PASS
+ok  	github.com/ehrlich-b/ngn/rodenteval	0.010s

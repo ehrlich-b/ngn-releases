@@ -1,0 +1,9 @@
+{
+  "started": 1790634316.4723268,
+  "trainer_sha256": "b5be91333b611e5a296bda29fe74d256dd49433304eaccb386b9065f8bf4856d",
+  "mutually_exclusive_compile_flags_rejected": true,
+  "result_weight_end": 0.4,
+  "smoke_resume_pass": true,
+  "mismatched_weight_resume_rejected": true,
+  "completed": 1790634323.7234845
+}

@@ -1,0 +1,8 @@
+{
+  "observed_at_utc": "2026-10-01T01:36:04.215064+00:00",
+  "cpus": [
+    "Cpus_allowed_list:\t0,2"
+  ],
+  "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/ngn-personal-ep-review-20261001.service\n",
+  "go": "go version go1.25.5 linux/amd64"
+}

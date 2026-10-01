@@ -1,0 +1,22 @@
+{
+  "source_commit": "53e6a841dcda7059a2af363d85f785ef1817304a",
+  "all_781_constants_match_pinned_mit_source": true,
+  "license_text_equivalent": true,
+  "source_header_credits_disservin": true,
+  "receipts": [
+    {
+      "path": "src/zobrist.hpp",
+      "url": "https://raw.githubusercontent.com/Disservin/chess-library/53e6a841dcda7059a2af363d85f785ef1817304a/src/zobrist.hpp",
+      "bytes": 18584,
+      "git_blob": "e37349b65aef696ccdc45d6691921a5ae3ae7604",
+      "sha256": "6f0d9d2a82606600078756a3bdf7c794254153ab4359af20c7e404ce39c341a4"
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/Disservin/chess-library/53e6a841dcda7059a2af363d85f785ef1817304a/LICENSE",
+      "bytes": 1066,
+      "git_blob": "e8a87e02a48df6824f57a15d7cb68ab58f078729",
+      "sha256": "5860e7607afbf4c7e91bad5549b71d16fc4eceb90f0c671cd77a343ae7461a2a"
+    }
+  ]
+}

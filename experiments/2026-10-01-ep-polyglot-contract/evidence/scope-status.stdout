@@ -1,0 +1,20 @@
+candidate_branch=task/ep-polyglot-contract-20261001
+candidate_head=7ce0b410a6e7919ff85eff7c38b84bd9f9d82d6e
+candidate_tracked_diff_begin
+candidate_tracked_diff_end
+candidate_status_begin
+?? engine/polyglot_external_contract_test.go
+?? engine/testdata/
+?? experiments/2026-10-01-ep-polyglot-contract.md
+?? experiments/2026-10-01-ep-polyglot-contract/
+candidate_status_end
+baseline_head=8b41845aae29757c031e889f88de55a7064bc8b6
+baseline_tracked_diff_begin
+baseline_tracked_diff_end
+baseline_status_begin
+?? engine/polyglot_external_contract_test.go
+?? engine/testdata/
+baseline_status_end
+baseline_testdata_begin
+polyglot_special_move_oracle.json
+baseline_testdata_end

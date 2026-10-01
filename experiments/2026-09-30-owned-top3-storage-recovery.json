@@ -1,0 +1,414 @@
+{
+  "cache_entries_pruned_older_than_24h": 9738,
+  "compaction_20260930_top3": {
+    "after_vhd_gib": 403.02,
+    "authority": "Previously approved identical Ubuntu VHDX read-only compaction and service restoration.",
+    "before_physical_windows_free_gib": 22.83,
+    "before_vhd_gib": 408.099,
+    "hopper_enabled": "enabled",
+    "immediate_after_physical_windows_free_gib": 24.854,
+    "receipt": {
+      "bytes": 2737,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/maintenance-after-20260930-top3.json",
+      "sha256": "966d8f6d3b29e1a97e1c07df20c4027c162190f756eae189066b645904693388"
+    },
+    "running_containers": [
+      {
+        "id": "a3c1ba6ae1db191998e8ac5baf2b7f77a0013e024adc68a8eae9b4eb4377dfde",
+        "names": [
+          "/arli-slot0-task-lean-evidence-month2-w11-product-classical-state-current-example"
+        ],
+        "restart": {
+          "MaximumRetryCount": 0,
+          "Name": "no"
+        },
+        "status": "Up 2 minutes"
+      },
+      {
+        "id": "add5b17340a45706aa640e135f192a342880d2d6f99e3dd22bd829256c6d9593",
+        "names": [
+          "/arli-slot1-task-lean-evidence-month2-w11-product-classical-state-first-consumer"
+        ],
+        "restart": {
+          "MaximumRetryCount": 0,
+          "Name": "no"
+        },
+        "status": "Up 2 minutes"
+      },
+      {
+        "id": "e0ad11fe4f146ff7ec35a7280362269b6f45bc8c4db1cee881e0799f907c185b",
+        "names": [
+          "/arli-relay"
+        ],
+        "restart": {
+          "MaximumRetryCount": 0,
+          "Name": "unless-stopped"
+        },
+        "status": "Up 2 minutes"
+      }
+    ],
+    "services": {
+      "arli-hopper.service": "active",
+      "docker.service": "active"
+    },
+    "stderr": {
+      "bytes": 1015,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/maintenance-20260930-top3.stderr",
+      "sha256": "4edaa886d6eb3f627a647013b2d33be8104eb3a9729afea17439805f471fd1c9"
+    },
+    "stdout": {
+      "bytes": 30851,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/maintenance-20260930-top3.stdout",
+      "sha256": "ce00b3c4e7877eb3f525b2ef35911adf7fc2fcaaba90bf9b4fcfcc855c8d165a"
+    },
+    "subsequent_free_gib": 24.528053283691406
+  },
+  "full_tool_cache_receipt": {
+    "bytes": 1767260,
+    "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/work/top3-tool-and-cache-receipt.json",
+    "sha256": "323042c405fad300975aee7b3cc9ce607dc3ee3d46083f449b5ab240a64bc129"
+  },
+  "historical_records": {
+    "all_raw_representations_replaced": true,
+    "checked_at_unix": 1790774440.377507,
+    "claim": "Every full raw terminal trace is preserved in a hash-verified local archive and in its independently round-trip-verified WSL sibling gzip file. Remove only the redundant raw representation after verifying the off-worker proof and current source hashes. No partial match is scored.",
+    "compressed_bytes": 1080512937,
+    "linux_allocation_reclaimed_gib": 5.36132391449064,
+    "local_archive": {
+      "bytes": 1080535040,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/outputs/20260930-historical-owned-records-lossless.tar",
+      "sha256": "d4de5be6a5e65f87288af382526641421a63efb35c9a28829a57187334a90cbc"
+    },
+    "off_worker_verified": true,
+    "raw_bytes": 6837147117,
+    "records": [
+      {
+        "compressed_bytes": 29433168,
+        "compressed_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-archive-a1-e10-vs-rodent-200-v1/run-001/fastchess.log.gz",
+        "compressed_sha256": "86a75ae430dae4130f050a249582577c38666cc06ff9421e341664da3aa67fdf",
+        "raw_allocated_bytes": 198987776,
+        "raw_bytes": 198983582,
+        "raw_inode": 1587055,
+        "raw_mtime_ns": 1790307368309786807,
+        "raw_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-archive-a1-e10-vs-rodent-200-v1/run-001/fastchess.log",
+        "raw_sha256": "8c2092a2068f3d5dc561f821f5c41ac231b4a884e3f3208a7ac9bf1d8cbba40c",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 5519906,
+        "compressed_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-archive-a1-e10-vs-rodent-200-v1/run-001/receipts/child-processes.json.gz",
+        "compressed_sha256": "5c01626819a926415922f6af9e1813de15db57d92bbaec536eb5316abdf4ded8",
+        "raw_allocated_bytes": 190840832,
+        "raw_bytes": 190840758,
+        "raw_inode": 1600271,
+        "raw_mtime_ns": 1790307370229396588,
+        "raw_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-archive-a1-e10-vs-rodent-200-v1/run-001/receipts/child-processes.json",
+        "raw_sha256": "1e19f5525e1f298a7a1882415aec2e38f1284c0229431448558270b8cb248186",
+        "terminal_state": "DORMANT_OLDER_THAN_24H"
+      },
+      {
+        "compressed_bytes": 55646271,
+        "compressed_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-lr1-confirm-400-v1/run-001/fastchess.log.gz",
+        "compressed_sha256": "0104ffe690a0d39beccaf1fe9be87aa96980b66d6252c384e77a9054c2ab2680",
+        "raw_allocated_bytes": 334614528,
+        "raw_bytes": 334608812,
+        "raw_inode": 809642,
+        "raw_mtime_ns": 1790152133171120073,
+        "raw_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-lr1-confirm-400-v1/run-001/fastchess.log",
+        "raw_sha256": "6ec1e3106410f8e9b6e63c636393a5ce6bd91e965f0ae67a37ea03691c104fbf",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 30225771,
+        "compressed_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-lr1-confirm-400-v1/run-001/receipts/child-processes.json.gz",
+        "compressed_sha256": "05a306daa8e290baa4987d143204491e7f4348c665492808a79c4e89e93cdc2e",
+        "raw_allocated_bytes": 1003782144,
+        "raw_bytes": 1003774371,
+        "raw_inode": 837264,
+        "raw_mtime_ns": 1790152148686575711,
+        "raw_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-lr1-confirm-400-v1/run-001/receipts/child-processes.json",
+        "raw_sha256": "14c5335f4e9f1cd69e092c04f4bc9f467dbfd0a1bd93bc9dbd30a9d58a610d0c",
+        "terminal_state": "DORMANT_OLDER_THAN_24H"
+      },
+      {
+        "compressed_bytes": 23224775,
+        "compressed_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/fastchess.log.gz",
+        "compressed_sha256": "f41cdcaee79724dc64c8e55ee69d115a2fa4e5c81590fdfe14c25896e33df940",
+        "raw_allocated_bytes": 154226688,
+        "raw_bytes": 154219358,
+        "raw_inode": 845739,
+        "raw_mtime_ns": 1790156191430395788,
+        "raw_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/fastchess.log",
+        "raw_sha256": "05a7ec925ccbb156e72db1136ce5ed2b1a067b7ae699b5a8213e28c9ca97f3b6",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 4773201,
+        "compressed_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/receipts/child-processes.json.gz",
+        "compressed_sha256": "76f83cc7b9aed52a3bbe352acf64c58e31e61491e4070faa29bff9c85ca4b387",
+        "raw_allocated_bytes": 166813696,
+        "raw_bytes": 166807287,
+        "raw_inode": 848062,
+        "raw_mtime_ns": 1790156192837599983,
+        "raw_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-200-v1/run-001/receipts/child-processes.json",
+        "raw_sha256": "d5a8cde17f88e5ad27fb72df7bf4bdc11065df0983e63320dd9e2ca177f4f718",
+        "terminal_state": "DORMANT_OLDER_THAN_24H"
+      },
+      {
+        "compressed_bytes": 21439091,
+        "compressed_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-fixednodes-200-v1/run-001/fastchess.log.gz",
+        "compressed_sha256": "96ce03fbf7cb4953bace6daa3f3954796f8c1fdd688b002f210319c471e2eb75",
+        "raw_allocated_bytes": 144486400,
+        "raw_bytes": 144482135,
+        "raw_inode": 853805,
+        "raw_mtime_ns": 1790160219611041936,
+        "raw_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-fixednodes-200-v1/run-001/fastchess.log",
+        "raw_sha256": "319edf7d7b1bcaead3ea9a921a118bf410ec53304bb28190d95661521671c94b",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 2701890,
+        "compressed_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-fixednodes-200-v1/run-001/receipts/child-processes.json.gz",
+        "compressed_sha256": "0f9c41d884eab1870f89fb8e1d32390b5b24d00c6c39e9f2165c98c31d2be5b9",
+        "raw_allocated_bytes": 94429184,
+        "raw_bytes": 94428349,
+        "raw_inode": 842843,
+        "raw_mtime_ns": 1790160220431010505,
+        "raw_path": "/home/ehrli/nnue-owned-k4-20260920/integration-v1/k4-main20m-vs-rodent-fixednodes-200-v1/run-001/receipts/child-processes.json",
+        "raw_sha256": "518841e63e4b7005b0d52524715c20737e53ac47adbb91c819085b1a09db31e4",
+        "terminal_state": "DORMANT_OLDER_THAN_24H"
+      },
+      {
+        "compressed_bytes": 907548864,
+        "compressed_path": "/home/ehrli/nnue-owned-k4-20260920/historical-holdouts-v1/positions.jsonl.gz",
+        "compressed_sha256": "668649ae3ae782506818c34238540da66baf6aeee7d9cbfc4f807a1c21f4e454",
+        "raw_allocated_bytes": 4549009408,
+        "raw_bytes": 4549002465,
+        "raw_inode": 129627,
+        "raw_mtime_ns": 1789962769538658493,
+        "raw_path": "/home/ehrli/nnue-owned-k4-20260920/historical-holdouts-v1/positions.jsonl",
+        "raw_sha256": "8ca534f2e710b4427efb60ab8e9f7d7323c580853e309d55f0bdf51cbea827ba",
+        "terminal_state": "DORMANT_OLDER_THAN_24H"
+      }
+    ],
+    "replaced_at_unix": 1790774913.9587407,
+    "restore_instructions": "For any old audit that requires the original raw path, decompress the sibling .gz to the original path and verify the recorded raw byte count and SHA-256 before rerunning. No original audit, spec, PGN, model, source or result file is changed.",
+    "state": "ARCHIVED_LOSSLESS_REPLACEMENT",
+    "verification": "Every compressed file and full decompressed record matches the WSL byte count and SHA-256. Archive contains exactly the declared files.",
+    "windows_free_gib_before_compaction": 23.363990783691406
+  },
+  "pending": "An off-worker scatter intermediate archive is being streamed and independently verified. No scatter file has yet been removed. Only after every raw byte and declared file is verified, a separate checked offload may remove those redundant WSL .bin representations while retaining gathered corpora and metadata; a fresh compaction and 30 GiB physical admission check are required before new matches.",
+  "schema": "ngn-owned-top3-storage-recovery-v1",
+  "scope": "Preserve exact complete historical raw bytes in checked lossless representations; deduplicate identical read-only tools; prune only regenerable old Go cache entries. No source, model, checkpoint, canonical training/validation corpus, spec, PGN or result is changed. No stopped match is scored.",
+  "state": "PARTIAL_RECOVERY_NEW_MATCHES_HELD",
+  "terminal_traces": {
+    "all_raw_representations_replaced": true,
+    "checked_at_unix": 1790772868.707475,
+    "claim": "Every full raw terminal trace is preserved in a hash-verified local archive and in its independently round-trip-verified WSL sibling gzip file. Remove only the redundant raw representation after verifying the off-worker proof and current source hashes. No partial match is scored.",
+    "compressed_bytes": 958782812,
+    "linux_allocation_reclaimed_gib": 4.256882343441248,
+    "local_archive": {
+      "bytes": 958801920,
+      "path": "/Users/ehrlich/Documents/Codex/2026-09-29/find/outputs/20260930-terminal-traces-lossless.tar",
+      "sha256": "4ebb70137f49ee34ee83cd271c1bff68b74b9afcaeb153bc716f888cde393178"
+    },
+    "off_worker_verified": true,
+    "raw_bytes": 5529480613,
+    "records": [
+      {
+        "compressed_bytes": 15708222,
+        "compressed_path": "/home/ehrli/nnue-owned-continuation-20260928/matches/aa-long/fastchess.log.gz",
+        "compressed_sha256": "e9b961ec1b52054343f2edd6213098d8ed3eaf54d151b24371c14a765cdc67ae",
+        "raw_allocated_bytes": 84606976,
+        "raw_bytes": 84598918,
+        "raw_inode": 3124419,
+        "raw_mtime_ns": 1790654843675703594,
+        "raw_path": "/home/ehrli/nnue-owned-continuation-20260928/matches/aa-long/fastchess.log",
+        "raw_sha256": "e2e460e7194b78cb44fb8ef368e4de08c6c0e4fc522d09a4ec33719e820d602e",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 16833654,
+        "compressed_path": "/home/ehrli/nnue-owned-continuation-20260928/matches/aa-short/fastchess.log.gz",
+        "compressed_sha256": "3b3d187a2d12d056c9dce8142dfab4422dc343a2e5baad116e22eeb286cf7718",
+        "raw_allocated_bytes": 95014912,
+        "raw_bytes": 95007317,
+        "raw_inode": 3024319,
+        "raw_mtime_ns": 1790638733426680745,
+        "raw_path": "/home/ehrli/nnue-owned-continuation-20260928/matches/aa-short/fastchess.log",
+        "raw_sha256": "07d944fd7c3695033c6a36069fe865cc3a395d18b44a99e3c66fb779bfef4f8c",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 57874669,
+        "compressed_path": "/home/ehrli/nnue-owned-continuation-20260928/matches/external-long/fastchess.log.gz",
+        "compressed_sha256": "1c477ef15732a25c7e84edb8333e9dee4bedca0501c2139ecb17667ab91f177b",
+        "raw_allocated_bytes": 324866048,
+        "raw_bytes": 324859911,
+        "raw_inode": 3161998,
+        "raw_mtime_ns": 1790668364658370161,
+        "raw_path": "/home/ehrli/nnue-owned-continuation-20260928/matches/external-long/fastchess.log",
+        "raw_sha256": "1900caca19633fe5fbd2a6d096e1b8f791582918853dc31f92692c34a049f842",
+        "terminal_state": "FAILED"
+      },
+      {
+        "compressed_bytes": 113632331,
+        "compressed_path": "/home/ehrli/nnue-owned-continuation-20260928/matches/reference/fastchess.log.gz",
+        "compressed_sha256": "1caaea291e925f04144a31a7fd74956a0a1d0fcbbb25896f587b5e8614c6ccfc",
+        "raw_allocated_bytes": 645439488,
+        "raw_bytes": 645432795,
+        "raw_inode": 3029897,
+        "raw_mtime_ns": 1790643152007059210,
+        "raw_path": "/home/ehrli/nnue-owned-continuation-20260928/matches/reference/fastchess.log",
+        "raw_sha256": "c9a59df2ce3b1f01b4b2be529600e2a76cf6e0c761f30bf551983663bbff7cdf",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 219442046,
+        "compressed_path": "/home/ehrli/nnue-owned-continuation-20260928/matches/wdl40/fastchess.log.gz",
+        "compressed_sha256": "c5f3c489b374c491edd79f80e7b355e1860c6aac40dd973fb34fa236772c1aea",
+        "raw_allocated_bytes": 1245376512,
+        "raw_bytes": 1245371769,
+        "raw_inode": 3080065,
+        "raw_mtime_ns": 1790651961258429600,
+        "raw_path": "/home/ehrli/nnue-owned-continuation-20260928/matches/wdl40/fastchess.log",
+        "raw_sha256": "f390f32b382bf105911823027056c8697f325210d1f92611ddab6c75c3caee5b",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 17356799,
+        "compressed_path": "/home/ehrli/nnue-owned-continuation-20260928/followup/e20-aa/fastchess.log.gz",
+        "compressed_sha256": "8d90f24322a195ff061f0334e7a9441bbd3e0d418d60ab320671795cf6b99cd2",
+        "raw_allocated_bytes": 99647488,
+        "raw_bytes": 99642528,
+        "raw_inode": 3273422,
+        "raw_mtime_ns": 1790670603188895371,
+        "raw_path": "/home/ehrli/nnue-owned-continuation-20260928/followup/e20-aa/fastchess.log",
+        "raw_sha256": "8ecabb2fbbf20e05f915596ee91f789335a6acff13de13e3ce616200f6bf0d21",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 111797453,
+        "compressed_path": "/home/ehrli/nnue-owned-continuation-20260928/followup/e20-gate/fastchess.log.gz",
+        "compressed_sha256": "5141140b9d8761b9e47c9cfff3a404e95c6af0bff416bdf3f161fcf7cf322202",
+        "raw_allocated_bytes": 633913344,
+        "raw_bytes": 633905979,
+        "raw_inode": 3289968,
+        "raw_mtime_ns": 1790674960928953486,
+        "raw_path": "/home/ehrli/nnue-owned-continuation-20260928/followup/e20-gate/fastchess.log",
+        "raw_sha256": "1143cf267f6e217b7185fdec6a036fa673bc3975df81ff32b61b79588b34c948",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 58163381,
+        "compressed_path": "/home/ehrli/nnue-owned-continuation-20260928/external-fresh/counter-fresh/fastchess.log.gz",
+        "compressed_sha256": "460c18c00fece9c4dcdf46906ead91c8f15a918fdbb5fd60ff2e402412fd32a6",
+        "raw_allocated_bytes": 328040448,
+        "raw_bytes": 328032285,
+        "raw_inode": 3334175,
+        "raw_mtime_ns": 1790691340476529497,
+        "raw_path": "/home/ehrli/nnue-owned-continuation-20260928/external-fresh/counter-fresh/fastchess.log",
+        "raw_sha256": "4e8a2107e39687d5d7883d036d3765a87390b58fc1d7e7455fb0bafce01de889",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 13440346,
+        "compressed_path": "/home/ehrli/nnue-owned-continuation-20260928/external-fresh/counter-fresh-aa/fastchess.log.gz",
+        "compressed_sha256": "6610837b1af979c0827a1552502512816aa9eca3a382c3584d32ef8f29c3fad4",
+        "raw_allocated_bytes": 74153984,
+        "raw_bytes": 74146509,
+        "raw_inode": 3330674,
+        "raw_mtime_ns": 1790677708181342027,
+        "raw_path": "/home/ehrli/nnue-owned-continuation-20260928/external-fresh/counter-fresh-aa/fastchess.log",
+        "raw_sha256": "b39d39950c7b94dc7e96e92df641405a379262b4673ed48fe2f36cba31c88858",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 17919245,
+        "compressed_path": "/home/ehrli/nnue-owned-continuation-20260928/wdl15-gate/wdl15-aa/fastchess.log.gz",
+        "compressed_sha256": "7c0ec05105409ec7c6e6dc0e9f6823215966c11a990056468c5f6922eadfd8b8",
+        "raw_allocated_bytes": 101597184,
+        "raw_bytes": 101591714,
+        "raw_inode": 3415705,
+        "raw_mtime_ns": 1790692430935582112,
+        "raw_path": "/home/ehrli/nnue-owned-continuation-20260928/wdl15-gate/wdl15-aa/fastchess.log",
+        "raw_sha256": "e8da0aecf2520421a2e039ffbfe54ca1f6622da91c85c986804b6277f114704d",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 105128045,
+        "compressed_path": "/home/ehrli/nnue-owned-continuation-20260928/wdl15-gate/wdl15-gate/fastchess.log.gz",
+        "compressed_sha256": "3aada94be61dfdec436aab112bf27cf33cb16fa1f29366de09b25032e22234f8",
+        "raw_allocated_bytes": 602505216,
+        "raw_bytes": 602500111,
+        "raw_inode": 3419855,
+        "raw_mtime_ns": 1790696671299882280,
+        "raw_path": "/home/ehrli/nnue-owned-continuation-20260928/wdl15-gate/wdl15-gate/fastchess.log",
+        "raw_sha256": "132ff5d355cff587f9e284e6f62e7e0d9319c294fb9f44e809d6e950582b649c",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 17213817,
+        "compressed_path": "/home/ehrli/nnue-owned-smp-20260929/matches/width2-aa/fastchess.log.gz",
+        "compressed_sha256": "8d31fc16dbca6084ab0aeb075e69c909784cf68de1bc9c0afb24e01346e7170b",
+        "raw_allocated_bytes": 104435712,
+        "raw_bytes": 104432486,
+        "raw_inode": 3485914,
+        "raw_mtime_ns": 1790702556840489868,
+        "raw_path": "/home/ehrli/nnue-owned-smp-20260929/matches/width2-aa/fastchess.log",
+        "raw_sha256": "55e629278d11d5f02161c10a7c17e47fc4c2a123baa11ef04278b993463a4aa3",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 103611901,
+        "compressed_path": "/home/ehrli/nnue-owned-smp-20260929/matches/width2-gate/fastchess.log.gz",
+        "compressed_sha256": "818e4c2fb9d5ca0318093434dc1237ce88cf4fe575e59b7b6ad72c735de5b855",
+        "raw_allocated_bytes": 616431616,
+        "raw_bytes": 616427310,
+        "raw_inode": 3490278,
+        "raw_mtime_ns": 1790711072770030890,
+        "raw_path": "/home/ehrli/nnue-owned-smp-20260929/matches/width2-gate/fastchess.log",
+        "raw_sha256": "199a1f61c3ccbd703f979341fc2b9827817cb899e53262711caeccaf451af1cb",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 15588795,
+        "compressed_path": "/home/ehrli/nnue-owned-smp-20260929/matches/width4-aa/fastchess.log.gz",
+        "compressed_sha256": "615de2ee8570d61a732df6c199cef01f97b1cedd870c357e5a99388f2fadcf0b",
+        "raw_allocated_bytes": 99729408,
+        "raw_bytes": 99721760,
+        "raw_inode": 3524241,
+        "raw_mtime_ns": 1790715148306352461,
+        "raw_path": "/home/ehrli/nnue-owned-smp-20260929/matches/width4-aa/fastchess.log",
+        "raw_sha256": "8de67273e0fd0dc2199904560f51e8cfc9b766432245219e84f0e0511d63ef30",
+        "terminal_state": "COMPLETE"
+      },
+      {
+        "compressed_bytes": 75072108,
+        "compressed_path": "/home/ehrli/nnue-owned-smp-20260929/matches/width4-gate/fastchess.log.gz",
+        "compressed_sha256": "afcef4ea80af63dacf12466b4326ed1e7e693837bce0a5999d865d1c619f511d",
+        "raw_allocated_bytes": 473817088,
+        "raw_bytes": 473809221,
+        "raw_inode": 3541084,
+        "raw_mtime_ns": 1790734078378473736,
+        "raw_path": "/home/ehrli/nnue-owned-smp-20260929/matches/width4-gate/fastchess.log",
+        "raw_sha256": "4700e548fa3048abb64d9fd381ed96267dc09c417da0c7c539f03e9274c87e1f",
+        "terminal_state": "FAILED"
+      }
+    ],
+    "replaced_at_unix": 1790773089.3087268,
+    "restore_instructions": "For any old audit that requires the original raw path, decompress the sibling .gz to the original path and verify the recorded raw byte count and SHA-256 before rerunning. No original audit, spec, PGN, model, source or result file is changed.",
+    "state": "ARCHIVED_LOSSLESS_REPLACEMENT",
+    "verification": "Every compressed file and full decompressed trace matches its WSL byte count and SHA-256. Archive contains exactly the declared files.",
+    "windows_free_gib_before_compaction": 22.833457946777344
+  },
+  "tool_and_cache_summary": {
+    "all_tool_bytes_verified": true,
+    "cache_allocation_reclaimed_gib": 0.9643287658691406,
+    "checked_at_unix": 1790774139.401775,
+    "claim": "Only byte-identical tool copies in dormant owned research were replaced by hard links to the verified read-only pool. Only regenerable single-link Go cache entries older than 24 hours were pruned. Source, training data, models, checkpoints, game records and recent cache entries are retained.",
+    "reclaimable_tool_gib": 1.8277587890625,
+    "state": "COMPLETE"
+  },
+  "tool_files_verified": 54
+}

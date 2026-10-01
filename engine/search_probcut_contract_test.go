@@ -3,8 +3,6 @@ package engine
 import (
 	"reflect"
 	"testing"
-
-	"github.com/ehrlich-b/ngn/nnue"
 )
 
 const probcutContractFEN = "4k3/p7/8/8/8/8/8/R3K3 w - - 0 1"
@@ -16,12 +14,11 @@ func newProbcutContractState(t *testing.T, depth int) (*Position, *SearchInfo) {
 
 func newProbcutContractStateForFEN(t *testing.T, fen string, depth int) (*Position, *SearchInfo) {
 	t.Helper()
-	model := loadEvaluatorTensors(t, new(nnue.Tensors))
 	searcher, err := NewSearchEngineWithHash(1)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := searcher.SelectNGNV1Evaluator(model); err != nil {
+	if err := searcher.SelectHCEEvaluator(); err != nil {
 		t.Fatal(err)
 	}
 	pos := n3cPosition(t, fen)
@@ -34,6 +31,7 @@ func newProbcutContractStateForFEN(t *testing.T, fen string, depth int) (*Positi
 	})
 	tt := searcher.prepareTTGeneration(generation)
 	evaluator := searcher.mustPreparePrimaryEvaluator(pos, generation)
+	evaluator.staticOracle = func(*Position) int { return 0 }
 	return pos, newN3CDirectSearchInfo(searcher, evaluator, tt, depth)
 }
 
@@ -49,7 +47,7 @@ func TestProbcutMoveStackFeedsGrandchild(t *testing.T) {
 	observedGrandchild := false
 	observedRootMove := EmptyMove
 	info.evaluator.transitionObserver = func(observed *Position, evaluator *workerEvaluator) {
-		switch evaluator.nnueDepth() {
+		switch evaluator.evaluationDepth() {
 		case 1:
 			rootCaptureActive = observed.Hash() == captureChild.Hash()
 		case 3:
@@ -81,7 +79,7 @@ func TestProbcutMoveStackIsLiveBeforeQuiescence(t *testing.T) {
 	captureChild := probcutChild(t, pos, capture)
 	observedCapture := false
 	info.evaluator.transitionObserver = func(observed *Position, evaluator *workerEvaluator) {
-		if evaluator.nnueDepth() == 1 && observed.Hash() == captureChild.Hash() && !observedCapture {
+		if evaluator.evaluationDepth() == 1 && observed.Hash() == captureChild.Hash() && !observedCapture {
 			observedCapture = true
 			info.control.RequestStop()
 		}
@@ -116,7 +114,7 @@ func TestProbcutMoveStackTracksCompletedSiblings(t *testing.T) {
 	previousProbcutCapture := EmptyMove
 	checkedLastSibling := false
 	info.evaluator.transitionObserver = func(observed *Position, evaluator *workerEvaluator) {
-		if evaluator.nnueDepth() != 1 {
+		if evaluator.evaluationDepth() != 1 {
 			return
 		}
 		// The evaluator transition callback runs just before the search path
@@ -178,7 +176,7 @@ func requireProbcutSearchUnwound(t *testing.T, pos *Position, before pvPositionS
 	if info.RepStackLen != wantRepLen || info.FrameDepth != wantFrameDepth {
 		t.Fatalf("search stack lengths after search = repetition %d, frames %d; want %d, %d", info.RepStackLen, info.FrameDepth, wantRepLen, wantFrameDepth)
 	}
-	if got := info.evaluator.nnueDepth(); got != 0 {
+	if got := info.evaluator.evaluationDepth(); got != 0 {
 		t.Fatalf("search left evaluator depth %d, want 0", got)
 	}
 }
@@ -199,7 +197,7 @@ func TestSingularVerificationSkipsProbcutAtExcludedPly(t *testing.T) {
 	info.tt.Set(child.Hash(), EmptyMove, scoreToTT(0, 1), 1, Exact, false)
 	visitedExcluded := false
 	info.evaluator.transitionObserver = func(observed *Position, evaluator *workerEvaluator) {
-		if evaluator.nnueDepth() == 1 && observed.Hash() == child.Hash() {
+		if evaluator.evaluationDepth() == 1 && observed.Hash() == child.Hash() {
 			visitedExcluded = true
 		}
 	}
@@ -261,7 +259,7 @@ func TestProbcutRemainsEnabledOutsideExcludedPly(t *testing.T) {
 			info.tt.Set(child.Hash(), EmptyMove, scoreToTT(0, test.ply+1), 1, Exact, false)
 			visitedCapture := false
 			info.evaluator.transitionObserver = func(observed *Position, evaluator *workerEvaluator) {
-				if evaluator.nnueDepth() == 1 && observed.Hash() == child.Hash() {
+				if evaluator.evaluationDepth() == 1 && observed.Hash() == child.Hash() {
 					visitedCapture = true
 				}
 			}
@@ -290,7 +288,7 @@ func TestStoppedSingularVerificationSkipsProbcutAndUnwinds(t *testing.T) {
 	visitedExcluded := false
 	requestedStop := false
 	info.evaluator.transitionObserver = func(observed *Position, evaluator *workerEvaluator) {
-		if evaluator.nnueDepth() != 1 {
+		if evaluator.evaluationDepth() != 1 {
 			return
 		}
 		if observed.Hash() == child.Hash() {

@@ -1,0 +1,18 @@
+{
+  "classification": "source-derived model, not exact-binary proof",
+  "g2_rank_index": 1,
+  "killer_stage_would_accept_if_empty": true,
+  "normal_is_promotion": false,
+  "normal_move_integer": 398,
+  "normal_move_type": 0,
+  "normal_rendered": "g2g1",
+  "pinned_validator_accepts_normal_g2g1": true,
+  "promotion_renderings": [
+    "g2g1n",
+    "g2g1b",
+    "g2g1r",
+    "g2g1q"
+  ],
+  "tt_preserves_all_move_bits": true,
+  "tt_round_trip_move_integer": 398
+}
