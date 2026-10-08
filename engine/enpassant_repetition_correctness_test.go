@@ -11,8 +11,6 @@ import (
 // (SHA-256 897f7ebd0c3adc602839d7782673ddbecdd7c1bc72c58dc73fb424f8884b283e,
 // Stockfish 18 executable SHA-256
 // 6b087694916228c905a5e14db74cca8c7e5643602226af1fa5d42353c455b9f9).
-// The Polyglot values are independently frozen standard book keys. They retain
-// adjacency-only EP semantics and deliberately do not follow the repetition key.
 type enPassantRepetitionFixture struct {
 	name             string
 	startFEN         string
@@ -25,8 +23,6 @@ type enPassantRepetitionFixture struct {
 	wantNoEPMoves    []string
 	wantEPPerft2     uint64
 	wantNoEPPerft2   uint64
-	wantPolyglotEP   uint64
-	wantPolyglotNoEP uint64
 	illegalEnPassant bool
 }
 
@@ -39,7 +35,6 @@ var enPassantRepetitionFixtures = []enPassantRepetitionFixture{
 		wantEPMoves:   []string{"a5a4", "a5a6", "a5b4", "a5b5", "a5b6", "e5e6"},
 		wantNoEPMoves: []string{"a5a4", "a5a6", "a5b4", "a5b5", "a5b6", "e5e6"},
 		wantEPPerft2:  95, wantNoEPPerft2: 95,
-		wantPolyglotEP: 0x7DE1CE053EC5F302, wantPolyglotNoEP: 0x617810D6027D63A3,
 	},
 	{
 		name: "pinned_black_capturer", illegalEnPassant: true,
@@ -49,7 +44,6 @@ var enPassantRepetitionFixtures = []enPassantRepetitionFixture{
 		wantEPMoves:   []string{"d4d3", "h4g3", "h4g4", "h4g5", "h4h3", "h4h5"},
 		wantNoEPMoves: []string{"d4d3", "h4g3", "h4g4", "h4g5", "h4h3", "h4h5"},
 		wantEPPerft2:  95, wantNoEPPerft2: 95,
-		wantPolyglotEP: 0xA11E5ED885F82B3E, wantPolyglotNoEP: 0x6E2F1B068F2569B7,
 	},
 	{
 		name: "unrelated_check_white_capturer", illegalEnPassant: true,
@@ -59,7 +53,6 @@ var enPassantRepetitionFixtures = []enPassantRepetitionFixture{
 		wantEPMoves:   []string{"a4a3", "a4a5", "a4b3", "a4b4"},
 		wantNoEPMoves: []string{"a4a3", "a4a5", "a4b3", "a4b4"},
 		wantEPPerft2:  52, wantNoEPPerft2: 52,
-		wantPolyglotEP: 0xC35CAC2F9CD29728, wantPolyglotNoEP: 0xDFC572FCA06A0789,
 	},
 	{
 		name: "unrelated_check_black_capturer", illegalEnPassant: true,
@@ -69,7 +62,6 @@ var enPassantRepetitionFixtures = []enPassantRepetitionFixture{
 		wantEPMoves:   []string{"h5g5", "h5g6", "h5h4", "h5h6"},
 		wantNoEPMoves: []string{"h5g5", "h5g6", "h5h4", "h5h6"},
 		wantEPPerft2:  52, wantNoEPPerft2: 52,
-		wantPolyglotEP: 0x5B87B7EEC99F77E5, wantPolyglotNoEP: 0x94B6F230C342356C,
 	},
 	{
 		name:     "legal_white_capturer",
@@ -79,7 +71,6 @@ var enPassantRepetitionFixtures = []enPassantRepetitionFixture{
 		wantEPMoves:   []string{"a5a4", "a5b4", "a5b5", "e5d6", "e5e6"},
 		wantNoEPMoves: []string{"a5a4", "a5b4", "a5b5", "e5e6"},
 		wantEPPerft2:  91, wantNoEPPerft2: 75,
-		wantPolyglotEP: 0x3463A6765A4BCAC1, wantPolyglotNoEP: 0x28FA78A566F35A60,
 	},
 	{
 		name:     "legal_black_capturer",
@@ -89,7 +80,6 @@ var enPassantRepetitionFixtures = []enPassantRepetitionFixture{
 		wantEPMoves:   []string{"d4d3", "d4e3", "h4g4", "h4g5", "h4h5"},
 		wantNoEPMoves: []string{"d4d3", "h4g4", "h4g5", "h4h5"},
 		wantEPPerft2:  91, wantNoEPPerft2: 75,
-		wantPolyglotEP: 0xD83D30DE46E32827, wantPolyglotNoEP: 0x170C75004C3E6AAE,
 	},
 }
 
@@ -182,16 +172,13 @@ func assertEnPassantPositionRestored(t *testing.T, pos *Position, want enPassant
 	}
 }
 
-func assertPinnedOracleStage(t *testing.T, label string, pos *Position, moves []string, perft2 uint64, polyglot uint64) {
+func assertPinnedOracleStage(t *testing.T, label string, pos *Position, moves []string, perft2 uint64) {
 	t.Helper()
 	if got := legalMoveStrings(pos); !reflect.DeepEqual(got, moves) {
 		t.Fatalf("%s legal moves = %v, want pinned Stockfish set %v", label, got, moves)
 	}
 	if got := perft2Nodes(pos); got != perft2 {
 		t.Fatalf("%s perft 2 = %d, want pinned Stockfish %d", label, got, perft2)
-	}
-	if got := PolyglotHash(pos); got != polyglot {
-		t.Fatalf("%s Polyglot hash = %016X, want standard Polyglot %016X", label, got, polyglot)
 	}
 }
 
@@ -212,12 +199,12 @@ func TestLegalEnPassantOrdinaryHashAndPinnedOracle(t *testing.T) {
 			fenEP := mustParseEnPassantPosition(t, fixture.epFEN)
 			fenNoEP := mustParseEnPassantPosition(t, fixture.noEPFEN)
 
-			assertPinnedOracleStage(t, "real push", incremental, fixture.wantEPMoves, fixture.wantEPPerft2, fixture.wantPolyglotEP)
-			assertPinnedOracleStage(t, "EP FEN", fenEP, fixture.wantEPMoves, fixture.wantEPPerft2, fixture.wantPolyglotEP)
-			assertPinnedOracleStage(t, "no-EP FEN", fenNoEP, fixture.wantNoEPMoves, fixture.wantNoEPPerft2, fixture.wantPolyglotNoEP)
+			assertPinnedOracleStage(t, "real push", incremental, fixture.wantEPMoves, fixture.wantEPPerft2)
+			assertPinnedOracleStage(t, "EP FEN", fenEP, fixture.wantEPMoves, fixture.wantEPPerft2)
+			assertPinnedOracleStage(t, "no-EP FEN", fenNoEP, fixture.wantNoEPMoves, fixture.wantNoEPPerft2)
 
 			if incremental.EnPassant == NoSquare || fenEP.EnPassant == NoSquare {
-				t.Fatal("raw adjacent EP state was cleared; Polyglot and move-generation state must be retained")
+				t.Fatal("raw adjacent EP state was cleared; move-generation state must be retained")
 			}
 			if incremental.Hash() != fenEP.Hash() {
 				t.Fatalf("incremental key %016X != EP-FEN full key %016X", incremental.Hash(), fenEP.Hash())

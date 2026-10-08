@@ -6,17 +6,20 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"runtime"
 	"strings"
 
 	"github.com/ehrlich-b/ngn/engine"
 )
 
-var releaseProfile = "hce"
-var releaseVersion = "0.2.0-dev-hce"
+// Release builds set releaseVersion with -ldflags -X. The default profile embeds
+// the NGN network; -X main.releaseProfile=hce builds the locked-HCE engine.
+var releaseProfile = "nnue"
+var releaseVersion = "0.3.0-dev"
 
 func releaseDefaults() (backend, model string, book bool, err error) {
 	switch releaseProfile {
-	case "hce":
+	case "nnue", "hce":
 		return engine.EvaluatorBackendHCEName, "", false, nil
 	default:
 		return "", "", false, fmt.Errorf("unknown or retired build profile %q", releaseProfile)
@@ -54,9 +57,13 @@ func run(args []string, input io.Reader, output, errorOutput io.Writer) int {
 		fmt.Fprintln(output, releaseVersion)
 		return 0
 	}
-	if releaseProfile == "hce" && (strings.ToLower(strings.TrimSpace(*evalBackend)) != engine.EvaluatorBackendHCEName ||
-		(strings.TrimSpace(*evalFile) != "" && !strings.EqualFold(strings.TrimSpace(*evalFile), "<empty>"))) {
-		fmt.Fprintln(errorOutput, "ngn: HCE build requires -eval-backend hce and no -eval-file")
+	if strings.ToLower(strings.TrimSpace(*evalBackend)) != engine.EvaluatorBackendHCEName ||
+		(strings.TrimSpace(*evalFile) != "" && !strings.EqualFold(strings.TrimSpace(*evalFile), "<empty>")) {
+		if releaseProfile == "hce" {
+			fmt.Fprintln(errorOutput, "ngn: HCE build requires -eval-backend hce and no -eval-file")
+		} else {
+			fmt.Fprintln(errorOutput, "ngn: evaluator flags are unsupported; use the UCI EvalFile and UseNNUE options")
+		}
 		return 2
 	}
 
@@ -65,10 +72,12 @@ func run(args []string, input io.Reader, output, errorOutput io.Writer) int {
 		fmt.Fprintf(errorOutput, "ngn: release identity failed: %v\n", err)
 		return 2
 	}
-	if releaseProfile == "hce" {
-		err = uciEngine.ConfigureHCEStartup()
-	} else {
-		err = uciEngine.ConfigureStartupEvaluator(*evalBackend, *evalFile)
+	if os.Getenv("GOMAXPROCS") == "" {
+		uciEngine.ConfigureStartupThreadScheduler(func(count int) { runtime.GOMAXPROCS(count) })
+	}
+	err = uciEngine.ConfigureHCEStartup()
+	if err == nil && releaseProfile == "nnue" {
+		err = uciEngine.ConfigureEmbeddedNNUEStartup()
 	}
 	if err != nil {
 		fmt.Fprintf(errorOutput, "ngn: evaluator startup configuration failed: %v\n", err)

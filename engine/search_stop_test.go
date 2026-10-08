@@ -60,6 +60,42 @@ func TestStoppedChildDoesNotStoreParentTT(t *testing.T) {
 	}
 }
 
+// Every clock-check site may be the one that trips, including the parent's own
+// move-loop check after earlier moves were searched; none may store the parent.
+func TestStoppedSearchNeverStoresRootTTAtAnyCheckSite(t *testing.T) {
+	pos, err := ParseFEN("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3")
+	if err != nil {
+		t.Fatal(err)
+	}
+	rootHash := pos.Hash()
+	stops := 0
+	for offset := 1; offset <= 1024; offset++ {
+		ClearStop()
+		ClearHistoryTable()
+		ClearKillerMoves()
+		ClearCounterMoves()
+		defaultSearchEngine, _ = NewSearchEngineWithHash(1)
+		tm := NewTimeManager()
+		tm.timeControl = TimePerMove
+		tm.allocatedTime = time.Nanosecond
+		tm.startTime = time.Now().Add(-time.Second)
+		tm.checkCounter = uint64(1024 - offset)
+		info := newSearchInfoForTest(tm, 2)
+		alphaBetaPV(pos, 2, 0, -INFINITY, INFINITY, true, true, false, info)
+		if !info.Stopped {
+			break
+		}
+		stops++
+		if _, _, _, _, hit, _ := info.tt.Get(rootHash); hit {
+			t.Fatalf("search stopped at check %d stored the root transposition-table entry", offset)
+		}
+	}
+	ClearStop()
+	if stops < 30 {
+		t.Fatalf("only %d check sites exercised", stops)
+	}
+}
+
 func TestQuiescenceHonorsTimeLimit(t *testing.T) {
 	ClearStop()
 	t.Cleanup(ClearStop)

@@ -1,1 +1,0 @@
-S=../rodent-pinned-renderer-source; for spec in 'tables.go 81 90' 'tables.go 291 307' 'gen.go 59 104' 'gen.go 132 175' 'legal.go 125 160' 'movepick.go 82 134' 'trans.go 94 109' 'trans.go 226 245' 'uci.go 714 747' 'uci.go 767 780'; do set -- $spec; printf '\n=== %s:%s-%s ===\n' "$1" "$2" "$3"; nl -ba "$S/$1" | sed -n "$2,${3}p"; done | sed -E 's/[[:blank:]]+$//'

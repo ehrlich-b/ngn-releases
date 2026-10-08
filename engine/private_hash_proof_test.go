@@ -45,7 +45,6 @@ func TestPrivateHashCompatibilityDump(t *testing.T) {
 		put(position.Hash())
 		put(position.hash)
 		put(generateZobristHash(position))
-		put(PolyglotHash(position))
 		put(uint8(position.Tag))
 		put(int8(position.EnPassant))
 		put(position.HalfMoveClock)

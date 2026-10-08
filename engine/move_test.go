@@ -195,35 +195,35 @@ func TestMoveTagCombinations(t *testing.T) {
 }
 
 func BenchmarkNewMove(b *testing.B) {
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		NewMove(E2, E4, WhitePawn, NoPiece, NoType, 0)
 	})
 }
 
 func BenchmarkMoveSource(b *testing.B) {
 	move := NewMove(E2, E4, WhitePawn, NoPiece, NoType, 0)
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		_ = move.Source()
 	})
 }
 
 func BenchmarkMoveDestination(b *testing.B) {
 	move := NewMove(E2, E4, WhitePawn, NoPiece, NoType, 0)
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		_ = move.Destination()
 	})
 }
 
 func BenchmarkMoveIsCapture(b *testing.B) {
 	move := NewMove(E4, D5, WhitePawn, BlackPawn, NoType, Capture)
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		_ = move.IsCapture()
 	})
 }
 
 func BenchmarkMoveToString(b *testing.B) {
 	move := NewMove(E7, E8, WhitePawn, NoPiece, Queen, 0)
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		_ = move.ToString()
 	})
 }

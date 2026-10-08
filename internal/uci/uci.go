@@ -119,6 +119,12 @@ const tcFlagGrace = 300 * time.Millisecond
 // if it never comes up — callers MUST treat nil as fatal rather than play games
 // (a dead engine forfeits every game as "no-move" → bogus +800).
 func Start(path, name string, lowPower bool) *Engine {
+	return StartWithOptions(path, name, lowPower, nil)
+}
+
+// StartWithOptions applies ordered setoption commands before readiness and warmup.
+// Commands are constructed by the caller; options persist across ucinewgame.
+func StartWithOptions(path, name string, lowPower bool, options []string) *Engine {
 	for attempt := 1; attempt <= 3; attempt++ {
 		var cmd *exec.Cmd
 		if lowPower && runtime.GOOS == "darwin" {
@@ -139,6 +145,9 @@ func Start(path, name string, lowPower bool) *Engine {
 			log.Printf("%s (%s): no uciok within 15s (attempt %d/3)", name, path, attempt)
 			Stop(e)
 			continue
+		}
+		for _, option := range options {
+			Send(e, option)
 		}
 		Send(e, "isready")
 		if !WaitFor(e, "readyok", 15*time.Second) {
@@ -178,6 +187,10 @@ func WaitFor(e *Engine, expected string, timeout time.Duration) bool {
 	deadline := time.Now().Add(timeout)
 	for time.Now().Before(deadline) {
 		if e.stdout.Scan() {
+			if expected == "readyok" && strings.HasPrefix(e.stdout.Text(), "info string error") {
+				log.Printf("engine rejected configuration: %s", e.stdout.Text())
+				return false
+			}
 			if strings.Contains(e.stdout.Text(), expected) {
 				return true
 			}

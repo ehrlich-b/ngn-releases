@@ -1,5 +1,0 @@
-=== RUN   TestCounterProfilePersistentSnapshot
---- PASS: TestCounterProfilePersistentSnapshot (1.78s)
-=== RUN   TestCounterTransitionFixedNodeSnapshot
---- PASS: TestCounterTransitionFixedNodeSnapshot (3.81s)
-PASS

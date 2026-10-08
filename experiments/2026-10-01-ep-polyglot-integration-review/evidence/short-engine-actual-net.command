@@ -1,1 +1,0 @@
-env NGN_EP_OWNED_NNUE=/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue GOTOOLCHAIN=local GOMAXPROCS=1 GOFLAGS=-p=1 GOCACHE=/home/ehrli/ngn-personal-correctness-20261001/.gocache-ep-repair /usr/local/go/bin/go test -short ./engine -count=1

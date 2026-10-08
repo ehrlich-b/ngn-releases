@@ -1,0 +1,157 @@
+{
+  "Schema": "NGN-CLAIM-2",
+  "AtUTC": "2026-10-07T18:36:17.817140017Z",
+  "Receipt": {
+    "Path": "/home/ehrli/ngn-data/claim-run-20261007/samples/confirmation/receipt.json",
+    "SHA256": "9212f503de37d0a11aa46f2468abffc5da4e5e2c6ec0c35dc4bf1c7b1ce7ad66"
+  },
+  "Artifacts": [
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/ngn",
+      "SHA256": "8fb36cfb68b78e4df65a1fc6b9f05232cb234418db1ab609b3a4468e12e22f4e"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/claimtool",
+      "SHA256": "a4960f5922705ff375f04a9f5a9f09b4567daa369a64eb8fb2d1a565f2ebf800"
+    },
+    {
+      "Path": "/home/ehrli/repos/ngn/output/corrected-pin-20260905/results-r0905matepin/inputs/sprt_openings.txt",
+      "SHA256": "974e4b5ab871a9e106d0c766bfa39fc83676222337fb7702f61782e2ac5b3222"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/samples/confirmation/first-80-openings.txt",
+      "SHA256": "6e42b15c5c57c17905d28c1c0cb7e83d558f8092bd5fc672c421ccf25e419919"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/candidate.nnue",
+      "SHA256": "c6c127966d1cd9848b8bbe836ae74d5672874a3e74e973a488e4d92e350416f2"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/claimbridge.exe",
+      "SHA256": "026e9fd42883112b43e2dd97eccf5777725f1cf29bdd9114f20478e37680001a"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/archive-split.json",
+      "SHA256": "80e55525d0f4f2c77e080510d80dbee5ad39800503ad1d858f1ebb3142542ee9"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/corpus-digest.json",
+      "SHA256": "652394d3a95d27b099e82362304df654dd00a4b50ac7f30f22b04c7e3ec1eff1"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/gate-h512.json",
+      "SHA256": "bdc1082690ad6b4d40d2ff395dbe3c6ed168da50303afbe39ea274f61dd22f0c"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/gate-h512.log",
+      "SHA256": "5799f38e2564e34f3be741d2e5133afd328b07befce20a9f0d861d2abc6245d9"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/h512-config.json",
+      "SHA256": "e395179a912d94ed6d0bd539c48e00f32ecd53827b89ad59daa2312132fdaad8"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/h512-history.json",
+      "SHA256": "923c1a209a6a8a3e5f5ed29cdd88d94d5330e1c61561ba52ad0e05af2289a475"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/h512-parity.json",
+      "SHA256": "9c5fa6fcef413cd56d1ace762e056c350159496f62790641e265c8aa347009f6"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/h512-parity.log",
+      "SHA256": "92ba27bf98ad08503efbb182f48c973f1d2cce87acc23e897c0bcfc51816c0cc"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/independent-h512-audit.json",
+      "SHA256": "b00a8434ceae8e0a74d08d1abfa016f9232b1ccdddcede83289a5b537309b3be"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/metadata-h512.json",
+      "SHA256": "91a4241634615c3151624b644c5fe89c2f6f5282ea9155f5bc806d07549fdb15"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/parity-positions.json",
+      "SHA256": "9dfe794c2c23bc03f88fcb5d655f61ddb6fb1f374d0dbe37650cacf428bda1e1"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/parity-records.ngnp",
+      "SHA256": "b3ed3394b7123480fb98ffbad555f6eb9d0fbb110bf107d49568630d9fff7839"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/plan-h512.json",
+      "SHA256": "6f9af7f57092294953e85ff98ec1d696f6203bbd6a90a7f0975f8aea9b8f896c"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/receipt-final.json",
+      "SHA256": "ada7c54522b16ba4fcb3e1fbc7cc6987e0a1f0785569d85f15a1ed49e0ef1f5b"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/training-h512.json",
+      "SHA256": "6f0cfd0a78b1eefe7ca4911b63e922a96cae4b7eebc5d68919f4ab3a2b7d53d9"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/candidate-declaration.json",
+      "SHA256": "a9cc834abfa4b9dbc1b40d2bccee1503e07448aafaaebafe1547ff61f14fead7"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/corpus-digest.json",
+      "SHA256": "652394d3a95d27b099e82362304df654dd00a4b50ac7f30f22b04c7e3ec1eff1"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/independent-h512-audit.json",
+      "SHA256": "b00a8434ceae8e0a74d08d1abfa016f9232b1ccdddcede83289a5b537309b3be"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/frozen-build-parity.log",
+      "SHA256": "ab7e4e5d98f64ce5ebceaaaca22e3a8972c7c3ac7798c2adb8b48be68be6e132"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/manifest.json",
+      "SHA256": "d7baabf8ebae473cced15694f25ae31fcc56f6dc1942e0a00b3c9da5a6a13ca7"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/h512-parity.json",
+      "SHA256": "9c5fa6fcef413cd56d1ace762e056c350159496f62790641e265c8aa347009f6"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/training-h512.json",
+      "SHA256": "6f0cfd0a78b1eefe7ca4911b63e922a96cae4b7eebc5d68919f4ab3a2b7d53d9"
+    },
+    {
+      "Path": "/mnt/c/Users/ehrli/ngn/repin/anchors/counter_38.exe",
+      "SHA256": "d260174182ea10c5b902a8d25e217166f5b5b54dc4fa64c220b498acce6dec11"
+    },
+    {
+      "Path": "/home/ehrli/nnue-owned-maelstrom-20260930-v2/maelstrom-3.3.0",
+      "SHA256": "66ea969530d63f5904114079f518ba618b0deb4e269eb0c95d7496960379ea53"
+    },
+    {
+      "Path": "/home/ehrli/repos/ngn-next/output/go-opponent-preflight-20260906/counter-5.5-linux-amd64",
+      "SHA256": "6c48fb52934d49d3774633e32f0b4fb4796b1e2c63925f24167ef0f0c0d761c8"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/anchors/viridithas10/viridithas-10.0.0-x86_64-linux-v3",
+      "SHA256": "35b32c4acc3216fd9d1084bebad90452cee2e8725af4bdd0f175cc42c4e3def3"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/samples/screen/receipt.json",
+      "SHA256": "568b1c8a6e40379ab766645bcfc1bb39dc56280237b7296674f3e980ede9590b"
+    },
+    {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/samples/screen/analysis.json",
+      "SHA256": "41cff636368510ada2947e12dff451b20f7300a115674cbd924c7984a6074df9"
+    }
+  ],
+  "Host": {
+    "Hostname": "NewPC",
+    "OS": "linux",
+    "Kernel": "Linux NewPC 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux",
+    "CPUStatus": "0-15",
+    "Nice": "19",
+    "Load": "1.39 4.60 6.61 1/407 498977",
+    "Scheduling": "taskset 0-15 nice 19; engines GOMAXPROCS=1; Windows anchors via pinned Idle bridge",
+    "AtUTC": "2026-10-07T18:36:17.816357042Z"
+  },
+  "Unchanged": true
+}

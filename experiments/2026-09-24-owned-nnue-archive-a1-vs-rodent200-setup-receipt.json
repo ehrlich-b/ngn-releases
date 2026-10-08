@@ -1,9 +1,0 @@
-{
-  "schema": "ngn-k4-archive-vs-rodent200-setup-v1",
-  "base_manifest_sha256": "60e7df9d8c4eefefaa2fb15d28a718803430c02ec4a78ed1129d0ceacb60f919",
-  "held_manifest_sha256": "e7ae0d1e00e1445f9320e36e08b706f1b08f51a6cad163857d3614fcd0c1658b",
-  "review_subject_sha256": "9e3e98161fbe8c22854175939cfd7010a5ab0b81fab02634c2d2318c675e909d",
-  "k4_model_sha256": "7e7fe59ba477b12041f010d7a1c2851d728ef84c8a761961a5e2e4b77776cfaf",
-  "paired_with_k4_model_sha256": "cebec29cbab676af6a2ade2b67da5c9a01ddb7882ed604238c0e7d67893f72d6",
-  "decision_rule": "Promote over the 20M SF18-labeled K4 only if the paired per-opening score difference (archive minus 20M, same 100 pairs) has a 95% bootstrap lower bound above zero (100,000 resamples, seed 2026092401)."
-}

@@ -1,3 +1,13 @@
+Current binary note (NGN 0.3.0, 2026-10-07): this inventory preserves
+attribution for past versions; the table below describes 0.2.0-rc.1, not 0.3.0.
+The 0.3.0 executable contains NGN code, the NGN-trained embedded network
+(`c6c12796…`) and the Go runtime only: no foreign evaluator or network, PeSTO
+tables, Polyglot constants, Zahak-derived files or external book loading. Its
+training data and alteration method are described in
+[LICENSES/TRAINING-DATA.txt](../LICENSES/TRAINING-DATA.txt); the license grant is
+[LICENSE-GRANT.txt](../LICENSE-GRANT.txt). Stockfish subprocess support is
+tooling-only. See the top of NOTICE for the 0.3.0 summary.
+
 # Third-party provenance for release preparation
 
 The inventory below records the historical 0.2.0-rc.1 release. Subsequent
@@ -130,3 +140,9 @@ Evidence: experiments/2026-10-01-original-hce-release/report.md.
 The final source-package sweep also removed the inactive training/nnue K4/Bullet
 scaffold from the current tree. Historical Bullet MIT attribution is retained.
 No Go runtime source changed after the verified 629bd170 engine stage.
+
+Current binary update, 2026-10-05: external Polyglot loading and its canonical
+constants are removed, with their dependent tests and fixtures. Historical
+Disservin notices and licenses remain. Current sliding multipliers are generated
+by NGN's cmd/magicgen from a recorded NGN seed, not from an external table.
+The older candidate-state paragraphs above document stages, not current contents.

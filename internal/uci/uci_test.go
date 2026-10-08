@@ -1,6 +1,71 @@
 package uci
 
-import "testing"
+import (
+	"bufio"
+	"os"
+	"path/filepath"
+	"runtime"
+	"strings"
+	"testing"
+	"time"
+)
+
+func TestStartWithOptionsBeforeWarmup(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("test subprocess uses a POSIX shell")
+	}
+	dir := t.TempDir()
+	path := filepath.Join(dir, "fake-uci")
+	receipt := filepath.Join(dir, "commands")
+	t.Setenv("NGN_UCI_TEST_LOG", receipt)
+	script := `#!/bin/sh
+configured=no
+while IFS= read -r line; do
+  printf '%s\n' "$line" >> "$NGN_UCI_TEST_LOG"
+  case "$line" in
+    uci) printf 'uciok\n' ;;
+    'setoption name UseNNUE value true') configured=yes ;;
+    isready)
+      if [ "$configured" = yes ]; then printf 'readyok\n';
+      else printf 'info string error missing options\n'; fi ;;
+    'go movetime 200') printf 'bestmove e2e4\n' ;;
+    quit) exit 0 ;;
+  esac
+done
+`
+	if err := os.WriteFile(path, []byte(script), 0700); err != nil {
+		t.Fatal(err)
+	}
+	options := []string{"setoption name EvalFile value /net dir/pilot.nnue", "setoption name UseNNUE value true"}
+	e := StartWithOptions(path, "test", false, options)
+	if e == nil {
+		t.Fatal("configured fake engine failed startup")
+	}
+	defer Stop(e)
+	commands, err := os.ReadFile(receipt)
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := "uci\n" + strings.Join(options, "\n") + "\nisready\nposition startpos\ngo movetime 200\n"
+	if string(commands) != want {
+		t.Fatalf("startup commands = %q, want %q", commands, want)
+	}
+}
+
+func TestReadyRejectsConfigurationError(t *testing.T) {
+	for _, tc := range []struct {
+		output string
+		want   bool
+	}{
+		{"info string option set: UseNNUE = true\nreadyok\n", true},
+		{"info string error eval option: CRC mismatch; using hce\nreadyok\n", false},
+	} {
+		e := &Engine{stdout: bufio.NewScanner(strings.NewReader(tc.output))}
+		if got := WaitFor(e, "readyok", time.Second); got != tc.want {
+			t.Fatalf("WaitFor(%q) = %v, want %v", tc.output, got, tc.want)
+		}
+	}
+}
 
 func TestParseScore(t *testing.T) {
 	cases := []struct {

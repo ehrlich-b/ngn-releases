@@ -15,42 +15,6 @@ import (
 	"time"
 )
 
-// Global opening book instance
-var globalOpeningBook *PolyglotBook
-
-// InitOpeningBook loads an opening book from the given path
-func InitOpeningBook(path string) error {
-	book, err := LoadPolyglotBook(path)
-	if err != nil {
-		return err
-	}
-	globalOpeningBook = book
-	return nil
-}
-
-// GetOpeningBook returns the global opening book
-func GetOpeningBook() *PolyglotBook {
-	return globalOpeningBook
-}
-
-// TryLoadDefaultBook attempts to load a book from common locations
-func TryLoadDefaultBook() {
-	// Try common book locations
-	bookPaths := []string{
-		"book.bin",
-		"opening.bin",
-		"openings.bin",
-		"./book/book.bin",
-		"./book/opening.bin",
-	}
-
-	for _, path := range bookPaths {
-		if err := InitOpeningBook(path); err == nil {
-			return
-		}
-	}
-}
-
 type uciSearchState uint8
 
 const (
@@ -81,7 +45,6 @@ type uciSearchSession struct {
 	debugMode         bool
 	allowResignation  bool
 	copyPosition      func(*Position) *Position
-	openingBook       *PolyglotBook
 	ownBook           bool
 	configuredThreads int
 
@@ -159,6 +122,7 @@ type UCIEngine struct {
 	startupOwnBook          bool
 	researchEvaluatorLocked bool
 	ownBook                 bool
+	embeddedNet             *NGNN1Network
 }
 
 const defaultUCIMoveOverheadMilliseconds = 100
@@ -201,20 +165,12 @@ func NewUCIEngine() *UCIEngine {
 	rawUCILogger.Println("=== RAW UCI MESSAGE LOG ===")
 	rawUCILogger.Println("Format: >>> = sent to engine, <<< = sent from engine")
 
-	// Try to load opening book
-	TryLoadDefaultBook()
-	if book := GetOpeningBook(); book != nil {
-		logger.Printf("Opening book loaded: %d entries", book.Size())
-	} else {
-		logger.Println("No opening book found")
-	}
-
 	return &UCIEngine{
 		position:                newUCIStartingPosition(),
 		searcher:                NewSearchEngine(),
 		debugMode:               false,
 		engineName:              "ngn",
-		engineAuthor:            "ngn team",
+		engineAuthor:            "Bryan Ehrlich",
 		version:                 "0.1.0",
 		timeManager:             newUCITimeManager(),
 		movesPlayed:             0,
@@ -227,8 +183,8 @@ func NewUCIEngine() *UCIEngine {
 		evaluatorConfig:         newUCIEvaluatorConfig(),
 		startupDefaults:         uciEvaluatorDefaults{backend: uciEvaluatorHCE},
 		researchEvaluatorLocked: true,
-		ownBook:                 true,
-		startupOwnBook:          true,
+		ownBook:                 false,
+		startupOwnBook:          false,
 	}
 }
 
@@ -417,16 +373,12 @@ func (uci *UCIEngine) handleCommand(command string, output io.Writer) (quit bool
 func (uci *UCIEngine) handleUCI(output io.Writer) {
 	uci.lifecycleMu.Lock()
 	name, version, author := uci.engineName, uci.version, uci.engineAuthor
-	evalBackendDefault := uci.startupDefaults.backend
 	evalFileDefault := uci.startupDefaults.file
+	useNNUEDefault := uci.startupDefaults.useNNUE
 	ownBookDefault := uci.startupOwnBook
-	researchEvaluatorLocked := uci.researchEvaluatorLocked
 	uci.lifecycleMu.Unlock()
 	uci.sendUCIMessage(output, fmt.Sprintf("id name %s %s", name, version))
 	uci.sendUCIMessage(output, fmt.Sprintf("id author %s", author))
-	if evalBackendDefault == "" {
-		evalBackendDefault = uciEvaluatorHCE
-	}
 	if evalFileDefault == "" {
 		evalFileDefault = "<empty>"
 	}
@@ -436,11 +388,8 @@ func (uci *UCIEngine) handleUCI(output io.Writer) {
 	uci.sendUCIMessage(output, "option name Threads type spin default 1 min 1 max 64")
 	uci.sendUCIMessage(output, "option name Move Overhead type spin default 100 min 0 max 5000")
 	uci.sendUCIMessage(output, fmt.Sprintf("option name OwnBook type check default %t", ownBookDefault))
-	uci.sendUCIMessage(output, "option name SyzygyPath type string default <empty>")
-	if !researchEvaluatorLocked {
-		uci.sendUCIMessage(output, fmt.Sprintf("option name EvalBackend type combo default %s var hce var ngn-v1 var sf18-big var counter-5.5", evalBackendDefault))
-		uci.sendUCIMessage(output, fmt.Sprintf("option name EvalFile type string default %s", evalFileDefault))
-	}
+	uci.sendUCIMessage(output, fmt.Sprintf("option name EvalFile type string default %s", evalFileDefault))
+	uci.sendUCIMessage(output, fmt.Sprintf("option name UseNNUE type check default %t", useNNUEDefault))
 
 	// Tunable search parameters (for SPSA / manual A/B; defaults == shipped values).
 	for _, p := range TunableSearchParams {
@@ -492,22 +441,6 @@ func (uci *UCIEngine) handleSetOption(args []string, output io.Writer) {
 
 	// Handle specific options
 	switch strings.ToLower(optionName) {
-	case "syzygypath":
-		uci.joinSearch(true)
-		if optionValue != "" && optionValue != "<empty>" {
-			err := InitSyzygy(optionValue)
-			if err != nil {
-				uci.debugLogger.Printf("Failed to initialize Syzygy tablebases: %v", err)
-				if uci.debugMode {
-					fmt.Fprintf(output, "info string syzygy init failed: %v\n", err)
-				}
-			} else {
-				uci.debugLogger.Printf("Syzygy tablebases loaded from: %s (max %d pieces)", optionValue, TBLargestPieceCount())
-				if uci.debugMode {
-					fmt.Fprintf(output, "info string syzygy loaded: %s (%d pieces)\n", optionValue, TBLargestPieceCount())
-				}
-			}
-		}
 	case "move overhead":
 		milliseconds, err := strconv.Atoi(optionValue)
 		if err != nil || milliseconds < minMoveOverheadMilliseconds || milliseconds > maxMoveOverheadMilliseconds {
@@ -567,11 +500,10 @@ func (uci *UCIEngine) handleSetOption(args []string, output io.Writer) {
 		uci.handleEvalBackendOption(optionValue, output)
 		return
 	case "evalfile":
-		if uci.researchEvaluatorIsLocked() {
-			uci.sendEvalOptionError(output, "research startup evaluator is locked")
-			return
-		}
 		uci.handleEvalFileOption(optionValue, output)
+		return
+	case "usennue":
+		uci.handleUseNNUEOption(optionValue, output)
 		return
 	default:
 		if isTunableParam(optionName) {
@@ -815,7 +747,6 @@ func (uci *UCIEngine) beginSearchSession(receivedAt time.Time, params SearchPara
 		debugMode:         uci.debugMode,
 		allowResignation:  uci.allowResignation,
 		copyPosition:      uci.copyPosition,
-		openingBook:       GetOpeningBook(),
 		ownBook:           uci.ownBook,
 		configuredThreads: uci.searcher.ThreadCount(),
 	}
@@ -1004,17 +935,10 @@ func (uci *UCIEngine) searchSession(session *uciSearchSession, output io.Writer,
 		fmt.Fprintf(output, "info string starting search, maxDepth=%d\n", maxDepth)
 	}
 
-	// Check opening books first when enabled for this immutable search session.
-	// OwnBook=false bypasses both external Polyglot and embedded fallback books.
+	// The NGN-authored embedded book is opt-in for this search session.
 	bookMove, bookFound := EmptyMove, false
 	if session.ownBook {
-		if book := session.openingBook; book != nil {
-			bookMove, bookFound = book.ProbeBook(session.root)
-		}
-		// Fallback to embedded book if no external book or no hit.
-		if !bookFound {
-			bookMove, bookFound = ProbeEmbeddedBook(session.root)
-		}
+		bookMove, bookFound = ProbeEmbeddedBook(session.root)
 	}
 
 	if bookFound {
@@ -1031,42 +955,6 @@ func (uci *UCIEngine) searchSession(session *uciSearchSession, output io.Writer,
 		// Output the book move result
 		fmt.Fprintf(output, "info depth 1 score cp %d nodes 1 time 0 nps 0 pv %s\n",
 			bestScore, bestMove.ToString())
-	} else if tbMove, tbResult := ProbeRoot(session.root); tbResult.Found && tbMove != EmptyMove {
-		uci.emitThreadReceipt(session, output, 1)
-		// Syzygy tablebase hit - perfect endgame play
-		uci.debugLogger.Printf("Syzygy tablebase hit! WDL=%d DTZ=%d Move=%s", tbResult.WDL, tbResult.DTZ, tbMove.ToString())
-		if session.debugMode {
-			fmt.Fprintf(output, "info string tablebase move: %s (WDL=%d)\n", tbMove.ToString(), tbResult.WDL)
-		}
-
-		bestMove = tbMove
-		// Convert WDL to centipawn score
-		switch tbResult.WDL {
-		case WDL_Win:
-			bestScore = MATE_VALUE - 100 - tbResult.DTZ // Winning
-		case WDL_CursedWin:
-			bestScore = 500 // Theoretically winning but 50-move draw
-		case WDL_Draw:
-			bestScore = 0
-		case WDL_BlessedLoss:
-			bestScore = -500 // Theoretically losing but 50-move draw
-		case WDL_Loss:
-			bestScore = -MATE_VALUE + 100 + tbResult.DTZ // Losing
-		}
-
-		uci.debugLogger.Printf("Using tablebase move: %v with score %d", bestMove.ToString(), bestScore)
-
-		// Output the tablebase result
-		var scoreStr string
-		if bestScore >= MATE_IN_MAX {
-			scoreStr = fmt.Sprintf("mate %d", (MATE_VALUE-bestScore+1)/2)
-		} else if bestScore <= -MATE_IN_MAX {
-			scoreStr = fmt.Sprintf("mate %d", -(MATE_VALUE+bestScore+1)/2)
-		} else {
-			scoreStr = fmt.Sprintf("cp %d", bestScore)
-		}
-		fmt.Fprintf(output, "info depth 1 score %s nodes 1 time 0 nps 0 tbhits 1 pv %s\n",
-			scoreStr, bestMove.ToString())
 	} else {
 		uci.debugLogger.Printf("No opening book move found for current position")
 		if session.debugMode {
@@ -1108,7 +996,7 @@ func (uci *UCIEngine) searchSession(session *uciSearchSession, output io.Writer,
 				mate := (MATE_VALUE - score + 1) / 2
 				scoreStr = fmt.Sprintf("mate %d", mate)
 			} else if score <= -MATE_IN_MAX {
-				// Mirror the winning branch (and the tablebase path at line ~610):
+				// Mirror the winning branch:
 				// plies-to-mate is MATE_VALUE+score, reported as a negative "mate -N".
 				// The old `-score - MATE_VALUE` underflowed for real losing mates and
 				// clamped to the garbage "mate -501" seen 25k+ times in the logs.

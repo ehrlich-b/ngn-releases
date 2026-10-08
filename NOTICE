@@ -1,5 +1,23 @@
 NGN source attribution and modification notices
 
+NGN 0.3.0 contents (2026-10-07)
+The 0.3.0 executable contains NGN code, the NGN-trained embedded network and the
+Go runtime/standard library (BSD-style, LICENSES/Go-LICENSE.txt). It contains no
+Counter, Rodent, Stockfish, PeSTO, Polyglot or Bullet code or data. The board,
+position, hash and cache code that came from Zahak was rewritten from behavior
+contracts in October 2026; some identifiers and interfaces keep their Zahak-era
+names. The sections below describe earlier versions (<=0.2.0-rc.1) and are kept
+for historical copies. The network was trained by NGN's trainer/ (Python
+standard library, NumPy, PyTorch) on ODbL T80 data; see LICENSES/TRAINING-DATA.txt.
+Its 768-input SCReLU layout, 255/64/400 quantization and material output buckets
+are common published NNUE design choices, popularized by the Bullet and
+Stockfish communities. Search-technique acknowledgements are listed below.
+The 0.3.0 source release contains the engine, the trainer, the NGN tools used
+to generate data and measure strength, and the 0.3.0 records. Earlier research
+tools and notebooks that adapted or probed other engines are not part of it;
+they remain in the history of earlier releases with the notices below.
+
+Historical record
 This notice records origins of code and tooling present in NGN 0.2.0-rc.1.
 It remains applicable to historical copies even after components are removed.
 The NGN source and model grant is GPL-3.0-only. That grant does not replace
@@ -176,3 +194,18 @@ Thanki and Pawel Koziol, under GPLv3. Its SOURCE-LICENSE-GPL-3.0, origin receipt
 and added directory NOTICE apply. It is an independent diagnostic executable,
 not imported by NGN's main dependency closure or used in the evaluation hot path.
 Its source/evidence is preserved with attribution rather than hidden.
+
+Current-tree modification dated 2026-10-05: external Polyglot book support,
+canonical random constants and dependent tests/fixtures are removed. The
+NGN-authored embedded FEN book remains opt-in with OwnBook=false by default.
+Stockfish subprocess tooling moved to internal/oracle, outside main's dependency
+closure; test utilities are test-only. The borrowed aspiration score divisor
+and pawn-correction calibration are replaced by neutral NGN placeholders
+(80 and 3/64) pending NGN tuning. Earlier source/data attributions and exact
+license texts above remain historical records.
+
+Current-tree slider modification dated 2026-10-05: cmd/magicgen independently
+finds the committed magic multipliers using an NGN-authored PRNG and fixed seed
+0x4e474e4d41474943. Every relevant blocker subset is verified against NGN's
+coordinate rays. No Counter multiplier is used. The historical Counter
+attribution remains applicable to earlier derived copies.

@@ -171,28 +171,28 @@ func TestPieceNames(t *testing.T) {
 }
 
 func BenchmarkGetPiece(b *testing.B) {
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		GetPiece(Pawn, White)
 	})
 }
 
 func BenchmarkPieceColor(b *testing.B) {
 	piece := WhiteQueen
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		_ = piece.Color()
 	})
 }
 
 func BenchmarkPieceType(b *testing.B) {
 	piece := BlackRook
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		_ = piece.Type()
 	})
 }
 
 func BenchmarkPieceWeight(b *testing.B) {
 	piece := WhiteQueen
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		_ = piece.Weight()
 	})
 }

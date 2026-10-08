@@ -37,10 +37,10 @@ func pawnCorrectionIndex(whitePawns, blackPawns uint64) int {
 }
 
 // correctionValue returns the centipawn adjustment to add to the static eval. The
-// 6245/131072 weight mirrors Stockfish's pawn-correction term, so a saturated entry
-// (±corrHistLimit) yields at most ±49 cp.
+// NGN chooses 3/64 as a neutral round placeholder for later NGN tuning.
+// A saturated entry (±corrHistLimit) yields at most ±48 cp.
 func (h *workerHistory) correctionValue(stm Color, idx int) int {
-	return h.pawnCorrectionHistory[stm][idx] * 6245 / 131072
+	return h.pawnCorrectionHistory[stm][idx] * 3 / 64
 }
 
 // correctedStandPat is the raw eval plus the side-to-move's pawn-structure, non-pawn AND
@@ -110,7 +110,7 @@ func nonPawnCorrectionIndex(whiteNonPawn, blackNonPawn uint64) int {
 }
 
 func (h *workerHistory) nonPawnCorrectionValue(stm Color, idx int) int {
-	return h.nonPawnCorrectionHistory[stm][idx] * 6245 / 131072
+	return h.nonPawnCorrectionHistory[stm][idx] * 3 / 64
 }
 
 func (h *workerHistory) updateNonPawnCorrection(stm Color, idx, diff, depth int) {
@@ -158,7 +158,7 @@ func minorCorrectionIndex(whiteMinors, blackMinors uint64) int {
 }
 
 func (h *workerHistory) minorCorrectionValue(stm Color, idx int) int {
-	return h.minorCorrectionHistory[stm][idx] * 6245 / 131072
+	return h.minorCorrectionHistory[stm][idx] * 3 / 64
 }
 
 func (h *workerHistory) updateMinorCorrection(stm Color, idx, diff, depth int) {

@@ -211,11 +211,26 @@ func (b *Bitboard) Move(src, dest Square, sourcePiece, destinationPiece Piece) {
 	}
 
 	b.Clear(dest, destinationPiece)
-	b.Clear(src, sourcePiece)
 	if sourcePiece == NoPiece {
 		b.mailbox[uint8(dest)] = NoPiece
-	} else {
-		b.addPiece(dest, sourcePiece)
+	} else if validPiece(sourcePiece) {
+		// Relocation preserves material phase. Update each occupancy once and
+		// add only the PST difference; Clear/addPiece would undo and redo the
+		// same material contribution and repeat square/piece validation.
+		from, to := uint8(src), uint8(dest)
+		remove, add := SquareMask[from], SquareMask[to]
+		b.pieces[sourcePiece] = (b.pieces[sourcePiece] &^ remove) | add
+		if sourcePiece <= WhiteKing {
+			b.whitePieces = (b.whitePieces &^ remove) | add
+		} else {
+			b.blackPieces = (b.blackPieces &^ remove) | add
+		}
+		b.accMG += mgPST[sourcePiece][to] - mgPST[sourcePiece][from]
+		b.accEG += egPST[sourcePiece][to] - egPST[sourcePiece][from]
+		if b.mailbox[from] == sourcePiece {
+			b.mailbox[from] = NoPiece
+		}
+		b.mailbox[to] = sourcePiece
 	}
 
 	switch sourcePiece {

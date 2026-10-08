@@ -1,8 +1,0 @@
-schema=ngn-rodent-counter-shared-build-log-v1
-commit=762377947c0907d1ce6be74cb71e01521610bd76
-tree=59587882012a4bd0a64fdac2678a0b0cee01c143
-status_begin
-status_end
-go version go1.25.5 linux/amd64
-command=env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOAMD64=v3 GOMAXPROCS=2 GOFLAGS=-mod=readonly GOTOOLCHAIN=local /usr/local/go/bin/go -C /home/ehrli/repos/ngn-rodent-counter-strength-build-20260913 build -p 2 -o /home/ehrli/repos/ngn-rodent-counter-strength-build-20260913/output/rodent-counter-strength-build-20260913/ngn-rodent-counter-shared .
-build_exit=0

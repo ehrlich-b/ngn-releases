@@ -1,7 +1,9 @@
 SPDX-License-Identifier: GPL-3.0-only
 
-NGN's original source code and the packaged NGN-owned WDL25-e10 neural network are licensed under the GNU General Public License, version 3 only. The complete license text is supplied in LICENSE.
+Copyright (C) 2024-2026 Bryan Ehrlich
 
-Existing copyright notices and third-party licenses remain applicable to their respective components. See docs/THIRD_PARTY.md and LICENSES for the preserved notices.
+NGN's original source code and the NGN-trained neural networks distributed with NGN are licensed under the GNU General Public License, version 3 only. For NGN 0.3.0 this is the embedded network engine/nets/ngn-h512-c6c12796.nnue (SHA-256 c6c127966d1cd9848b8bbe836ae74d5672874a3e74e973a488e4d92e350416f2). Earlier releases granted the same terms for their packaged WDL25-e10 network. The complete license text is supplied in LICENSE.
 
-The official-stockfish T80 source database and NGN's altered-database inputs remain subject to the Open Database License 1.0. Their attribution, complete alteration method and exact filter/map inputs accompany the network release. This grant does not replace those database terms.
+Existing copyright notices and third-party licenses remain applicable to their respective components and historical copies. See NOTICE, docs/THIRD_PARTY.md and LICENSES.
+
+The official-stockfish/master-binpacks T80 source database and NGN's altered-database inputs remain subject to the Open Database License 1.0. Their attribution, complete alteration method and exact filter/map inputs accompany the network release (LICENSES/TRAINING-DATA.txt). This grant does not replace those database terms.

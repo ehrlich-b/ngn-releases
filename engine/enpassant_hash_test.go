@@ -3,8 +3,7 @@ package engine
 import "testing"
 
 // TestEnPassantHashCapturabilityGate guards both EP contracts. The raw target is
-// retained only with an adjacent pawn, as required by the existing Polyglot book
-// key. The ordinary Zobrist/repetition key is stricter and includes that target
+// retained only with an adjacent pawn, for FEN and move generation. The ordinary Zobrist/repetition key is stricter and includes that target
 // only when at least one EP capture is legal. FEN and incremental paths must
 // agree under both rules.
 func TestEnPassantHashCapturabilityGate(t *testing.T) {
@@ -55,7 +54,7 @@ func TestEnPassantHashCapturabilityGate(t *testing.T) {
 
 	// Pinned: an adjacent capturer exists but the EP capture is pin-illegal
 	// (a5 king and h5 rook share the rank with the e5/d5 pawns). The raw target
-	// remains for Polyglot's separate adjacency/book-key contract. Stockfish 18's
+	// remains for FEN and move generation. Stockfish 18's
 	// real-move repetition key instead applies legal-EP normalization (its FEN
 	// loader retains the pseudo target); NGN's full and incremental ordinary keys
 	// must agree on that legal identity.

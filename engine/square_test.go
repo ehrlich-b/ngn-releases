@@ -187,35 +187,35 @@ func TestSquareRoundTrip(t *testing.T) {
 }
 
 func BenchmarkSquareOf(b *testing.B) {
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		SquareOf(FileE, Rank4)
 	})
 }
 
 func BenchmarkSquareFile(b *testing.B) {
 	square := E4
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		_ = square.File()
 	})
 }
 
 func BenchmarkSquareRank(b *testing.B) {
 	square := E4
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		_ = square.Rank()
 	})
 }
 
 func BenchmarkSquareName(b *testing.B) {
 	square := E4
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		_ = square.Name()
 	})
 }
 
 func BenchmarkSquareGetColor(b *testing.B) {
 	square := E4
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		_ = square.GetColor()
 	})
 }

@@ -1,1 +1,0 @@
-git rev-parse --abbrev-ref HEAD; git rev-parse HEAD; git diff --name-only; git status --short; git -C ../polyglot-baseline-proof8b rev-parse HEAD; git -C ../polyglot-baseline-proof8b diff --name-only; git -C ../polyglot-baseline-proof8b status --short; find ../polyglot-baseline-proof8b/engine/testdata -maxdepth 1 -type f -printf '%f\n'

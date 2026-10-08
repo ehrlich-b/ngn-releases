@@ -18,7 +18,7 @@ func TestUCIBasicCommands(t *testing.T) {
 	if !strings.Contains(response, "id name ngn") {
 		t.Error("UCI response should contain engine name")
 	}
-	if !strings.Contains(response, "id author ngn team") {
+	if !strings.Contains(response, "id author Bryan Ehrlich") {
 		t.Error("UCI response should contain author")
 	}
 	if !strings.Contains(response, "uciok") {

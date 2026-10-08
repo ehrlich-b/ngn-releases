@@ -1,1 +1,0 @@
-PYTHONDONTWRITEBYTECODE=1 python3 -c "import ast,pathlib; [ast.parse(pathlib.Path(p).read_text()) for p in ['experiments/2026-10-01-rodent-pv-identity-probe/rodent_pv_probe.py','experiments/2026-10-01-rodent-pv-identity-probe/classifier_regression.py']]"

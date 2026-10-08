@@ -31,14 +31,15 @@ var (
 	SINGULAR_DEPTH          = 6   // Minimum depth for singular extensions
 	SINGULAR_MARGIN         = 48  // Margin for singular move detection
 	EXTENSION_BUDGET        = 26  // Max net extensions on a single root-to-leaf path (anti-explosion)
-	ASP_INIT                = 13  // Aspiration initial half-window (cp); Stash shape delta = ASP_INIT + |prevScore|/ASP_SCORE_DIV
+	ASP_INIT                = 13  // Aspiration initial half-window (cp); delta = ASP_INIT + |prevScore|/ASP_SCORE_DIV
 	ASP_MULT                = 154 // Aspiration widening multiplier in percent (150 => x1.5 delta growth per fail)
 )
 
 // ASP_SCORE_DIV scales the aspiration init window by the previous score's
-// magnitude (Stash's window-vs-eval shape). Not a tunable — the two window
+// magnitude. NGN chose 80 as a neutral round placeholder for later NGN tuning.
+// Not a tunable — the two window
 // knobs exposed to SPSA are ASP_INIT and ASP_MULT.
-const ASP_SCORE_DIV = 81
+const ASP_SCORE_DIV = 80
 
 // stoppedSearchScore is a throwaway value returned only while unwinding a stopped
 // search. Every caller must check info.Stopped before using the returned score.
@@ -745,7 +746,7 @@ func searchIterativeDeepeningWorkerUnsafe(pos *Position, maxDepth int, timeManag
 		// T5: Modern aspiration windows. Shallow depths (<=3) search full width — a
 		// stable previousScore isn't established yet and re-searches there are pure
 		// waste. From depth 4 up, open a small window scaled by the previous score's
-		// magnitude (Stash shape: delta = ASP_INIT + |prevScore|/ASP_SCORE_DIV) and
+		// magnitude (delta = ASP_INIT + |prevScore|/ASP_SCORE_DIV) and
 		// widen it PROGRESSIVELY on each fail below (delta grows by ASP_MULT), never
 		// jumping straight to an infinite bound and never abandoning the iteration.
 		// Widening caps naturally at +/-INFINITY (a full-width search always lands
@@ -1879,10 +1880,12 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 			continue
 		}
 
-		// Check time before evaluating each move (now cheap to call)
+		// Check time before evaluating each move (now cheap to call). A stopped node
+		// returns like every other stop site: its partial result must not reach the
+		// TT or correction history.
 		if info.TimeManager != nil && info.TimeManager.ShouldStopSearch(depth) {
 			info.Stopped = true
-			break
+			return stoppedSearchScore
 		}
 
 		// Futility pruning - skip quiet moves if position is hopeless (but never prune

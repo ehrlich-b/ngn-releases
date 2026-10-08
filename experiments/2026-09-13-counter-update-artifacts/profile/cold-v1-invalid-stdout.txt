@@ -1,2 +1,0 @@
---- FAIL: TestCounterTransitionFixedNodeSnapshot (0.00s)
-    counter_transition_profile_test.go:244: set NGN_COUNTER55_PROFILE_OUTPUT to a new explicit receipt path

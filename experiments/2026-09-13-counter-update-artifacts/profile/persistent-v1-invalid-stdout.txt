@@ -1,8 +1,0 @@
---- FAIL: BenchmarkCounterProfilePersistent/game_1
-    counter_post_output_profile_test.go:245: PV length=0
---- FAIL: BenchmarkCounterProfilePersistent/game_2
-    counter_post_output_profile_test.go:245: PV length=0
---- FAIL: BenchmarkCounterProfilePersistent/game_3
-    counter_post_output_profile_test.go:245: PV length=0
---- FAIL: BenchmarkCounterProfilePersistent
-FAIL

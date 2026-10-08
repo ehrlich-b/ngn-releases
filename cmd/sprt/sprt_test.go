@@ -26,6 +26,29 @@ func TestPentaBucketing(t *testing.T) {
 	}
 }
 
+func TestUCIOptionFlags(t *testing.T) {
+	var options optionFlags
+	for _, option := range []string{"EvalFile=/net dir/pilot.nnue", "UseNNUE=true", "Move Overhead=10", "Empty="} {
+		if err := options.Set(option); err != nil {
+			t.Fatal(err)
+		}
+	}
+	want := []string{"setoption name EvalFile value /net dir/pilot.nnue", "setoption name UseNNUE value true", "setoption name Move Overhead value 10", "setoption name Empty value "}
+	for i := range want {
+		if options[i] != want[i] {
+			t.Fatalf("option %d: got %q, want %q", i, options[i], want[i])
+		}
+	}
+	for _, bad := range []string{"UseNNUE", "=true", "Hash=64\nquit", "Hash\r=64", "Hash value 1=2"} {
+		if err := options.Set(bad); err == nil {
+			t.Fatalf("accepted invalid option %q", bad)
+		}
+	}
+	if len(options) != len(want) {
+		t.Fatal("invalid option changed the list")
+	}
+}
+
 // TestPentaReducesToTrinomialUnderIndependence is the correctness anchor: when the
 // two games of a pair are independent, the pentanomial variance is exactly
 // var_game/2 and pentaLLR must equal the trinomial sprtLLR to floating-point. The

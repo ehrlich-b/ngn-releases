@@ -1,8 +1,11 @@
 Contains information from official-stockfish/master-binpacks, made available under the Open Database License (ODbL) 1.0.
 
 Dataset: https://huggingface.co/datasets/official-stockfish/master-binpacks/tree/1e095a758c630bc58d0b6dac4da44fcd38ac89c2
+File: test80-2022-08-aug-16tb7p.v6-dd.min.binpack (Leela Chess Zero T80, August 2022), 10,809,713,086 bytes, SHA-256 0d22957b8d4f0f8e6f2913be7b744b2dab5178c3563e0f916312d0d94c28b92b
 License: https://opendatacommons.org/licenses/odbl/1-0/
 
-The NGN-owned net was randomly initialized and trained on mapped T80 search scores and game results. No borrowed trained network or optimizer was imported.
-The separately supplied ngn-0.2.0-rc.1-training-method.tar.gz contains the complete alteration recipe, exact filter keys and score map, plus source provenance and notices. The corresponding engine source contains the transformation algorithms.
-The altered database retains ODbL terms. The engine and model licenses are a separate release decision.
+NGN 0.3.0's embedded network (SHA-256 c6c127966d1cd9848b8bbe836ae74d5672874a3e74e973a488e4d92e350416f2) was randomly initialized and trained by NGN's trainer (trainer/) on positions, search scores and game results from that file. No borrowed trained network or optimizer was imported.
+
+Alteration (2026-09-24, one pass): kept quiet, not-in-check positions from train-split chains; excluded positions whose key is in conflicts.bin; dropped the VALUE_NONE score sentinel; remapped scores with a monotone 64-knot piecewise-linear map (score-map.json) fitted against Stockfish 18 evaluations of about 100,000 calibration positions; stored as 2,374,290,033 32-byte records (SHA-256 270f65bdf9f5c948160cae5330030a60f99e94383de2a290b565ae7aad7cde26). The pass was run by an earlier NGN research tool that decoded the binpack with the sfbinpack 0.6.4 crate and identified positions for the conflicts.bin exclusion by Rodent V1.2's network-input layout (Naman Thanki and Pawel Koziol). That tool is not part of NGN 0.3.0, and nothing from it is in the engine, the trainer or the network. The separately supplied ngn-0.3.0-training-method.tar.gz contains METHOD.md (the complete algorithm), conflicts.bin, score-map.json, the scatter/corpus manifests and the exact training command.
+
+The altered database retains ODbL terms. The engine and network license (GPL-3.0-only) is stated in LICENSE-GRANT.txt and does not replace them.

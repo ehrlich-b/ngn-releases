@@ -50,33 +50,30 @@ func requireRealDepthTwoSearch(t *testing.T, output string) {
 	t.Fatalf("missing depth-2 info:\n%s", output)
 }
 
-func TestUCIOwnBookOptionAdvertisedDefaultTrue(t *testing.T) {
+func TestUCIOwnBookOptionAdvertisedDefaultFalse(t *testing.T) {
 	uci := NewUCIEngine()
 	var output bytes.Buffer
 	uci.handleCommand("uci", &output)
-	if !strings.Contains(output.String(), "option name OwnBook type check default true\n") {
+	if !strings.Contains(output.String(), "option name OwnBook type check default false\n") {
 		t.Fatalf("uci response omitted OwnBook default:\n%s", output.String())
 	}
 	uci.lifecycleMu.Lock()
 	got := uci.ownBook
 	uci.lifecycleMu.Unlock()
-	if !got {
-		t.Fatal("new UCI engine did not default OwnBook to true")
+	if got {
+		t.Fatal("new UCI engine did not default OwnBook to false")
 	}
 }
 
 func TestUCIOwnBookFalseBypassesEmbeddedBookAndPersistsNewGame(t *testing.T) {
-	oldBook := globalOpeningBook
-	globalOpeningBook = nil
-	t.Cleanup(func() { globalOpeningBook = oldBook })
-
 	withBook := NewUCIEngine()
+	withBook.ConfigureStartupOwnBook(true)
 	var bookOutput bytes.Buffer
 	withBook.handleCommand("position startpos", io.Discard)
 	withBook.handleCommand("go depth 2", &bookOutput)
 	waitOwnBookSearchDone(t, withBook)
 	if !strings.Contains(bookOutput.String(), "info depth 1 score cp 50 nodes 1 time 0 nps 0 pv e2e4\n") {
-		t.Fatalf("default OwnBook=true missed embedded startpos witness:\n%s", bookOutput.String())
+		t.Fatalf("explicit OwnBook=true missed embedded startpos witness:\n%s", bookOutput.String())
 	}
 
 	withoutBook := NewUCIEngine()
@@ -97,35 +94,6 @@ func TestUCIOwnBookFalseBypassesEmbeddedBookAndPersistsNewGame(t *testing.T) {
 	if !strings.Contains(searchOutput.String(), "bestmove ") {
 		t.Fatalf("OwnBook=false search omitted bestmove:\n%s", searchOutput.String())
 	}
-}
-
-func TestUCIOwnBookFalseBypassesExternalBook(t *testing.T) {
-	start := newUCIStartingPosition()
-	externalMove := uint16(D4) | uint16(D2)<<6
-	oldBook := globalOpeningBook
-	globalOpeningBook = &PolyglotBook{entries: []PolyglotEntry{{
-		Key:    PolyglotHash(start),
-		Move:   externalMove,
-		Weight: 100,
-	}}}
-	t.Cleanup(func() { globalOpeningBook = oldBook })
-
-	withBook := NewUCIEngine()
-	var bookOutput bytes.Buffer
-	withBook.handleCommand("position startpos", io.Discard)
-	withBook.handleCommand("go depth 2", &bookOutput)
-	waitOwnBookSearchDone(t, withBook)
-	if !strings.Contains(bookOutput.String(), "info depth 1 score cp 50 nodes 1 time 0 nps 0 pv d2d4\n") {
-		t.Fatalf("OwnBook=true missed injected external-book witness:\n%s", bookOutput.String())
-	}
-
-	withoutBook := NewUCIEngine()
-	withoutBook.handleCommand("setoption name OwnBook value false", io.Discard)
-	var searchOutput bytes.Buffer
-	withoutBook.handleCommand("position startpos", io.Discard)
-	withoutBook.handleCommand("go depth 2", &searchOutput)
-	waitOwnBookSearchDone(t, withoutBook)
-	requireRealDepthTwoSearch(t, searchOutput.String())
 }
 
 func TestUCIOwnBookInvalidValuePreservesState(t *testing.T) {
@@ -152,6 +120,7 @@ func TestUCIOwnBookInvalidValuePreservesState(t *testing.T) {
 func TestUCIOwnBookReplacementJoinsPreparedSearchAndSuppressesOutput(t *testing.T) {
 	clock := &uciFakeClock{now: time.Date(2026, 9, 6, 15, 0, 0, 0, time.UTC)}
 	uci := newLifecycleTestUCI(t, clock)
+	uci.ConfigureStartupOwnBook(true)
 	entered, blockSetup, releaseSetup := newUCISetupGate(t)
 	uci.copyPosition = func(pos *Position) *Position {
 		blockSetup()
@@ -165,7 +134,7 @@ func TestUCIOwnBookReplacementJoinsPreparedSearchAndSuppressesOutput(t *testing.
 	session := uci.activeSearch
 	uci.lifecycleMu.Unlock()
 	if session == nil || !session.ownBook {
-		t.Fatal("prepared session did not snapshot default OwnBook=true")
+		t.Fatal("prepared session did not snapshot explicit OwnBook=true")
 	}
 
 	setDone := make(chan struct{})
@@ -195,6 +164,7 @@ func TestUCIOwnBookReplacementJoinsPreparedSearchAndSuppressesOutput(t *testing.
 
 func TestUCIOwnBookReplacementJoinsRunningSearchAndSuppressesOutput(t *testing.T) {
 	uci := NewUCIEngine()
+	uci.ConfigureStartupOwnBook(true)
 	t.Cleanup(func() { uci.joinSearch(true) })
 	uci.handleCommand("position fen r3k2r/p1ppqpb1/bn2pnp1/2pP4/1p2P3/2N2N2/PPQBBPPP/R3K2R w KQkq - 0 1", io.Discard)
 

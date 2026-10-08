@@ -2,8 +2,8 @@ package engine
 
 import "fmt"
 
-// EmbeddedBook provides a simple built-in opening book
-// This is used when no external book file is found
+// EmbeddedBook provides NGN-authored opening choices keyed by FEN.
+// OwnBook explicitly enables it; it has no external book or hash-table dependency.
 
 // Common opening moves with weights (higher = better)
 var embeddedBookMoves = map[string][]struct {

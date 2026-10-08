@@ -1,9 +1,0 @@
-python syntax: PASS
-gofmt -d: PASS
-candidate fixture exact: PASS
-baseline test exact: PASS
-baseline fixture exact: PASS
-candidate git diff --check: PASS
-candidate tracked tree unchanged: PASS
-baseline git diff --check: PASS
-baseline tracked tree unchanged: PASS

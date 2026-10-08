@@ -1,6 +1,0 @@
-python syntax: PASS
-gofmt -d: PASS
-git diff --check: PASS
-tracked source unchanged: PASS
-source HEAD: PASS
-scoped text whitespace: PASS

@@ -1,1 +1,0 @@
-python3 experiments/2026-10-01-ep-repetition-correctness/stockfish_probe.py /home/ehrli/nnue-owned-morning-20260930/inputs/stockfish18 --source-head 701328646490f1bc8ed214002f578a58c9b0723e > experiments/2026-10-01-ep-repetition-correctness/stockfish-probe.json 2> experiments/2026-10-01-ep-repetition-correctness/stockfish-probe.stderr

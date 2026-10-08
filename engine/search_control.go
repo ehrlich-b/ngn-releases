@@ -442,7 +442,7 @@ func (e *SearchEngine) evaluateForPlayerCached(pos *Position) int {
 	defer e.sessionMu.Unlock()
 	generation := mustAcquireHCEModelUse()
 	defer releaseHCEModelUse()
-	evaluator := e.worker.prepareHCEGeneration(pos, generation)
+	evaluator := e.mustPreparePrimaryEvaluator(pos, generation)
 	return evaluator.SearchSTM(pos)
 }
 

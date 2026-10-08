@@ -59,7 +59,25 @@ type pairAcc struct {
 	games  int
 }
 
+// optionFlags keeps UCI options in command-line order, including paths with spaces.
+type optionFlags []string
+
+func (o *optionFlags) String() string { return strings.Join(*o, "; ") }
+
+func (o *optionFlags) Set(value string) error {
+	name, setting, ok := strings.Cut(value, "=")
+	name = strings.TrimSpace(name)
+	if !ok || name == "" || strings.ContainsAny(value, "\r\n") || strings.Contains(name, " value ") {
+		return fmt.Errorf("UCI option must be NAME=VALUE on one line")
+	}
+	*o = append(*o, "setoption name "+name+" value "+setting)
+	return nil
+}
+
 func main() {
+	var newOptions, baseOptions optionFlags
+	flag.Var(&newOptions, "newoption", "candidate UCI NAME=VALUE (repeatable, ordered)")
+	flag.Var(&baseOptions, "baseoption", "baseline UCI NAME=VALUE (repeatable, ordered)")
 	newPath := flag.String("new", "./build/ngn", "candidate engine binary")
 	basePath := flag.String("base", "./build/ngn_base", "baseline engine binary")
 	depth := flag.Int("depth", 9, "fixed search depth per move (0 = use -movetime)")
@@ -165,6 +183,7 @@ func main() {
 	fmt.Printf("NGN self-play SPRT\n")
 	fmt.Printf("==================\n")
 	fmt.Printf("new=%s  base=%s\n", *newPath, *basePath)
+	fmt.Printf("new options: %v\nbase options: %v\n", []string(newOptions), []string(baseOptions))
 	fmt.Printf("mode: %s | openings: %d (x2 colors) | concurrency: %d%s\n",
 		mode, len(openings), *concurrency, uci.PowerNote(*lowPower))
 	fmt.Printf("H0: elo<=%.1f   H1: elo>=%.1f   (alpha=%.2f beta=%.2f -> LLR bounds [%.2f, %.2f])\n\n",
@@ -181,6 +200,7 @@ func main() {
 
 	runSPRT(runConfig{
 		newPath: *newPath, basePath: *basePath,
+		newOptions: newOptions, baseOptions: baseOptions,
 		newDepth: newDepth, baseDepth: baseD, movetime: *movetime, nodes: *nodes, maxMoves: *maxMoves,
 		tcTimeMs: tcTimeMs, tcIncMs: tcIncMs, gameTimeout: *gameTimeout,
 		elo0: *elo0, elo1: *elo1, lower: lower, upper: upper,
@@ -191,6 +211,7 @@ func main() {
 
 type runConfig struct {
 	newPath, basePath               string
+	newOptions, baseOptions         []string
 	newDepth, baseDepth, movetime   int
 	nodes                           int
 	tcTimeMs, tcIncMs               int
@@ -249,8 +270,8 @@ func runSPRT(cfg runConfig, openings [][]string) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			newEng := uci.Start(cfg.newPath, "new", cfg.lowPower)
-			baseEng := uci.Start(cfg.basePath, "base", cfg.lowPower)
+			newEng := uci.StartWithOptions(cfg.newPath, "new", cfg.lowPower, cfg.newOptions)
+			baseEng := uci.StartWithOptions(cfg.basePath, "base", cfg.lowPower, cfg.baseOptions)
 			if newEng == nil || baseEng == nil {
 				log.Fatalf("engine failed UCI handshake after retries (new ok=%v, base ok=%v); aborting run instead of forfeiting every game as no-move", newEng != nil, baseEng != nil)
 			}
@@ -267,8 +288,8 @@ func runSPRT(cfg runConfig, openings [][]string) {
 				if !ok {
 					// The watchdog killed both engines to break a wedge; bring up fresh
 					// ones and void this game — the run survives on the remaining games.
-					newEng = uci.Start(cfg.newPath, "new", cfg.lowPower)
-					baseEng = uci.Start(cfg.basePath, "base", cfg.lowPower)
+					newEng = uci.StartWithOptions(cfg.newPath, "new", cfg.lowPower, cfg.newOptions)
+					baseEng = uci.StartWithOptions(cfg.basePath, "base", cfg.lowPower, cfg.baseOptions)
 					if newEng == nil || baseEng == nil {
 						log.Printf("WATCHDOG: engine restart failed after a wedge; this worker exits, others continue")
 						return

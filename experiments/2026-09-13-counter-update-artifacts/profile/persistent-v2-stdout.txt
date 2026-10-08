@@ -1,8 +1,0 @@
-goos: linux
-goarch: amd64
-pkg: github.com/ehrlich-b/ngn/engine
-cpu: AMD Ryzen 7 9800X3D 8-Core Processor           
-BenchmarkCounterProfilePersistent/game_1         	      10	 579427816 ns/op	    800000 minimum_nodes/op	         2.000 searches/op	 2397913 B/op	      26 allocs/op
-BenchmarkCounterProfilePersistent/game_2         	      10	 606569636 ns/op	    800000 minimum_nodes/op	         2.000 searches/op	 2399142 B/op	      27 allocs/op
-BenchmarkCounterProfilePersistent/game_3         	      10	 643805764 ns/op	    800000 minimum_nodes/op	         2.000 searches/op	 2402836 B/op	      27 allocs/op
-PASS

@@ -1,8 +1,0 @@
-{
-  "error": "VerificationError: frozen input copy absent: resource_amendment_receipt",
-  "run_root": "/home/ehrli/repos/ngn-qpromo-gate-20260912/run-002",
-  "schema": "ngn-qpromo-run002-independent-terminal-review-v2",
-  "state": "FAILED",
-  "verified_utc": "2026-09-12T23:07:25.721719+00:00",
-  "verifier_sha256": "e6def0533059acaded63f26174ce56a5793bba2a1014d2d4770d33cc9f3fe01f"
-}

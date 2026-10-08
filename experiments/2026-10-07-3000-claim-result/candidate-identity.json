@@ -1,0 +1,113 @@
+{
+  "Engine": {
+    "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/ngn",
+    "SHA256": "8fb36cfb68b78e4df65a1fc6b9f05232cb234418db1ab609b3a4468e12e22f4e"
+  },
+  "Net": {
+    "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/candidate.nnue",
+    "SHA256": "c6c127966d1cd9848b8bbe836ae74d5672874a3e74e973a488e4d92e350416f2"
+  },
+  "SourceRoot": "/home/ehrli/wt/claim-run-20261007",
+  "SourceCommit": "9fe2cb6303480b4e1f4a2157048f06f7f8a9fb75",
+  "GoVersion": "go1.25.5",
+  "BuildArgv": [
+    "/usr/local/go/bin/go",
+    "build",
+    "-buildvcs=true",
+    "-p",
+    "2",
+    "-o",
+    "/home/ehrli/ngn-data/claim-run-20261007/frozen/ngn",
+    "."
+  ],
+  "Provenance": {
+    "artifact:archive-split.json": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/archive-split.json",
+      "SHA256": "80e55525d0f4f2c77e080510d80dbee5ad39800503ad1d858f1ebb3142542ee9"
+    },
+    "artifact:corpus-digest.json": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/corpus-digest.json",
+      "SHA256": "652394d3a95d27b099e82362304df654dd00a4b50ac7f30f22b04c7e3ec1eff1"
+    },
+    "artifact:gate-h512.json": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/gate-h512.json",
+      "SHA256": "bdc1082690ad6b4d40d2ff395dbe3c6ed168da50303afbe39ea274f61dd22f0c"
+    },
+    "artifact:gate-h512.log": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/gate-h512.log",
+      "SHA256": "5799f38e2564e34f3be741d2e5133afd328b07befce20a9f0d861d2abc6245d9"
+    },
+    "artifact:h512/config.json": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/h512-config.json",
+      "SHA256": "e395179a912d94ed6d0bd539c48e00f32ecd53827b89ad59daa2312132fdaad8"
+    },
+    "artifact:h512/history.json": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/h512-history.json",
+      "SHA256": "923c1a209a6a8a3e5f5ed29cdd88d94d5330e1c61561ba52ad0e05af2289a475"
+    },
+    "artifact:h512/parity.json": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/h512-parity.json",
+      "SHA256": "9c5fa6fcef413cd56d1ace762e056c350159496f62790641e265c8aa347009f6"
+    },
+    "artifact:h512/parity.log": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/h512-parity.log",
+      "SHA256": "92ba27bf98ad08503efbb182f48c973f1d2cce87acc23e897c0bcfc51816c0cc"
+    },
+    "artifact:independent-h512-audit.json": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/independent-h512-audit.json",
+      "SHA256": "b00a8434ceae8e0a74d08d1abfa016f9232b1ccdddcede83289a5b537309b3be"
+    },
+    "artifact:metadata-h512.json": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/metadata-h512.json",
+      "SHA256": "91a4241634615c3151624b644c5fe89c2f6f5282ea9155f5bc806d07549fdb15"
+    },
+    "artifact:parity-positions.json": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/parity-positions.json",
+      "SHA256": "9dfe794c2c23bc03f88fcb5d655f61ddb6fb1f374d0dbe37650cacf428bda1e1"
+    },
+    "artifact:parity-records.ngnp": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/parity-records.ngnp",
+      "SHA256": "b3ed3394b7123480fb98ffbad555f6eb9d0fbb110bf107d49568630d9fff7839"
+    },
+    "artifact:plan-h512.json": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/plan-h512.json",
+      "SHA256": "6f9af7f57092294953e85ff98ec1d696f6203bbd6a90a7f0975f8aea9b8f896c"
+    },
+    "artifact:receipt-final.json": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/receipt-final.json",
+      "SHA256": "ada7c54522b16ba4fcb3e1fbc7cc6987e0a1f0785569d85f15a1ed49e0ef1f5b"
+    },
+    "artifact:training-h512.json": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/training-h512.json",
+      "SHA256": "6f0cfd0a78b1eefe7ca4911b63e922a96cae4b7eebc5d68919f4ab3a2b7d53d9"
+    },
+    "candidate-declaration": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/candidate-declaration.json",
+      "SHA256": "a9cc834abfa4b9dbc1b40d2bccee1503e07448aafaaebafe1547ff61f14fead7"
+    },
+    "data": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/corpus-digest.json",
+      "SHA256": "652394d3a95d27b099e82362304df654dd00a4b50ac7f30f22b04c7e3ec1eff1"
+    },
+    "export": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/independent-h512-audit.json",
+      "SHA256": "b00a8434ceae8e0a74d08d1abfa016f9232b1ccdddcede83289a5b537309b3be"
+    },
+    "frozen-build-parity": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/frozen-build-parity.log",
+      "SHA256": "ab7e4e5d98f64ce5ebceaaaca22e3a8972c7c3ac7798c2adb8b48be68be6e132"
+    },
+    "manifest": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/manifest.json",
+      "SHA256": "d7baabf8ebae473cced15694f25ae31fcc56f6dc1942e0a00b3c9da5a6a13ca7"
+    },
+    "parity": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/h512-parity.json",
+      "SHA256": "9c5fa6fcef413cd56d1ace762e056c350159496f62790641e265c8aa347009f6"
+    },
+    "training": {
+      "Path": "/home/ehrli/ngn-data/claim-run-20261007/frozen/provenance/training-h512.json",
+      "SHA256": "6f0cfd0a78b1eefe7ca4911b63e922a96cae4b7eebc5d68919f4ab3a2b7d53d9"
+    }
+  }
+}

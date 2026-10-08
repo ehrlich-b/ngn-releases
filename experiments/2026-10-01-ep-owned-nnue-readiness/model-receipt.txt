@@ -1,8 +1,0 @@
-model_path=/home/ehrli/nnue-owned-k4-20260920/night-20260927/runs/wdl25-e10.nnue
-model_bytes=4744976
-model_mode=-rw-r--r--
-model_mtime=2026-09-27 23:33:33.804001718 -0400
-model_sha256=1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29
-expected_sha256=1ec8fc1737ddfdd5f8b6ff0b4e26778085fb563f7c5e82c1fc5d3ea454b6ec29
-backend=ngn-k4-768-v1
-scale=60

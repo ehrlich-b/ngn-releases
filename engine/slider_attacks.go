@@ -1,120 +1,81 @@
 package engine
 
-import "math/bits"
+import (
+	"github.com/ehrlich-b/ngn/internal/sliderray"
+	"math/bits"
+)
 
-// trailingZeros returns the index of the least-significant set bit.  An
-// empty bitboard has the conventional one-past-the-end result, 64.
-func trailingZeros(bb uint64) int {
-	return bits.TrailingZeros64(bb)
+// A square's interior blockers select one row in an NGN-generated attack table.
+// uint64 multiplication deliberately wraps; its high bits form the table index.
+type sliderLookup struct {
+	mask, multiplier uint64
+	offset           uint32
+	shift            uint8
 }
 
-// GetRookAttacks returns the squares visible from sq along the four
-// orthogonal rays.  A blocker belongs to the attack set, but squares beyond
-// it do not.  The origin is never inspected as an occupant.
-func GetRookAttacks(sq int, occupied uint64) uint64 {
-	return getRookAttacksBB(sq, occupied)
+var rookSliders [64]sliderLookup
+var bishopSliders [64]sliderLookup
+var rookAttackTable [102400]uint64
+var bishopAttackTable [5248]uint64
+
+func init() {
+	buildSliderTables(false, rookMagicMultipliers, &rookSliders, rookAttackTable[:])
+	buildSliderTables(true, bishopMagicMultipliers, &bishopSliders, bishopAttackTable[:])
 }
 
-// GetBishopAttacks returns the squares visible from sq along the four
-// diagonal rays.
-func GetBishopAttacks(sq int, occupied uint64) uint64 {
-	return getBishopAttacksBB(sq, occupied)
+// Construction verifies every relevant occupancy against coordinate rays.
+// A destructive collision in a committed multiplier fails at startup.
+func buildSliderTables(diagonal bool, multipliers [64]uint64, lookups *[64]sliderLookup, table []uint64) {
+	var offset uint32
+	for square, multiplier := range multipliers {
+		mask := sliderray.Mask(square, diagonal)
+		width := bits.OnesCount64(mask)
+		entry := sliderLookup{mask: mask, multiplier: multiplier, offset: offset, shift: uint8(64 - width)}
+		lookups[square] = entry
+		blockers := uint64(0)
+		for {
+			attacks := sliderray.Rook(square, blockers)
+			if diagonal {
+				attacks = sliderray.Bishop(square, blockers)
+			}
+			index := offset + uint32((blockers*multiplier)>>entry.shift)
+			if table[index] != 0 && table[index] != attacks {
+				panic("NGN slider multiplier has a destructive collision")
+			}
+			table[index] = attacks
+			blockers = (blockers - mask) & mask
+			if blockers == 0 {
+				break
+			}
+		}
+		offset += uint32(1) << width
+	}
+	if int(offset) != len(table) {
+		panic("NGN slider table size mismatch")
+	}
 }
 
-// GetQueenAttacks is the union of the rook and bishop rays.
+func trailingZeros(bb uint64) int                     { return bits.TrailingZeros64(bb) }
+func GetRookAttacks(sq int, occupied uint64) uint64   { return getRookAttacksBB(sq, occupied) }
+func GetBishopAttacks(sq int, occupied uint64) uint64 { return getBishopAttacksBB(sq, occupied) }
 func GetQueenAttacks(sq int, occupied uint64) uint64 {
 	return getRookAttacksBB(sq, occupied) | getBishopAttacksBB(sq, occupied)
 }
 
-// getRookAttacksBB is the bitboard-named form kept for callers that use the
-// lower-level attack helper.
 func getRookAttacksBB(sq int, occupied uint64) uint64 {
 	if sq < 0 || sq >= 64 {
 		return 0
 	}
-
-	file := sq & 7
-	rank := sq >> 3
-	var attacks uint64
-
-	for nextRank := rank + 1; nextRank < 8; nextRank++ {
-		next := nextRank*8 + file
-		mask := uint64(1) << uint(next)
-		attacks |= mask
-		if occupied&mask != 0 {
-			break
-		}
-	}
-	for nextRank := rank - 1; nextRank >= 0; nextRank-- {
-		next := nextRank*8 + file
-		mask := uint64(1) << uint(next)
-		attacks |= mask
-		if occupied&mask != 0 {
-			break
-		}
-	}
-	for nextFile := file + 1; nextFile < 8; nextFile++ {
-		next := rank*8 + nextFile
-		mask := uint64(1) << uint(next)
-		attacks |= mask
-		if occupied&mask != 0 {
-			break
-		}
-	}
-	for nextFile := file - 1; nextFile >= 0; nextFile-- {
-		next := rank*8 + nextFile
-		mask := uint64(1) << uint(next)
-		attacks |= mask
-		if occupied&mask != 0 {
-			break
-		}
-	}
-
-	return attacks
+	entry := &rookSliders[sq]
+	index := uint32(((occupied & entry.mask) * entry.multiplier) >> entry.shift)
+	return rookAttackTable[entry.offset+index]
 }
 
-// getBishopAttacksBB is the direct coordinate walk for diagonal rays.
 func getBishopAttacksBB(sq int, occupied uint64) uint64 {
 	if sq < 0 || sq >= 64 {
 		return 0
 	}
-
-	file := sq & 7
-	rank := sq >> 3
-	var attacks uint64
-
-	for nextFile, nextRank := file+1, rank+1; nextFile < 8 && nextRank < 8; nextFile, nextRank = nextFile+1, nextRank+1 {
-		next := nextRank*8 + nextFile
-		mask := uint64(1) << uint(next)
-		attacks |= mask
-		if occupied&mask != 0 {
-			break
-		}
-	}
-	for nextFile, nextRank := file-1, rank+1; nextFile >= 0 && nextRank < 8; nextFile, nextRank = nextFile-1, nextRank+1 {
-		next := nextRank*8 + nextFile
-		mask := uint64(1) << uint(next)
-		attacks |= mask
-		if occupied&mask != 0 {
-			break
-		}
-	}
-	for nextFile, nextRank := file+1, rank-1; nextFile < 8 && nextRank >= 0; nextFile, nextRank = nextFile+1, nextRank-1 {
-		next := nextRank*8 + nextFile
-		mask := uint64(1) << uint(next)
-		attacks |= mask
-		if occupied&mask != 0 {
-			break
-		}
-	}
-	for nextFile, nextRank := file-1, rank-1; nextFile >= 0 && nextRank >= 0; nextFile, nextRank = nextFile-1, nextRank-1 {
-		next := nextRank*8 + nextFile
-		mask := uint64(1) << uint(next)
-		attacks |= mask
-		if occupied&mask != 0 {
-			break
-		}
-	}
-
-	return attacks
+	entry := &bishopSliders[sq]
+	index := uint32(((occupied & entry.mask) * entry.multiplier) >> entry.shift)
+	return bishopAttackTable[entry.offset+index]
 }

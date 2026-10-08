@@ -1,3 +1,0 @@
-=== RUN   TestCounterCorrectionHistoryProfile
---- PASS: TestCounterCorrectionHistoryProfile (4.16s)
-PASS

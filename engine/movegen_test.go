@@ -366,7 +366,7 @@ func BenchmarkMoveGeneration(b *testing.B) {
 		EnPassant: NoSquare,
 	}
 
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		GenerateMoves(pos)
 	})
 }
@@ -610,7 +610,7 @@ func BenchmarkLegalMoveGeneration(b *testing.B) {
 		EnPassant: NoSquare,
 	}
 
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		GenerateLegalMoves(pos)
 	})
 }
@@ -622,7 +622,7 @@ func BenchmarkPerftDepth3(b *testing.B) {
 		EnPassant: NoSquare,
 	}
 
-	BenchmarkFunction(b, func() {
+	benchmarkFunction(b, func() {
 		RunPerftTest(pos, 3)
 	})
 }

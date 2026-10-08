@@ -1,1 +1,0 @@
-{"cpu_seconds": 0.33999999999999997, "forced_promotion_bestmove": "g2g1q", "promotion_node_bestmove": "f3f2", "runtime_witness": false, "search_wall_seconds": 0.8026259790131007, "searches": 9, "state": "NOT_REPRODUCED_IN_BOUNDED_PLAN"}

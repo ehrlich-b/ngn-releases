@@ -73,11 +73,51 @@ func (e *SearchEngine) SelectHCEEvaluator() error {
 	return nil
 }
 
+// SelectNGNN1Evaluator selects validated NGNN1/2/3 weights while no search is active.
+// The network's pointer is part of model identity, so reloading invalidates TT
+// and every worker's evaluation-dependent history even if the path is unchanged.
+func (e *SearchEngine) SelectNGNN1Evaluator(network *NGNN1Network) error {
+	if !network.valid() {
+		return fmt.Errorf("NGNN1: invalid network")
+	}
+	e.sessionMu.Lock()
+	defer e.sessionMu.Unlock()
+	e.evaluatorModel = evaluatorModel{identity: evaluatorModelIdentity{
+		backend:         evaluatorBackendNGNN1,
+		adapterRevision: evaluatorAdapterRevision,
+		network:         network,
+	}}
+	return nil
+}
+
 const EvaluatorBackendHCEName = "hce"
+const EvaluatorBackendNGNN1Name = "ngnn1"
+const EvaluatorBackendNGNN2Name = "ngnn2"
+const EvaluatorBackendNGNN3Name = "ngnn3"
+
+func (n *NGNN1Network) backendName() string {
+	if n.version == 3 {
+		return EvaluatorBackendNGNN3Name
+	}
+	if n.version == 2 {
+		return EvaluatorBackendNGNN2Name
+	}
+	return EvaluatorBackendNGNN1Name
+}
+
+func (m evaluatorModelIdentity) backendName() string {
+	if m.backend == evaluatorBackendNGNN1 && m.network != nil {
+		return m.network.backendName()
+	}
+	return evaluatorBackendName(m.backend)
+}
 
 func evaluatorBackendName(backend evaluatorBackend) string {
 	if backend == evaluatorBackendHCE {
 		return EvaluatorBackendHCEName
+	}
+	if backend == evaluatorBackendNGNN1 {
+		return EvaluatorBackendNGNN1Name
 	}
 	return fmt.Sprintf("unknown-%d", backend)
 }
@@ -87,7 +127,7 @@ func (e *SearchEngine) SelectedEvaluatorBackend() string {
 	defer e.sessionMu.Unlock()
 	generation := mustAcquireHCEModelUse()
 	defer releaseHCEModelUse()
-	return evaluatorBackendName(e.selectedEvaluatorModel(generation).identity.backend)
+	return e.selectedEvaluatorModel(generation).identity.backendName()
 }
 
 func (e *SearchEngine) EvaluateSelected(pos *Position) (score int, backend string, err error) {
@@ -106,5 +146,5 @@ func (e *SearchEngine) EvaluateSelected(pos *Position) (score int, backend strin
 	if err != nil {
 		return 0, "", err
 	}
-	return worker.SearchSTM(pos), evaluatorBackendName(worker.Identity().backend), nil
+	return worker.SearchSTM(pos), worker.Identity().backendName(), nil
 }

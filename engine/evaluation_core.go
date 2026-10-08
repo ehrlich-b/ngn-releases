@@ -1,5 +1,39 @@
 package engine
 
+import "math/bits"
+
+// Fixed geometry replaces repeated rank/file walks. Colour zero moves toward
+// lower ranks, colour one toward higher ranks. These contain no tuned values.
+var pawnForwardArea, kingShieldArea = evaluationPawnGeometry()
+
+func evaluationPawnGeometry() (forward, shield [2][64]uint64) {
+	for color := 0; color < 2; color++ {
+		step := -1
+		if color == int(White) {
+			step = 1
+		}
+		for square := 0; square < 64; square++ {
+			file, rank := square&7, square>>3
+			for distance := 1; distance < 8; distance++ {
+				r := rank + step*distance
+				if r < 0 || r >= 8 {
+					break
+				}
+				for f := file - 1; f <= file+1; f++ {
+					if f >= 0 && f < 8 {
+						mask := uint64(1) << uint(r*8+f)
+						forward[color][square] |= mask
+						if distance <= 2 {
+							shield[color][square] |= mask
+						}
+					}
+				}
+			}
+		}
+	}
+	return
+}
+
 // The evaluator deliberately keeps its numbers small and hand-designed.  A
 // table entry is already White-relative: a white entry is positive and the
 // corresponding black entry on the vertically reflected square is its
@@ -194,7 +228,10 @@ func evaluateRaw(board *Bitboard) int {
 }
 
 func addPawnTerms(mg, eg *int, pawnBits [2]uint64, pawnFiles [2][8]int) {
-	for square := 0; square < 64; square++ {
+	remaining := pawnBits[0] | pawnBits[1]
+	for remaining != 0 {
+		square := bits.TrailingZeros64(remaining)
+		remaining &= remaining - 1
 		piece := NoPiece
 		if pawnBits[0]&(uint64(1)<<uint(square)) != 0 {
 			piece = BlackPawn
@@ -255,22 +292,7 @@ func addPawnTerms(mg, eg *int, pawnBits [2]uint64, pawnFiles [2][8]int) {
 
 		// Passed-pawn detection considers the same and adjacent files only
 		// in the pawn's forward half of the board.
-		passed := true
-		firstRank, lastRank, step := rank+1, 8, 1
-		if piece.Color() == Black {
-			firstRank, lastRank, step = rank-1, -1, -1
-		}
-		for scanRank := firstRank; scanRank != lastRank && passed; scanRank += step {
-			for scanFile := file - 1; scanFile <= file+1; scanFile++ {
-				if scanFile < 0 || scanFile >= 8 {
-					continue
-				}
-				if pawnBits[1-colorIndex]&(uint64(1)<<uint(scanRank*8+scanFile)) != 0 {
-					passed = false
-					break
-				}
-			}
-		}
+		passed := pawnBits[1-colorIndex]&pawnForwardArea[colorIndex][square] == 0
 		if passed {
 			*mg += sign * (4 + 2*forward)
 			*eg += sign * (8 + 3*forward)
@@ -284,30 +306,11 @@ func addKingTerms(mg, eg *int, pawnBits [2]uint64, kingBits [2]uint64) {
 		if colorIndex == int(White) {
 			sign = 1
 		}
-		for kingSquare := 0; kingSquare < 64; kingSquare++ {
-			if kingBits[colorIndex]&(uint64(1)<<uint(kingSquare)) == 0 {
-				continue
-			}
-			kingFile := kingSquare & 7
-			kingRank := kingSquare >> 3
-			shield := 0
-			for pawnSquare := 0; pawnSquare < 64; pawnSquare++ {
-				if pawnBits[colorIndex]&(uint64(1)<<uint(pawnSquare)) == 0 {
-					continue
-				}
-				pawnFile := pawnSquare & 7
-				if absInt(pawnFile-kingFile) > 1 {
-					continue
-				}
-				pawnRank := pawnSquare >> 3
-				relativeRank := pawnRank - kingRank
-				if colorIndex == int(Black) {
-					relativeRank = kingRank - pawnRank
-				}
-				if relativeRank == 1 || relativeRank == 2 {
-					shield++
-				}
-			}
+		remaining := kingBits[colorIndex]
+		for remaining != 0 {
+			kingSquare := bits.TrailingZeros64(remaining)
+			remaining &= remaining - 1
+			shield := bits.OnesCount64(pawnBits[colorIndex] & kingShieldArea[colorIndex][kingSquare])
 			*mg += sign * 7 * shield
 			*eg += sign * 2 * shield
 		}
