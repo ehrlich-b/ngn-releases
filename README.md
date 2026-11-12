@@ -8,15 +8,19 @@ with an NGN-trained network embedded in the executable; no sidecar is needed.
 **Official rating: CCRL 40/15.** NGN 0.3.0 (1 CPU) is rated **3411 ±37** from
 133 games on the list computed November 7, 2026
 ([engine page](https://computerchess.org.uk/ccrl/4040/cgi/engine_details.cgi?print=Details&each_game=0&eng=NGN%200.3.0%2064-bit)).
-NGN is not yet on the CCRL Blitz list.
+NGN is not yet on the CCRL Blitz list. 0.4.0 has been submitted for testing.
 
-**Our estimate for the development version, early November 2026: about 3580
-CCRL Blitz (8 threads).** This is our own measurement, not an official rating.
-A 320-game gauntlet at 10+0.1 with 8 threads against Koivisto 6.0, akimbo 1.0.0,
-Black Marlin 9.0 and Berserk 12, using their CCRL Blitz 8CPU ratings as fixed
-anchors, measured **3582 [3542, 3623]**. A longer 120+1 run against three of
-those anchors stopped early at 368 games, at 3629 [3593, 3665]. This version
-is not released yet.
+**0.4.0 against earlier NGN (our own testing, 10+0.1, one thread):** +222
+[+196, +248] Elo against 0.3.0 over 1,000 games, and +104 [+68, +140] against
+the October 19 development build over 385 games. Self-play gains usually shrink
+on CCRL; until 0.4.0 is rated, our guess for it on 40/15 is roughly 3450-3550.
+
+**Earlier Blitz estimate, October 19 development build: about 3580 CCRL Blitz
+(8 threads).** This is our own measurement, not an official rating. A 320-game
+gauntlet at 10+0.1 with 8 threads against Koivisto 6.0, akimbo 1.0.0, Black
+Marlin 9.0 and Berserk 12, using their CCRL Blitz 8CPU ratings as fixed anchors,
+measured **3582 [3542, 3623]**. A longer 120+1 run against three of those
+anchors stopped early at 368 games, at 3629 [3593, 3665].
 
 For scale: CCRL 40/15 ratings run lower than Blitz ratings (the top of each
 list, Stockfish 19, is 3650 on 40/15 and 3803 on Blitz). The same kind of local
@@ -139,5 +143,7 @@ GOOS=windows GOARCH=amd64 GOAMD64=v3 go build -trimpath -ldflags "-X main.releas
 For byte-identical builds from checkouts with different publication histories,
 set `GOFLAGS=-buildvcs=false`; source archives contain no VCS metadata.
 Use the same Go version, CGO setting and bundled `default.pgo` for comparisons.
+The 0.4.0 release binaries were built with Go 1.27.3 and `CGO_ENABLED=0`; with
+those settings and `-buildvcs=false`, this source rebuilds them byte for byte.
 
 GPL-3.0-only; see [LICENSE](LICENSE) and [LICENSE-GRANT.txt](LICENSE-GRANT.txt).
