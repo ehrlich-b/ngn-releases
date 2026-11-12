@@ -9,6 +9,7 @@ import numpy as np
 
 from trainer.ngnp import Position, decode_record, feature_indices, parse_fen
 from trainer.king_buckets import feature_indices as king_features
+from trainer.threats import THREAT_FEATURES, reference_indices
 
 
 def trunc_div(numerator: int, denominator: int) -> int:
@@ -30,7 +31,7 @@ class Network:
         elif (magic, version) == (b"NGN2", 2):
             offset = 28
             buckets, qa, qb, scale = struct.unpack_from("<4I", data, 12)
-        elif (magic, version) == (b"NGN3", 3):
+        elif (magic, version) in ((b"NGN3", 3), (b"NGN5", 5)):
             if len(data) < 96:
                 raise ValueError("Truncated NGNN3 header")
             offset = 96
@@ -46,9 +47,20 @@ class Network:
             raise ValueError("Invalid NGNN1 hidden size")
         if (qa, qb, scale) != (255, 64, 400):
             raise ValueError("Invalid NGNN1 quantization constants")
+        self.threat_weights = {}
+        threat_bytes = 0
+        if version == 5:
+            if len(data) < 112:
+                raise ValueError("Truncated NGNN5 header")
+            feature_count, rows, width, reserved = struct.unpack_from("<4I", data, 96)
+            if (feature_count != THREAT_FEATURES or width != 1 or reserved != 0
+                    or rows > king_buckets * THREAT_FEATURES):
+                raise ValueError("Invalid NGNN5 layout")
+            offset = 112
+            threat_bytes = rows * (4 + hidden)
         features = king_buckets * 768
         count = (features + 1) * hidden + buckets * 2 * hidden
-        expected = offset + count * 2 + buckets * 4 + 4
+        expected = offset + count * 2 + buckets * 4 + 4 + threat_bytes
         if len(data) != expected:
             raise ValueError("Wrong NGNN1 payload length")
         stored_crc = struct.unpack_from("<I", data, len(data) - 4)[0]
@@ -58,6 +70,19 @@ class Network:
         self.version, self.buckets = version, buckets
         self.king_buckets = king_buckets
         # Widen before any arithmetic; valid int16 endpoints cannot overflow.
+        if version == 5:
+            start = offset + features * hidden * 2
+            previous = -1
+            for _ in range(rows):
+                row = struct.unpack_from("<I", data, start)[0]
+                values = np.frombuffer(data, dtype="i1", count=hidden, offset=start + 4).astype(np.int64)
+                if row <= previous or row >= king_buckets * THREAT_FEATURES or not values.any():
+                    raise ValueError("Invalid NGNN5 sparse row")
+                self.threat_weights[row] = values
+                previous = row
+                start += 4 + hidden
+            # Remove only the interleaved sparse payload for the ordinary reader.
+            data = data[:offset + features * hidden * 2] + data[start:]
         weights = np.frombuffer(data, dtype="<i2", count=count, offset=offset).astype(np.int64)
         self.w1 = weights[:features * hidden].reshape(features, hidden)
         self.b1 = weights[features * hidden:(features + 1) * hidden]
@@ -74,6 +99,11 @@ class Network:
         indices = [feature_indices(position, p) if self.king_map is None else
                    king_features(position, p, self.king_map) for p in (0, 1)]
         acc = [self.b1 + self.w1[index].sum(axis=0, dtype=np.int64) for index in indices]
+        if self.version == 5:
+            for p in (0, 1):
+                for row in reference_indices(position, p, self.king_map):
+                    if row in self.threat_weights:
+                        acc[p] += self.threat_weights[row]
         us = np.clip(acc[position.stm], 0, self.qa) ** 2
         them = np.clip(acc[1 - position.stm], 0, self.qa) ** 2
         bucket = self.bucket(position)
@@ -83,7 +113,7 @@ class Network:
         value = trunc_div(total, self.qa) + bias
         cp = trunc_div(value * self.scale, self.qa * self.qb)
         # Preserve the legacy reference's unbounded diagnostic scores.
-        return max(-24999, min(24999, cp)) if self.version == 3 else cp
+        return max(-24999, min(24999, cp)) if self.version in (3, 5) else cp
 
     def evaluate_fen(self, fen: str) -> int:
         return self.evaluate(parse_fen(fen))

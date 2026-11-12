@@ -129,6 +129,7 @@ const defaultUCIMoveOverheadMilliseconds = 100
 
 func newUCITimeManager() *TimeManager {
 	tm := NewTimeManager()
+	tm.scoreTime.enabled = acceptedOptionDefaults["W2ScoreTime"] == 1
 	if err := tm.SetMoveOverhead(defaultUCIMoveOverheadMilliseconds); err != nil {
 		panic(err)
 	}
@@ -249,8 +250,8 @@ func (uci *UCIEngine) nowTime() time.Time {
 // Helper function to create starting position
 func newUCIStartingPosition() *Position {
 	pos := &Position{
-		Board:         StartingBoard(),
-		Tag:           WhiteCanCastleKingSide | WhiteCanCastleQueenSide | BlackCanCastleKingSide | BlackCanCastleQueenSide | WhiteToMove,
+		Board: StartingBoard(),
+		Tag:   WhiteCanCastleKingSide | WhiteCanCastleQueenSide | BlackCanCastleKingSide | BlackCanCastleQueenSide, Side: White,
 		EnPassant:     NoSquare,
 		HalfMoveClock: 0,
 		Positions:     make(map[uint64]int),
@@ -387,6 +388,7 @@ func (uci *UCIEngine) handleUCI(output io.Writer) {
 	uci.sendUCIMessage(output, "option name Hash type spin default 128 min 1 max 1024")
 	uci.sendUCIMessage(output, "option name Threads type spin default 1 min 1 max 64")
 	uci.sendUCIMessage(output, "option name Move Overhead type spin default 100 min 0 max 5000")
+	uci.sendUCIMessage(output, fmt.Sprintf("option name W2ScoreTime type spin default %d min 0 max 1", acceptedOptionDefaults["W2ScoreTime"]))
 	uci.sendUCIMessage(output, fmt.Sprintf("option name OwnBook type check default %t", ownBookDefault))
 	uci.sendUCIMessage(output, fmt.Sprintf("option name EvalFile type string default %s", evalFileDefault))
 	uci.sendUCIMessage(output, fmt.Sprintf("option name UseNNUE type check default %t", useNNUEDefault))
@@ -441,6 +443,15 @@ func (uci *UCIEngine) handleSetOption(args []string, output io.Writer) {
 
 	// Handle specific options
 	switch strings.ToLower(optionName) {
+	case "w2scoretime":
+		value, err := strconv.Atoi(optionValue)
+		if err != nil || value < 0 || value > 1 {
+			break
+		}
+		uci.joinSearch(true)
+		uci.lifecycleMu.Lock()
+		uci.timeManager.scoreTime.enabled = value == 1
+		uci.lifecycleMu.Unlock()
 	case "move overhead":
 		milliseconds, err := strconv.Atoi(optionValue)
 		if err != nil || milliseconds < minMoveOverheadMilliseconds || milliseconds > maxMoveOverheadMilliseconds {
@@ -508,7 +519,12 @@ func (uci *UCIEngine) handleSetOption(args []string, output io.Writer) {
 	default:
 		if isTunableParam(optionName) {
 			uci.joinSearch(true)
+			oldQChecks := W2QChecks
 			setTunableParam(optionName, optionValue)
+			if W2QChecks != oldQChecks {
+				// Main-search bounds also depend on the horizon move policy.
+				uci.searcher.ClearHash()
+			}
 		}
 	}
 
@@ -545,6 +561,9 @@ func setTunableParam(name, value string) bool {
 				v = p.Max
 			}
 			*p.Ptr = v
+			if p.Ptr == &tuneLMRBase || p.Ptr == &tuneLMRDivisor {
+				rebuildLMRTable()
+			}
 			return true
 		}
 	}
@@ -567,8 +586,10 @@ func (uci *UCIEngine) handleNewGame(output io.Writer) {
 	uci.movesPlayed = 0
 	uci.lastScore = 0
 	moveOverhead := uci.timeManager.moveOverhead
+	scoreTimeEnabled := uci.timeManager.scoreTime.enabled
 	uci.timeManager = newUCITimeManager()
 	uci.timeManager.moveOverhead = moveOverhead
+	uci.timeManager.scoreTime.enabled = scoreTimeEnabled
 
 	if uci.debugMode {
 		fmt.Fprintf(output, "info string new game started\n")

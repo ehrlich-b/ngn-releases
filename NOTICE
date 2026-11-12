@@ -1,23 +1,31 @@
 NGN source attribution and modification notices
 
-NGN 0.3.0 contents (2026-10-07)
-The 0.3.0 executable contains NGN code, the NGN-trained embedded network and the
-Go runtime/standard library (BSD-style, LICENSES/Go-LICENSE.txt). It contains no
-Counter, Rodent, Stockfish, PeSTO, Polyglot or Bullet code or data. The board,
-position, hash and cache code that came from Zahak was rewritten from behavior
-contracts in October 2026; some identifiers and interfaces keep their Zahak-era
-names. The sections below describe earlier versions (<=0.2.0-rc.1) and are kept
-for historical copies. The network was trained by NGN's trainer/ (Python
-standard library, NumPy, PyTorch) on ODbL T80 data; see LICENSES/TRAINING-DATA.txt.
-Its 768-input SCReLU layout, 255/64/400 quantization and material output buckets
-are common published NNUE design choices, popularized by the Bullet and
-Stockfish communities. Search-technique acknowledgements are listed below.
-The 0.3.0 source release contains the engine, the trainer, the NGN tools used
-to generate data and measure strength, and the 0.3.0 records. Earlier research
-tools and notebooks that adapted or probed other engines are not part of it;
-they remain in the history of earlier releases with the notices below.
+NGN 0.4.0 contents (2026-11-11)
+The executable contains NGN engine/inference code, the NGN-trained embedded
+NGNN3 H768 network and Go's runtime/standard library (LICENSES/Go-LICENSE.txt).
+The network has 8 mirrored king-context buckets of 768 piece-square inputs,
+768 hidden units per perspective, SCReLU and 8 material output buckets.
+SHA-256: 2dcb6d936c0275927cb9e881f42e22558e618ad7e6fd998df6c4e5046d42c443.
+Normal builds select this network; UseNNUE=false selects NGN's classical core.
+The public source also supplies trainer/, owned test fixtures and default.pgo.
+The trainer uses Python, NumPy and PyTorch; those libraries are not redistributed
+or linked into the engine. Published king-bucket, mirrored-input, SCReLU and
+accumulator-cache techniques acknowledge the Stockfish/Bullet communities;
+these are design credits, not imported implementation or trained weights.
+T80 positions and third-party search labels are allowed training inputs; the
+ODbL data lineage and alteration method are in LICENSES/TRAINING-DATA.txt and
+docs/TRAINING-METHOD.md. The verified weight chain starts at fresh NGN trainer
+revision 7ef9821, continues through H512 81215229 and seeded H768 widening,
+and ends at the embedded export above. Corpus content pins are documented
+there; historical corpus build inputs are not shipped. No other engine's
+NNUE network is distributed.
+Zahak-derived board, position, hash and cache implementations were replaced in
+October 2026; interface/bit-layout lineage and historical notices remain.
+The dated sections below describe earlier versions and development stages,
+including removed Rodent, Counter, Stockfish, PeSTO, Polyglot and Bullet material.
+Historical diagnostic experiments and obsolete adapters are outside this release.
 
-Historical record
+Historical record (all following stage descriptions are dated history)
 This notice records origins of code and tooling present in NGN 0.2.0-rc.1.
 It remains applicable to historical copies even after components are removed.
 The NGN source and model grant is GPL-3.0-only. That grant does not replace
@@ -193,7 +201,8 @@ pawn-validation model and archived source evidence from Rodent V, by Naman
 Thanki and Pawel Koziol, under GPLv3. Its SOURCE-LICENSE-GPL-3.0, origin receipts
 and added directory NOTICE apply. It is an independent diagnostic executable,
 not imported by NGN's main dependency closure or used in the evaluation hot path.
-Its source/evidence is preserved with attribution rather than hidden.
+Its source/evidence remains in historical development records with attribution;
+it is not included in the 0.4.0 source archive.
 
 Current-tree modification dated 2026-10-05: external Polyglot book support,
 canonical random constants and dependent tests/fixtures are removed. The

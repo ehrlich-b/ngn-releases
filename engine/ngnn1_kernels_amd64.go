@@ -17,8 +17,21 @@ func ngnn1SubRow(acc []int32, row []int16)
 //go:noescape
 func ngnn1MoveRows(dst, src []int32, remove, add []int16)
 
+// Update both contiguous perspectives with their respective feature rows.
+// dst and src contain 2H int32 values, and each row contains H int16 values.
+// The exact-alias or disjoint-source contract also applies to the full frame.
+//
+//go:noescape
+func ngnn1MovePair(dst, src []int32, removeUs, addUs, removeThem, addThem []int16)
+
 //go:noescape
 func ngnn1CaptureRows(dst, src []int32, remove, capture, add []int16)
+
+// Update both contiguous H-wide perspectives; source and destination may
+// alias exactly or be disjoint. Each feature row has H signed int16 lanes.
+//
+//go:noescape
+func ngnn1CapturePair(dst, src []int32, removeUs, captureUs, addUs, removeThem, captureThem, addThem []int16)
 
 //go:noescape
 func ngnn1CastleRows(dst, src []int32, removeKing, removeRook, addKing, addRook []int16)

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
@@ -38,6 +39,7 @@ func run(args []string, input io.Reader, output, errorOutput io.Writer) int {
 	}
 	flags := flag.NewFlagSet("ngn", flag.ContinueOnError)
 	flags.SetOutput(errorOutput)
+	showBuildInfo := flags.Bool("build-info", false, "Print build identity as JSON and exit")
 	showVersion := flags.Bool("version", false, "Print the engine version and exit")
 	allowResignation := flags.Bool("allow-resignation", false, "Allow engine to resign in hopeless positions")
 	evalBackend := flags.String("eval-backend", defaultBackend, "Evaluator backend (hce in the default build)")
@@ -52,6 +54,13 @@ func run(args []string, input io.Reader, output, errorOutput io.Writer) int {
 	if flags.NArg() != 0 {
 		fmt.Fprintf(errorOutput, "ngn: unexpected positional arguments: %q\n", flags.Args())
 		return 2
+	}
+	if *showBuildInfo {
+		if err := json.NewEncoder(output).Encode(currentBuildInfo()); err != nil {
+			fmt.Fprintf(errorOutput, "ngn: build info: %v\n", err)
+			return 2
+		}
+		return 0
 	}
 	if *showVersion {
 		fmt.Fprintln(output, releaseVersion)

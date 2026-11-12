@@ -143,6 +143,7 @@ type TimeManager struct {
 	// across rival moves (contested → extend it). Zero means "no completed
 	// iteration yet", which nodeEffortFactor maps to a neutral 1.0. Reset per move.
 	bestMoveNodeFraction float64
+	scoreTime            wave2ScoreTime
 
 	// now is injectable so admission-time accounting and setup expiry are
 	// deterministic in lifecycle tests. It is immutable while a manager is in use.
@@ -209,6 +210,7 @@ func (tm *TimeManager) SetTimeControlAt(params SearchParams, isWhite bool, start
 	tm.lastIterationTime = 0
 	tm.stableIters = 0
 	tm.bestMoveNodeFraction = 0
+	tm.scoreTime.reset()
 	tm.checkCounter = 0
 	if tm.observer != nil {
 		tm.observer.reset()
@@ -327,8 +329,8 @@ func (tm *TimeManager) computeTournamentLimits() {
 	}
 	uf := float64(usable)
 
-	soft := uf/float64(moves) + 0.8*float64(tm.increment)
-	hard := math.Min(soft*4, uf*0.3)
+	soft := uf/float64(moves) + (float64(tuneSoftIncrementPercent)/100)*float64(tm.increment)
+	hard := math.Min(soft*float64(tuneHardSoftMultiplier), uf*(float64(tuneHardBankPercent)/100))
 	if hard < soft {
 		hard = soft // tiny banks: don't let the 0.3 cap fall below the soft target
 	}
@@ -424,7 +426,13 @@ func (tm *TimeManager) NewIteration() {
 // the node distribution of the completed iteration regardless of stability — and is
 // read by nodeEffortFactor. Only the soft target flexes; the hard ceiling never does,
 // so this cannot increase flag risk.
-func (tm *TimeManager) ReportCompletedIteration(bestMoveChanged, windowHeldFirstTry bool, bestMoveNodeFraction float64) {
+//
+// completedScore is optional for callers without an exact root score. An omitted
+// score is unknown and breaks the score trend; aspiration bounds must never be
+// passed here. A successful re-search supplies its final in-window score even
+// when windowHeldFirstTry is false.
+func (tm *TimeManager) ReportCompletedIteration(bestMoveChanged, windowHeldFirstTry bool, bestMoveNodeFraction float64, completedScore ...int) {
+	tm.scoreTime.report(completedScore)
 	tm.bestMoveNodeFraction = bestMoveNodeFraction
 	if bestMoveChanged || !windowHeldFirstTry {
 		tm.stableIters = 0
@@ -499,7 +507,8 @@ func (tm *TimeManager) nodeEffortFactor() float64 {
 	return factor
 }
 
-// Bounds on the composed T1b×T1e soft-target multiplier. stabilitySoftFactor and
+// Bounds on the composed soft-target multiplier, also applied after the optional
+// completed-score factor. stabilitySoftFactor and
 // nodeEffortFactor are correlated — a settled best move usually also owns most of the
 // tree — so their raw product (up to 1.30×1.25 = 1.625, down to 0.85×0.85 ≈ 0.7225) is
 // clamped here to stop the two signals from double-counting into a budget that
@@ -602,6 +611,9 @@ func (tm *TimeManager) tournamentStopReason(depth int, elapsed time.Duration) se
 	// or undercuts a safe floor. The next-iteration projection, the hard ceiling, and
 	// the emergency floor above are UNCHANGED, so this cannot flag.
 	composed := tm.stabilitySoftFactor() * tm.nodeEffortFactor()
+	// Score loss can extend the existing soft factor, within the same composed
+	// bounds. Hard-deadline and emergency checks above remain independent.
+	composed *= tm.scoreTime.factor()
 	if composed < softComposedMin {
 		composed = softComposedMin
 	}
@@ -641,10 +653,10 @@ func (tm *TimeManager) determineGamePhase(position *Position) GamePhase {
 
 	// Count material to determine phase
 	totalMaterial := 0
-	queens := PopCount(position.Board.GetBitboardOf(WhiteQueen)) + PopCount(position.Board.GetBitboardOf(BlackQueen))
-	rooks := PopCount(position.Board.GetBitboardOf(WhiteRook)) + PopCount(position.Board.GetBitboardOf(BlackRook))
-	minors := PopCount(position.Board.GetBitboardOf(WhiteBishop)) + PopCount(position.Board.GetBitboardOf(BlackBishop)) +
-		PopCount(position.Board.GetBitboardOf(WhiteKnight)) + PopCount(position.Board.GetBitboardOf(BlackKnight))
+	queens := PopCount(position.Board.PieceOccupancy(WhiteQueen)) + PopCount(position.Board.PieceOccupancy(BlackQueen))
+	rooks := PopCount(position.Board.PieceOccupancy(WhiteRook)) + PopCount(position.Board.PieceOccupancy(BlackRook))
+	minors := PopCount(position.Board.PieceOccupancy(WhiteBishop)) + PopCount(position.Board.PieceOccupancy(BlackBishop)) +
+		PopCount(position.Board.PieceOccupancy(WhiteKnight)) + PopCount(position.Board.PieceOccupancy(BlackKnight))
 
 	totalMaterial = queens*9 + rooks*5 + minors*3
 
@@ -663,7 +675,7 @@ func (tm *TimeManager) calculatePositionComplexity(position *Position) float64 {
 		return 0.5 // Default complexity
 	}
 
-	allPiecesBitboard := position.Board.GetWhitePieces() | position.Board.GetBlackPieces()
+	allPiecesBitboard := position.Board.WhiteOccupancy() | position.Board.BlackOccupancy()
 	totalPieces := PopCount(allPiecesBitboard)
 	if totalPieces == 0 {
 		return 0.0
@@ -683,7 +695,7 @@ func (tm *TimeManager) calculatePositionComplexity(position *Position) float64 {
 	pieceTypes := 0
 	for _, piece := range []Piece{WhiteQueen, BlackQueen, WhiteRook, BlackRook,
 		WhiteBishop, BlackBishop, WhiteKnight, BlackKnight} {
-		if PopCount(position.Board.GetBitboardOf(piece)) > 0 {
+		if PopCount(position.Board.PieceOccupancy(piece)) > 0 {
 			pieceTypes++
 		}
 	}

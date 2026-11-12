@@ -10,7 +10,7 @@ func hasLegalPawnPush(p *Position) bool {
 		pawn, step = BlackPawn, -8
 		targets = p.Board.pieces[BlackPawn] >> 8
 	}
-	targets &^= p.Board.whitePieces | p.Board.blackPieces
+	targets &^= p.Board.occupiedByColor[White] | p.Board.occupiedByColor[Black]
 	king := Square(bitScanForward(p.Board.pieces[GetPiece(King, color)]))
 	for targets != 0 {
 		to := Square(bitScanForward(targets))

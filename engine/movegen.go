@@ -32,17 +32,23 @@ func generateMovesUnsafe(pos *Position) []Move {
 	return moves
 }
 
-// GenerateLegalMoves generates all legal moves for the current position
+// GenerateLegalMoves generates all legal moves without changing pos. Concurrent
+// queries may share pos provided no other goroutine mutates it.
 func GenerateLegalMoves(pos *Position) []Move {
-	return WrapMoveGeneration("GenerateLegalMoves", func() []Move {
-		return generateLegalMovesUnsafe(pos)
-	}, pos)
+	// Legality checks make and unmake moves, and castling checks temporarily edit
+	// the board. Bitboard is a value (including its evaluation accumulator).
+	// MakeMove does not access repetition history, so no map or mutex is shared.
+	scratch := Position{
+		Board: pos.Board, Side: pos.Side, EnPassant: pos.EnPassant, Tag: pos.Tag,
+		hash: pos.hash, HalfMoveClock: pos.HalfMoveClock,
+	}
+	return generateLegalMovesUnsafe(&scratch)
 }
 
 // validatePosition checks if a position has both kings (basic validity check)
 func validatePosition(pos *Position) bool {
-	whiteKingBB := pos.Board.GetBitboardOf(WhiteKing)
-	blackKingBB := pos.Board.GetBitboardOf(BlackKing)
+	whiteKingBB := pos.Board.PieceOccupancy(WhiteKing)
+	blackKingBB := pos.Board.PieceOccupancy(BlackKing)
 
 	// Both kings must exist
 	if whiteKingBB == 0 || blackKingBB == 0 {
@@ -99,7 +105,7 @@ func generateCapturesUnsafe(pos *Position) []Move {
 // generatePieceMoves generates moves for a specific piece type using the provided generator function
 func generatePieceMoves(pos *Position, piece Piece, generator func(*Position, Square) []Move) []Move {
 	moves := make([]Move, 0, 32)
-	pieceBitboard := pos.Board.GetBitboardOf(piece)
+	pieceBitboard := pos.Board.PieceOccupancy(piece)
 
 	for pieceBitboard != 0 {
 		square := Square(bits.TrailingZeros64(pieceBitboard))
@@ -113,9 +119,9 @@ func generatePieceMoves(pos *Position, piece Piece, generator func(*Position, Sq
 // generateWhitePawnMoves generates all white pawn moves
 func generateWhitePawnMoves(pos *Position) []Move {
 	moves := make([]Move, 0, 16)
-	whitePawns := pos.Board.GetBitboardOf(WhitePawn)
-	allPieces := pos.Board.GetWhitePieces() | pos.Board.GetBlackPieces()
-	enemyPieces := pos.Board.GetBlackPieces()
+	whitePawns := pos.Board.PieceOccupancy(WhitePawn)
+	allPieces := pos.Board.WhiteOccupancy() | pos.Board.BlackOccupancy()
+	enemyPieces := pos.Board.BlackOccupancy()
 
 	// Single pawn pushes
 	singlePushes := (whitePawns << 8) & ^allPieces
@@ -219,9 +225,9 @@ func generateWhitePawnMoves(pos *Position) []Move {
 // generateBlackPawnMoves generates all black pawn moves
 func generateBlackPawnMoves(pos *Position) []Move {
 	moves := make([]Move, 0, 16)
-	blackPawns := pos.Board.GetBitboardOf(BlackPawn)
-	allPieces := pos.Board.GetWhitePieces() | pos.Board.GetBlackPieces()
-	enemyPieces := pos.Board.GetWhitePieces()
+	blackPawns := pos.Board.PieceOccupancy(BlackPawn)
+	allPieces := pos.Board.WhiteOccupancy() | pos.Board.BlackOccupancy()
+	enemyPieces := pos.Board.WhiteOccupancy()
 
 	// Single pawn pushes (black pawns move "down" the board)
 	singlePushes := (blackPawns >> 8) & ^allPieces
@@ -325,9 +331,9 @@ func generateKnightMoves(pos *Position, from Square) []Move {
 	moves := make([]Move, 0, 8)
 	attacks := KnightAttacks[from]
 	piece := pos.Board.PieceAt(from)
-	friendlyPieces := pos.Board.GetWhitePieces()
+	friendlyPieces := pos.Board.WhiteOccupancy()
 	if piece.Color() == Black {
-		friendlyPieces = pos.Board.GetBlackPieces()
+		friendlyPieces = pos.Board.BlackOccupancy()
 	}
 
 	// Remove squares occupied by friendly pieces
@@ -370,11 +376,11 @@ func generateSlidingMoves(pos *Position, from Square, directions []int) []Move {
 	var moveBuffer [28]Move
 	numMoves := 0
 	piece := pos.Board.PieceAt(from)
-	friendlyPieces := pos.Board.GetWhitePieces()
+	friendlyPieces := pos.Board.WhiteOccupancy()
 	if piece.Color() == Black {
-		friendlyPieces = pos.Board.GetBlackPieces()
+		friendlyPieces = pos.Board.BlackOccupancy()
 	}
-	allPieces := pos.Board.GetWhitePieces() | pos.Board.GetBlackPieces()
+	allPieces := pos.Board.WhiteOccupancy() | pos.Board.BlackOccupancy()
 
 	for _, direction := range directions {
 		for i := 1; i < 8; i++ {
@@ -447,7 +453,7 @@ func generateSlidingMoves(pos *Position, from Square, directions []int) []Move {
 // generateKingMoves generates moves for a king at the given square (including castling)
 func generateKingMoves(pos *Position, piece Piece) []Move {
 	moves := make([]Move, 0, 8)
-	kingBitboard := pos.Board.GetBitboardOf(piece)
+	kingBitboard := pos.Board.PieceOccupancy(piece)
 
 	// Check if king exists on the board
 	if kingBitboard == 0 {
@@ -462,9 +468,9 @@ func generateKingMoves(pos *Position, piece Piece) []Move {
 	}
 
 	attacks := KingAttacks[kingSquare]
-	friendlyPieces := pos.Board.GetWhitePieces()
+	friendlyPieces := pos.Board.WhiteOccupancy()
 	if piece.Color() == Black {
-		friendlyPieces = pos.Board.GetBlackPieces()
+		friendlyPieces = pos.Board.BlackOccupancy()
 	}
 
 	// Remove squares occupied by friendly pieces
@@ -546,8 +552,8 @@ func abs(x int) int {
 func generateSlidingMovesIntoBuffer(pos *Position, from Square, directions []int, buffer []Move) int {
 	count := 0
 	piece := pos.Board.PieceAt(from)
-	friendly := pos.Board.GetWhitePieces()
-	enemy := pos.Board.GetBlackPieces()
+	friendly := pos.Board.WhiteOccupancy()
+	enemy := pos.Board.BlackOccupancy()
 	if piece.Color() == Black {
 		friendly, enemy = enemy, friendly
 	}
@@ -576,8 +582,8 @@ func generateSlidingCapturesIntoBuffer(pos *Position, from Square, directions []
 		return 0
 	}
 	piece := pos.Board.PieceAt(from)
-	friendly := pos.Board.GetWhitePieces()
-	enemy := pos.Board.GetBlackPieces()
+	friendly := pos.Board.WhiteOccupancy()
+	enemy := pos.Board.BlackOccupancy()
 	if piece.Color() == Black {
 		friendly, enemy = enemy, friendly
 	}
@@ -636,7 +642,7 @@ func moveIsPseudoLegal(pos *Position, move Move) bool {
 	}
 
 	dstMask := SquareMask[int(dst)]
-	occupied := pos.Board.GetWhitePieces() | pos.Board.GetBlackPieces()
+	occupied := pos.Board.WhiteOccupancy() | pos.Board.BlackOccupancy()
 
 	switch mover.Type() {
 	case Knight:
@@ -674,7 +680,7 @@ func moveIsPseudoLegal(pos *Position, move Move) bool {
 // Its callers obtain the move from the generator, which already established the
 // rights, rook, and empty-path requirements. MakeMove alone cannot do this: after
 // castling, the rook may block an attack on the king's original square. Keep this
-// direct rather than relying on PositionTag while inspecting a position.
+// direct rather than relying on PositionState while inspecting a position.
 func isLegalCastle(pos *Position, move Move) bool {
 	color := move.MovingPiece().Color()
 	if isInCheck(pos, color) {
@@ -731,7 +737,7 @@ func isSquareAttacked(pos *Position, square Square, attackingColor Color) bool {
 	var existingKingSquare Square = 64 // Invalid square initially
 	var existingKingPiece Piece
 
-	kingBitboard := pos.Board.GetBitboardOf(testKing)
+	kingBitboard := pos.Board.PieceOccupancy(testKing)
 	if kingBitboard != 0 {
 		existingKingSquare = Square(bits.TrailingZeros64(kingBitboard))
 		existingKingPiece = pos.Board.PieceAt(existingKingSquare)
@@ -768,7 +774,7 @@ func isInCheck(pos *Position, color Color) bool {
 		kingPiece = BlackKing
 	}
 
-	kingBitboard := pos.Board.GetBitboardOf(kingPiece)
+	kingBitboard := pos.Board.PieceOccupancy(kingPiece)
 	if kingBitboard == 0 {
 		return false // No king found
 	}
@@ -789,7 +795,7 @@ func isInCheck(pos *Position, color Color) bool {
 		// Black pawns attack from squares king+7 and king+9
 		leftAttack := (SquareMask[kingSquare] << 7) & ^FileMasks[FileH]  // mask FileH to prevent H->A wrap
 		rightAttack := (SquareMask[kingSquare] << 9) & ^FileMasks[FileA] // mask FileA to prevent A->H wrap
-		if (leftAttack|rightAttack)&pos.Board.GetBitboardOf(BlackPawn) != 0 {
+		if (leftAttack|rightAttack)&pos.Board.PieceOccupancy(BlackPawn) != 0 {
 			return true
 		}
 	} else {
@@ -799,7 +805,7 @@ func isInCheck(pos *Position, color Color) bool {
 		leftAttack := (SquareMask[kingSquare] >> 7) & ^FileMasks[FileA] // Exclude if king is on file A
 		// For king-9: prevent wrapping from file H to file A
 		rightAttack := (SquareMask[kingSquare] >> 9) & ^FileMasks[FileH] // Exclude if king is on file H
-		if (leftAttack|rightAttack)&pos.Board.GetBitboardOf(WhitePawn) != 0 {
+		if (leftAttack|rightAttack)&pos.Board.PieceOccupancy(WhitePawn) != 0 {
 			return true
 		}
 	}
@@ -813,31 +819,31 @@ func isInCheck(pos *Position, color Color) bool {
 	}
 
 	// Check knight attacks
-	enemyKnights := pos.Board.GetBitboardOf(WhiteKnight + enemyBase)
+	enemyKnights := pos.Board.PieceOccupancy(WhiteKnight + enemyBase)
 	if KnightAttacks[kingSquare]&enemyKnights != 0 {
 		return true
 	}
 
 	// Check king attacks (for adjacent king positions)
-	enemyKing := pos.Board.GetBitboardOf(WhiteKing + enemyBase)
+	enemyKing := pos.Board.PieceOccupancy(WhiteKing + enemyBase)
 	if KingAttacks[kingSquare]&enemyKing != 0 {
 		return true
 	}
 
 	// Check sliding piece attacks using magic bitboards - O(1) lookups
-	occupied := pos.Board.GetWhitePieces() | pos.Board.GetBlackPieces()
+	occupied := pos.Board.WhiteOccupancy() | pos.Board.BlackOccupancy()
 
 	// Enemy queens attack on both diagonals and ranks/files; fetch once and reuse.
-	enemyQueens := pos.Board.GetBitboardOf(WhiteQueen + enemyBase)
+	enemyQueens := pos.Board.PieceOccupancy(WhiteQueen + enemyBase)
 
 	// Check diagonal attacks (bishop, queen)
-	diagonalAttackers := pos.Board.GetBitboardOf(WhiteBishop+enemyBase) | enemyQueens
+	diagonalAttackers := pos.Board.PieceOccupancy(WhiteBishop+enemyBase) | enemyQueens
 	if GetBishopAttacks(int(kingSquare), occupied)&diagonalAttackers != 0 {
 		return true
 	}
 
 	// Check straight attacks (rook, queen)
-	straightAttackers := pos.Board.GetBitboardOf(WhiteRook+enemyBase) | enemyQueens
+	straightAttackers := pos.Board.PieceOccupancy(WhiteRook+enemyBase) | enemyQueens
 	if GetRookAttacks(int(kingSquare), occupied)&straightAttackers != 0 {
 		return true
 	}
@@ -923,7 +929,7 @@ func GenerateCapturesIntoBuffer(pos *Position, buffer []Move) int {
 
 func generatePieceMovesIntoBuffer(pos *Position, piece Piece, generator func(*Position, Square, []Move) int, buffer []Move) int {
 	moveCount := 0
-	pieceBitboard := pos.Board.GetBitboardOf(piece)
+	pieceBitboard := pos.Board.PieceOccupancy(piece)
 
 	for pieceBitboard != 0 {
 		square := Square(bits.TrailingZeros64(pieceBitboard))
@@ -939,7 +945,7 @@ func generatePieceCapturesIntoBuffer(pos *Position, piece Piece, generator func(
 	if len(buffer) == 0 {
 		return 0
 	}
-	pieceBitboard := pos.Board.GetBitboardOf(piece)
+	pieceBitboard := pos.Board.PieceOccupancy(piece)
 
 	for pieceBitboard != 0 && captureCount < len(buffer) {
 		square := Square(bits.TrailingZeros64(pieceBitboard))
@@ -956,9 +962,9 @@ func generateKnightMovesIntoBuffer(pos *Position, from Square, buffer []Move) in
 	count := 0
 	attacks := KnightAttacks[from]
 	piece := pos.Board.PieceAt(from)
-	friendlyPieces := pos.Board.GetWhitePieces()
+	friendlyPieces := pos.Board.WhiteOccupancy()
 	if piece.Color() == Black {
-		friendlyPieces = pos.Board.GetBlackPieces()
+		friendlyPieces = pos.Board.BlackOccupancy()
 	}
 
 	attacks &^= friendlyPieces
@@ -997,9 +1003,9 @@ func generateKnightCapturesIntoBuffer(pos *Position, from Square, buffer []Move)
 	}
 	attacks := KnightAttacks[from]
 	piece := pos.Board.PieceAt(from)
-	enemyPieces := pos.Board.GetBlackPieces()
+	enemyPieces := pos.Board.BlackOccupancy()
 	if piece.Color() == Black {
-		enemyPieces = pos.Board.GetWhitePieces()
+		enemyPieces = pos.Board.WhiteOccupancy()
 	}
 	attacks &= enemyPieces
 	for attacks != 0 && count < len(buffer) {
@@ -1026,9 +1032,9 @@ func generateQueenCapturesIntoBuffer(pos *Position, from Square, buffer []Move) 
 
 func generateWhitePawnMovesIntoBuffer(pos *Position, buffer []Move) int {
 	count := 0
-	whitePawns := pos.Board.GetBitboardOf(WhitePawn)
-	allPieces := pos.Board.GetWhitePieces() | pos.Board.GetBlackPieces()
-	enemyPieces := pos.Board.GetBlackPieces()
+	whitePawns := pos.Board.PieceOccupancy(WhitePawn)
+	allPieces := pos.Board.WhiteOccupancy() | pos.Board.BlackOccupancy()
+	enemyPieces := pos.Board.BlackOccupancy()
 
 	// Single pushes
 	singlePushes := (whitePawns << 8) & ^allPieces
@@ -1130,9 +1136,9 @@ func generateWhitePawnMovesIntoBuffer(pos *Position, buffer []Move) int {
 
 func generateBlackPawnMovesIntoBuffer(pos *Position, buffer []Move) int {
 	count := 0
-	blackPawns := pos.Board.GetBitboardOf(BlackPawn)
-	allPieces := pos.Board.GetWhitePieces() | pos.Board.GetBlackPieces()
-	enemyPieces := pos.Board.GetWhitePieces()
+	blackPawns := pos.Board.PieceOccupancy(BlackPawn)
+	allPieces := pos.Board.WhiteOccupancy() | pos.Board.BlackOccupancy()
+	enemyPieces := pos.Board.WhiteOccupancy()
 
 	// Single pushes
 	singlePushes := (blackPawns >> 8) & ^allPieces
@@ -1237,8 +1243,8 @@ func generateWhitePawnCapturesIntoBuffer(pos *Position, buffer []Move) int {
 	if len(buffer) == 0 {
 		return 0
 	}
-	whitePawns := pos.Board.GetBitboardOf(WhitePawn)
-	enemyPieces := pos.Board.GetBlackPieces()
+	whitePawns := pos.Board.PieceOccupancy(WhitePawn)
+	enemyPieces := pos.Board.BlackOccupancy()
 
 	leftCaptures := ((whitePawns & ^FileMasks[FileA]) << 7) & enemyPieces
 	lc := leftCaptures
@@ -1315,8 +1321,8 @@ func generateBlackPawnCapturesIntoBuffer(pos *Position, buffer []Move) int {
 	if len(buffer) == 0 {
 		return 0
 	}
-	blackPawns := pos.Board.GetBitboardOf(BlackPawn)
-	enemyPieces := pos.Board.GetWhitePieces()
+	blackPawns := pos.Board.PieceOccupancy(BlackPawn)
+	enemyPieces := pos.Board.WhiteOccupancy()
 
 	leftCaptures := ((blackPawns & ^FileMasks[FileH]) >> 7) & enemyPieces
 	lc := leftCaptures
@@ -1390,15 +1396,15 @@ func generateBlackPawnCapturesIntoBuffer(pos *Position, buffer []Move) int {
 
 func generateKingMovesIntoBuffer(pos *Position, piece Piece, buffer []Move) int {
 	count := 0
-	kingBB := pos.Board.GetBitboardOf(piece)
+	kingBB := pos.Board.PieceOccupancy(piece)
 	if kingBB == 0 {
 		return 0
 	}
 	from := Square(bits.TrailingZeros64(kingBB))
 	attacks := KingAttacks[from]
-	friendly := pos.Board.GetWhitePieces()
+	friendly := pos.Board.WhiteOccupancy()
 	if piece.Color() == Black {
-		friendly = pos.Board.GetBlackPieces()
+		friendly = pos.Board.BlackOccupancy()
 	}
 	attacks &^= friendly
 	for attacks != 0 {
@@ -1440,15 +1446,15 @@ func generateKingCapturesIntoBuffer(pos *Position, piece Piece, buffer []Move) i
 	if len(buffer) == 0 {
 		return 0
 	}
-	kingBB := pos.Board.GetBitboardOf(piece)
+	kingBB := pos.Board.PieceOccupancy(piece)
 	if kingBB == 0 {
 		return 0
 	}
 	from := Square(bits.TrailingZeros64(kingBB))
 	attacks := KingAttacks[from]
-	enemy := pos.Board.GetBlackPieces()
+	enemy := pos.Board.BlackOccupancy()
 	if piece.Color() == Black {
-		enemy = pos.Board.GetWhitePieces()
+		enemy = pos.Board.WhiteOccupancy()
 	}
 	attacks &= enemy
 	for attacks != 0 && count < len(buffer) {

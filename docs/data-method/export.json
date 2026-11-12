@@ -1,0 +1,6 @@
+{
+  "epochs": 30,
+  "reexport_identical": true,
+  "parity_cases": 20,
+  "sha256": "2dcb6d936c0275927cb9e881f42e22558e618ad7e6fd998df6c4e5046d42c443"
+}

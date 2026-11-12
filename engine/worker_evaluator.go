@@ -39,6 +39,7 @@ type workerEvaluator struct {
 	depth              int
 	staticOracle       func(*Position) int
 	transitionObserver func(*Position, *workerEvaluator)
+	nodeObserver       func() // Optional diagnostics at the exact search node counter.
 }
 
 func (m evaluatorModel) newWorker(hce *hceEvaluator) (*workerEvaluator, error) {
@@ -77,7 +78,10 @@ func (e *workerEvaluator) Reset(pos *Position) error {
 	return nil
 }
 
-type workerEvalMove struct{ delta ngnn1Delta }
+type workerEvalMove struct {
+	delta        ngnn1Delta
+	threatBefore *Bitboard
+}
 type workerEvalNull struct{}
 
 func (e *workerEvaluator) PrepareMove(pos *Position, move Move) (workerEvalMove, error) {
@@ -88,11 +92,14 @@ func (e *workerEvaluator) PrepareMove(pos *Position, move Move) (workerEvalMove,
 		if pos == nil || !validPiece(move.MovingPiece()) {
 			return workerEvalMove{}, errWorkerEvaluator
 		}
-		delta := ngnn1MoveDelta(move)
-		if e.nnue.network.version == 3 {
-			delta = e.nnue.network.kingMoveDelta(pos, move, delta)
+		if e.nnue.network.version == 5 {
+			before := pos.Board
+			return workerEvalMove{delta: e.nnue.network.ngnn3MoveDelta(pos, move), threatBefore: &before}, nil
 		}
-		return workerEvalMove{delta: delta}, nil
+		if e.nnue.network.kingInputs() {
+			return workerEvalMove{delta: e.nnue.network.ngnn3MoveDelta(pos, move)}, nil
+		}
+		return workerEvalMove{delta: ngnn1MoveDelta(move)}, nil
 	}
 	return workerEvalMove{}, nil
 }
@@ -102,7 +109,11 @@ func (e *workerEvaluator) PushMove(pos *Position, transition workerEvalMove) err
 	}
 	e.depth++
 	if e.nnue != nil {
-		e.nnue.pushPosition(e.depth, transition.delta, pos)
+		if e.nnue.network.version == 5 {
+			e.nnue.pushNGNN5(e.depth, transition.delta, pos, transition.threatBefore)
+		} else {
+			e.nnue.pushPosition(e.depth, transition.delta, pos)
+		}
 	}
 	e.observeTransition(pos)
 	return nil
@@ -140,7 +151,7 @@ func (e *workerEvaluator) SearchSTM(pos *Position) int {
 	}
 	if e.nnue != nil {
 		n := e.nnue.network
-		return n.evaluateBucket(e.nnue.at(e.depth), pos.Turn(), n.bucket(pos))
+		return e.nnue.evaluatePosition(e.depth, pos, n)
 	}
 	return e.hce.SearchSTM(pos)
 }
@@ -153,7 +164,7 @@ func (e *workerEvaluator) LegacyUndampedSTM(pos *Position) int {
 	}
 	if e.nnue != nil {
 		n := e.nnue.network
-		return n.evaluateBucket(e.nnue.at(e.depth), pos.Turn(), n.bucket(pos))
+		return e.nnue.evaluatePosition(e.depth, pos, n)
 	}
 	return e.hce.LegacyUndampedSTM(pos)
 }
@@ -182,7 +193,7 @@ func (e *workerEvaluator) mustPushMadeMove(
 	pos *Position,
 	transition workerEvalMove,
 	move Move,
-	undoTag PositionTag,
+	undoTag PositionState,
 	undoEP Square,
 	undoClock uint8,
 ) {

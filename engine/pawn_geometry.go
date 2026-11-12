@@ -37,8 +37,8 @@ func countPassedPawnsFast(own, enemy uint64, color Color) int {
 }
 
 func countPassedPawns(board *Bitboard, color Color) int {
-	own := board.GetBitboardOf(GetPiece(Pawn, color))
-	enemy := board.GetBitboardOf(GetPiece(Pawn, Color(1-int(color))))
+	own := board.PieceOccupancy(GetPiece(Pawn, color))
+	enemy := board.PieceOccupancy(GetPiece(Pawn, Color(1-int(color))))
 	count := 0
 	for square := 0; square < 64; square++ {
 		if own&(uint64(1)<<square) == 0 {
@@ -70,7 +70,7 @@ func countDoubledPawns(board *Bitboard, color Color, file int) int {
 	if file < 0 || file >= 8 {
 		return 0
 	}
-	pawns := board.GetBitboardOf(GetPiece(Pawn, color))
+	pawns := board.PieceOccupancy(GetPiece(Pawn, color))
 	count := bits.OnesCount64(pawns & (uint64(0x0101010101010101) << file))
 	if count > 1 {
 		return count - 1
@@ -79,7 +79,7 @@ func countDoubledPawns(board *Bitboard, color Color, file int) int {
 }
 
 func countIsolatedPawns(board *Bitboard, color Color) int {
-	pawns := board.GetBitboardOf(GetPiece(Pawn, color))
+	pawns := board.PieceOccupancy(GetPiece(Pawn, color))
 	count := 0
 	for square := 0; square < 64; square++ {
 		if pawns&(uint64(1)<<square) == 0 {

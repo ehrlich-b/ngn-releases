@@ -64,6 +64,45 @@ MoveRows_loop:
 	VZEROUPPER
 	RET
 
+// Quiet moves with no king-context refresh update two independent frames.
+// Pair their arithmetic at the same neuron index and share one loop/call.
+// Each frame keeps its own int32 wrap semantics and unaligned addresses.
+TEXT ·ngnn1MovePair(SB), NOSPLIT, $0-144
+	MOVQ dst_base+0(FP), DI
+	MOVQ src_base+24(FP), SI
+	MOVQ removeUs_base+48(FP), R8
+	MOVQ addUs_base+72(FP), R9
+	MOVQ removeThem_base+96(FP), R10
+	MOVQ addThem_base+120(FP), R11
+	MOVQ addUs_len+80(FP), CX
+	LEAQ (DI)(CX*4), R12
+	LEAQ (SI)(CX*4), R13
+MovePair_loop:
+	VMOVDQU (SI), Y0
+	VMOVDQU (R13), Y2
+	VPMOVSXWD (R8), Y1
+	VPMOVSXWD (R10), Y3
+	VPSUBD Y1, Y0, Y0
+	VPSUBD Y3, Y2, Y2
+	VPMOVSXWD (R9), Y1
+	VPMOVSXWD (R11), Y3
+	VPADDD Y1, Y0, Y0
+	VPADDD Y3, Y2, Y2
+	VMOVDQU Y0, (DI)
+	VMOVDQU Y2, (R12)
+	ADDQ $32, SI
+	ADDQ $32, DI
+	ADDQ $32, R12
+	ADDQ $32, R13
+	ADDQ $16, R8
+	ADDQ $16, R9
+	ADDQ $16, R10
+	ADDQ $16, R11
+	SUBQ $8, CX
+	JNZ MovePair_loop
+	VZEROUPPER
+	RET
+
 TEXT ·ngnn1CaptureRows(SB), NOSPLIT, $0-120
 	MOVQ dst_base+0(FP), DI
 	MOVQ src_base+24(FP), SI
@@ -87,6 +126,52 @@ CaptureRows_loop:
 	ADDQ $16, R10
 	SUBQ $8, CX
 	JNZ CaptureRows_loop
+	VZEROUPPER
+	RET
+
+// Interleave independent capture arithmetic for both accumulator perspectives.
+// All subtraction/addition retains int32 wrapping; addresses may be unaligned.
+TEXT ·ngnn1CapturePair(SB), NOSPLIT, $0-192
+	MOVQ dst_base+0(FP), DI
+	MOVQ src_base+24(FP), SI
+	MOVQ removeUs_base+48(FP), R8
+	MOVQ captureUs_base+72(FP), R9
+	MOVQ addUs_base+96(FP), R10
+	MOVQ removeThem_base+120(FP), R11
+	MOVQ captureThem_base+144(FP), R12
+	MOVQ addThem_base+168(FP), R13
+	MOVQ addUs_len+104(FP), CX
+	LEAQ (DI)(CX*4), BX
+	LEAQ (SI)(CX*4), DX
+CapturePair_loop:
+	VMOVDQU (SI), Y0
+	VMOVDQU (DX), Y2
+	VPMOVSXWD (R8), Y1
+	VPMOVSXWD (R11), Y3
+	VPSUBD Y1, Y0, Y0
+	VPSUBD Y3, Y2, Y2
+	VPMOVSXWD (R9), Y1
+	VPMOVSXWD (R12), Y3
+	VPSUBD Y1, Y0, Y0
+	VPSUBD Y3, Y2, Y2
+	VPMOVSXWD (R10), Y1
+	VPMOVSXWD (R13), Y3
+	VPADDD Y1, Y0, Y0
+	VPADDD Y3, Y2, Y2
+	VMOVDQU Y0, (DI)
+	VMOVDQU Y2, (BX)
+	ADDQ $32, SI
+	ADDQ $32, DI
+	ADDQ $32, BX
+	ADDQ $32, DX
+	ADDQ $16, R8
+	ADDQ $16, R9
+	ADDQ $16, R10
+	ADDQ $16, R11
+	ADDQ $16, R12
+	ADDQ $16, R13
+	SUBQ $8, CX
+	JNZ CapturePair_loop
 	VZEROUPPER
 	RET
 
@@ -156,8 +241,9 @@ Dot_loop:
 	VZEROUPPER
 	RET
 
-// Packed path for loader-verified weights within [-128,128]. Clamp int32
-// before packing. Reorder the lane-local pack into neuron order. x*w fits
+// Packed path for loader-verified weights within [-128,128]. Saturating to
+// int16 before clamping to [0,255] preserves the clamp for every int32 input.
+// Reorder the lane-local pack into neuron order. x*w fits
 // signed int16, so madd(x, x*w) gives exact int32 pair sums. Keep White/Black
 // sums separate until sign extension: H/8 products per int32 lane, <=2^31-1.
 TEXT ·ngnn1OutputSmall(SB), NOSPLIT, $0-80
@@ -171,26 +257,22 @@ TEXT ·ngnn1OutputSmall(SB), NOSPLIT, $0-80
 	VPXOR Y7, Y7, Y7
 	MOVL $255, AX
 	MOVD AX, X4
-	VPBROADCASTD X4, Y4
+	VPBROADCASTW X4, Y4
 OutputSmall_loop:
 	VMOVDQU (SI), Y0
 	VMOVDQU 32(SI), Y1
-	VPMAXSD Y5, Y0, Y0
-	VPMAXSD Y5, Y1, Y1
-	VPMINSD Y4, Y0, Y0
-	VPMINSD Y4, Y1, Y1
 	VPACKSSDW Y1, Y0, Y2
+	VPMAXSW Y5, Y2, Y2
+	VPMINSW Y4, Y2, Y2
 	VPERMQ $0xd8, Y2, Y2
 	VPMULLW (R8), Y2, Y3
 	VPMADDWD Y2, Y3, Y3
 	VPADDD Y3, Y6, Y6
 	VMOVDQU (DI), Y0
 	VMOVDQU 32(DI), Y1
-	VPMAXSD Y5, Y0, Y0
-	VPMAXSD Y5, Y1, Y1
-	VPMINSD Y4, Y0, Y0
-	VPMINSD Y4, Y1, Y1
 	VPACKSSDW Y1, Y0, Y2
+	VPMAXSW Y5, Y2, Y2
+	VPMINSW Y4, Y2, Y2
 	VPERMQ $0xd8, Y2, Y2
 	VPMULLW (R9), Y2, Y3
 	VPMADDWD Y2, Y3, Y3

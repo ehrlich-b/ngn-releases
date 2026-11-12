@@ -9,10 +9,10 @@ import (
 // individual piece bitboards and the two colour bitboards are kept alongside
 // a mailbox so that both kinds of lookup are inexpensive.
 type Bitboard struct {
-	pieces                   [13]uint64
-	whitePieces, blackPieces uint64
-	accMG, accEG, accPhase   int
-	mailbox                  [64]Piece
+	pieces          [13]uint64
+	occupiedByColor [2]uint64
+	accPhase        int
+	mailbox         [64]Piece
 }
 
 // SquareMask contains one bit for every square, using A1 as bit zero.
@@ -72,12 +72,10 @@ func (b *Bitboard) addPiece(square Square, piece Piece) {
 	mask := b.squareBit(square)
 	b.pieces[piece] |= mask
 	if piece.Color() == White {
-		b.whitePieces |= mask
+		b.occupiedByColor[White] |= mask
 	} else {
-		b.blackPieces |= mask
+		b.occupiedByColor[Black] |= mask
 	}
-	b.accMG += mgPST[piece][uint8(square)]
-	b.accEG += egPST[piece][uint8(square)]
 	b.accPhase += piecePhaseInc[piece]
 	b.mailbox[uint8(square)] = piece
 }
@@ -112,19 +110,19 @@ func (b *Bitboard) Kings() uint64 {
 	return b.pieces[WhiteKing] | b.pieces[BlackKing]
 }
 
-// GetWhitePieces returns the occupancy of all white pieces.
-func (b *Bitboard) GetWhitePieces() uint64 {
-	return b.whitePieces
+// WhiteOccupancy returns the occupancy of all white pieces.
+func (b *Bitboard) WhiteOccupancy() uint64 {
+	return b.occupiedByColor[White]
 }
 
-// GetBlackPieces returns the occupancy of all black pieces.
-func (b *Bitboard) GetBlackPieces() uint64 {
-	return b.blackPieces
+// BlackOccupancy returns the occupancy of all black pieces.
+func (b *Bitboard) BlackOccupancy() uint64 {
+	return b.occupiedByColor[Black]
 }
 
-// GetBitboardOf returns the bitboard belonging to piece.  Invalid piece
+// PieceOccupancy returns the bitboard belonging to piece.  Invalid piece
 // values have no corresponding board and therefore return an empty mask.
-func (b *Bitboard) GetBitboardOf(piece Piece) uint64 {
+func (b *Bitboard) PieceOccupancy(piece Piece) uint64 {
 	if piece < NoPiece || piece > BlackKing {
 		return 0
 	}
@@ -165,12 +163,10 @@ func (b *Bitboard) Clear(square Square, piece Piece) {
 	mask := b.squareBit(square)
 	b.pieces[piece] &^= mask
 	if piece.Color() == White {
-		b.whitePieces &^= mask
+		b.occupiedByColor[White] &^= mask
 	} else {
-		b.blackPieces &^= mask
+		b.occupiedByColor[Black] &^= mask
 	}
-	b.accMG -= mgPST[piece][uint8(square)]
-	b.accEG -= egPST[piece][uint8(square)]
 	b.accPhase -= piecePhaseInc[piece]
 	if b.mailbox[uint8(square)] == piece {
 		b.mailbox[uint8(square)] = NoPiece
@@ -215,18 +211,16 @@ func (b *Bitboard) Move(src, dest Square, sourcePiece, destinationPiece Piece) {
 		b.mailbox[uint8(dest)] = NoPiece
 	} else if validPiece(sourcePiece) {
 		// Relocation preserves material phase. Update each occupancy once and
-		// add only the PST difference; Clear/addPiece would undo and redo the
+		// keep its phase unchanged; Clear/addPiece would undo and redo the
 		// same material contribution and repeat square/piece validation.
 		from, to := uint8(src), uint8(dest)
 		remove, add := SquareMask[from], SquareMask[to]
 		b.pieces[sourcePiece] = (b.pieces[sourcePiece] &^ remove) | add
 		if sourcePiece <= WhiteKing {
-			b.whitePieces = (b.whitePieces &^ remove) | add
+			b.occupiedByColor[White] = (b.occupiedByColor[White] &^ remove) | add
 		} else {
-			b.blackPieces = (b.blackPieces &^ remove) | add
+			b.occupiedByColor[Black] = (b.occupiedByColor[Black] &^ remove) | add
 		}
-		b.accMG += mgPST[sourcePiece][to] - mgPST[sourcePiece][from]
-		b.accEG += egPST[sourcePiece][to] - egPST[sourcePiece][from]
 		if b.mailbox[from] == sourcePiece {
 			b.mailbox[from] = NoPiece
 		}
@@ -277,18 +271,12 @@ func (b *Bitboard) copy() Bitboard {
 	return *b
 }
 
-// recomputeAccumulator rebuilds all additive evaluation fields from the
-// current piece masks and the current global value tables.
+// recomputeAccumulator rebuilds material phase from the current piece masks.
 func (b *Bitboard) recomputeAccumulator() {
-	b.accMG = 0
-	b.accEG = 0
 	b.accPhase = 0
 	for piece := WhitePawn; piece <= BlackKing; piece++ {
 		occupancy := b.pieces[piece]
 		for occupancy != 0 {
-			square := bitScanForward(occupancy)
-			b.accMG += mgPST[piece][square]
-			b.accEG += egPST[piece][square]
 			b.accPhase += piecePhaseInc[piece]
 			occupancy &= occupancy - 1
 		}

@@ -26,9 +26,9 @@ func ParseFEN(fenString string) (*Position, error) {
 	// 2. Parse active color
 	switch parts[1] {
 	case "w":
-		position.SetTag(WhiteToMove)
+		position.Side = White
 	case "b":
-		position.SetTag(BlackToMove)
+		position.Side = Black
 	default:
 		return nil, fmt.Errorf("invalid active color: %s", parts[1])
 	}
@@ -107,7 +107,7 @@ func parsePiecePlacement(placement string, board *Bitboard) error {
 				file += emptySquares
 			} else {
 				// Piece
-				piece := pieceFromName(char)
+				piece := parsePieceGlyph(char)
 				if piece == NoPiece {
 					return fmt.Errorf("invalid piece character: %c", char)
 				}

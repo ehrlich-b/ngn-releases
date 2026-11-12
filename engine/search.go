@@ -16,23 +16,71 @@ const (
 
 // Tunable search parameters. These are var, not const, so the SPSA driver and
 // UCI `setoption` can override them at runtime (rebuild-free A/B); the literals
-// below are the current hand-set defaults and MUST stay node-identical
-// (scripts/nodecheck.sh). TunableSearchParams below is the single source of
-// truth tying each var to its UCI name and spin range.
+// below are the warm 24k-game SPSA endpoint verified on fe92ced/81215229
+// against the previous compiled final14 defaults (session113 fixed1000 gate).
+// TunableSearchParams below is the single source of truth tying each var to
+// its UCI name, default and spin range.
 var (
-	NULL_MOVE_R             = 3   // Null move reduction depth
+	T1104ContPlies          = 0
+	T1104Cuckoo             = 0
+	T1104PriorBonus         = 0
+	T1104CorrMore           = 0
+	W2QChecks               = 0   // One layer of quiet checks at the qsearch horizon
+	T1104LowPly             = 0   // Experimental near-root quiet ordering (default off)
+	NULL_MOVE_R             = 4   // Null move reduction depth
 	NULL_MOVE_MIN_DEPTH     = 2   // Minimum depth for null move pruning
 	LMR_FULL_DEPTH          = 3   // Minimum depth for LMR
+	T1104_LMR_FRACTIONAL    = 0   // Experimental fractional quiet reductions (default off)
+	T1104_LMR_CAPTURES      = 0   // Experimental capture reductions (default off)
+	T1104_LMR_DEEPER        = 0   // Optional adaptive verification depth
 	LMR_MOVE_THRESHOLD      = 2   // Start reducing after this many moves
-	FUTILITY_MARGIN         = 103 // Futility per-depth coefficient (margin = FUTILITY_MARGIN*(depth+improving), CG-grounded)
+	FUTILITY_MARGIN         = 101 // Futility per-depth coefficient (margin = FUTILITY_MARGIN*(depth+improving), CG-grounded)
 	FUTILITY_MAX_DEPTH      = 8   // Extended futility pruning depth (W1: was 3, CounterGo prunes quiets to depth 8)
-	REVERSE_FUTILITY_MARGIN = 88  // Reverse futility margin
-	DELTA_MARGIN            = 96  // Delta pruning margin in quiescence
-	SINGULAR_DEPTH          = 6   // Minimum depth for singular extensions
-	SINGULAR_MARGIN         = 48  // Margin for singular move detection
-	EXTENSION_BUDGET        = 26  // Max net extensions on a single root-to-leaf path (anti-explosion)
-	ASP_INIT                = 13  // Aspiration initial half-window (cp); delta = ASP_INIT + |prevScore|/ASP_SCORE_DIV
-	ASP_MULT                = 154 // Aspiration widening multiplier in percent (150 => x1.5 delta growth per fail)
+	REVERSE_FUTILITY_MARGIN = 69  // Reverse futility margin
+	DELTA_MARGIN            = 261 // Delta pruning margin in quiescence
+	SINGULAR_DEPTH          = 8   // Minimum depth for singular extensions
+	T1104_SINGULAR_DOUBLE   = 0   // Enable experimental multi-ply singular extensions
+	SINGULAR_MARGIN         = 67  // Margin for singular move detection
+	EXTENSION_BUDGET        = 29  // Max net extensions on a single root-to-leaf path (anti-explosion)
+	ASP_INIT                = 18  // Aspiration initial half-window (cp); delta = ASP_INIT + |prevScore|/ASP_SCORE_DIV
+	ASP_MULT                = 171 // Aspiration widening multiplier in percent (150 => x1.5 delta growth per fail)
+)
+
+var (
+	tuneLMRBase                 = 0   // Hundredths of a ply
+	tuneLMRDivisor              = 200 // Hundredths
+	tuneHistoryLMRDivisor       = 2500
+	tuneHistoryLMRCap           = 2
+	tuneRFPMaxDepth             = 7
+	tuneRFPImproving            = 1
+	tuneFutilityImproving       = 1
+	tuneLMPQuadratic            = 1
+	tuneLMPNonImprovingDivisor  = 2
+	tuneLMPMaxDepth             = 9
+	tuneSEECaptureDepth         = 4
+	tuneSEECaptureThreshold     = 100
+	tuneSEEQuietDepth           = 4
+	tuneSEEQuietSlope           = 80
+	tuneHistoryPruneDepth       = 3
+	tuneHistoryPruneThreshold   = 1000
+	tuneHistoryPruneMoves       = 3
+	tuneNullMoveDepthDivisor    = 600 // Hundredths
+	tuneNullMoveOffset          = 1
+	tuneIIRDepth                = 4
+	tuneIIRPhase                = 8
+	tuneIIDDepth                = 4
+	tuneIIDReduction            = 2
+	tuneSingularMarginDivisor   = 32
+	tuneSingularTTDepthOffset   = 3
+	tuneHistoryRateCap          = 400
+	tuneHistoryRateScale        = 1
+	tuneHistoryBonusCap         = 2048
+	tunePawnCorrectionWeight    = 3
+	tuneNonPawnCorrectionWeight = 3
+	tuneMinorCorrectionWeight   = 3
+	tuneSoftIncrementPercent    = 80
+	tuneHardSoftMultiplier      = 4
+	tuneHardBankPercent         = 30
 )
 
 // ASP_SCORE_DIV scales the aspiration init window by the previous score's
@@ -57,20 +105,101 @@ type TunableParam struct {
 // Min/Max bound both the spin advertisement and SPSA exploration; Def is the
 // shipped default (== the literal above).
 var TunableSearchParams = []TunableParam{
-	{"NullMoveR", &NULL_MOVE_R, 3, 2, 5},
+	{"T1104ContPlies", &T1104ContPlies, 0, 0, 1},
+	{"W2QCapture", &W2QCapture, 0, 0, 1},
+	{"T1104Cuckoo", &T1104Cuckoo, 0, 0, 1},
+	{"T1104CorrMore", &T1104CorrMore, 0, 0, 1},
+	{"W2NullVerify", &W2NullVerify, 0, 0, 1},
+	{"W2NullMargin", &W2NullMargin, 0, 0, 1},
+	{"W2CorrMargin", &W2CorrMargin, 0, 0, 1},
+	{"W2QChecks", &W2QChecks, 0, 0, 1},
+	{"T1104LowPly", &T1104LowPly, 0, 0, 1},
+	{"T1104PriorBonus", &T1104PriorBonus, 0, 0, 1},
+	{"NullMoveR", &NULL_MOVE_R, 4, 2, 5},
 	{"NullMoveMinDepth", &NULL_MOVE_MIN_DEPTH, 2, 1, 6},
 	{"LMRFullDepth", &LMR_FULL_DEPTH, 3, 1, 6},
+	{"T1104LMRDeeper", &T1104_LMR_DEEPER, 0, 0, 1},
 	{"LMRMoveThreshold", &LMR_MOVE_THRESHOLD, 2, 1, 8},
-	{"FutilityMargin", &FUTILITY_MARGIN, 103, 50, 160},
+	{"T1104LMRCaptures", &T1104_LMR_CAPTURES, 0, 0, 1},
+	{"T1104LMRFractional", &T1104_LMR_FRACTIONAL, 0, 0, 1},
+	{"FutilityMargin", &FUTILITY_MARGIN, 101, 50, 160},
 	{"FutilityMaxDepth", &FUTILITY_MAX_DEPTH, 8, 1, 8},
-	{"ReverseFutilityMargin", &REVERSE_FUTILITY_MARGIN, 88, 40, 300},
-	{"DeltaMargin", &DELTA_MARGIN, 96, 0, 400},
-	{"SingularDepth", &SINGULAR_DEPTH, 6, 4, 12},
-	{"SingularMargin", &SINGULAR_MARGIN, 48, 16, 256},
-	{"ExtensionBudget", &EXTENSION_BUDGET, 26, 4, 64},
-	{"AspInit", &ASP_INIT, 13, 4, 40},
-	{"AspMult", &ASP_MULT, 154, 110, 250},
-	{"LMPBase", &LMP_BASE, 4, 2, 16},
+	{"ReverseFutilityMargin", &REVERSE_FUTILITY_MARGIN, 69, 40, 300},
+	{"DeltaMargin", &DELTA_MARGIN, 261, 0, 400},
+	{"SingularDepth", &SINGULAR_DEPTH, 8, 4, 12},
+	{"SingularMargin", &SINGULAR_MARGIN, 67, 16, 256},
+	{"T1104SingularDouble", &T1104_SINGULAR_DOUBLE, 0, 0, 1},
+	{"ExtensionBudget", &EXTENSION_BUDGET, 29, 4, 64},
+	{"AspInit", &ASP_INIT, 18, 4, 40},
+	{"AspMult", &ASP_MULT, 171, 110, 250},
+	{"LMPBase", &LMP_BASE, 3, 2, 16},
+	{"LMRBase", &tuneLMRBase, 0, 0, 300},
+	{"LMRDivisor", &tuneLMRDivisor, 200, 100, 600},
+	{"HistoryLMRDivisor", &tuneHistoryLMRDivisor, 2500, 500, 6000},
+	{"HistoryLMRCap", &tuneHistoryLMRCap, 2, 1, 5},
+	{"RFPMaxDepth", &tuneRFPMaxDepth, 7, 1, 12},
+	{"RFPImproving", &tuneRFPImproving, 1, 0, 3},
+	{"FutilityImproving", &tuneFutilityImproving, 1, 0, 3},
+	{"LMPQuadratic", &tuneLMPQuadratic, 1, 1, 4},
+	{"LMPNonImprovingDivisor", &tuneLMPNonImprovingDivisor, 2, 1, 5},
+	{"LMPMaxDepth", &tuneLMPMaxDepth, 9, 2, 14},
+	{"SEECaptureDepth", &tuneSEECaptureDepth, 4, 1, 8},
+	{"SEECaptureThreshold", &tuneSEECaptureThreshold, 100, 0, 400},
+	{"SEEQuietDepth", &tuneSEEQuietDepth, 4, 1, 8},
+	{"SEEQuietSlope", &tuneSEEQuietSlope, 80, 0, 300},
+	{"HistoryPruneDepth", &tuneHistoryPruneDepth, 3, 1, 8},
+	{"HistoryPruneThreshold", &tuneHistoryPruneThreshold, 1000, 100, 4000},
+	{"HistoryPruneMoves", &tuneHistoryPruneMoves, 3, 0, 10},
+	{"NullMoveDepthDivisor", &tuneNullMoveDepthDivisor, 600, 100, 1200},
+	{"NullMoveOffset", &tuneNullMoveOffset, 1, 0, 4},
+	{"IIRDepth", &tuneIIRDepth, 4, 2, 10},
+	{"IIRPhase", &tuneIIRPhase, 8, 0, 24},
+	{"IIDDepth", &tuneIIDDepth, 4, 2, 10},
+	{"IIDReduction", &tuneIIDReduction, 2, 1, 4},
+	{"SingularMarginDivisor", &tuneSingularMarginDivisor, 32, 8, 96},
+	{"SingularTTDepthOffset", &tuneSingularTTDepthOffset, 3, 0, 8},
+	{"HistoryRateCap", &tuneHistoryRateCap, 400, 64, 512},
+	{"HistoryRateScale", &tuneHistoryRateScale, 1, 1, 4},
+	{"HistoryBonusCap", &tuneHistoryBonusCap, 2048, 512, 8192},
+	{"PawnCorrectionWeight", &tunePawnCorrectionWeight, 3, 0, 10},
+	{"NonPawnCorrectionWeight", &tuneNonPawnCorrectionWeight, 3, 0, 10},
+	{"MinorCorrectionWeight", &tuneMinorCorrectionWeight, 3, 0, 10},
+	{"SoftIncrementPercent", &tuneSoftIncrementPercent, 80, 0, 150},
+	{"HardSoftMultiplier", &tuneHardSoftMultiplier, 4, 1, 8},
+	{"HardBankPercent", &tuneHardBankPercent, 30, 1, 100},
+}
+
+// singularExtension counts plies added to the normal child depth. The extra
+// margins are provisional centipawn thresholds, pending the fixed-node gate.
+func singularExtension(score, beta int, isPV bool) int {
+	if score >= beta {
+		return 0
+	}
+	ext := 1
+	if T1104_SINGULAR_DOUBLE != 0 && score < beta-32 {
+		ext = 2
+		if !isPV && score < beta-96 {
+			ext = 3
+		}
+	}
+	return ext
+}
+
+// lmrVerificationDepth adjusts a reduced move's verification using its scout
+// score. Strong improvements earn a ply; marginal alpha raises save one.
+// The extra ply must obey the same cumulative extension limit as other moves.
+func lmrVerificationDepth(nextDepth, depth, ply, rootDepth, score, bestScore, alpha int) int {
+	if T1104_LMR_DEEPER == 0 {
+		return nextDepth
+	}
+	if score > bestScore+20+2*depth {
+		if nextDepth+1 <= rootDepth-(ply+1)+EXTENSION_BUDGET && nextDepth+1 <= depth+1 {
+			return nextDepth + 1
+		}
+	} else if score <= alpha+20 && nextDepth > 0 {
+		return nextDepth - 1
+	}
+	return nextDepth
 }
 
 // Late Move Pruning thresholds, indexed [improving][depth] (S4, W11). Follows
@@ -85,14 +214,14 @@ var TunableSearchParams = []TunableParam{
 // therefore computed inline from the tunable base rather than kept as a frozen
 // literal, which exposes it to SPSA without changing a single threshold at the
 // default. Kept as a var (not const) so the UCI/SPSA path can write through it.
-var LMP_BASE = 4
+var LMP_BASE = 3
 
 // lmpThresholdFor returns the late-move-pruning move count for a depth, matching
 // the historical table exactly at LMP_BASE == 5 (integer division intended).
 func lmpThresholdFor(depth int, improving bool) int {
-	t := LMP_BASE + depth*depth
+	t := LMP_BASE + tuneLMPQuadratic*depth*depth
 	if !improving {
-		t /= 2
+		t /= tuneLMPNonImprovingDivisor
 	}
 	return t
 }
@@ -123,10 +252,18 @@ var SearchToggles = struct {
 // killer adjustments, and the depth cap remain on top.
 var lmrTable [64][64]int
 
-func init() {
+const lmrPly = 1024
+
+var lmrFractionalTable [64][64]int
+
+func init() { rebuildLMRTable() }
+
+func rebuildLMRTable() {
 	for d := 1; d < 64; d++ {
 		for m := 1; m < 64; m++ {
-			lmrTable[d][m] = int(math.Log(float64(d)) * math.Log(float64(m)) / 2.0)
+			base := float64(tuneLMRBase)/100 + math.Log(float64(d))*math.Log(float64(m))/(float64(tuneLMRDivisor)/100)
+			lmrTable[d][m] = int(base)
+			lmrFractionalTable[d][m] = int(base * lmrPly)
 		}
 	}
 }
@@ -173,6 +310,102 @@ func seeNonLosingByMVV(move Move) bool {
 		move.CapturedPiece().seeWeight() >= move.MovingPiece().seeWeight()
 }
 
+// quietLMRReduction returns the final quiet reduction, including its cap.
+func quietLMRReduction(depth, legalTried int, isPV, improving bool, histScore int, nodeTTPv, killer bool) int {
+	d, m := depth, legalTried
+	if d > 63 {
+		d = 63
+	}
+	if m > 63 {
+		m = 63
+	}
+	r := lmrTable[d][m]
+	if !isPV {
+		r++
+	}
+	if !improving {
+		r++
+	}
+	if h1NormalizedLMRConsumer {
+		r += h1NormalizedLMRTerm(histScore)
+	} else if histScore < -500 {
+		r++
+	} else if histScore > 1000 {
+		r--
+	}
+	if r < 0 {
+		r = 0
+	}
+	if nodeTTPv {
+		r--
+		if r < 0 {
+			r = 0
+		}
+	}
+	if killer {
+		r--
+		if r < 0 {
+			r = 0
+		}
+	}
+	if r >= depth-1 {
+		r = depth - 2
+	}
+	if r < 0 {
+		r = 0
+	}
+	return r
+}
+
+// quietLMRFractionalReduction applies the fractional-LMR / combined-history
+// idea using NGN's own log table and history scale. GetHistoryScore supplies
+// statScore = main + continuation + follow-up, with absent ancestors omitted.
+// Keep the table and every adjustment in 1/1024 ply until the final nearest-ply
+// rounding; in particular, do not quantize history to h1NormalizedLMRTerm.
+// The cut-node bump is experimental too; the legacy path has no such bump.
+func quietLMRFractionalReduction(depth, legalTried int, isPV, improving bool, statScore int, nodeTTPv, killer, cutNode bool) int {
+	d, m := min(depth, 63), min(legalTried, 63)
+	r := lmrFractionalTable[d][m]
+	if !isPV {
+		r += lmrPly
+	}
+	if !improving {
+		r += lmrPly
+	}
+	if cutNode {
+		r += lmrPly
+	}
+	if nodeTTPv {
+		r -= lmrPly
+	}
+	if killer {
+		r -= lmrPly
+	}
+	stat := statScore * lmrPly / tuneHistoryLMRDivisor
+	stat = max(-tuneHistoryLMRCap*lmrPly, min(stat, tuneHistoryLMRCap*lmrPly))
+	r -= stat
+	r = max(0, min(r, max(0, depth-2)*lmrPly))
+	return (r + lmrPly/2) / lmrPly
+}
+
+// lmrCaptureReduction stays below even the least-reduced eligible quiet at
+// this node. If that quiet is not reduced, the capture is not reduced either.
+func lmrCaptureReduction(pos *Position, move Move, history, depth, legalTried int, isPV, improving, nodeTTPv bool) int {
+	if T1104_LMR_CAPTURES == 0 || !move.IsCapture() || history >= 0 ||
+		!SearchToggles.LMR || depth < LMR_FULL_DEPTH || legalTried <= LMR_MOVE_THRESHOLD {
+		return 0
+	}
+	if isPV && staticExchangeEvaluation(pos, move) > 0 {
+		return 0
+	}
+	// Maximum history bonus and killer status give the smallest quiet reduction.
+	r := quietLMRReduction(depth, legalTried, isPV, improving, 100000, nodeTTPv, true) - 1
+	if r < 0 {
+		return 0
+	}
+	return r
+}
+
 // Static Exchange Evaluation (SEE) implementation
 // Returns the material balance after a series of exchanges on the target square
 func staticExchangeEvaluation(pos *Position, move Move) int {
@@ -180,7 +413,7 @@ func staticExchangeEvaluation(pos *Position, move Move) int {
 	// infinite weight would poison the swap. Quiet (non-capture) moves DO flow
 	// through: gain[0] = 0 (nothing captured) and the swap then evaluates whether
 	// the moving piece survives on its destination square. This is what quiet-move
-	// SEE pruning reads; capture/EP/promotion paths are unchanged.
+	// SEE pruning reads.
 	if move.IsCastle() {
 		return 0
 	}
@@ -189,37 +422,34 @@ func staticExchangeEvaluation(pos *Position, move Move) int {
 	to := move.Destination()
 	targetSquare := to
 
-	// Handle en passant specially
-	if move.IsEnPassant() {
-		// For en passant, the captured pawn is on a different square
-		if move.MovingPiece().Color() == White {
-			targetSquare = Square(int(to) - 8) // Black pawn is one rank down
-		} else {
-			targetSquare = Square(int(to) + 8) // White pawn is one rank up
-		}
-	}
-
 	// Get the initial captured piece value
 	capturedValue := move.CapturedPiece().seeWeight()
-
-	// Get all attackers of the target square
-	attackers := getAttackers(pos, targetSquare)
 
 	// Pawn/knight/king attackers are occupancy-independent (their attack patterns
 	// can't be blocked or revealed), so derive them once and re-mask by occupancy
 	// each swap step instead of rebuilding them in getAttackersAfterMove.
 	nonSlider := seeNonSliderAttackers(pos, targetSquare)
 
-	// Remove the moving piece from attackers (it just moved)
 	movingPiece := move.MovingPiece()
-	attackers &^= SquareMask[int(from)]
 
 	// Initialize the exchange - use stack array to avoid allocation
 	var gain [32]int // Exchange gains on stack
 	depth := 0
 	color := movingPiece.Color().Other() // Side to move after initial capture
-	occupied := pos.Board.GetWhitePieces() | pos.Board.GetBlackPieces()
+	occupied := pos.Board.WhiteOccupancy() | pos.Board.BlackOccupancy()
 	occupied &^= SquareMask[int(from)] // mover left its square -> reveals x-ray attackers behind it
+	if move.IsEnPassant() {
+		// The exchange stays on the destination; only the captured pawn's
+		// original square is removed from occupancy.
+		capturedSquare := int(to) - 8
+		if movingPiece.Color() == Black {
+			capturedSquare = int(to) + 8
+		}
+		occupied &^= SquareMask[capturedSquare]
+	}
+	occupied |= SquareMask[int(to)]
+	// Even the first recapture must see sliders exposed by the initial move.
+	attackers := getAttackersAfterMove(pos, nonSlider, occupied, targetSquare)
 
 	// gain[0] is the value of the piece initially captured. pieceOnSquare tracks
 	// the value of whatever piece now stands on the target square (initially the
@@ -277,8 +507,8 @@ func getAttackers(pos *Position, square Square) uint64 {
 	attackers := uint64(0)
 
 	// Pawn attacks
-	whitePawns := pos.Board.GetBitboardOf(WhitePawn)
-	blackPawns := pos.Board.GetBitboardOf(BlackPawn)
+	whitePawns := pos.Board.PieceOccupancy(WhitePawn)
+	blackPawns := pos.Board.PieceOccupancy(BlackPawn)
 
 	// White pawn attacks. A white pawn attacking `square` sits one rank below it:
 	// at square-9 (its file one LEFT of the target, valid when target file > A) or
@@ -319,32 +549,32 @@ func getAttackers(pos *Position, square Square) uint64 {
 	}
 
 	// Knight attacks
-	whiteKnights := pos.Board.GetBitboardOf(WhiteKnight)
-	blackKnights := pos.Board.GetBitboardOf(BlackKnight)
+	whiteKnights := pos.Board.PieceOccupancy(WhiteKnight)
+	blackKnights := pos.Board.PieceOccupancy(BlackKnight)
 	knightAttacks := KnightAttacks[square]
 	attackers |= (whiteKnights | blackKnights) & knightAttacks
 
 	// King attacks
-	whiteKing := pos.Board.GetBitboardOf(WhiteKing)
-	blackKing := pos.Board.GetBitboardOf(BlackKing)
+	whiteKing := pos.Board.PieceOccupancy(WhiteKing)
+	blackKing := pos.Board.PieceOccupancy(BlackKing)
 	kingAttacks := KingAttacks[square]
 	attackers |= (whiteKing | blackKing) & kingAttacks
 
 	// Bishop/Queen diagonal attacks
-	whiteBishops := pos.Board.GetBitboardOf(WhiteBishop)
-	blackBishops := pos.Board.GetBitboardOf(BlackBishop)
-	whiteQueens := pos.Board.GetBitboardOf(WhiteQueen)
-	blackQueens := pos.Board.GetBitboardOf(BlackQueen)
+	whiteBishops := pos.Board.PieceOccupancy(WhiteBishop)
+	blackBishops := pos.Board.PieceOccupancy(BlackBishop)
+	whiteQueens := pos.Board.PieceOccupancy(WhiteQueen)
+	blackQueens := pos.Board.PieceOccupancy(BlackQueen)
 
 	diagonalAttackers := whiteBishops | blackBishops | whiteQueens | blackQueens
-	attackers |= diagonalAttackers & seeGetBishopAttacks(square, pos.Board.GetWhitePieces()|pos.Board.GetBlackPieces())
+	attackers |= diagonalAttackers & seeGetBishopAttacks(square, pos.Board.WhiteOccupancy()|pos.Board.BlackOccupancy())
 
 	// Rook/Queen straight attacks
-	whiteRooks := pos.Board.GetBitboardOf(WhiteRook)
-	blackRooks := pos.Board.GetBitboardOf(BlackRook)
+	whiteRooks := pos.Board.PieceOccupancy(WhiteRook)
+	blackRooks := pos.Board.PieceOccupancy(BlackRook)
 
 	straightAttackers := whiteRooks | blackRooks | whiteQueens | blackQueens
-	attackers |= straightAttackers & seeGetRookAttacks(square, pos.Board.GetWhitePieces()|pos.Board.GetBlackPieces())
+	attackers |= straightAttackers & seeGetRookAttacks(square, pos.Board.WhiteOccupancy()|pos.Board.BlackOccupancy())
 
 	return attackers
 }
@@ -379,7 +609,7 @@ func findLeastValuableAttacker(pos *Position, attackers uint64, color Color) (Sq
 	}
 	for pt := Pawn; pt <= King; pt++ {
 		piece := Piece(pt) + base
-		pieceBB := pos.Board.GetBitboardOf(piece) & attackers
+		pieceBB := pos.Board.PieceOccupancy(piece) & attackers
 		if pieceBB != 0 {
 			return Square(bits.TrailingZeros64(pieceBB)), piece
 		}
@@ -398,8 +628,8 @@ func seeNonSliderAttackers(pos *Position, targetSquare Square) uint64 {
 	nonSlider := uint64(0)
 
 	// Pawn attacks (file guards paired with the matching offset — see getAttackers).
-	whitePawns := pos.Board.GetBitboardOf(WhitePawn)
-	blackPawns := pos.Board.GetBitboardOf(BlackPawn)
+	whitePawns := pos.Board.PieceOccupancy(WhitePawn)
+	blackPawns := pos.Board.PieceOccupancy(BlackPawn)
 	if targetSquare.Rank() > Rank1 {
 		if targetSquare.File() > FileA {
 			nonSlider |= whitePawns & SquareMask[int(targetSquare)-9]
@@ -418,8 +648,8 @@ func seeNonSliderAttackers(pos *Position, targetSquare Square) uint64 {
 	}
 
 	// Knight + king attacks (occupancy-independent patterns).
-	nonSlider |= (pos.Board.GetBitboardOf(WhiteKnight) | pos.Board.GetBitboardOf(BlackKnight)) & KnightAttacks[targetSquare]
-	nonSlider |= (pos.Board.GetBitboardOf(WhiteKing) | pos.Board.GetBitboardOf(BlackKing)) & KingAttacks[targetSquare]
+	nonSlider |= (pos.Board.PieceOccupancy(WhiteKnight) | pos.Board.PieceOccupancy(BlackKnight)) & KnightAttacks[targetSquare]
+	nonSlider |= (pos.Board.PieceOccupancy(WhiteKing) | pos.Board.PieceOccupancy(BlackKing)) & KingAttacks[targetSquare]
 	return nonSlider
 }
 
@@ -432,17 +662,17 @@ func getAttackersAfterMove(pos *Position, nonSlider uint64, occupied uint64, tar
 	tempAttackers := nonSlider & occupied
 
 	// Bishop/Queen diagonal attacks
-	whiteBishops := pos.Board.GetBitboardOf(WhiteBishop) & occupied
-	blackBishops := pos.Board.GetBitboardOf(BlackBishop) & occupied
-	whiteQueens := pos.Board.GetBitboardOf(WhiteQueen) & occupied
-	blackQueens := pos.Board.GetBitboardOf(BlackQueen) & occupied
+	whiteBishops := pos.Board.PieceOccupancy(WhiteBishop) & occupied
+	blackBishops := pos.Board.PieceOccupancy(BlackBishop) & occupied
+	whiteQueens := pos.Board.PieceOccupancy(WhiteQueen) & occupied
+	blackQueens := pos.Board.PieceOccupancy(BlackQueen) & occupied
 
 	diagonalAttackers := whiteBishops | blackBishops | whiteQueens | blackQueens
 	tempAttackers |= diagonalAttackers & seeGetBishopAttacks(targetSquare, occupied)
 
 	// Rook/Queen straight attacks
-	whiteRooks := pos.Board.GetBitboardOf(WhiteRook) & occupied
-	blackRooks := pos.Board.GetBitboardOf(BlackRook) & occupied
+	whiteRooks := pos.Board.PieceOccupancy(WhiteRook) & occupied
+	blackRooks := pos.Board.PieceOccupancy(BlackRook) & occupied
 
 	straightAttackers := whiteRooks | blackRooks | whiteQueens | blackQueens
 	tempAttackers |= straightAttackers & seeGetRookAttacks(targetSquare, occupied)
@@ -495,6 +725,11 @@ type SearchInfo struct {
 	// are ever read, so no restore on unwind is needed.
 	MoveStack [MaximumDepth]Move
 
+	// TT move used by each live parent's move loop. The separate root loops
+	// do not order by a TT move and leave slot zero empty. Only used when
+	// prior-move learning is enabled; a child's TT move is a different context.
+	priorBonusTTStack [MaximumDepth]Move
+
 	// Zero-allocation buffers passed through recursion
 	MoveBuffer    *[256]Move // For move generation
 	CaptureBuffer *[64]Move  // For capture generation
@@ -504,6 +739,10 @@ type SearchInfo struct {
 	// Pruning and search efficiency statistics
 	FutilityPrunes       uint64 // Moves pruned by futility pruning
 	NullMoveCutoffs      uint64 // Beta cutoffs from null move pruning
+	NullVerifySearches   uint64 // Deep null fail-highs checked on the real position
+	NullVerifyCutoffs    uint64 // Verified deep null cutoffs
+	NullVerifyFailLows   uint64 // Rejected null cutoffs; ordinary move search resumes
+	LMRCaptureReductions uint64 // Capture reductions applied by the experimental option
 	LMRReductions        uint64 // Moves reduced by Late Move Reduction
 	NullWindowScouts     uint64 // Non-first moves searched with a null window (re-search denominator)
 	LMRReSearches        uint64 // Reduced fail-highs re-searched at full depth (LMR verification churn)
@@ -557,6 +796,8 @@ type SearchInfo struct {
 	QStandPatCuts       uint64 // qsearch stand-pat beta cutoffs
 	QDeltaPrunes        uint64 // qsearch delta prunes
 	QSEEPrunes          uint64 // qsearch SEE prunes
+	QChecksAdmitted     uint64 // Legal quiet non-promotion checks appended at qDepth 0
+	QChecksSearched     uint64 // Admitted checks actually searched before a cutoff
 	QBetaCutoffs        uint64 // qsearch beta cutoffs in the capture/evasion loops
 	AspFailLows         uint64 // Aspiration fail-lows (each costs a full-width re-iteration)
 	AspFailHighs        uint64 // Aspiration fail-highs
@@ -566,12 +807,18 @@ type SearchInfo struct {
 	SingularTries       uint64 // Singular verification searches run (success ctr exists)
 	ExtBudgetClamps     uint64 // Paths clamped by the extension budget (explosion lines)
 
+	// Private to this worker's SearchInfo; inherited by all recursive calls.
+	nullVerification bool
+	// Optional deterministic test seam for null-child and verification searches.
+	nullSearch func(*Position, int, int, int, int, bool, bool, bool, *SearchInfo) int
+
 	ExcludedMove Move // Move to exclude during singular search
 	ExcludedPly  int  // ply at which ExcludedMove applies (the singular verification root)
 
 	// Repetition detection during search
 	RepStack    [512]uint64 // Stack of Zobrist hashes on current search path
 	RepStackLen int         // Current depth in repetition stack
+	cuckooStart int         // First ancestor after the most recent null move
 
 	// maxNodes snapshots the `go nodes` budget at search start — it is constant for
 	// the whole search, so the per-node check reads a plain field instead of paying
@@ -631,6 +878,9 @@ func (info *SearchInfo) countNode() bool {
 		return false
 	}
 	info.Nodes++
+	if info.evaluator != nil && info.evaluator.nodeObserver != nil {
+		info.evaluator.nodeObserver()
+	}
 	info.publishNodesIfDue(false)
 	if info.maxNodes != 0 && info.Nodes >= info.maxNodes {
 		info.observeTermination(searchTerminationNodeCap)
@@ -655,6 +905,10 @@ func searchIterativeDeepeningUnsafe(pos *Position, maxDepth int, timeManager *Ti
 }
 
 func searchIterativeDeepeningWorkerUnsafe(pos *Position, maxDepth int, timeManager *TimeManager, callback DepthCallback, control *SearchControl, history *workerHistory, evaluator *workerEvaluator, tt *Cache, options iterativeSearchOptions) *SearchInfo {
+	if timeManager != nil {
+		// Also reset for API searches reusing a manager without reconfiguring clocks.
+		timeManager.scoreTime.reset()
+	}
 	if options.advanceTTAge {
 		tt.AdvanceAge()
 	}
@@ -691,6 +945,9 @@ func searchIterativeDeepeningWorkerUnsafe(pos *Position, maxDepth int, timeManag
 	}
 
 	seedRootStaticEval(pos, info)
+	if T1104Cuckoo != 0 {
+		info.RepStack[0], info.RepStackLen = pos.Hash(), 1
+	}
 
 	// Generate root moves without heap allocations (pseudo-legal; legality handled in search loop)
 	var rootGen [256]Move
@@ -867,6 +1124,10 @@ func searchIterativeDeepeningWorkerUnsafe(pos *Position, maxDepth int, timeManag
 							m = 63
 						}
 						reduction = lmrTable[d][m]
+						if T1104_LMR_FRACTIONAL != 0 {
+							statScore := info.history.GetHistoryScore(move, savedLast, EmptyMove)
+							reduction = quietLMRFractionalReduction(currentDepth, legalRoot, true, true, statScore, false, info.history.IsKillerMove(move, 0), false)
+						}
 						if reduction >= currentDepth-1 {
 							reduction = currentDepth - 2
 						}
@@ -950,6 +1211,9 @@ func searchIterativeDeepeningWorkerUnsafe(pos *Position, maxDepth int, timeManag
 				return info
 			}
 			if h1NewHistoryProducer {
+				info.history.updatePawnQuiets(pos,
+					h1CompletedQuiets(&completedRootQuiets, completedRootQuietCount),
+					iterationBestMove, currentDepth, windowAlpha, iterationBestScore)
 				info.history.h1UpdateCompletedNode(
 					h1CompletedQuiets(&completedRootQuiets, completedRootQuietCount),
 					iterationBestMove,
@@ -1020,7 +1284,7 @@ func searchIterativeDeepeningWorkerUnsafe(pos *Position, maxDepth int, timeManag
 					if totalAttemptNodes > 0 {
 						bestMoveNodeFraction = float64(bestMoveNodes) / float64(totalAttemptNodes)
 					}
-					info.TimeManager.ReportCompletedIteration(bestMoveChanged, attempts == 1, bestMoveNodeFraction)
+					info.TimeManager.ReportCompletedIteration(bestMoveChanged, attempts == 1, bestMoveNodeFraction, iterationBestScore)
 					info.TimeManager.observeCompletedIteration(currentDepth, attempts)
 				}
 			}
@@ -1097,7 +1361,7 @@ func extractPVFromTT(tt *Cache, pos *Position, firstMove Move, maxLength int) []
 	type undoEntry struct {
 		move Move
 		ep   Square
-		tag  PositionTag
+		tag  PositionState
 		hc   uint8
 	}
 	pv := make([]Move, 0, maxLength)
@@ -1198,6 +1462,9 @@ func pvDrawTerminal(pos *Position, repetitionCount int) bool {
 // NOT centipawn-identical (guarded by TestSearchFixedMatchesProductionScore). Do
 // not draw strength conclusions from it.
 func searchFixedUnsafe(pos *Position, depth int, timeManager *TimeManager, control *SearchControl, history *workerHistory, evaluator *workerEvaluator, tt *Cache) *SearchInfo {
+	if timeManager != nil {
+		timeManager.scoreTime.reset()
+	}
 	// Allocate buffers once for the entire search tree
 	var moveBuffer [256]Move
 	var captureBuffer [64]Move
@@ -1241,6 +1508,9 @@ func searchFixedUnsafe(pos *Position, depth int, timeManager *TimeManager, contr
 	}
 
 	seedRootStaticEval(pos, info)
+	if T1104Cuckoo != 0 {
+		info.RepStack[0], info.RepStackLen = pos.Hash(), 1
+	}
 
 	var orderedRoot [256]Move
 	orderedCount := info.history.orderMovesIntoBufferWithDepth(moves, 0, orderedRoot[:], pos) // killers are ply-keyed; root is ply 0
@@ -1376,9 +1646,9 @@ func seedRootStaticEval(pos *Position, info *SearchInfo) {
 	}
 	stm := pos.Turn()
 	corrIdx := pawnCorrectionIndex(pos.Board.pieces[WhitePawn], pos.Board.pieces[BlackPawn])
-	nonPawnCorrIdx := nonPawnCorrectionIndex(pos.Board.GetWhitePieces()&^pos.Board.pieces[WhitePawn], pos.Board.GetBlackPieces()&^pos.Board.pieces[BlackPawn])
+	nonPawnCorrIdx := nonPawnCorrectionIndex(pos.Board.WhiteOccupancy()&^pos.Board.pieces[WhitePawn], pos.Board.BlackOccupancy()&^pos.Board.pieces[BlackPawn])
 	minorCorrIdx := minorCorrectionIndex(pos.Board.pieces[WhiteKnight]|pos.Board.pieces[WhiteBishop], pos.Board.pieces[BlackKnight]|pos.Board.pieces[BlackBishop])
-	info.StaticEvalStack[0] = info.evaluator.SearchSTM(pos) + info.history.correctionValue(stm, corrIdx) + info.history.nonPawnCorrectionValue(stm, nonPawnCorrIdx) + info.history.minorCorrectionValue(stm, minorCorrIdx)
+	info.StaticEvalStack[0] = info.history.moreCorrection(pos, EmptyMove) + info.evaluator.SearchSTM(pos) + info.history.correctionValue(stm, corrIdx) + info.history.nonPawnCorrectionValue(stm, nonPawnCorrIdx) + info.history.minorCorrectionValue(stm, minorCorrIdx)
 }
 
 // searchDrawScore applies the same terminal rules in the main and quiescence
@@ -1467,6 +1737,14 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 	if score, drawn := searchDrawScore(pos, ply, hash, info); drawn {
 		return score
 	}
+	incomingAlpha := alpha
+	cycleMove := cuckooRepetitionMove(pos, ply, alpha, hash, info)
+	if cycleMove != EmptyMove {
+		alpha = 0
+		if alpha >= beta {
+			return alpha
+		}
+	}
 
 	// Push current hash onto repetition stack
 	if info.RepStackLen < len(info.RepStack) {
@@ -1502,7 +1780,7 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 	// for move ordering; only the cutoff and the (corrupting) store are skipped.
 	inSingular := info.ExcludedMove != EmptyMove && ply == info.ExcludedPly
 
-	if ttHit && !isPV && ttDepth >= int8(depth) && !inSingular {
+	if ttHit && !isPV && ttDepth >= int8(depth) && !inSingular && (cycleMove == EmptyMove || ttEval >= 0) {
 		info.TTHits++
 		switch ttNodeType {
 		case Exact:
@@ -1521,9 +1799,9 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 
 	// Internal Iterative Deepening (IID)
 	// When we have no TT move at high depth, do a reduced search to find one
-	if SearchToggles.IID && ttMove == EmptyMove && depth >= 4 && isPV {
+	if SearchToggles.IID && ttMove == EmptyMove && depth >= tuneIIDDepth && isPV {
 		// Search at reduced depth to get a good move for ordering
-		iidDepth := depth - 2
+		iidDepth := depth - tuneIIDReduction
 		if iidDepth < 1 {
 			iidDepth = 1
 		}
@@ -1550,7 +1828,7 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 	// cutNode (not all-nodes) and skipped in low-material positions (accPhase < 8):
 	// endgames are low-branching and need depth, where reducing no-TT-move nodes cost
 	// ~2-4 ply in the probe and turned the unguarded version net-negative.
-	if ttMove == EmptyMove && depth >= 4 && cutNode && pos.Board.accPhase >= 8 {
+	if ttMove == EmptyMove && depth >= tuneIIRDepth && cutNode && pos.Board.accPhase >= tuneIIRPhase {
 		depth--
 	}
 
@@ -1584,6 +1862,7 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 	// ago to keep the improving chain sane across checking plies.
 	stm := pos.Turn()
 	var staticEval int
+	rawStaticEval := unknownStaticEval
 	var corrIdx int        // pawn-correction slot; valid only when !inCheck
 	var nonPawnCorrIdx int // non-pawn-correction slot; valid only when !inCheck
 	var minorCorrIdx int   // minor-piece-correction slot; valid only when !inCheck
@@ -1592,6 +1871,10 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 	// (updatePawnCorrection, same form as gravityUpdate), which converges to the full correction only when
 	// it learns from the corrected value; learning from raw would saturate the entry to the clamp limit.
 	var corrStaticEval int
+	previous := EmptyMove
+	if T1104CorrMore != 0 && ply > 0 {
+		previous = info.MoveStack[ply-1]
+	}
 	if inCheck {
 		if ply >= 2 {
 			staticEval = info.StaticEvalStack[ply-2]
@@ -1600,9 +1883,10 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 		}
 	} else {
 		corrIdx = pawnCorrectionIndex(pos.Board.pieces[WhitePawn], pos.Board.pieces[BlackPawn])
-		nonPawnCorrIdx = nonPawnCorrectionIndex(pos.Board.GetWhitePieces()&^pos.Board.pieces[WhitePawn], pos.Board.GetBlackPieces()&^pos.Board.pieces[BlackPawn])
+		nonPawnCorrIdx = nonPawnCorrectionIndex(pos.Board.WhiteOccupancy()&^pos.Board.pieces[WhitePawn], pos.Board.BlackOccupancy()&^pos.Board.pieces[BlackPawn])
 		minorCorrIdx = minorCorrectionIndex(pos.Board.pieces[WhiteKnight]|pos.Board.pieces[WhiteBishop], pos.Board.pieces[BlackKnight]|pos.Board.pieces[BlackBishop])
-		staticEval = info.evaluator.SearchSTM(pos) + info.history.correctionValue(stm, corrIdx) + info.history.nonPawnCorrectionValue(stm, nonPawnCorrIdx) + info.history.minorCorrectionValue(stm, minorCorrIdx)
+		rawStaticEval = info.evaluator.SearchSTM(pos)
+		staticEval = info.history.moreCorrection(pos, previous) + rawStaticEval + info.history.correctionValue(stm, corrIdx) + info.history.nonPawnCorrectionValue(stm, nonPawnCorrIdx) + info.history.minorCorrectionValue(stm, minorCorrIdx)
 		corrStaticEval = staticEval // T4: capture the corrected static (raw + pawn + non-pawn + minor) BEFORE S7 overwrites it (all tables' learn target)
 		// S7: a search-refined TT score is a sharper static estimate than a fresh
 		// eval for the margin heuristics below (RFP/futility/NMP/improving). Use it
@@ -1630,12 +1914,14 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 	// improving (SF11 217*(d-improving), Ethereal/Weiss equivalents) — every
 	// reference engine prunes harder when the eval is NOT trending up; the
 	// ungated depth<=8 extension inflated sharp-position trees (probe-rejected).
-	if SearchToggles.RFP && depth <= 7 && !inCheck && beta-alpha == 1 {
+	if SearchToggles.RFP && depth <= tuneRFPMaxDepth && !inCheck && beta-alpha == 1 {
 		imp := 0
 		if improving {
-			imp = 1
+			imp = tuneRFPImproving
 		}
 		margin := REVERSE_FUTILITY_MARGIN * (depth - imp)
+		// Use the learned correction before TT substitution, only for RFP.
+		margin += wave2CorrMargin(rawStaticEval, corrStaticEval)
 		if staticEval-margin >= beta {
 			info.RFPPrunes++
 			return staticEval - margin
@@ -1650,7 +1936,7 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 	if SearchToggles.Futility && depth <= FUTILITY_MAX_DEPTH && !inCheck && !isPV { // Don't prune in PV nodes
 		imp := 0
 		if improving {
-			imp = 1
+			imp = tuneFutilityImproving
 		}
 		margin := FUTILITY_MARGIN * (depth + imp)
 		if staticEval+margin <= alpha {
@@ -1674,12 +1960,13 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 	// all-node is expected to fail low, so NMP's "this node is already >= beta" premise is
 	// wrong there and the null search is speculative work against the node's own expectation.
 	// This makes the code match the claim the comment above already makes.
-	if SearchToggles.NullMove && !inCheck && depth >= NULL_MOVE_MIN_DEPTH && canNull && !isPV && cutNode && staticEval >= beta &&
+	if SearchToggles.NullMove && info.allowNullMove(alpha, beta) && !inCheck && depth >= NULL_MOVE_MIN_DEPTH && canNull && !isPV && cutNode && staticEval >= beta &&
 		hasNonPawnMaterial(&pos.Board, pos.Turn()) &&
 		!(ttHit && ttNodeType == UpperBound && ttEval < beta) {
 		// Set lastMovePlayed to EmptyMove so children don't pick spurious
 		// counter-move replies keyed on our own prior move.
 		savedLast := info.history.GetLastMovePlayed()
+		savedMove := info.MoveStack[ply]
 		info.NullMoveTries++
 		evalNull := info.evaluator.mustPrepareNull(pos)
 		oldEP := pos.MakeNullMove()
@@ -1691,22 +1978,33 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 		// reduction depth-NULL_MOVE_R-1 = -1 trips the negative-depth guard and
 		// verifies the null move with a raw static eval (tactically blind) instead
 		// of quiescence; flooring routes it through qsearch like the depth>=4 path.
-		nullDepth := depth - (NULL_MOVE_R + 1 + depth/6) // NMP reduction: tunable base NULL_MOVE_R (def 3 => R+1=4) + depth-scaling; CG/Ethereal/Weiss converge
+		nullDepth := depth - (NULL_MOVE_R + tuneNullMoveOffset + depth*100/tuneNullMoveDepthDivisor) // NMP reduction: tunable base NULL_MOVE_R (def 3 => R+1=4) + depth-scaling; CG/Ethereal/Weiss converge
+		nullDepth -= wave2NullMargin(corrStaticEval, beta)
 		if nullDepth < 0 {
 			nullDepth = 0
 		}
-		score := -alphaBetaPV(pos, nullDepth, ply+1, -beta, -beta+1, false, false, !cutNode, info)
+		savedCuckooStart := info.cuckooStart
+		info.cuckooStart = info.RepStackLen
+		score := -info.searchNullChild(pos, nullDepth, ply+1, -beta, -beta+1, !cutNode)
+		info.cuckooStart = savedCuckooStart
 
 		info.evaluator.mustPop()
 		pos.UnMakeNullMove(oldEP)
 		info.history.SetLastMovePlayed(savedLast)
+		info.MoveStack[ply] = savedMove
 		if info.Stopped {
 			return stoppedSearchScore
 		}
 
 		if score >= beta {
-			info.NullMoveCutoffs++
-			return beta
+			verified := info.verifyNullCutoff(pos, depth, ply, beta, cutNode)
+			if info.Stopped {
+				return stoppedSearchScore
+			}
+			if verified {
+				info.NullMoveCutoffs++
+				return beta
+			}
 		}
 	}
 
@@ -1794,7 +2092,7 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 	if SearchToggles.Singular && ttHit && ttMove != EmptyMove && depth >= SINGULAR_DEPTH &&
 		info.ExcludedMove == EmptyMove && // Not already in singular search
 		(ttNodeType == Exact || ttNodeType == LowerBound) &&
-		ttDepth >= int8(depth-3) {
+		ttDepth >= int8(depth-tuneSingularTTDepthOffset) {
 		singularMove = ttMove
 	}
 
@@ -1826,15 +2124,24 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 	if ply >= 2 {
 		prev2 = info.MoveStack[ply-2]
 	}
+	prev4, prev6 := info.contPlies(ply)
+	if T1104PriorBonus != 0 {
+		info.priorBonusTTStack[ply] = ttMove
+	}
 	ordered := frame.ordered[:]
 	scores := frame.scores[:]
-	orderedCount, ttIndex := info.history.scoreMovesIntoBuffer(moves, ply, info.history.GetLastMovePlayed(), prev2, ttMove, ttHit, ordered, scores, pos, true)
+	orderedCount, ttIndex := info.history.scoreMovesIntoBuffer(moves, ply, info.history.GetLastMovePlayed(), prev2, ttMove, ttHit, ordered, scores, pos, true, prev4, prev6)
 	info.MoveLoopNodes++
 	if ttIndex >= 0 {
 		info.TTMoveListed++
 	}
 	bestScore := -INFINITY
 	bestMove := EmptyMove
+	if cycleMove != EmptyMove {
+		// The legal closing move guarantees a draw even if quiet pruning skips
+		// it. Keep this path-dependent floor out of position-only TT entries.
+		bestScore, bestMove = 0, cycleMove
+	}
 	moveCount := 0
 	legalTried := 0
 
@@ -1908,7 +2215,7 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 		// Late Move Pruning (LMP) - skip very late quiet moves at low depths
 		// Only apply in non-PV nodes, not in check, and for quiet moves
 		// Use legalTried (not moveCount) since moveCount includes illegal moves
-		if SearchToggles.LMP && !isPV && !inCheck && depth > 0 && depth < 9 &&
+		if SearchToggles.LMP && !isPV && !inCheck && depth > 0 && depth < tuneLMPMaxDepth &&
 			!move.IsCapture() && move.PromoType() == NoType && move != ttMove && legalTried > 0 {
 			threshold := lmpThresholdFor(depth, improving)
 			if legalTried > threshold {
@@ -1920,9 +2227,9 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 		// SEE pruning for bad captures in main search
 		// Skip obviously losing captures at low depths (not in PV, not TT move).
 		// legalTried > 0 guard (F1): never prune before one legal move is searched.
-		if SearchToggles.SEEPrune && !isPV && !inCheck && depth <= 4 && move.IsCapture() && move != ttMove && legalTried > 0 {
+		if SearchToggles.SEEPrune && !isPV && !inCheck && depth <= tuneSEECaptureDepth && move.IsCapture() && move != ttMove && legalTried > 0 {
 			// Skip the full swap when the capture is provably non-losing (SEE >= 0 > -100).
-			if !seeNonLosingByMVV(move) && staticExchangeEvaluation(pos, move) < -100 { // losing more than a pawn
+			if !seeNonLosingByMVV(move) && staticExchangeEvaluation(pos, move) < -tuneSEECaptureThreshold { // losing more than a pawn
 				info.SEECapPrunes++
 				continue
 			}
@@ -1934,10 +2241,10 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 		// larger losses. Exclude the TT move, promotions (tactical), and king
 		// moves — the king's infinite SEE weight poisons the swap, and a pinned
 		// enemy "attacker" of a king square may not be a legal capture.
-		if SearchToggles.SEEPrune && !isPV && !inCheck && depth <= 4 &&
+		if SearchToggles.SEEPrune && !isPV && !inCheck && depth <= tuneSEEQuietDepth &&
 			!move.IsCapture() && move != ttMove && move.PromoType() == NoType && legalTried > 0 {
 			if mp := move.MovingPiece(); mp != WhiteKing && mp != BlackKing {
-				if staticExchangeEvaluation(pos, move) < -80*depth {
+				if staticExchangeEvaluation(pos, move) < -tuneSEEQuietSlope*depth {
 					info.SEEQuietPrunes++
 					continue
 				}
@@ -1945,9 +2252,9 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 		}
 
 		// History pruning: skip quiet moves with very bad history at low depths
-		if SearchToggles.HistPrune && !isPV && !inCheck && depth <= 3 && !move.IsCapture() && move.PromoType() == NoType && move != ttMove {
-			histScore := info.history.GetHistoryScore(move, info.history.GetLastMovePlayed(), prev2)
-			if histScore < -1000 && legalTried > 3 { // Very bad history and not early move
+		if SearchToggles.HistPrune && !isPV && !inCheck && depth <= tuneHistoryPruneDepth && !move.IsCapture() && move.PromoType() == NoType && move != ttMove {
+			histScore := info.history.GetHistoryScore(move, info.history.GetLastMovePlayed(), prev2, prev4, prev6)
+			if histScore < -tuneHistoryPruneThreshold && legalTried > tuneHistoryPruneMoves { // Very bad history and not early move
 				info.HistPrunes++
 				continue
 			}
@@ -1963,6 +2270,10 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 		// so children see the correct lastMovePlayed for counter-move lookups,
 		// and extension logic uses the true parent move.
 		savedLast := info.history.GetLastMovePlayed()
+		capReduction := 0
+		if T1104_LMR_CAPTURES != 0 && !inCheck && move.IsCapture() {
+			capReduction = lmrCaptureReduction(pos, move, info.history.captureHistoryScore(move), depth, legalTried+1, isPV, improving, nodeTTPv)
+		}
 		evalMove := info.evaluator.mustPrepareMove(pos, move)
 		ep, tag, hc, _ := pos.MakeMove(move)
 		movingColor := move.MovingPiece().Color()
@@ -2020,9 +2331,9 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 			if (color == White && destRank >= 6) || (color == Black && destRank <= 1) {
 				var oppPawns uint64
 				if color == White {
-					oppPawns = pos.Board.GetBitboardOf(BlackPawn)
+					oppPawns = pos.Board.PieceOccupancy(BlackPawn)
 				} else {
-					oppPawns = pos.Board.GetBitboardOf(WhitePawn)
+					oppPawns = pos.Board.PieceOccupancy(WhitePawn)
 				}
 				if passedPawnFrontSpan[color][dest]&oppPawns == 0 && nextDepth+1 <= depth {
 					nextDepth++
@@ -2041,7 +2352,7 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 			pos.UnMakeMove(move, tag, ep, hc)
 			info.history.SetLastMovePlayed(savedLast)
 
-			singularBeta := int(ttEval) - (SINGULAR_MARGIN*depth)/32 // singular margin: tunable base SINGULAR_MARGIN (def 64 => 2*depth) depth-scaled; CG/Ethereal/Weiss converge here
+			singularBeta := int(ttEval) - (SINGULAR_MARGIN*depth)/tuneSingularMarginDivisor // singular margin: tunable base SINGULAR_MARGIN (def 64 => 2*depth) depth-scaled; CG/Ethereal/Weiss converge here
 			info.SingularTries++
 			info.ExcludedMove = singularMove
 			info.ExcludedPly = ply           // the verification re-searches THIS node's position
@@ -2068,9 +2379,12 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 			info.evaluator.mustPushMadeMove(pos, evalMove, move, tag, ep, hc)
 			info.history.SetLastMovePlayed(move)
 			info.MoveStack[ply] = move
+			if T1104PriorBonus != 0 {
+				info.priorBonusTTStack[ply] = ttMove
+			}
 
-			if singularScore < singularBeta {
-				nextDepth++
+			if extension := singularExtension(singularScore, singularBeta, isPV); extension > 0 {
+				nextDepth += extension
 				info.SingularExtensions++
 			} else if !isPV && ttEval >= beta {
 				// Singular-neg-ext (W-SE2): the verification failed high — another move
@@ -2082,13 +2396,16 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 			}
 		}
 
-		if nextDepth > depth+1 {
-			// Guardrail: limit extensions to at most +1 beyond current depth
-			nextDepth = depth + 1
+		maxNodeDepth := depth + 1
+		if T1104_SINGULAR_DOUBLE != 0 {
+			maxNodeDepth = depth + 2
+		}
+		if nextDepth > maxNodeDepth {
+			nextDepth = maxNodeDepth
 		}
 
 		// Per-path extension budget (anti-explosion). The per-node guardrail above
-		// caps a single node at +1, but a check extension only RESTORES the decrement
+		// caps a single node, but a check extension only RESTORES the decrement
 		// (nextDepth == depth), so a non-decaying checking line keeps depth flat and
 		// can recurse toward MaximumDepth (the seldepth-111, ~20x-node explosion).
 		// Bound the CUMULATIVE net extension on this root-to-leaf path: the child's
@@ -2116,68 +2433,24 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 			if SearchToggles.LMR && depth >= LMR_FULL_DEPTH && legalTried > LMR_MOVE_THRESHOLD &&
 				!move.IsCapture() && move.PromoType() == NoType && !inCheck && !givesCheck {
 
-				// Stockfish-style log-based base reduction; non-PV gets +1
-				d := depth
-				if d > 63 {
-					d = 63
-				}
-				m := legalTried
-				if m > 63 {
-					m = 63
-				}
-				reduction = lmrTable[d][m]
-				if !isPV {
-					reduction++
-				}
-
-				// Reduce one less ply when our position is improving.
-				if !improving {
-					reduction++
-				}
-				// History-based LMR adjustment:
-				// Reduce more for moves with bad history, less for moves with good history
-				histScore := info.history.GetHistoryScore(move, savedLast, prev2)
-				if h1NormalizedLMRConsumer {
-					reduction += h1NormalizedLMRTerm(histScore)
-				} else if histScore < -500 {
-					reduction++ // Bad history = reduce more
-				} else if histScore > 1000 {
-					reduction-- // Good history = reduce less
-				}
-				if reduction < 0 {
-					reduction = 0
-				}
-
-				// T19: reduce less at nodes that have ever been PV. NGN's FMC is ~84%
-				// vs elite ~90% and T3a proved ADDING reduction hurts here, so this
-				// moves with the measured weakness rather than against it.
-				if nodeTTPv {
-					reduction--
-					if reduction < 0 {
-						reduction = 0
-					}
-				}
-
-				// Killer move reduction adjustment - don't reduce killer moves as much
-				if info.history.IsKillerMove(move, ply) {
-					reduction-- // Reduce less for killer moves
-					if reduction < 0 {
-						reduction = 0
-					}
-				}
-
-				// Cap maximum reduction
-				if reduction >= depth-1 {
-					reduction = depth - 2
-				}
-				if reduction < 0 {
-					reduction = 0
+				histScore := info.history.GetHistoryScore(move, savedLast, prev2, prev4, prev6)
+				if T1104_LMR_FRACTIONAL != 0 {
+					reduction = quietLMRFractionalReduction(depth, legalTried, isPV, improving, histScore, nodeTTPv, info.history.IsKillerMove(move, ply), cutNode)
+				} else {
+					reduction = quietLMRReduction(depth, legalTried, isPV, improving, histScore, nodeTTPv, info.history.IsKillerMove(move, ply))
 				}
 				// Track LMR usage
 				if reduction > 0 {
 					info.LMRReductions++
 					info.LMRPliesSum += uint64(reduction)
 				}
+			}
+
+			if capReduction > 0 && !givesCheck {
+				info.LMRCaptureReductions++
+				reduction = capReduction
+				info.LMRReductions++
+				info.LMRPliesSum += uint64(reduction)
 			}
 
 			// Compute reduced depth (check extension already applied via nextDepth)
@@ -2205,7 +2478,8 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 			// per-path extension budget bounds the check recursion this re-search opens.
 			if reduction > 0 && score > alpha {
 				info.LMRReSearches++
-				score = -alphaBetaPV(pos, nextDepth, ply+1, -alpha-1, -alpha, false, true, !cutNode, info)
+				verifyDepth := lmrVerificationDepth(nextDepth, depth, ply, info.RootDepth, score, bestScore, alpha)
+				score = -alphaBetaPV(pos, verifyDepth, ply+1, -alpha-1, -alpha, false, true, !cutNode, info)
 				if info.Stopped {
 					info.evaluator.mustPop()
 					pos.UnMakeMove(move, tag, ep, hc)
@@ -2247,14 +2521,18 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 
 		if score >= beta {
 			if h1NewHistoryProducer {
+				info.history.updatePawnQuiets(pos,
+					h1CompletedQuiets(&frame.completedHistoryQuiets, completedHistoryQuietCount),
+					bestMove, depth, incomingAlpha, bestScore)
 				info.history.h1UpdateCompletedNode(
 					h1CompletedQuiets(&frame.completedHistoryQuiets, completedHistoryQuietCount),
 					bestMove,
 					savedLast,
 					prev2,
 					depth,
-					origAlpha,
+					incomingAlpha,
 					bestScore,
+					prev4, prev6,
 				)
 			}
 			info.BetaCutoffs++
@@ -2314,8 +2592,9 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 			}
 			// Policy 00/01 retain cutoff-only gravity history. Policy 10/11 has
 			// already applied the completed-winner response exactly once above.
+			info.history.updateLowPly(move, ply, depth)
 			if !h1NewHistoryProducer {
-				info.history.UpdateHistoryTable(move, savedLast, prev2, depth)
+				info.history.UpdateHistoryTable(move, savedLast, prev2, depth, prev4, prev6)
 			}
 			// Update killer moves for quiet moves that cause beta cutoffs
 			info.history.UpdateKillerMoves(move, ply)
@@ -2328,7 +2607,7 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 				for i := 0; i < searchedQuietCount; i++ {
 					quietMove := searchedQuiets[i]
 					if quietMove != move {
-						info.history.PenalizeHistoryTable(quietMove, savedLast, prev2, depth)
+						info.history.PenalizeHistoryTable(quietMove, savedLast, prev2, depth, prev4, prev6)
 					}
 				}
 			}
@@ -2348,6 +2627,7 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 			info.history.maybeUpdatePawnCorrection(stm, corrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
 			info.history.maybeUpdateNonPawnCorrection(stm, nonPawnCorrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
 			info.history.maybeUpdateMinorCorrection(stm, minorCorrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
+			info.history.maybeUpdateMore(pos, previous, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
 
 			// Store in transposition table as Lower Bound (Cut-Node). Skip at the
 			// singular verification root: its result is a move-excluded search and
@@ -2378,21 +2658,36 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 	}
 
 	if h1NewHistoryProducer && !info.Stopped {
+		info.history.updatePawnQuiets(pos,
+			h1CompletedQuiets(&frame.completedHistoryQuiets, completedHistoryQuietCount),
+			bestMove, depth, incomingAlpha, bestScore)
 		info.history.h1UpdateCompletedNode(
 			h1CompletedQuiets(&frame.completedHistoryQuiets, completedHistoryQuietCount),
 			bestMove,
 			info.history.GetLastMovePlayed(),
 			prev2,
 			depth,
-			origAlpha,
+			incomingAlpha,
 			bestScore,
+			prev4, prev6,
 		)
 	}
 
+	// A restricted singular search cannot establish that every reply fails low.
+	if T1104PriorBonus != 0 && !inSingular {
+		info.rewardPriorQuiet(depth, ply, incomingAlpha, bestScore)
+	}
+
 	// Learn the pawn-structure + non-pawn + minor corrections from the completed search of this node.
-	info.history.maybeUpdatePawnCorrection(stm, corrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
-	info.history.maybeUpdateNonPawnCorrection(stm, nonPawnCorrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
-	info.history.maybeUpdateMinorCorrection(stm, minorCorrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
+	// A fail-low with one move excluded is not an upper bound for the ordinary
+	// position. Fail-high learning above remains valid: a restricted lower
+	// bound is also a lower bound for the full move set.
+	if !inSingular {
+		info.history.maybeUpdatePawnCorrection(stm, corrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
+		info.history.maybeUpdateNonPawnCorrection(stm, nonPawnCorrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
+		info.history.maybeUpdateMinorCorrection(stm, minorCorrIdx, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
+		info.history.maybeUpdateMore(pos, previous, corrStaticEval, bestScore, beta, depth, bestMove, inCheck)
+	}
 
 	// Store in transposition table
 	var nodeType NodeType
@@ -2409,7 +2704,7 @@ func alphaBetaPV(pos *Position, depth int, ply int, alpha int, beta int, isPV bo
 
 	// Skip the store at the singular verification root (move-excluded result must
 	// not overwrite the real entry for this position).
-	if !inSingular {
+	if !inSingular && (cycleMove == EmptyMove || bestScore > 0) {
 		info.tt.Set(hash, bestMove, scoreToTT(bestScore, ply), int8(depth), nodeType, nodeTTPv)
 	}
 	return bestScore
@@ -2431,6 +2726,31 @@ func depthBand(depth int) int {
 
 func quiescence(pos *Position, alpha int, beta int, ply int, info *SearchInfo) int {
 	return quiescenceWithDepth(pos, alpha, beta, ply, info, 0)
+}
+
+// appendQuietPromotions appends the four non-capturing promotion variants for
+// each pawn with an empty promotion square. It is deliberately pseudo-legal:
+// qsearch's existing MakeMove/isInCheck gate remains the sole legality policy.
+// This avoids full move generation at every qnode while retaining all promotions.
+func appendQuietPromotions(pos *Position, moves []Move) int {
+	occupied := pos.Board.WhiteOccupancy() | pos.Board.BlackOccupancy()
+	pawns, step, piece := pos.Board.PieceOccupancy(WhitePawn)&RankMasks[Rank7], 8, WhitePawn
+	if pos.Turn() == Black {
+		pawns, step, piece = pos.Board.PieceOccupancy(BlackPawn)&RankMasks[Rank2], -8, BlackPawn
+	}
+	n := 0
+	for pawns != 0 {
+		from := Square(bits.TrailingZeros64(pawns))
+		to := Square(int(from) + step)
+		if occupied&SquareMask[int(to)] == 0 {
+			for _, promo := range [...]PieceType{Queen, Rook, Bishop, Knight} {
+				moves[n] = NewMove(from, to, piece, NoPiece, promo, 0)
+				n++
+			}
+		}
+		pawns &^= SquareMask[int(from)]
+	}
+	return n
 }
 
 func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *SearchInfo, qDepth int) int {
@@ -2459,18 +2779,37 @@ func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *Sear
 	if score, drawn := searchDrawScore(pos, ply, hash, info); drawn {
 		return score
 	}
+	cycleMove := cuckooRepetitionMove(pos, ply, alpha, hash, info)
+	if cycleMove != EmptyMove {
+		alpha = 0
+		if alpha >= beta {
+			return alpha
+		}
+	}
 	inCheck := pos.IsInCheck()
 
-	// qDepth remains a diagnostic/call-site argument, not a capture horizon.
+	// qDepth bounds only the optional quiet-check layer, never captures.
 	// Qsearch lower bounds share depth-0 TT entries, so a capture-only cap here
 	// would let a shorter search certify a bound for a later, longer one.
 	// TT cutoff probe. Qsearch is depth 0; any cached entry at depth >= 0
 	// covers us (main search stores at depth >= 1 only). Mate scores need
 	// converting from node-relative TT encoding back to root-relative.
 	// Also keep ttMove for move ordering even when no cutoff is taken.
+	// The extra choices change the depth-0 bound. Isolate their entries from
+	// capture-only descendants, and retain the ordinary hash move for ordering.
+	qchecks := W2QChecks == 1 && qDepth == 0 && !inCheck
+	ttHash := hash
+	if qchecks {
+		ttHash ^= wave2QChecksTTKey
+	}
 	ttMove, ttEvalRaw, _, ttNodeType, ttHit, ttPvEntry := info.tt.Get(hash)
+	if qchecks {
+		// Preserve exactly the ordinary noisy ordering hint even if the
+		// enhanced entry's best move is a quiet check.
+		_, ttEvalRaw, _, ttNodeType, ttHit, ttPvEntry = info.tt.Get(ttHash)
+	}
 	info.QTTProbes++
-	if ttHit {
+	if ttHit && (cycleMove == EmptyMove || scoreFromTT(ttEvalRaw, ply) >= 0) {
 		info.QTTHits++
 		ttEval := scoreFromTT(ttEvalRaw, ply)
 		switch ttNodeType {
@@ -2536,6 +2875,9 @@ func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *Sear
 		}
 
 		bestScore := -INFINITY
+		if cycleMove != EmptyMove {
+			bestScore = 0
+		}
 		legalMoves := 0
 
 		for i := 0; i < moveCount; i++ {
@@ -2552,6 +2894,9 @@ func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *Sear
 			info.evaluator.mustPushMadeMove(pos, evalMove, move, tag, ep, hc)
 			legalMoves++
 
+			if T1104CorrMore != 0 && ply < MaximumDepth {
+				info.MoveStack[ply] = move
+			}
 			score := -quiescenceWithDepth(pos, -beta, -alpha, ply+1, info, qDepth+1)
 			info.evaluator.mustPop()
 			pos.UnMakeMove(move, tag, ep, hc)
@@ -2614,7 +2959,23 @@ func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *Sear
 	// route through (evaluateLazyStandPat) is pinned dead — qsearchLazyMargin=100000
 	// means lazyFailHigh never fires — so this is value-identical; re-route through a
 	// cache-aware lazy path if that margin is ever unpinned (SHELVED 2026-06-02).
-	standPat := info.history.correctedStandPat(pos, info.evaluator)
+	previous := EmptyMove
+	if T1104CorrMore != 0 && ply > 0 {
+		previous = info.MoveStack[ply-1]
+	}
+	standPat := info.history.correctedStandPatPrevious(pos, info.evaluator, previous)
+	// A non-cutting bound can still improve the horizon estimate. A lower
+	// bound supplies a floor and an upper bound supplies a ceiling; each only
+	// replaces the estimate in that direction. Keep mate-distance scores out
+	// of static margins. Check, draw and cancellation handling precede this.
+	if ttHit {
+		boundScore := scoreFromTT(ttEvalRaw, ply)
+		if abs(boundScore) < MATE_IN_MAX &&
+			((ttNodeType == LowerBound && boundScore > standPat) ||
+				(ttNodeType == UpperBound && boundScore < standPat)) {
+			standPat = boundScore
+		}
+	}
 	if standPat >= beta {
 		info.QStandPatCuts++
 		return beta
@@ -2622,29 +2983,34 @@ func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *Sear
 
 	bestScore := standPat
 	bestMove := EmptyMove
+	if cycleMove != EmptyMove && bestScore < 0 {
+		bestScore, bestMove = 0, cycleMove
+	}
 	if standPat > alpha {
 		alpha = standPat
 	}
 
-	// Captures only. Quiet checks are dropped because moveGivesCheck misses
-	// discovered, en-passant, and promotion checks; an incomplete quiet-check
-	// path is worse than captures-only at the horizon.
+	// Keep the existing noisy class and its selection order. The optional
+	// legal quiet checks form a separate suffix, bounded by the full move buffer.
 	captureCount := GenerateCapturesIntoBuffer(pos, info.CaptureBuffer[:])
-	var captures [64]Move
+	var captures [256]Move
 	copy(captures[:], (*info.CaptureBuffer)[:captureCount])
+	captureCount += appendQuietPromotions(pos, captures[captureCount:])
+	moveCount := captureCount
+	if qchecks {
+		moveCount += appendWave2QChecks(pos, captures[moveCount:], qframe.moveBuffer[:])
+		info.QChecksAdmitted += uint64(moveCount - captureCount)
+	}
 
 	// MVV/LVA scores for an INCREMENTAL selection-sort (select-max per iter, stop at
 	// cutoff — avoids the upfront full-sort cost the void "-129" comment cited).
 	// Encoding-only (victim/attacker seeWeight, no board access); ttMove forced top.
-	var capScore [64]int
+	var capScore [96]int
 	for i := 0; i < captureCount; i++ {
-		capScore[i] = 8*int(captures[i].CapturedPiece().seeWeight()) - int(captures[i].MovingPiece().seeWeight())
-		if captures[i] == ttMove {
-			capScore[i] = 1 << 30
-		}
+		capScore[i] = info.history.wave2QCaptureScore(captures[i], ttMove)
 	}
 
-	for i := 0; i < captureCount; i++ {
+	for i := 0; i < moveCount; i++ {
 		// incremental selection: pull the best-scored remaining capture to i
 		best := i
 		for j := i + 1; j < captureCount; j++ {
@@ -2652,8 +3018,10 @@ func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *Sear
 				best = j
 			}
 		}
-		captures[i], captures[best] = captures[best], captures[i]
-		capScore[i], capScore[best] = capScore[best], capScore[i]
+		if i < captureCount {
+			captures[i], captures[best] = captures[best], captures[i]
+			capScore[i], capScore[best] = capScore[best], capScore[i]
+		}
 		move := captures[i]
 
 		// Delta pruning: skip captures that cannot possibly raise alpha. For
@@ -2664,13 +3032,13 @@ func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *Sear
 			promoPiece := GetPiece(move.PromoType(), move.MovingPiece().Color())
 			gain += int(promoPiece.seeWeight()) - 100
 		}
-		if standPat+gain+DELTA_MARGIN <= alpha {
+		if i < captureCount && standPat+gain+DELTA_MARGIN <= alpha {
 			info.QDeltaPrunes++
 			continue
 		}
 
 		// SEE pruning: skip losing captures (skip the full swap when provably non-losing).
-		if !seeNonLosingByMVV(move) && staticExchangeEvaluation(pos, move) < 0 {
+		if i < captureCount && !seeNonLosingByMVV(move) && staticExchangeEvaluation(pos, move) < 0 {
 			info.QSEEPrunes++
 			continue
 		}
@@ -2682,7 +3050,13 @@ func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *Sear
 			continue
 		}
 		info.evaluator.mustPushMadeMove(pos, evalMove, move, tag, ep, hc)
+		if i >= captureCount {
+			info.QChecksSearched++
+		}
 
+		if T1104CorrMore != 0 && ply < MaximumDepth {
+			info.MoveStack[ply] = move
+		}
 		score := -quiescenceWithDepth(pos, -beta, -alpha, ply+1, info, qDepth+1)
 		info.evaluator.mustPop()
 		pos.UnMakeMove(move, tag, ep, hc)
@@ -2703,7 +3077,7 @@ func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *Sear
 			// preserving it is free — and dropping it would let a depth-0 store erase a
 			// mark the main search had earned, silently weakening the LMR adjustment on
 			// exactly the nodes it is meant to protect. (SF preserves ttPv likewise.)
-			info.tt.Set(pos.Hash(), bestMove, scoreToTT(beta, ply), 0, LowerBound, ttHit && ttPvEntry)
+			info.tt.Set(ttHash, bestMove, scoreToTT(beta, ply), 0, LowerBound, ttHit && ttPvEntry)
 			info.QSearchTTStores++
 			return beta
 		}
@@ -2713,4 +3087,18 @@ func quiescenceWithDepth(pos *Position, alpha int, beta int, ply int, info *Sear
 	}
 
 	return bestScore
+}
+
+// contPlies reads only live ancestor slots; root and shallow nodes have no
+// distant context. The option-off path does not inspect the stack.
+func (info *SearchInfo) contPlies(ply int) (prev4, prev6 Move) {
+	if T1104ContPlies != 0 {
+		if ply >= 4 {
+			prev4 = info.MoveStack[ply-4]
+		}
+		if ply >= 6 {
+			prev6 = info.MoveStack[ply-6]
+		}
+	}
+	return
 }

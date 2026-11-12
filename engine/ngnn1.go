@@ -1,6 +1,7 @@
 package engine
 
 import (
+	"bytes"
 	"encoding/binary"
 	"fmt"
 	"hash/crc32"
@@ -17,26 +18,32 @@ const (
 	ngnn1ScoreLimit = 24999
 )
 
-// NGNN1Network owns validated, immutable NGNN1, NGNN2 or NGNN3 weights. Workers share this
+// NGNN1Network owns validated, immutable NGNN1, NGNN2, NGNN3, NGNN5 or NGNN6 weights. Workers share this
 // object; their accumulators never live here. All arithmetic remains exact
 // even for the full int16 weight range permitted by the file format.
 type NGNN1Network struct {
-	hidden      int
-	version     int
-	buckets     int // zero means one for existing in-package single-row networks
-	kingBuckets int
-	kingMap     [64]uint8
-	weights     []int16
-	bias        []int16
-	output      []int16
-	outputBias  int32 // first bucket, also the sole NGNN1 output bias
-	otherBiases []int32
-	smallOutput bool // immutable loader-derived bound: every output weight is within [-128, 128]
+	hidden        int
+	version       int
+	buckets       int // zero means one for existing in-package single-row networks
+	kingBuckets   int
+	kingMap       [64]uint8
+	weights       []int16
+	threatWeights map[uint32][]int8 // NGNN5 nonzero input rows; missing rows are zero
+	bias          []int16
+	output        []int16
+	outputBias    int32 // first bucket, also the sole NGNN1 output bias
+	otherBiases   []int32
+	compactInput  bool          // loader-proved int16 accumulator bounds and small output
+	residual      *NGNN6Network // immutable version 6 head
+	smallOutput   bool          // immutable loader-derived bound: every output weight is within [-128, 128]
 }
 
 func (n *NGNN1Network) valid() bool {
 	return n != nil && n.hidden > 0 && n.hidden <= ngnn1MaxHidden && n.hidden%16 == 0 &&
 		(n.bucketCount() == 1 || n.buckets == 2 || n.buckets == 4 || n.buckets == 8) &&
+		(n.version != 6 || ((n.hidden == 32 || n.hidden == 768) && n.kingBuckets == 8 && n.buckets == 8 &&
+			n.residual != nil && n.residual.linear != nil && n.residual.linear.hidden == n.hidden &&
+			len(n.residual.hiddenWeight) == ngnn6Units*2*n.hidden)) &&
 		n.validKingLayout() && len(n.weights) == n.featureCount()*n.hidden && len(n.bias) == n.hidden &&
 		len(n.output) == n.bucketCount()*2*n.hidden && len(n.otherBiases) == n.bucketCount()-1
 }
@@ -48,7 +55,7 @@ func (n *NGNN1Network) bucketCount() int {
 	return n.buckets
 }
 
-// LoadNGNN1 accepts NGNN1/2/3, preserving the original API. No partial network is
+// LoadNGNN1 accepts NGNN1/2/3/5/6, preserving the original API. No partial network is
 // returned after an I/O, header, length, or checksum error.
 func LoadNGNN1(path string) (*NGNN1Network, error) {
 	f, err := os.Open(path)
@@ -69,6 +76,14 @@ func ReadNGNN1(r io.Reader) (*NGNN1Network, error) {
 	version, nb, kb, constants := int(binary.LittleEndian.Uint32(header[4:8])), 1, 1, 12
 	var kingMap [64]uint8
 	switch {
+	case string(header[:4]) == "NGN6" && version == 6:
+		residual, err := ReadNGNN6(io.MultiReader(bytes.NewReader(header), r))
+		if err != nil {
+			return nil, err
+		}
+		n := *residual.linear
+		n.version, n.residual = 6, residual
+		return &n, nil
 	case string(header[:4]) == "NGNN" && version == 1:
 	case string(header[:4]) == "NGN2" && version == 2:
 		header = storage[:28]
@@ -80,6 +95,8 @@ func ReadNGNN1(r io.Reader) (*NGNN1Network, error) {
 			return nil, fmt.Errorf("NGNN2: invalid bucket count %d", nb)
 		}
 		constants = 16
+	case string(header[:4]) == "NGN5" && version == 5:
+		return readNGNN5(r, header)
 	case string(header[:4]) == "NGN3" && version == 3:
 		header = storage[:96]
 		if _, err := io.ReadFull(r, header[24:]); err != nil {
@@ -133,6 +150,17 @@ func ReadNGNN1(r io.Reader) (*NGNN1Network, error) {
 	n.weights = readWeights(kb * ngnn1Features * h)
 	n.bias = readWeights(h)
 	n.output = readWeights(nb * 2 * h)
+	n.outputBias = int32(binary.LittleEndian.Uint32(data[offset : offset+4]))
+	n.otherBiases = make([]int32, nb-1)
+	for i := range n.otherBiases {
+		offset += 4
+		n.otherBiases[i] = int32(binary.LittleEndian.Uint32(data[offset : offset+4]))
+	}
+	n.prepareOutputLayout()
+	return n, nil
+}
+
+func (n *NGNN1Network) prepareOutputLayout() {
 	n.smallOutput = true
 	for _, w := range n.output {
 		if w < -128 || w > 128 {
@@ -140,13 +168,7 @@ func ReadNGNN1(r io.Reader) (*NGNN1Network, error) {
 			break
 		}
 	}
-	n.outputBias = int32(binary.LittleEndian.Uint32(data[offset : offset+4]))
-	n.otherBiases = make([]int32, nb-1)
-	for i := range n.otherBiases {
-		offset += 4
-		n.otherBiases[i] = int32(binary.LittleEndian.Uint32(data[offset : offset+4]))
-	}
-	return n, nil
+	n.compactInput = n.kingInputs() && n.smallOutput && n.compactInputBound()
 }
 
 func ngnn1Feature(piece Piece, square Square, perspective Color) int {
@@ -169,9 +191,15 @@ func (n *NGNN1Network) row(feature int) []int16 {
 // refresh writes White then Black, independently of engine Color numbering.
 // int32 covers B1 + all 64 squares at the extreme int16 weight values.
 func (n *NGNN1Network) refresh(pos *Position, accum []int32) {
+	if n.version == 5 {
+		for p, color := range [...]Color{White, Black} {
+			n.ngnn5RefreshPerspective(pos, color, accum[p*n.hidden:(p+1)*n.hidden])
+		}
+		return
+	}
 	for p, color := range [...]Color{White, Black} {
 		context := ngnn3Context{}
-		if n.version == 3 {
+		if n.kingInputs() {
 			context = n.kingContext(pos, color)
 		}
 		a := accum[p*n.hidden : (p+1)*n.hidden]
@@ -198,7 +226,7 @@ func (n *NGNN1Network) bucket(pos *Position) int {
 	if nb == 1 {
 		return 0
 	}
-	count := PopCount(pos.Board.whitePieces | pos.Board.blackPieces)
+	count := PopCount(pos.Board.occupiedByColor[White] | pos.Board.occupiedByColor[Black])
 	return min(nb-1, max(0, (count-2)*nb/32))
 }
 
@@ -222,6 +250,9 @@ func (n *NGNN1Network) evaluateBucket(acc []int32, turn Color, bucket int) int {
 	}
 	v := sum/ngnn1QA + int64(bias)
 	cp := v * ngnn1Scale / (ngnn1QA * ngnn1QB)
+	if n.residual != nil {
+		cp += ngnn6ResidualCP(n.residual, us, them, bucket)
+	}
 	if cp > ngnn1ScoreLimit {
 		return ngnn1ScoreLimit
 	}
@@ -261,7 +292,7 @@ func ngnn1MoveDelta(move Move) ngnn1Delta {
 	if captured := move.CapturedPiece(); captured != NoPiece {
 		square := move.Destination()
 		if move.IsEnPassant() {
-			square = findEnPassantCaptureSquare(move)
+			square = enPassantVictimSquare(move)
 		}
 		remove(captured, square)
 	}
@@ -280,18 +311,37 @@ func ngnn1MoveDelta(move Move) ngnn1Delta {
 	return d
 }
 
+// A logical search ply can read an earlier slot after a null move. Every real
+// move writes its own slot, so sharing never changes an ancestor accumulator.
+type ngnn1Frame struct {
+	values  []int32
+	slot    int
+	compact []int16
+}
+
 type ngnn1State struct {
 	network      *NGNN1Network
 	stack        []int32
+	compactStack []int16
+	wideView     []int32 // diagnostic access only; search reads compact frames directly
+	frames       []ngnn1Frame
 	refreshCache []ngnn3CacheEntry
+	pending      []ngnnCompactPending
 }
 
 func (s *ngnn1State) at(depth int) []int32 {
-	width := 2 * s.network.hidden
-	return s.stack[depth*width : (depth+1)*width]
+	if s.network.compactInput {
+		s.materializeCompact(depth)
+		return s.compactView(depth)
+	}
+	return s.frames[depth].values
 }
 
 func (s *ngnn1State) ensure(depth int) {
+	if s.network.compactInput {
+		s.ensureCompact(depth)
+		return
+	}
 	width := 2 * s.network.hidden
 	if (depth+1)*width > len(s.stack) {
 		plies := 128
@@ -303,13 +353,26 @@ func (s *ngnn1State) ensure(depth int) {
 		}
 		next := make([]int32, plies*width)
 		copy(next, s.stack)
+		frames := make([]ngnn1Frame, plies)
+		for ply := range frames {
+			slot := ply
+			if ply < len(s.frames) {
+				slot = s.frames[ply].slot
+			}
+			frames[ply] = ngnn1Frame{values: next[slot*width : (slot+1)*width], slot: slot}
+		}
 		s.stack = next
+		s.frames = frames
 	}
 }
 
 func (s *ngnn1State) reset(pos *Position) {
 	s.ensure(0)
-	if s.network.version == 3 {
+	if s.network.compactInput {
+		s.resetCompact(pos)
+		return
+	}
+	if s.network.kingInputs() {
 		for p, color := range [...]Color{White, Black} {
 			s.cachedRefresh(p, s.network.kingContext(pos, color), pos, s.at(0)[p*s.network.hidden:(p+1)*s.network.hidden])
 		}
@@ -324,12 +387,31 @@ func (s *ngnn1State) push(depth int, delta ngnn1Delta) {
 
 func (s *ngnn1State) pushPosition(depth int, delta ngnn1Delta, pos *Position) {
 	s.ensure(depth)
-	parent, child := s.at(depth-1), s.at(depth)
+	if s.network.compactInput {
+		s.recordCompact(depth, delta, pos)
+		return
+	}
 	if delta.removes == 0 && delta.adds == 0 {
-		copy(child, parent)
+		s.frames[depth] = s.frames[depth-1]
 		return // Null move: the turn changes; the features do not.
 	}
+	width := 2 * s.network.hidden
+	child := s.stack[depth*width : (depth+1)*width]
+	s.frames[depth] = ngnn1Frame{values: child, slot: depth}
+	parent := s.at(depth - 1)
 	n := s.network
+	if delta.refreshMask == 0 && delta.removes == 1 && delta.adds == 1 {
+		ngnn1MovePair(child, parent,
+			n.row(int(delta.remove[0][0])), n.row(int(delta.add[0][0])),
+			n.row(int(delta.remove[1][0])), n.row(int(delta.add[1][0])))
+		return
+	}
+	if delta.refreshMask == 0 && delta.removes == 2 && delta.adds == 1 {
+		ngnn1CapturePair(child, parent,
+			n.row(int(delta.remove[0][0])), n.row(int(delta.remove[0][1])), n.row(int(delta.add[0][0])),
+			n.row(int(delta.remove[1][0])), n.row(int(delta.remove[1][1])), n.row(int(delta.add[1][0])))
+		return
+	}
 	for p := 0; p < 2; p++ {
 		a := child[p*n.hidden : (p+1)*n.hidden]
 		if delta.refreshMask&(1<<p) != 0 {

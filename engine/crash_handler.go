@@ -166,10 +166,10 @@ func WrapEvaluation(functionName string, fn func() int, board *Bitboard) int {
 
 	// Slow path - full debugging context (disabled by default)
 	context := map[string]interface{}{
-		"white_king":   board.GetBitboardOf(WhiteKing),
-		"black_king":   board.GetBitboardOf(BlackKing),
-		"white_pieces": board.GetWhitePieces(),
-		"black_pieces": board.GetBlackPieces(),
+		"white_king":   board.PieceOccupancy(WhiteKing),
+		"black_king":   board.PieceOccupancy(BlackKing),
+		"white_pieces": board.WhiteOccupancy(),
+		"black_pieces": board.BlackOccupancy(),
 		"all_pieces":   board.AllPieces(),
 	}
 

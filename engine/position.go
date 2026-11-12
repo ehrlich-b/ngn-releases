@@ -9,24 +9,21 @@ const CHECKMATE_EVAL int16 = 30000
 const MAX_NON_CHECKMATE float32 = 25000
 const MIN_NON_CHECKMATE float32 = -MAX_NON_CHECKMATE
 
-// PositionTag stores the state which is not represented by the board itself.
-// The turn bits intentionally occupy two separate flags: callers of the
-// legacy interface use ToggleTurn to flip both of them together.
-type PositionTag uint8
+// PositionState stores the state which is not represented by the board itself.
+// Side to move lives in Position.Side, independently of these metadata bits.
+type PositionState uint8
 
 const (
-	WhiteCanCastleKingSide PositionTag = 1 << iota
+	WhiteCanCastleKingSide PositionState = 1 << iota
 	WhiteCanCastleQueenSide
 	BlackCanCastleKingSide
 	BlackCanCastleQueenSide
 	InCheck
-	BlackToMove
-	WhiteToMove
 	enPassantHash
 )
 
 // CASTLING_FLAG is the mask of all four castling-right flags.
-const CASTLING_FLAG PositionTag = WhiteCanCastleKingSide |
+const CASTLING_FLAG PositionState = WhiteCanCastleKingSide |
 	WhiteCanCastleQueenSide |
 	BlackCanCastleKingSide |
 	BlackCanCastleQueenSide
@@ -45,8 +42,9 @@ const (
 // draw policy inspect or update the repetition table.
 type Position struct {
 	Board          Bitboard
+	Side           Color
 	EnPassant      Square
-	Tag            PositionTag
+	Tag            PositionState
 	hash           uint64
 	Positions      map[uint64]int
 	positionsMutex sync.RWMutex
@@ -54,22 +52,22 @@ type Position struct {
 }
 
 // SetTag sets every bit present in tag.
-func (position *Position) SetTag(tag PositionTag) {
+func (position *Position) SetTag(tag PositionState) {
 	position.Tag |= tag
 }
 
 // ClearTag clears every bit present in tag.
-func (position *Position) ClearTag(tag PositionTag) {
+func (position *Position) ClearTag(tag PositionState) {
 	position.Tag &^= tag
 }
 
 // ToggleTag flips every bit present in tag.
-func (position *Position) ToggleTag(tag PositionTag) {
+func (position *Position) ToggleTag(tag PositionState) {
 	position.Tag ^= tag
 }
 
 // HasTag reports whether any bit in tag is set.
-func (position *Position) HasTag(tag PositionTag) bool {
+func (position *Position) HasTag(tag PositionState) bool {
 	return position.Tag&tag != 0
 }
 
@@ -78,18 +76,11 @@ func (position *Position) HasCastling() bool {
 	return position.HasTag(CASTLING_FLAG)
 }
 
-// Turn returns White when the white-turn flag is set and Black otherwise.
-func (position *Position) Turn() Color {
-	if position.HasTag(WhiteToMove) {
-		return White
-	}
-	return Black
-}
+// Turn returns the single side-to-move field.
+func (position *Position) Turn() Color { return position.Side }
 
-// ToggleTurn flips both legacy turn flags.
-func (position *Position) ToggleTurn() {
-	position.ToggleTag(BlackToMove | WhiteToMove)
-}
+// ToggleTurn switches the side independently of castling/check/EP metadata.
+func (position *Position) ToggleTurn() { position.Side = position.Side.Other() }
 
 // IsEndGame delegates the material question to the board for the side to
 // move.
@@ -108,15 +99,15 @@ func (position *Position) IsInCheck() bool {
 func (position *Position) Hash() uint64 {
 	if position.hash == 0 {
 		position.ensureEnPassantHash()
-		position.hash = generateZobristHash(position)
+		position.hash = computePositionKey(position)
 	}
 	return position.hash
 }
 
-// findEnPassantCaptureSquare returns the square of the pawn removed by an
+// enPassantVictimSquare returns the square of the pawn removed by an
 // en-passant move.  The board is rank-major, so the victim is eight squares
 // behind the destination for either mover.
-func findEnPassantCaptureSquare(move Move) Square {
+func enPassantVictimSquare(move Move) Square {
 	return move.Destination() ^ 8
 }
 
@@ -136,7 +127,7 @@ func (position *Position) applyMoveBoard(move Move) {
 	position.Board.Move(source, destination, moving, destinationPiece)
 
 	if move.IsEnPassant() {
-		position.Board.Clear(findEnPassantCaptureSquare(move), captured)
+		position.Board.Clear(enPassantVictimSquare(move), captured)
 	}
 
 	if promotion := GetPiece(move.PromoType(), moving.Color()); promotion != NoPiece {
@@ -186,7 +177,7 @@ func (position *Position) undoMoveBoard(move Move, mover Color) {
 	}
 
 	if move.IsEnPassant() {
-		position.Board.UpdateSquare(findEnPassantCaptureSquare(move), captured, NoPiece)
+		position.Board.UpdateSquare(enPassantVictimSquare(move), captured, NoPiece)
 	} else if captured != NoPiece {
 		position.Board.UpdateSquare(destination, captured, NoPiece)
 	}
@@ -303,7 +294,7 @@ func (position *Position) updateCheckForSideToMove() {
 // makeMoveHelper applies the complete search move update and returns the
 // metadata needed by its inverse.  Move generation has already established
 // legality; this layer deliberately does not validate the move.
-func (position *Position) makeMoveHelper(move Move) (oldEnPassant Square, oldTag PositionTag, oldClock uint8, legal bool) {
+func (position *Position) makeMoveHelper(move Move) (oldEnPassant Square, oldTag PositionState, oldClock uint8, legal bool) {
 	// A manually assembled cold root may have a raw EP target but no legal-EP
 	// hash bit yet.  Establish that bit before saving the old metadata.
 	if position.hash == 0 {
@@ -331,49 +322,48 @@ func (position *Position) makeMoveHelper(move Move) (oldEnPassant Square, oldTag
 
 	captureSquare := move.Destination()
 	if move.IsEnPassant() {
-		captureSquare = findEnPassantCaptureSquare(move)
+		captureSquare = enPassantVictimSquare(move)
 	}
 	promotion := GetPiece(move.PromoType(), moving.Color())
-	updateHash(position, move, captureSquare, position.EnPassant, oldEnPassant, promotion, oldTag)
+	advanceMoveKey(position, move, captureSquare, position.EnPassant, oldEnPassant, promotion, oldTag)
 
 	return oldEnPassant, oldTag, oldClock, true
 }
 
 // MakeMove is the search-facing complete move update.
-func (position *Position) MakeMove(move Move) (oldEnPassant Square, oldTag PositionTag, oldClock uint8, legal bool) {
+func (position *Position) MakeMove(move Move) (oldEnPassant Square, oldTag PositionState, oldClock uint8, legal bool) {
 	return position.makeMoveHelper(move)
 }
 
 // unMakeMoveHelper reverses a complete move.  Hash reversal happens while all
-// post-move metadata is still installed, as required by updateHash.
-func (position *Position) unMakeMoveHelper(move Move, oldTag PositionTag, oldEnPassant Square, oldClock uint8) {
+// post-move metadata is still installed, as required by advanceMoveKey.
+func (position *Position) unMakeMoveHelper(move Move, oldTag PositionState, oldEnPassant Square, oldClock uint8) {
 	captureSquare := move.Destination()
 	if move.IsEnPassant() {
-		captureSquare = findEnPassantCaptureSquare(move)
+		captureSquare = enPassantVictimSquare(move)
 	}
 	moving := move.MovingPiece()
 	promotion := GetPiece(move.PromoType(), moving.Color())
-	updateHash(position, move, captureSquare, position.EnPassant, oldEnPassant, promotion, oldTag)
+	advanceMoveKey(position, move, captureSquare, position.EnPassant, oldEnPassant, promotion, oldTag)
 
+	position.ToggleTurn()
 	position.Tag = oldTag
 	position.EnPassant = oldEnPassant
 	position.HalfMoveClock = oldClock
 
-	// The saved tag already contains the original turn.  Use it to recover the
-	// mover's color for promotions and castling-rook restoration; unlike the
-	// partial inverse, the complete inverse must not toggle after restoring the
-	// saved tag.
+	// Turn was restored separately from the saved metadata. Use it for
+	// promotion and castling-rook restoration.
 	position.undoMoveBoard(move, position.Turn())
 }
 
 // UnMakeMove is the search-facing inverse of MakeMove.
-func (position *Position) UnMakeMove(move Move, oldTag PositionTag, oldEnPassant Square, oldClock uint8) {
+func (position *Position) UnMakeMove(move Move, oldTag PositionState, oldEnPassant Square, oldClock uint8) {
 	position.unMakeMoveHelper(move, oldTag, oldEnPassant, oldClock)
 }
 
 // GameMakeMove applies a move and records the resulting position when a
 // repetition table has been supplied.
-func (position *Position) GameMakeMove(move Move) (oldEnPassant Square, oldTag PositionTag, oldClock uint8, legal bool) {
+func (position *Position) GameMakeMove(move Move) (oldEnPassant Square, oldTag PositionState, oldClock uint8, legal bool) {
 	oldEnPassant, oldTag, oldClock, legal = position.makeMoveHelper(move)
 	if legal && position.Positions != nil {
 		currentHash := position.Hash()
@@ -387,7 +377,7 @@ func (position *Position) GameMakeMove(move Move) (oldEnPassant Square, oldTag P
 // GameUnMakeMove removes the current position from the repetition table and
 // then performs the ordinary search undo.  Missing entries are deliberately
 // left untouched.
-func (position *Position) GameUnMakeMove(move Move, oldTag PositionTag, oldEnPassant Square, oldClock uint8) {
+func (position *Position) GameUnMakeMove(move Move, oldTag PositionState, oldEnPassant Square, oldClock uint8) {
 	if position.Positions != nil {
 		currentHash := position.Hash()
 		position.positionsMutex.Lock()
@@ -412,14 +402,14 @@ func (position *Position) MakeNullMove() Square {
 	position.EnPassant = NoSquare
 	position.HalfMoveClock++
 	position.ToggleTurn()
-	updateHashForNullMove(position, position.EnPassant, oldEnPassant)
+	advanceNullKey(position, position.EnPassant, oldEnPassant)
 	return oldEnPassant
 }
 
 // UnMakeNullMove reverses MakeNullMove while retaining the helper's cold/warm
 // hash behavior.
 func (position *Position) UnMakeNullMove(oldEnPassant Square) {
-	updateHashForNullMove(position, position.EnPassant, oldEnPassant)
+	advanceNullKey(position, position.EnPassant, oldEnPassant)
 	position.EnPassant = oldEnPassant
 	position.HalfMoveClock--
 	position.ToggleTurn()
@@ -433,6 +423,7 @@ func (position *Position) Copy() *Position {
 
 	copyPosition := &Position{
 		Board:         position.Board,
+		Side:          position.Side,
 		EnPassant:     position.EnPassant,
 		Tag:           position.Tag,
 		hash:          position.hash,
@@ -475,10 +466,10 @@ func (position *Position) IsDraw() bool {
 	}
 
 	minorMasks := [...]uint64{
-		position.Board.GetBitboardOf(WhiteKnight),
-		position.Board.GetBitboardOf(BlackKnight),
-		position.Board.GetBitboardOf(WhiteBishop),
-		position.Board.GetBitboardOf(BlackBishop),
+		position.Board.PieceOccupancy(WhiteKnight),
+		position.Board.PieceOccupancy(BlackKnight),
+		position.Board.PieceOccupancy(WhiteBishop),
+		position.Board.PieceOccupancy(BlackBishop),
 	}
 	nonEmptyMasks := 0
 	for _, mask := range minorMasks {
@@ -497,8 +488,8 @@ func (position *Position) IsDraw() bool {
 		}
 	}
 
-	whiteBishops := position.Board.GetBitboardOf(WhiteBishop)
-	blackBishops := position.Board.GetBitboardOf(BlackBishop)
+	whiteBishops := position.Board.PieceOccupancy(WhiteBishop)
+	blackBishops := position.Board.PieceOccupancy(BlackBishop)
 	if position.Board.Knights() == 0 &&
 		PopCount(whiteBishops) == 1 && PopCount(blackBishops) == 1 {
 		whiteSquare := Square(bitScanForward(whiteBishops))

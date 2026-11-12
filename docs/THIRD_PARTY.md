@@ -1,27 +1,36 @@
-Current binary note (NGN 0.3.0, 2026-10-07): this inventory preserves
-attribution for past versions; the table below describes 0.2.0-rc.1, not 0.3.0.
-The 0.3.0 executable contains NGN code, the NGN-trained embedded network
-(`c6c12796…`) and the Go runtime only: no foreign evaluator or network, PeSTO
-tables, Polyglot constants, Zahak-derived files or external book loading. Its
-training data and alteration method are described in
-[LICENSES/TRAINING-DATA.txt](../LICENSES/TRAINING-DATA.txt); the license grant is
-[LICENSE-GRANT.txt](../LICENSE-GRANT.txt). Stockfish subprocess support is
-tooling-only. See the top of NOTICE for the 0.3.0 summary.
+# Third-party provenance for NGN 0.4.0
 
-# Third-party provenance for release preparation
+The 2026-11-11 release ships NGN engine/inference code, the NGN-trained embedded
+NGNN3 H768 network and Go runtime/standard library. The network has 8 mirrored
+king-context buckets × 768 piece-square inputs, H768 per perspective, SCReLU
+and 8 material output buckets; SHA-256
+`2dcb6d936c0275927cb9e881f42e22558e618ad7e6fd998df6c4e5046d42c443`.
+Normal builds use that network; `UseNNUE=false` selects NGN's classical core.
+Published king buckets, mirroring, accumulator caches and quantization are
+technique acknowledgements to the Stockfish/Bullet communities, not copied
+implementation or imported weights. Source similarity has generic chess
+primitives and shared interface lineage; this is no claim that every expression
+or algorithm was invented by NGN.
 
-The inventory below records the historical 0.2.0-rc.1 release. Subsequent
-replacement sections record the current recovery candidate; normal builds use
-locked HCE and load no owned neural model. Historical notices are retained.
+The source includes `trainer/`, small NGN-owned test fixtures and `default.pgo`.
+NumPy and PyTorch are trainer dependencies, not distributed engine components.
+The Go BSD notice and historical component licenses remain under `LICENSES/`.
+The source/model grant is [GPL-3.0-only](../LICENSE-GRANT.txt). T80 training data
+is separately subject to [ODbL and its data notice](../LICENSES/TRAINING-DATA.txt);
+see [the transformation method and verified weight lineage](TRAINING-METHOD.md).
+The lineage starts at a fresh NGN H512 initialization using trainer revision
+7ef9821, preserves that checkpoint through seeded H768 widening, and binds
+the trained export to the embedded hash. Corpus content pins are retained;
+historical corpus build inputs and checkpoints are not distributed.
+No opponent code, external network, subprocess reference engine, research
+operations or historical diagnostic experiment is in this source archive.
 
-NGN's randomly initialized owned network is distinct from its compatibility
-backends and source dependencies. Selecting owned weights does not remove the
-other backends from the executable or settle the project's source license.
-NGN's original source code and the packaged NGN-owned WDL25-e10 neural network
-are licensed under the GNU General Public License, version 3 only. The complete
-license text is supplied in LICENSE. Existing copyright notices and third-party
-licenses remain applicable to their respective components. See the approved
-[license grant](../LICENSE-GRANT.txt).
+## Historical inventory: 0.2.0-rc.1 and dated replacement stages
+
+The following table and subsequent accounts describe earlier distributions
+and dated development states. They are preserved for attribution, including
+Rodent V by Naman Thanki and Pawel Koziol, Counter by Vadim Chizhov, and the
+Stockfish developers. They do not inventory the contents of 0.4.0.
 
 | Component | Recorded origin | Preserved license evidence |
 | --- | --- | --- |
@@ -54,12 +63,12 @@ retain the approved GPL grant and corresponding source with the binary packages.
 
 This inventory includes direct adaptation, internal reuse, trained weights and separate data/tool dependencies. “Owned” describes the initialization and training of the distributed weights; it does not claim original evaluator source. The private 2026-10-01 audit found that the published source and Windows/Linux packages omitted the names of the Rodent authors, the Counter copyright notice and the Stockfish developers copyright notice. Those omissions are corrected here before any code removal; released artifacts and historical evidence remain unchanged. See `NOTICE` for author and modification notices.
 
-## Private replacement stage, 2026-10-01
+## Historical replacement stage, 2026-10-01
 
 The Rodent V1.1/V1.2 and derived K4 runtime packages/adapters, and their K4
 bridge/label/pack/finalizer/sampler path, have been removed on this task branch
 after adding the notices above. The inventory is retained for historical copies.
-Normal builds now default to HCE and lock evaluator switching. Counter/Stockfish
+At this 2026-10-01 stage, builds defaulted to HCE and locked evaluator switching. Counter/Stockfish
 reference backends still require an explicit research build; this is an HCE
 fallback, not a declaration that every source component is independently written.
 Piece/square/move implementations were independently regenerated from interface
@@ -118,9 +127,9 @@ source/data provenance gates remain open. This is not a claim of legal
 clean-room certification or complete originality.
 Evidence: experiments/2026-10-01-independent-position/report.md.
 
-## Current independent HCE release candidate
+## Historical independent HCE stage, 2026-10-01
 
-The current candidate removes the complete old HCE, PeSTO and legacy tables,
+The 2026-10-01 candidate removed the complete old HCE, PeSTO and legacy tables,
 explicit Counter draw scaling, inherited magic constants and all generic,
 Counter/Stockfish NNUE packages/adapters. Its new classical core has original
 analytic tables and hand-chosen values, with no training corpus or network.
@@ -137,7 +146,7 @@ NNUE package appears in the compiled main dependency closure. This documents
 the identified replacements and test evidence, not blanket legal certification.
 Evidence: experiments/2026-10-01-original-hce-release/report.md.
 
-The final source-package sweep also removed the inactive training/nnue K4/Bullet
+The 2026-10-01 source-package sweep also removed the inactive training/nnue K4/Bullet
 scaffold from the current tree. Historical Bullet MIT attribution is retained.
 No Go runtime source changed after the verified 629bd170 engine stage.
 

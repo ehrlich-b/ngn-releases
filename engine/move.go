@@ -17,42 +17,42 @@ const (
 
 // NewMove packs the supplied move fields.
 func NewMove(from Square, to Square, moving Piece, captured Piece, promotion PieceType, tag MoveTag) Move {
-	return Move(uint32(from)&0x3f) |
-		Move((uint32(to)&0x3f)<<6) |
-		Move((uint32(moving)&0x0f)<<12) |
-		Move((uint32(captured)&0x0f)<<16) |
-		Move((uint32(promotion)&0x07)<<20) |
-		Move((uint32(tag)&0xff)<<23)
+	return Move(uint32(tag)&0x0f) |
+		Move((uint32(promotion)&0x07)<<4) |
+		Move((uint32(moving)&0x0f)<<7) |
+		Move((uint32(captured)&0x0f)<<11) |
+		Move((uint32(from)&0x3f)<<15) |
+		Move((uint32(to)&0x3f)<<21)
 }
 
 // Source returns the packed source square.
 func (m Move) Source() Square {
-	return Square(m & 0x3f)
+	return Square((m >> 15) & 0x3f)
 }
 
 // Destination returns the packed destination square.
 func (m Move) Destination() Square {
-	return Square((m >> 6) & 0x3f)
+	return Square((m >> 21) & 0x3f)
 }
 
 // MovingPiece returns the packed moving piece.
 func (m Move) MovingPiece() Piece {
-	return Piece((m >> 12) & 0x0f)
+	return Piece((m >> 7) & 0x0f)
 }
 
 // CapturedPiece returns the packed captured piece.
 func (m Move) CapturedPiece() Piece {
-	return Piece((m >> 16) & 0x0f)
+	return Piece((m >> 11) & 0x0f)
 }
 
 // PromoType returns the packed promotion type.
 func (m Move) PromoType() PieceType {
-	return PieceType((m >> 20) & 0x07)
+	return PieceType((m >> 4) & 0x07)
 }
 
-// Tag returns the packed flags, excluding bit 31.
+// Tag returns the four chess move flags from the low nibble.
 func (m Move) Tag() MoveTag {
-	return MoveTag(m >> 23)
+	return MoveTag(m & 0x0f)
 }
 
 // IsKingSideCastle reports whether the king-side castling flag is set.

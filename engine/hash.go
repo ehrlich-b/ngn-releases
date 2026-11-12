@@ -7,91 +7,92 @@ import (
 )
 
 var (
-	piecesZC       [12][64]uint64
-	castleRightsZC [4]uint64
-	enPassantZC    [16]uint64
-	whiteTurnZC    uint64
+	occupantKeys [64][13]uint64
+	castlingKeys [4]uint64
+	epTargetKeys [16]uint64
+	whiteSideKey uint64
 )
 
 func init() {
-	digest := sha256.Sum256([]byte("ehrlich"))
+	digest := sha256.Sum256([]byte("NGN board keys v1"))
 	seed := int64(binary.LittleEndian.Uint64(digest[:8]))
 	random := rand.New(rand.NewSource(seed))
-
-	whiteTurnZC = random.Uint64()
-	for piece := range piecesZC {
-		for square := range piecesZC[piece] {
-			piecesZC[piece][square] = random.Uint64()
+	for index := range epTargetKeys {
+		epTargetKeys[index] = random.Uint64()
+	}
+	for index := range castlingKeys {
+		castlingKeys[index] = random.Uint64()
+	}
+	for square := 63; square >= 0; square-- {
+		for piece := 12; piece >= 1; piece-- {
+			occupantKeys[square][piece] = random.Uint64()
 		}
 	}
-	for index := range castleRightsZC {
-		castleRightsZC[index] = random.Uint64()
-	}
-	for index := range enPassantZC {
-		enPassantZC[index] = random.Uint64()
-	}
+	whiteSideKey = random.Uint64()
+	initCuckoo()
 }
 
-func enPassantZobrist(square Square, turn Color) uint64 {
+
+func epTargetKey(square Square, turn Color) uint64 {
 	switch turn {
 	case Black:
 		if square >= A3 && square <= H3 {
-			return enPassantZC[int(square-A3)]
+			return epTargetKeys[int(square-A3)]
 		}
 	case White:
 		if square >= A6 && square <= H6 {
-			return enPassantZC[8+int(square-A6)]
+			return epTargetKeys[8+int(square-A6)]
 		}
 	}
 	return 0
 }
 
-func pieceZobrist(piece Piece, square Square) uint64 {
-	return piecesZC[int(piece)-1][int(square)]
+func occupantKey(piece Piece, square Square) uint64 {
+	return occupantKeys[int(square)][int(piece)]
 }
 
-func generateZobristHash(pos *Position) uint64 {
+func computePositionKey(pos *Position) uint64 {
 	var hash uint64
 	turn := pos.Turn()
 	if turn == White {
-		hash ^= whiteTurnZC
+		hash ^= whiteSideKey
 	}
 
 	for index := 0; index < 4; index++ {
-		if pos.Tag&PositionTag(1<<index) != 0 {
-			hash ^= castleRightsZC[index]
+		if pos.Tag&PositionState(1<<index) != 0 {
+			hash ^= castlingKeys[index]
 		}
 	}
 
 	for square := Square(0); square <= H8; square++ {
 		piece := pos.Board.PieceAt(square)
 		if piece != NoPiece {
-			hash ^= pieceZobrist(piece, square)
+			hash ^= occupantKey(piece, square)
 		}
 	}
 
 	if pos.HasTag(enPassantHash) {
-		hash ^= enPassantZobrist(pos.EnPassant, turn)
+		hash ^= epTargetKey(pos.EnPassant, turn)
 	}
 	return hash
 }
 
-func updateHashForNullMove(pos *Position, newEnPassant Square, oldEnPassant Square) {
+func advanceNullKey(pos *Position, newEnPassant Square, oldEnPassant Square) {
 	if pos.hash == 0 {
 		pos.Hash()
 		return
 	}
 
-	hash := pos.hash ^ whiteTurnZC
+	hash := pos.hash ^ whiteSideKey
 	if pos.HasTag(enPassantHash) {
 		turn := pos.Turn()
-		hash ^= enPassantZobrist(newEnPassant, turn)
-		hash ^= enPassantZobrist(oldEnPassant, turn.Other())
+		hash ^= epTargetKey(newEnPassant, turn)
+		hash ^= epTargetKey(oldEnPassant, turn.Other())
 	}
 	pos.hash = hash
 }
 
-func updateHash(pos *Position, move Move, captureSquare Square, newEnPassant Square, oldEnPassant Square, promoPiece Piece, oldPositionTag PositionTag) {
+func advanceMoveKey(pos *Position, move Move, captureSquare Square, newEnPassant Square, oldEnPassant Square, promoPiece Piece, previousState PositionState) {
 	if pos.hash == 0 {
 		pos.Hash()
 		return
@@ -101,53 +102,53 @@ func updateHash(pos *Position, move Move, captureSquare Square, newEnPassant Squ
 		return
 	}
 
-	hash := pos.hash ^ whiteTurnZC
+	hash := pos.hash ^ whiteSideKey
 	source := move.Source()
 	if move.IsKingSideCastle() {
 		switch source {
 		case E1:
-			hash ^= pieceZobrist(WhiteRook, H1)
-			hash ^= pieceZobrist(WhiteRook, F1)
+			hash ^= occupantKey(WhiteRook, H1)
+			hash ^= occupantKey(WhiteRook, F1)
 		case E8:
-			hash ^= pieceZobrist(BlackRook, H8)
-			hash ^= pieceZobrist(BlackRook, F8)
+			hash ^= occupantKey(BlackRook, H8)
+			hash ^= occupantKey(BlackRook, F8)
 		}
 	} else if move.IsQueenSideCastle() {
 		switch source {
 		case E1:
-			hash ^= pieceZobrist(WhiteRook, A1)
-			hash ^= pieceZobrist(WhiteRook, D1)
+			hash ^= occupantKey(WhiteRook, A1)
+			hash ^= occupantKey(WhiteRook, D1)
 		case E8:
-			hash ^= pieceZobrist(BlackRook, A8)
-			hash ^= pieceZobrist(BlackRook, D8)
+			hash ^= occupantKey(BlackRook, A8)
+			hash ^= occupantKey(BlackRook, D8)
 		}
 	}
 
-	changedCastle := oldPositionTag ^ pos.Tag
+	changedCastle := previousState ^ pos.Tag
 	for index := 0; index < 4; index++ {
-		if changedCastle&PositionTag(1<<index) != 0 {
-			hash ^= castleRightsZC[index]
+		if changedCastle&PositionState(1<<index) != 0 {
+			hash ^= castlingKeys[index]
 		}
 	}
 
 	turn := pos.Turn()
 	if pos.HasTag(enPassantHash) {
-		hash ^= enPassantZobrist(newEnPassant, turn)
+		hash ^= epTargetKey(newEnPassant, turn)
 	}
-	if oldPositionTag&enPassantHash != 0 {
-		hash ^= enPassantZobrist(oldEnPassant, turn.Other())
+	if previousState&enPassantHash != 0 {
+		hash ^= epTargetKey(oldEnPassant, turn.Other())
 	}
 
 	moving := move.MovingPiece()
-	hash ^= pieceZobrist(moving, source)
+	hash ^= occupantKey(moving, source)
 	destinationPiece := moving
 	if promoPiece != NoPiece {
 		destinationPiece = promoPiece
 	}
-	hash ^= pieceZobrist(destinationPiece, move.Destination())
+	hash ^= occupantKey(destinationPiece, move.Destination())
 
 	if captured := move.CapturedPiece(); captured != NoPiece {
-		hash ^= pieceZobrist(captured, captureSquare)
+		hash ^= occupantKey(captured, captureSquare)
 	}
 
 	pos.hash = hash

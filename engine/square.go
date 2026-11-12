@@ -145,15 +145,15 @@ func (s Square) String() string {
 	return s.Name()
 }
 
-// DarkSquares is the bitset of dark squares.
-const DarkSquares uint64 = 0xAA55AA55AA55AA55
+// DarkSquareMask is the bitset of dark squares.
+const DarkSquareMask uint64 = uint64(0x55)*0x0001000100010001 | uint64(0xaa)*0x0100010001000100
 
 // GetColor returns the board color of s.
 func (s Square) GetColor() Color {
 	if s < 0 || s > 63 {
 		return White
 	}
-	if DarkSquares&(uint64(1)<<uint8(s)) != 0 {
+	if DarkSquareMask&(uint64(1)<<uint8(s)) != 0 {
 		return Black
 	}
 	return White
