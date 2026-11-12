@@ -4,6 +4,26 @@ NGN is a UCI chess engine written in Go by Bryan Ehrlich. Version 0.3.0 plays
 with an NNUE network trained by NGN's own trainer; the network is embedded in
 the executable, so no extra files are needed.
 
+## Strength
+
+**Official rating: CCRL 40/15.** NGN 0.3.0 (1 CPU) is rated **3411 ±37** from
+133 games on the list computed November 7, 2026
+([engine page](https://computerchess.org.uk/ccrl/4040/cgi/engine_details.cgi?print=Details&each_game=0&eng=NGN%200.3.0%2064-bit)).
+NGN is not yet on the CCRL Blitz list.
+
+**Our estimate for the development version, early November 2026: about 3580
+CCRL Blitz (8 threads).** This is our own measurement, not an official rating.
+A 320-game gauntlet at 10+0.1 with 8 threads against Koivisto 6.0, akimbo 1.0.0,
+Black Marlin 9.0 and Berserk 12, using their CCRL Blitz 8CPU ratings as fixed
+anchors, measured **3582 [3542, 3623]**. A longer 120+1 run against three of
+those anchors stopped early at 368 games, at 3629 [3593, 3665]. This version
+is not released yet.
+
+For scale: CCRL 40/15 ratings run lower than Blitz ratings (the top of each
+list, Stockfish 19, is 3650 on 40/15 and 3803 on Blitz). The same kind of local
+calibration put 0.3.0 at 3462 against CCRL Blitz 1CPU anchors, and CCRL 40/15
+rated it 3411.
+
 ## 0.3.0 contents
 
 - **Engine:** search, board, move generation, hashing/TT and time management
@@ -42,12 +62,12 @@ components; their history is kept in [NOTICE](NOTICE) and
 
 Pondering is not supported.
 
-## Strength
+## 0.3.0 local calibration
 
-A predeclared local calibration on 2026-10-07 measured **3462 [3430, 3493]**
-at 120+1 over 640 games against Counter 3.8, Counter 5.5, Maelstrom 3.3 and
-Viridithas 10 using their CCRL Blitz 1CPU ratings as fixed anchors. It is not an
-official rating. See
+Before release, a predeclared local calibration on 2026-10-07 measured
+**3462 [3430, 3493]** at 120+1 over 640 games against Counter 3.8, Counter 5.5,
+Maelstrom 3.3 and Viridithas 10 using their CCRL Blitz 1CPU ratings as fixed
+anchors. See
 [experiments/2026-10-07-3000-claim-result.md](experiments/2026-10-07-3000-claim-result.md).
 
 ## Build
